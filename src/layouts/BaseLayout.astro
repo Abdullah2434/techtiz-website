@@ -1,6 +1,5 @@
 ---
-import '../styles/_shared.css';
-import '../styles/_responsive.css';
+import '../styles/globals.css';
 
 interface Props {
   title: string;
@@ -58,7 +57,7 @@ const resolvedOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogIm
 
   <slot name="head" />
 </head>
-<body>
+<body class="min-h-screen min-w-0 bg-seasalt text-ink font-sans antialiased">
   <slot />
 </body>
 </html>

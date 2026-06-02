@@ -1,5 +1,8 @@
 ---
 import SledLayout from '../../layouts/SledLayout.astro';
+import PageHero from '../../components/shared/PageHero.astro';
+import Eyebrow from '../../components/shared/Eyebrow.astro';
+import CtaButton from '../../components/shared/CtaButton.astro';
 import {
   HOW_WE_ENGAGE_SEO, HOW_WE_ENGAGE_HERO, SEQUENCE_STEPS, BOUNDARY_CARDS, PRINCIPLES, FIRST_EMAIL_CHECKLIST
 } from '../../lib/constants/pages/how-we-engage';
@@ -10,38 +13,46 @@ const { title, description, canonicalPath, ogImage } = HOW_WE_ENGAGE_SEO;
 <SledLayout {title} {description} {canonicalPath} {ogImage} currentPage="/us-sled/how-we-engage/">
 
 <!-- HERO -->
-<section class="page-hero">
-  <div class="wrap">
-    <div class="lead">
-      <span class="eyebrow"><span class="gl"></span> {HOW_WE_ENGAGE_HERO.eyebrow}</span>
-      <h1 set:html={HOW_WE_ENGAGE_HERO.heading} />
-      <p class="body">{HOW_WE_ENGAGE_HERO.body}</p>
-    </div>
-  </div>
-</section>
+<PageHero eyebrow={HOW_WE_ENGAGE_HERO.eyebrow} heading={HOW_WE_ENGAGE_HERO.heading} body={HOW_WE_ENGAGE_HERO.body} />
 
 <!-- SEQUENCE -->
-<section class="sequence">
-  <div class="wrap">
-    <div class="head">
-      <span class="eyebrow">The sequence</span>
-      <h2>Three steps. Predictable timing. Same playbook every time.</h2>
-      <p>The structured-relationship sequence is itself the credibility signal. Capture managers and BD leads at U.S. primes know the rhythm; we hold to it.</p>
+<section class="bg-seasalt py-20">
+  <div class="mx-auto max-w-[1280px] px-12 max-[1024px]:px-8 max-[900px]:px-6 max-[600px]:px-[18px]">
+    <div class="mb-10 max-w-[820px]">
+      <Eyebrow text="The sequence" showGlyph />
+      <h2 class="mt-4 text-[38px] font-extrabold leading-[1.1] tracking-[-0.02em] text-yale-dark">
+        Three steps. Predictable timing. Same playbook every time.
+      </h2>
+      <p class="mt-3.5 text-[15.5px] leading-relaxed text-muted">
+        The structured-relationship sequence is itself the credibility signal. Capture managers and BD leads at U.S. primes know the rhythm; we hold to it.
+      </p>
     </div>
-    <div class="seq-list">
+
+    <div class="space-y-5">
       {SEQUENCE_STEPS.map(step => (
-        <div class="seq-step">
-          <div class="seq-left">
-            <div class="seq-num">{step.n}</div>
-            <span class="seq-when">{step.when}</span>
+        <div class="grid grid-cols-[180px_1fr_420px] gap-6 rounded-2xl border border-line bg-white p-6 shadow-[0_14px_36px_-26px_rgba(14,38,64,0.25)] max-[1100px]:grid-cols-[180px_1fr] max-[720px]:grid-cols-1">
+          <div class="flex items-start gap-3">
+            <div class="grid size-12 shrink-0 place-items-center rounded-xl bg-cyan-soft text-yale-dark">
+              <span class="font-mono text-[16px] font-extrabold">{step.n}</span>
+            </div>
+            <div class="pt-1">
+              <div class="font-mono text-[10.5px] font-bold tracking-[0.18em] uppercase text-cyan-strong">
+                Timing
+              </div>
+              <div class="mt-1 text-[13.5px] font-semibold text-muted">{step.when}</div>
+            </div>
           </div>
-          <div class="seq-body">
-            <h3>{step.heading}</h3>
-            <p>{step.body}</p>
+
+          <div>
+            <h3 class="text-[18px] font-extrabold leading-tight text-yale-dark">{step.heading}</h3>
+            <p class="mt-2 text-[14px] leading-[1.55] text-muted">{step.body}</p>
           </div>
-          <div class="seq-detail">
-            <span class="lbl">{step.detailLabel}</span>
-            <ul>
+
+          <div class="rounded-xl border border-line bg-seasalt p-4 max-[1100px]:col-span-2 max-[720px]:col-span-1">
+            <div class="font-mono text-[10.5px] font-bold tracking-[0.14em] uppercase text-cyan-strong">
+              {step.detailLabel}
+            </div>
+            <ul class="mt-2 list-disc pl-4 text-[13.5px] leading-[1.55] text-muted">
               {step.details.map(d => <li>{d}</li>)}
             </ul>
           </div>
@@ -52,20 +63,25 @@ const { title, description, canonicalPath, ogImage } = HOW_WE_ENGAGE_SEO;
 </section>
 
 <!-- WHAT WE DO NOT DO -->
-<section class="boundaries">
-  <div class="wrap">
-    <div class="head">
-      <span class="eyebrow">What we do not do</span>
-      <h2>The boundaries are the credibility.</h2>
-      <p>Every engagement begins with a structured relationship. The behaviors below are out of bounds, full stop. This isn't a sales line; it's how the practice is operated.</p>
+<section class="bg-white py-20">
+  <div class="mx-auto max-w-[1280px] px-12 max-[1024px]:px-8 max-[900px]:px-6 max-[600px]:px-[18px]">
+    <div class="mb-10 max-w-[820px]">
+      <Eyebrow text="What we do not do" showGlyph />
+      <h2 class="mt-4 text-[38px] font-extrabold leading-[1.1] tracking-[-0.02em] text-yale-dark">
+        The boundaries are the credibility.
+      </h2>
+      <p class="mt-3.5 text-[15.5px] leading-relaxed text-muted">
+        Every engagement begins with a structured relationship. The behaviors below are out of bounds, full stop. This isn't a sales line; it's how the practice is operated.
+      </p>
     </div>
-    <div class="boundary-grid">
+
+    <div class="grid grid-cols-3 gap-6 max-[1024px]:grid-cols-2 max-[720px]:grid-cols-1">
       {BOUNDARY_CARDS.map(b => (
-        <div class="b-card">
-          <div class="x">✕</div>
+        <div class="flex gap-3 rounded-2xl border border-line bg-seasalt p-5">
+          <div class="mt-0.5 shrink-0 text-[14px] font-extrabold text-amber">✕</div>
           <div>
-            <h4>{b.heading}</h4>
-            <p>{b.body}</p>
+            <h4 class="text-[16px] font-extrabold leading-tight text-yale-dark">{b.heading}</h4>
+            <p class="mt-2 text-[14px] leading-[1.55] text-muted">{b.body}</p>
           </div>
         </div>
       ))}
@@ -74,25 +90,29 @@ const { title, description, canonicalPath, ogImage } = HOW_WE_ENGAGE_SEO;
 </section>
 
 <!-- PRINCIPLES BAND -->
-<section class="principles-band">
-  <div class="wrap principles-inner">
-    <div class="left">
-      <span class="eyebrow">Locked in teaming letter</span>
-      <h2>Four non-negotiables, in writing.</h2>
-      <p>These show up in the teaming letter draft we send in Step 3. They are not negotiable; they are how the practice operates.</p>
+<section class="bg-yale-dark py-20 text-white/70">
+  <div class="mx-auto max-w-[1280px] px-12 max-[1024px]:px-8 max-[900px]:px-6 max-[600px]:px-[18px] grid grid-cols-[1fr_1.15fr] gap-12 items-start max-[900px]:grid-cols-1">
+    <div>
+      <Eyebrow text="Locked in teaming letter" onDark showGlyph />
+      <h2 class="mt-4 text-[38px] font-extrabold leading-[1.1] tracking-[-0.02em] text-white">
+        Four non-negotiables, in writing.
+      </h2>
+      <p class="mt-3.5 text-[15.5px] leading-relaxed text-white/70">
+        These show up in the teaming letter draft we send in Step 3. They are not negotiable; they are how the practice operates.
+      </p>
     </div>
-    <div class="princ-list">
+    <div class="space-y-3.5">
       {PRINCIPLES.map(p => (
-        <div class="princ-row">
-          <div class="ic">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <div class="flex gap-3 rounded-2xl border border-white/12 bg-white/5 p-5">
+          <div class="grid size-10 shrink-0 place-items-center rounded-xl bg-cyan-soft text-yale-dark">
+            <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M12 2 L4 6 v6 c0 4 3.5 8 8 10 c4.5 -2 8 -6 8 -10 V6 z"></path>
               <path d="M9 12 l2 2 l4 -4"></path>
             </svg>
           </div>
           <div>
-            <h4>{p.heading}</h4>
-            <p>{p.body}</p>
+            <h4 class="text-[16px] font-extrabold leading-tight text-white">{p.heading}</h4>
+            <p class="mt-2 text-[14px] leading-[1.55] text-white/70">{p.body}</p>
           </div>
         </div>
       ))}
@@ -101,17 +121,23 @@ const { title, description, canonicalPath, ogImage } = HOW_WE_ENGAGE_SEO;
 </section>
 
 <!-- FINAL CTA -->
-<section class="final">
-  <div class="wrap final-inner">
-    <div class="left">
-      <span class="eyebrow">Start the sequence</span>
-      <h2>Step 01 is one email.</h2>
-      <p>From a capture manager, BD lead, or program manager at a U.S. prime. One business day later, a US-based partner manager replies with the NDA and a calendar slot.</p>
-      <a href="/us-sled/contact/" class="cta">Start an NDA conversation <span class="arr"></span></a>
+<section class="bg-white py-20">
+  <div class="mx-auto max-w-[1280px] px-12 max-[1024px]:px-8 max-[900px]:px-6 max-[600px]:px-[18px] grid grid-cols-[1fr_1.05fr] gap-12 items-start max-[900px]:grid-cols-1">
+    <div>
+      <Eyebrow text="Start the sequence" showGlyph />
+      <h2 class="mt-4 text-[40px] font-extrabold leading-[1.1] tracking-[-0.02em] text-yale-dark">
+        Step 01 is one email.
+      </h2>
+      <p class="mt-3.5 text-[15.5px] leading-relaxed text-muted">
+        From a capture manager, BD lead, or program manager at a U.S. prime. One business day later, a US-based partner manager replies with the NDA and a calendar slot.
+      </p>
+      <div class="mt-7">
+        <CtaButton href="/us-sled/contact/" label="Start an NDA conversation" variant="cta" />
+      </div>
     </div>
-    <div class="right">
-      <h4>What to include in the first email</h4>
-      <ul>
+    <div class="rounded-2xl border border-line bg-seasalt p-6">
+      <h4 class="text-[16px] font-extrabold text-yale-dark">What to include in the first email</h4>
+      <ul class="mt-3 list-disc pl-5 text-[14px] leading-[1.55] text-muted">
         {FIRST_EMAIL_CHECKLIST.map(item => <li>{item}</li>)}
       </ul>
     </div>
@@ -120,65 +146,3 @@ const { title, description, canonicalPath, ogImage } = HOW_WE_ENGAGE_SEO;
 
 </SledLayout>
 
-<style>
-.page-hero { background: var(--seasalt); padding: 80px 0 56px; position: relative; overflow: hidden; }
-.page-hero::before { content: ""; position: absolute; right: -40px; top: -40px; width: 280px; height: 280px; background: linear-gradient(45deg, transparent 49%, rgba(24,176,230,0.10) 49% 51%, transparent 51%); background-size: 28px 28px; transform: rotate(15deg); }
-.page-hero .lead { max-width: 760px; position: relative; z-index: 2; }
-.page-hero .lead .eyebrow { margin-bottom: 18px; display: inline-block; }
-.page-hero h1 { font-size: 56px; line-height: 1.05; margin-bottom: 22px; }
-.page-hero h1 :global(.accent) { color: var(--cyan); }
-.page-hero .body { font-size: 17px; color: var(--muted); line-height: 1.55; max-width: 640px; }
-
-.sequence { padding: 100px 0 80px; background: var(--white); }
-.sequence .head { max-width: 720px; margin-bottom: 56px; }
-.sequence .head .eyebrow { margin-bottom: 14px; display: inline-block; }
-.sequence .head h2 { font-size: 40px; line-height: 1.1; }
-.sequence .head p { font-size: 15.5px; color: var(--muted); margin-top: 14px; max-width: 600px; line-height: 1.6; }
-.seq-list { display: grid; grid-template-columns: 1fr; gap: 16px; }
-.seq-step { display: grid; grid-template-columns: 140px 1fr 320px; gap: 36px; align-items: stretch; background: var(--seasalt); border: 1px solid var(--line); border-radius: 14px; padding: 32px 36px; }
-.seq-step .seq-left { display: flex; flex-direction: column; gap: 12px; }
-.seq-step .seq-num { width: 56px; height: 56px; border-radius: 10px; background: var(--yale-dark); color: var(--cyan); display: grid; place-items: center; font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 18px; letter-spacing: 0.04em; }
-.seq-step .seq-when { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan-strong); }
-.seq-step .seq-body h3 { font-size: 24px; color: var(--yale-dark); line-height: 1.2; margin-bottom: 12px; }
-.seq-step .seq-body p { font-size: 15px; color: var(--ink); line-height: 1.6; max-width: 560px; }
-.seq-step .seq-detail { background: var(--white); border: 1px solid var(--line); border-radius: 10px; padding: 20px 22px; display: flex; flex-direction: column; gap: 10px; }
-.seq-step .seq-detail .lbl { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
-.seq-step .seq-detail ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
-.seq-step .seq-detail ul li { font-size: 13px; color: var(--ink); line-height: 1.5; padding-left: 16px; position: relative; }
-.seq-step .seq-detail ul li::before { content: ""; position: absolute; left: 0; top: 7px; width: 7px; height: 7px; background: var(--cyan); transform: rotate(15deg); }
-
-.boundaries { padding: 100px 0; background: var(--seasalt); border-top: 1px solid var(--line); }
-.boundaries .head { margin-bottom: 40px; max-width: 720px; }
-.boundaries .head .eyebrow { margin-bottom: 14px; display: inline-block; color: var(--amber); }
-.boundaries .head h2 { font-size: 40px; line-height: 1.1; }
-.boundaries .head p { font-size: 15.5px; color: var(--muted); margin-top: 14px; max-width: 600px; line-height: 1.6; }
-.boundary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.b-card { background: var(--white); border: 1px solid var(--line); border-radius: 12px; padding: 26px 28px; display: grid; grid-template-columns: 36px 1fr; gap: 16px; }
-.b-card .x { width: 36px; height: 36px; border-radius: 50%; background: rgba(216,144,23,0.10); color: var(--amber); display: grid; place-items: center; font-size: 18px; font-weight: 700; }
-.b-card h4 { font-size: 16px; color: var(--yale); margin-bottom: 8px; line-height: 1.3; }
-.b-card p { font-size: 13.5px; color: var(--muted); line-height: 1.6; }
-
-.principles-band { background: var(--yale-dark); color: var(--white); padding: 90px 0; position: relative; overflow: hidden; }
-.principles-band::before { content: ""; position: absolute; right: -60px; top: -60px; width: 320px; height: 320px; background: linear-gradient(45deg, transparent 48%, rgba(24,176,230,0.16) 48% 52%, transparent 52%); background-size: 30px 30px; transform: rotate(15deg); }
-.principles-inner { display: grid; grid-template-columns: 0.9fr 1.3fr; gap: 56px; position: relative; z-index: 2; align-items: start; }
-.principles-inner .left .eyebrow { color: var(--cyan); display: inline-block; margin-bottom: 18px; }
-.principles-inner .left h2 { color: var(--white); font-size: 36px; line-height: 1.1; margin-bottom: 18px; }
-.principles-inner .left p { color: rgba(255,255,255,0.72); font-size: 15px; line-height: 1.6; max-width: 340px; }
-.princ-list { display: flex; flex-direction: column; gap: 14px; }
-.princ-row { border: 1px solid rgba(255,255,255,0.10); border-radius: 10px; padding: 22px 24px; display: grid; grid-template-columns: 36px 1fr; gap: 16px; background: rgba(255,255,255,0.02); }
-.princ-row .ic { width: 36px; height: 36px; background: rgba(24,176,230,0.14); border-radius: 8px; display: grid; place-items: center; color: var(--cyan); }
-.princ-row .ic svg { width: 18px; height: 18px; }
-.princ-row h4 { color: var(--white); font-size: 16px; margin-bottom: 6px; line-height: 1.3; }
-.princ-row p { font-size: 13.5px; color: rgba(255,255,255,0.72); line-height: 1.6; }
-
-.final { background: var(--white); padding: 100px 0; border-top: 1px solid var(--line); }
-.final-inner { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items: center; }
-.final-inner .left .eyebrow { margin-bottom: 14px; display: inline-block; }
-.final-inner .left h2 { font-size: 40px; line-height: 1.1; margin-bottom: 18px; }
-.final-inner .left p { font-size: 15.5px; color: var(--muted); line-height: 1.6; max-width: 500px; margin-bottom: 28px; }
-.final-inner .right { background: var(--seasalt); border: 1px solid var(--line); border-radius: 14px; padding: 32px 32px; }
-.final-inner .right h4 { font-size: 16px; color: var(--yale); margin-bottom: 14px; }
-.final-inner .right ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
-.final-inner .right ul li { display: flex; align-items: center; gap: 10px; font-size: 13.5px; color: var(--ink); line-height: 1.5; }
-.final-inner .right ul li::before { content: ""; width: 8px; height: 8px; background: var(--cyan); transform: rotate(15deg); flex-shrink: 0; }
-</style>

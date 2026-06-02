@@ -34,25 +34,33 @@ function buildCrumbs(path: string) {
 }
 ---
 
-<div class="subnav">
-  <div class="wrap subnav-inner">
-    <div class="crumbs">
+<div class="subnav sticky top-[76px] z-40 border-b border-line bg-white/96 backdrop-blur-[10px] max-[900px]:static">
+  <div class="subnav-inner mx-auto max-w-[1280px] px-12 max-[1024px]:px-8 max-[900px]:px-6 max-[600px]:px-[18px] flex h-[52px] items-center justify-between max-[900px]:h-auto max-[900px]:py-[8px]">
+    <div class="crumbs mr-6 flex shrink-0 items-center gap-2.5 font-mono text-[11.5px] tracking-[0.04em] whitespace-nowrap text-muted max-[900px]:hidden">
       {crumbs.map((c, i) => (
         <>
-          {i > 0 && <span class="sep">/</span>}
+          {i > 0 && <span class="sep text-line">/</span>}
           {c.href ? (
-            <a href={c.href}>{c.label}</a>
+            <a href={c.href} class="text-muted transition-colors duration-[180ms] ease-out hover:text-yale">{c.label}</a>
           ) : (
-            <span class="here">{c.label}</span>
+            <span class="here font-semibold text-yale">{c.label}</span>
           )}
         </>
       ))}
     </div>
-    <div class="sub-links" data-spy>
+    <div
+      class="sub-links flex shrink-0 flex-nowrap gap-[22px] max-[900px]:overflow-x-auto max-[900px]:scrollbar-none"
+      data-spy
+    >
       {SLED_SUBNAV.map(link => (
         <a
           href={link.href}
-          class:list={[{ on: isActive(link.href) }]}
+          class:list={[
+            {
+              on: isActive(link.href),
+            },
+          ]}
+          class="border-b-2 border-transparent px-0 py-1.5 text-[13.5px] font-medium whitespace-nowrap text-muted transition-[color,border-color] duration-[180ms] ease-out hover:text-yale [&.on]:border-cyan [&.on]:font-semibold [&.on]:text-yale"
           data-spy-id={'spyId' in link ? (link as any).spyId : undefined}
         >
           {link.label}

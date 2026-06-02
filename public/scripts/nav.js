@@ -3,16 +3,25 @@
 (function(){
   // -------- Mega-menu hover / click --------
   const items = document.querySelectorAll('.nav-item');
+  if(!items.length) return;
   let openTimer = null, closeTimer = null;
+  document.querySelectorAll('.mega-item').forEach(el => {
+    el.dataset.active = el.classList.contains('active') ? 'true' : 'false';
+  });
   function openItem(el){
-    items.forEach(i => { if(i !== el) i.classList.remove('open'); });
+    items.forEach(i => {
+      if(i !== el) i.classList.remove('open');
+      i.dataset.open = i === el ? 'true' : 'false';
+    });
     el.classList.add('open');
+    el.dataset.open = 'true';
     const btn = el.querySelector('.nav-link');
     if(btn) btn.setAttribute('aria-expanded','true');
   }
   function closeAll(){
     items.forEach(i => {
       i.classList.remove('open');
+      i.dataset.open = 'false';
       const btn = i.querySelector('.nav-link');
       if(btn) btn.setAttribute('aria-expanded','false');
     });
@@ -56,13 +65,23 @@
     list.querySelectorAll('.mega-item').forEach(item => {
       item.addEventListener('mouseenter', () => {
         list.querySelectorAll('.mega-item').forEach(i => i.classList.remove('active'));
+        list.querySelectorAll('.mega-item').forEach(i => (i.dataset.active = 'false'));
         item.classList.add('active');
+        item.dataset.active = 'true';
         const k = item.dataset.key;
         const d = data[key][k];
         if(!d || !featBlock || !subBlock) return;
         featBlock.querySelector('[data-feat-title]').textContent = d.title;
         featBlock.querySelector('[data-feat-desc]').textContent = d.desc;
-        subBlock.innerHTML = d.subs.map(s => '<a href="#">'+s+'</a>').join('');
+        // Preserve styling/spacing by keeping the same sublink classes.
+        subBlock.innerHTML = d.subs
+          .map(
+            (s) =>
+              '<a href="/" class="rounded-md px-3 py-2 text-[13.5px] font-medium text-muted transition-[background,color] duration-[180ms] ease-out hover:bg-seasalt hover:text-yale">' +
+              s +
+              '</a>'
+          )
+          .join('');
       });
     });
   });

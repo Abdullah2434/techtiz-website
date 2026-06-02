@@ -6,17 +6,61 @@ interface Props {
 }
 
 const { href, label, variant = 'cta' } = Astro.props;
+
+const base = 'inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-lg text-sm font-bold transition-[transform,box-shadow,background,border-color,color] duration-[180ms] ease-out';
 ---
 
 {variant === 'cta' && (
-  <a href={href} class="cta">{label} <span class="arr"></span></a>
+  <a
+    href={href}
+    class:list={[
+      base,
+      'bg-cyan px-5 py-3 text-yale-dark hover:-translate-y-px hover:shadow-[0_10px_24px_-8px_rgba(24,176,230,0.55)]',
+    ]}
+  >
+    {label}
+    <svg aria-hidden="true" viewBox="0 0 20 20" class="size-4">
+      <path
+        d="M7 4.5 12.5 10 7 15.5"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  </a>
 )}
 {variant === 'primary' && (
-  <a href={href} class="btn-primary">{label}</a>
+  <a
+    href={href}
+    class:list={[
+      base,
+      'bg-yale px-[22px] py-[13px] text-white hover:-translate-y-px hover:bg-yale-dark',
+    ]}
+  >
+    {label}
+  </a>
 )}
 {variant === 'ghost-dark' && (
-  <a href={href} class="btn-ghost-dark">{label}</a>
+  <a
+    href={href}
+    class:list={[
+      base,
+      'border border-white/32 px-5 py-3 text-white hover:border-white hover:bg-white/8',
+    ]}
+  >
+    {label}
+  </a>
 )}
 {variant === 'ghost-light' && (
-  <a href={href} class="btn-ghost-light">{label}</a>
+  <a
+    href={href}
+    class:list={[
+      base,
+      'border border-line bg-white px-5 py-3 text-yale hover:border-yale hover:bg-seasalt',
+    ]}
+  >
+    {label}
+  </a>
 )}

@@ -1,5 +1,8 @@
 ---
 import SledLayout from '../../layouts/SledLayout.astro';
+import PageHero from '../../components/shared/PageHero.astro';
+import Eyebrow from '../../components/shared/Eyebrow.astro';
+import CtaButton from '../../components/shared/CtaButton.astro';
 import {
   OPERATING_MODEL_SEO, OPERATING_MODEL_HERO, ONSHORE_ITEMS, ONSHORE_DATA_CLASSES,
   OFFSHORE_ITEMS, OFFSHORE_DATA_CLASSES, STATE_ROWS, DISCLOSURE_STEPS
@@ -20,74 +23,103 @@ const FRAMEWORKS = [
 <SledLayout {title} {description} {canonicalPath} {ogImage} currentPage="/us-sled/operating-model/">
 
 <!-- HERO -->
-<section class="page-hero">
-  <div class="wrap">
-    <div class="lead">
-      <span class="eyebrow"><span class="gl"></span> {OPERATING_MODEL_HERO.eyebrow}</span>
-      <h1 set:html={OPERATING_MODEL_HERO.heading} />
-      <p class="body">{OPERATING_MODEL_HERO.body}</p>
-      <div class="answer-card">
-        <div class="qmark">Flow-down<br/>question</div>
-        <div class="text" set:html={`<strong>"If I subcontract this work to Techtiz, where does the data go and who touches it?"</strong> &nbsp;${OPERATING_MODEL_HERO.answerCard.text.replace(/^"[^"]*"\s*/, '')}`} />
+<PageHero eyebrow={OPERATING_MODEL_HERO.eyebrow} heading={OPERATING_MODEL_HERO.heading} body={OPERATING_MODEL_HERO.body}>
+  <div class="mt-8 max-w-[780px] rounded-2xl border border-line bg-seasalt p-6">
+    <div class="grid grid-cols-[110px_1fr] gap-5 max-[520px]:grid-cols-1">
+      <div class="grid place-items-center rounded-xl bg-white p-4 text-center">
+        <div class="font-mono text-[10.5px] font-bold tracking-[0.14em] uppercase text-cyan-strong leading-tight">
+          Flow-down<br/>question
+        </div>
       </div>
+      <div
+        class="text-[14.5px] leading-[1.6] text-muted"
+        set:html={`<strong class='text-yale-dark'>\"If I subcontract this work to Techtiz, where does the data go and who touches it?\"</strong> &nbsp;${OPERATING_MODEL_HERO.answerCard.text.replace(/^"[^"]*"\s*/, '')}`}
+      />
     </div>
   </div>
-</section>
+</PageHero>
 
 <!-- ARCHITECTURE -->
-<section class="architecture">
-  <div class="wrap">
-    <div class="head">
-      <span class="eyebrow">Bifurcated architecture</span>
-      <h2>Two environments. One contract. A documented air-gap between them.</h2>
-      <p>The operating model is structural, not procedural. Sensitive data classes are physically and logically separated from the offshore engineering plane. The prime sees the boundary in the disclosure pack; the agency never sees us at all.</p>
+<section class="bg-white py-20">
+  <div class="mx-auto max-w-[1280px] px-12 max-[1024px]:px-8 max-[900px]:px-6 max-[600px]:px-[18px]">
+    <div class="mb-10 max-w-[880px]">
+      <Eyebrow text="Bifurcated architecture" showGlyph />
+      <h2 class="mt-4 text-[38px] font-extrabold leading-[1.1] tracking-[-0.02em] text-yale-dark">
+        Two environments. One contract. A documented air-gap between them.
+      </h2>
+      <p class="mt-3.5 text-[15.5px] leading-relaxed text-muted">
+        The operating model is structural, not procedural. Sensitive data classes are physically and logically separated from the offshore engineering plane. The prime sees the boundary in the disclosure pack; the agency never sees us at all.
+      </p>
     </div>
-    <div class="arch-board">
-      <div class="arch-col onshore">
-        <div class="col-h"><span class="col-flag">CONUS · US persons</span></div>
-        <div>
-          <div class="col-title">Onshore plane</div>
-          <div class="col-sub">U.S.-citizen personnel on U.S. soil. The only environment cleared to handle live agency data, controlled information, and any work touching law-enforcement, judicial, or healthcare systems.</div>
+
+    <div class="grid grid-cols-[1fr_120px_1fr] items-stretch gap-6 max-[1024px]:grid-cols-1">
+      <div class="rounded-2xl border border-line bg-seasalt p-6">
+        <div class="mb-5 flex items-center justify-between gap-3">
+          <span class="rounded-full bg-white px-3 py-1 font-mono text-[10.5px] font-bold tracking-[0.14em] text-yale uppercase">
+            CONUS · US persons
+          </span>
         </div>
-        <div class="what-list">
+        <div class="text-[18px] font-extrabold text-yale-dark">Onshore plane</div>
+        <div class="mt-2 text-[14px] leading-[1.55] text-muted">
+          U.S.-citizen personnel on U.S. soil. The only environment cleared to handle live agency data, controlled information, and any work touching law-enforcement, judicial, or healthcare systems.
+        </div>
+        <div class="mt-5 space-y-2.5">
           {ONSHORE_ITEMS.map(item => (
-            <div class="item"><span class="dot"></span><div><strong>{item.title}</strong> — {item.body}</div></div>
+            <div class="flex gap-3">
+              <span class="mt-2 inline-block size-2 rotate-15 bg-cyan" aria-hidden="true"></span>
+              <div class="text-[13.5px] leading-[1.55] text-muted">
+                <strong class="text-yale-dark">{item.title}</strong> — {item.body}
+              </div>
+            </div>
           ))}
         </div>
-        <div class="data-classes">
-          <div class="lbl">Data classes handled here</div>
-          <div class="pill-row">
-            {ONSHORE_DATA_CLASSES.map(cls => <span class="pill">{cls}</span>)}
+        <div class="mt-6 rounded-xl border border-line bg-white p-4">
+          <div class="font-mono text-[10.5px] font-bold tracking-[0.14em] uppercase text-cyan-strong">Data classes handled here</div>
+          <div class="mt-3 flex flex-wrap gap-2">
+            {ONSHORE_DATA_CLASSES.map(cls => (
+              <span class="rounded-full border border-line bg-seasalt px-3 py-1 text-[12.5px] font-medium text-muted">{cls}</span>
+            ))}
           </div>
         </div>
       </div>
 
-      <div class="arch-gap" aria-hidden="true">
-        <div class="vline"></div>
-        <div class="icon">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <div class="flex flex-col items-center justify-center gap-4 max-[1024px]:hidden" aria-hidden="true">
+        <div class="h-24 w-px bg-line"></div>
+        <div class="grid size-12 place-items-center rounded-xl border border-line bg-white text-yale-dark shadow-[0_10px_24px_-18px_rgba(14,38,64,0.25)]">
+          <svg viewBox="0 0 24 24" class="size-6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
             <rect x="3" y="11" width="18" height="11" rx="2"></rect>
             <path d="M7 11 V7 a5 5 0 0 1 10 0 v4"></path>
           </svg>
         </div>
-        <div class="vline"></div>
+        <div class="h-24 w-px bg-line"></div>
       </div>
 
-      <div class="arch-col offshore">
-        <div class="col-h"><span class="col-flag">Lahore · Engineering</span></div>
-        <div>
-          <div class="col-title">Offshore engineering plane</div>
-          <div class="col-sub">Senior engineers in Lahore working against sanitized environments, synthetic data sets, and API contracts that do not expose live agency endpoints. Where the bulk of the build happens, never against production data.</div>
+      <div class="rounded-2xl border border-line bg-seasalt p-6">
+        <div class="mb-5 flex items-center justify-between gap-3">
+          <span class="rounded-full bg-white px-3 py-1 font-mono text-[10.5px] font-bold tracking-[0.14em] text-yale uppercase">
+            Lahore · Engineering
+          </span>
         </div>
-        <div class="what-list">
+        <div class="text-[18px] font-extrabold text-yale-dark">Offshore engineering plane</div>
+        <div class="mt-2 text-[14px] leading-[1.55] text-muted">
+          Senior engineers in Lahore working against sanitized environments, synthetic data sets, and API contracts that do not expose live agency endpoints. Where the bulk of the build happens, never against production data.
+        </div>
+        <div class="mt-5 space-y-2.5">
           {OFFSHORE_ITEMS.map(item => (
-            <div class="item"><span class="dot"></span><div><strong>{item.title}</strong> — {item.body}</div></div>
+            <div class="flex gap-3">
+              <span class="mt-2 inline-block size-2 rotate-15 bg-cyan" aria-hidden="true"></span>
+              <div class="text-[13.5px] leading-[1.55] text-muted">
+                <strong class="text-yale-dark">{item.title}</strong> — {item.body}
+              </div>
+            </div>
           ))}
         </div>
-        <div class="data-classes">
-          <div class="lbl">Data classes handled here</div>
-          <div class="pill-row">
-            {OFFSHORE_DATA_CLASSES.map(cls => <span class="pill">{cls}</span>)}
+        <div class="mt-6 rounded-xl border border-line bg-white p-4">
+          <div class="font-mono text-[10.5px] font-bold tracking-[0.14em] uppercase text-cyan-strong">Data classes handled here</div>
+          <div class="mt-3 flex flex-wrap gap-2">
+            {OFFSHORE_DATA_CLASSES.map(cls => (
+              <span class="rounded-full border border-line bg-seasalt px-3 py-1 text-[12.5px] font-medium text-muted">{cls}</span>
+            ))}
           </div>
         </div>
       </div>
@@ -96,26 +128,44 @@ const FRAMEWORKS = [
 </section>
 
 <!-- COMPLIANCE FRAMEWORKS -->
-<section class="frameworks">
-  <div class="wrap">
-    <div class="head">
-      <span class="eyebrow">Compliance frameworks</span>
-      <h2>The frameworks a prime compliance officer is looking for.</h2>
-      <p>Specific claims with status, scope, and target dates. Where a framework is in-progress, a target date is on the page. Where a framework applies on a per-engagement basis, the posture statement explains how.</p>
+<section class="bg-seasalt py-20">
+  <div class="mx-auto max-w-[1280px] px-12 max-[1024px]:px-8 max-[900px]:px-6 max-[600px]:px-[18px]">
+    <div class="mb-10 max-w-[900px]">
+      <Eyebrow text="Compliance frameworks" showGlyph />
+      <h2 class="mt-4 text-[38px] font-extrabold leading-[1.1] tracking-[-0.02em] text-yale-dark">
+        The frameworks a prime compliance officer is looking for.
+      </h2>
+      <p class="mt-3.5 text-[15.5px] leading-relaxed text-muted">
+        Specific claims with status, scope, and target dates. Where a framework is in-progress, a target date is on the page. Where a framework applies on a per-engagement basis, the posture statement explains how.
+      </p>
     </div>
-    <div class="fw-grid">
+
+    <div class="grid grid-cols-2 gap-6 max-[900px]:grid-cols-1">
       {FRAMEWORKS.map(fw => (
-        <div class="fw-card">
-          <div class="fw-head">
-            <div class="fw-name">{fw.name}</div>
-            <span class:list={['fw-status', fw.statusClass]}>{fw.status}</span>
+        <div class="rounded-2xl border border-line bg-white p-[22px] shadow-[0_14px_36px_-26px_rgba(14,38,64,0.25)]">
+          <div class="flex items-start justify-between gap-4">
+            <div class="text-[16px] font-extrabold text-yale-dark">{fw.name}</div>
+            <span
+              class:list={[
+                'inline-flex shrink-0 items-center rounded-full px-3 py-1 text-[12.5px] font-bold',
+                {
+                  'bg-amber/12 text-amber': fw.statusClass === 'in-progress',
+                  'bg-yale/8 text-yale': fw.statusClass === 'aligned',
+                  'bg-cyan-soft text-yale-dark': fw.statusClass === 'applied',
+                  'bg-seasalt text-muted': fw.statusClass === 'posture',
+                },
+              ]}
+            >
+              {fw.status}
+            </span>
           </div>
-          <div class="fw-what" set:html={fw.what} />
-          <div class="fw-detail">
+          <div class="mt-3 text-[13.5px] leading-[1.55] text-muted" set:html={fw.what} />
+
+          <div class="mt-5 grid grid-cols-[140px_1fr] gap-x-4 gap-y-2 rounded-xl border border-line bg-seasalt p-4 max-[520px]:grid-cols-1">
             {Object.entries(fw.detail).map(([k, v]) => (
               <>
-                <div class="k">{k}</div>
-                <div class:list={['v', { target: k === 'Target' }]}>{v}</div>
+                <div class="font-mono text-[10.5px] font-bold tracking-[0.14em] text-cyan-strong uppercase">{k}</div>
+                <div class:list={['text-[13.5px] leading-[1.55] text-muted', { 'font-semibold text-yale-dark': k === 'Target' }]}>{v}</div>
               </>
             ))}
           </div>
@@ -126,57 +176,98 @@ const FRAMEWORKS = [
 </section>
 
 <!-- STATE RESTRICTIONS -->
-<section class="states">
-  <div class="wrap">
-    <div class="head">
-      <span class="eyebrow">State-by-state offshore restrictions</span>
-      <h2>Where we can serve directly. Where the prime needs to disclose. Where a waiver is required.</h2>
-      <p>The U.S. state landscape on offshore subcontracting is fragmented; an offshore-shy compliance officer needs a prepared answer, not a research project. This is ours, kept current. Always confirm against the live solicitation language before bid.</p>
+<section class="bg-white py-20">
+  <div class="mx-auto max-w-[1280px] px-12 max-[1024px]:px-8 max-[900px]:px-6 max-[600px]:px-[18px]">
+    <div class="mb-10 max-w-[980px]">
+      <Eyebrow text="State-by-state offshore restrictions" showGlyph />
+      <h2 class="mt-4 text-[38px] font-extrabold leading-[1.1] tracking-[-0.02em] text-yale-dark">
+        Where we can serve directly. Where the prime needs to disclose. Where a waiver is required.
+      </h2>
+      <p class="mt-3.5 text-[15.5px] leading-relaxed text-muted">
+        The U.S. state landscape on offshore subcontracting is fragmented; an offshore-shy compliance officer needs a prepared answer, not a research project. This is ours, kept current. Always confirm against the live solicitation language before bid.
+      </p>
     </div>
-    <div class="legend-row">
-      <div class="legend-item"><span class="sw serve"></span>Serve directly under standard subcontract</div>
-      <div class="legend-item"><span class="sw disclose"></span>Standard subcontract + offshore-handling disclosure</div>
-      <div class="legend-item"><span class="sw waiver"></span>Restructuring or written waiver required</div>
+
+    <div class="mb-6 flex flex-wrap gap-x-5 gap-y-2 text-[13.5px] text-muted">
+      <span class="inline-flex items-center gap-2"><span class="inline-block size-2 rounded-sm bg-green" aria-hidden="true"></span>Serve directly under standard subcontract</span>
+      <span class="inline-flex items-center gap-2"><span class="inline-block size-2 rounded-sm bg-amber" aria-hidden="true"></span>Standard subcontract + offshore-handling disclosure</span>
+      <span class="inline-flex items-center gap-2"><span class="inline-block size-2 rounded-sm bg-yale" aria-hidden="true"></span>Restructuring or written waiver required</span>
     </div>
-    <div class="state-table">
-      <div class="state-row head-row">
-        <div class="sc">Posture</div>
-        <div class="sc">State / framework</div>
-        <div class="sc">Restriction in plain English</div>
-        <div class="sc">Our handling</div>
+
+    <div class="overflow-hidden rounded-2xl border border-line bg-white">
+      <div class="grid grid-cols-[140px_260px_1fr_240px] border-b border-line bg-seasalt px-6 py-4 text-[12.5px] font-bold text-muted max-[1024px]:hidden">
+        <div>Posture</div>
+        <div>State / framework</div>
+        <div>Restriction in plain English</div>
+        <div>Our handling</div>
       </div>
       {STATE_ROWS.map(row => (
-        <div class="state-row">
-          <div class="sc code"><span class:list={['sw', row.posture]}></span>{row.code}</div>
-          <div class="sc name">{row.name}</div>
-          <div class="sc what">{row.what}</div>
-          <div class="sc posture"><span class:list={['badge', row.badgeClass]}>{row.badge}</span></div>
+        <div class="grid grid-cols-[140px_260px_1fr_240px] border-b border-line px-6 py-5 max-[1024px]:grid-cols-1 max-[1024px]:gap-3">
+          <div class="flex items-center gap-2 text-[13.5px] font-semibold text-yale-dark">
+            <span
+              class:list={[
+                'inline-block size-2 rounded-sm',
+                {
+                  'bg-green': row.posture === 'serve',
+                  'bg-amber': row.posture === 'disclose',
+                  'bg-yale': row.posture === 'waiver',
+                },
+              ]}
+              aria-hidden="true"
+            ></span>
+            {row.code}
+          </div>
+          <div class="text-[14px] font-semibold text-yale-dark">{row.name}</div>
+          <div class="text-[14px] leading-[1.55] text-muted">{row.what}</div>
+          <div>
+            <span
+              class:list={[
+                'inline-flex items-center rounded-full px-3 py-1 text-[12.5px] font-bold',
+                {
+                  'bg-green/12 text-green': row.badgeClass === 'serve',
+                  'bg-amber/12 text-amber': row.badgeClass === 'disclose',
+                  'bg-yale/8 text-yale': row.badgeClass !== 'serve' && row.badgeClass !== 'disclose',
+                },
+              ]}
+            >
+              {row.badge}
+            </span>
+          </div>
         </div>
       ))}
     </div>
-    <div class="states-foot">// State-level disclosure pack maintained on request · Updated quarterly · Confirm against live solicitation language</div>
+    <div class="mt-4 font-mono text-[10.5px] tracking-[0.14em] text-muted uppercase">
+      // State-level disclosure pack maintained on request · Updated quarterly · Confirm against live solicitation language
+    </div>
   </div>
 </section>
 
 <!-- DISCLOSURE PROTOCOL -->
-<section class="protocol">
-  <div class="wrap">
-    <div class="protocol-inner">
-      <div class="left">
-        <span class="eyebrow">Disclosure protocol</span>
-        <h2>Proactive disclosure is the engagement default.</h2>
-        <p>Every prime conversation begins with a written disclosure of our operating model. The prime never has to ask. The flow-down file is built from day one.</p>
-        <div class="stamp">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11 V7 a5 5 0 0 1 10 0 v4"></path></svg>
+<section class="bg-seasalt py-20">
+  <div class="mx-auto max-w-[1280px] px-12 max-[1024px]:px-8 max-[900px]:px-6 max-[600px]:px-[18px]">
+    <div class="grid grid-cols-[1fr_1.25fr] gap-12 items-start max-[900px]:grid-cols-1">
+      <div>
+        <Eyebrow text="Disclosure protocol" showGlyph />
+        <h2 class="mt-4 text-[38px] font-extrabold leading-[1.1] tracking-[-0.02em] text-yale-dark">
+          Proactive disclosure is the engagement default.
+        </h2>
+        <p class="mt-3.5 text-[15.5px] leading-relaxed text-muted">
+          Every prime conversation begins with a written disclosure of our operating model. The prime never has to ask. The flow-down file is built from day one.
+        </p>
+        <div class="mt-6 inline-flex items-center gap-2 rounded-xl border border-line bg-white px-4 py-3 text-[13.5px] font-semibold text-yale-dark">
+          <svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11 V7 a5 5 0 0 1 10 0 v4"></path></svg>
           Locked in teaming letter
         </div>
       </div>
-      <div class="protocol-steps">
+
+      <div class="grid grid-cols-2 gap-6 max-[720px]:grid-cols-1">
         {DISCLOSURE_STEPS.map(step => (
-          <div class="proto-step">
-            <div class="num">{step.n}</div>
-            <h4>{step.heading}</h4>
-            <p>{step.body}</p>
+          <div class="rounded-2xl border border-line bg-white p-6 shadow-[0_14px_36px_-26px_rgba(14,38,64,0.25)]">
+            <div class="grid size-10 place-items-center rounded-xl bg-cyan-soft text-yale-dark">
+              <span class="font-mono text-[14px] font-extrabold">{step.n}</span>
+            </div>
+            <h4 class="mt-4 text-[16px] font-extrabold leading-tight text-yale-dark">{step.heading}</h4>
+            <p class="mt-2 text-[14px] leading-[1.55] text-muted">{step.body}</p>
           </div>
         ))}
       </div>
@@ -185,32 +276,41 @@ const FRAMEWORKS = [
 </section>
 
 <!-- PIPELINE INTELLIGENCE NOTE -->
-<section class="intel-band">
-  <div class="wrap">
-    <div class="head" style="margin-bottom: 36px; max-width: 720px;">
-      <span class="eyebrow">Pipeline intelligence</span>
-      <h2 style="font-size: 36px; line-height: 1.1; margin-top: 8px;">How we source pipeline intelligence, the clean way.</h2>
-      <p style="font-size: 15.5px; color: var(--muted); margin-top: 14px; line-height: 1.6;">A prime asking how Techtiz sources pipeline has a clean, defensible answer. We subscribe to the structured procurement-intelligence ecosystem rather than scraping it from outside.</p>
+<section class="bg-white py-20">
+  <div class="mx-auto max-w-[1280px] px-12 max-[1024px]:px-8 max-[900px]:px-6 max-[600px]:px-[18px]">
+    <div class="mb-10 max-w-[820px]">
+      <Eyebrow text="Pipeline intelligence" showGlyph />
+      <h2 class="mt-4 text-[38px] font-extrabold leading-[1.1] tracking-[-0.02em] text-yale-dark">
+        How we source pipeline intelligence, the clean way.
+      </h2>
+      <p class="mt-3.5 text-[15.5px] leading-relaxed text-muted">
+        A prime asking how Techtiz sources pipeline has a clean, defensible answer. We subscribe to the structured procurement-intelligence ecosystem rather than scraping it from outside.
+      </p>
     </div>
-    <div class="intel-grid">
-      <div class="intel-card feature">
-        <span class="eyebrow">Authorized subscriber model</span>
-        <h3>Inside the ecosystem, not adjacent to it.</h3>
-        <p>Subscriber status places us inside the structured procurement-intelligence ecosystem with paid access, audit logs, and direct prime-outreach channels. The opposite of an offshore firm scraping public RFP archives.</p>
-        <div class="vendors">
-          <span class="v">Deltek GovWin · subscriber</span>
-          <span class="v">Bloomberg Government · subscriber</span>
-          <span class="v">SAM.gov · monitored</span>
+
+    <div class="grid grid-cols-2 gap-6 max-[900px]:grid-cols-1">
+      <div class="rounded-2xl border border-line bg-seasalt p-6">
+        <Eyebrow text="Authorized subscriber model" showGlyph />
+        <h3 class="mt-4 text-[18px] font-extrabold leading-tight text-yale-dark">Inside the ecosystem, not adjacent to it.</h3>
+        <p class="mt-2 text-[14px] leading-[1.55] text-muted">
+          Subscriber status places us inside the structured procurement-intelligence ecosystem with paid access, audit logs, and direct prime-outreach channels. The opposite of an offshore firm scraping public RFP archives.
+        </p>
+        <div class="mt-4 flex flex-wrap gap-2">
+          <span class="rounded-full border border-line bg-white px-3 py-1 text-[12.5px] font-medium text-muted">Deltek GovWin · subscriber</span>
+          <span class="rounded-full border border-line bg-white px-3 py-1 text-[12.5px] font-medium text-muted">Bloomberg Government · subscriber</span>
+          <span class="rounded-full border border-line bg-white px-3 py-1 text-[12.5px] font-medium text-muted">SAM.gov · monitored</span>
         </div>
       </div>
-      <div class="intel-card">
-        <span class="eyebrow">What we use it for</span>
-        <h3>Pipeline, primes, and prep — never published commentary.</h3>
-        <p>Subscription tools identify primes assembling teams for upcoming bids, recent awards, and capability-statement matches. We use them to find partners, not to publish marketing analyses of active solicitations.</p>
-        <div class="vendors">
-          <span class="v">Find primes assembling teams</span>
-          <span class="v">Capability-statement matching</span>
-          <span class="v">Award-history research</span>
+      <div class="rounded-2xl border border-line bg-seasalt p-6">
+        <Eyebrow text="What we use it for" showGlyph />
+        <h3 class="mt-4 text-[18px] font-extrabold leading-tight text-yale-dark">Pipeline, primes, and prep — never published commentary.</h3>
+        <p class="mt-2 text-[14px] leading-[1.55] text-muted">
+          Subscription tools identify primes assembling teams for upcoming bids, recent awards, and capability-statement matches. We use them to find partners, not to publish marketing analyses of active solicitations.
+        </p>
+        <div class="mt-4 flex flex-wrap gap-2">
+          <span class="rounded-full border border-line bg-white px-3 py-1 text-[12.5px] font-medium text-muted">Find primes assembling teams</span>
+          <span class="rounded-full border border-line bg-white px-3 py-1 text-[12.5px] font-medium text-muted">Capability-statement matching</span>
+          <span class="rounded-full border border-line bg-white px-3 py-1 text-[12.5px] font-medium text-muted">Award-history research</span>
         </div>
       </div>
     </div>
@@ -218,138 +318,20 @@ const FRAMEWORKS = [
 </section>
 
 <!-- FINAL CTA -->
-<section class="final">
-  <div class="wrap final-inner">
-    <span class="eyebrow">Engage us</span>
-    <h2>Need the full operating-model pack before your next subcontract review?</h2>
-    <p>The architecture diagram, control mapping, per-state posture page, and personnel attestation template, sent under NDA within one business day.</p>
-    <a href="/us-sled/contact/" class="cta">Request the operating-model pack <span class="arr"></span></a>
+<section class="bg-yale-dark py-20">
+  <div class="mx-auto max-w-[920px] px-12 max-[1024px]:px-8 max-[900px]:px-6 max-[600px]:px-[18px] text-center">
+    <Eyebrow text="Engage us" onDark showGlyph class="justify-center" />
+    <h2 class="mt-4 text-[40px] font-extrabold leading-[1.1] tracking-[-0.02em] text-white">
+      Need the full operating-model pack before your next subcontract review?
+    </h2>
+    <p class="mx-auto mt-3.5 mb-8 max-w-[760px] text-[15.5px] leading-relaxed text-white/70">
+      The architecture diagram, control mapping, per-state posture page, and personnel attestation template, sent under NDA within one business day.
+    </p>
+    <div class="flex justify-center">
+      <CtaButton href="/us-sled/contact/" label="Request the operating-model pack" variant="cta" />
+    </div>
   </div>
 </section>
 
 </SledLayout>
 
-<style>
-.page-hero { background: var(--seasalt); padding: 80px 0 56px; position: relative; overflow: hidden; }
-.page-hero::before { content: ""; position: absolute; right: -40px; top: -40px; width: 280px; height: 280px; background: linear-gradient(45deg, transparent 49%, rgba(24,176,230,0.10) 49% 51%, transparent 51%); background-size: 28px 28px; transform: rotate(15deg); pointer-events: none; }
-.page-hero .lead { max-width: 820px; position: relative; z-index: 2; }
-.page-hero .lead .eyebrow { margin-bottom: 18px; display: inline-block; }
-.page-hero h1 { font-size: 56px; line-height: 1.05; margin-bottom: 22px; }
-.page-hero h1 :global(.accent) { color: var(--cyan); }
-.page-hero .body { font-size: 17px; color: var(--muted); line-height: 1.55; max-width: 720px; margin-bottom: 28px; }
-.page-hero .answer-card { background: var(--white); border: 1px solid var(--line); border-left: 3px solid var(--cyan); border-radius: 8px; padding: 22px 26px; max-width: 720px; position: relative; z-index: 2; display: flex; gap: 18px; align-items: flex-start; }
-.page-hero .answer-card .qmark { flex-shrink: 0; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.14em; color: var(--muted); text-transform: uppercase; width: 110px; padding-top: 2px; }
-.page-hero .answer-card .text { font-size: 15px; line-height: 1.55; color: var(--ink); }
-
-.architecture { padding: 100px 0 80px; background: var(--white); }
-.architecture .head { max-width: 780px; margin-bottom: 56px; }
-.architecture .head .eyebrow { margin-bottom: 14px; display: inline-block; }
-.architecture .head h2 { font-size: 40px; line-height: 1.1; }
-.architecture .head p { font-size: 15.5px; color: var(--muted); margin-top: 14px; max-width: 640px; line-height: 1.6; }
-.arch-board { background: var(--seasalt); border: 1px solid var(--line); border-radius: 16px; padding: 40px; display: grid; grid-template-columns: 1fr 80px 1fr; gap: 0; position: relative; overflow: hidden; }
-.arch-board::before { content: "Air-gap"; position: absolute; left: 50%; top: 40px; transform: translateX(-50%); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.20em; text-transform: uppercase; color: var(--cyan-strong); padding: 4px 10px; border: 1px solid var(--cyan); background: var(--white); border-radius: 4px; z-index: 3; }
-.arch-col { background: var(--white); border: 1px solid var(--line); border-radius: 12px; padding: 28px 28px 26px; display: flex; flex-direction: column; gap: 18px; }
-.arch-col.onshore { border-color: var(--yale-mid); }
-.arch-col .col-h { display: flex; align-items: center; gap: 12px; padding-bottom: 18px; border-bottom: 1px solid var(--line-soft); }
-.arch-col .col-flag { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white); background: var(--yale-dark); padding: 5px 9px; border-radius: 4px; }
-.arch-col.offshore .col-flag { background: var(--cyan-strong); }
-.arch-col .col-title { font-size: 19px; color: var(--yale-dark); font-weight: 800; letter-spacing: -0.01em; line-height: 1.2; }
-.arch-col .col-sub { font-size: 13px; color: var(--muted); line-height: 1.5; }
-.arch-col .what-list { display: flex; flex-direction: column; gap: 10px; }
-.arch-col .what-list .item { display: grid; grid-template-columns: 18px 1fr; gap: 12px; align-items: flex-start; font-size: 13.5px; line-height: 1.5; color: var(--ink); }
-.arch-col .what-list .item .dot { width: 7px; height: 7px; margin-top: 7px; background: var(--cyan); transform: rotate(15deg); flex-shrink: 0; margin-left: 5px; }
-.arch-col.onshore .what-list .item .dot { background: var(--yale-mid); }
-.arch-col .data-classes { margin-top: auto; padding-top: 18px; border-top: 1px solid var(--line-soft); }
-.arch-col .data-classes .lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; color: var(--muted); text-transform: uppercase; margin-bottom: 10px; }
-.arch-col .data-classes .pill-row { display: flex; flex-wrap: wrap; gap: 6px; }
-.arch-col .data-classes .pill { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--yale-dark); background: var(--cyan-soft); border: 1px solid var(--cyan-soft); padding: 4px 9px; border-radius: 4px; letter-spacing: 0.02em; }
-.arch-col.offshore .data-classes .pill { background: var(--seasalt); border-color: var(--line); color: var(--muted); }
-.arch-gap { display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.arch-gap .vline { width: 1px; flex: 1; background: repeating-linear-gradient(to bottom, var(--cyan) 0 6px, transparent 6px 12px); }
-.arch-gap .icon { width: 44px; height: 44px; border-radius: 50%; background: var(--white); border: 1px solid var(--cyan); display: grid; place-items: center; color: var(--cyan-strong); margin: 6px 0; }
-
-.frameworks { padding: 100px 0; background: var(--seasalt); border-top: 1px solid var(--line); }
-.frameworks .head { margin-bottom: 48px; max-width: 720px; }
-.frameworks .head .eyebrow { margin-bottom: 14px; display: inline-block; }
-.frameworks .head h2 { font-size: 40px; line-height: 1.1; }
-.frameworks .head p { font-size: 15.5px; color: var(--muted); margin-top: 14px; max-width: 640px; line-height: 1.6; }
-.fw-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.fw-card { background: var(--white); border: 1px solid var(--line); border-radius: 12px; padding: 28px 28px 24px; display: flex; flex-direction: column; gap: 14px; transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease; }
-.fw-card:hover { transform: translateY(-2px); border-color: #C2CCD9; box-shadow: 0 18px 36px -18px rgba(21,58,95,0.16); }
-.fw-card .fw-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; }
-.fw-card .fw-name { font-size: 18px; color: var(--yale-dark); font-weight: 800; letter-spacing: -0.01em; line-height: 1.25; }
-.fw-card .fw-status { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; padding: 4px 8px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; }
-.fw-card .fw-status.in-progress { color: var(--amber); background: rgba(216,144,23,0.10); }
-.fw-card .fw-status.applied { color: var(--green); background: rgba(43,165,114,0.12); }
-.fw-card .fw-status.aligned { color: var(--cyan-strong); background: var(--cyan-soft); }
-.fw-card .fw-status.posture { color: var(--yale); background: var(--seasalt); }
-.fw-card .fw-what { font-size: 13.5px; color: var(--muted); line-height: 1.55; }
-.fw-card .fw-detail { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--line-soft); display: grid; grid-template-columns: auto 1fr; gap: 8px 14px; font-size: 12.5px; line-height: 1.45; }
-.fw-card .fw-detail .k { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.10em; color: var(--muted); text-transform: uppercase; padding-top: 2px; }
-.fw-card .fw-detail .v { color: var(--ink); }
-.fw-card .fw-detail .v.target { color: var(--yale-dark); font-weight: 700; }
-
-.states { padding: 100px 0 90px; background: var(--white); }
-.states .head { max-width: 760px; margin-bottom: 40px; }
-.states .head .eyebrow { margin-bottom: 14px; display: inline-block; }
-.states .head h2 { font-size: 40px; line-height: 1.1; }
-.states .head p { font-size: 15.5px; color: var(--muted); margin-top: 14px; max-width: 640px; line-height: 1.6; }
-.legend-row { display: flex; flex-wrap: wrap; gap: 18px; margin-bottom: 28px; padding: 16px 20px; background: var(--seasalt); border: 1px solid var(--line); border-radius: 10px; }
-.legend-item { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; color: var(--ink); font-weight: 600; }
-.legend-item .sw { width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0; }
-.legend-item .sw.serve { background: var(--green); }
-.legend-item .sw.disclose { background: var(--amber); }
-.legend-item .sw.waiver { background: #C44; }
-.state-table { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--white); }
-.state-row { display: grid; grid-template-columns: 70px 1.4fr 2.2fr 1fr; gap: 0; border-bottom: 1px solid var(--line-soft); align-items: stretch; }
-.state-row:last-child { border-bottom: 0; }
-.state-row.head-row { background: var(--seasalt); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--muted); }
-.state-row .sc { padding: 18px 20px; font-size: 14px; color: var(--ink); line-height: 1.5; border-right: 1px solid var(--line-soft); }
-.state-row .sc:last-child { border-right: 0; }
-.state-row .sc.code { font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--yale-dark); letter-spacing: 0.04em; display: flex; align-items: center; gap: 10px; }
-.state-row .sc.code .sw { width: 8px; height: 8px; border-radius: 2px; }
-.state-row .sc.code .sw.serve { background: var(--green); }
-.state-row .sc.code .sw.disclose { background: var(--amber); }
-.state-row .sc.code .sw.waiver { background: #C44; }
-.state-row .sc.name { font-weight: 700; color: var(--yale); }
-.state-row .sc.what { color: var(--muted); font-size: 13px; }
-.state-row .sc.posture { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; letter-spacing: 0.04em; display: flex; align-items: center; }
-.state-row .sc.posture .badge { padding: 4px 9px; border-radius: 4px; font-weight: 600; }
-.state-row .sc.posture .badge.serve { background: rgba(43,165,114,0.12); color: var(--green); }
-.state-row .sc.posture .badge.disclose { background: rgba(216,144,23,0.12); color: var(--amber); }
-.state-row .sc.posture .badge.waiver { background: rgba(196,68,68,0.12); color: #B33; }
-.states-foot { margin-top: 22px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.10em; color: var(--muted); text-transform: uppercase; }
-
-.protocol { background: var(--yale-dark); color: var(--white); padding: 100px 0; position: relative; overflow: hidden; }
-.protocol::before { content: ""; position: absolute; right: -60px; top: -60px; width: 380px; height: 380px; background: linear-gradient(45deg, transparent 48%, rgba(24,176,230,0.14) 48% 52%, transparent 52%); background-size: 30px 30px; transform: rotate(15deg); }
-.protocol-inner { display: grid; grid-template-columns: 0.85fr 1.35fr; gap: 56px; position: relative; z-index: 2; align-items: start; }
-.protocol .left .eyebrow { color: var(--cyan); display: inline-block; margin-bottom: 18px; }
-.protocol .left h2 { color: var(--white); font-size: 40px; line-height: 1.08; margin-bottom: 20px; }
-.protocol .left p { color: rgba(255,255,255,0.78); font-size: 15px; line-height: 1.6; max-width: 400px; }
-.protocol .left .stamp { margin-top: 24px; display: inline-flex; align-items: center; gap: 10px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: var(--cyan); text-transform: uppercase; padding: 9px 16px; border: 1px solid rgba(24,176,230,0.4); border-radius: 100px; background: rgba(24,176,230,0.06); }
-.protocol-steps { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid rgba(255,255,255,0.10); border-radius: 14px; overflow: hidden; background: rgba(255,255,255,0.02); }
-.proto-step { padding: 30px 30px 28px; border-right: 1px solid rgba(255,255,255,0.08); border-bottom: 1px solid rgba(255,255,255,0.08); }
-.proto-step:nth-child(2n) { border-right: 0; }
-.proto-step:nth-child(n+5) { border-bottom: 0; }
-.proto-step .num { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.16em; color: var(--cyan); text-transform: uppercase; margin-bottom: 14px; }
-.proto-step h4 { color: var(--white); font-size: 16.5px; line-height: 1.3; margin-bottom: 10px; }
-.proto-step p { color: rgba(255,255,255,0.70); font-size: 13px; line-height: 1.6; }
-
-.intel-band { padding: 90px 0; background: var(--white); }
-.intel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: stretch; }
-.intel-card { background: var(--seasalt); border: 1px solid var(--line); border-radius: 14px; padding: 36px 36px 32px; display: flex; flex-direction: column; gap: 16px; }
-.intel-card.feature { background: var(--white); border-left: 3px solid var(--cyan); }
-.intel-card .eyebrow { display: inline-block; }
-.intel-card h3 { font-size: 22px; color: var(--yale-dark); line-height: 1.25; }
-.intel-card p { font-size: 14.5px; color: var(--muted); line-height: 1.6; }
-.intel-card .vendors { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--line-soft); display: flex; flex-wrap: wrap; gap: 8px; }
-.intel-card .vendors .v { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: var(--yale-dark); background: var(--white); border: 1px solid var(--line); padding: 5px 10px; border-radius: 4px; letter-spacing: 0.02em; }
-.intel-card.feature .vendors .v { background: var(--seasalt); }
-
-.final { background: var(--yale-dark); color: var(--white); position: relative; overflow: hidden; }
-.final::before { content: ""; position: absolute; right: -60px; top: -60px; width: 320px; height: 320px; background: linear-gradient(45deg, transparent 48%, rgba(24,176,230,0.16) 48% 52%, transparent 52%); background-size: 30px 30px; transform: rotate(15deg); }
-.final-inner { padding: 90px 0; text-align: center; position: relative; z-index: 2; }
-.final .eyebrow { color: var(--cyan); margin-bottom: 14px; display: inline-block; }
-.final h2 { color: var(--white); font-size: 38px; margin-bottom: 18px; max-width: 700px; margin-left: auto; margin-right: auto; line-height: 1.15; }
-.final p { color: rgba(255,255,255,0.78); font-size: 16px; margin: 0 auto 28px; max-width: 580px; line-height: 1.6; }
-</style>

@@ -1,0 +1,49 @@
+
+
+
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/preflight.css' layer(base);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+:root,
+html,
+body {
+  overflow-x: clip;
+}
+
+:root {
+  --yale: #153A5F;
+  --yale-mid: #1F4D7A;
+  --yale-dark: #0E2640;
+  --cyan: #18B0E6;
+  --cyan-soft: #E6F6FC;
+  --cyan-strong: #0A6E94;
+  --seasalt: #F8F8F8;
+  --ink: #1B2430;
+  --muted: #5B6776;
+  --line: #D9DEE5;
+  --line-soft: #E8ECF1;
+  --white: #FFFFFF;
+  --green: #2BA572;
+  --amber: #D89017;
+}
+
+@theme {
+  --color-yale: var(--yale);
+  --color-yale-mid: var(--yale-mid);
+  --color-yale-dark: var(--yale-dark);
+  --color-cyan: var(--cyan);
+  --color-cyan-soft: var(--cyan-soft);
+  --color-cyan-strong: var(--cyan-strong);
+  --color-seasalt: var(--seasalt);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-line-soft: var(--line-soft);
+  --color-white: var(--white);
+  --color-green: var(--green);
+  --color-amber: var(--amber);
+
+  --font-sans: 'Manrope', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}

@@ -1,5 +1,7 @@
 ---
 import SledLayout from '../../layouts/SledLayout.astro';
+import Eyebrow from '../../components/shared/Eyebrow.astro';
+import CtaButton from '../../components/shared/CtaButton.astro';
 import {
   CONTACT_SEO, CONTACT_HERO, SLA_ITEMS, WHAT_HAPPENS_NEXT, INTENT_OPTIONS,
   ROLE_OPTIONS, VEHICLE_OPTIONS, TIMING_OPTIONS, CEILING_OPTIONS, CLEARANCE_OPTIONS
@@ -12,148 +14,168 @@ const { title, description, canonicalPath, ogImage } = CONTACT_SEO;
 <SledLayout {title} {description} {canonicalPath} {ogImage} currentPage="/us-sled/contact/">
 
 <!-- SLA STRIP -->
-<section class="sla-strip">
-  <div class="wrap sla-inner">
-    <span class="lbl">Our commitment to primes</span>
+<section class="border-b border-line bg-white py-4">
+  <div class="mx-auto max-w-[1280px] px-12 max-[1024px]:px-8 max-[900px]:px-6 max-[600px]:px-[18px] flex flex-wrap items-center gap-x-5 gap-y-2">
+    <span class="shrink-0 font-mono text-[10.5px] font-bold tracking-[0.18em] uppercase text-cyan-strong">
+      Our commitment to primes
+    </span>
     {SLA_ITEMS.map(item => (
-      <span class="item"><span class="tsq"></span> {item}</span>
+      <span class="inline-flex items-center gap-2 text-[13.5px] leading-[1.55] text-muted">
+        <span class="inline-block size-2 rotate-15 bg-cyan" aria-hidden="true"></span>
+        {item}
+      </span>
     ))}
   </div>
 </section>
 
 <!-- FORM -->
-<section class="contact-section">
-  <div class="wrap">
-    <div class="contact-grid">
+<section class="bg-seasalt py-20">
+  <div class="mx-auto max-w-[1280px] px-12 max-[1024px]:px-8 max-[900px]:px-6 max-[600px]:px-[18px]">
+    <div class="grid grid-cols-[1.25fr_0.9fr] gap-10 items-start max-[1024px]:grid-cols-1">
 
       <!-- LEFT -->
       <div>
-        <div class="lead">
-          <span class="eyebrow"><span class="gl"></span> {CONTACT_HERO.eyebrow}</span>
-          <h1 set:html={CONTACT_HERO.heading} />
-          <p class="desc">{CONTACT_HERO.desc}</p>
+        <div class="mb-8 max-w-[860px]">
+          <Eyebrow text={CONTACT_HERO.eyebrow} showGlyph />
+          <h1 class="mt-4 text-[48px] font-extrabold leading-[1.05] tracking-[-0.022em] text-yale-dark" set:html={CONTACT_HERO.heading} />
+          <p class="mt-3.5 text-[15.5px] leading-relaxed text-muted">{CONTACT_HERO.desc}</p>
         </div>
 
-        <form class="intake-form" id="intakeForm" novalidate>
+        <form class="rounded-2xl border border-line bg-white p-8 shadow-[0_18px_48px_-34px_rgba(14,38,64,0.30)]" id="intakeForm" novalidate>
 
-          <div class="section-l">Section 01</div>
-          <div class="section-h">About you</div>
+          <div class="font-mono text-[10.5px] font-bold tracking-[0.18em] text-cyan-strong uppercase">Section 01</div>
+          <div class="mt-2 text-[18px] font-extrabold text-yale-dark">About you</div>
 
-          <div class="field-row">
-            <div class="field">
-              <label for="name">Full name <span class="req">*</span></label>
-              <input id="name" name="name" type="text" placeholder="Jane Doe" required />
+          <div class="mt-6 grid grid-cols-2 gap-5 max-[720px]:grid-cols-1">
+            <div>
+              <label for="name" class="block text-[13.5px] font-semibold text-yale-dark">Full name <span class="text-amber">*</span></label>
+              <input id="name" name="name" type="text" placeholder="Jane Doe" required class="mt-2 w-full rounded-xl border border-line bg-white px-4 py-3 text-[14px] text-ink outline-none transition-[border-color,box-shadow] duration-180 ease-out focus:border-yale focus:shadow-[0_0_0_4px_rgba(14,38,64,0.08)]" />
             </div>
-            <div class="field">
-              <label for="email">Work email <span class="req">*</span></label>
-              <input id="email" name="email" type="email" placeholder="jane@firm.com" required />
+            <div>
+              <label for="email" class="block text-[13.5px] font-semibold text-yale-dark">Work email <span class="text-amber">*</span></label>
+              <input id="email" name="email" type="email" placeholder="jane@firm.com" required class="mt-2 w-full rounded-xl border border-line bg-white px-4 py-3 text-[14px] text-ink outline-none transition-[border-color,box-shadow] duration-180 ease-out focus:border-yale focus:shadow-[0_0_0_4px_rgba(14,38,64,0.08)]" />
             </div>
           </div>
 
-          <div class="field-row">
-            <div class="field">
-              <label for="firm">Prime firm name <span class="req">*</span></label>
-              <input id="firm" name="firm" type="text" placeholder="e.g. National Environmental Consulting LLP" required />
+          <div class="mt-5 grid grid-cols-2 gap-5 max-[720px]:grid-cols-1">
+            <div>
+              <label for="firm" class="block text-[13.5px] font-semibold text-yale-dark">Prime firm name <span class="text-amber">*</span></label>
+              <input id="firm" name="firm" type="text" placeholder="e.g. National Environmental Consulting LLP" required class="mt-2 w-full rounded-xl border border-line bg-white px-4 py-3 text-[14px] text-ink outline-none transition-[border-color,box-shadow] duration-180 ease-out focus:border-yale focus:shadow-[0_0_0_4px_rgba(14,38,64,0.08)]" />
             </div>
-            <div class="field">
-              <label for="role">Your role</label>
-              <select id="role" name="role">
+            <div>
+              <label for="role" class="block text-[13.5px] font-semibold text-yale-dark">Your role</label>
+              <select id="role" name="role" class="mt-2 w-full rounded-xl border border-line bg-white px-4 py-3 text-[14px] text-ink outline-none transition-[border-color,box-shadow] duration-180 ease-out focus:border-yale focus:shadow-[0_0_0_4px_rgba(14,38,64,0.08)]">
                 {ROLE_OPTIONS.map(opt => <option>{opt}</option>)}
               </select>
             </div>
           </div>
 
-          <div class="section-divider"></div>
-          <div class="section-l">Section 02</div>
-          <div class="section-h">About the engagement</div>
+          <div class="my-8 h-px bg-line"></div>
+          <div class="font-mono text-[10.5px] font-bold tracking-[0.18em] text-cyan-strong uppercase">Section 02</div>
+          <div class="mt-2 text-[18px] font-extrabold text-yale-dark">About the engagement</div>
 
-          <div class="field-row">
-            <div class="field">
-              <label for="vehicle">Contract vehicle <span style="color:var(--muted);font-weight:500;">(if known)</span></label>
-              <select id="vehicle" name="vehicle">
+          <div class="mt-6 grid grid-cols-2 gap-5 max-[720px]:grid-cols-1">
+            <div>
+              <label for="vehicle" class="block text-[13.5px] font-semibold text-yale-dark">Contract vehicle <span class="font-normal text-muted">(if known)</span></label>
+              <select id="vehicle" name="vehicle" class="mt-2 w-full rounded-xl border border-line bg-white px-4 py-3 text-[14px] text-ink outline-none transition-[border-color,box-shadow] duration-180 ease-out focus:border-yale focus:shadow-[0_0_0_4px_rgba(14,38,64,0.08)]">
                 {VEHICLE_OPTIONS.map(opt => <option>{opt}</option>)}
               </select>
             </div>
-            <div class="field">
-              <label for="timing">Engagement timing</label>
-              <select id="timing" name="timing">
+            <div>
+              <label for="timing" class="block text-[13.5px] font-semibold text-yale-dark">Engagement timing</label>
+              <select id="timing" name="timing" class="mt-2 w-full rounded-xl border border-line bg-white px-4 py-3 text-[14px] text-ink outline-none transition-[border-color,box-shadow] duration-180 ease-out focus:border-yale focus:shadow-[0_0_0_4px_rgba(14,38,64,0.08)]">
                 {TIMING_OPTIONS.map(opt => <option>{opt}</option>)}
               </select>
             </div>
           </div>
 
-          <div class="field-row">
-            <div class="field">
-              <label for="solicitation">Solicitation / RFP number <span style="color:var(--muted);font-weight:500;">(optional)</span></label>
-              <input id="solicitation" name="solicitation" type="text" placeholder="e.g. RFP-2026-0142" />
+          <div class="mt-5 grid grid-cols-2 gap-5 max-[720px]:grid-cols-1">
+            <div>
+              <label for="solicitation" class="block text-[13.5px] font-semibold text-yale-dark">Solicitation / RFP number <span class="font-normal text-muted">(optional)</span></label>
+              <input id="solicitation" name="solicitation" type="text" placeholder="e.g. RFP-2026-0142" class="mt-2 w-full rounded-xl border border-line bg-white px-4 py-3 text-[14px] text-ink outline-none transition-[border-color,box-shadow] duration-180 ease-out focus:border-yale focus:shadow-[0_0_0_4px_rgba(14,38,64,0.08)]" />
             </div>
-            <div class="field">
-              <label for="ceiling">Estimated contract ceiling <span style="color:var(--muted);font-weight:500;">(optional)</span></label>
-              <select id="ceiling" name="ceiling">
+            <div>
+              <label for="ceiling" class="block text-[13.5px] font-semibold text-yale-dark">Estimated contract ceiling <span class="font-normal text-muted">(optional)</span></label>
+              <select id="ceiling" name="ceiling" class="mt-2 w-full rounded-xl border border-line bg-white px-4 py-3 text-[14px] text-ink outline-none transition-[border-color,box-shadow] duration-180 ease-out focus:border-yale focus:shadow-[0_0_0_4px_rgba(14,38,64,0.08)]">
                 {CEILING_OPTIONS.map(opt => <option>{opt}</option>)}
               </select>
             </div>
           </div>
 
-          <div class="field-row">
-            <div class="field">
-              <label for="clearance">Security clearance required <span style="color:var(--muted);font-weight:500;">(optional)</span></label>
-              <select id="clearance" name="clearance">
+          <div class="mt-5 grid grid-cols-2 gap-5 max-[720px]:grid-cols-1">
+            <div>
+              <label for="clearance" class="block text-[13.5px] font-semibold text-yale-dark">Security clearance required <span class="font-normal text-muted">(optional)</span></label>
+              <select id="clearance" name="clearance" class="mt-2 w-full rounded-xl border border-line bg-white px-4 py-3 text-[14px] text-ink outline-none transition-[border-color,box-shadow] duration-180 ease-out focus:border-yale focus:shadow-[0_0_0_4px_rgba(14,38,64,0.08)]">
                 {CLEARANCE_OPTIONS.map(opt => <option>{opt}</option>)}
               </select>
             </div>
-            <div class="field" aria-hidden="true"></div>
+            <div aria-hidden="true"></div>
           </div>
 
-          <div class="field full">
-            <label for="desc">Brief description</label>
-            <textarea id="desc" name="desc" placeholder="What's the engagement type? Subcontract under a master? Teaming letter in place or imminent? What technical surface area are you looking to staff?"></textarea>
+          <div class="mt-5">
+            <label for="desc" class="block text-[13.5px] font-semibold text-yale-dark">Brief description</label>
+            <textarea id="desc" name="desc" placeholder="What's the engagement type? Subcontract under a master? Teaming letter in place or imminent? What technical surface area are you looking to staff?" class="mt-2 min-h-[120px] w-full resize-y rounded-xl border border-line bg-white px-4 py-3 text-[14px] text-ink outline-none transition-[border-color,box-shadow] duration-180 ease-out focus:border-yale focus:shadow-[0_0_0_4px_rgba(14,38,64,0.08)]"></textarea>
           </div>
 
-          <div class="section-divider"></div>
-          <div class="section-l">Section 03</div>
-          <div class="section-h">What you'd like from us</div>
+          <div class="my-8 h-px bg-line"></div>
+          <div class="font-mono text-[10.5px] font-bold tracking-[0.18em] text-cyan-strong uppercase">Section 03</div>
+          <div class="mt-2 text-[18px] font-extrabold text-yale-dark">What you'd like from us</div>
 
-          <div class="intent-grid">
+          <div class="mt-6 grid grid-cols-2 gap-4 max-[720px]:grid-cols-1">
             {INTENT_OPTIONS.map((opt, i) => (
-              <label class:list={['intent-option', { on: i === 0 }]}>
-                <input type="radio" name="intent" value={opt.value} checked={i === 0} />
-                <span class="check"></span>
-                <span>
-                  <span class="l">{opt.label}</span>
-                  <span class="d">{opt.desc}</span>
-                </span>
+              <label
+                class:list={[
+                  'intent-option group cursor-pointer rounded-2xl border border-line bg-white p-5 transition-[border-color,background,transform,box-shadow] duration-180 ease-out hover:-translate-y-px hover:shadow-[0_16px_40px_-30px_rgba(14,38,64,0.28)] group-[.on]:border-yale group-[.on]:bg-seasalt',
+                  { on: i === 0 },
+                ]}
+              >
+                <input type="radio" name="intent" value={opt.value} checked={i === 0} class="sr-only" />
+                <div class="flex items-start gap-3">
+                  <span class="mt-1 grid size-5 shrink-0 place-items-center rounded-full border border-line bg-white">
+                    <span class="hidden size-2 rounded-full bg-cyan group-[.on]:block" aria-hidden="true"></span>
+                  </span>
+                  <span>
+                    <span class="l block text-[14.5px] font-extrabold leading-tight text-yale-dark">{opt.label}</span>
+                    <span class="d mt-1 block text-[13.5px] leading-[1.55] text-muted">{opt.desc}</span>
+                  </span>
+                </div>
               </label>
             ))}
           </div>
 
-          <div class="submit-row">
-            <div class="note">All fields are confidential. NDA on request before review.</div>
-            <button type="submit">Send to Techtiz <span style="display:inline-block;transform:translateX(0);">→</span></button>
+          <div class="mt-7 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-6">
+            <div class="text-[13.5px] leading-[1.55] text-muted">All fields are confidential. NDA on request before review.</div>
+            <button type="submit" class="inline-flex items-center justify-center gap-2.5 rounded-lg bg-yale px-6 py-3 text-sm font-bold text-white transition-[transform,background,box-shadow] duration-180 ease-out hover:-translate-y-px hover:bg-yale-dark hover:shadow-[0_16px_40px_-30px_rgba(14,38,64,0.38)]">
+              Send to Techtiz <span aria-hidden="true">→</span>
+            </button>
           </div>
         </form>
 
-        <div class="intake-form" id="formSuccess" role="status" style="display:none; text-align:center; padding:56px 40px;">
-          <div style="width:56px; height:56px; margin:0 auto 22px; border-radius:50%; background:var(--cyan-soft); display:grid; place-items:center;">
+        <div class="hidden rounded-2xl border border-line bg-white px-10 py-14 text-center shadow-[0_18px_48px_-34px_rgba(14,38,64,0.30)] [&.is-visible]:block" id="formSuccess" role="status">
+          <div class="mx-auto mb-[22px] grid size-14 place-items-center rounded-full bg-cyan-soft">
             <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--cyan-strong)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"></path></svg>
           </div>
-          <h3 style="font-size:24px; margin-bottom:10px;">Your inquiry is ready to send.</h3>
-          <p style="font-size:15px; color:var(--muted); line-height:1.55; max-width:420px; margin:0 auto 24px;">Your email client should have opened a pre-filled message to <strong style="color:var(--yale);">sled@techtiz.co</strong>. If it didn't, copy your details into an email to that address — we reply within one business day with a mutual NDA template.</p>
-          <a class="btn-ghost-light" id="formReset" href="#">Submit another inquiry</a>
+          <h3 class="mb-2.5 text-2xl">Your inquiry is ready to send.</h3>
+          <p class="mx-auto mb-6 max-w-[420px] text-[15px] leading-[1.55] text-muted">Your email client should have opened a pre-filled message to <strong class="text-yale">sled@techtiz.co</strong>. If it didn't, copy your details into an email to that address — we reply within one business day with a mutual NDA template.</p>
+          <a id="formReset" href="#" class="inline-flex items-center justify-center rounded-lg border border-line bg-white px-5 py-3 text-sm font-bold text-yale transition-[border-color,background,color] duration-180 ease-out hover:border-yale hover:bg-seasalt">
+            Submit another inquiry
+          </a>
         </div>
       </div>
 
       <!-- RIGHT -->
       <aside>
-        <div class="side-card">
-          <span class="h">What happens next</span>
-          <h2>Three steps. Two of them are ours.</h2>
-          <div class="steps">
+        <div class="rounded-2xl border border-line bg-white p-6 shadow-[0_18px_48px_-34px_rgba(14,38,64,0.30)]">
+          <div class="font-mono text-[10.5px] font-bold tracking-[0.18em] text-cyan-strong uppercase">What happens next</div>
+          <h2 class="mt-3 text-[22px] font-extrabold leading-tight text-yale-dark">Three steps. Two of them are ours.</h2>
+          <div class="mt-5 space-y-3.5">
             {WHAT_HAPPENS_NEXT.map(step => (
-              <div class="step">
-                <div class="n"><span>{step.n}</span></div>
-                <div class="t">
-                  <em>{step.timing}</em>
+              <div class="flex gap-3 rounded-xl border border-line bg-seasalt p-4">
+                <div class="grid size-10 shrink-0 place-items-center rounded-xl bg-white text-yale-dark">
+                  <span class="font-mono text-[14px] font-extrabold">{step.n}</span>
+                </div>
+                <div class="text-[13.5px] leading-[1.55] text-muted">
+                  <em class="block not-italic font-semibold text-yale-dark">{step.timing}</em>
                   {step.text}
                 </div>
               </div>
@@ -161,12 +183,12 @@ const { title, description, canonicalPath, ogImage } = CONTACT_SEO;
           </div>
         </div>
 
-        <div class="direct-card">
-          <div class="h">Or skip the form</div>
-          <h3>Email the SLED desk directly.</h3>
-          <p>If you'd rather start with a short email, send a one-line description of the engagement type and your role. Our U.S.-based partner manager routes it from there, usually within one business day.</p>
-          <a class="contact-row" href={`mailto:${SITE.email.sled}`}>
-            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <div class="mt-6 rounded-2xl border border-line bg-white p-6 shadow-[0_18px_48px_-34px_rgba(14,38,64,0.30)]">
+          <div class="font-mono text-[10.5px] font-bold tracking-[0.18em] text-cyan-strong uppercase">Or skip the form</div>
+          <h3 class="mt-3 text-[18px] font-extrabold leading-tight text-yale-dark">Email the SLED desk directly.</h3>
+          <p class="mt-2 text-[13.5px] leading-[1.55] text-muted">If you'd rather start with a short email, send a one-line description of the engagement type and your role. Our U.S.-based partner manager routes it from there, usually within one business day.</p>
+          <a class="mt-4 inline-flex items-center gap-2 rounded-xl border border-line bg-seasalt px-4 py-3 text-[14px] font-semibold text-yale transition-colors duration-180 ease-out hover:text-yale-dark" href={`mailto:${SITE.email.sled}`}>
+            <svg class="size-4 opacity-70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             {SITE.email.sled}
           </a>
         </div>
@@ -178,72 +200,6 @@ const { title, description, canonicalPath, ogImage } = CONTACT_SEO;
 
 </SledLayout>
 
-<style>
-.sla-strip { background: var(--yale); color: var(--white); padding: 28px 0; position: relative; overflow: hidden; }
-.sla-strip::before { content: ""; position: absolute; right: -40px; top: -40px; width: 180px; height: 180px; background: linear-gradient(45deg, transparent 48%, rgba(24,176,230,0.14) 48% 52%, transparent 52%); background-size: 24px 24px; transform: rotate(15deg); }
-.sla-inner { display: grid; grid-template-columns: 1fr auto auto auto auto; gap: 32px; align-items: center; position: relative; z-index: 2; }
-.sla-inner .lbl { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan); }
-.sla-inner .item { display: flex; align-items: center; gap: 12px; font-size: 13.5px; color: rgba(255,255,255,0.88); }
-.sla-inner .item .tsq { width: 10px; height: 10px; background: var(--cyan); transform: rotate(15deg); flex-shrink: 0; }
-
-.contact-section { padding: 80px 0 100px; position: relative; overflow: hidden; }
-.contact-section::before { content: ""; position: absolute; right: -80px; top: -40px; width: 320px; height: 320px; background: linear-gradient(45deg, transparent 49%, rgba(24,176,230,0.08) 49% 51%, transparent 51%); background-size: 30px 30px; transform: rotate(15deg); pointer-events: none; }
-.contact-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 64px; align-items: start; position: relative; z-index: 2; }
-
-.lead .eyebrow { display: inline-block; margin-bottom: 18px; }
-.lead h1 { font-size: 52px; line-height: 1.05; margin-bottom: 22px; }
-.lead h1 :global(.accent) { color: var(--cyan); }
-.lead .desc { font-size: 17px; color: var(--muted); line-height: 1.55; max-width: 540px; margin-bottom: 40px; }
-
-.intake-form { background: var(--white); border: 1px solid var(--line); border-radius: 12px; padding: 40px; }
-.intake-form .section-l { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan-strong); margin-bottom: 4px; font-weight: 700; }
-.intake-form .section-h { font-size: 18px; font-weight: 700; color: var(--yale); margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--line-soft); }
-.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
-.field { display: flex; flex-direction: column; gap: 6px; }
-.field.full { grid-column: span 2; }
-.field label { font-family: 'Manrope', sans-serif; font-size: 12.5px; font-weight: 600; color: var(--yale); letter-spacing: 0.02em; }
-.field label .req { color: var(--cyan-strong); margin-left: 2px; }
-.field input, .field textarea, .field select { font-family: inherit; font-size: 14.5px; color: var(--ink); background: var(--seasalt); border: 1px solid var(--line); border-radius: 6px; padding: 11px 14px; outline: none; transition: border-color 180ms ease, background 180ms ease, box-shadow 180ms ease; }
-.field input::placeholder, .field textarea::placeholder { color: var(--muted); opacity: 0.7; }
-.field input:focus, .field textarea:focus, .field select:focus { border-color: var(--cyan); background: var(--white); box-shadow: 0 0 0 3px rgba(24,176,230,0.15); }
-.field textarea { min-height: 130px; resize: vertical; line-height: 1.55; }
-.field select { appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%); background-position: calc(100% - 16px) center, calc(100% - 12px) center; background-size: 4px 4px; background-repeat: no-repeat; }
-.section-divider { margin: 30px 0 26px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
-.intent-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.intent-option { border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; cursor: pointer; background: var(--seasalt); transition: border-color 180ms ease, background 180ms ease; display: flex; align-items: flex-start; gap: 12px; }
-.intent-option:hover { border-color: var(--cyan-strong); }
-.intent-option.on { border-color: var(--cyan); background: var(--cyan-soft); }
-.intent-option input { display: none; }
-.intent-option .check { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--line); flex-shrink: 0; margin-top: 1px; background: var(--white); display: grid; place-items: center; }
-.intent-option.on .check { border-color: var(--cyan); background: var(--cyan); }
-.intent-option.on .check::after { content: ""; width: 6px; height: 6px; background: var(--white); transform: rotate(15deg); }
-.intent-option .l { font-weight: 700; font-size: 13.5px; color: var(--yale); display: block; margin-bottom: 2px; }
-.intent-option .d { font-size: 12px; color: var(--muted); line-height: 1.4; }
-.submit-row { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--line-soft); display: flex; justify-content: space-between; align-items: center; }
-.submit-row .note { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.08em; color: var(--muted); text-transform: uppercase; }
-.submit-row button { display: inline-flex; align-items: center; gap: 12px; background: var(--cyan); color: var(--yale-dark); font-weight: 700; font-size: 14.5px; padding: 14px 26px; border-radius: 8px; transition: transform 180ms ease, box-shadow 180ms ease; }
-.submit-row button:hover { transform: translateY(-1px); box-shadow: 0 12px 26px -10px rgba(24,176,230,0.55); }
-
-.side-card { background: var(--yale-dark); border-radius: 12px; padding: 36px 32px; color: var(--white); position: relative; overflow: hidden; margin-bottom: 16px; }
-.side-card::before { content: ""; position: absolute; right: -30px; top: -30px; width: 160px; height: 160px; background: linear-gradient(45deg, transparent 48%, rgba(24,176,230,0.20) 48% 52%, transparent 52%); background-size: 22px 22px; transform: rotate(15deg); }
-.side-card .h { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan); margin-bottom: 14px; position: relative; z-index: 2; }
-.side-card h2 { color: var(--white); font-size: 24px; margin-bottom: 24px; line-height: 1.2; position: relative; z-index: 2; }
-.steps { display: flex; flex-direction: column; gap: 18px; position: relative; z-index: 2; }
-.step { display: grid; grid-template-columns: 36px 1fr; gap: 16px; align-items: start; }
-.step .n { width: 36px; height: 36px; background: rgba(24,176,230,0.15); border: 1px solid rgba(24,176,230,0.35); color: var(--cyan); font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; display: grid; place-items: center; border-radius: 6px; transform: rotate(15deg); }
-.step .n span { transform: rotate(-15deg); display: block; }
-.step .t { color: rgba(255,255,255,0.88); font-size: 14px; line-height: 1.5; }
-.step .t strong { color: var(--white); font-weight: 700; }
-.step .t em { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cyan); font-style: normal; display: block; margin-bottom: 2px; }
-
-.direct-card { background: var(--white); border: 1px solid var(--line); border-radius: 12px; padding: 28px 28px; }
-.direct-card .h { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan-strong); margin-bottom: 12px; }
-.direct-card h3 { font-size: 18px; color: var(--yale); margin-bottom: 8px; }
-.direct-card p { font-size: 13.5px; color: var(--muted); line-height: 1.55; margin-bottom: 16px; }
-.direct-card .contact-row { display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: var(--seasalt); border: 1px solid var(--line); border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--yale); transition: border-color 180ms ease, background 180ms ease; }
-.direct-card .contact-row:hover { border-color: var(--cyan-strong); background: var(--cyan-soft); }
-.direct-card .contact-row .icon { color: var(--cyan-strong); width: 18px; height: 18px; }
-</style>
 
 <script>
   document.querySelectorAll('.intent-option').forEach(opt => {
@@ -287,9 +243,9 @@ const { title, description, canonicalPath, ogImage } = CONTACT_SEO;
       ];
       const subject = 'SLED subcontract inquiry — ' + (val('firm') || 'prime contractor');
       window.location.href = 'mailto:sled@techtiz.co?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lines.join('\n'));
-      form.style.display = 'none';
+      form.classList.add('hidden');
       if(success) {
-        success.style.display = 'block';
+        success.classList.add('is-visible');
         const y = success.getBoundingClientRect().top + window.scrollY - 140;
         window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
       }
@@ -297,9 +253,9 @@ const { title, description, canonicalPath, ogImage } = CONTACT_SEO;
     const reset = document.getElementById('formReset');
     if(reset) reset.addEventListener('click', function(e) {
       e.preventDefault();
-      if(success) success.style.display = 'none';
+      if(success) success.classList.remove('is-visible');
       form.reset();
-      form.style.display = '';
+      form.classList.remove('hidden');
     });
   })();
 </script>

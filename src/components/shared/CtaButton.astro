@@ -1,0 +1,22 @@
+---
+interface Props {
+  href: string;
+  label: string;
+  variant?: 'cta' | 'primary' | 'ghost-dark' | 'ghost-light';
+}
+
+const { href, label, variant = 'cta' } = Astro.props;
+---
+
+{variant === 'cta' && (
+  <a href={href} class="cta">{label} <span class="arr"></span></a>
+)}
+{variant === 'primary' && (
+  <a href={href} class="btn-primary">{label}</a>
+)}
+{variant === 'ghost-dark' && (
+  <a href={href} class="btn-ghost-dark">{label}</a>
+)}
+{variant === 'ghost-light' && (
+  <a href={href} class="btn-ghost-light">{label}</a>
+)}

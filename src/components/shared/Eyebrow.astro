@@ -1,0 +1,15 @@
+---
+interface Props {
+  text: string;
+  onDark?: boolean;
+  showGlyph?: boolean;
+  class?: string;
+}
+
+const { text, onDark = false, showGlyph = false, class: extraClass = '' } = Astro.props;
+---
+
+<span class:list={['eyebrow', { 'on-dark': onDark }, extraClass]}>
+  {showGlyph && <span class="gl"></span>}
+  {text}
+</span>

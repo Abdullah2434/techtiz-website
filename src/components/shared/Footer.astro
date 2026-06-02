@@ -1,0 +1,56 @@
+---
+import { SITE, LEGAL_LINKS } from '../../lib/constants/site';
+import { FOOTER_COLUMNS } from '../../lib/constants/nav';
+---
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div class="brand-foot">
+        <a href="/" class="brand-mark">
+          <img src={SITE.logo.light} alt="Techtiz" class="brand-logo" />
+        </a>
+        <p>{SITE.description}</p>
+        <div class="socials">
+          <a href={SITE.socials.linkedin} aria-label="LinkedIn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14M8.6 18.3v-7.6H6.07v7.6H8.6m-1.27-8.67a1.45 1.45 0 0 0 1.45-1.45A1.45 1.45 0 0 0 7.33 6.7a1.46 1.46 0 0 0-1.46 1.46 1.46 1.46 0 0 0 1.46 1.45m11 8.67v-4.18c0-2.2-1.18-3.22-2.76-3.22a2.38 2.38 0 0 0-2.16 1.19v-1.02h-2.45v7.6h2.53v-4.22c0-1.12.43-1.78 1.39-1.78s1.4.62 1.4 1.78v4.22h2.55z"></path>
+            </svg>
+          </a>
+          <a href={SITE.socials.x} aria-label="X">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.2 2H21l-6.5 7.4L22 22h-6.6l-5.2-6.8L4.2 22H1.5l7-8L1.2 2h6.8l4.7 6.2L18.2 2zm-1.2 18h1.8L7.2 4H5.3l11.7 16z"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      {FOOTER_COLUMNS.map(col => (
+        <div>
+          <h5>{col.heading}</h5>
+          <ul>
+            {col.links.map(link => (
+              <li><a href={link.href}>{link.label}</a></li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <div class="strip">
+      <div class="foot-reg">
+        <div class="regline">
+          <span class="k">NAICS</span>{SITE.naics}<span class="sep">·</span>
+          <span class="k">NIGP</span>{SITE.nigp}<span class="sep">·</span>
+          <span class="k">Teaming</span><a href={`mailto:${SITE.email.sled}`}>{SITE.email.sled}</a>
+        </div>
+        <div>{SITE.copyright}</div>
+      </div>
+      <div class="legal">
+        {LEGAL_LINKS.map(link => (
+          <a href={link.href}>{link.label}</a>
+        ))}
+      </div>
+    </div>
+  </div>
+</footer>

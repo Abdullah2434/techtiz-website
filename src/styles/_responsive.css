@@ -1,0 +1,238 @@
+/* =========================================================
+   Techtiz · U.S. Public Sector (SLED) — responsive layer
+   Loaded AFTER _shared.css and page styles. Uses !important
+   so it overrides page-specific and inline grid definitions.
+   Breakpoints: 1024 (tablet), 900 (small tablet), 600 (phone)
+   ========================================================= */
+
+/* Kill the desktop-only min-width that caused the unreadable
+   mobile shrink on every page. */
+body { min-width: 0 !important; }
+img, svg, video { max-width: 100%; }
+
+/* ---------------- Tablet ---------------- */
+@media (max-width: 1024px) {
+  .wrap { padding: 0 32px !important; }
+
+  /* 3-up grids → 2-up */
+  .fw-grid,
+  .engage-steps,
+  .proc-grid,
+  .backbone-grid,
+  .rfp-grid,
+  .spec-grid,
+  .why-grid,
+  .vehicles-grid { grid-template-columns: repeat(2, 1fr) !important; }
+
+  .outcomes .stats { grid-template-columns: repeat(3, 1fr) !important; }
+}
+
+/* ------------- Small tablet / large phone ------------- */
+@media (max-width: 900px) {
+  .wrap { padding: 0 24px !important; }
+
+  /* ---- Header → hamburger ---- */
+  header.top .nav {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    height: 64px !important;
+  }
+  header.top .primary-nav,
+  header.top .right-cta { display: none !important; }
+  .m-nav-toggle { display: inline-flex !important; }
+
+  /* ---- Subnav → horizontal scroll, not sticky ---- */
+  .subnav { position: static !important; }
+  .subnav-inner { justify-content: flex-start !important; height: auto !important; padding: 8px 0 !important; }
+  .subnav-inner .crumbs { display: none !important; }
+  .subnav-inner .sub-links {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    gap: 18px !important;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+  .subnav-inner .sub-links::-webkit-scrollbar { display: none; }
+
+  /* ---- Trust strip ---- */
+  .trust-row { grid-template-columns: repeat(2, 1fr) !important; gap: 0 !important; }
+  .trust-item { border-left: 0 !important; padding: 12px 0 !important; }
+  .case-studies .trust-inner,
+  .trust-inner { grid-template-columns: 1fr 1fr !important; row-gap: 14px; }
+
+  /* ---- Section rhythm + headings ---- */
+  section.block { padding: 64px 0 !important; }
+  section.block.tight { padding: 48px 0 !important; }
+  .block-head { flex-direction: column; align-items: flex-start; gap: 16px; margin-bottom: 36px !important; }
+  .block-head h2 { font-size: 30px !important; }
+  .sled-hero h1 { font-size: 40px !important; }
+  .sled-hero .inner { padding: 72px 0 64px !important; }
+  .sled-hero .quick-stats { flex-wrap: wrap; gap: 22px !important; }
+  .sled-hero .quick-stats .qs + .qs { padding-left: 0 !important; border-left: 0 !important; }
+  .lead h1 { font-size: 38px !important; }
+
+  /* ---- Collapse all major layout grids to a single column ---- */
+  .two-stages .ts-header,
+  .stage-panel,
+  .stage-panel.show,
+  .svc-grid,
+  .onshore .onshore-head,
+  .concerns-grid,
+  .principles-inner,
+  .principle-grid,
+  .vehicles .vh-head,
+  .inquiry,
+  .inquiry-right .form-row,
+  .need-row,
+  .matrix-row,
+  .stack-grid,
+  .boundaries .list,
+  .boundary-grid,
+  .arch-grid,
+  .protocol-inner,
+  .protocol-steps,
+  .intel-grid,
+  .state-row,
+  .ex-grid,
+  .confid-inner,
+  .seq-step,
+  .final-inner,
+  .contact-grid,
+  .field-row,
+  .intent-grid { grid-template-columns: 1fr !important; gap: 20px !important; }
+
+  /* Air-gap divider column collapses */
+  .arch-grid { gap: 16px !important; }
+
+  /* 3-up → 2-up at this size for denser card grids */
+  .fw-grid,
+  .engage-steps,
+  .proc-grid,
+  .backbone-grid,
+  .rfp-grid,
+  .spec-grid,
+  .why-grid,
+  .vehicles-grid { grid-template-columns: repeat(2, 1fr) !important; }
+
+  .outcomes .stats { grid-template-columns: repeat(2, 1fr) !important; row-gap: 0; }
+
+  /* Wide rulers / SLA strip wrap */
+  .sla-inner { grid-template-columns: 1fr !important; gap: 14px !important; }
+  .clock-ruler { overflow-x: auto; }
+
+  /* Card inner padding trims */
+  .onshore .onshore-clock { grid-template-columns: 1fr !important; gap: 20px !important; }
+}
+
+/* ---------------- Phone ---------------- */
+@media (max-width: 600px) {
+  .wrap { padding: 0 18px !important; }
+
+  .sled-hero h1 { font-size: 31px !important; }
+  .lead h1 { font-size: 30px !important; }
+  .block-head h2 { font-size: 26px !important; }
+  .sled-hero .body, .lead .desc { font-size: 16px !important; }
+
+  /* Everything single column on phone */
+  .fw-grid,
+  .engage-steps,
+  .proc-grid,
+  .backbone-grid,
+  .rfp-grid,
+  .spec-grid,
+  .why-grid,
+  .vehicles-grid,
+  .trust-row,
+  .trust-inner,
+  .outcomes .stats { grid-template-columns: 1fr !important; }
+
+  footer.foot .cols { grid-template-columns: 1fr !important; gap: 28px !important; }
+  footer.foot { padding: 56px 0 28px !important; }
+
+  .cta, .btn-primary, .btn-ghost-dark, .btn-ghost-light { width: 100%; justify-content: center; }
+  .sled-hero .cta-row { flex-direction: column; align-items: stretch; }
+
+  .intake-form, .side-card, .direct-card { padding: 24px 20px !important; }
+  .submit-row { flex-direction: column; align-items: stretch; gap: 14px; }
+  .submit-row button { width: 100%; justify-content: center; }
+}
+
+@media (max-width: 600px) {
+  footer.foot .strip { flex-direction: column; gap: 14px; align-items: flex-start; }
+  footer.foot .strip .legal { flex-wrap: wrap; gap: 14px; }
+}
+
+/* =========================================================
+   Mobile nav drawer (built by _mobile-nav.js)
+   ========================================================= */
+.m-nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px; height: 44px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--white);
+  flex-shrink: 0;
+  padding: 0 11px;
+}
+.m-nav-toggle span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: var(--yale);
+  border-radius: 2px;
+  transition: transform 220ms ease, opacity 180ms ease;
+}
+body.m-nav-open .m-nav-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+body.m-nav-open .m-nav-toggle span:nth-child(2) { opacity: 0; }
+body.m-nav-open .m-nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.m-nav-drawer {
+  position: fixed;
+  top: 64px; left: 0; right: 0;
+  bottom: 0;
+  background: var(--white);
+  z-index: 49;
+  padding: 24px 24px 40px;
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform 280ms cubic-bezier(.4,0,.2,1);
+  border-top: 1px solid var(--line);
+}
+body.m-nav-open .m-nav-drawer { transform: translateX(0); }
+body.m-nav-open { overflow: hidden; }
+@media (min-width: 901px) { .m-nav-drawer { display: none !important; } }
+
+.m-nav-drawer .m-grp { margin-bottom: 26px; }
+.m-nav-drawer .m-grp-h {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cyan-strong);
+  margin-bottom: 6px;
+}
+.m-nav-drawer a {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 13px 4px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  border-bottom: 1px solid var(--line-soft);
+}
+.m-nav-drawer a.on, .m-nav-drawer a[aria-current="page"] { color: var(--yale); }
+.m-nav-drawer a.on::after { content: ""; width: 8px; height: 8px; background: var(--cyan); transform: rotate(15deg); }
+.m-nav-drawer .m-cta {
+  margin-top: 24px;
+  background: var(--cyan);
+  color: var(--yale-dark);
+  border-radius: 8px;
+  justify-content: center;
+  border-bottom: 0;
+  font-weight: 700;
+  padding: 15px;
+}
+.m-nav-drawer .m-cta::after { display: none; }

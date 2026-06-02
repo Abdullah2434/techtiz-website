@@ -1,0 +1,63 @@
+---
+import { SLED_SUBNAV } from '../../lib/constants/routes';
+
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+
+function isActive(href: string) {
+  const normalized = currentPath.replace(/\/$/, '') || '/';
+  const hrefNorm = href.replace(/\/$/, '') || '/';
+  if (hrefNorm.includes('#')) return false;
+  return normalized === hrefNorm || normalized === hrefNorm.replace(/\/$/, '');
+}
+
+const crumbs = buildCrumbs(currentPath);
+
+function buildCrumbs(path: string) {
+  const crumbList: Array<{ label: string; href?: string }> = [
+    { label: 'Techtiz', href: '/' },
+  ];
+  if (path.startsWith('/us-sled')) {
+    crumbList.push({ label: 'SLED Partnerships', href: '/us-sled/' });
+    const sub = SLED_SUBNAV.find(l => l.href !== '/us-sled/' && path.startsWith(l.href.replace(/\/$/, '')));
+    if (sub) {
+      crumbList[crumbList.length - 1] = { label: 'SLED Partnerships', href: '/us-sled/' };
+      crumbList.push({ label: sub.label });
+    } else if (path === '/us-sled/' || path === '/us-sled') {
+      crumbList[crumbList.length - 1] = { label: 'SLED Partnerships' };
+    }
+  }
+  return crumbList;
+}
+---
+
+<div class="subnav">
+  <div class="wrap subnav-inner">
+    <div class="crumbs">
+      {crumbs.map((c, i) => (
+        <>
+          {i > 0 && <span class="sep">/</span>}
+          {c.href ? (
+            <a href={c.href}>{c.label}</a>
+          ) : (
+            <span class="here">{c.label}</span>
+          )}
+        </>
+      ))}
+    </div>
+    <div class="sub-links" data-spy>
+      {SLED_SUBNAV.map(link => (
+        <a
+          href={link.href}
+          class:list={[{ on: isActive(link.href) }]}
+          data-spy-id={'spyId' in link ? (link as any).spyId : undefined}
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+  </div>
+</div>

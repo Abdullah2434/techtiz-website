@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/shared/Header.astro';
+import Footer from '../components/shared/Footer.astro';
+
+const seo = {
+  title: 'Techtiz | AI-native engineering studio',
+  description: 'Techtiz is an AI-native engineering studio building adaptive systems for ambitious teams. Specialized technical subcontractor for U.S. SLED prime contractors.',
+  canonicalPath: '/',
+  ogImage: '/assets/logo.svg',
+};
+---
+
+<BaseLayout {...seo}>
+  <Header currentPage="/" />
+  <main>
+    <!-- Commercial hub hero -->
+    <section style="background: var(--yale-dark); color: var(--white); padding: 120px 0; text-align: center; position: relative; overflow: hidden;">
+      <div style="position: absolute; right: -60px; top: -60px; width: 320px; height: 320px; background: linear-gradient(45deg, transparent 48%, rgba(24,176,230,0.16) 48% 52%, transparent 52%); background-size: 30px 30px; transform: rotate(15deg);"></div>
+      <div class="wrap" style="position: relative; z-index: 2;">
+        <span class="eyebrow on-dark" style="display: inline-block; margin-bottom: 22px;"><span class="gl"></span> AI-native engineering studio</span>
+        <h1 style="color: var(--white); font-size: 64px; line-height: 1.04; letter-spacing: -0.022em; margin-bottom: 24px; max-width: 900px; margin-left: auto; margin-right: auto;">
+          Building adaptive systems for <span style="color: var(--cyan);">ambitious teams.</span>
+        </h1>
+        <p style="color: rgba(255,255,255,0.80); font-size: 19px; line-height: 1.55; max-width: 640px; margin: 0 auto 40px;">
+          Development, AI, automation, digital transformation, and UX design — globally delivered, with a dedicated U.S. public sector practice.
+        </p>
+        <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+          <a href="/us-sled/" class="cta">SLED Partnerships <span class="arr"></span></a>
+          <a href="/us-sled/contact/" class="btn-ghost-dark">Start an NDA conversation →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services overview -->
+    <section class="block" style="background: var(--white);">
+      <div class="wrap">
+        <div class="block-head">
+          <div class="left">
+            <span class="eyebrow">What we build</span>
+            <h2>Five practice areas. One engineering partner.</h2>
+            <p class="sub">From custom software to AI pipelines to statutory-format document production — all under one subcontract.</p>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+          {[
+            { title: 'Development', desc: 'Custom software, mobile apps, low-code/no-code, and vibe-coded platforms.' },
+            { title: 'AI & Intelligence', desc: 'LLM systems, RAG pipelines, agents, and ML pipelines that ship and stay in production.' },
+            { title: 'Automation & AI Solutions', desc: 'Internal tools and workflows that pay for themselves. RPA, integrations, ops automation.' },
+            { title: 'Digital Transformation', desc: 'Modernize legacy stacks without halting the business. Migrations, data platforms, change management.' },
+            { title: 'UX Design / Enablement', desc: 'Research-backed interfaces that feel inevitable. Design systems, prototyping, brand.' },
+            { title: 'U.S. SLED Partnerships', desc: 'Back-office engineering for state, local, and education prime contractors. NDA-first. Subcontract-only.', isSled: true },
+          ].map(svc => (
+            <div class:list={['cap-card', { 'spec-card-cta': (svc as any).isSled }]}>
+              <h3>{svc.title}</h3>
+              <p>{svc.desc}</p>
+              {(svc as any).isSled && <a class="spec-link" href="/us-sled/">Learn more →</a>}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- SLED CTA band -->
+    <section style="background: var(--seasalt); border-top: 1px solid var(--line); padding: 80px 0;">
+      <div class="wrap" style="display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;">
+        <div>
+          <span class="eyebrow" style="display: inline-block; margin-bottom: 14px;"><span class="gl"></span> U.S. Public Sector</span>
+          <h2 style="font-size: 40px; line-height: 1.1; margin-bottom: 18px;">Are you a U.S. SLED prime contractor?</h2>
+          <p style="font-size: 15.5px; color: var(--muted); line-height: 1.6; margin-bottom: 28px;">We deliver specialized back-office technical workstreams under subcontract and NDA. GIS, AI, automation, statutory document production, grant reporting, and platform modernization.</p>
+          <a href="/us-sled/" class="cta">SLED Partnerships <span class="arr"></span></a>
+        </div>
+        <div style="background: var(--white); border: 1px solid var(--line); border-radius: 14px; padding: 32px;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan-strong); margin-bottom: 18px;">What we offer primes</div>
+          {[
+            'Pre-award: technical volumes, compliance matrices, orals demos',
+            'Post-award: senior engineers, sprint delivery, KT',
+            'NDA-first · White-label · Subcontract-only',
+            'NAICS 541511 · 541512 · 541519',
+          ].map(item => (
+            <div style="display: flex; align-items: center; gap: 10px; font-size: 13.5px; color: var(--ink); padding: 10px 0; border-bottom: 1px solid var(--line-soft);">
+              <span style="width: 7px; height: 7px; background: var(--cyan); transform: rotate(15deg); flex-shrink: 0; display: inline-block;"></span>
+              {item}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <script src="/scripts/nav.js" is:inline></script>
+  <script src="/scripts/mobile-nav.js" is:inline></script>
+</BaseLayout>
+
+<style>
+.spec-card-cta { background: var(--yale-dark) !important; border-color: var(--yale-dark) !important; }
+.spec-card-cta h3 { color: var(--white) !important; }
+.spec-card-cta p { color: rgba(255,255,255,0.75) !important; }
+.spec-link { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--cyan); display: inline-flex; align-items: center; gap: 10px; margin-top: 14px; }
+</style>

@@ -1,0 +1,305 @@
+---
+import SledLayout from '../../layouts/SledLayout.astro';
+import {
+  CONTACT_SEO, CONTACT_HERO, SLA_ITEMS, WHAT_HAPPENS_NEXT, INTENT_OPTIONS,
+  ROLE_OPTIONS, VEHICLE_OPTIONS, TIMING_OPTIONS, CEILING_OPTIONS, CLEARANCE_OPTIONS
+} from '../../lib/constants/pages/contact';
+import { SITE } from '../../lib/constants/site';
+
+const { title, description, canonicalPath, ogImage } = CONTACT_SEO;
+---
+
+<SledLayout {title} {description} {canonicalPath} {ogImage} currentPage="/us-sled/contact/">
+
+<!-- SLA STRIP -->
+<section class="sla-strip">
+  <div class="wrap sla-inner">
+    <span class="lbl">Our commitment to primes</span>
+    {SLA_ITEMS.map(item => (
+      <span class="item"><span class="tsq"></span> {item}</span>
+    ))}
+  </div>
+</section>
+
+<!-- FORM -->
+<section class="contact-section">
+  <div class="wrap">
+    <div class="contact-grid">
+
+      <!-- LEFT -->
+      <div>
+        <div class="lead">
+          <span class="eyebrow"><span class="gl"></span> {CONTACT_HERO.eyebrow}</span>
+          <h1 set:html={CONTACT_HERO.heading} />
+          <p class="desc">{CONTACT_HERO.desc}</p>
+        </div>
+
+        <form class="intake-form" id="intakeForm" novalidate>
+
+          <div class="section-l">Section 01</div>
+          <div class="section-h">About you</div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="name">Full name <span class="req">*</span></label>
+              <input id="name" name="name" type="text" placeholder="Jane Doe" required />
+            </div>
+            <div class="field">
+              <label for="email">Work email <span class="req">*</span></label>
+              <input id="email" name="email" type="email" placeholder="jane@firm.com" required />
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="firm">Prime firm name <span class="req">*</span></label>
+              <input id="firm" name="firm" type="text" placeholder="e.g. National Environmental Consulting LLP" required />
+            </div>
+            <div class="field">
+              <label for="role">Your role</label>
+              <select id="role" name="role">
+                {ROLE_OPTIONS.map(opt => <option>{opt}</option>)}
+              </select>
+            </div>
+          </div>
+
+          <div class="section-divider"></div>
+          <div class="section-l">Section 02</div>
+          <div class="section-h">About the engagement</div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="vehicle">Contract vehicle <span style="color:var(--muted);font-weight:500;">(if known)</span></label>
+              <select id="vehicle" name="vehicle">
+                {VEHICLE_OPTIONS.map(opt => <option>{opt}</option>)}
+              </select>
+            </div>
+            <div class="field">
+              <label for="timing">Engagement timing</label>
+              <select id="timing" name="timing">
+                {TIMING_OPTIONS.map(opt => <option>{opt}</option>)}
+              </select>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="solicitation">Solicitation / RFP number <span style="color:var(--muted);font-weight:500;">(optional)</span></label>
+              <input id="solicitation" name="solicitation" type="text" placeholder="e.g. RFP-2026-0142" />
+            </div>
+            <div class="field">
+              <label for="ceiling">Estimated contract ceiling <span style="color:var(--muted);font-weight:500;">(optional)</span></label>
+              <select id="ceiling" name="ceiling">
+                {CEILING_OPTIONS.map(opt => <option>{opt}</option>)}
+              </select>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="clearance">Security clearance required <span style="color:var(--muted);font-weight:500;">(optional)</span></label>
+              <select id="clearance" name="clearance">
+                {CLEARANCE_OPTIONS.map(opt => <option>{opt}</option>)}
+              </select>
+            </div>
+            <div class="field" aria-hidden="true"></div>
+          </div>
+
+          <div class="field full">
+            <label for="desc">Brief description</label>
+            <textarea id="desc" name="desc" placeholder="What's the engagement type? Subcontract under a master? Teaming letter in place or imminent? What technical surface area are you looking to staff?"></textarea>
+          </div>
+
+          <div class="section-divider"></div>
+          <div class="section-l">Section 03</div>
+          <div class="section-h">What you'd like from us</div>
+
+          <div class="intent-grid">
+            {INTENT_OPTIONS.map((opt, i) => (
+              <label class:list={['intent-option', { on: i === 0 }]}>
+                <input type="radio" name="intent" value={opt.value} checked={i === 0} />
+                <span class="check"></span>
+                <span>
+                  <span class="l">{opt.label}</span>
+                  <span class="d">{opt.desc}</span>
+                </span>
+              </label>
+            ))}
+          </div>
+
+          <div class="submit-row">
+            <div class="note">All fields are confidential. NDA on request before review.</div>
+            <button type="submit">Send to Techtiz <span style="display:inline-block;transform:translateX(0);">→</span></button>
+          </div>
+        </form>
+
+        <div class="intake-form" id="formSuccess" role="status" style="display:none; text-align:center; padding:56px 40px;">
+          <div style="width:56px; height:56px; margin:0 auto 22px; border-radius:50%; background:var(--cyan-soft); display:grid; place-items:center;">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--cyan-strong)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"></path></svg>
+          </div>
+          <h3 style="font-size:24px; margin-bottom:10px;">Your inquiry is ready to send.</h3>
+          <p style="font-size:15px; color:var(--muted); line-height:1.55; max-width:420px; margin:0 auto 24px;">Your email client should have opened a pre-filled message to <strong style="color:var(--yale);">sled@techtiz.co</strong>. If it didn't, copy your details into an email to that address — we reply within one business day with a mutual NDA template.</p>
+          <a class="btn-ghost-light" id="formReset" href="#">Submit another inquiry</a>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <aside>
+        <div class="side-card">
+          <span class="h">What happens next</span>
+          <h2>Three steps. Two of them are ours.</h2>
+          <div class="steps">
+            {WHAT_HAPPENS_NEXT.map(step => (
+              <div class="step">
+                <div class="n"><span>{step.n}</span></div>
+                <div class="t">
+                  <em>{step.timing}</em>
+                  {step.text}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="direct-card">
+          <div class="h">Or skip the form</div>
+          <h3>Email the SLED desk directly.</h3>
+          <p>If you'd rather start with a short email, send a one-line description of the engagement type and your role. Our U.S.-based partner manager routes it from there, usually within one business day.</p>
+          <a class="contact-row" href={`mailto:${SITE.email.sled}`}>
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            {SITE.email.sled}
+          </a>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+</SledLayout>
+
+<style>
+.sla-strip { background: var(--yale); color: var(--white); padding: 28px 0; position: relative; overflow: hidden; }
+.sla-strip::before { content: ""; position: absolute; right: -40px; top: -40px; width: 180px; height: 180px; background: linear-gradient(45deg, transparent 48%, rgba(24,176,230,0.14) 48% 52%, transparent 52%); background-size: 24px 24px; transform: rotate(15deg); }
+.sla-inner { display: grid; grid-template-columns: 1fr auto auto auto auto; gap: 32px; align-items: center; position: relative; z-index: 2; }
+.sla-inner .lbl { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan); }
+.sla-inner .item { display: flex; align-items: center; gap: 12px; font-size: 13.5px; color: rgba(255,255,255,0.88); }
+.sla-inner .item .tsq { width: 10px; height: 10px; background: var(--cyan); transform: rotate(15deg); flex-shrink: 0; }
+
+.contact-section { padding: 80px 0 100px; position: relative; overflow: hidden; }
+.contact-section::before { content: ""; position: absolute; right: -80px; top: -40px; width: 320px; height: 320px; background: linear-gradient(45deg, transparent 49%, rgba(24,176,230,0.08) 49% 51%, transparent 51%); background-size: 30px 30px; transform: rotate(15deg); pointer-events: none; }
+.contact-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 64px; align-items: start; position: relative; z-index: 2; }
+
+.lead .eyebrow { display: inline-block; margin-bottom: 18px; }
+.lead h1 { font-size: 52px; line-height: 1.05; margin-bottom: 22px; }
+.lead h1 :global(.accent) { color: var(--cyan); }
+.lead .desc { font-size: 17px; color: var(--muted); line-height: 1.55; max-width: 540px; margin-bottom: 40px; }
+
+.intake-form { background: var(--white); border: 1px solid var(--line); border-radius: 12px; padding: 40px; }
+.intake-form .section-l { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan-strong); margin-bottom: 4px; font-weight: 700; }
+.intake-form .section-h { font-size: 18px; font-weight: 700; color: var(--yale); margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--line-soft); }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field.full { grid-column: span 2; }
+.field label { font-family: 'Manrope', sans-serif; font-size: 12.5px; font-weight: 600; color: var(--yale); letter-spacing: 0.02em; }
+.field label .req { color: var(--cyan-strong); margin-left: 2px; }
+.field input, .field textarea, .field select { font-family: inherit; font-size: 14.5px; color: var(--ink); background: var(--seasalt); border: 1px solid var(--line); border-radius: 6px; padding: 11px 14px; outline: none; transition: border-color 180ms ease, background 180ms ease, box-shadow 180ms ease; }
+.field input::placeholder, .field textarea::placeholder { color: var(--muted); opacity: 0.7; }
+.field input:focus, .field textarea:focus, .field select:focus { border-color: var(--cyan); background: var(--white); box-shadow: 0 0 0 3px rgba(24,176,230,0.15); }
+.field textarea { min-height: 130px; resize: vertical; line-height: 1.55; }
+.field select { appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%); background-position: calc(100% - 16px) center, calc(100% - 12px) center; background-size: 4px 4px; background-repeat: no-repeat; }
+.section-divider { margin: 30px 0 26px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+.intent-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.intent-option { border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; cursor: pointer; background: var(--seasalt); transition: border-color 180ms ease, background 180ms ease; display: flex; align-items: flex-start; gap: 12px; }
+.intent-option:hover { border-color: var(--cyan-strong); }
+.intent-option.on { border-color: var(--cyan); background: var(--cyan-soft); }
+.intent-option input { display: none; }
+.intent-option .check { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--line); flex-shrink: 0; margin-top: 1px; background: var(--white); display: grid; place-items: center; }
+.intent-option.on .check { border-color: var(--cyan); background: var(--cyan); }
+.intent-option.on .check::after { content: ""; width: 6px; height: 6px; background: var(--white); transform: rotate(15deg); }
+.intent-option .l { font-weight: 700; font-size: 13.5px; color: var(--yale); display: block; margin-bottom: 2px; }
+.intent-option .d { font-size: 12px; color: var(--muted); line-height: 1.4; }
+.submit-row { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--line-soft); display: flex; justify-content: space-between; align-items: center; }
+.submit-row .note { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.08em; color: var(--muted); text-transform: uppercase; }
+.submit-row button { display: inline-flex; align-items: center; gap: 12px; background: var(--cyan); color: var(--yale-dark); font-weight: 700; font-size: 14.5px; padding: 14px 26px; border-radius: 8px; transition: transform 180ms ease, box-shadow 180ms ease; }
+.submit-row button:hover { transform: translateY(-1px); box-shadow: 0 12px 26px -10px rgba(24,176,230,0.55); }
+
+.side-card { background: var(--yale-dark); border-radius: 12px; padding: 36px 32px; color: var(--white); position: relative; overflow: hidden; margin-bottom: 16px; }
+.side-card::before { content: ""; position: absolute; right: -30px; top: -30px; width: 160px; height: 160px; background: linear-gradient(45deg, transparent 48%, rgba(24,176,230,0.20) 48% 52%, transparent 52%); background-size: 22px 22px; transform: rotate(15deg); }
+.side-card .h { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan); margin-bottom: 14px; position: relative; z-index: 2; }
+.side-card h2 { color: var(--white); font-size: 24px; margin-bottom: 24px; line-height: 1.2; position: relative; z-index: 2; }
+.steps { display: flex; flex-direction: column; gap: 18px; position: relative; z-index: 2; }
+.step { display: grid; grid-template-columns: 36px 1fr; gap: 16px; align-items: start; }
+.step .n { width: 36px; height: 36px; background: rgba(24,176,230,0.15); border: 1px solid rgba(24,176,230,0.35); color: var(--cyan); font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; display: grid; place-items: center; border-radius: 6px; transform: rotate(15deg); }
+.step .n span { transform: rotate(-15deg); display: block; }
+.step .t { color: rgba(255,255,255,0.88); font-size: 14px; line-height: 1.5; }
+.step .t strong { color: var(--white); font-weight: 700; }
+.step .t em { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cyan); font-style: normal; display: block; margin-bottom: 2px; }
+
+.direct-card { background: var(--white); border: 1px solid var(--line); border-radius: 12px; padding: 28px 28px; }
+.direct-card .h { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan-strong); margin-bottom: 12px; }
+.direct-card h3 { font-size: 18px; color: var(--yale); margin-bottom: 8px; }
+.direct-card p { font-size: 13.5px; color: var(--muted); line-height: 1.55; margin-bottom: 16px; }
+.direct-card .contact-row { display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: var(--seasalt); border: 1px solid var(--line); border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--yale); transition: border-color 180ms ease, background 180ms ease; }
+.direct-card .contact-row:hover { border-color: var(--cyan-strong); background: var(--cyan-soft); }
+.direct-card .contact-row .icon { color: var(--cyan-strong); width: 18px; height: 18px; }
+</style>
+
+<script>
+  document.querySelectorAll('.intent-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      document.querySelectorAll('.intent-option').forEach(o => o.classList.remove('on'));
+      opt.classList.add('on');
+      const input = opt.querySelector('input') as HTMLInputElement;
+      if(input) input.checked = true;
+    });
+  });
+
+  (function() {
+    const form = document.getElementById('intakeForm') as HTMLFormElement;
+    const success = document.getElementById('formSuccess');
+    if(!form) return;
+    function val(id: string) { const el = document.getElementById(id) as HTMLInputElement; return el ? el.value.trim() : ''; }
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      let ok = true;
+      ['name','email','firm'].forEach(function(id) {
+        const el = document.getElementById(id) as HTMLInputElement;
+        if(el && !el.value.trim()) { el.style.borderColor = 'var(--amber)'; ok = false; }
+        else if(el) { el.style.borderColor = ''; }
+      });
+      if(!ok) return;
+      const intentEl = form.querySelector('input[name="intent"]:checked');
+      const intent = intentEl ? (intentEl.closest('.intent-option')?.querySelector('.l') as HTMLElement)?.textContent?.trim() : '—';
+      const lines = [
+        'U.S. SLED subcontract inquiry', '',
+        'Name:        ' + val('name'),
+        'Work email:  ' + val('email'),
+        'Prime firm:  ' + val('firm'),
+        'Role:        ' + val('role'),
+        'Vehicle:     ' + val('vehicle'),
+        'Timing:      ' + val('timing'),
+        'Solicitation: ' + (val('solicitation') || '(not provided)'),
+        'Ceiling:     ' + val('ceiling'),
+        'Clearance:   ' + val('clearance'),
+        'Requesting:  ' + intent,
+        '', 'Description:', (val('desc') || '(none provided)')
+      ];
+      const subject = 'SLED subcontract inquiry — ' + (val('firm') || 'prime contractor');
+      window.location.href = 'mailto:sled@techtiz.co?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lines.join('\n'));
+      form.style.display = 'none';
+      if(success) {
+        success.style.display = 'block';
+        const y = success.getBoundingClientRect().top + window.scrollY - 140;
+        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+      }
+    });
+    const reset = document.getElementById('formReset');
+    if(reset) reset.addEventListener('click', function(e) {
+      e.preventDefault();
+      if(success) success.style.display = 'none';
+      form.reset();
+      form.style.display = '';
+    });
+  })();
+</script>

@@ -1,0 +1,184 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../lib/constants/site';
+
+const seo = {
+  title: 'Capability Statement | Techtiz · U.S. SLED Subcontractor',
+  description: 'Techtiz capability statement for U.S. SLED prime contractors — core competencies, differentiators, codes, and contact. NDA-first, subcontract-only.',
+  canonicalPath: '/us-sled/capability-statement/',
+  ogImage: '/assets/logo.svg',
+};
+---
+
+<BaseLayout {...seo}>
+
+<div class="toolbar">
+  <span class="lbl">Capability Statement · pre-deploy draft</span>
+  <div class="actions">
+    <a href="/us-sled/">← Back to SLED hub</a>
+    <button class="print" type="button" onclick="window.print()">Save / print as PDF</button>
+  </div>
+</div>
+
+<div class="sheet">
+
+  <!-- HEADER -->
+  <div class="cs-head">
+    <div class="who">
+      <img src={SITE.logo.dark} alt="Techtiz" class="logo" />
+      <h1>U.S. SLED Technical Subcontractor</h1>
+      <p class="tag">Back-office engineering for state, local, and education prime contractors. NDA-first. Subcontract-only. We never face the agency.</p>
+    </div>
+    <div class="badge">
+      <span class="k">SAM.gov UEI</span><span class="v pending">add UEI</span>
+      <span class="k">CAGE Code</span><span class="v pending">add CAGE</span>
+      <span class="k">Business size</span><span class="v pending">confirm size</span>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <h2 class="sec">Company snapshot</h2>
+  <div class="intro">
+    <p>Techtiz is an AI-native engineering studio that delivers specialized technical workstreams to U.S. SLED prime contractors under subcontract and NDA. We integrate into a prime's master subcontract as a white-labeled delivery team — writing technical volumes and building demos pre-award, and shipping engineering post-award — while the prime remains the sole face to the agency. Delivery is onshore-controlled and offshore-engineered across three time zones for follow-the-sun coverage.</p>
+  </div>
+
+  <!-- CORE COMPETENCIES -->
+  <h2 class="sec">Core competencies</h2>
+  <ul class="comp">
+    <li><strong>GIS &amp; spatial systems</strong> — mapping, ETL, statutory geospatial reporting</li>
+    <li><strong>AI &amp; intelligence</strong> — LLM/RAG systems, agents, ML pipelines in production</li>
+    <li><strong>Workflow automation</strong> — RPA, integrations, internal tooling</li>
+    <li><strong>Statutory document production</strong> — compliant, format-controlled output at volume</li>
+    <li><strong>Grant &amp; compliance reporting</strong> — on-deadline, zero-deficiency reporting</li>
+    <li><strong>Platform modernization</strong> — legacy migration without halting operations</li>
+    <li><strong>Pre-award proposal support</strong> — technical volumes, compliance matrices, orals demos</li>
+    <li><strong>Post-award delivery</strong> — engineers, sprints, KT, integration under your SOW</li>
+  </ul>
+
+  <!-- DIFFERENTIATORS -->
+  <h2 class="sec">Differentiators</h2>
+  <div class="diff">
+    <div class="d"><h4>NDA-first, subcontract-only</h4><p>A mutual NDA precedes any substantive exchange. We contract under the prime's terms and never engage the agency directly.</p></div>
+    <div class="d"><h4>Onshore-controlled architecture</h4><p>CONUS/Lahore air-gap, CJIS/CUI/FCI/FTI handling, background-checked U.S. personnel, per-state offshore restrictions.</p></div>
+    <div class="d"><h4>Follow-the-sun delivery</h4><p>Three-time-zone coverage compresses proposal and delivery cycles when the bench is thin.</p></div>
+    <div class="d"><h4>Senior-led, plug-in ready</h4><p>Specialized engineers and statutory-format expertise on hand, deployable inside a master subcontract.</p></div>
+  </div>
+
+  <!-- COMPLIANCE -->
+  <h2 class="sec">Compliance &amp; security posture</h2>
+  <div class="chips">
+    <span>NIST SP 800-171</span><span>SOC 2</span><span>StateRAMP</span><span>CJIS</span>
+    <span>Section 508 / VPAT</span><span>CMMC</span><span>HIPAA</span><span>IRS Pub 1075</span>
+  </div>
+
+  <!-- PAST PERFORMANCE -->
+  <h2 class="sec">Representative delivery <span style="text-transform:none; letter-spacing:0; font-family:'Manrope'; color:var(--muted); font-weight:500; font-size:9.5px;">— summarized under NDA; partner names withheld</span></h2>
+  <div class="pp">
+    <div class="p"><div class="n">35 / 35</div><div class="t">municipalities onboarded to a statewide platform rollout</div></div>
+    <div class="p"><div class="n">0</div><div class="t">EGLE statutory format deficiencies across submitted filings</div></div>
+    <div class="p"><div class="n">0</div><div class="t">late grant reports across the reporting cycle</div></div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="cs-foot">
+    <div>
+      <h2 class="sec" style="margin-top:0;">Codes &amp; classifications</h2>
+      <div class="codes">
+        <div class="row"><span class="k">NAICS</span><span class="v">541511 · 541512 · 541519</span></div>
+        <div class="row"><span class="k">NIGP</span><span class="v">918-46 · 918-00</span></div>
+        <div class="row"><span class="k">SAM.gov UEI</span><span class="v pending">add UEI</span></div>
+        <div class="row"><span class="k">CAGE Code</span><span class="v pending">add CAGE</span></div>
+        <div class="row"><span class="k">Set-aside / size</span><span class="v pending">confirm</span></div>
+        <div class="row"><span class="k">Insurance</span><span class="v">Prime-routed</span></div>
+      </div>
+    </div>
+    <div class="contact-box">
+      <span class="k">Teaming contact</span>
+      <div class="line">
+        <strong>Techtiz — SLED Partnerships</strong><br/>
+        <a href={`mailto:${SITE.email.sled}`}>{SITE.email.sled}</a><br/>
+        Reply within 1 business day<br/>
+        Lahore HQ · U.S. office
+      </div>
+    </div>
+  </div>
+
+  <p class="note">Pre-deploy draft. Italicized fields (UEI, CAGE, set-aside / size) are placeholders to confirm against SAM.gov before this statement is distributed. Compliance frameworks reflect current posture; confirm certification vs. roadmap status per framework before claiming.</p>
+
+</div>
+
+</BaseLayout>
+
+<style>
+  :root { --yale:#153A5F; --yale-dark:#0E2640; --cyan:#18B0E6; --cyan-soft:#E6F6FC; --cyan-strong:#0B8DC4; --seasalt:#F8F8F8; --ink:#1B2430; --muted:#5B6776; --line:#D9DEE5; --line-soft:#E8ECF1; --white:#FFFFFF; }
+  * { box-sizing:border-box; }
+  html, body { margin:0; padding:0; }
+  body { font-family:'Manrope',system-ui,sans-serif; background:var(--seasalt); color:var(--ink); -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+
+  .toolbar { position:sticky; top:0; z-index:10; background:var(--yale-dark); color:#fff; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 24px; }
+  .toolbar .lbl { font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--cyan); }
+  .toolbar .actions { display:flex; gap:10px; }
+  .toolbar a, .toolbar button { font-family:inherit; cursor:pointer; font-size:13px; font-weight:700; border-radius:7px; padding:9px 16px; border:1px solid rgba(255,255,255,.28); color:#fff; background:transparent; transition:background .18s ease, border-color .18s ease; display:inline-flex; align-items:center; gap:8px; }
+  .toolbar a:hover, .toolbar button:hover { border-color:#fff; }
+  .toolbar button.print { background:var(--cyan); color:var(--yale-dark); border-color:var(--cyan); }
+  .toolbar a { text-decoration:none; }
+
+  .sheet { width:8.5in; min-height:11in; margin:28px auto; background:var(--white); box-shadow:0 24px 60px -28px rgba(14,38,64,.4); padding:0.6in 0.62in 0.5in; position:relative; }
+  .cs-head { display:flex; justify-content:space-between; align-items:flex-start; gap:24px; padding-bottom:16px; border-bottom:3px solid var(--yale); }
+  .cs-head .logo { height:30px; width:auto; }
+  .cs-head .who h1 { font-size:21px; color:var(--yale); margin:10px 0 3px; letter-spacing:-.01em; }
+  .cs-head .who .tag { font-size:12px; color:var(--muted); max-width:4.4in; line-height:1.45; }
+  .cs-head .badge { text-align:right; flex-shrink:0; }
+  .cs-head .badge .k { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); display:block; }
+  .cs-head .badge .v { font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--yale); font-weight:600; display:block; margin-bottom:8px; }
+  .cs-head .badge .v.pending { color:var(--cyan-strong); border-bottom:1px dashed var(--line); }
+
+  h2.sec { font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--cyan-strong); margin:20px 0 10px; font-weight:600; display:flex; align-items:center; gap:9px; }
+  h2.sec::before { content:""; width:9px; height:9px; background:var(--cyan); transform:rotate(15deg); flex-shrink:0; }
+
+  .intro p { font-size:12.5px; line-height:1.55; color:var(--ink); margin:0; }
+  ul.comp { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:7px 22px; }
+  ul.comp li { font-size:12px; line-height:1.4; color:var(--ink); padding-left:16px; position:relative; }
+  ul.comp li::before { content:""; position:absolute; left:0; top:5px; width:7px; height:7px; background:var(--cyan); transform:rotate(15deg); }
+  ul.comp li strong { color:var(--yale); font-weight:700; }
+
+  .diff { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .diff .d { border:1px solid var(--line); border-radius:8px; padding:11px 13px; }
+  .diff .d h4 { font-size:12px; color:var(--yale); margin:0 0 3px; }
+  .diff .d p { font-size:11px; color:var(--muted); line-height:1.45; margin:0; }
+
+  .chips { display:flex; flex-wrap:wrap; gap:6px; }
+  .chips span { font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.04em; color:var(--yale); background:var(--cyan-soft); border:1px solid #CDE9F6; border-radius:5px; padding:5px 9px; }
+
+  .pp { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
+  .pp .p { border-left:2px solid var(--cyan); padding:2px 0 2px 11px; }
+  .pp .p .n { font-size:17px; font-weight:800; color:var(--yale); line-height:1; font-family:'JetBrains Mono',monospace; }
+  .pp .p .t { font-size:10.5px; color:var(--muted); line-height:1.4; margin-top:4px; }
+
+  .cs-foot { margin-top:22px; border-top:1px solid var(--line); padding-top:14px; display:grid; grid-template-columns:1.4fr 1fr; gap:24px; }
+  .codes { display:grid; grid-template-columns:1fr 1fr; gap:7px 18px; }
+  .codes .row .k { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); display:block; }
+  .codes .row .v { font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--yale); font-weight:600; }
+  .codes .row .v.pending { color:var(--cyan-strong); border-bottom:1px dashed var(--line); font-style:italic; }
+  .contact-box { background:var(--yale-dark); border-radius:9px; padding:15px 16px; color:#fff; }
+  .contact-box .k { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.12em; text-transform:uppercase; color:var(--cyan); display:block; margin-bottom:7px; }
+  .contact-box .line { font-size:12px; line-height:1.6; }
+  .contact-box .line strong { color:#fff; }
+  .contact-box a { color:var(--cyan); text-decoration:none; font-family:'JetBrains Mono',monospace; }
+
+  .note { font-size:9.5px; color:var(--muted); margin-top:12px; line-height:1.45; }
+
+  @media print {
+    @page { size:Letter; margin:0; }
+    body { background:#fff; }
+    .toolbar { display:none !important; }
+    .sheet { margin:0; box-shadow:none; width:auto; min-height:auto; padding:0.5in 0.55in; }
+  }
+  @media (max-width:760px) {
+    .sheet { width:auto; margin:14px; padding:28px 22px; }
+    .diff, .pp, .cs-foot, .codes { grid-template-columns:1fr !important; }
+    ul.comp { grid-template-columns:1fr; }
+    .cs-head { flex-direction:column; }
+    .cs-head .badge { text-align:left; }
+  }
+</style>

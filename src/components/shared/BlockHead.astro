@@ -1,0 +1,24 @@
+---
+interface Props {
+  eyebrow: string;
+  heading: string;
+  sub?: string;
+  rightLinkLabel?: string;
+  rightLinkHref?: string;
+}
+
+const { eyebrow, heading, sub, rightLinkLabel, rightLinkHref } = Astro.props;
+---
+
+<div class="block-head">
+  <div class="left">
+    <span class="eyebrow">{eyebrow}</span>
+    <h2 set:html={heading} />
+    {sub && <p class="sub">{sub}</p>}
+  </div>
+  {rightLinkLabel && rightLinkHref && (
+    <div class="right">
+      <a href={rightLinkHref}>{rightLinkLabel}</a>
+    </div>
+  )}
+</div>

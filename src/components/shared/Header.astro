@@ -1,0 +1,113 @@
+---
+interface Props {
+  currentPage?: string;
+}
+
+const { currentPage = '' } = Astro.props;
+const isSled = currentPage.startsWith('/us-sled') || Astro.url?.pathname?.startsWith('/us-sled');
+---
+
+<header class="top">
+  <div class="wrap nav">
+    <a href="/" class="brand-mark" aria-label="Techtiz home">
+      <img src="/assets/logo.svg" alt="Techtiz" class="brand-logo" />
+    </a>
+
+    <nav class="primary-nav" aria-label="Primary">
+      <a href="/" class="nav-link">About Us</a>
+
+      <div class="nav-item" data-mega="services">
+        <button class="nav-link" type="button" aria-expanded="false">Services <span class="chev"></span></button>
+        <div class="mega" role="menu">
+          <div class="mega-inner">
+            <div class="mega-left">
+              <div class="mega-eyebrow">We Offer</div>
+              <div class="mega-list" data-list="services">
+                <a class="mega-item active" data-key="development" href="/">Development <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="ai" href="/">AI &amp; Intelligence <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="automation" href="/">Automation &amp; AI Solutions <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="transformation" href="/">Digital Transformation <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="ux" href="/">UX Design / Enablement <span class="arr-r"></span></a>
+              </div>
+            </div>
+            <div class="mega-right">
+              <div class="mega-feature" data-feature="services">
+                <div class="feat-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="3" width="20" height="14" rx="2"></rect>
+                    <path d="M8 21h8M12 17v4"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h4 data-feat-title>Development</h4>
+                  <p data-feat-desc>Build robust, scalable digital products designed to grow with your business.</p>
+                </div>
+              </div>
+              <div class="mega-sublinks" data-sublinks="services">
+                <a href="/">Custom Software</a>
+                <a href="/">Mobile Apps</a>
+                <a href="/">Low code / No-code Dev</a>
+                <a href="/">Vibe code Dev</a>
+              </div>
+              <div class="mega-footer">
+                <span class="mega-tag">U.S. SLED prime contractor?</span>
+                <a class="mega-cta" href="/us-sled/">See SLED Partnerships →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-item" data-mega="industries">
+        <button class="nav-link" type="button" aria-expanded="false">Industries <span class="chev"></span></button>
+        <div class="mega" role="menu">
+          <div class="mega-inner">
+            <div class="mega-left">
+              <div class="mega-eyebrow">Industries</div>
+              <div class="mega-list" data-list="industries">
+                <a class="mega-item active" data-key="healthcare" href="/">Healthcare <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="marketing" href="/">Digital Marketing <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="realestate" href="/">Real Estate <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="ecommerce" href="/">E-commerce <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="logistics" href="/">Logistics &amp; Supply Chain <span class="arr-r"></span></a>
+                <a class="mega-item" data-key="education" href="/">Education <span class="arr-r"></span></a>
+              </div>
+            </div>
+            <div class="mega-right">
+              <div class="mega-feature" data-feature="industries">
+                <div class="feat-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h4 data-feat-title>Healthcare</h4>
+                  <p data-feat-desc>Techtiz streamlines admin tasks for healthcare teams, enhancing efficiency and safety.</p>
+                </div>
+              </div>
+              <div class="mega-sublinks" data-sublinks="industries">
+                <a href="/">AI Appointment Management</a>
+                <a href="/">AI-Powered Communication</a>
+                <a href="/">Reporting Optimization</a>
+                <a href="/">Patient Records</a>
+              </div>
+              <div class="mega-footer">
+                <span class="mega-tag">U.S. SLED prime contractor?</span>
+                <a class="mega-cta" href="/us-sled/">SLED Partnerships →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a href="/us-sled/case-studies/" class="nav-link">Engagement Examples</a>
+      <a href="/" class="nav-link">Careers</a>
+    </nav>
+
+    <div class="right-cta">
+      <a href="/us-sled/" class="us-pill" aria-current={isSled ? 'page' : undefined}>
+        <span class="sled-dot"></span> SLED Partnerships
+      </a>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,6 @@
+UI rules:
+
+- Use **21st.dev MCP (Magic MCP)** for UI building blocks and patterns.
+- Use **Tailwind CSS** for styling; keep classnames readable and spacing consistent.
+- Keep UI accessible and consistent across `.astro` and island components.
+

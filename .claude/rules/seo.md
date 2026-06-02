@@ -1,0 +1,7 @@
+Astro SEO rules (apply to every route in `src/pages/`):
+
+- Every page must set `<title>`, `<meta name="description">`, and a canonical `<link rel="canonical">`.
+- Add OG + Twitter tags (title/description/url/image).
+- Use one shared pattern (layout or `Seo.astro`) so pages only pass `title`, `description`, `canonicalPath`.
+- Add sitemap + `robots.txt` when the site should be indexed.
+

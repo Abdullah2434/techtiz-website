@@ -1,0 +1,10 @@
+---
+alwaysApply: true
+---
+
+Astro frontend rules:
+
+- **Structure**: `src/pages` routes, `src/layouts` layouts, `src/components` UI, `src/content` content collections, `public` static assets.
+- **Rendering**: server-first by default; use islands (`client:*`) only when necessary.
+- **Code style**: keep files small, avoid deep nesting, prefer early returns, prefer `const`.
+- **State**: keep state local to islands; avoid global stores unless multiple islands must coordinate.

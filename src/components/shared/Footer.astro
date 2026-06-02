@@ -1,18 +1,26 @@
 ---
+import '../../styles/chrome.css';
 import { SITE, LEGAL_LINKS } from '../../lib/constants/site';
+
+const wrap =
+  'mx-auto max-w-[1280px] px-12 max-[1024px]:px-8 max-[900px]:px-6 max-[600px]:px-[18px]';
 ---
 
-<footer class="relative overflow-hidden bg-yale-dark py-20 pb-8 text-white/70">
-  <div class="mx-auto max-w-[1280px] px-12 max-[1024px]:px-8 max-[900px]:px-6 max-[600px]:px-[18px]">
-    <div class="mb-14 grid grid-cols-[1.2fr_repeat(4,1fr)_1.2fr] gap-10 max-[1024px]:grid-cols-[1.3fr_repeat(2,1fr)] max-[900px]:grid-cols-1">
+<footer class="foot relative overflow-hidden bg-yale-dark py-20 pb-8 text-white/70">
+  <div
+    class="pointer-events-none absolute -bottom-10 -left-10 size-[260px] rotate-[15deg] opacity-60 bg-[linear-gradient(45deg,transparent_48%,rgba(24,176,230,0.14)_48%_52%,transparent_52%)] bg-size-[30px_30px]"
+    aria-hidden="true"
+  ></div>
+
+  <div class={wrap}>
+    <div class="cols relative mb-14 grid grid-cols-[1.5fr_repeat(4,1fr)] gap-10 max-[900px]:grid-cols-1">
       <div class="brand-foot">
-        <a href="/" class="inline-flex items-center gap-2.5">
-          <img src={SITE.logo.light} alt="Techtiz" class="block h-[30px] w-auto" />
+        <a href="/" class="brand-mark inline-block">
+          <img src="/assets/logo-light.svg" alt="Techtiz" class="brand-logo block h-[30px] w-auto" />
         </a>
         <p class="my-[18px] mb-[22px] max-w-[290px] text-sm leading-[1.55] text-white/70">
-          {SITE.description}
+          An AI-native engineering studio building adaptive systems for ambitious teams.
         </p>
-
         <div class="socials flex gap-2.5">
           <a
             href={SITE.socials.linkedin}
@@ -20,9 +28,7 @@ import { SITE, LEGAL_LINKS } from '../../lib/constants/site';
             class="grid size-[34px] place-items-center rounded-md border border-white/18 text-white/70 transition-[color,border-color] duration-[180ms] ease-out hover:border-cyan hover:text-cyan"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14M8.6 18.3v-7.6H6.07v7.6H8.6m-1.27-8.67a1.45 1.45 0 0 0 1.45-1.45A1.45 1.45 0 0 0 7.33 6.7a1.46 1.46 0 0 0-1.46 1.46 1.46 1.46 0 0 0 1.46 1.45m11 8.67v-4.18c0-2.2-1.18-3.22-2.76-3.22a2.38 2.38 0 0 0-2.16 1.19v-1.02h-2.45v7.6h2.53v-4.22c0-1.12.43-1.78 1.39-1.78s1.4.62 1.4 1.78v4.22h2.55z"
-              ></path>
+              <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14M8.6 18.3v-7.6H6.07v7.6H8.6m-1.27-8.67a1.45 1.45 0 0 0 1.45-1.45A1.45 1.45 0 0 0 7.33 6.7a1.46 1.46 0 0 0-1.46 1.46 1.46 1.46 0 0 0 1.46 1.45m11 8.67v-4.18c0-2.2-1.18-3.22-2.76-3.22a2.38 2.38 0 0 0-2.16 1.19v-1.02h-2.45v7.6h2.53v-4.22c0-1.12.43-1.78 1.39-1.78s1.4.62 1.4 1.78v4.22h2.55z"></path>
             </svg>
           </a>
           <a
@@ -31,9 +37,7 @@ import { SITE, LEGAL_LINKS } from '../../lib/constants/site';
             class="grid size-[34px] place-items-center rounded-md border border-white/18 text-white/70 transition-[color,border-color] duration-[180ms] ease-out hover:border-cyan hover:text-cyan"
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M18.2 2H21l-6.5 7.4L22 22h-6.6l-5.2-6.8L4.2 22H1.5l7-8L1.2 2h6.8l4.7 6.2L18.2 2zm-1.2 18h1.8L7.2 4H5.3l11.7 16z"
-              ></path>
+              <path d="M18.2 2H21l-6.5 7.4L22 22h-6.6l-5.2-6.8L4.2 22H1.5l7-8L1.2 2h6.8l4.7 6.2L18.2 2zm-1.2 18h1.8L7.2 4H5.3l11.7 16z"></path>
             </svg>
           </a>
           <a
@@ -42,123 +46,64 @@ import { SITE, LEGAL_LINKS } from '../../lib/constants/site';
             class="grid size-[34px] place-items-center rounded-md border border-white/18 text-white/70 transition-[color,border-color] duration-[180ms] ease-out hover:border-cyan hover:text-cyan"
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M13.5 22v-8h2.7l.4-3H13.5V9.1c0-.9.3-1.6 1.6-1.6H16.7V4.9c-.3 0-1.4-.1-2.7-.1-2.7 0-4.5 1.6-4.5 4.6V11H7v3h2.5v8h4z"></path>
+              <path d="M13.5 21.95v-7.78H16l.37-2.9H13.5V9.41c0-.84.23-1.41 1.43-1.41h1.53V5.4a20 20 0 0 0-2.23-.11c-2.2 0-3.7 1.34-3.7 3.8v2.18H8V14h2.53v7.95h2.97z"></path>
             </svg>
           </a>
         </div>
       </div>
 
-      {[
-        {
-          heading: 'Solutions',
-          links: [
-            { label: 'Development', href: '/' },
-            { label: 'AI & Intelligence', href: '/' },
-            { label: 'Automation & AI', href: '/' },
-            { label: 'Digital Transformation', href: '/' },
-            { label: 'UX Design', href: '/' },
-          ],
-        },
-        {
-          heading: 'Industries',
-          links: [
-            { label: 'Healthcare', href: '/' },
-            { label: 'Digital Marketing', href: '/' },
-            { label: 'E-commerce', href: '/' },
-            { label: 'Real Estate', href: '/' },
-            { label: 'Logistics', href: '/' },
-            { label: 'Education', href: '/' },
-          ],
-        },
-        {
-          heading: 'U.S. Public Sector',
-          links: [
-            { label: 'SLED Hub', href: '/us-sled/' },
-            { label: 'Capabilities', href: '/us-sled/capabilities/' },
-            { label: 'How We Engage', href: '/us-sled/how-we-engage/' },
-            { label: 'Operating Model', href: '/us-sled/operating-model/' },
-            { label: 'Engagement Examples', href: '/us-sled/case-studies/' },
-            { label: 'Procurement Vehicles', href: '/us-sled/#vehicles' },
-            { label: 'SLED Contact', href: '/us-sled/contact/' },
-          ],
-        },
-        {
-          heading: 'Company',
-          links: [
-            { label: 'About', href: '/' },
-            { label: 'Team', href: '/' },
-            { label: 'Careers', href: '/' },
-            { label: 'Press', href: '/' },
-            { label: 'Contact', href: '/us-sled/contact/' },
-          ],
-        },
-      ].map(col => (
-        <div>
-          <h5 class="mb-[18px] font-mono text-[11px] font-semibold tracking-[0.14em] text-cyan uppercase">
-            {col.heading}
-          </h5>
-          <ul class="m-0 flex list-none flex-col gap-2.5 p-0">
-            {col.links.map(link => (
-              <li>
-                <a href={link.href} class="text-sm text-white/78 transition-colors duration-[180ms] ease-out hover:text-cyan">
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
+      <div>
+        <h5 class="mb-[18px] font-mono text-[11px] font-semibold tracking-[0.14em] text-cyan uppercase">Solutions</h5>
+        <ul class="m-0 flex list-none flex-col gap-2.5 p-0">
+          <li><a href="/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Development</a></li>
+          <li><a href="/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">AI &amp; Intelligence</a></li>
+          <li><a href="/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Automation &amp; AI</a></li>
+          <li><a href="/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Digital Transformation</a></li>
+          <li><a href="/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">UX Design</a></li>
+        </ul>
+      </div>
 
-      <div class="max-[1024px]:col-span-3 max-[900px]:col-span-1">
-        <h5 class="mb-[18px] font-mono text-[11px] font-semibold tracking-[0.14em] text-cyan uppercase">
-          Book a Consultation
-        </h5>
-        <p class="mb-4 text-sm leading-[1.55] text-white/70">
-          Get a 30-minute scoping call with a senior engineer. NDA-first when needed.
-        </p>
-        <form class="flex items-center gap-2.5 max-[600px]:flex-col max-[600px]:items-stretch">
-          <input
-            type="email"
-            name="email"
-            required
-            placeholder="you@company.com"
-            class="h-[44px] w-full rounded-lg border border-white/16 bg-white/8 px-3.5 text-sm text-white placeholder:text-white/45 outline-none ring-0 transition-[border-color,background] duration-180 focus:border-cyan focus:bg-white/10"
-          />
-          <button
-            type="button"
-            class="inline-flex h-[44px] shrink-0 items-center justify-center rounded-lg bg-cyan px-4 text-sm font-bold text-yale-dark hover:brightness-[0.98]"
-          >
-            Book a Consultation →
-          </button>
-        </form>
-        <div class="mt-4 text-sm text-white/70">
-          Or email{' '}
-          <a class="border-b border-cyan/50 text-white/82 hover:text-cyan" href="mailto:hello@techtiz.co">hello@techtiz.co</a>
-        </div>
+      <div>
+        <h5 class="mb-[18px] font-mono text-[11px] font-semibold tracking-[0.14em] text-cyan uppercase">Industries</h5>
+        <ul class="m-0 flex list-none flex-col gap-2.5 p-0">
+          <li><a href="/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Healthcare</a></li>
+          <li><a href="/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Digital Marketing</a></li>
+          <li><a href="/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">E-commerce</a></li>
+          <li><a href="/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Real Estate</a></li>
+          <li><a href="/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Logistics</a></li>
+          <li><a href="/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Education</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5 class="mb-[18px] font-mono text-[11px] font-semibold tracking-[0.14em] text-cyan uppercase">SLED Partnerships</h5>
+        <ul class="m-0 flex list-none flex-col gap-2.5 p-0">
+          <li><a href="/us-sled/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">SLED Hub</a></li>
+          <li><a href="/us-sled/capabilities/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Capabilities</a></li>
+          <li><a href="/us-sled/how-we-engage/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">How We Engage</a></li>
+          <li><a href="/us-sled/operating-model/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Operating Model</a></li>
+          <li><a href="/us-sled/case-studies/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Engagement Examples</a></li>
+          <li><a href="/us-sled/#vehicles" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Procurement Vehicles</a></li>
+          <li><a href="/us-sled/contact/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">SLED Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5 class="mb-[18px] font-mono text-[11px] font-semibold tracking-[0.14em] text-cyan uppercase">Company</h5>
+        <ul class="m-0 flex list-none flex-col gap-2.5 p-0">
+          <li><a href="/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">About</a></li>
+          <li><a href="/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Team</a></li>
+          <li><a href="/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Careers</a></li>
+          <li><a href="/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Press</a></li>
+          <li><a href="/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Contact</a></li>
+        </ul>
       </div>
     </div>
 
-    <div class="flex items-center justify-between border-t border-white/10 pt-6 text-[13px] text-white/55">
-      <div class="foot-reg flex flex-col gap-2.5">
-        <div class="regline font-mono text-[11.5px] tracking-[0.03em] text-white/58">
-          <span class="k mr-[7px] tracking-[0.12em] text-cyan uppercase">NAICS</span>
-          {SITE.naics}
-          <span class="sep mx-1.5 text-white/22">·</span>
-          <span class="k mr-[7px] tracking-[0.12em] text-cyan uppercase">NIGP</span>
-          {SITE.nigp}
-          <span class="sep mx-1.5 text-white/22">·</span>
-          <span class="k mr-[7px] tracking-[0.12em] text-cyan uppercase">Teaming</span>
-          <a
-            href={`mailto:${SITE.email.sled}`}
-            class="border-b border-cyan/50 text-white/82 hover:text-cyan"
-          >
-            {SITE.email.sled}
-          </a>
-        </div>
-        <div>{SITE.copyright}</div>
-      </div>
+    <div class="strip relative flex items-center justify-between border-t border-white/10 pt-6 text-[13px] text-white/55 max-[600px]:flex-col max-[600px]:items-start max-[600px]:gap-3.5">
+      <div>© 2026 Techtiz · Lahore HQ · U.S. office</div>
       <div class="legal flex gap-6">
-        {LEGAL_LINKS.map(link => (
+        {LEGAL_LINKS.map((link) => (
           <a href={link.href} class="hover:text-cyan">
             {link.label}
           </a>

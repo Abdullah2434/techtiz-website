@@ -1,0 +1,50 @@
+---
+import { ENGAGE_MODELS } from '../../lib/constants/pages/home';
+import BlockHead from '../shared/BlockHead.astro';
+import PageWrap from './PageWrap.astro';
+---
+
+<section class="bg-white pt-10 pb-[110px] max-[900px]:py-14">
+  <PageWrap>
+    <BlockHead eyebrow="How we work" heading="Three ways to engage. One bar for quality." />
+
+    <div class="grid grid-cols-3 gap-[18px] max-lg:grid-cols-2 max-sm:grid-cols-1">
+      {ENGAGE_MODELS.map((model) => (
+        <div
+          class:list={[
+            'relative flex flex-col gap-4 rounded-xl border px-8 py-9 transition-[transform,box-shadow] duration-240 hover:-translate-y-0.5 hover:shadow-[0_18px_36px_-18px_rgba(21,58,95,0.16)]',
+            model.feature
+              ? 'overflow-hidden border-yale-dark bg-yale-dark text-white'
+              : 'border-line bg-white',
+          ]}
+        >
+          {'badge' in model && model.badge && (
+            <span class="absolute top-[22px] right-[22px] rounded bg-cyan px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-yale-dark">
+              {model.badge}
+            </span>
+          )}
+          {model.feature && (
+            <div
+              class="pointer-events-none absolute -bottom-[30px] -left-[30px] size-[180px] rotate-[15deg] bg-[linear-gradient(45deg,transparent_48%,rgba(24,176,230,0.12)_48%_52%,transparent_52%)] bg-size-[24px_24px]"
+              aria-hidden="true"
+            ></div>
+          )}
+          <span class:list={['font-mono text-[11px] uppercase tracking-[0.14em]', model.feature ? 'text-cyan' : 'text-cyan-strong']}>
+            {model.num}
+          </span>
+          <h3 class:list={['text-[26px] font-extrabold leading-[1.15]', model.feature ? 'text-white' : 'text-yale']}>{model.title}</h3>
+          <p class:list={['text-[14.5px] leading-[1.55]', model.feature ? 'text-white/75' : 'text-muted']}>{model.desc}</p>
+          <div
+            class:list={[
+              'mt-auto border-t pt-4 text-[13px]',
+              model.feature ? 'border-white/14 text-white' : 'border-line text-ink',
+            ]}
+          >
+            <em class="mb-1 block font-mono text-[10px] not-italic uppercase tracking-[0.12em] text-cyan">Best for</em>
+            {model.best}
+          </div>
+        </div>
+      ))}
+    </div>
+  </PageWrap>
+</section>

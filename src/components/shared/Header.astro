@@ -1,76 +1,77 @@
 ---
+import '../../styles/chrome.css';
+
 interface Props {
   currentPage?: string;
 }
 
-const { currentPage = '' } = Astro.props;
-const isSled = currentPage.startsWith('/us-sled') || Astro.url?.pathname?.startsWith('/us-sled');
+const wrap =
+  'mx-auto max-w-[1280px] px-12 max-[1024px]:px-8 max-[900px]:px-6 max-[600px]:px-[18px]';
 ---
 
 <header class="top sticky top-0 z-50 border-b border-line bg-white/94 backdrop-blur-[10px]">
-  <div class="nav mx-auto max-w-[1280px] px-12 max-[1024px]:px-8 max-[900px]:px-6 max-[600px]:px-[18px] grid h-[76px] grid-cols-[1fr_auto_1fr] items-center max-[900px]:h-[64px]">
-    <a
-      href="/"
-      class="brand-mark inline-flex items-center gap-2.5"
-      aria-label="Techtiz home"
-    >
+  <div class:list={[wrap, 'nav grid h-[76px] grid-cols-[1fr_auto_1fr] items-center max-[900px]:flex max-[900px]:h-16 max-[900px]:justify-between']}>
+    <a href="/" class="brand" aria-label="Techtiz home">
       <img src="/assets/logo.svg" alt="Techtiz" class="brand-logo block h-[26px] w-auto" />
     </a>
 
     <nav class="primary-nav inline-flex items-center gap-0.5 max-[900px]:hidden" aria-label="Primary">
-      <a href="/" class="nav-link relative inline-flex cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-lg border border-transparent bg-transparent px-4 py-2.5 font-sans text-[14.5px] font-semibold leading-none text-ink transition-[color,background,border-color] duration-[180ms] ease-out hover:bg-yale/4 hover:text-yale">
+      <a
+        href="/"
+        class="nav-link inline-flex cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-lg border border-transparent bg-transparent px-4 py-2.5 font-sans text-[14.5px] font-semibold leading-none text-ink transition-[color,background,border-color] duration-[180ms] ease-out hover:bg-yale/4 hover:text-yale"
+      >
         About Us
       </a>
 
-      <div class="nav-item relative group" data-mega="services">
+      <div class="nav-item relative" data-mega="services">
         <button
-          class="nav-link nav-link relative inline-flex cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-lg border border-transparent bg-transparent px-4 py-2.5 font-sans text-[14.5px] font-semibold leading-none text-ink transition-[color,background,border-color] duration-[180ms] ease-out hover:bg-yale/4 hover:text-yale group-data-[open=true]:border-line group-data-[open=true]:bg-white group-data-[open=true]:text-yale group-data-[open=true]:shadow-[0_1px_2px_rgba(14,38,64,0.04)]"
+          class="nav-link inline-flex cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-lg border border-transparent bg-transparent px-4 py-2.5 font-sans text-[14.5px] font-semibold leading-none text-ink transition-[color,background,border-color] duration-[180ms] ease-out hover:bg-yale/4 hover:text-yale"
           type="button"
           aria-expanded="false"
         >
-          Services <span class="chev size-[7px] -translate-x-px -translate-y-px rotate-45 border-r-[1.6px] border-b-[1.6px] border-current opacity-55 transition-transform duration-220 ease-out group-data-[open=true]:-translate-x-px group-data-[open=true]:-translate-y-px group-data-[open=true]:-rotate-[135deg]"></span>
+          Services <span class="chev size-[7px] -translate-x-px -translate-y-px rotate-45 border-r-[1.6px] border-b-[1.6px] border-current opacity-55 transition-transform duration-220 ease-out"></span>
         </button>
         <div
-          class="mega pointer-events-none invisible relative absolute top-[calc(100%+14px)] left-1/2 z-60 w-[760px] -translate-x-1/2 -translate-y-1 rounded-2xl border border-line bg-white p-[22px] opacity-0 shadow-[0_30px_60px_-20px_rgba(14,38,64,0.22),0_6px_18px_-8px_rgba(14,38,64,0.10)] transition-[opacity,transform,visibility] duration-[180ms] ease-out before:content-[''] before:absolute before:-top-2 before:left-1/2 before:size-3.5 before:-translate-x-1/2 before:rotate-45 before:rounded-tl before:border-t before:border-l before:border-line before:bg-white group-data-[open=true]:pointer-events-auto group-data-[open=true]:visible group-data-[open=true]:translate-x-[-50%] group-data-[open=true]:translate-y-0 group-data-[open=true]:opacity-100"
+          class="mega pointer-events-none invisible absolute top-[calc(100%+14px)] left-1/2 z-60 w-[min(760px,calc(100vw-32px))] -translate-x-1/2 -translate-y-1 rounded-2xl border border-line bg-white p-[22px] opacity-0 shadow-[0_30px_60px_-20px_rgba(14,38,64,0.22),0_6px_18px_-8px_rgba(14,38,64,0.10)] transition-[opacity,transform,visibility] duration-[180ms] ease-out before:absolute before:-top-2 before:left-1/2 before:size-3.5 before:-translate-x-1/2 before:rotate-45 before:rounded-tl before:border-t before:border-l before:border-line before:bg-white before:content-[''] max-[1180px]:left-0 max-[1180px]:translate-x-0 max-[1180px]:before:left-10"
           role="menu"
         >
-          <div class="mega-inner relative grid grid-cols-[250px_1fr] gap-[22px]">
+          <div class="mega-inner grid grid-cols-[250px_1fr] gap-[22px]">
             <div class="mega-left">
               <div class="mega-eyebrow mb-3.5 px-1.5 text-[17px] font-extrabold tracking-[-0.01em] text-yale-dark">We Offer</div>
               <div class="mega-list flex flex-col gap-0.5" data-list="services">
-                <a class="mega-item group flex cursor-pointer items-center justify-between rounded-lg px-3.5 py-[11px] text-sm font-semibold text-ink transition-[background,color] duration-[180ms] ease-out hover:bg-cyan-soft hover:text-yale-dark [&.active]:bg-cyan-soft [&.active]:text-yale-dark" data-key="development" href="/" aria-current="page">
+                <a class="mega-item active flex cursor-pointer items-center justify-between rounded-lg px-3.5 py-[11px] text-sm font-semibold text-ink transition-[background,color] duration-[180ms] ease-out hover:bg-cyan-soft hover:text-yale-dark" data-key="development" href="/">
                   Development
-                  <span class="arr-r size-2 rotate-[-45deg] border-r-[1.6px] border-b-[1.6px] border-current opacity-0 transition-opacity duration-[180ms] ease-out group-data-[active=true]:opacity-60"></span>
+                  <span class="arr-r size-2 rotate-[-45deg] border-r-[1.6px] border-b-[1.6px] border-current opacity-0 transition-opacity duration-[180ms] ease-out"></span>
                 </a>
-                <a class="mega-item group flex cursor-pointer items-center justify-between rounded-lg px-3.5 py-[11px] text-sm font-semibold text-ink transition-[background,color] duration-[180ms] ease-out hover:bg-cyan-soft hover:text-yale-dark [&.active]:bg-cyan-soft [&.active]:text-yale-dark" data-key="ai" href="/">
+                <a class="mega-item flex cursor-pointer items-center justify-between rounded-lg px-3.5 py-[11px] text-sm font-semibold text-ink transition-[background,color] duration-[180ms] ease-out hover:bg-cyan-soft hover:text-yale-dark" data-key="ai" href="/">
                   AI &amp; Intelligence
-                  <span class="arr-r size-2 rotate-[-45deg] border-r-[1.6px] border-b-[1.6px] border-current opacity-0 transition-opacity duration-[180ms] ease-out group-data-[active=true]:opacity-60"></span>
+                  <span class="arr-r size-2 rotate-[-45deg] border-r-[1.6px] border-b-[1.6px] border-current opacity-0 transition-opacity duration-[180ms] ease-out"></span>
                 </a>
-                <a class="mega-item group flex cursor-pointer items-center justify-between rounded-lg px-3.5 py-[11px] text-sm font-semibold text-ink transition-[background,color] duration-[180ms] ease-out hover:bg-cyan-soft hover:text-yale-dark [&.active]:bg-cyan-soft [&.active]:text-yale-dark" data-key="automation" href="/">
+                <a class="mega-item flex cursor-pointer items-center justify-between rounded-lg px-3.5 py-[11px] text-sm font-semibold text-ink transition-[background,color] duration-[180ms] ease-out hover:bg-cyan-soft hover:text-yale-dark" data-key="automation" href="/">
                   Automation &amp; AI Solutions
-                  <span class="arr-r size-2 rotate-[-45deg] border-r-[1.6px] border-b-[1.6px] border-current opacity-0 transition-opacity duration-[180ms] ease-out group-data-[active=true]:opacity-60"></span>
+                  <span class="arr-r size-2 rotate-[-45deg] border-r-[1.6px] border-b-[1.6px] border-current opacity-0 transition-opacity duration-[180ms] ease-out"></span>
                 </a>
-                <a class="mega-item group flex cursor-pointer items-center justify-between rounded-lg px-3.5 py-[11px] text-sm font-semibold text-ink transition-[background,color] duration-[180ms] ease-out hover:bg-cyan-soft hover:text-yale-dark [&.active]:bg-cyan-soft [&.active]:text-yale-dark" data-key="transformation" href="/">
+                <a class="mega-item flex cursor-pointer items-center justify-between rounded-lg px-3.5 py-[11px] text-sm font-semibold text-ink transition-[background,color] duration-[180ms] ease-out hover:bg-cyan-soft hover:text-yale-dark" data-key="transformation" href="/">
                   Digital Transformation
-                  <span class="arr-r size-2 rotate-[-45deg] border-r-[1.6px] border-b-[1.6px] border-current opacity-0 transition-opacity duration-[180ms] ease-out group-data-[active=true]:opacity-60"></span>
+                  <span class="arr-r size-2 rotate-[-45deg] border-r-[1.6px] border-b-[1.6px] border-current opacity-0 transition-opacity duration-[180ms] ease-out"></span>
                 </a>
-                <a class="mega-item group flex cursor-pointer items-center justify-between rounded-lg px-3.5 py-[11px] text-sm font-semibold text-ink transition-[background,color] duration-[180ms] ease-out hover:bg-cyan-soft hover:text-yale-dark [&.active]:bg-cyan-soft [&.active]:text-yale-dark" data-key="ux" href="/">
+                <a class="mega-item flex cursor-pointer items-center justify-between rounded-lg px-3.5 py-[11px] text-sm font-semibold text-ink transition-[background,color] duration-[180ms] ease-out hover:bg-cyan-soft hover:text-yale-dark" data-key="ux" href="/">
                   UX Design / Enablement
-                  <span class="arr-r size-2 rotate-[-45deg] border-r-[1.6px] border-b-[1.6px] border-current opacity-0 transition-opacity duration-[180ms] ease-out group-data-[active=true]:opacity-60"></span>
+                  <span class="arr-r size-2 rotate-[-45deg] border-r-[1.6px] border-b-[1.6px] border-current opacity-0 transition-opacity duration-[180ms] ease-out"></span>
                 </a>
               </div>
             </div>
             <div class="mega-right flex flex-col border-l border-line-soft pl-[22px]">
               <div class="mega-feature mb-3.5 flex items-start gap-3.5 rounded-[10px] bg-cyan-soft p-4 px-[18px]" data-feature="services">
-                <div class="feat-icon grid size-[38px] shrink-0 place-items-center text-yale-dark">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="2" y="3" width="20" height="14" rx="2"></rect>
-                    <path d="M8 21h8M12 17v4"></path>
+                <div class="feat-icon grid size-[38px] shrink-0 place-items-center text-yale-dark" data-feat-icon>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="size-[30px]">
+                    <polyline points="16 18 22 12 16 6"></polyline>
+                    <polyline points="8 6 2 12 8 18"></polyline>
                   </svg>
                 </div>
                 <div>
                   <h4 data-feat-title class="mb-1 text-[17px] leading-[1.2] text-yale-dark">Development</h4>
-                  <p data-feat-desc class="m-0 max-w-[360px] text-xs leading-[1.45] text-muted">Build robust, scalable digital products designed to grow with your business.</p>
+                  <p data-feat-desc class="m-0 max-w-[360px] text-[12.5px] leading-[1.45] text-muted">Build robust, scalable digital products designed to grow with your business.</p>
                 </div>
               </div>
               <div class="mega-sublinks grid grid-cols-2 gap-x-2 gap-y-0.5 py-1" data-sublinks="services">
@@ -88,58 +89,58 @@ const isSled = currentPage.startsWith('/us-sled') || Astro.url?.pathname?.starts
         </div>
       </div>
 
-      <div class="nav-item relative group" data-mega="industries">
+      <div class="nav-item relative" data-mega="industries">
         <button
-          class="nav-link relative inline-flex cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-lg border border-transparent bg-transparent px-4 py-2.5 font-sans text-[14.5px] font-semibold leading-none text-ink transition-[color,background,border-color] duration-[180ms] ease-out hover:bg-yale/4 hover:text-yale group-data-[open=true]:border-line group-data-[open=true]:bg-white group-data-[open=true]:text-yale group-data-[open=true]:shadow-[0_1px_2px_rgba(14,38,64,0.04)]"
+          class="nav-link inline-flex cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-lg border border-transparent bg-transparent px-4 py-2.5 font-sans text-[14.5px] font-semibold leading-none text-ink transition-[color,background,border-color] duration-[180ms] ease-out hover:bg-yale/4 hover:text-yale"
           type="button"
           aria-expanded="false"
         >
-          Industries <span class="chev size-[7px] -translate-x-px -translate-y-px rotate-45 border-r-[1.6px] border-b-[1.6px] border-current opacity-55 transition-transform duration-220 ease-out group-data-[open=true]:-translate-x-px group-data-[open=true]:-translate-y-px group-data-[open=true]:-rotate-[135deg]"></span>
+          Industries <span class="chev size-[7px] -translate-x-px -translate-y-px rotate-45 border-r-[1.6px] border-b-[1.6px] border-current opacity-55 transition-transform duration-220 ease-out"></span>
         </button>
         <div
-          class="mega pointer-events-none invisible relative absolute top-[calc(100%+14px)] left-1/2 z-60 w-[760px] -translate-x-1/2 -translate-y-1 rounded-2xl border border-line bg-white p-[22px] opacity-0 shadow-[0_30px_60px_-20px_rgba(14,38,64,0.22),0_6px_18px_-8px_rgba(14,38,64,0.10)] transition-[opacity,transform,visibility] duration-[180ms] ease-out before:content-[''] before:absolute before:-top-2 before:left-1/2 before:size-3.5 before:-translate-x-1/2 before:rotate-45 before:rounded-tl before:border-t before:border-l before:border-line before:bg-white group-data-[open=true]:pointer-events-auto group-data-[open=true]:visible group-data-[open=true]:translate-x-[-50%] group-data-[open=true]:translate-y-0 group-data-[open=true]:opacity-100"
+          class="mega pointer-events-none invisible absolute top-[calc(100%+14px)] left-1/2 z-60 w-[min(760px,calc(100vw-32px))] -translate-x-1/2 -translate-y-1 rounded-2xl border border-line bg-white p-[22px] opacity-0 shadow-[0_30px_60px_-20px_rgba(14,38,64,0.22),0_6px_18px_-8px_rgba(14,38,64,0.10)] transition-[opacity,transform,visibility] duration-[180ms] ease-out before:absolute before:-top-2 before:left-1/2 before:size-3.5 before:-translate-x-1/2 before:rotate-45 before:rounded-tl before:border-t before:border-l before:border-line before:bg-white before:content-[''] max-[1180px]:left-auto max-[1180px]:right-0 max-[1180px]:translate-x-0 max-[1180px]:before:left-auto max-[1180px]:before:right-10"
           role="menu"
         >
-          <div class="mega-inner relative grid grid-cols-[250px_1fr] gap-[22px]">
+          <div class="mega-inner grid grid-cols-[250px_1fr] gap-[22px]">
             <div class="mega-left">
               <div class="mega-eyebrow mb-3.5 px-1.5 text-[17px] font-extrabold tracking-[-0.01em] text-yale-dark">Industries</div>
               <div class="mega-list flex flex-col gap-0.5" data-list="industries">
-                <a class="mega-item group flex cursor-pointer items-center justify-between rounded-lg px-3.5 py-[11px] text-sm font-semibold text-ink transition-[background,color] duration-[180ms] ease-out hover:bg-cyan-soft hover:text-yale-dark [&.active]:bg-cyan-soft [&.active]:text-yale-dark" data-key="healthcare" href="/" aria-current="page">
+                <a class="mega-item active flex cursor-pointer items-center justify-between rounded-lg px-3.5 py-[11px] text-sm font-semibold text-ink transition-[background,color] duration-[180ms] ease-out hover:bg-cyan-soft hover:text-yale-dark" data-key="healthcare" href="/">
                   Healthcare
-                  <span class="arr-r size-2 rotate-[-45deg] border-r-[1.6px] border-b-[1.6px] border-current opacity-0 transition-opacity duration-[180ms] ease-out group-data-[active=true]:opacity-60"></span>
+                  <span class="arr-r size-2 rotate-[-45deg] border-r-[1.6px] border-b-[1.6px] border-current opacity-0 transition-opacity duration-[180ms] ease-out"></span>
                 </a>
-                <a class="mega-item group flex cursor-pointer items-center justify-between rounded-lg px-3.5 py-[11px] text-sm font-semibold text-ink transition-[background,color] duration-[180ms] ease-out hover:bg-cyan-soft hover:text-yale-dark [&.active]:bg-cyan-soft [&.active]:text-yale-dark" data-key="marketing" href="/">
+                <a class="mega-item flex cursor-pointer items-center justify-between rounded-lg px-3.5 py-[11px] text-sm font-semibold text-ink transition-[background,color] duration-[180ms] ease-out hover:bg-cyan-soft hover:text-yale-dark" data-key="marketing" href="/">
                   Digital Marketing
-                  <span class="arr-r size-2 rotate-[-45deg] border-r-[1.6px] border-b-[1.6px] border-current opacity-0 transition-opacity duration-[180ms] ease-out group-data-[active=true]:opacity-60"></span>
+                  <span class="arr-r size-2 rotate-[-45deg] border-r-[1.6px] border-b-[1.6px] border-current opacity-0 transition-opacity duration-[180ms] ease-out"></span>
                 </a>
-                <a class="mega-item group flex cursor-pointer items-center justify-between rounded-lg px-3.5 py-[11px] text-sm font-semibold text-ink transition-[background,color] duration-[180ms] ease-out hover:bg-cyan-soft hover:text-yale-dark [&.active]:bg-cyan-soft [&.active]:text-yale-dark" data-key="realestate" href="/">
+                <a class="mega-item flex cursor-pointer items-center justify-between rounded-lg px-3.5 py-[11px] text-sm font-semibold text-ink transition-[background,color] duration-[180ms] ease-out hover:bg-cyan-soft hover:text-yale-dark" data-key="realestate" href="/">
                   Real Estate
-                  <span class="arr-r size-2 rotate-[-45deg] border-r-[1.6px] border-b-[1.6px] border-current opacity-0 transition-opacity duration-[180ms] ease-out group-data-[active=true]:opacity-60"></span>
+                  <span class="arr-r size-2 rotate-[-45deg] border-r-[1.6px] border-b-[1.6px] border-current opacity-0 transition-opacity duration-[180ms] ease-out"></span>
                 </a>
-                <a class="mega-item group flex cursor-pointer items-center justify-between rounded-lg px-3.5 py-[11px] text-sm font-semibold text-ink transition-[background,color] duration-[180ms] ease-out hover:bg-cyan-soft hover:text-yale-dark [&.active]:bg-cyan-soft [&.active]:text-yale-dark" data-key="ecommerce" href="/">
+                <a class="mega-item flex cursor-pointer items-center justify-between rounded-lg px-3.5 py-[11px] text-sm font-semibold text-ink transition-[background,color] duration-[180ms] ease-out hover:bg-cyan-soft hover:text-yale-dark" data-key="ecommerce" href="/">
                   E-commerce
-                  <span class="arr-r size-2 rotate-[-45deg] border-r-[1.6px] border-b-[1.6px] border-current opacity-0 transition-opacity duration-[180ms] ease-out group-data-[active=true]:opacity-60"></span>
+                  <span class="arr-r size-2 rotate-[-45deg] border-r-[1.6px] border-b-[1.6px] border-current opacity-0 transition-opacity duration-[180ms] ease-out"></span>
                 </a>
-                <a class="mega-item group flex cursor-pointer items-center justify-between rounded-lg px-3.5 py-[11px] text-sm font-semibold text-ink transition-[background,color] duration-[180ms] ease-out hover:bg-cyan-soft hover:text-yale-dark [&.active]:bg-cyan-soft [&.active]:text-yale-dark" data-key="logistics" href="/">
+                <a class="mega-item flex cursor-pointer items-center justify-between rounded-lg px-3.5 py-[11px] text-sm font-semibold text-ink transition-[background,color] duration-[180ms] ease-out hover:bg-cyan-soft hover:text-yale-dark" data-key="logistics" href="/">
                   Logistics &amp; Supply Chain
-                  <span class="arr-r size-2 rotate-[-45deg] border-r-[1.6px] border-b-[1.6px] border-current opacity-0 transition-opacity duration-[180ms] ease-out group-data-[active=true]:opacity-60"></span>
+                  <span class="arr-r size-2 rotate-[-45deg] border-r-[1.6px] border-b-[1.6px] border-current opacity-0 transition-opacity duration-[180ms] ease-out"></span>
                 </a>
-                <a class="mega-item group flex cursor-pointer items-center justify-between rounded-lg px-3.5 py-[11px] text-sm font-semibold text-ink transition-[background,color] duration-[180ms] ease-out hover:bg-cyan-soft hover:text-yale-dark [&.active]:bg-cyan-soft [&.active]:text-yale-dark" data-key="education" href="/">
+                <a class="mega-item flex cursor-pointer items-center justify-between rounded-lg px-3.5 py-[11px] text-sm font-semibold text-ink transition-[background,color] duration-[180ms] ease-out hover:bg-cyan-soft hover:text-yale-dark" data-key="education" href="/">
                   Education
-                  <span class="arr-r size-2 rotate-[-45deg] border-r-[1.6px] border-b-[1.6px] border-current opacity-0 transition-opacity duration-[180ms] ease-out group-data-[active=true]:opacity-60"></span>
+                  <span class="arr-r size-2 rotate-[-45deg] border-r-[1.6px] border-b-[1.6px] border-current opacity-0 transition-opacity duration-[180ms] ease-out"></span>
                 </a>
               </div>
             </div>
             <div class="mega-right flex flex-col border-l border-line-soft pl-[22px]">
               <div class="mega-feature mb-3.5 flex items-start gap-3.5 rounded-[10px] bg-cyan-soft p-4 px-[18px]" data-feature="industries">
-                <div class="feat-icon grid size-[38px] shrink-0 place-items-center text-yale-dark">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <div class="feat-icon grid size-[38px] shrink-0 place-items-center text-yale-dark" data-feat-icon>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="size-[30px]">
                     <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
                   </svg>
                 </div>
                 <div>
                   <h4 data-feat-title class="mb-1 text-[17px] leading-[1.2] text-yale-dark">Healthcare</h4>
-                  <p data-feat-desc class="m-0 max-w-[360px] text-xs leading-[1.45] text-muted">Techtiz streamlines admin tasks for healthcare teams, enhancing efficiency and safety.</p>
+                  <p data-feat-desc class="m-0 max-w-[360px] text-[12.5px] leading-[1.45] text-muted">Techtiz streamlines admin tasks for healthcare teams, enhancing efficiency and safety.</p>
                 </div>
               </div>
               <div class="mega-sublinks grid grid-cols-2 gap-x-2 gap-y-0.5 py-1" data-sublinks="industries">
@@ -150,59 +151,35 @@ const isSled = currentPage.startsWith('/us-sled') || Astro.url?.pathname?.starts
               </div>
               <div class="mega-footer mt-3.5 flex items-center justify-between border-t border-line-soft pt-3.5">
                 <span class="mega-tag font-mono text-[10.5px] tracking-[0.14em] text-cyan-strong uppercase">U.S. SLED prime contractor?</span>
-                <a class="mega-cta inline-flex items-center gap-2 border-b-2 border-cyan pb-0.5 text-[13px] font-bold text-yale" href="/us-sled/">SLED Partnerships →</a>
+                <a class="mega-cta inline-flex items-center gap-2 border-b-2 border-cyan pb-0.5 text-[13px] font-bold text-yale" href="/us-sled/">See SLED Partnerships →</a>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <a href="/us-sled/case-studies/" class="nav-link relative inline-flex cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-lg border border-transparent bg-transparent px-4 py-2.5 font-sans text-[14.5px] font-semibold leading-none text-ink transition-[color,background,border-color] duration-[180ms] ease-out hover:bg-yale/4 hover:text-yale">Case Studies</a>
-      <a href="/" class="nav-link relative inline-flex cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-lg border border-transparent bg-transparent px-4 py-2.5 font-sans text-[14.5px] font-semibold leading-none text-ink transition-[color,background,border-color] duration-[180ms] ease-out hover:bg-yale/4 hover:text-yale">Careers</a>
-    </nav>
-
-    <div class="right-cta flex items-center justify-self-end gap-3 max-[900px]:hidden">
       <a
-        href="/us-sled/"
-        class="us-pill group inline-flex items-center gap-2 rounded-lg border border-line bg-white px-3.5 py-2 font-mono text-[13px] font-bold tracking-[0.04em] text-yale transition-[border-color,background] duration-[180ms] ease-out hover:border-yale hover:bg-seasalt"
-        aria-current={isSled ? 'page' : undefined}
-        data-current={isSled ? 'page' : undefined}
+        href="/us-sled/case-studies/"
+        class="nav-link inline-flex cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-lg border border-transparent bg-transparent px-4 py-2.5 font-sans text-[14.5px] font-semibold leading-none text-ink transition-[color,background,border-color] duration-[180ms] ease-out hover:bg-yale/4 hover:text-yale"
       >
-        <span class="grid size-4 place-items-center rotate-12 rounded-[4px] bg-cyan text-white shadow-[0_8px_18px_-10px_rgba(24,176,230,0.60)] group-data-[current=page]:animate-[usPillDotPulse_2.4s_ease-out_infinite]" aria-hidden="true">
-          <span class="size-[6px] rotate-12 rounded-[1.5px] bg-white"></span>
-        </span>
-        U.S. Public Sector
+        Case Studies
       </a>
       <a
-        href="/us-sled/"
-        aria-label="View U.S. Public Sector hub"
-        class="grid size-[42px] place-items-center rounded-lg border border-line bg-white text-yale transition-[border-color,background,color] duration-[180ms] ease-out hover:border-yale hover:bg-seasalt"
+        href="/"
+        class="nav-link inline-flex cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-lg border border-transparent bg-transparent px-4 py-2.5 font-sans text-[14.5px] font-semibold leading-none text-ink transition-[color,background,border-color] duration-[180ms] ease-out hover:bg-yale/4 hover:text-yale"
       >
-        <svg aria-hidden="true" viewBox="0 0 20 20" class="size-4">
-          <path
-            d="M7 4.5 12.5 10 7 15.5"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
+        Careers
+      </a>
+    </nav>
+
+    <div class="right-cta flex items-center justify-self-end max-[900px]:hidden">
+      <a
+        href="/us-sled/"
+        class="us-pill inline-flex items-center gap-2 rounded-lg border border-line bg-white px-4 py-2.5 font-mono text-[13px] font-bold tracking-[0.04em] text-yale transition-[border-color,background] duration-[180ms] ease-out hover:border-yale hover:bg-seasalt"
+      >
+        <span class="sled-dot inline-block size-2 shrink-0 rotate-[15deg] bg-cyan" aria-hidden="true"></span>
+        SLED Partnerships
       </a>
     </div>
   </div>
-
-  <style>
-    @keyframes usPillDotPulse {
-      0% {
-        box-shadow: 0 0 0 0 rgba(24,176,230,0.55);
-      }
-      70% {
-        box-shadow: 0 0 0 6px rgba(24,176,230,0);
-      }
-      100% {
-        box-shadow: 0 0 0 0 rgba(24,176,230,0);
-      }
-    }
-  </style>
 </header>

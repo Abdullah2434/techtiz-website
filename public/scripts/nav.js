@@ -5,9 +5,6 @@
   const items = document.querySelectorAll('.nav-item');
   if(!items.length) return;
   let openTimer = null, closeTimer = null;
-  document.querySelectorAll('.mega-item').forEach(el => {
-    el.dataset.active = el.classList.contains('active') ? 'true' : 'false';
-  });
   function openItem(el){
     items.forEach(i => {
       if(i !== el) i.classList.remove('open');
@@ -41,6 +38,20 @@
   document.addEventListener('keydown', e => { if(e.key === 'Escape') closeAll(); });
 
   // -------- Mega-menu hovered item swap --------
+  const SVG_OPEN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="size-[30px]">';
+  const ICONS = {
+    development: SVG_OPEN + '<polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>',
+    ai: SVG_OPEN + '<path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9z"></path><path d="M19 14.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"></path><path d="M5 16l.5 1.5L7 18l-1.5.5L5 20l-.5-1.5L3 18l1.5-.5z"></path></svg>',
+    automation: SVG_OPEN + '<circle cx="12" cy="12" r="2.6"></circle><path d="M12 2v3"></path><path d="M12 19v3"></path><path d="M2 12h3"></path><path d="M19 12h3"></path><path d="M4.9 4.9l2.1 2.1"></path><path d="M17 17l2.1 2.1"></path><path d="M4.9 19.1L7 17"></path><path d="M17 7l2.1-2.1"></path></svg>',
+    transformation: SVG_OPEN + '<path d="M21 12a9 9 0 0 1-15.36 6.36L3 21"></path><path d="M3 12a9 9 0 0 1 15.36-6.36L21 3"></path><polyline points="21 3 21 9 15 9"></polyline><polyline points="3 21 3 15 9 15"></polyline></svg>',
+    ux: SVG_OPEN + '<path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg>',
+    healthcare: SVG_OPEN + '<path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>',
+    marketing: SVG_OPEN + '<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>',
+    realestate: SVG_OPEN + '<path d="M3 10.5L12 3l9 7.5V21H3z"></path><path d="M9 21v-7h6v7"></path></svg>',
+    ecommerce: SVG_OPEN + '<circle cx="9" cy="21" r="1.4"></circle><circle cx="19" cy="21" r="1.4"></circle><path d="M2 3h3l2.4 12.2a2 2 0 0 0 2 1.6h9.2a2 2 0 0 0 2-1.6L22 7H6.5"></path></svg>',
+    logistics: SVG_OPEN + '<rect x="1.5" y="6" width="13" height="10"></rect><path d="M14.5 9h4l3 3v4h-7z"></path><circle cx="6" cy="18.5" r="2"></circle><circle cx="18" cy="18.5" r="2"></circle></svg>',
+    education: SVG_OPEN + '<path d="M22 10L12 5 2 10l10 5 10-5z"></path><path d="M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"></path><path d="M22 10v6"></path></svg>',
+  };
   const data = {
     services: {
       development: { title: 'Development', desc: 'Build robust, scalable digital products designed to grow with your business.', subs: ['Custom Software','Mobile Apps','Low code / No-code Dev','Vibe code Dev'] },
@@ -65,14 +76,14 @@
     list.querySelectorAll('.mega-item').forEach(item => {
       item.addEventListener('mouseenter', () => {
         list.querySelectorAll('.mega-item').forEach(i => i.classList.remove('active'));
-        list.querySelectorAll('.mega-item').forEach(i => (i.dataset.active = 'false'));
         item.classList.add('active');
-        item.dataset.active = 'true';
         const k = item.dataset.key;
         const d = data[key][k];
         if(!d || !featBlock || !subBlock) return;
         featBlock.querySelector('[data-feat-title]').textContent = d.title;
         featBlock.querySelector('[data-feat-desc]').textContent = d.desc;
+        const iconEl = featBlock.querySelector('[data-feat-icon]');
+        if(iconEl && ICONS[k]) iconEl.innerHTML = ICONS[k];
         // Preserve styling/spacing by keeping the same sublink classes.
         subBlock.innerHTML = d.subs
           .map(

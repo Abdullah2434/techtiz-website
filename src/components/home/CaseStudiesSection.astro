@@ -1,0 +1,68 @@
+---
+import { CASE_STUDIES } from '../../lib/constants/pages/home';
+import BlockHead from '../shared/BlockHead.astro';
+import PageWrap from './PageWrap.astro';
+
+const thumbGradients = {
+  t1: 'bg-[linear-gradient(135deg,#1E4A78_0%,#0E2640_100%)]',
+  t2: 'bg-[linear-gradient(135deg,#18B0E6_0%,#0F6E94_100%)]',
+  t3: 'bg-[linear-gradient(135deg,#153A5F_0%,#2A6FA0_100%)]',
+} as const;
+---
+
+<section class="bg-white py-[110px] max-[900px]:py-14">
+  <PageWrap>
+    <BlockHead
+      eyebrow="Selected work"
+      heading="Outcomes, not artifacts."
+      sub="A few of the products we've taken from sketch to scale."
+      rightLinkLabel="All case studies →"
+      rightLinkHref="/us-sled/case-studies/"
+    />
+
+    <div class="grid grid-cols-3 gap-[18px] max-lg:grid-cols-2 max-sm:grid-cols-1">
+      {CASE_STUDIES.map((cs) => (
+        <a
+          href={cs.href}
+          class="group flex flex-col overflow-hidden rounded-xl border border-line bg-white transition-[transform,box-shadow] duration-240 hover:-translate-y-0.5 hover:shadow-[0_22px_44px_-22px_rgba(21,58,95,0.20)]"
+        >
+          <div class:list={['relative aspect-[16/10] overflow-hidden', thumbGradients[cs.variant]]}>
+            <span class="absolute top-3.5 left-3.5 rounded bg-black/18 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-white backdrop-blur-sm">
+              {cs.stamp}
+            </span>
+            <div class="pointer-events-none absolute -right-5 -bottom-5 size-[200px]" aria-hidden="true">
+              <span class="absolute right-9 bottom-14 size-12 rotate-[15deg] bg-white/16"></span>
+              <span class="absolute right-20 bottom-6 size-9 rotate-[15deg] bg-white/10"></span>
+              <span class="absolute right-4 bottom-[100px] size-[26px] rotate-[15deg] bg-cyan opacity-65"></span>
+            </div>
+            <span class="absolute bottom-3.5 left-4 font-mono text-[10.5px] uppercase tracking-[0.10em] text-white/65">{cs.filename}</span>
+          </div>
+          <div class="flex flex-1 flex-col px-[26px] py-6">
+            <div class="mb-2.5 flex gap-3.5 font-mono text-[10.5px] uppercase tracking-[0.10em] text-cyan-strong [&>span+span]:before:mr-3.5 [&>span+span]:before:text-line [&>span+span]:before:content-['·']">
+              {cs.meta.map((m) => <span>{m}</span>)}
+            </div>
+            <h3 class="mb-4 text-[21px] font-extrabold leading-[1.2] text-yale">{cs.title}</h3>
+            <div class="mb-[22px] flex flex-col gap-2">
+              <div class="grid grid-cols-[78px_1fr] gap-3 text-[13px] leading-[1.45]">
+                <span class="pt-0.5 font-mono text-[10px] uppercase tracking-[0.10em] text-muted">Challenge</span>
+                <span class="text-ink">{cs.challenge}</span>
+              </div>
+              <div class="grid grid-cols-[78px_1fr] gap-3 text-[13px] leading-[1.45]">
+                <span class="pt-0.5 font-mono text-[10px] uppercase tracking-[0.10em] text-muted">Solution</span>
+                <span class="text-ink">{cs.solution}</span>
+              </div>
+              <div class="grid grid-cols-[78px_1fr] gap-3 text-[13px] leading-[1.45]">
+                <span class="pt-0.5 font-mono text-[10px] uppercase tracking-[0.10em] text-cyan-strong">Outcome</span>
+                <span class="font-bold text-yale">{cs.outcome}</span>
+              </div>
+            </div>
+            <span class="mt-auto inline-flex items-center gap-2 text-[13.5px] font-bold text-yale transition-[gap] duration-200 group-hover:gap-3.5">
+              Read the case study
+              <span aria-hidden="true">→</span>
+            </span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </PageWrap>
+</section>

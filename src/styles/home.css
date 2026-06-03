@@ -270,11 +270,64 @@
   }
 }
 
-.home-ind-card-fade,
+/* Industries — tab + panel transitions (legacy framer: 0.4s ease [0.4,0,0.2,1]) */
+.home-ind-tab {
+  transition:
+    background-color 400ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 400ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.home-ind-card {
+  transition:
+    opacity 400ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.home-ind-card.home-ind-exit {
+  opacity: 0;
+  transform: translateY(-20px);
+  pointer-events: none;
+}
+
+.home-ind-card.home-ind-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.home-ind-stagger > * {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 400ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.home-ind-panel-ready .home-ind-stagger > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.home-ind-stagger > *:nth-child(1) {
+  transition-delay: 100ms;
+}
+.home-ind-stagger > *:nth-child(2) {
+  transition-delay: 200ms;
+}
+.home-ind-stagger > *:nth-child(3) {
+  transition-delay: 300ms;
+}
+.home-ind-stagger > *:nth-child(4) {
+  transition-delay: 400ms;
+}
+.home-ind-stagger > *:nth-child(5) {
+  transition-delay: 500ms;
+}
+
 .home-why-panel-fade {
   opacity: 0;
   transform: translateY(6px);
-  transition: opacity 240ms ease, transform 240ms ease;
+  transition: opacity 100ms ease, transform 240ms ease;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -319,5 +372,19 @@
   }
   .home-chart-dot {
     opacity: 1;
+  }
+  .home-ind-tab,
+  .home-ind-card,
+  .home-ind-stagger > * {
+    transition: none !important;
+  }
+  .home-ind-card.home-ind-exit,
+  .home-ind-card.home-ind-enter {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .home-ind-stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

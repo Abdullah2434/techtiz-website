@@ -1,0 +1,53 @@
+---
+import FileCheck from '@lucide/astro/icons/file-check';
+import FileSearch from '@lucide/astro/icons/file-search';
+import GitBranch from '@lucide/astro/icons/git-branch';
+import Lock from '@lucide/astro/icons/lock';
+import RefreshCw from '@lucide/astro/icons/refresh-cw';
+import UserCheck from '@lucide/astro/icons/user-check';
+import { DISCLOSURE_STEPS } from '../../../lib/constants/pages/operating-model';
+import Eyebrow from '../../shared/Eyebrow.astro';
+import SledPageWrap from '../shared/SledPageWrap.astro';
+
+const stepIcons = [FileCheck, FileSearch, GitBranch, Lock, UserCheck, RefreshCw] as const;
+---
+
+<section class="sled-section-tight bg-seasalt" id="disclosure">
+  <SledPageWrap>
+    <div class="grid grid-cols-1 gap-12 lg:grid-cols-[0.92fr_1.08fr] lg:gap-14">
+      <div class="sled-reveal lg:sticky lg:top-[140px] lg:self-start" data-sled-reveal>
+        <Eyebrow text="Disclosure protocol" showGlyph class="mb-4" />
+        <h2 class="text-[clamp(1.75rem,3.5vw,2.375rem)] font-extrabold leading-[1.1] tracking-[-0.02em] text-yale-dark">
+          Proactive disclosure is the engagement default.
+        </h2>
+        <p class="mt-3.5 text-[15.5px] leading-[1.65] text-muted">
+          Every prime conversation begins with a written disclosure of our operating model. The prime never has to ask. The flow-down file is built from day one.
+        </p>
+        <div class="mt-6 inline-flex items-center gap-2.5 rounded-xl border border-line bg-white px-4 py-3 text-[13.5px] font-semibold text-yale-dark shadow-[0_8px_20px_-14px_rgba(21,58,95,0.2)]">
+          <Lock class="size-4 text-cyan-strong" stroke-width="1.75" aria-hidden="true" />
+          Locked in teaming letter
+        </div>
+      </div>
+
+      <div class="sled-reveal-stagger grid grid-cols-1 gap-4 sm:grid-cols-2" data-sled-reveal>
+        {DISCLOSURE_STEPS.map((step, idx) => {
+          const Icon = stepIcons[idx];
+          return (
+            <div class="sled-card group flex flex-col rounded-2xl p-6">
+              <div class="flex items-start justify-between gap-3">
+                <div class="grid size-11 place-items-center rounded-xl bg-yale-dark px-1 font-mono text-[11px] font-extrabold leading-none tracking-[0.02em] text-cyan transition-transform duration-300 group-hover:scale-105 sm:text-[12px]">
+                  {step.n}
+                </div>
+                <span class="grid size-9 place-items-center rounded-lg bg-cyan-soft text-cyan-strong opacity-80 transition-opacity group-hover:opacity-100">
+                  <Icon class="size-4" stroke-width="1.75" aria-hidden="true" />
+                </span>
+              </div>
+              <h4 class="mt-4 text-[16px] font-extrabold leading-tight text-yale-dark">{step.heading}</h4>
+              <p class="mt-2 text-[14px] leading-[1.6] text-muted">{step.body}</p>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </SledPageWrap>
+</section>

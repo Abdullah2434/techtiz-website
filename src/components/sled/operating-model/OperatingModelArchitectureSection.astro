@@ -1,0 +1,131 @@
+---
+import Code from '@lucide/astro/icons/code';
+import Database from '@lucide/astro/icons/database';
+import FileText from '@lucide/astro/icons/file-text';
+import FingerprintPattern from '@lucide/astro/icons/fingerprint-pattern';
+import Globe from '@lucide/astro/icons/globe';
+import Laptop from '@lucide/astro/icons/laptop';
+import Lock from '@lucide/astro/icons/lock';
+import MapPin from '@lucide/astro/icons/map-pin';
+import PackageCheck from '@lucide/astro/icons/package-check';
+import TestTube from '@lucide/astro/icons/test-tube';
+import UserCheck from '@lucide/astro/icons/user-check';
+import {
+  ONSHORE_ITEMS,
+  ONSHORE_DATA_CLASSES,
+  OFFSHORE_ITEMS,
+  OFFSHORE_DATA_CLASSES,
+} from '../../../lib/constants/pages/operating-model';
+import Eyebrow from '../../shared/Eyebrow.astro';
+import SledPageWrap from '../shared/SledPageWrap.astro';
+
+const onshoreIcons = [UserCheck, Database, FingerprintPattern, PackageCheck] as const;
+const offshoreIcons = [Code, TestTube, FileText, Laptop] as const;
+---
+
+<section class="sled-section bg-white" id="architecture">
+  <SledPageWrap>
+    <div class="sled-reveal mb-14 grid grid-cols-1 gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-end" data-sled-reveal>
+      <div>
+        <Eyebrow text="Bifurcated architecture" showGlyph class="mb-4" />
+        <h2 class="text-[clamp(1.75rem,3.8vw,2.5rem)] font-extrabold leading-[1.08] tracking-[-0.02em] text-yale-dark">
+          Two environments. One contract. A documented air-gap between them.
+        </h2>
+      </div>
+      <p class="max-w-[540px] text-[15.5px] leading-[1.65] text-muted lg:justify-self-end">
+        The operating model is structural, not procedural. Sensitive data classes are physically and logically separated from the offshore engineering plane. The prime sees the boundary in the disclosure pack; the agency never sees us at all.
+      </p>
+    </div>
+
+    <div class="sled-reveal grid grid-cols-1 items-stretch gap-6 lg:grid-cols-[1fr_auto_1fr]" data-sled-reveal>
+      <div class="sled-card group overflow-hidden rounded-2xl p-0">
+        <div class="border-b border-line bg-gradient-to-r from-yale-dark to-yale px-6 py-4 sm:px-7">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <span class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 font-mono text-[10.5px] font-bold tracking-[0.14em] uppercase text-white">
+              <MapPin class="size-3.5" aria-hidden="true" />
+              CONUS · US persons
+            </span>
+          </div>
+          <div class="mt-3 text-[18px] font-extrabold text-white">Onshore plane</div>
+        </div>
+        <div class="p-6 sm:p-7">
+          <p class="text-[14px] leading-[1.6] text-muted">
+            U.S.-citizen personnel on U.S. soil. The only environment cleared to handle live agency data, controlled information, and any work touching law-enforcement, judicial, or healthcare systems.
+          </p>
+          <ul class="mt-5 space-y-3">
+            {ONSHORE_ITEMS.map((item, idx) => {
+              const Icon = onshoreIcons[idx];
+              return (
+                <li class="flex gap-3">
+                  <span class="mt-0.5 grid size-8 shrink-0 place-items-center rounded-lg bg-cyan-soft text-cyan-strong">
+                    <Icon class="size-4" stroke-width="1.75" aria-hidden="true" />
+                  </span>
+                  <span class="text-[13.5px] leading-[1.55] text-muted">
+                    <strong class="text-yale-dark">{item.title}</strong> — {item.body}
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
+          <div class="mt-6 rounded-xl border border-line bg-seasalt/80 p-4">
+            <div class="font-mono text-[10.5px] font-bold tracking-[0.14em] uppercase text-cyan-strong">Data classes handled here</div>
+            <div class="mt-3 flex flex-wrap gap-2">
+              {ONSHORE_DATA_CLASSES.map((cls) => (
+                <span class="rounded-full border border-line bg-white px-3 py-1 text-[12.5px] font-medium text-muted">{cls}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col items-center justify-center gap-3 py-2 lg:px-2" aria-hidden="true">
+        <div class="hidden h-full min-h-[60px] w-px bg-gradient-to-b from-transparent via-line to-transparent lg:block" />
+        <div class="sled-glass grid size-14 place-items-center rounded-2xl border border-line bg-white text-yale-dark shadow-[0_12px_28px_-16px_rgba(14,38,64,0.35)]">
+          <Lock class="size-6" stroke-width="1.75" />
+        </div>
+        <span class="font-mono text-[10px] font-bold tracking-[0.16em] uppercase text-muted lg:hidden">Air-gap</span>
+        <div class="hidden h-full min-h-[60px] w-px bg-gradient-to-b from-transparent via-line to-transparent lg:block" />
+      </div>
+
+      <div class="sled-card group overflow-hidden rounded-2xl p-0">
+        <div class="border-b border-line bg-gradient-to-r from-seasalt to-white px-6 py-4 sm:px-7">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <span class="inline-flex items-center gap-2 rounded-full border border-line bg-white px-3 py-1 font-mono text-[10.5px] font-bold tracking-[0.14em] uppercase text-yale">
+              <Globe class="size-3.5" aria-hidden="true" />
+              Lahore · Engineering
+            </span>
+          </div>
+          <div class="mt-3 text-[18px] font-extrabold text-yale-dark">Offshore engineering plane</div>
+        </div>
+        <div class="p-6 sm:p-7">
+          <p class="text-[14px] leading-[1.6] text-muted">
+            Senior engineers in Lahore working against sanitized environments, synthetic data sets, and API contracts that do not expose live agency endpoints. Where the bulk of the build happens, never against production data.
+          </p>
+          <ul class="mt-5 space-y-3">
+            {OFFSHORE_ITEMS.map((item, idx) => {
+              const Icon = offshoreIcons[idx];
+              return (
+                <li class="flex gap-3">
+                  <span class="mt-0.5 grid size-8 shrink-0 place-items-center rounded-lg bg-yale-dark/8 text-yale">
+                    <Icon class="size-4" stroke-width="1.75" aria-hidden="true" />
+                  </span>
+                  <span class="text-[13.5px] leading-[1.55] text-muted">
+                    <strong class="text-yale-dark">{item.title}</strong> — {item.body}
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
+          <div class="mt-6 rounded-xl border border-line bg-seasalt/80 p-4">
+            <div class="font-mono text-[10.5px] font-bold tracking-[0.14em] uppercase text-cyan-strong">Data classes handled here</div>
+            <div class="mt-3 flex flex-wrap gap-2">
+              {OFFSHORE_DATA_CLASSES.map((cls) => (
+                <span class="rounded-full border border-line bg-white px-3 py-1 text-[12.5px] font-medium text-muted">{cls}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </SledPageWrap>
+</section>

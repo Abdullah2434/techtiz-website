@@ -1,0 +1,45 @@
+---
+import SledIcon from './SledIcon.astro';
+import SledPageWrap from './SledPageWrap.astro';
+import { TRUST_ITEMS } from '../../lib/constants/pages/sled-hub';
+---
+
+<div class="border-b border-line bg-white py-[22px]">
+  <SledPageWrap>
+    <div class="grid grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-0 max-[600px]:grid-cols-1">
+      {TRUST_ITEMS.map((item, idx) => {
+        const inner = (
+          <>
+            <div class="shrink-0 text-cyan-strong">
+              <SledIcon name={item.icon} class="size-[26px]" />
+            </div>
+            <div class="flex min-w-0 flex-col gap-1">
+              <span class="font-mono text-[9.5px] leading-[1.3] tracking-[0.14em] uppercase text-muted">{item.label}</span>
+              <span
+                class:list={[
+                  'font-mono text-[12.5px] font-semibold tracking-[0.02em] text-yale',
+                  'pending' in item && item.pending && 'border-b border-dashed border-line pb-px italic text-muted',
+                ]}
+              >
+                {item.value}
+              </span>
+            </div>
+          </>
+        );
+
+        const itemClass = [
+          'flex items-center gap-3 py-2',
+          idx > 0 && 'border-l border-line pl-[22px] max-[600px]:border-l-0 max-[600px]:pl-0',
+        ];
+
+        return 'href' in item && item.href ? (
+          <a class:list={itemClass} href={item.href}>
+            {inner}
+          </a>
+        ) : (
+          <div class:list={itemClass}>{inner}</div>
+        );
+      })}
+    </div>
+  </SledPageWrap>
+</div>

@@ -1,0 +1,67 @@
+---
+import SledButton from './SledButton.astro';
+import Eyebrow from '../shared/Eyebrow.astro';
+import SledPageWrap from './SledPageWrap.astro';
+import { SLED_HERO } from '../../lib/constants/pages/sled-hub';
+---
+
+<section
+  class="sled-hub-hero relative isolate overflow-hidden bg-yale-dark text-white min-h-[640px]"
+  id="top"
+  data-screen-label="01 Hero"
+>
+  <div class="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
+    <div
+      class="sled-hero-capitol absolute inset-0 bg-[url('/assets/capitol.png')] bg-cover bg-[position:right_35%] opacity-[0.48] [filter:saturate(0.5)_contrast(1.05)_brightness(0.9)] [will-change:transform]"
+    ></div>
+  </div>
+  <div
+    class="absolute inset-0 z-[1] bg-[linear-gradient(90deg,rgba(14,38,64,0.98)_0%,rgba(14,38,64,0.88)_38%,rgba(14,38,64,0.55)_72%,rgba(14,38,64,0.30)_100%),linear-gradient(180deg,rgba(14,38,64,0.20)_0%,rgba(14,38,64,0.55)_100%)]"
+    aria-hidden="true"
+  ></div>
+
+  <SledPageWrap class="relative z-[5] py-[120px] pb-[110px] max-[900px]:py-[72px] max-[900px]:pb-16">
+    <div class="max-w-[760px]">
+      <span class="mb-[22px] inline-flex items-center gap-2 font-mono text-[10.5px] tracking-[0.14em] uppercase text-cyan">
+        <span class="inline-block size-2 rotate-[15deg] bg-cyan" aria-hidden="true"></span>
+        {SLED_HERO.eyebrow}
+      </span>
+
+      <h1
+        class="mb-6 text-[60px] leading-[1.04] tracking-[-0.022em] font-extrabold text-white max-[900px]:text-[40px] max-[600px]:text-[31px]"
+        set:html={SLED_HERO.heading}
+      />
+
+      <p class="mb-9 max-w-[640px] text-[18px] leading-[1.55] text-white/80 max-[600px]:text-base">{SLED_HERO.body}</p>
+
+      <div class="flex flex-wrap gap-[14px] max-[600px]:flex-col max-[600px]:items-stretch">
+        {SLED_HERO.ctas.map((cta) => (
+          <SledButton
+            href={cta.href}
+            label={cta.label}
+            variant={cta.variant === 'cta' ? 'cta' : 'ghost-dark'}
+          />
+        ))}
+      </div>
+
+      <div class="mt-14 flex max-w-[760px] flex-wrap gap-9 border-t border-white/[0.14] pt-7 max-[900px]:gap-[22px]">
+        {SLED_HERO.stats.map((s, idx) => (
+          <div
+            class:list={[
+              'flex flex-col',
+              idx > 0 && 'border-l border-white/[0.12] pl-9 max-[900px]:border-l-0 max-[900px]:pl-0',
+            ]}
+          >
+            <div class="text-[26px] font-extrabold leading-none tracking-[-0.02em] text-cyan">{s.n}</div>
+            <div class="mt-2 font-mono text-[10.5px] tracking-[0.10em] uppercase text-white/[0.68]">{s.l}</div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-9 inline-flex items-center gap-[10px] rounded border border-cyan/40 px-[14px] py-2 font-mono text-[11px] tracking-[0.10em] uppercase text-cyan/85">
+        <span class="size-2 rotate-[15deg] bg-cyan" aria-hidden="true"></span>
+        <span>{SLED_HERO.disclaimer}</span>
+      </div>
+    </div>
+  </SledPageWrap>
+</section>

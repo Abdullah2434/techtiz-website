@@ -1,0 +1,131 @@
+/* SLED pages — animations and legacy UI hooks */
+
+@keyframes capitolDrift {
+  0% { transform: scale(1.02) translate3d(0, 0, 0); }
+  100% { transform: scale(1.05) translate3d(-6px, -4px, 0); }
+}
+
+.sled-hero-capitol {
+  animation: capitolDrift 32s ease-in-out infinite alternate;
+}
+
+.sled-hub-hero h1 .accent,
+.sled-inner-hero h1 .accent {
+  color: var(--color-cyan);
+}
+
+/* CTA arrow (legacy .cta .arr) */
+.sled-btn-arr::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-top: 1.8px solid currentColor;
+  border-right: 1.8px solid currentColor;
+  transform: translateY(-50%) rotate(45deg);
+}
+.sled-btn-arr::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 4px;
+  top: 50%;
+  height: 1.8px;
+  background: currentColor;
+  transform: translateY(-50%);
+}
+
+/* Pain-point label dot */
+.sled-pain-label::before {
+  content: "";
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(216, 144, 23, 0.12);
+  background-image: radial-gradient(circle, var(--color-amber) 22%, transparent 22%);
+  background-size: 100% 100%;
+}
+
+/* Stage tabs */
+.sled-stage-panel {
+  display: none;
+}
+.sled-stage-panel.is-visible {
+  display: grid;
+}
+
+/* Inquiry form */
+.sled-inquiry-success {
+  display: none;
+}
+.sled-inquiry-success.is-visible {
+  display: flex;
+}
+.sled-need-card.is-selected {
+  border-color: var(--color-cyan);
+  background: var(--color-cyan-soft);
+}
+.sled-need-card.is-selected .sled-need-check {
+  background: var(--color-cyan);
+  border-color: var(--color-cyan);
+}
+.sled-need-card.is-selected .sled-need-check::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 5px;
+  height: 9px;
+  border-right: 2px solid var(--color-yale-dark);
+  border-bottom: 2px solid var(--color-yale-dark);
+  transform: rotate(45deg);
+}
+
+/* Matrix row hover */
+.sled-matrix-row:hover {
+  background: var(--color-seasalt);
+}
+
+/* Operating principles decorative grid */
+.sled-principles::after {
+  content: "";
+  position: absolute;
+  left: 40%;
+  bottom: -60px;
+  width: 380px;
+  height: 380px;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 40px, rgba(24, 176, 230, 0.03) 40px 41px),
+    repeating-linear-gradient(90deg, transparent 0 40px, rgba(24, 176, 230, 0.03) 40px 41px);
+}
+
+/* Inner page hero decoration */
+.sled-inner-hero::before {
+  content: "";
+  position: absolute;
+  right: -40px;
+  top: -40px;
+  width: 260px;
+  height: 260px;
+  background: linear-gradient(45deg, transparent 49%, rgba(24, 176, 230, 0.10) 49% 51%, transparent 51%);
+  background-size: 28px 28px;
+  transform: rotate(15deg);
+  pointer-events: none;
+}
+
+/* Final CTA decoration */
+.sled-final-cta::before {
+  content: "";
+  position: absolute;
+  right: -60px;
+  top: -60px;
+  width: 320px;
+  height: 320px;
+  background: linear-gradient(45deg, transparent 48%, rgba(24, 176, 230, 0.16) 48% 52%, transparent 52%);
+  background-size: 30px 30px;
+  transform: rotate(15deg);
+  pointer-events: none;
+}

@@ -10,9 +10,41 @@ export const CAPABILITIES_HERO = {
   heading: 'What we <span class="accent">bring on day one.</span>',
   body: 'A reference page a prime can scan in two minutes to confirm Techtiz can plug into the bid stack.',
   ctas: [
-    { label: 'Download capability statement', href: '/us-sled/capability-statement/', variant: 'cta' },
-    { label: 'Start an NDA conversation →', href: '/us-sled/contact/', variant: 'ghost-light' },
+    { label: 'Download capability statement', href: '/us-sled/capability-statement/', variant: 'cta' as const },
+    { label: 'Start an NDA conversation →', href: '/us-sled/contact/', variant: 'ghost-light' as const },
   ],
+} as const;
+
+export const PROCUREMENT_STRIP = {
+  eyebrow: 'Procurement & registration',
+  items: [
+    {
+      label: 'NAICS Codes',
+      value: '541511 · 541512 · 541519',
+      caption: 'Custom Computer Programming · Computer Systems Design',
+      icon: 'card',
+    },
+    {
+      label: 'NIGP Codes',
+      value: '918-46 · 918-00',
+      caption: 'Software Development · Technology',
+      icon: 'building',
+    },
+    {
+      label: 'Insurance',
+      value: 'Per engagement',
+      caption: 'Routed through prime master agreement',
+      icon: 'shield',
+    },
+  ],
+} as const;
+
+export const FRAMEWORKS_SECTION = {
+  eyebrow: 'Compliance frameworks',
+  heading: 'What a prime compliance officer is looking for.',
+  body: "Specific framework claims with status, scope, and target dates. We don't list controls we can't substantiate. Where a framework is in-progress, the target is on the page.",
+  linkLabel: 'See the full operating model and architecture',
+  linkHref: '/us-sled/operating-model/',
 } as const;
 
 export const COMPLIANCE_FRAMEWORKS = [
@@ -21,6 +53,7 @@ export const COMPLIANCE_FRAMEWORKS = [
     status: 'In progress',
     statusClass: 'ip',
     what: '<strong>Operational cybersecurity controls.</strong> Independent audit of access, change management, monitoring, and incident response across a 6–12 month observation window.',
+    targetLabel: 'Target',
     target: 'Q4 2026 · Bridge letter on request',
   },
   {
@@ -28,6 +61,7 @@ export const COMPLIANCE_FRAMEWORKS = [
     status: 'Posture',
     statusClass: 'po',
     what: '<strong>Required for LE, court, and dispatch work.</strong> Fingerprinted, background-checked U.S. personnel on U.S. soil for any CJI touch. Offshore plane never touches CJI.',
+    targetLabel: 'Evidence',
     target: "Personnel attestations to the prime's CJIS coordinator",
   },
   {
@@ -35,6 +69,7 @@ export const COMPLIANCE_FRAMEWORKS = [
     status: 'Aligned',
     statusClass: 'al',
     what: '<strong>StateRAMP-aware cloud architecture.</strong> We design inside the prime\'s authorization boundary using controls that map cleanly to StateRAMP and TX-RAMP categorization.',
+    targetLabel: 'Scope',
     target: 'Architecture, SSP narrative, 3PAO response support',
   },
   {
@@ -42,6 +77,7 @@ export const COMPLIANCE_FRAMEWORKS = [
     status: 'Applied',
     statusClass: 'ap',
     what: '<strong>Required for all government digital interfaces.</strong> WCAG 2.2 AA validation, screen-reader regression, PDF/UA conversion, plain-language editing. VPAT 2.5 ITI authored per surface.',
+    targetLabel: 'Deliverable',
     target: 'Signed VPAT ships with every scoped engagement',
   },
   {
@@ -49,14 +85,16 @@ export const COMPLIANCE_FRAMEWORKS = [
     status: 'Aligned',
     statusClass: 'al',
     what: '<strong>Baseline for primes serving federal customers.</strong> 110-control baseline implemented across access, audit, configuration, incident response, and media protection.',
-    target: "Self-assessment · SSP & POAM maintained · CMMC Level 2 alignment",
+    targetLabel: 'Posture',
+    target: 'Self-assessment · SSP & POAM maintained · CMMC Level 2 alignment',
   },
   {
     name: 'HIPAA · IRS Pub 1075',
     status: 'Posture',
     statusClass: 'po',
     what: '<strong>For healthcare, eligibility, and tax-data work.</strong> BAA executed as sub under prime BAA. FTI and PHI handled by U.S. personnel on U.S. soil per Pub 1075 §9.3.',
-    target: 'Onshore-only for any PHI / FTI / agency PII touch',
+    targetLabel: 'Onshore-only',
+    target: 'for any PHI / FTI / agency PII touch',
   },
 ] as const;
 

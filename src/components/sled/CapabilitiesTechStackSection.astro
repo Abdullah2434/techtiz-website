@@ -1,0 +1,28 @@
+---
+import Eyebrow from '../shared/Eyebrow.astro';
+import SledPageWrap from './SledPageWrap.astro';
+import { TECH_STACK } from '../../lib/constants/pages/capabilities';
+---
+
+<section class="border-t border-line bg-seasalt py-[100px]">
+  <SledPageWrap>
+    <div class="mb-12">
+      <Eyebrow text="Tech stack" showGlyph class="mb-3.5" />
+      <h2 class="text-[40px] leading-[1.1] font-extrabold text-yale-dark">Four quadrants of working tools.</h2>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 max-[720px]:grid-cols-1">
+      {TECH_STACK.map((q) => (
+        <div class="rounded-[10px] border border-line bg-white px-[30px] py-8">
+          <h3 class="text-[17px] font-extrabold text-yale">{q.heading}</h3>
+          <div class="mb-5 mt-1.5 font-mono text-[10px] tracking-[0.14em] uppercase text-cyan-strong">{q.subLabel}</div>
+          <div class="flex flex-wrap gap-2">
+            {q.tools.map((t) => (
+              <span class="rounded border border-line bg-seasalt px-2.5 py-1.5 font-mono text-[11.5px] tracking-[0.02em] text-yale">{t}</span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </SledPageWrap>
+</section>

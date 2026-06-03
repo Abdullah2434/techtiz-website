@@ -1,0 +1,47 @@
+---
+import Eyebrow from '../shared/Eyebrow.astro';
+import SledPageWrap from './SledPageWrap.astro';
+import { OUTCOMES, OUTCOMES_STATS } from '../../lib/constants/pages/sled-hub';
+
+function formatStat(n: string) {
+  if (n.includes('%')) {
+    const [value] = n.split('%');
+    return `${value}<span class="text-[24px]">%</span>`;
+  }
+  if (n.includes('/')) {
+    const [left, right] = n.split('/');
+    return `${left}<span class="text-[24px]">/${right}</span>`;
+  }
+  return n;
+}
+---
+
+<section class="relative overflow-hidden bg-yale py-[80px] text-white" data-screen-label="05 Outcomes">
+  <div
+    class="pointer-events-none absolute -right-10 -top-10 size-[260px] rotate-[15deg] [background:linear-gradient(45deg,transparent_48%,rgba(24,176,230,0.16)_48%_52%,transparent_52%)] [background-size:26px_26px]"
+    aria-hidden="true"
+  ></div>
+
+  <SledPageWrap class="relative z-[2]">
+    <div class="mb-12 text-center">
+      <Eyebrow text={OUTCOMES.eyebrow} onDark showGlyph class="mb-[14px]" />
+      <h2 class="mx-auto max-w-[720px] text-[36px] leading-[1.1] text-white max-[900px]:text-[28px]">
+        {OUTCOMES.heading}
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
+      {OUTCOMES_STATS.map((s, idx) => (
+        <div class:list={['px-5 text-center', idx > 0 && 'md:border-l md:border-white/15']}>
+          <div
+            class="mb-3 text-[48px] font-extrabold leading-none tracking-[-0.03em] text-cyan"
+            set:html={formatStat(s.n)}
+          />
+          <div class="mx-auto max-w-[160px] font-mono text-[10.5px] leading-[1.4] tracking-[0.12em] uppercase text-white/80">
+            {s.l}
+          </div>
+        </div>
+      ))}
+    </div>
+  </SledPageWrap>
+</section>

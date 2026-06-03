@@ -1,0 +1,27 @@
+---
+import { WHY_CARDS, WHY_SECTION } from '../../lib/constants/pages/sled-hub';
+import Eyebrow from '../shared/Eyebrow.astro';
+import SledPageWrap from './SledPageWrap.astro';
+---
+
+<section class="border-t border-line bg-white py-[110px] max-[900px]:py-16" data-screen-label="09 Why Techtiz">
+  <SledPageWrap>
+    <div class="mb-10">
+      <Eyebrow text={WHY_SECTION.eyebrow} showGlyph class="mb-3" />
+      <h2 class="text-[40px] font-extrabold text-yale-dark max-[900px]:text-[30px]">{WHY_SECTION.heading}</h2>
+    </div>
+
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+      {WHY_CARDS.map((c) => (
+        <div>
+          <div class="mb-[14px] font-mono text-[11px] tracking-[0.16em] uppercase text-cyan-strong">{c.num}</div>
+          <h3 class="mb-[14px] text-[22px] font-extrabold text-yale">{c.heading}</h3>
+          <p class="mb-[14px] text-[14.5px] leading-[1.6] text-muted">{c.body}</p>
+          <div class="inline-block rounded-md border border-line bg-seasalt px-3 py-2 font-mono text-[11px] tracking-[0.04em] text-ink">
+            <em class="not-italic text-cyan-strong">Counter to</em> {c.counter.replace('Counter to ', '')}
+          </div>
+        </div>
+      ))}
+    </div>
+  </SledPageWrap>
+</section>

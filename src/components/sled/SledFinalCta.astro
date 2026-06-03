@@ -1,0 +1,33 @@
+---
+import Eyebrow from '../shared/Eyebrow.astro';
+import SledButton from './SledButton.astro';
+import SledPageWrap from './SledPageWrap.astro';
+
+interface Props {
+  eyebrow?: string;
+  heading?: string;
+  body?: string;
+  primaryCta?: { label: string; href: string };
+  secondaryCta?: { label: string; href: string };
+}
+
+const {
+  eyebrow = 'Engage us',
+  heading = 'Considering a teaming arrangement?',
+  body = 'Start an NDA conversation. Engagement structure proposed within 5 business days of NDA.',
+  primaryCta = { label: 'Talk to us about a subcontract role', href: '/us-sled/contact/' },
+  secondaryCta = { label: 'Capability statement →', href: '/us-sled/capability-statement/' },
+} = Astro.props;
+---
+
+<section class="sled-final-cta relative overflow-hidden bg-yale-dark text-white">
+  <SledPageWrap class="relative z-[2] py-[90px] text-center">
+    <Eyebrow text={eyebrow} onDark showGlyph class="mb-3.5 justify-center" />
+    <h2 class="mx-auto mb-7 max-w-[640px] text-[38px] leading-[1.15] font-extrabold text-white">{heading}</h2>
+    <p class="mx-auto mb-6 max-w-[560px] text-base leading-[1.55] text-white/[0.78]">{body}</p>
+    <div class="flex flex-wrap justify-center gap-[14px]">
+      <SledButton href={primaryCta.href} label={primaryCta.label} variant="cta" />
+      <SledButton href={secondaryCta.href} label={secondaryCta.label} variant="ghost-dark" />
+    </div>
+  </SledPageWrap>
+</section>

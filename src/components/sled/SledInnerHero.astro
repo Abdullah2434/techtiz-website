@@ -1,0 +1,35 @@
+---
+import SledButton from './SledButton.astro';
+import Eyebrow from '../shared/Eyebrow.astro';
+import SledPageWrap from './SledPageWrap.astro';
+
+interface Props {
+  eyebrow: string;
+  heading: string;
+  body?: string;
+  ctas?: ReadonlyArray<{ label: string; href: string; variant: 'cta' | 'ghost-dark' | 'ghost-light' }>;
+}
+
+const { eyebrow, heading, body, ctas = [] } = Astro.props;
+---
+
+<section class="sled-inner-hero relative overflow-hidden bg-seasalt py-20 pb-[60px]">
+  <SledPageWrap class="relative z-[2]">
+    <div class="max-w-[740px]">
+      <Eyebrow text={eyebrow} showGlyph class="mb-[18px]" />
+      <h1
+        class="mb-[22px] text-[56px] leading-[1.05] tracking-[-0.022em] font-extrabold text-yale max-[900px]:text-[38px] max-[600px]:text-[30px]"
+        set:html={heading}
+      />
+      {body && <p class="max-w-[600px] text-[17px] leading-[1.55] text-muted">{body}</p>}
+      {ctas.length > 0 && (
+        <div class="mt-[26px] flex flex-wrap gap-[14px]">
+          {ctas.map((cta) => (
+            <SledButton href={cta.href} label={cta.label} variant={cta.variant} />
+          ))}
+        </div>
+      )}
+      <slot />
+    </div>
+  </SledPageWrap>
+</section>

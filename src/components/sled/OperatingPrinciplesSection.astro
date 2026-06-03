@@ -1,0 +1,50 @@
+---
+import Eyebrow from '../shared/Eyebrow.astro';
+import SledIcon from './SledIcon.astro';
+import SledPageWrap from './SledPageWrap.astro';
+import { OPERATING_PRINCIPLES } from '../../lib/constants/pages/sled-hub';
+---
+
+<section class="sled-principles relative overflow-hidden bg-yale-dark py-[110px] text-white max-[900px]:py-16" data-screen-label="04 Operating principles">
+  <div
+    class="pointer-events-none absolute -right-10 top-[60px] size-[480px] opacity-100 [background:repeating-linear-gradient(0deg,transparent_0_40px,rgba(24,176,230,0.04)_40px_41px),repeating-linear-gradient(90deg,transparent_0_40px,rgba(24,176,230,0.04)_40px_41px)]"
+    aria-hidden="true"
+  ></div>
+
+  <SledPageWrap class="relative z-[2]">
+    <div class="grid grid-cols-1 gap-12 lg:grid-cols-[0.85fr_1.4fr] lg:gap-14">
+      <div>
+        <Eyebrow text={OPERATING_PRINCIPLES.eyebrow} onDark showGlyph class="mb-[18px]" />
+        <h2 class="mb-[18px] text-[40px] leading-[1.08] text-white max-[900px]:text-[30px]">
+          {OPERATING_PRINCIPLES.heading}
+        </h2>
+        <p class="mb-6 max-w-[360px] text-[15.5px] leading-[1.6] text-white/70">{OPERATING_PRINCIPLES.body}</p>
+        <div class="inline-flex items-center gap-[10px] rounded-full border border-cyan/45 bg-cyan/10 px-4 py-[9px] font-mono text-[11px] tracking-[0.14em] uppercase text-cyan">
+          <svg class="size-[14px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11 V7 a5 5 0 0 1 10 0 v4"></path></svg>
+          {OPERATING_PRINCIPLES.badge}
+        </div>
+      </div>
+
+      <div class="overflow-hidden rounded-[16px] border border-white/10 bg-white/[0.02]">
+        <div class="grid grid-cols-1 lg:grid-cols-2">
+          {OPERATING_PRINCIPLES.items.map((item, idx) => (
+            <div
+              class:list={[
+                'relative p-9 pb-[34px]',
+                idx < 2 && 'border-b border-white/10',
+                idx % 2 === 0 && 'lg:border-r lg:border-white/10',
+              ]}
+            >
+              <span class="absolute right-[30px] top-7 font-mono text-[10.5px] tracking-[0.14em] text-white/45">{item.num}</span>
+              <div class="mb-[22px] grid size-[42px] place-items-center rounded-[10px] bg-cyan/15 text-cyan">
+                <SledIcon name={item.icon} class="size-5" />
+              </div>
+              <h3 class="mb-3 text-[19px] leading-[1.3] text-white">{item.heading}</h3>
+              <p class="text-[13.5px] leading-[1.6] text-white/70">{item.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </SledPageWrap>
+</section>

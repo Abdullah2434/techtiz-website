@@ -1,6 +1,7 @@
 ---
+import '../../styles/sled.css';
 import SledLayout from '../../layouts/SledLayout.astro';
-import PageHero from '../../components/shared/PageHero.astro';
+import SledInnerHero from '../../components/sled/SledInnerHero.astro';
 import Eyebrow from '../../components/shared/Eyebrow.astro';
 import CtaButton from '../../components/shared/CtaButton.astro';
 import {
@@ -22,22 +23,21 @@ const FRAMEWORKS = [
 
 <SledLayout {title} {description} {canonicalPath} {ogImage} currentPage="/us-sled/operating-model/">
 
-<!-- HERO -->
-<PageHero eyebrow={OPERATING_MODEL_HERO.eyebrow} heading={OPERATING_MODEL_HERO.heading} body={OPERATING_MODEL_HERO.body}>
-  <div class="mt-8 max-w-[780px] rounded-2xl border border-line bg-seasalt p-6">
+<SledInnerHero eyebrow={OPERATING_MODEL_HERO.eyebrow} heading={OPERATING_MODEL_HERO.heading} body={OPERATING_MODEL_HERO.body}>
+  <div class="mt-8 max-w-[780px] rounded-2xl border border-line bg-white p-6">
     <div class="grid grid-cols-[110px_1fr] gap-5 max-[520px]:grid-cols-1">
-      <div class="grid place-items-center rounded-xl bg-white p-4 text-center">
-        <div class="font-mono text-[10.5px] font-bold tracking-[0.14em] uppercase text-cyan-strong leading-tight">
-          Flow-down<br/>question
+      <div class="grid place-items-center rounded-xl bg-seasalt p-4 text-center">
+        <div class="font-mono text-[10.5px] font-bold leading-tight tracking-[0.14em] uppercase text-cyan-strong">
+          Flow-down<br />question
         </div>
       </div>
       <div
         class="text-[14.5px] leading-[1.6] text-muted"
-        set:html={`<strong class='text-yale-dark'>\"If I subcontract this work to Techtiz, where does the data go and who touches it?\"</strong> &nbsp;${OPERATING_MODEL_HERO.answerCard.text.replace(/^"[^"]*"\s*/, '')}`}
+        set:html={`<strong class="text-yale-dark">"If I subcontract this work to Techtiz, where does the data go and who touches it?"</strong> ${OPERATING_MODEL_HERO.answerCard.text.replace(/^"[^"]*"\s*&nbsp;/, '')}`}
       />
     </div>
   </div>
-</PageHero>
+</SledInnerHero>
 
 <!-- ARCHITECTURE -->
 <section class="bg-white py-20">

@@ -1,0 +1,43 @@
+---
+interface Props {
+  href: string;
+  label: string;
+  variant?: 'cta' | 'ghost-dark' | 'ghost-light' | 'primary';
+}
+
+const { href, label, variant = 'cta' } = Astro.props;
+---
+
+{variant === 'cta' && (
+  <a
+    href={href}
+    class="sled-btn-cta inline-flex items-center gap-2.5 whitespace-nowrap rounded-lg bg-cyan px-5 py-3 text-[14.5px] font-bold text-yale-dark transition-[transform,box-shadow] duration-[180ms] ease-out hover:-translate-y-px hover:shadow-[0_10px_24px_-8px_rgba(24,176,230,0.55)]"
+  >
+    {label}
+    <span class="sled-btn-arr relative inline-block size-3.5" aria-hidden="true"></span>
+  </a>
+)}
+{variant === 'ghost-dark' && (
+  <a
+    href={href}
+    class="inline-flex items-center gap-2.5 whitespace-nowrap rounded-lg border border-white/32 px-5 py-3 text-[14.5px] font-bold text-white transition-[border-color,background] duration-[180ms] ease-out hover:border-white hover:bg-white/8"
+  >
+    {label}
+  </a>
+)}
+{variant === 'ghost-light' && (
+  <a
+    href={href}
+    class="inline-flex items-center gap-2.5 whitespace-nowrap rounded-lg border border-line bg-white px-5 py-3 text-[14.5px] font-bold text-yale transition-[border-color,background] duration-[180ms] ease-out hover:border-yale hover:bg-seasalt"
+  >
+    {label}
+  </a>
+)}
+{variant === 'primary' && (
+  <a
+    href={href}
+    class="inline-flex items-center gap-2.5 whitespace-nowrap rounded-lg bg-yale px-[22px] py-[13px] text-[14.5px] font-bold text-white transition-[background,transform] duration-[180ms] ease-out hover:-translate-y-px hover:bg-yale-dark"
+  >
+    {label}
+  </a>
+)}

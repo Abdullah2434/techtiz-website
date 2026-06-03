@@ -1,0 +1,24 @@
+---
+import Eyebrow from '../shared/Eyebrow.astro';
+import SledIcon from './SledIcon.astro';
+import SledPageWrap from './SledPageWrap.astro';
+import { PROCUREMENT_STRIP } from '../../lib/constants/pages/capabilities';
+---
+
+<section class="border-y border-line bg-white py-10">
+  <SledPageWrap>
+    <div class="mb-[26px] text-center">
+      <Eyebrow text={PROCUREMENT_STRIP.eyebrow} />
+    </div>
+    <div class="grid grid-cols-3 max-[900px]:grid-cols-1">
+      {PROCUREMENT_STRIP.items.map((item, idx) => (
+        <div class:list={['px-[22px] py-2', idx > 0 && 'border-l border-line max-[900px]:border-l-0 max-[900px]:px-0', idx === 0 && 'pl-0']}>
+          <SledIcon name={item.icon} class="mb-3 size-7 text-cyan-strong" />
+          <div class="mb-1.5 font-mono text-[10px] tracking-[0.14em] uppercase text-muted">{item.label}</div>
+          <div class="mb-1.5 font-mono text-[13px] font-bold leading-[1.4] tracking-[0.02em] text-yale">{item.value}</div>
+          <div class="text-[11.5px] leading-[1.4] text-muted">{item.caption}</div>
+        </div>
+      ))}
+    </div>
+  </SledPageWrap>
+</section>

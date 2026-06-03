@@ -1,13 +1,21 @@
 ---
+import ArrowRight from '@lucide/astro/icons/arrow-right';
+
 interface Props {
   href: string;
   label: string;
   variant?: 'cta' | 'primary' | 'ghost-dark' | 'ghost-light';
+  showArrow?: boolean;
+  animated?: boolean;
 }
 
-const { href, label, variant = 'cta' } = Astro.props;
+const { href, label, variant = 'cta', showArrow = true, animated = false } = Astro.props;
 
-const base = 'inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-lg text-sm font-bold transition-[transform,box-shadow,background,border-color,color] duration-[180ms] ease-out';
+const base =
+  'inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-lg text-sm font-bold transition-[transform,box-shadow,background,border-color,color] duration-[180ms] ease-out';
+
+const primaryLink =
+  'relative z-[1] bg-yale px-[22px] py-[13px] text-[14.5px] text-white hover:-translate-y-px hover:bg-yale-dark hover:shadow-[0_12px_28px_-10px_rgba(21,58,95,0.55)]';
 ---
 
 {variant === 'cta' && (
@@ -19,27 +27,23 @@ const base = 'inline-flex items-center justify-center gap-2.5 whitespace-nowrap 
     ]}
   >
     {label}
-    <svg aria-hidden="true" viewBox="0 0 20 20" class="size-4">
-      <path
-        d="M7 4.5 12.5 10 7 15.5"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
-    </svg>
+    {showArrow && <ArrowRight class="size-4 shrink-0" aria-hidden="true" />}
   </a>
 )}
-{variant === 'primary' && (
-  <a
-    href={href}
-    class:list={[
-      base,
-      'bg-yale px-[22px] py-[13px] text-white hover:-translate-y-px hover:bg-yale-dark',
-    ]}
-  >
+{variant === 'primary' && animated && (
+  <span class="cta-animated relative inline-flex overflow-hidden rounded-lg p-[2px]">
+    <span class="cta-animated-spin" aria-hidden="true"></span>
+    <span class="cta-animated-pulse" aria-hidden="true"></span>
+    <a href={href} class:list={[base, primaryLink, 'rounded-[6px]']}>
+      {label}
+      {showArrow && <ArrowRight class="size-4 shrink-0" aria-hidden="true" />}
+    </a>
+  </span>
+)}
+{variant === 'primary' && !animated && (
+  <a href={href} class:list={[base, primaryLink]}>
     {label}
+    {showArrow && <ArrowRight class="size-4 shrink-0" aria-hidden="true" />}
   </a>
 )}
 {variant === 'ghost-dark' && (

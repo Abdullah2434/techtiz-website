@@ -1,0 +1,18 @@
+---
+import Check from "@lucide/astro/icons/check";
+
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+---
+
+<li class="flex items-center gap-3 text-[14.5px] leading-[1.4] text-ink">
+  <span
+    class="grid size-[22px] shrink-0 place-items-center rounded-full border-[1.5px] border-cyan bg-cyan-soft text-cyan-strong"
+  >
+    <Check class="size-3" stroke-width={2.5} />
+  </span>
+  {text}
+</li>

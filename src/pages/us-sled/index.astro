@@ -19,17 +19,19 @@ const { title, description, canonicalPath, ogImage } = SLED_HUB_SEO;
 ---
 
 <SledLayout {title} {description} {canonicalPath} {ogImage} currentPage="/us-sled/">
+  <div class="sled-hub-page">
   <SledHubHero />
   <SledTrustStrip />
   <WhoWeAreNotStripe />
   <TwoStagesSection />
   <OnshoreSection />
   <OperatingPrinciplesSection />
-  <OutcomesSection />
   <BackboneSection />
+  <OutcomesSection />
   <SpecializationsSection />
   <VehiclesSection />
   <WhyTechtizSection />
   <HubInquirySection />
+  </div>
   <script src="/scripts/sled-hub.js" is:inline></script>
 </SledLayout>

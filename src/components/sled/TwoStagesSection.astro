@@ -3,45 +3,44 @@ import { TWO_STAGES } from '../../lib/constants/pages/sled-hub';
 import Eyebrow from '../shared/Eyebrow.astro';
 import SledIcon from './SledIcon.astro';
 import SledPageWrap from './SledPageWrap.astro';
-
-const svcCard =
-  'relative flex gap-[14px] rounded-[12px] border border-line bg-white p-[22px] pb-5 transition-[transform,border-color,box-shadow] duration-200 ease-out hover:-translate-y-[2px] hover:border-[#C2CCD9] hover:shadow-[0_16px_30px_-18px_rgba(21,58,95,0.18)]';
 ---
 
-<section class="bg-seasalt py-[110px] max-[900px]:py-16" id="two-stages" data-screen-label="02 Two stages">
+<section class="sled-section bg-seasalt" id="two-stages" data-screen-label="02 Two stages">
   <SledPageWrap>
-    <Eyebrow text={TWO_STAGES.eyebrow} showGlyph class="mb-3.5" />
+    <div class="sled-reveal" data-sled-reveal>
+      <Eyebrow text={TWO_STAGES.eyebrow} showGlyph class="mb-4" />
 
-    <div class="mb-12 grid grid-cols-1 gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
-      <h2 class="text-[44px] leading-[1.05] font-extrabold tracking-[-0.022em] text-yale-dark max-[900px]:text-[30px]">
-        {TWO_STAGES.heading}
-      </h2>
-      <p class="max-w-[540px] text-[16px] leading-[1.6] text-muted">{TWO_STAGES.sub}</p>
-    </div>
+      <div class="mb-14 grid grid-cols-1 gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-end">
+        <h2 class="text-[clamp(1.75rem,3.8vw,2.75rem)] leading-[1.06] font-extrabold tracking-[-0.022em] text-yale-dark">
+          {TWO_STAGES.heading}
+        </h2>
+        <p class="max-w-[540px] text-[16px] leading-[1.65] text-muted lg:justify-self-end">{TWO_STAGES.sub}</p>
+      </div>
 
-    <div
-      class="mb-10 inline-flex items-center justify-center gap-1 rounded-full border border-line bg-white p-[6px]"
-      role="tablist"
-    >
-      {TWO_STAGES.tabs.map((tab, idx) => (
-        <button
-          type="button"
-          data-sled-stage-tab={tab.id}
-          role="tab"
-          aria-selected={idx === 0 ? 'true' : 'false'}
-          class:list={[
-            'inline-flex items-center gap-[10px] rounded-full px-[22px] py-[12px] text-[14px] font-bold transition-[background,color] duration-200 ease-out hover:text-yale',
-            idx === 0 ? 'bg-yale-dark text-white' : 'text-muted',
-          ]}
-        >
-          {tab.id === 'pre' ? (
-            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 9 l6 6 M15 9 l-6 6"></path></svg>
-          ) : (
-            <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3 17 9 11 13 15 21 7"></polyline><polyline points="14 7 21 7 21 14"></polyline></svg>
-          )}
-          {tab.label}
-        </button>
-      ))}
+      <div
+        class="sled-glass mb-12 inline-flex w-full max-w-full flex-wrap items-center justify-center gap-1 rounded-2xl border border-line/90 p-1.5 shadow-[0_10px_30px_-20px_rgba(21,58,95,0.16)] sm:w-auto"
+        role="tablist"
+      >
+        {TWO_STAGES.tabs.map((tab, idx) => (
+          <button
+            type="button"
+            data-sled-stage-tab={tab.id}
+            role="tab"
+            aria-selected={idx === 0 ? 'true' : 'false'}
+            class:list={[
+              'sled-tab-pill inline-flex items-center gap-2.5 rounded-xl px-5 py-3 text-[13.5px] font-bold sm:px-6 sm:text-[14px]',
+              idx === 0 ? 'bg-yale-dark text-white' : 'text-muted',
+            ]}
+          >
+            {tab.id === 'pre' ? (
+              <svg class="size-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 9 l6 6 M15 9 l-6 6"></path></svg>
+            ) : (
+              <svg class="size-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3 17 9 11 13 15 21 7"></polyline><polyline points="14 7 21 7 21 14"></polyline></svg>
+            )}
+            {tab.label}
+          </button>
+        ))}
+      </div>
     </div>
 
     {(['pre', 'post'] as const).map((stageId, idx) => {
@@ -50,36 +49,36 @@ const svcCard =
         <div
           data-sled-stage-panel={stageId}
           class:list={[
-            'sled-stage-panel grid grid-cols-1 gap-6 lg:grid-cols-[1fr_1.55fr] lg:gap-12',
+            'sled-stage-panel grid grid-cols-1 gap-8 lg:grid-cols-[1fr_1.55fr] lg:gap-14',
             idx === 0 && 'is-visible',
           ]}
         >
-          <div>
-            <div class="mb-[18px] inline-flex items-center gap-[10px] font-mono text-[11px] tracking-[0.14em] uppercase text-cyan-strong">
+          <div class="sled-reveal lg:sticky lg:top-[140px] lg:self-start" data-sled-reveal>
+            <div class="mb-5 inline-flex items-center gap-2.5 rounded-lg border border-cyan/20 bg-cyan-soft/60 px-3 py-1.5 font-mono text-[11px] tracking-[0.14em] uppercase text-cyan-strong">
               {stage.tag}
             </div>
-            <h3 class="mb-7 text-[30px] font-extrabold text-yale-dark">{stage.heading}</h3>
-            <div class="rounded-[12px] border border-line bg-white p-[22px] pb-5">
+            <h3 class="mb-8 text-[clamp(1.375rem,2.5vw,1.875rem)] font-extrabold leading-[1.12] text-yale-dark">{stage.heading}</h3>
+            <div class="sled-card rounded-2xl p-6">
               <div class="sled-pain-label mb-3 inline-flex items-center gap-2 font-mono text-[10.5px] tracking-[0.16em] uppercase text-amber">
                 The Pain Point
               </div>
-              <p class="text-[14px] leading-[1.55] text-ink italic">{stage.pain}</p>
+              <p class="text-[14px] leading-[1.6] text-ink italic">{stage.pain}</p>
             </div>
-            <div class="mt-[22px] inline-flex items-center gap-2 font-mono text-[12px] text-muted">
+            <div class="mt-6 inline-flex items-center gap-2 rounded-lg bg-white px-3 py-2 font-mono text-[12px] text-muted shadow-[0_6px_18px_-14px_rgba(21,58,95,0.2)]">
               ↳ Our role: <strong class="font-semibold tracking-[0.02em] text-yale-dark">{stage.role}</strong>
             </div>
           </div>
 
-          <div class="grid grid-cols-1 gap-[14px] lg:grid-cols-2">
+          <div class="sled-reveal-stagger grid grid-cols-1 gap-4 lg:grid-cols-2" data-sled-reveal>
             {stage.services.map((svc) => (
-              <div class={svcCard}>
-                <span class="absolute right-[22px] top-[18px] font-mono text-[10.5px] tracking-[0.14em] text-muted">{svc.n}</span>
-                <div class="shrink-0 text-cyan-strong">
+              <div class="sled-card group flex gap-4 p-6">
+                <span class="absolute right-5 top-5 font-mono text-[10.5px] tracking-[0.14em] text-muted/80">{svc.n}</span>
+                <div class="grid size-11 shrink-0 place-items-center rounded-xl bg-cyan-soft text-cyan-strong transition-colors duration-300 group-hover:bg-cyan/15">
                   <SledIcon name={svc.icon} />
                 </div>
-                <div class="flex flex-col gap-1.5">
+                <div class="flex flex-col gap-2 pr-6">
                   <h4 class="text-[15.5px] font-extrabold text-yale-dark">{svc.heading}</h4>
-                  <p class="text-[13.5px] text-muted">{svc.body}</p>
+                  <p class="text-[13.5px] leading-[1.55] text-muted">{svc.body}</p>
                 </div>
               </div>
             ))}

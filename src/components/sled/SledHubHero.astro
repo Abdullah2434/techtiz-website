@@ -5,35 +5,43 @@ import SledPageWrap from './SledPageWrap.astro';
 ---
 
 <section
-  class="sled-hub-hero relative isolate overflow-hidden bg-yale-dark text-white min-h-[640px]"
+  class="sled-hub-hero relative isolate min-h-[min(92vh,760px)] overflow-hidden bg-yale-dark text-white"
   id="top"
   data-screen-label="01 Hero"
 >
   <div class="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
     <div
-      class="sled-hero-capitol absolute inset-0 bg-[url('/assets/capitol.png')] bg-cover bg-[position:right_35%] opacity-[0.48] [filter:saturate(0.5)_contrast(1.05)_brightness(0.9)] [will-change:transform]"
+      class="sled-hero-capitol absolute inset-0 bg-[url('/assets/capitol.png')] bg-cover bg-[position:right_32%] opacity-[0.42] [filter:saturate(0.45)_contrast(1.08)_brightness(0.88)] [will-change:transform]"
+    ></div>
+    <div
+      class="sled-hero-glow-a pointer-events-none absolute top-[-6%] right-[4%] size-[min(44vw,540px)] rounded-full bg-[radial-gradient(circle,rgba(24,176,230,0.28)_0%,transparent_68%)] blur-[80px] motion-reduce:hidden"
+    ></div>
+    <div
+      class="sled-hero-glow-b pointer-events-none absolute bottom-[-10%] left-[-6%] size-[min(38vw,420px)] rounded-full bg-[radial-gradient(circle,rgba(21,58,95,0.35)_0%,transparent_70%)] blur-[72px] motion-reduce:hidden"
     ></div>
   </div>
   <div
-    class="absolute inset-0 z-[1] bg-[linear-gradient(90deg,rgba(14,38,64,0.98)_0%,rgba(14,38,64,0.88)_38%,rgba(14,38,64,0.55)_72%,rgba(14,38,64,0.30)_100%),linear-gradient(180deg,rgba(14,38,64,0.20)_0%,rgba(14,38,64,0.55)_100%)]"
+    class="absolute inset-0 z-[1] bg-[linear-gradient(100deg,rgba(14,38,64,0.97)_0%,rgba(14,38,64,0.90)_34%,rgba(14,38,64,0.62)_68%,rgba(14,38,64,0.28)_100%),linear-gradient(180deg,rgba(14,38,64,0.15)_0%,rgba(14,38,64,0.62)_100%)]"
     aria-hidden="true"
   ></div>
 
-  <SledPageWrap class="relative z-[5] py-[120px] pb-[110px] max-[900px]:py-[72px] max-[900px]:pb-16">
-    <div class="max-w-[760px]">
-      <span class="mb-[22px] inline-flex items-center gap-2 font-mono text-[10.5px] tracking-[0.14em] uppercase text-cyan">
-        <span class="inline-block size-2 rotate-[15deg] bg-cyan" aria-hidden="true"></span>
+  <SledPageWrap class="relative z-[5] flex min-h-[min(92vh,760px)] flex-col justify-center py-[clamp(5rem,10vw,7.5rem)]">
+    <div class="max-w-[780px] sled-reveal is-visible">
+      <span class="mb-6 inline-flex items-center gap-2.5 rounded-full border border-white/12 bg-white/5 px-4 py-2 font-mono text-[10.5px] tracking-[0.14em] uppercase text-cyan backdrop-blur-sm">
+        <span class="inline-block size-2 rotate-[15deg] bg-cyan motion-safe:animate-pulse" aria-hidden="true"></span>
         {SLED_HERO.eyebrow}
       </span>
 
       <h1
-        class="mb-6 text-[60px] leading-[1.04] tracking-[-0.022em] font-extrabold text-white max-[900px]:text-[40px] max-[600px]:text-[31px]"
+        class="mb-7 text-[clamp(2rem,5.2vw,3.75rem)] leading-[1.04] font-extrabold tracking-[-0.024em] text-white"
         set:html={SLED_HERO.heading}
       />
 
-      <p class="mb-9 max-w-[640px] text-[18px] leading-[1.55] text-white/80 max-[600px]:text-base">{SLED_HERO.body}</p>
+      <p class="mb-10 max-w-[660px] text-[clamp(1rem,1.6vw,1.125rem)] leading-[1.62] text-white/82">
+        {SLED_HERO.body}
+      </p>
 
-      <div class="flex flex-wrap gap-[14px] max-[600px]:flex-col max-[600px]:items-stretch">
+      <div class="flex flex-wrap gap-3 max-[600px]:flex-col max-[600px]:items-stretch">
         {SLED_HERO.ctas.map((cta) => (
           <SledButton
             href={cta.href}
@@ -44,29 +52,29 @@ import SledPageWrap from './SledPageWrap.astro';
       </div>
 
       <div
-        class="mt-14 grid w-full max-w-[760px] grid-cols-4 gap-6 border-t border-white/[0.14] pt-7 max-[600px]:gap-3"
+        class="sled-glass-dark mt-14 grid w-full max-w-[780px] grid-cols-2 gap-6 rounded-2xl p-6 sm:grid-cols-4 sm:gap-0 sm:p-0 sm:rounded-none sm:border-0 sm:bg-transparent sm:backdrop-blur-none"
         role="list"
       >
         {SLED_HERO.stats.map((s, idx) => (
           <div
             role="listitem"
             class:list={[
-              'flex min-w-0 flex-col',
-              idx > 0 && 'border-l border-white/[0.12] pl-6 max-[600px]:pl-3',
+              'flex min-w-0 flex-col sm:px-0 sm:py-0',
+              idx > 0 && 'max-[639px]:border-t max-[639px]:border-white/12 max-[639px]:pt-5 sm:border-t-0 sm:border-l sm:border-white/14 sm:pl-7 sm:pt-0',
             ]}
           >
-            <div class="text-[26px] font-extrabold leading-none tracking-[-0.02em] text-cyan max-[600px]:text-[22px]">
+            <div class="text-[clamp(1.375rem,2.5vw,1.625rem)] font-extrabold leading-none tracking-[-0.02em] text-cyan">
               {s.n}
             </div>
-            <div class="mt-2 font-mono text-[10.5px] leading-[1.35] tracking-[0.10em] uppercase text-white/[0.68] max-[600px]:text-[9px] max-[600px]:tracking-[0.06em]">
+            <div class="mt-2.5 font-mono text-[10px] leading-[1.4] tracking-[0.10em] uppercase text-white/70 sm:text-[10.5px]">
               {s.l}
             </div>
           </div>
         ))}
       </div>
 
-      <div class="mt-9 inline-flex items-center gap-[10px] rounded border border-cyan/40 px-[14px] py-2 font-mono text-[11px] tracking-[0.10em] uppercase text-cyan/85">
-        <span class="size-2 rotate-[15deg] bg-cyan" aria-hidden="true"></span>
+      <div class="mt-8 inline-flex max-w-full items-center gap-2.5 rounded-xl border border-cyan/35 bg-cyan/8 px-4 py-2.5 font-mono text-[10.5px] leading-snug tracking-[0.08em] uppercase text-cyan/90 backdrop-blur-sm">
+        <span class="size-2 shrink-0 rotate-[15deg] bg-cyan" aria-hidden="true"></span>
         <span>{SLED_HERO.disclaimer}</span>
       </div>
     </div>

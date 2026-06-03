@@ -4,40 +4,39 @@ import Eyebrow from '../shared/Eyebrow.astro';
 import SledIcon from './SledIcon.astro';
 import SledPageWrap from './SledPageWrap.astro';
 
-const cardClass =
-  'flex flex-col gap-[14px] rounded-[12px] border border-line bg-white p-[26px] pb-6 transition-[transform,border-color,box-shadow] duration-200 ease-out hover:-translate-y-[2px] hover:border-[#C2CCD9] hover:shadow-[0_18px_36px_-18px_rgba(21,58,95,0.16)]';
+const specCard = 'sled-card group flex flex-col gap-4 p-7';
+
+const iconWrap =
+  'grid size-12 place-items-center rounded-xl bg-cyan-soft text-cyan-strong transition-transform duration-300 group-hover:scale-105';
 ---
 
-<section class="border-y border-line bg-white py-[110px] max-[900px]:py-16" data-screen-label="07 Specializations">
+<section class="sled-section border-y border-line bg-white" data-screen-label="07 Specializations">
   <SledPageWrap>
-    <div class="mb-14 flex flex-col items-start justify-between gap-12 max-[900px]:mb-9 max-[900px]:gap-4 lg:flex-row lg:items-end">
+    <div class="sled-reveal mb-14 flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end lg:gap-12" data-sled-reveal>
       <div class="max-w-[700px]">
-        <Eyebrow text={SPECIALIZATIONS.eyebrow} showGlyph class="mb-3.5" />
-        <h2 class="text-[44px] font-extrabold tracking-[-0.022em] text-yale-dark max-[900px]:text-[30px] max-[600px]:text-[26px]">{SPECIALIZATIONS.heading}</h2>
-        <p class="mt-3.5 max-w-[720px] text-[15.5px] leading-[1.6] text-muted">{SPECIALIZATIONS.sub}</p>
+        <Eyebrow text={SPECIALIZATIONS.eyebrow} showGlyph class="mb-4" />
+        <h2 class="text-[clamp(1.75rem,3.8vw,2.75rem)] font-extrabold tracking-[-0.022em] text-yale-dark">{SPECIALIZATIONS.heading}</h2>
+        <p class="mt-4 max-w-[720px] text-[15.5px] leading-[1.65] text-muted">{SPECIALIZATIONS.sub}</p>
       </div>
-      <a
-        class="inline-flex items-center gap-2 border-b-2 border-cyan pb-1 text-sm font-bold text-yale transition-[gap] duration-200 ease-out hover:gap-3.5"
-        href={SPECIALIZATIONS.linkHref}
-      >
+      <a class="sled-link-accent shrink-0 pb-1 text-sm" href={SPECIALIZATIONS.linkHref}>
         {SPECIALIZATIONS.linkLabel} <span aria-hidden="true">→</span>
       </a>
     </div>
 
-    <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
+    <div class="sled-reveal-stagger grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3" data-sled-reveal>
       {SPECIALIZATIONS.cards.map((card) => (
-        <article class={cardClass}>
+        <article class={specCard}>
           <div class="flex items-center justify-between">
-            <div class="grid size-11 place-items-center rounded-lg bg-cyan-soft text-cyan-strong">
+            <div class={iconWrap}>
               <SledIcon name={card.icon} class="size-[22px]" />
             </div>
             <span class="font-mono text-[11px] tracking-[0.14em] uppercase text-muted">{card.num}</span>
           </div>
-          <h3 class="text-[18px] font-extrabold text-yale-dark">{card.heading}</h3>
-          <p class="text-[13.5px] leading-[1.55] text-muted">{card.body}</p>
-          <div class="mt-auto flex flex-wrap gap-1.5 border-t border-line-soft pt-3">
+          <h3 class="text-[18px] font-extrabold leading-[1.2] text-yale-dark">{card.heading}</h3>
+          <p class="text-[13.5px] leading-[1.58] text-muted">{card.body}</p>
+          <div class="mt-auto flex flex-wrap gap-2 border-t border-line-soft pt-4">
             {card.tools.map((tool) => (
-              <span class="rounded border border-line bg-seasalt px-[9px] py-1 font-mono text-[11px] tracking-[0.02em] text-cyan-strong">
+              <span class="rounded-md border border-line bg-seasalt px-2.5 py-1 font-mono text-[10.5px] tracking-[0.02em] text-cyan-strong">
                 {tool}
               </span>
             ))}
@@ -45,17 +44,17 @@ const cardClass =
         </article>
       ))}
 
-      <article class="flex flex-col gap-[14px] rounded-[12px] border border-yale-dark bg-yale-dark p-[26px] pb-6 text-white transition-[transform,box-shadow] duration-200 ease-out hover:-translate-y-[2px] hover:shadow-[0_18px_36px_-18px_rgba(21,58,95,0.22)]">
+      <article class={specCard}>
         <div class="flex items-center justify-between">
-          <div class="grid size-11 place-items-center rounded-lg bg-cyan/20 text-cyan">
+          <div class={iconWrap}>
             <SledIcon name="arrow" class="size-[22px]" />
           </div>
-          <span class="font-mono text-[11px] tracking-[0.14em] uppercase text-white/50">+</span>
+          <span class="font-mono text-[11px] tracking-[0.14em] uppercase text-muted">+</span>
         </div>
-        <h3 class="text-[18px] leading-[1.25] text-white">{SPECIALIZATIONS.cta.heading}</h3>
-        <p class="text-[13.5px] leading-[1.55] text-white/75">{SPECIALIZATIONS.cta.body}</p>
+        <h3 class="text-[18px] font-extrabold leading-[1.2] text-yale-dark">{SPECIALIZATIONS.cta.heading}</h3>
+        <p class="text-[13.5px] leading-[1.58] text-muted">{SPECIALIZATIONS.cta.body}</p>
         <a
-          class="mt-auto inline-flex items-center gap-2 border-t border-white/10 pt-[14px] font-mono text-[12px] tracking-[0.10em] uppercase text-cyan transition-[gap] duration-200 ease-out hover:gap-4"
+          class="mt-auto inline-flex items-center gap-2 border-t border-line-soft pt-4 font-mono text-[12px] tracking-[0.10em] uppercase text-cyan-strong transition-[gap] duration-300 ease-out hover:gap-3.5"
           href={SPECIALIZATIONS.cta.linkHref}
         >
           {SPECIALIZATIONS.cta.linkLabel} <span aria-hidden="true">→</span>

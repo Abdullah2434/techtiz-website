@@ -16,29 +16,40 @@ function formatStat(n: string) {
 }
 ---
 
-<section class="relative overflow-hidden bg-yale py-[80px] text-white" data-screen-label="05 Outcomes">
+<section class="sled-section-tight relative overflow-hidden bg-yale py-[clamp(4rem,7vw,5.5rem)] text-white" data-screen-label="05 Outcomes">
   <div
-    class="pointer-events-none absolute -right-10 -top-10 size-[260px] rotate-[15deg] [background:linear-gradient(45deg,transparent_48%,rgba(24,176,230,0.16)_48%_52%,transparent_52%)] [background-size:26px_26px]"
+    class="pointer-events-none absolute -right-10 -top-10 size-[280px] rotate-[15deg] [background:linear-gradient(45deg,transparent_48%,rgba(24,176,230,0.14)_48%_52%,transparent_52%)] [background-size:26px_26px]"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="sled-hero-glow-b pointer-events-none absolute bottom-[-30%] left-[20%] size-[min(40vw,360px)] rounded-full bg-[radial-gradient(circle,rgba(24,176,230,0.15)_0%,transparent_68%)] blur-[72px] motion-reduce:hidden"
     aria-hidden="true"
   ></div>
 
   <SledPageWrap class="relative z-[2]">
-    <div class="mb-12 text-center">
-      <Eyebrow text={OUTCOMES.eyebrow} onDark showGlyph class="mb-[14px]" />
-      <h2 class="mx-auto max-w-[600px] text-[36px] font-extrabold text-white max-[900px]:text-[28px]">
+    <div class="sled-reveal mb-14 text-center" data-sled-reveal>
+      <div class="mb-4 flex justify-center">
+        <Eyebrow text={OUTCOMES.eyebrow} onDark showGlyph />
+      </div>
+      <h2 class="mx-auto max-w-[640px] text-[clamp(1.5rem,3.2vw,2.25rem)] font-extrabold leading-[1.1] text-white">
         {OUTCOMES.heading}
       </h2>
-      <p class="mx-auto mt-4 max-w-[640px] text-[14px] leading-[1.55] text-white/75">{OUTCOMES.sub}</p>
+      <p class="mx-auto mt-5 max-w-[660px] text-[14.5px] leading-[1.6] text-white/78">{OUTCOMES.sub}</p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
+    <div class="sled-reveal-stagger grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-5 lg:gap-0" data-sled-reveal>
       {OUTCOMES_STATS.map((s, idx) => (
-        <div class:list={['px-5 text-center', idx > 0 && 'md:border-l md:border-white/15']}>
+        <div
+          class:list={[
+            'group px-4 text-center sm:px-5',
+            idx > 0 && 'lg:border-l lg:border-white/14',
+          ]}
+        >
           <div
-            class="mb-3 text-[48px] font-extrabold leading-none tracking-[-0.03em] text-cyan"
+            class="mb-4 text-[clamp(2rem,4vw,3rem)] font-extrabold leading-none tracking-[-0.03em] text-cyan transition-transform duration-300 group-hover:scale-105"
             set:html={formatStat(s.n)}
           />
-          <div class="mx-auto max-w-[160px] font-mono text-[10.5px] leading-[1.4] tracking-[0.12em] uppercase text-white/80">
+          <div class="mx-auto max-w-[170px] font-mono text-[10.5px] leading-[1.45] tracking-[0.11em] uppercase text-white/82">
             {s.l}
           </div>
         </div>

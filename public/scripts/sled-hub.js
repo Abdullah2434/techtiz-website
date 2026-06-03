@@ -1,4 +1,25 @@
 (function () {
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const revealEls = document.querySelectorAll('[data-sled-reveal]');
+  if (revealEls.length && !prefersReduced) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: '0px 0px -8% 0px', threshold: 0.12 }
+    );
+    revealEls.forEach((el) => io.observe(el));
+  } else {
+    revealEls.forEach((el) => el.classList.add('is-visible'));
+  }
+})();
+
+(function () {
   const buttons = document.querySelectorAll('[data-sled-stage-tab]');
   const panels = document.querySelectorAll('[data-sled-stage-panel]');
   buttons.forEach((btn) => {

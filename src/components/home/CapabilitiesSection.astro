@@ -1,0 +1,85 @@
+---
+import { CAPABILITIES } from '../../lib/constants/pages/home';
+import BlockHead from '../shared/BlockHead.astro';
+import CapabilityIcon from './CapabilityIcon.astro';
+import PageWrap from './PageWrap.astro';
+---
+
+<section class="bg-white py-[110px] max-[900px]:py-14">
+  <PageWrap>
+    <BlockHead
+      eyebrow="Capabilities"
+      heading="A full engineering and design surface, wired for AI."
+      sub="Five interlocking practices. Engage one, or hand us the whole problem."
+      rightLinkLabel="See full capability matrix →"
+      rightLinkHref="/#capability-matrix"
+    />
+
+    <div class="grid grid-cols-3 gap-4 max-lg:grid-cols-2 max-sm:grid-cols-1">
+      {CAPABILITIES.map((cap) => (
+        <a
+          href={cap.href}
+          class:list={[
+            'group relative flex min-h-[280px] flex-col gap-3.5 overflow-hidden rounded-[10px] border px-7 py-[30px] transition-[transform,border-color,box-shadow] duration-240 hover:-translate-y-0.5',
+            cap.feature
+              ? 'border-yale-dark bg-yale-dark text-white hover:shadow-[0_18px_36px_-18px_rgba(21,58,95,0.18)]'
+              : 'border-line bg-white hover:border-[#C2CCD9] hover:shadow-[0_18px_36px_-18px_rgba(21,58,95,0.18)]',
+          ]}
+        >
+          {cap.feature && (
+            <div class="pointer-events-none absolute -right-5 -top-5 size-[100px]" aria-hidden="true">
+              <span class="absolute right-9 top-[22px] size-[18px] rotate-[15deg] bg-cyan opacity-55"></span>
+              <span class="absolute right-3.5 top-[50px] size-[30px] rotate-[15deg] bg-cyan opacity-[0.18]"></span>
+              <span class="absolute right-12 top-[60px] size-3 rotate-[15deg] bg-cyan opacity-35"></span>
+            </div>
+          )}
+
+          <div
+            class:list={[
+              'grid size-11 place-items-center rounded-lg',
+              cap.feature ? 'bg-cyan/16 text-cyan' : 'bg-cyan-soft text-cyan-strong',
+            ]}
+          >
+            <CapabilityIcon name={cap.icon} />
+          </div>
+
+          <h3 class:list={['text-[22px] font-extrabold leading-[1.2]', cap.feature ? 'text-white' : 'text-yale']}>
+            {cap.title}
+          </h3>
+          <p class:list={['text-sm leading-[1.55]', cap.feature ? 'text-white/74' : 'text-muted']}>{cap.desc}</p>
+
+          <div class="mt-1.5 flex flex-wrap gap-1.5">
+            {cap.tags.map((tag) => (
+              <span
+                class:list={[
+                  'rounded border px-2 py-1 font-mono text-[10.5px] tracking-[0.04em]',
+                  cap.feature
+                    ? 'border-white/14 bg-white/5 text-cyan'
+                    : 'border-line bg-seasalt text-yale',
+                ]}
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          {'stack' in cap && cap.stack && (
+            <div class="mt-4 border-t border-white/10 pt-4 font-mono text-[10.5px] uppercase leading-[1.6] tracking-[0.10em] text-cyan">
+              {cap.stack}
+            </div>
+          )}
+
+          <span
+            class:list={[
+              'mt-auto inline-flex items-center gap-2 text-[13.5px] font-bold transition-[gap,color] duration-200 group-hover:gap-3.5',
+              cap.feature ? 'text-cyan' : 'text-yale group-hover:text-cyan-strong',
+            ]}
+          >
+            {cap.cta}
+            <span aria-hidden="true">→</span>
+          </span>
+        </a>
+      ))}
+    </div>
+  </PageWrap>
+</section>

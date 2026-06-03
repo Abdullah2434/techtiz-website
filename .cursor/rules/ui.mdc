@@ -7,3 +7,6 @@ UI rules:
 - Use **21st.dev MCP (Magic MCP)** for UI building blocks and patterns.
 - Use **Tailwind CSS** for styling; keep classnames readable and spacing consistent.
 - Keep UI accessible and consistent across `.astro` and island components.
+- **Legacy reference**: `legacy/` (gitignored) holds the static HTML design source. When building or updating marketing pages, match structure, copy, and visual hierarchy from the corresponding `legacy/*.html` file; port styles to Tailwind utility classes (not inline `<style>` blocks).
+- **Design tokens**: use theme colors from `src/styles/globals.css` (`yale`, `cyan`, `seasalt`, `ink`, `muted`, `line`, etc.) via Tailwind (`text-yale`, `bg-cyan-soft`, …).
+- **Homepage**: sections live in `src/components/home/`; content in `src/lib/constants/pages/home.ts`; page-only animations in `src/styles/home.css`.

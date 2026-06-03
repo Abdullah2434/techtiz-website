@@ -1,0 +1,31 @@
+---
+import { TRUST_CLIENTS } from '../../lib/constants/pages/home';
+import PageWrap from './PageWrap.astro';
+import Eyebrow from '../shared/Eyebrow.astro';
+---
+
+<div class="border-y border-line bg-white py-7">
+  <PageWrap>
+    <div class="mb-[18px] text-center">
+      <Eyebrow text="Trusted by teams shipping at the edge" />
+    </div>
+    <div class="grid grid-cols-6 items-center gap-9 max-[1024px]:grid-cols-3 max-[600px]:grid-cols-2 max-[600px]:gap-6">
+      {TRUST_CLIENTS.map((client) => (
+        <div
+          class:list={[
+            'flex items-center justify-center gap-2 text-base font-bold tracking-[-0.01em] whitespace-nowrap opacity-[0.68] transition-opacity duration-220 hover:opacity-100',
+            client.alt ? 'text-cyan' : 'text-yale',
+          ]}
+        >
+          <span
+            class:list={[
+              'relative inline-block size-[11px] rotate-[15deg] after:absolute after:left-[1.5px] after:top-[1.5px] after:size-[3px] after:bg-white after:content-[\'\']',
+              client.alt ? 'bg-cyan' : 'bg-yale',
+            ]}
+          ></span>
+          {client.name}
+        </div>
+      ))}
+    </div>
+  </PageWrap>
+</div>

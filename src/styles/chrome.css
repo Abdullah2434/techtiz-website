@@ -1,0 +1,124 @@
+/* Header / footer — legacy .open, .active, mobile nav (paired with public/scripts/nav.js) */
+
+.nav-item.open > .nav-link {
+  background: var(--white);
+  border-color: var(--line);
+  color: var(--yale);
+  box-shadow: 0 1px 2px rgba(14, 38, 64, 0.04);
+}
+
+.nav-item.open > .nav-link .chev {
+  transform: rotate(-135deg) translate(-1px, -1px);
+}
+
+.nav-item.open .mega {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  /* Don't hardcode X translate — allow Tailwind classes to control it.
+     We only need to bring Y into view when open. */
+  translate: var(--tw-translate-x, 0) 0;
+}
+
+.mega-item.active {
+  background: var(--cyan-soft);
+  color: var(--yale-dark);
+}
+
+.mega-item.active .arr-r {
+  opacity: 0.6;
+}
+
+body.m-nav-open {
+  overflow: hidden;
+}
+
+body.m-nav-open .m-nav-toggle span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+body.m-nav-open .m-nav-toggle span:nth-child(2) {
+  opacity: 0;
+}
+
+body.m-nav-open .m-nav-toggle span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+body.m-nav-open .m-nav-drawer {
+  transform: translateX(0);
+}
+
+.m-nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--white);
+  flex-shrink: 0;
+  padding: 0 11px;
+  cursor: pointer;
+}
+
+.m-nav-toggle span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: var(--yale);
+  border-radius: 2px;
+  transition: transform 0.22s ease, opacity 0.18s ease;
+}
+
+.m-nav-drawer {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--white);
+  z-index: 49;
+  padding: 24px 24px 40px;
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  border-top: 1px solid var(--line);
+}
+
+.m-nav-drawer a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 4px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.m-nav-drawer .m-cta {
+  margin-top: 24px;
+  background: var(--cyan);
+  color: var(--yale-dark);
+  border-radius: 8px;
+  justify-content: center;
+  border-bottom: 0;
+  font-weight: 700;
+  padding: 15px;
+}
+
+@media (max-width: 900px) {
+  .m-nav-toggle {
+    display: inline-flex;
+  }
+}
+
+@media (min-width: 901px) {
+  .m-nav-drawer,
+  .m-nav-toggle {
+    display: none !important;
+  }
+}

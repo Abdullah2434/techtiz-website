@@ -1,0 +1,22 @@
+---
+import { PROOF_STATS } from '../../lib/constants/pages/home';
+import PageWrap from './PageWrap.astro';
+---
+
+<div class="border-y border-line bg-white">
+  <PageWrap class="grid grid-cols-4 py-[60px] max-[900px]:grid-cols-2 max-[900px]:gap-8 max-[600px]:grid-cols-1">
+    {PROOF_STATS.map((stat, i) => (
+      <div
+        class:list={[
+          'border-l border-line py-2 pl-8 max-[600px]:border-l-0 max-[600px]:pl-0',
+          i === 0 && 'border-l-0 pl-0',
+        ]}
+      >
+        <div class="mb-3 text-[64px] font-extrabold leading-none tracking-[-0.04em] text-yale">
+          {stat.n}<span class="text-cyan">{stat.plus}</span>
+        </div>
+        <div class="max-w-[160px] font-mono text-[11px] uppercase leading-[1.4] tracking-[0.14em] text-muted">{stat.label}</div>
+      </div>
+    ))}
+  </PageWrap>
+</div>

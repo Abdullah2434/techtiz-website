@@ -1,0 +1,137 @@
+/* Homepage animations ported from legacy/index.html — use with Tailwind layout classes */
+
+@keyframes sector-dot-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(24, 176, 230, 0.55); }
+  70% { box-shadow: 0 0 0 7px rgba(24, 176, 230, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(24, 176, 230, 0); }
+}
+
+@keyframes float-a {
+  0%, 100% { transform: rotate(15deg) translate(0, 0); }
+  50% { transform: rotate(15deg) translate(-4px, -6px); }
+}
+@keyframes float-b {
+  0%, 100% { transform: rotate(15deg) translate(0, 0); }
+  50% { transform: rotate(15deg) translate(5px, 4px); }
+}
+@keyframes float-c {
+  0%, 100% { transform: rotate(15deg) translate(0, 0); }
+  50% { transform: rotate(15deg) translate(-6px, 3px); }
+}
+
+@keyframes mockup-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes draw-line {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes dot-pulse {
+  0% { opacity: 1; filter: drop-shadow(0 0 0 rgba(24, 176, 230, 0.6)); }
+  50% { opacity: 1; filter: drop-shadow(0 0 6px rgba(24, 176, 230, 0.85)); }
+  100% { opacity: 1; filter: drop-shadow(0 0 0 rgba(24, 176, 230, 0.6)); }
+}
+
+@keyframes kpi-fade {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes badge-twist {
+  0%, 100% { transform: rotate(15deg) scale(1); }
+  50% { transform: rotate(15deg) scale(1.18); }
+}
+
+@keyframes tab-slide {
+  0%, 100% { transform: scaleX(1); }
+  50% { transform: scaleX(0.7); }
+}
+
+@keyframes health-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(43, 165, 114, 0.5); }
+  70% { box-shadow: 0 0 0 8px rgba(43, 165, 114, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(43, 165, 114, 0); }
+}
+
+.home-sector-on .home-sector-dot {
+  animation: sector-dot-pulse 2.4s ease-out infinite;
+}
+
+.home-float-a { animation: float-a 7.5s ease-in-out infinite; }
+.home-float-b { animation: float-b 9s ease-in-out infinite; }
+.home-float-c { animation: float-c 11s ease-in-out infinite; }
+
+.home-mockup {
+  animation: mockup-rise 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.home-chart-line-cyan,
+.home-chart-line-yale {
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  animation: draw-line 2.4s ease-out 350ms forwards;
+}
+.home-chart-line-yale {
+  animation-delay: 600ms;
+}
+
+.home-chart-dot {
+  transform-origin: center;
+  animation: dot-pulse 2.6s ease-out 2.6s infinite;
+  opacity: 0;
+}
+.home-chart-dot-delay {
+  animation-delay: 2.8s;
+}
+
+.home-kpi-v {
+  animation: kpi-fade 700ms ease-out 700ms both;
+}
+.home-kpi-v-2 { animation-delay: 850ms; }
+.home-kpi-v-3 { animation-delay: 1000ms; }
+
+.home-badge-twist::before {
+  animation: badge-twist 4.2s ease-in-out infinite;
+}
+
+.home-menu-on::after {
+  transform-origin: left center;
+  animation: tab-slide 4s ease-in-out infinite;
+}
+
+.home-health-blink {
+  animation: health-pulse 2s ease-out infinite;
+}
+
+.home-ind-card-fade,
+.home-why-panel-fade {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 240ms ease, transform 240ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-sector-on .home-sector-dot,
+  .home-float-a,
+  .home-float-b,
+  .home-float-c,
+  .home-mockup,
+  .home-chart-line-cyan,
+  .home-chart-line-yale,
+  .home-chart-dot,
+  .home-kpi-v,
+  .home-badge-twist::before,
+  .home-menu-on::after,
+  .home-health-blink {
+    animation: none !important;
+  }
+  .home-chart-line-cyan,
+  .home-chart-line-yale {
+    stroke-dashoffset: 0;
+  }
+  .home-chart-dot {
+    opacity: 1;
+  }
+}

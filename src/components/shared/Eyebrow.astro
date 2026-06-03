@@ -1,0 +1,28 @@
+---
+interface Props {
+  text: string;
+  onDark?: boolean;
+  showGlyph?: boolean;
+  class?: string;
+}
+
+const { text, onDark = false, showGlyph = false, class: extraClass = '' } = Astro.props;
+---
+
+<span
+  class:list={[
+    'inline-flex items-center font-mono text-[11px] font-bold tracking-[0.18em] uppercase',
+    onDark ? 'text-cyan' : 'text-cyan-strong',
+    extraClass,
+  ]}
+>
+  {showGlyph && (
+    <span
+      class="relative mr-2 inline-block size-[11px] -translate-y-px rotate-[15deg] bg-cyan align-middle"
+      aria-hidden="true"
+    >
+      <span class="absolute left-[1.5px] top-[1.5px] size-[3.5px] bg-white"></span>
+    </span>
+  )}
+  {text}
+</span>

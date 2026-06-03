@@ -1,0 +1,35 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/shared/Header.astro';
+import Footer from '../components/shared/Footer.astro';
+import Subnav from '../components/shared/Subnav.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath: string;
+  ogImage?: string;
+  currentPage?: string;
+  showSubnav?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonicalPath,
+  ogImage,
+  currentPage = '',
+  showSubnav = true,
+} = Astro.props;
+---
+
+<BaseLayout {title} {description} {canonicalPath} {ogImage}>
+  <Header currentPage={currentPage} />
+  {showSubnav && <Subnav currentPath={canonicalPath} />}
+  <main>
+    <slot />
+  </main>
+  <Footer />
+  <script src="/scripts/nav.js" is:inline></script>
+  <script src="/scripts/mobile-nav.js" is:inline></script>
+</BaseLayout>

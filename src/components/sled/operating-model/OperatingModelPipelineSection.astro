@@ -1,6 +1,4 @@
 ---
-import Award from '@lucide/astro/icons/award';
-import Radar from '@lucide/astro/icons/radar';
 import Eyebrow from '../../shared/Eyebrow.astro';
 import SledPageWrap from '../shared/SledPageWrap.astro';
 ---
@@ -19,9 +17,6 @@ import SledPageWrap from '../shared/SledPageWrap.astro';
 
     <div class="sled-reveal-stagger grid grid-cols-1 gap-4 lg:grid-cols-2" data-sled-reveal>
       <div class="sled-card group rounded-2xl p-6 sm:p-7">
-        <div class="mb-4 grid size-11 place-items-center rounded-xl bg-cyan-soft text-cyan-strong transition-transform duration-300 group-hover:scale-105">
-          <Radar class="size-5" stroke-width="1.75" aria-hidden="true" />
-        </div>
         <Eyebrow text="Authorized subscriber model" showGlyph class="mb-3" />
         <h3 class="text-[18px] font-extrabold leading-tight text-yale-dark">Inside the ecosystem, not adjacent to it.</h3>
         <p class="mt-2 text-[14px] leading-[1.6] text-muted">
@@ -35,9 +30,6 @@ import SledPageWrap from '../shared/SledPageWrap.astro';
       </div>
 
       <div class="sled-card group rounded-2xl p-6 sm:p-7">
-        <div class="mb-4 grid size-11 place-items-center rounded-xl bg-yale-dark/8 text-yale transition-transform duration-300 group-hover:scale-105">
-          <Award class="size-5" stroke-width="1.75" aria-hidden="true" />
-        </div>
         <Eyebrow text="What we use it for" showGlyph class="mb-3" />
         <h3 class="text-[18px] font-extrabold leading-tight text-yale-dark">Pipeline, primes, and prep — never published commentary.</h3>
         <p class="mt-2 text-[14px] leading-[1.6] text-muted">

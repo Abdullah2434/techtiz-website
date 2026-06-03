@@ -1,8 +1,7 @@
 ---
-import SledButton from './SledButton.astro';
-import Eyebrow from '../shared/Eyebrow.astro';
-import SledPageWrap from './SledPageWrap.astro';
 import { SLED_HERO } from '../../lib/constants/pages/sled-hub';
+import SledButton from './SledButton.astro';
+import SledPageWrap from './SledPageWrap.astro';
 ---
 
 <section
@@ -44,16 +43,24 @@ import { SLED_HERO } from '../../lib/constants/pages/sled-hub';
         ))}
       </div>
 
-      <div class="mt-14 flex max-w-[760px] flex-wrap gap-9 border-t border-white/[0.14] pt-7 max-[900px]:gap-[22px]">
+      <div
+        class="mt-14 grid w-full max-w-[760px] grid-cols-4 gap-6 border-t border-white/[0.14] pt-7 max-[600px]:gap-3"
+        role="list"
+      >
         {SLED_HERO.stats.map((s, idx) => (
           <div
+            role="listitem"
             class:list={[
-              'flex flex-col',
-              idx > 0 && 'border-l border-white/[0.12] pl-9 max-[900px]:border-l-0 max-[900px]:pl-0',
+              'flex min-w-0 flex-col',
+              idx > 0 && 'border-l border-white/[0.12] pl-6 max-[600px]:pl-3',
             ]}
           >
-            <div class="text-[26px] font-extrabold leading-none tracking-[-0.02em] text-cyan">{s.n}</div>
-            <div class="mt-2 font-mono text-[10.5px] tracking-[0.10em] uppercase text-white/[0.68]">{s.l}</div>
+            <div class="text-[26px] font-extrabold leading-none tracking-[-0.02em] text-cyan max-[600px]:text-[22px]">
+              {s.n}
+            </div>
+            <div class="mt-2 font-mono text-[10.5px] leading-[1.35] tracking-[0.10em] uppercase text-white/[0.68] max-[600px]:text-[9px] max-[600px]:tracking-[0.06em]">
+              {s.l}
+            </div>
           </div>
         ))}
       </div>

@@ -7,7 +7,7 @@ export const SITE = {
     sled: 'sled@techtiz.co',
   },
   copyright: '© 2026 Techtiz · Lahore HQ · U.S. office',
-  naics: '541511 · 541512 · 541519',
+  naics: '541511 · 541512 · 541519 · 541613',
   nigp: '918-46 · 918-00',
   logo: {
     dark: '/assets/logo.svg',

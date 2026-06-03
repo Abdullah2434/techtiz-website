@@ -1,7 +1,7 @@
 ---
+import { OUTCOMES, OUTCOMES_STATS } from '../../lib/constants/pages/sled-hub';
 import Eyebrow from '../shared/Eyebrow.astro';
 import SledPageWrap from './SledPageWrap.astro';
-import { OUTCOMES, OUTCOMES_STATS } from '../../lib/constants/pages/sled-hub';
 
 function formatStat(n: string) {
   if (n.includes('%')) {
@@ -25,9 +25,10 @@ function formatStat(n: string) {
   <SledPageWrap class="relative z-[2]">
     <div class="mb-12 text-center">
       <Eyebrow text={OUTCOMES.eyebrow} onDark showGlyph class="mb-[14px]" />
-      <h2 class="mx-auto max-w-[720px] text-[36px] leading-[1.1] text-white max-[900px]:text-[28px]">
+      <h2 class="mx-auto max-w-[600px] text-[36px] font-extrabold text-white max-[900px]:text-[28px]">
         {OUTCOMES.heading}
       </h2>
+      <p class="mx-auto mt-4 max-w-[640px] text-[14px] leading-[1.55] text-white/75">{OUTCOMES.sub}</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5">

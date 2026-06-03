@@ -1,0 +1,48 @@
+---
+description: U.S. SLED page copy, compliance signals, and prime-contractor positioning per strategy PDF
+globs: src/pages/us-sled/**,src/components/sled/**,src/lib/constants/pages/sled*.ts,src/lib/constants/pages/*sled*,src/styles/sled.css,public/scripts/sled*.js
+alwaysApply: false
+---
+
+# U.S. SLED content rules
+
+**Source of truth:** `legacy/techtiz-sled-strategy.pdf` (website positioning for U.S. SLED prime contractors). Load the **sled-strategy** skill before substantive copy or section changes.
+
+## Audience and identity
+
+- Write for **U.S. SLED prime contractors** (capture, BD, program managers)—not commercial SaaS buyers.
+- Lead with: **back-office technical subcontractor**, **NDA-first**, **subcontract-only**, **we never face the agency**.
+- Never position Techtiz as competing with primes or selling direct to agencies.
+
+## Voice (do / don't)
+
+| Do | Don't |
+|----|-------|
+| Procurement, compliance, recompete, teaming letter, contract vehicle | "Reinvent your business with AI", startup pitch tone |
+| NDA-safe teasers; references "under executed teaming agreement" | Named agencies, contract values, or logos without approval |
+| FAR-aligned engagement labels (FFP, T&M, IDIQ/BPA) where models are described | Generic "Book a call" as the only CTA |
+| CPARS-style outcomes; sector-specific metrics | "180+ projects" / "98% satisfaction" with no government context |
+
+## Required signals (when editing hub, contact, capability statement)
+
+- **Trust bar:** SAM/UEI, Small Business (if applicable), NIST 800-171 roadmap, specific ISO targets (9001/27001)—not vague "ISO-aligned" alone.
+- **Teaming path:** capability statement PDF, inquiry form (RFP #, vehicle, agency, NDA status), **sled@techtiz.co**, **1 business day** response SLA.
+- **Security readiness:** background-check-ready personnel, CUI awareness, data handling inside prime boundary.
+- **Footer / strip:** NAICS **541511, 541512, 541519** (and 541613 if listed in constants).
+
+## Code structure
+
+- Copy lives in `src/lib/constants/pages/*` (e.g. `sled-hub.ts`, `how-we-engage.ts`)—not hardcoded in `.astro` sections.
+- Routes under `src/pages/us-sled/`; shared UI in `src/components/sled/`; layout `SledLayout.astro`; page CSS `src/styles/sled.css`.
+- SEO via each page's `*_SEO` constant + `SledLayout` (title, description, canonical, OG/Twitter).
+
+## Pain points to address (SLED, not commercial)
+
+Compliance/audit readiness, legacy modernization under procurement constraints, interoperability/data silos, procurement delay and recompete risk, staffing gaps on active vehicles.
+
+## Check before shipping copy
+
+1. Hero and H1 read SLED-subcontractor-first.
+2. No commercial-only trust signals without SLED counterpart.
+3. Past performance uses NDA-safe framing.
+4. CTAs point to `/us-sled/contact/`, capability statement, or how-we-engage—not generic commercial paths.

@@ -1,8 +1,8 @@
 ---
+import { OPERATING_PRINCIPLES } from '../../lib/constants/pages/sled-hub';
 import Eyebrow from '../shared/Eyebrow.astro';
 import SledIcon from './SledIcon.astro';
 import SledPageWrap from './SledPageWrap.astro';
-import { OPERATING_PRINCIPLES } from '../../lib/constants/pages/sled-hub';
 ---
 
 <section class="sled-principles relative overflow-hidden bg-yale-dark py-[110px] text-white max-[900px]:py-16" data-screen-label="04 Operating principles">
@@ -15,7 +15,7 @@ import { OPERATING_PRINCIPLES } from '../../lib/constants/pages/sled-hub';
     <div class="grid grid-cols-1 gap-12 lg:grid-cols-[0.85fr_1.4fr] lg:gap-14">
       <div>
         <Eyebrow text={OPERATING_PRINCIPLES.eyebrow} onDark showGlyph class="mb-[18px]" />
-        <h2 class="mb-[18px] text-[40px] leading-[1.08] text-white max-[900px]:text-[30px]">
+        <h2 class="mb-[18px] text-[40px] font-extrabold text-white max-[900px]:text-[30px]">
           {OPERATING_PRINCIPLES.heading}
         </h2>
         <p class="mb-6 max-w-[360px] text-[15.5px] leading-[1.6] text-white/70">{OPERATING_PRINCIPLES.body}</p>
@@ -39,7 +39,7 @@ import { OPERATING_PRINCIPLES } from '../../lib/constants/pages/sled-hub';
               <div class="mb-[22px] grid size-[42px] place-items-center rounded-[10px] bg-cyan/15 text-cyan">
                 <SledIcon name={item.icon} class="size-5" />
               </div>
-              <h3 class="mb-3 text-[19px] leading-[1.3] text-white">{item.heading}</h3>
+              <h3 class="mb-3 text-[19px] font-extrabold text-white">{item.heading}</h3>
               <p class="text-[13.5px] leading-[1.6] text-white/70">{item.body}</p>
             </div>
           ))}

@@ -78,6 +78,30 @@ const inputClass =
 
         <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
           <div>
+            <label class="mb-2 block font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted" for="sled-iq-rfp">
+              {HUB_INQUIRY.form.rfpLabel}
+            </label>
+            <input
+              class={inputClass}
+              type="text"
+              id="sled-iq-rfp"
+              name="rfp"
+              placeholder={HUB_INQUIRY.form.rfpPlaceholder}
+            />
+          </div>
+          <div>
+            <label class="mb-2 block font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted" for="sled-iq-nda">
+              {HUB_INQUIRY.form.ndaLabel}
+            </label>
+            <select class={inputClass} id="sled-iq-nda" name="nda">
+              <option value="">{HUB_INQUIRY.form.ndaPlaceholder}</option>
+              {HUB_INQUIRY.form.ndaOptions.map((opt) => <option>{opt}</option>)}
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+          <div>
             <label class="mb-2 block font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted" for="sled-iq-vehicle">Contract vehicle</label>
             <select class={inputClass} id="sled-iq-vehicle" name="vehicle">
               <option value="">Select…</option>
@@ -86,13 +110,13 @@ const inputClass =
           </div>
           <div>
             <label class="mb-2 block font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted" for="sled-iq-agency">Agency / end customer</label>
-            <input class={inputClass} type="text" id="sled-iq-agency" name="agency" placeholder="e.g. NC DHHS, we never contact directly" />
+            <input class={inputClass} type="text" id="sled-iq-agency" name="agency" placeholder="For teaming context only—we never contact the agency" />
           </div>
         </div>
 
         <div>
           <label class="mb-2 block font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted" for="sled-iq-desc">
-            Engagement description, contract #, scope needed, start date
+            Engagement description, contract #, scope, start date
           </label>
           <textarea
             class={`${inputClass} min-h-[112px] resize-y font-extrabold`}

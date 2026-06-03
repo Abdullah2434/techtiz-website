@@ -1,16 +1,17 @@
 export const SLED_HUB_SEO = {
-  title: "SLED Partnerships | Back-office engineering for primes | Techtiz",
+  title:
+    "U.S. SLED Subcontractor | Back-office engineering for primes | Techtiz",
   description:
-    "Back-office technical engineering subcontractor for U.S. SLED prime contractors. NDA-first, subcontract-only delivery across GIS, AI, automation, statutory document production, and grant reporting. We never face the agency.",
+    "Active back-office technical subcontractor for U.S. SLED prime contractors. NDA-first, subcontract-only—GIS, AI, automation, statutory documents, and grant reporting. Agency references under executed teaming agreement. We never face the agency.",
   canonicalPath: "/us-sled/",
   ogImage: "/assets/capitol.png",
 } as const;
 
 export const SLED_HERO = {
-  eyebrow: "U.S. SLED · Back-office engineering for primes",
+  eyebrow: "U.S. SLED · Active subcontractor for primes",
   heading:
-    'Back-office technical engineering for <span class="accent">U.S. SLED prime contractors.</span>',
-  body: "Specialized subcontractor support for GIS, AI, automation, statutory document production, grant reporting, and platform modernization. NDA-first. Subcontract-only. We never face the agency.",
+    'Back-office delivery for <span class="accent">U.S. SLED prime contractors.</span>',
+  body: "Active technical subcontractor behind Tier 1 primes. Pre bid proposal support and post award delivery under teaming letter. NDA-Protected. Subcontract-Only. We never face the agency your PM stays the only voice upstream.",
   ctas: [
     {
       label: "Start an NDA conversation",
@@ -42,7 +43,7 @@ export const TRUST_ITEMS = [
   {
     icon: "calendar",
     label: "Federal classification",
-    value: "NAICS 541511 · 541512 · 541519",
+    value: "NAICS 541511 · 541512",
   },
   {
     icon: "building",
@@ -53,15 +54,26 @@ export const TRUST_ITEMS = [
   { icon: "clock", label: "Response SLA", value: "1 business day" },
 ] as const;
 
+export const PAST_PERFORMANCE_STRIPE = {
+  label: "Active engagements",
+  body: "Active subcontractor support for U.S. SLED prime contractors under NDA. Agency references and CPARS-style performance narratives available upon executed teaming agreement.",
+} as const;
+
 export const OUTCOMES_STATS = [
   {
-    n: "100%",
-    l: "GIS-tagged facility inventory delivered on a state environmental plan",
+    n: "Live",
+    l: "Subcontract delivery on state vehicles via Tier 1 primes",
   },
-  { n: "0", l: "Statutory-format deficiencies on first submission" },
-  { n: "35/35", l: "Municipalities covered per-meeting briefing pack" },
-  { n: "0", l: "Late quarterly grant reports filed" },
-  { n: "0", l: "Agency-facing engagements ever" },
+  {
+    n: "NDA",
+    l: "References and CPARS-style narratives under teaming agreement",
+  },
+  { n: "0", l: "Agency-facing engagements—subcontract-only model" },
+  { n: "1 day", l: "Teaming inquiry response at sled@techtiz.co" },
+  {
+    n: "100%",
+    l: "White-label artifacts under your prime brand",
+  },
 ] as const;
 
 export const BACKBONE_CARDS = [
@@ -86,7 +98,7 @@ export const BACKBONE_CARDS = [
   {
     badgeNo: "04 · Produce",
     heading: "Document Production Suite",
-    body: "Statutory-format compliant deliverables in PDF, InDesign, ArcGIS, Word, Excel. EGLE-validated.",
+    body: "Statutory-format compliant deliverables in PDF, InDesign, ArcGIS, Word, Excel. Validated against state plan frameworks under prime QA.",
     href: "/us-sled/capabilities/",
   },
   {
@@ -117,7 +129,7 @@ export const VEHICLES = [
   {
     heading: "State Master Agreements",
     sub: "CA CMAS, NY OGS, TX DIR, prime-held",
-    note: "8 active states",
+    note: "Via your prime's state vehicles",
   },
   {
     heading: "Direct Subcontract",
@@ -132,7 +144,7 @@ export const VEHICLES = [
   {
     heading: "Open RFP / RFQ",
     sub: "Bid support as named subcontractor",
-    note: "14 wins last 24 mo",
+    note: "Pre-award volumes under teaming letter",
   },
 ] as const;
 
@@ -278,32 +290,32 @@ export const ONSHORE = {
   },
   concerns: [
     {
-      num: "Concern 01",
-      icon: "sun",
-      heading: "Follow-the-sun delivery without the 3 a.m. Slack pings.",
-      pain: "offshore vendors that bury PMs in async messages, gap on handoffs, stall on US-hours blockers.",
-      fix: "US engagement manager owns daily standup. Lahore picks up overnight. ~10 hours of US/PK overlap, same-day responses.",
+      num: "SLED pain 01",
+      icon: "shield",
+      heading: "Compliance and audit readiness without slowing delivery.",
+      pain: "IV&V findings, CJIS/HIPAA/StateRAMP flow-downs, and statutory checklists land on thin bench while the contract clock runs.",
+      fix: "We operate inside your authorization boundary audit ready artifacts, CAP narratives in your templates, controls applied to our workstream only.",
     },
     {
-      num: "Concern 02",
-      icon: "lock",
-      heading: "NDA-bound from the first 30-minute call.",
-      pain: "capture leads who can't share the RFP or past-performance set until paperwork clears.",
-      fix: "Mutual NDA ready to sign before the discovery call. Sensitive details stay in encrypted channels with audit trails.",
-    },
-    {
-      num: "Concern 03",
+      num: "SLED pain 02",
       icon: "file-lock",
-      heading: "IP assigned to you on day one.",
-      pain: 'subcontractors who keep ownership of "reusable components" and license them back, complicating government IP rights.',
-      fix: "Period-of-performance IP assignment baked into the teaming letter. Code and artifacts belong to the prime.",
+      heading: "Legacy modernization inside procurement and budget limits.",
+      pain: "mainframe wrappers, record migration, and portal refactors stall when the sub doesn't understand state procurement pacing.",
+      fix: "Service layer integration, ETL, and phased cutovers scoped to your vehicle and period of performance white-labeled under your PM.",
     },
     {
-      num: "Concern 04",
-      icon: "user-check",
-      heading: "Named seniors. No bait-and-switch.",
-      pain: "principal engineers on the proposal, junior engineers on delivery. CPARS pain that shows up at year-end review.",
-      fix: "Resumes you propose are the engineers who execute. Substitutions only with prime + agency approval.",
+      num: "SLED pain 03",
+      icon: "network",
+      heading: "Interoperability and data silos across agencies and systems.",
+      pain: "GIS inventories, grant pass-through data, and engagement platforms that don't join cleanly for statutory deliverables.",
+      fix: "Spatial joins, reconciliation reporting, and engagement cloud instrumentation built for the RFP work no COTS product covers cleanly.",
+    },
+    {
+      num: "SLED pain 04",
+      icon: "users",
+      heading: "Recompete risk and staffing gaps on active vehicles.",
+      pain: "17 days to submission or kickoff Monday with architects on another pursuit and no named seniors locked for CPARS.",
+      fix: "Pre-award surge under teaming letter + NDA; post-award named engineers (background-check-ready, CUI-aware) who match the resumes you proposed.",
     },
   ],
 } as const;
@@ -344,6 +356,7 @@ export const OPERATING_PRINCIPLES = {
 export const OUTCOMES = {
   eyebrow: "Outcomes that matter to primes",
   heading: "What changes when Techtiz is on your team.",
+  sub: "Metrics and agency references are shared under executed teaming agreement never published in violation of prime NDAs.",
 } as const;
 
 export const BACKBONE = {
@@ -366,7 +379,7 @@ export const SPECIALIZATIONS = {
       icon: "map-pin",
       heading: "Materials & environmental data platforms",
       body: "Facility inventories, capacity forecast models, multi-source spatial joins, and statutory-format document production for environmental plans adopted under state framework guidance.",
-      tools: ["ArcGIS", "PostGIS", "GeoPandas", "EGLE-format tooling"],
+      tools: ["ArcGIS", "PostGIS", "GeoPandas", "State plan formats"],
     },
     {
       num: "02",
@@ -379,7 +392,7 @@ export const SPECIALIZATIONS = {
       num: "03",
       icon: "calendar-grid",
       heading: "Permitting & licensing system modernization",
-      body: "Service-layer wrappers over legacy mainframes, ETL pipelines for record migration, reconciliation reporting, IV&V response packages, audit-trail and FOIA export tooling.",
+      body: "Service layer wrappers over legacy mainframes, ETL pipelines for record migration, reconciliation reporting, IV&V response packages, audit-trail and FOIA export tooling.",
       tools: ["Airbyte", "dbt", "PostgreSQL", "Supabase"],
     },
     {
@@ -421,13 +434,20 @@ export const HUB_INQUIRY = {
   aside: {
     eyebrow: "Partner with us",
     heading: "NDA first. Subcontract second. White-label always.",
-    body: "Capture managers, BD leads, and program managers at U.S. primes: a US partner manager replies within one business day with a mutual NDA template and a 30-minute calendar slot. No public materials exchanged before the NDA is signed.",
+    body: "Capture managers, BD leads, and program managers at U.S. primes: email sled@techtiz.co or use this form. A U.S. partner manager replies within one business day with a mutual NDA template and a 30-minute calendar slot. No public materials exchanged before the NDA is signed.",
     bullets: [
-      "One business day response",
+      "sled@techtiz.co · 1 business day",
       "Mutual NDA on first contact",
       "Teaming letter template included",
-      "White-label clause built-in",
+      "Background-check-ready · CUI-aware delivery",
     ],
+  },
+  form: {
+    rfpLabel: "RFP / RFQ / solicitation #",
+    rfpPlaceholder: "e.g. RFP-2026-0142 (pre-award)",
+    ndaLabel: "NDA status",
+    ndaPlaceholder: "Select…",
+    ndaOptions: ["Not started", "In progress", "Executed teaming agreement"],
   },
   needOptions: [
     {

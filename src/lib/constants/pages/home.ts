@@ -420,12 +420,32 @@ export const WHY_DATA: Record<
   },
 };
 
+/** @deprecated Use DIGITAL_FOUNDATION.stats */
 export const PROOF_STATS = [
   { n: "5", plus: "+", label: "Years shipping" },
   { n: "98", plus: "%", label: "Client satisfaction" },
   { n: "180", plus: "+", label: "Projects delivered" },
   { n: "200", plus: "+", label: "Clients served" },
 ] as const;
+
+export const DIGITAL_FOUNDATION = {
+  title: "Crafting Scalable Digital Foundations for Businesses",
+  description:
+    "Develop, evaluate, and implement AI agents using a robust visual interface tailored for engineering and innovation teams.",
+  cta: {
+    href: "/us-sled/contact/",
+    labelDesktop: "Book a Free Consultation",
+    labelMobile: "Book a Consultation",
+  },
+  bgImage: "/images/digital-section-bg.png",
+  ratingImage: "/images/rating-image.png",
+  stats: [
+    { id: "years", value: "5+", label: "Years of Experience" },
+    { id: "satisfaction", value: "98%", label: "Client Satisfaction" },
+    { id: "projects", value: "180+", label: "Projects Completed" },
+    { id: "clients", value: "200+", label: "Clients Served" },
+  ],
+} as const;
 
 export const CASE_STUDIES = [
   {

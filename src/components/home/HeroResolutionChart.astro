@@ -1,0 +1,37 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = 'size-full' } = Astro.props;
+---
+
+<svg viewBox="0 0 320 90" preserveAspectRatio="none" class={className} aria-hidden="true">
+  <g class="[&_line]:stroke-line-soft">
+    <line x1="0" y1="22" x2="320" y2="22"></line>
+    <line x1="0" y1="45" x2="320" y2="45"></line>
+    <line x1="0" y1="68" x2="320" y2="68"></line>
+  </g>
+  <path
+    d="M0,70 L23,68 L46,65 L69,66 L92,63 L115,60 L138,58 L161,56 L184,52 L207,50 L230,46 L253,42 L276,38 L299,34 L320,30 L320,90 L0,90 Z"
+    fill="#153A5F"
+    opacity="0.10"></path>
+  <path
+    class="home-chart-line-yale"
+    d="M0,70 L23,68 L46,65 L69,66 L92,63 L115,60 L138,58 L161,56 L184,52 L207,50 L230,46 L253,42 L276,38 L299,34 L320,30"
+    fill="none"
+    stroke="#153A5F"
+    stroke-width="1.5"></path>
+  <path
+    d="M0,55 L23,52 L46,46 L69,48 L92,40 L115,38 L138,30 L161,32 L184,24 L207,22 L230,18 L253,16 L276,12 L299,14 L320,8 L320,90 L0,90 Z"
+    fill="#18B0E6"
+    opacity="0.13"></path>
+  <path
+    class="home-chart-line-cyan"
+    d="M0,55 L23,52 L46,46 L69,48 L92,40 L115,38 L138,30 L161,32 L184,24 L207,22 L230,18 L253,16 L276,12 L299,14 L320,8"
+    fill="none"
+    stroke="#18B0E6"
+    stroke-width="2"></path>
+  <circle class="home-chart-dot" cx="299" cy="14" r="3" fill="#18B0E6"></circle>
+  <circle class="home-chart-dot home-chart-dot-delay" cx="320" cy="8" r="3" fill="#18B0E6"></circle>
+</svg>

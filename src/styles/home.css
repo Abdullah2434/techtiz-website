@@ -1,5 +1,15 @@
 /* Homepage animations ported from legacy/index.html — use with Tailwind layout classes */
 
+@keyframes hero-glow-a {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  100% { transform: translate3d(-24px, 18px, 0) scale(1.06); }
+}
+
+@keyframes hero-glow-b {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  100% { transform: translate3d(20px, -14px, 0) scale(1.08); }
+}
+
 @keyframes sector-dot-pulse {
   0% { box-shadow: 0 0 0 0 rgba(24, 176, 230, 0.55); }
   70% { box-shadow: 0 0 0 7px rgba(24, 176, 230, 0); }
@@ -53,6 +63,71 @@
   0% { box-shadow: 0 0 0 0 rgba(43, 165, 114, 0.5); }
   70% { box-shadow: 0 0 0 8px rgba(43, 165, 114, 0); }
   100% { box-shadow: 0 0 0 0 rgba(43, 165, 114, 0); }
+}
+
+@keyframes cta-border-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes cta-heartbeat {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.45;
+  }
+  14% {
+    transform: scale(1.04);
+    opacity: 0.22;
+  }
+  28% {
+    transform: scale(1);
+    opacity: 0.45;
+  }
+  42% {
+    transform: scale(1.06);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.06);
+    opacity: 0;
+  }
+}
+
+.cta-animated {
+  isolation: isolate;
+  box-shadow: 0 6px 20px -12px rgba(21, 58, 95, 0.4);
+}
+
+.cta-animated-spin {
+  position: absolute;
+  inset: -130%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg 48deg,
+    rgba(24, 176, 230, 0.22) 62deg,
+    #18b0e6 78deg,
+    #7ddfff 86deg,
+    rgba(24, 176, 230, 0.22) 98deg,
+    transparent 118deg 360deg
+  );
+  animation: cta-border-spin 2.8s linear infinite;
+  pointer-events: none;
+}
+
+.cta-animated-pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(24, 176, 230, 0.5);
+  animation: cta-heartbeat 2.6s ease-out infinite;
+  pointer-events: none;
+}
+
+.cta-animated:hover {
+  box-shadow: 0 10px 28px -10px rgba(24, 176, 230, 0.3);
+}
+
+.cta-animated:hover .cta-animated-spin {
+  animation-duration: 2s;
 }
 
 .home-sector-on .home-sector-dot {
@@ -124,8 +199,14 @@
   .home-kpi-v,
   .home-badge-twist::before,
   .home-menu-on::after,
-  .home-health-blink {
+  .home-health-blink,
+  .cta-animated-spin,
+  .cta-animated-pulse {
     animation: none !important;
+  }
+  .cta-animated-pulse {
+    opacity: 0.35;
+    transform: none;
   }
   .home-chart-line-cyan,
   .home-chart-line-yale {

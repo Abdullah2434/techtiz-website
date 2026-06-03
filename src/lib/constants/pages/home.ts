@@ -6,6 +6,20 @@ export const HOME_SEO = {
   ogImage: '/assets/logo.svg',
 } as const;
 
+export const HOME_HERO = {
+  eyebrow: 'Techtiz · AI-native engineering',
+  sector: {
+    international: 'International teams',
+    sled: { label: 'U.S. SLED primes', href: '/us-sled/' },
+  },
+  heading: 'Reinvent your business with',
+  headingAccent: 'AI systems',
+  headingEnd: 'that adapt and improve.',
+  body:
+    'We design automation systems that reduce busywork, enhance clarity, and support your growth. An AI-native engineering studio for ambitious product teams—and a technical subcontractor to U.S. SLED prime contractors.',
+  cta: { label: 'Talk to an Expert', href: '/us-sled/contact/' },
+} as const;
+
 export const TRUST_CLIENTS = [
   { name: 'LinkedGolf', alt: false },
   { name: 'Dashboard.Earth', alt: true },

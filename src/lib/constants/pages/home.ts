@@ -20,6 +20,18 @@ export const HOME_HERO = {
   cta: { label: 'Talk to an Expert', href: '/us-sled/contact/' },
 } as const;
 
+export const FEATURED_CLIENTS = [
+  { name: 'Alkhazan Food', image: '/images/clientfeature/food.png' },
+  { name: 'FT Play', image: '/images/clientfeature/ftplay.png' },
+  { name: 'Orient Care', image: '/images/clientfeature/orient.png' },
+  { name: 'Dashboard Earth', image: '/images/clientfeature/dashboard.png' },
+  { name: 'Epic', image: '/images/clientfeature/epic.png', imageClass: 'max-w-[110px]' },
+  { name: 'G-Tech', image: '/images/clientfeature/g.png', imageClass: 'max-w-[110px]' },
+  { name: 'Link Golf', image: '/images/clientfeature/golf.png' },
+  { name: 'KH Medical', image: '/images/clientfeature/kh.png' },
+  { name: 'TokenMart', image: '/images/clientfeature/token.png' },
+] as const;
+
 export const TRUST_CLIENTS = [
   { name: 'LinkedGolf', alt: false },
   { name: 'Dashboard.Earth', alt: true },

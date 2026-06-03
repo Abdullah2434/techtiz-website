@@ -180,6 +180,19 @@
   animation: health-pulse 2s ease-out infinite;
 }
 
+@keyframes logo-marquee {
+  to { transform: translateX(-50%); }
+}
+
+.home-logo-marquee {
+  animation: logo-marquee 42s linear infinite;
+  will-change: transform;
+}
+
+.home-logo-cloud:hover .home-logo-marquee {
+  animation-play-state: paused;
+}
+
 .home-ind-card-fade,
 .home-why-panel-fade {
   opacity: 0;
@@ -201,8 +214,23 @@
   .home-menu-on::after,
   .home-health-blink,
   .cta-animated-spin,
-  .cta-animated-pulse {
+  .cta-animated-pulse,
+  .home-logo-marquee {
     animation: none !important;
+  }
+  .home-logo-cloud {
+    overflow-x: auto;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+  .home-logo-marquee {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    gap: 1.5rem;
+  }
+  .home-logo-marquee > *:nth-child(n + 10) {
+    display: none;
   }
   .cta-animated-pulse {
     opacity: 0.35;

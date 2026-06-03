@@ -1,0 +1,102 @@
+---
+interface ServiceLink {
+  name: string;
+  href: string;
+}
+
+interface Props {
+  subtitle: string;
+  mainText: string;
+  image: string;
+  serviceLinks: readonly ServiceLink[];
+}
+
+const { subtitle, mainText, image, serviceLinks } = Astro.props;
+
+const capEase = 'cubic-bezier(0.22, 1, 0.36, 1)';
+const capDuration = '700ms';
+---
+
+<article
+  class="home-cap-card group relative flex h-[500px] w-[300px] shrink-0 cursor-pointer flex-col overflow-hidden rounded-2xl bg-[#F6F6F6] px-5 py-7 shadow-none hover:shadow-md max-md:[&.is-active]:h-auto max-md:[&.is-active]:min-h-[500px] md:w-[370px]"
+  data-cap-card
+  style={`--cap-ease: ${capEase}; --cap-duration: ${capDuration};`}
+>
+  <div
+    class="pointer-events-none absolute inset-0 z-0 opacity-0 transition-opacity duration-700 ease-in-out group-hover:opacity-[0.05] group-[&.is-active]:opacity-[0.05]"
+    aria-hidden="true"
+  >
+    <img
+      src={image}
+      alt=""
+      class="size-full object-contain"
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+
+  <div class="relative z-10 flex min-h-0 flex-1 flex-col">
+    <div
+      class="cap-hero-grid grid shrink-0 grid-rows-[1fr] transition-[grid-template-rows] duration-700 ease-in-out will-change-[grid-template-rows] group-hover:grid-rows-[0fr] group-[&.is-active]:grid-rows-[0fr]"
+    >
+      <div class="min-h-0 overflow-hidden">
+        <div
+          class="cap-hero mt-10 h-[300px] opacity-100 transition-opacity duration-700 ease-in-out group-hover:opacity-0 group-[&.is-active]:opacity-0"
+        >
+          <img
+            src={image}
+            alt={subtitle}
+            width={420}
+            height={300}
+            loading="lazy"
+            decoding="async"
+            class="size-full object-contain"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="cap-body grid min-h-0 flex-1 grid-rows-[1fr_auto_0fr] transition-[grid-template-rows] duration-700 ease-in-out will-change-[grid-template-rows] group-hover:grid-rows-[0fr_auto_1fr] group-[&.is-active]:grid-rows-[0fr_auto_1fr]"
+    >
+      <div class="min-h-0 overflow-hidden" aria-hidden="true"></div>
+
+      <div class="cap-title shrink-0">
+        <p class="mb-3 text-base font-normal leading-[110%] text-[#1E1E1E]/60">
+          {subtitle}
+        </p>
+        <h3
+          class="text-[24px] font-normal leading-[120%] tracking-[-0.03em] text-[#1E1E1E] md:text-[32px]"
+        >
+          {mainText}
+        </h3>
+      </div>
+
+      <div class="min-h-0 overflow-hidden">
+        <div
+          class="cap-services flex min-h-0 flex-col opacity-0 transition-opacity duration-700 ease-in-out delay-150 group-hover:opacity-100 group-[&.is-active]:opacity-100"
+        >
+          <h4
+            class="mb-3 shrink-0 pt-4 text-[14px] font-medium leading-[130%] tracking-normal text-yale md:text-base"
+          >
+            Services:
+          </h4>
+          <div
+            class="home-cap-services-inner min-h-0 flex-1 flex-wrap content-start gap-x-2 gap-y-2 overflow-y-auto pb-4 max-md:group-[&.is-active]:overflow-visible md:flex"
+          >
+            {
+              serviceLinks.map((link) => (
+                <a
+                  href={link.href}
+                  class="w-fit rounded-[3px] bg-[#18B0E6]/33 px-2.5 py-1.5 text-[10px] leading-normal font-normal text-yale transition-colors duration-300 hover:bg-cyan hover:text-white md:text-sm"
+                >
+                  {link.name}
+                </a>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

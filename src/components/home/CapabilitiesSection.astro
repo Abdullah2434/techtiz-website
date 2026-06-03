@@ -1,85 +1,72 @@
 ---
-import { CAPABILITIES } from '../../lib/constants/pages/home';
-import BlockHead from '../shared/BlockHead.astro';
-import CapabilityIcon from './CapabilityIcon.astro';
+import { HOME_CAPABILITIES } from '../../lib/constants/pages/home';
 import PageWrap from './PageWrap.astro';
+import CapabilityCard from './CapabilityCard.astro';
 ---
 
-<section class="bg-white py-[110px] max-[900px]:py-14">
+<section class="bg-white py-10 md:py-16" aria-labelledby="capabilities-heading">
   <PageWrap>
-    <BlockHead
-      eyebrow="Capabilities"
-      heading="A full engineering and design surface, wired for AI."
-      sub="Five interlocking practices. Engage one, or hand us the whole problem."
-      rightLinkLabel="See full capability matrix →"
-      rightLinkHref="/#capability-matrix"
-    />
-
-    <div class="grid grid-cols-3 gap-4 max-lg:grid-cols-2 max-sm:grid-cols-1">
-      {CAPABILITIES.map((cap) => (
+    <header class="mb-0 flex flex-col items-start justify-between gap-y-3">
+      <h2
+        id="capabilities-heading"
+        class="mb-1 text-left text-[24px] font-normal leading-[110%] text-[#1E1E1E]/80"
+      >
+        Tailored Services
+      </h2>
+      <div class="h-0.5 w-full bg-[#D0D0D0]"></div>
+      <div class="mb-3 flex w-full flex-wrap items-center justify-between gap-x-4 gap-y-4">
+        <p class="mb-1 max-w-[79%] text-left text-[32px] font-normal leading-[120%] tracking-[-0.02em] text-[#1E1E1E] md:text-[40px]">
+          Accelerate Your Growth
+        </p>
         <a
-          href={cap.href}
-          class:list={[
-            'group relative flex min-h-[280px] flex-col gap-3.5 overflow-hidden rounded-[10px] border px-7 py-[30px] transition-[transform,border-color,box-shadow] duration-240 hover:-translate-y-0.5',
-            cap.feature
-              ? 'border-yale-dark bg-yale-dark text-white hover:shadow-[0_18px_36px_-18px_rgba(21,58,95,0.18)]'
-              : 'border-line bg-white hover:border-[#C2CCD9] hover:shadow-[0_18px_36px_-18px_rgba(21,58,95,0.18)]',
-          ]}
+          href="/contact-us"
+          class="home-cap-btn-outline hidden min-h-[42px] min-w-[116px] items-center justify-center rounded-[2px] border border-[#4D4D4D] bg-transparent px-6 py-[11px] text-base font-normal text-[#4D4D4D] transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan hover:bg-cyan hover:text-white hover:shadow-md md:inline-flex"
         >
-          {cap.feature && (
-            <div class="pointer-events-none absolute -right-5 -top-5 size-[100px]" aria-hidden="true">
-              <span class="absolute right-9 top-[22px] size-[18px] rotate-[15deg] bg-cyan opacity-55"></span>
-              <span class="absolute right-3.5 top-[50px] size-[30px] rotate-[15deg] bg-cyan opacity-[0.18]"></span>
-              <span class="absolute right-12 top-[60px] size-3 rotate-[15deg] bg-cyan opacity-35"></span>
-            </div>
-          )}
-
-          <div
-            class:list={[
-              'grid size-11 place-items-center rounded-lg',
-              cap.feature ? 'bg-cyan/16 text-cyan' : 'bg-cyan-soft text-cyan-strong',
-            ]}
-          >
-            <CapabilityIcon name={cap.icon} />
-          </div>
-
-          <h3 class:list={['text-[22px] font-extrabold leading-[1.2]', cap.feature ? 'text-white' : 'text-yale']}>
-            {cap.title}
-          </h3>
-          <p class:list={['text-sm leading-[1.55]', cap.feature ? 'text-white/74' : 'text-muted']}>{cap.desc}</p>
-
-          <div class="mt-1.5 flex flex-wrap gap-1.5">
-            {cap.tags.map((tag) => (
-              <span
-                class:list={[
-                  'rounded border px-2 py-1 font-mono text-[10.5px] tracking-[0.04em]',
-                  cap.feature
-                    ? 'border-white/14 bg-white/5 text-cyan'
-                    : 'border-line bg-seasalt text-yale',
-                ]}
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-
-          {'stack' in cap && cap.stack && (
-            <div class="mt-4 border-t border-white/10 pt-4 font-mono text-[10.5px] uppercase leading-[1.6] tracking-[0.10em] text-cyan">
-              {cap.stack}
-            </div>
-          )}
-
-          <span
-            class:list={[
-              'mt-auto inline-flex items-center gap-2 text-[13.5px] font-bold transition-[gap,color] duration-200 group-hover:gap-3.5',
-              cap.feature ? 'text-cyan' : 'text-yale group-hover:text-cyan-strong',
-            ]}
-          >
-            {cap.cta}
-            <span aria-hidden="true">→</span>
-          </span>
+          Book a Consultation
         </a>
-      ))}
+      </div>
+    </header>
+
+    <div class="home-cap-scroll -mr-2 mt-8 overflow-x-auto overflow-y-hidden pb-6 pr-2">
+      <div class="flex w-max min-w-full gap-6 py-4">
+        {
+          HOME_CAPABILITIES.map((cap) => (
+            <CapabilityCard
+              subtitle={cap.subtitle}
+              mainText={cap.mainText}
+              image={cap.image}
+              serviceLinks={cap.serviceLinks}
+            />
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="mt-5 flex justify-center md:hidden">
+      <a
+        href="/capabilities/ai-consultation"
+        class="home-cap-btn-outline mx-auto inline-flex min-h-[42px] min-w-[116px] items-center justify-center rounded-[2px] border border-[#4D4D4D] bg-transparent px-6 py-[11px] text-base font-normal text-[#4D4D4D] transition-all duration-300 hover:border-cyan hover:bg-cyan hover:text-white"
+      >
+        Book a Consultation
+      </a>
     </div>
   </PageWrap>
 </section>
+
+<script>
+  const cards = document.querySelectorAll<HTMLElement>('[data-cap-card]');
+  const mq = window.matchMedia('(hover: none)');
+
+  cards.forEach((card) => {
+    card.querySelectorAll('a[href]').forEach((link) => {
+      link.addEventListener('click', (e) => e.stopPropagation());
+    });
+
+    card.addEventListener('click', () => {
+      if (!mq.matches) return;
+      const isActive = card.classList.contains('is-active');
+      cards.forEach((c) => c.classList.remove('is-active'));
+      if (!isActive) card.classList.add('is-active');
+    });
+  });
+</script>

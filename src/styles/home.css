@@ -193,6 +193,83 @@
   animation-play-state: paused;
 }
 
+.home-cap-scroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  scroll-padding-inline: 8px;
+}
+
+/* ~3.5 cards visible at 1400px container (370px card + 24px gap) */
+@media (min-width: 768px) {
+  .home-cap-scroll {
+    max-width: 100%;
+  }
+}
+
+.home-cap-scroll::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Inner tag list: scroll on desktop hover only; hide scrollbar chrome */
+.home-cap-services-inner {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.home-cap-services-inner::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+@media (max-width: 767px) {
+  .home-cap-card {
+    transition:
+      height var(--cap-duration, 850ms) var(--cap-ease, cubic-bezier(0.22, 1, 0.36, 1)),
+      box-shadow 300ms ease;
+  }
+
+  .home-cap-card.is-active .cap-services,
+  .home-cap-card.is-active .home-cap-services-inner {
+    overflow: visible;
+  }
+
+  .home-cap-card.is-active .home-cap-services-inner {
+    overflow: visible;
+    max-height: none;
+  }
+}
+
+@media (hover: hover) {
+  .home-cap-card {
+    transition: box-shadow 300ms ease;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-cap-card,
+  .home-cap-card * {
+    transition: none !important;
+  }
+  .home-cap-card .cap-hero-grid {
+    grid-template-rows: 1fr !important;
+  }
+  .home-cap-card .cap-hero {
+    opacity: 1 !important;
+  }
+  .home-cap-card .cap-body {
+    grid-template-rows: 1fr auto 1fr !important;
+  }
+  .home-cap-card .cap-services {
+    opacity: 1 !important;
+  }
+  .home-cap-card .home-cap-services-inner {
+    overflow: visible !important;
+  }
+}
+
 .home-ind-card-fade,
 .home-why-panel-fade {
   opacity: 0;

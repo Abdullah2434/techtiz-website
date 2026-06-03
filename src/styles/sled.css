@@ -331,6 +331,24 @@
   pointer-events: none;
 }
 
+/* How-we-engage sequence timeline */
+.sled-engage-timeline::before {
+  content: "";
+  position: absolute;
+  left: 27px;
+  top: 72px;
+  bottom: 72px;
+  width: 2px;
+  background: linear-gradient(180deg, rgba(24, 176, 230, 0.5), rgba(24, 176, 230, 0.06));
+  pointer-events: none;
+}
+
+@media (max-width: 1023px) {
+  .sled-engage-timeline::before {
+    display: none;
+  }
+}
+
 /* Final CTA decoration */
 .sled-final-cta::before {
   content: "";

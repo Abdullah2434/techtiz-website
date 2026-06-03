@@ -1,148 +1,30 @@
 ---
 import '../../styles/sled.css';
-import SledLayout from '../../layouts/SledLayout.astro';
+import HowWeEngageBoundariesSection from '../../components/sled/HowWeEngageBoundariesSection.astro';
+import HowWeEngagePrinciplesSection from '../../components/sled/HowWeEngagePrinciplesSection.astro';
+import HowWeEngageSequenceSection from '../../components/sled/HowWeEngageSequenceSection.astro';
+import HowWeEngageStartSection from '../../components/sled/HowWeEngageStartSection.astro';
 import SledInnerHero from '../../components/sled/SledInnerHero.astro';
-import Eyebrow from '../../components/shared/Eyebrow.astro';
-import CtaButton from '../../components/shared/CtaButton.astro';
+import SledLayout from '../../layouts/SledLayout.astro';
 import {
-  HOW_WE_ENGAGE_SEO, HOW_WE_ENGAGE_HERO, SEQUENCE_STEPS, BOUNDARY_CARDS, PRINCIPLES, FIRST_EMAIL_CHECKLIST
+  HOW_WE_ENGAGE_SEO,
+  HOW_WE_ENGAGE_HERO,
 } from '../../lib/constants/pages/how-we-engage';
 
 const { title, description, canonicalPath, ogImage } = HOW_WE_ENGAGE_SEO;
 ---
 
 <SledLayout {title} {description} {canonicalPath} {ogImage} currentPage="/us-sled/how-we-engage/">
-
-<SledInnerHero eyebrow={HOW_WE_ENGAGE_HERO.eyebrow} heading={HOW_WE_ENGAGE_HERO.heading} body={HOW_WE_ENGAGE_HERO.body} />
-
-<!-- SEQUENCE -->
-<section class="bg-white py-[100px] pb-20">
-  <div class="mx-auto max-w-[1280px] px-12 max-[1024px]:px-8 max-[900px]:px-6 max-[600px]:px-[18px]">
-    <div class="mb-10 max-w-[820px]">
-      <Eyebrow text="The sequence" showGlyph />
-      <h2 class="mt-4 text-[38px] font-extrabold leading-[1.1] tracking-[-0.02em] text-yale-dark">
-        Three steps. Predictable timing. Same playbook every time.
-      </h2>
-      <p class="mt-3.5 text-[15.5px] leading-relaxed text-muted">
-        The structured-relationship sequence is itself the credibility signal. Capture managers and BD leads at U.S. primes know the rhythm; we hold to it.
-      </p>
-    </div>
-
-    <div class="space-y-5">
-      {SEQUENCE_STEPS.map(step => (
-        <div class="grid grid-cols-[180px_1fr_420px] gap-6 rounded-2xl border border-line bg-white p-6 shadow-[0_14px_36px_-26px_rgba(14,38,64,0.25)] max-[1100px]:grid-cols-[180px_1fr] max-[720px]:grid-cols-1">
-          <div class="flex items-start gap-3">
-            <div class="grid size-12 shrink-0 place-items-center rounded-xl bg-cyan-soft text-yale-dark">
-              <span class="font-mono text-[16px] font-extrabold">{step.n}</span>
-            </div>
-            <div class="pt-1">
-              <div class="font-mono text-[10.5px] font-bold tracking-[0.18em] uppercase text-cyan-strong">
-                Timing
-              </div>
-              <div class="mt-1 text-[13.5px] font-semibold text-muted">{step.when}</div>
-            </div>
-          </div>
-
-          <div>
-            <h3 class="text-[18px] font-extrabold leading-tight text-yale-dark">{step.heading}</h3>
-            <p class="mt-2 text-[14px] leading-[1.55] text-muted">{step.body}</p>
-          </div>
-
-          <div class="rounded-xl border border-line bg-seasalt p-4 max-[1100px]:col-span-2 max-[720px]:col-span-1">
-            <div class="font-mono text-[10.5px] font-bold tracking-[0.14em] uppercase text-cyan-strong">
-              {step.detailLabel}
-            </div>
-            <ul class="mt-2 list-disc pl-4 text-[13.5px] leading-[1.55] text-muted">
-              {step.details.map(d => <li>{d}</li>)}
-            </ul>
-          </div>
-        </div>
-      ))}
-    </div>
+  <div class="sled-engage-page">
+    <SledInnerHero
+      eyebrow={HOW_WE_ENGAGE_HERO.eyebrow}
+      heading={HOW_WE_ENGAGE_HERO.heading}
+      body={HOW_WE_ENGAGE_HERO.body}
+    />
+    <HowWeEngageSequenceSection />
+    <HowWeEngageBoundariesSection />
+    <HowWeEngagePrinciplesSection />
+    <HowWeEngageStartSection />
   </div>
-</section>
-
-<!-- WHAT WE DO NOT DO -->
-<section class="bg-white py-20">
-  <div class="mx-auto max-w-[1280px] px-12 max-[1024px]:px-8 max-[900px]:px-6 max-[600px]:px-[18px]">
-    <div class="mb-10 max-w-[820px]">
-      <Eyebrow text="What we do not do" showGlyph />
-      <h2 class="mt-4 text-[38px] font-extrabold leading-[1.1] tracking-[-0.02em] text-yale-dark">
-        The boundaries are the credibility.
-      </h2>
-      <p class="mt-3.5 text-[15.5px] leading-relaxed text-muted">
-        Every engagement begins with a structured relationship. The behaviors below are out of bounds, full stop. This isn't a sales line; it's how the practice is operated.
-      </p>
-    </div>
-
-    <div class="grid grid-cols-3 gap-6 max-[1024px]:grid-cols-2 max-[720px]:grid-cols-1">
-      {BOUNDARY_CARDS.map(b => (
-        <div class="flex gap-3 rounded-2xl border border-line bg-seasalt p-5">
-          <div class="mt-0.5 shrink-0 text-[14px] font-extrabold text-amber">✕</div>
-          <div>
-            <h4 class="text-[16px] font-extrabold leading-tight text-yale-dark">{b.heading}</h4>
-            <p class="mt-2 text-[14px] leading-[1.55] text-muted">{b.body}</p>
-          </div>
-        </div>
-      ))}
-    </div>
-  </div>
-</section>
-
-<!-- PRINCIPLES BAND -->
-<section class="bg-yale-dark py-20 text-white/70">
-  <div class="mx-auto max-w-[1280px] px-12 max-[1024px]:px-8 max-[900px]:px-6 max-[600px]:px-[18px] grid grid-cols-[1fr_1.15fr] gap-12 items-start max-[900px]:grid-cols-1">
-    <div>
-      <Eyebrow text="Locked in teaming letter" onDark showGlyph />
-      <h2 class="mt-4 text-[38px] font-extrabold leading-[1.1] tracking-[-0.02em] text-white">
-        Four non-negotiables, in writing.
-      </h2>
-      <p class="mt-3.5 text-[15.5px] leading-relaxed text-white/70">
-        These show up in the teaming letter draft we send in Step 3. They are not negotiable; they are how the practice operates.
-      </p>
-    </div>
-    <div class="space-y-3.5">
-      {PRINCIPLES.map(p => (
-        <div class="flex gap-3 rounded-2xl border border-white/12 bg-white/5 p-5">
-          <div class="grid size-10 shrink-0 place-items-center rounded-xl bg-cyan-soft text-yale-dark">
-            <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M12 2 L4 6 v6 c0 4 3.5 8 8 10 c4.5 -2 8 -6 8 -10 V6 z"></path>
-              <path d="M9 12 l2 2 l4 -4"></path>
-            </svg>
-          </div>
-          <div>
-            <h4 class="text-[16px] font-extrabold leading-tight text-white">{p.heading}</h4>
-            <p class="mt-2 text-[14px] leading-[1.55] text-white/70">{p.body}</p>
-          </div>
-        </div>
-      ))}
-    </div>
-  </div>
-</section>
-
-<!-- FINAL CTA -->
-<section class="bg-white py-20">
-  <div class="mx-auto max-w-[1280px] px-12 max-[1024px]:px-8 max-[900px]:px-6 max-[600px]:px-[18px] grid grid-cols-[1fr_1.05fr] gap-12 items-start max-[900px]:grid-cols-1">
-    <div>
-      <Eyebrow text="Start the sequence" showGlyph />
-      <h2 class="mt-4 text-[40px] font-extrabold leading-[1.1] tracking-[-0.02em] text-yale-dark">
-        Step 01 is one email.
-      </h2>
-      <p class="mt-3.5 text-[15.5px] leading-relaxed text-muted">
-        From a capture manager, BD lead, or program manager at a U.S. prime. One business day later, a US-based partner manager replies with the NDA and a calendar slot.
-      </p>
-      <div class="mt-7">
-        <CtaButton href="/us-sled/contact/" label="Start an NDA conversation" variant="cta" />
-      </div>
-    </div>
-    <div class="rounded-2xl border border-line bg-seasalt p-6">
-      <h4 class="text-[16px] font-extrabold text-yale-dark">What to include in the first email</h4>
-      <ul class="mt-3 list-disc pl-5 text-[14px] leading-[1.55] text-muted">
-        {FIRST_EMAIL_CHECKLIST.map(item => <li>{item}</li>)}
-      </ul>
-    </div>
-  </div>
-</section>
-
+  <script src="/scripts/sled-hub.js" is:inline></script>
 </SledLayout>
-

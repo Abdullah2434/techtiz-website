@@ -19,7 +19,7 @@ const IND_ICON_KEYS = [
   class="relative overflow-hidden bg-yale-dark py-[110px] text-white max-[900px]:py-14"
 >
   <div
-    class="pointer-events-none absolute -bottom-[60px] -right-[60px] size-[320px] rotate-[15deg] opacity-70 bg-[linear-gradient(45deg,transparent_48%,rgba(24,176,230,0.12)_48%_52%,transparent_52%)] bg-size-[28px_28px]"
+    class="pointer-events-none absolute -top-[60px] -right-[60px] size-[320px] rotate-[15deg] opacity-70 bg-[linear-gradient(45deg,transparent_48%,rgba(24,176,230,0.12)_48%_52%,transparent_52%)] bg-size-[28px_28px]"
     aria-hidden="true"
   >
   </div>
@@ -60,10 +60,8 @@ const IND_ICON_KEYS = [
           <button
             type="button"
             class:list={[
-              "home-ind-tab cursor-pointer rounded-[10px] border px-6 py-3 text-sm font-semibold leading-none whitespace-nowrap",
-              i === 0
-                ? "border-cyan bg-cyan text-yale-dark"
-                : "border-white/10 bg-white/4 text-white/72 hover:border-cyan/30 hover:bg-white/8 hover:text-white",
+              "home-ind-tab cursor-pointer rounded-[10px] px-6 py-3 text-sm font-semibold leading-none whitespace-nowrap hover:border-cyan/30 hover:bg-white/8 hover:text-white",
+              i === 0 && "is-active",
             ]}
             role="tab"
             data-ind={tab.id}
@@ -80,17 +78,16 @@ const IND_ICON_KEYS = [
       data-ind-panel
     >
       <div
-        class="home-ind-card flex flex-col rounded-[14px] border border-white/10 bg-white/4 p-8 max-[600px]:p-6"
-        data-ind-card
+        class="home-ind-pane flex flex-col rounded-[14px] border border-white/10 bg-white/4 p-8 max-[600px]:p-6"
       >
-        <div class="mb-[18px] flex items-center gap-3" data-ind-icon-wrap>
-          <div
-            class="grid size-11 shrink-0 place-items-center rounded-[10px] bg-cyan/12 text-cyan"
-          >
-            <IndustryIcon name={initial.icon} />
-          </div>
-        </div>
         <div class="home-ind-stagger">
+          <div class="mb-[18px] flex items-center gap-3" data-ind-icon-wrap>
+            <div
+              class="grid size-11 shrink-0 place-items-center rounded-[10px] bg-cyan/12 text-cyan"
+            >
+              <IndustryIcon name={initial.icon} />
+            </div>
+          </div>
           <h3
             class="mb-3 text-2xl font-extrabold leading-[1.2] text-white"
             data-ind-title
@@ -117,15 +114,14 @@ const IND_ICON_KEYS = [
       </div>
 
       <div
-        class="home-ind-card flex flex-col rounded-[14px] border border-white/10 bg-white/4 p-8 max-[600px]:p-6"
-        data-ind-card
+        class="home-ind-pane flex flex-col rounded-[14px] border border-white/10 bg-white/4 p-8 max-[600px]:p-6"
       >
-        <div
-          class="mb-3 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-cyan"
-        >
-          Pain points we solve
-        </div>
         <div class="home-ind-stagger">
+          <div
+            class="mb-3 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-cyan"
+          >
+            Pain points we solve
+          </div>
           <h4
             class="mb-[18px] text-base font-bold leading-[1.3] text-white"
             data-ind-ch-head
@@ -150,8 +146,7 @@ const IND_ICON_KEYS = [
       </div>
 
       <div
-        class="home-ind-card relative overflow-hidden rounded-[14px] border border-yale-mid bg-yale p-8 max-[600px]:p-6"
-        data-ind-card
+        class="home-ind-pane relative overflow-hidden rounded-[14px] border border-yale-mid bg-yale p-8 max-[600px]:p-6"
       >
         <div
           class="pointer-events-none absolute -bottom-[30px] -right-[30px] size-[200px] rotate-[15deg] bg-[linear-gradient(45deg,transparent_48%,rgba(24,176,230,0.20)_48%_52%,transparent_52%)] bg-size-[22px_22px]"
@@ -226,7 +221,7 @@ const IND_ICON_KEYS = [
   const chEl = panel.querySelector("[data-ind-challenges]");
   const ctaTitleEl = panel.querySelector("[data-ind-cta-title]");
   const ctaSubEl = panel.querySelector("[data-ind-cta-sub]");
-  const cards = panel.querySelectorAll("[data-ind-card]");
+  const panes = panel.querySelectorAll(".home-ind-pane");
   let activeKey = "healthcare";
   let animating = false;
 
@@ -239,17 +234,9 @@ const IND_ICON_KEYS = [
 
   const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-  const setTabStyles = (tab, on) => {
+  const setTabState = (tab, on) => {
     tab.setAttribute("aria-selected", on ? "true" : "false");
-    tab.classList.toggle("border-cyan", on);
-    tab.classList.toggle("bg-cyan", on);
-    tab.classList.toggle("text-yale-dark", on);
-    tab.classList.toggle("border-white/10", !on);
-    tab.classList.toggle("bg-white/4", !on);
-    tab.classList.toggle("text-white/72", !on);
-    tab.classList.toggle("hover:border-cyan/30", !on);
-    tab.classList.toggle("hover:bg-white/8", !on);
-    tab.classList.toggle("hover:text-white", !on);
+    tab.classList.toggle("is-active", on);
   };
 
   const updateContent = (key) => {
@@ -286,31 +273,32 @@ const IND_ICON_KEYS = [
   const runPanelTransition = async (key) => {
     if (animating || key === activeKey) return;
     animating = true;
-    panel.classList.remove("home-ind-panel-ready");
 
-    cards.forEach((c) => {
-      c.classList.remove("home-ind-enter");
-      c.classList.add("home-ind-exit");
+    panes.forEach((pane) => {
+      pane.classList.remove("home-ind-enter");
+      pane.classList.add("home-ind-exit");
     });
 
     await wait(indTransitionMs);
 
+    panel.classList.remove("home-ind-panel-ready");
+    panel.classList.add("home-ind-revealing");
     updateContent(key);
     activeKey = key;
 
-    cards.forEach((c) => {
-      c.classList.remove("home-ind-exit");
-      c.classList.add("home-ind-enter");
+    panes.forEach((pane) => {
+      pane.classList.remove("home-ind-exit");
+      pane.classList.add("home-ind-enter");
     });
 
     await wait(20);
 
-    cards.forEach((c) => c.classList.remove("home-ind-enter"));
+    panes.forEach((pane) => pane.classList.remove("home-ind-enter"));
+    panel.classList.add("home-ind-panel-ready");
 
     await wait(indTransitionMs);
 
-    panel.classList.add("home-ind-panel-ready");
-
+    panel.classList.remove("home-ind-revealing");
     animating = false;
   };
 
@@ -321,7 +309,7 @@ const IND_ICON_KEYS = [
       const key = tab.getAttribute("data-ind");
       if (!key || key === activeKey) return;
 
-      tabs.forEach((t) => setTabStyles(t, t === tab));
+      tabs.forEach((t) => setTabState(t, t === tab));
       runPanelTransition(key);
     });
   });

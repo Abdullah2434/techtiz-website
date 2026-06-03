@@ -270,32 +270,41 @@
   }
 }
 
-/* Industries — tab + panel transitions (legacy framer: 0.4s ease [0.4,0,0.2,1]) */
+/* Industries — tab + panel transitions (same pattern as Why section) */
 .home-ind-tab {
+  border: 1px solid rgb(255 255 255 / 0.1);
+  background-color: rgb(255 255 255 / 0.04);
+  color: rgb(255 255 255 / 0.72);
   transition:
     background-color 400ms cubic-bezier(0.4, 0, 0.2, 1),
     border-color 400ms cubic-bezier(0.4, 0, 0.2, 1),
     color 400ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.home-ind-card {
+.home-ind-tab.is-active {
+  border-color: var(--color-cyan);
+  background-color: var(--color-cyan);
+  color: var(--color-yale-dark);
+}
+
+.home-ind-pane {
   transition:
     opacity 400ms cubic-bezier(0.4, 0, 0.2, 1),
     transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.home-ind-card.home-ind-exit {
+.home-ind-pane.home-ind-exit {
   opacity: 0;
   transform: translateY(-20px);
   pointer-events: none;
 }
 
-.home-ind-card.home-ind-enter {
+.home-ind-pane.home-ind-enter {
   opacity: 0;
   transform: translateY(20px);
 }
 
-.home-ind-stagger > * {
+.home-ind-panel.home-ind-revealing .home-ind-stagger > * {
   opacity: 0;
   transform: translateY(10px);
   transition:
@@ -303,31 +312,125 @@
     transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.home-ind-panel-ready .home-ind-stagger > * {
+.home-ind-panel.home-ind-revealing.home-ind-panel-ready .home-ind-stagger > * {
   opacity: 1;
   transform: translateY(0);
 }
 
-.home-ind-stagger > *:nth-child(1) {
-  transition-delay: 100ms;
+.home-ind-panel.home-ind-revealing .home-ind-stagger > *:nth-child(1) {
+  transition-delay: 80ms;
 }
-.home-ind-stagger > *:nth-child(2) {
+.home-ind-panel.home-ind-revealing .home-ind-stagger > *:nth-child(2) {
+  transition-delay: 140ms;
+}
+.home-ind-panel.home-ind-revealing .home-ind-stagger > *:nth-child(3) {
   transition-delay: 200ms;
 }
-.home-ind-stagger > *:nth-child(3) {
-  transition-delay: 300ms;
+.home-ind-panel.home-ind-revealing .home-ind-stagger > *:nth-child(4) {
+  transition-delay: 260ms;
 }
-.home-ind-stagger > *:nth-child(4) {
-  transition-delay: 400ms;
+.home-ind-panel.home-ind-revealing .home-ind-stagger > *:nth-child(5) {
+  transition-delay: 320ms;
 }
-.home-ind-stagger > *:nth-child(5) {
-  transition-delay: 500ms;
+.home-ind-panel.home-ind-revealing .home-ind-stagger > *:nth-child(6) {
+  transition-delay: 380ms;
 }
 
-.home-why-panel-fade {
+/* Why choose — tab + panel transitions (legacy framer: 0.4s ease [0.4,0,0.2,1]) */
+.home-why-tab {
+  transition:
+    border-color 400ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 400ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 400ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.home-why-tab.is-active {
+  border-color: var(--color-cyan);
+  background-color: #fff;
+  box-shadow:
+    0 8px 24px -14px rgba(24, 176, 230, 0.45),
+    inset 0 0 0 1px var(--color-cyan-soft);
+}
+
+.home-why-tab.is-active::after {
+  content: '';
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  z-index: 1;
+  width: 12px;
+  height: 12px;
+  transform: translateX(-50%) rotate(45deg);
+  border-right: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--color-line);
+  background-color: var(--color-seasalt);
+}
+
+.home-why-tab-num {
+  transition: color 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.home-why-tab.is-active .home-why-tab-num {
+  color: var(--color-cyan);
+}
+
+.home-why-tab.is-active .home-why-tab-title {
+  color: var(--color-yale-dark);
+}
+
+.home-why-tab.is-active .home-why-tab-tag {
+  color: var(--color-ink);
+}
+
+.home-why-pane {
+  transition:
+    opacity 400ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.home-why-pane.home-why-exit {
   opacity: 0;
-  transform: translateY(6px);
-  transition: opacity 100ms ease, transform 240ms ease;
+  transform: translateY(-20px);
+  pointer-events: none;
+}
+
+.home-why-pane.home-why-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Stagger only while panel is revealing — never hide content during pane exit */
+.home-why-panel.home-why-revealing .home-why-stagger > * {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 400ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.home-why-panel.home-why-revealing.home-why-panel-ready .home-why-stagger > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.home-why-panel.home-why-revealing .home-why-stagger > *:nth-child(1) {
+  transition-delay: 80ms;
+}
+.home-why-panel.home-why-revealing .home-why-stagger > *:nth-child(2) {
+  transition-delay: 140ms;
+}
+.home-why-panel.home-why-revealing .home-why-stagger > *:nth-child(3) {
+  transition-delay: 200ms;
+}
+.home-why-panel.home-why-revealing .home-why-stagger > *:nth-child(4) {
+  transition-delay: 260ms;
+}
+.home-why-panel.home-why-revealing .home-why-stagger > *:nth-child(5) {
+  transition-delay: 320ms;
+}
+.home-why-panel.home-why-revealing .home-why-stagger > *:nth-child(6) {
+  transition-delay: 380ms;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -374,17 +477,31 @@
     opacity: 1;
   }
   .home-ind-tab,
-  .home-ind-card,
-  .home-ind-stagger > * {
+  .home-ind-pane {
     transition: none !important;
   }
-  .home-ind-card.home-ind-exit,
-  .home-ind-card.home-ind-enter {
+  .home-ind-pane.home-ind-exit,
+  .home-ind-pane.home-ind-enter {
     opacity: 1 !important;
     transform: none !important;
   }
-  .home-ind-stagger > * {
+  .home-ind-panel.home-ind-revealing .home-ind-stagger > * {
     opacity: 1 !important;
     transform: none !important;
+    transition: none !important;
+  }
+  .home-why-tab,
+  .home-why-pane {
+    transition: none !important;
+  }
+  .home-why-pane.home-why-exit,
+  .home-why-pane.home-why-enter {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .home-why-panel.home-why-revealing .home-why-stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 }

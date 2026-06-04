@@ -49,6 +49,8 @@
   const form = document.getElementById('sledInquiryForm');
   const success = document.getElementById('sledInquirySuccess');
   if (!form) return;
+  const mailtoEmail = form.dataset.mailto || '';
+  if (!mailtoEmail) return;
 
   function v(id) {
     const el = document.getElementById(id);
@@ -89,7 +91,7 @@
     ];
     const subject = 'SLED engagement inquiry — ' + (v('sled-iq-company') || 'prime contractor');
     window.location.href =
-      'mailto:sled@techtiz.co?subject=' +
+      'mailto:' + mailtoEmail + '?subject=' +
       encodeURIComponent(subject) +
       '&body=' +
       encodeURIComponent(lines.join('\n'));

@@ -16,7 +16,7 @@ import {
   VEHICLE_OPTIONS,
   WHAT_HAPPENS_NEXT,
 } from '../../../lib/constants/pages/contact';
-import { SITE } from '../../../lib/constants/site';
+import { SITE, highlightSledEmailHtml } from '../../../lib/constants/site';
 import Eyebrow from '../../shared/Eyebrow.astro';
 import SledPageWrap from '../shared/SledPageWrap.astro';
 
@@ -46,6 +46,7 @@ const sectionLabelClass = 'font-mono text-[10.5px] font-bold tracking-[0.18em] t
         <form
           class="overflow-hidden rounded-2xl border border-line bg-white shadow-[0_24px_56px_-32px_rgba(14,38,64,0.28)]"
           id="intakeForm"
+          data-mailto={SITE.email.sled}
           novalidate
         >
           <div class="border-b border-line bg-gradient-to-r from-seasalt to-white px-6 py-5 sm:px-8">
@@ -188,9 +189,12 @@ const sectionLabelClass = 'font-mono text-[10.5px] font-bold tracking-[0.18em] t
             <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--color-cyan-strong)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"></path></svg>
           </div>
           <h3 class="mb-2.5 text-2xl font-extrabold text-yale-dark">Your inquiry is ready to send.</h3>
-          <p class="mx-auto mb-6 max-w-[420px] text-[15px] leading-[1.55] text-muted">
-            Your email client should have opened a pre-filled message to <strong class="text-yale">sled@techtiz.co</strong>. If it didn't, copy your details into an email to that address — we reply within one business day with a mutual NDA template.
-          </p>
+          <p
+            class="mx-auto mb-6 max-w-[420px] text-[15px] leading-[1.55] text-muted"
+            set:html={highlightSledEmailHtml(
+              `Your email client should have opened a pre-filled message to ${SITE.email.sled}. If it didn't, copy your details into an email to that address — we reply within one business day with a mutual NDA template.`,
+            )}
+          />
           <a
             id="formReset"
             href="#"
@@ -246,82 +250,6 @@ const sectionLabelClass = 'font-mono text-[10.5px] font-bold tracking-[0.18em] t
 </section>
 
 <script>
-  document.querySelectorAll('.intent-option').forEach((opt) => {
-    opt.addEventListener('click', () => {
-      document.querySelectorAll('.intent-option').forEach((o) => o.classList.remove('on'));
-      opt.classList.add('on');
-      const input = opt.querySelector('input') as HTMLInputElement;
-      if (input) input.checked = true;
-    });
-  });
-
-  (function () {
-    const form = document.getElementById('intakeForm') as HTMLFormElement;
-    const success = document.getElementById('formSuccess');
-    if (!form) return;
-    function val(id: string) {
-      const el = document.getElementById(id) as HTMLInputElement;
-      return el ? el.value.trim() : '';
-    }
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      let ok = true;
-      ['name', 'email', 'firm'].forEach((id) => {
-        const el = document.getElementById(id) as HTMLInputElement;
-        if (el && !el.value.trim()) {
-          el.style.borderColor = 'var(--color-amber)';
-          ok = false;
-        } else if (el) {
-          el.style.borderColor = '';
-        }
-      });
-      if (!ok) return;
-      const intentEl = form.querySelector('input[name="intent"]:checked');
-      const intent = intentEl
-        ? (intentEl.closest('.intent-option')?.querySelector('.l') as HTMLElement)?.textContent?.trim()
-        : '—';
-      const lines = [
-        'U.S. SLED subcontract inquiry',
-        '',
-        'Name:        ' + val('name'),
-        'Work email:  ' + val('email'),
-        'Prime firm:  ' + val('firm'),
-        'Role:        ' + val('role'),
-        'Vehicle:     ' + val('vehicle'),
-        'Timing:      ' + val('timing'),
-        'Solicitation: ' + (val('solicitation') || '(not provided)'),
-        'Ceiling:     ' + val('ceiling'),
-        'Clearance:   ' + val('clearance'),
-        'Requesting:  ' + intent,
-        '',
-        'Description:',
-        val('desc') || '(none provided)',
-      ];
-      const subject = 'SLED subcontract inquiry — ' + (val('firm') || 'prime contractor');
-      window.location.href =
-        'mailto:sled@techtiz.co?subject=' +
-        encodeURIComponent(subject) +
-        '&body=' +
-        encodeURIComponent(lines.join('\n'));
-      form.classList.add('hidden');
-      if (success) {
-        success.classList.remove('hidden');
-        success.classList.add('is-visible', 'flex');
-        const y = success.getBoundingClientRect().top + window.scrollY - 140;
-        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
-      }
-    });
-    const reset = document.getElementById('formReset');
-    if (reset) {
-      reset.addEventListener('click', (e) => {
-        e.preventDefault();
-        if (success) {
-          success.classList.remove('is-visible', 'flex');
-          success.classList.add('hidden');
-        }
-        form.reset();
-        form.classList.remove('hidden');
-      });
-    }
-  })();
+  import { initContactIntakeForm } from './contact-intake-form';
+  initContactIntakeForm();
 </script>

@@ -1,5 +1,6 @@
 ---
 import '../styles/globals.css';
+import { SITE } from '../lib/constants/site';
 
 interface Props {
   title: string;
@@ -19,7 +20,7 @@ const {
   ogDescription,
 } = Astro.props;
 
-const siteUrl = 'https://techtiz.co';
+const siteUrl = SITE.url;
 const canonical = `${siteUrl}${canonicalPath}`;
 const resolvedOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
 ---
@@ -41,7 +42,7 @@ const resolvedOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogIm
   <meta property="og:title" content={ogTitle ?? title} />
   <meta property="og:description" content={ogDescription ?? description} />
   <meta property="og:image" content={resolvedOgImage} />
-  <meta property="og:site_name" content="Techtiz" />
+  <meta property="og:site_name" content={SITE.name} />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />

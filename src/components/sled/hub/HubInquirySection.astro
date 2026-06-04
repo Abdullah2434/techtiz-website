@@ -1,6 +1,6 @@
 ---
 import { HUB_INQUIRY } from '../../../lib/constants/pages/sled-hub';
-import { SITE } from '../../../lib/constants/site';
+import { SITE, highlightSledEmailHtml } from '../../../lib/constants/site';
 import Eyebrow from '../../shared/Eyebrow.astro';
 import SledPageWrap from '../shared/SledPageWrap.astro';
 
@@ -38,7 +38,12 @@ const inputClass =
         </div>
       </aside>
 
-      <form class="flex flex-col gap-6 px-10 py-10 max-[900px]:px-8 lg:px-12 lg:py-12" id="sledInquiryForm" novalidate>
+      <form
+        class="flex flex-col gap-6 px-10 py-10 max-[900px]:px-8 lg:px-12 lg:py-12"
+        id="sledInquiryForm"
+        data-mailto={SITE.email.sled}
+        novalidate
+      >
         <div>
           <label class="mb-2.5 block font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted">
             What do you need help with? <span class="text-cyan-strong">*</span>
@@ -142,7 +147,7 @@ const inputClass =
           </div>
           <div>
             <label class="mb-2 block font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted" for="sled-iq-phone">Phone</label>
-            <input class={inputClass} type="tel" id="sled-iq-phone" name="phone" placeholder="+1 (XXX) XXX-XXXX" />
+            <input class={inputClass} type="tel" id="sled-iq-phone" name="phone" placeholder={SITE.phone.display} />
           </div>
         </div>
 
@@ -171,7 +176,7 @@ const inputClass =
         <h3 class="mb-3 text-2xl font-extrabold text-yale-dark">{HUB_INQUIRY.success.heading}</h3>
         <p
           class="mx-auto mb-7 max-w-[420px] text-[15px] leading-[1.58] text-muted"
-          set:html={HUB_INQUIRY.success.body.replace('sled@techtiz.co', `<strong class="text-yale">${SITE.email.sled}</strong>`)}
+          set:html={highlightSledEmailHtml(HUB_INQUIRY.success.body)}
         />
         <a
           class="inline-flex items-center justify-center rounded-xl border border-line bg-white px-7 py-3.5 text-[14.5px] font-bold text-yale-dark shadow-[0_8px_20px_-12px_rgba(21,58,95,0.15)] transition-[transform,background] duration-200 ease-out hover:-translate-y-0.5 hover:bg-seasalt"

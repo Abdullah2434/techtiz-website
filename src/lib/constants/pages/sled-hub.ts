@@ -1,3 +1,5 @@
+import { SITE } from "../site";
+
 export const SLED_HUB_SEO = {
   title:
     "U.S. SLED Subcontractor | Back-office engineering for primes | Techtiz",
@@ -69,7 +71,7 @@ export const OUTCOMES_STATS = [
     l: "References and CPARS-style narratives under teaming agreement",
   },
   { n: "0", l: "Agency-facing engagements—subcontract-only model" },
-  { n: "1 day", l: "Teaming inquiry response at sled@techtiz.co" },
+  { n: "1 day", l: `Teaming inquiry response at ${SITE.email.sled}` },
   {
     n: "100%",
     l: "White-label artifacts under your prime brand",
@@ -394,9 +396,9 @@ export const HUB_INQUIRY = {
   aside: {
     eyebrow: "Partner with us",
     heading: "NDA first. Subcontract second. White-label always.",
-    body: "Capture managers, BD leads, and program managers at U.S. primes: email sled@techtiz.co or use this form. A U.S. partner manager replies within one business day with a mutual NDA template and a 30-minute calendar slot. No public materials exchanged before the NDA is signed.",
+    body: `Capture managers, BD leads, and program managers at U.S. primes: email ${SITE.email.sled} or use this form. A U.S. partner manager replies within one business day with a mutual NDA template and a 30-minute calendar slot. No public materials exchanged before the NDA is signed.`,
     bullets: [
-      "sled@techtiz.co · 1 business day",
+      `${SITE.email.sled} · ${SITE.responseSla.sled}`,
       "Mutual NDA on first contact",
       "Teaming letter template included",
       "Background-check-ready · CUI-aware delivery",
@@ -437,7 +439,7 @@ export const HUB_INQUIRY = {
   submitLabel: "Send Inquiry",
   success: {
     heading: "Your inquiry is ready to send.",
-    body: "Your email client should have opened a pre-filled message to sled@techtiz.co. If it didn't, email that address directly — we reply within one business day with a mutual NDA template.",
+    body: `Your email client should have opened a pre-filled message to ${SITE.email.sled}. If it didn't, email that address directly — we reply within one business day with a mutual NDA template.`,
     resetLabel: "Start another inquiry",
   },
 } as const;

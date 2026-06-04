@@ -1,3 +1,5 @@
+import { SITE } from "../site";
+
 export const PROCUREMENT_VEHICLES_SEO = {
   title: "Procurement Vehicles | Subcontract via your prime's contract | Techtiz",
   description:
@@ -146,6 +148,6 @@ export const PROCUREMENT_BOUNDARY = {
 
 export const VEHICLES_CTA = {
   eyebrow: "Vehicle not listed?",
-  heading: "Email sled@techtiz.co with how the agency buys.",
+  heading: `Email ${SITE.email.sled} with how the agency buys.`,
   body: "Capture managers and BD leads: include the procurement vehicle, engagement type, and timing in the first email. A U.S. partner manager replies within one business day with a mutual NDA template and a 30-minute calendar slot.",
 } as const;

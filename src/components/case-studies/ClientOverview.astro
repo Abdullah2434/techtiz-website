@@ -16,7 +16,15 @@ const { appLogo, client, overview, overview2 } = Astro.props;
     <div class="grid grid-cols-1 items-start gap-14 md:grid-cols-[1.15fr_1.85fr]">
       <div class="flex flex-col gap-4 border-l border-[#9c9c9c]/40 pl-10 md:pl-16">
         <div data-aos="zoom-in" data-aos-delay="300">
-          <img src={appLogo} alt={client} width={90} height={90} class="mb-1 h-auto w-[90px]" loading="lazy" />
+          <img
+            src={appLogo}
+            alt={`${client} logo`}
+            width={90}
+            height={90}
+            class="mb-1 h-auto w-[90px]"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
         <div data-aos="fade-up" data-aos-delay="400">
           <span class="text-base text-[#7d7d7d]">Client</span>

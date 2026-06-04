@@ -8,6 +8,7 @@ import CaseStudiesListingHeader from "../../components/case-studies/CaseStudiesL
 import CaseStudiesListing from "../../components/case-studies/CaseStudiesListing.astro";
 import CaseStudiesCta from "../../components/case-studies/CaseStudiesCta.astro";
 import VideoModal from "../../components/case-studies/VideoModal.astro";
+import Breadcrumbs from "../../components/seo/Breadcrumbs.astro";
 import { CASE_STUDIES_SEO_PORTFOLIO } from "../../lib/config/case-studies";
 
 const { title, description, canonicalPath, ogImage } =
@@ -16,7 +17,10 @@ const { title, description, canonicalPath, ogImage } =
 
 <BaseLayout {title} {description} {canonicalPath} {ogImage}>
   <Header currentPage="/case-studies/" />
-  <main>
+  <main id="main-content">
+    <div class="mx-auto max-w-[1400px] px-2 pt-4 max-[600px]:px-[18px]">
+      <Breadcrumbs canonicalPath={canonicalPath} />
+    </div>
     <CaseStudiesHero />
     <CaseStudiesListingHeader />
     <CaseStudiesListing />

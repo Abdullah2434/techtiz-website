@@ -3,6 +3,7 @@ import BaseLayout from './BaseLayout.astro';
 import Header from '../components/shared/Header.astro';
 import Footer from '../components/shared/Footer.astro';
 import Subnav from '../components/shared/Subnav.astro';
+import type { JsonLdNode } from '../lib/seo/types';
 
 interface Props {
   title: string;
@@ -11,6 +12,7 @@ interface Props {
   ogImage?: string;
   currentPage?: string;
   showSubnav?: boolean;
+  jsonLd?: JsonLdNode[];
 }
 
 const {
@@ -20,13 +22,14 @@ const {
   ogImage,
   currentPage = '',
   showSubnav = true,
+  jsonLd,
 } = Astro.props;
 ---
 
-<BaseLayout {title} {description} {canonicalPath} {ogImage}>
+<BaseLayout {title} {description} {canonicalPath} {ogImage} {jsonLd}>
   <Header currentPage={currentPage} />
   {showSubnav && <Subnav currentPath={canonicalPath} />}
-  <main>
+  <main id="main-content">
     <slot />
   </main>
   <Footer />

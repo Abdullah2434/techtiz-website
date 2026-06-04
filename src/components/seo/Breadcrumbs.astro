@@ -1,0 +1,45 @@
+---
+import { buildBreadcrumbs } from '../../lib/seo/crumbs';
+import { absoluteUrl, breadcrumbListJsonLd } from '../../lib/seo/json-ld';
+import JsonLd from './JsonLd.astro';
+
+interface Props {
+  canonicalPath: string;
+  class?: string;
+  /** Visually hidden nav for pages that already show crumbs elsewhere. */
+  visuallyHidden?: boolean;
+}
+
+const { canonicalPath, class: className, visuallyHidden = false } = Astro.props;
+const crumbs = buildBreadcrumbs(canonicalPath);
+const pageUrl = absoluteUrl(canonicalPath);
+---
+
+{
+  crumbs.length > 1 && (
+    <>
+      <nav
+        aria-label="Breadcrumb"
+        class:list={[className, visuallyHidden && 'sr-only']}
+      >
+        <ol class="flex flex-wrap items-center gap-2 font-mono text-[11.5px] tracking-[0.04em] text-muted">
+          {crumbs.map((crumb, index) => (
+            <li class="flex items-center gap-2">
+              {index > 0 && <span class="text-line" aria-hidden="true">/</span>}
+              {crumb.href ? (
+                <a href={crumb.href} class="text-muted transition-colors hover:text-yale">
+                  {crumb.label}
+                </a>
+              ) : (
+                <span class="font-semibold text-yale" aria-current="page">
+                  {crumb.label}
+                </span>
+              )}
+            </li>
+          ))}
+        </ol>
+      </nav>
+      <JsonLd data={breadcrumbListJsonLd(crumbs, pageUrl)} />
+    </>
+  )
+}

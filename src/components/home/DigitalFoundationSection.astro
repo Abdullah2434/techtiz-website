@@ -55,7 +55,7 @@ const { title, description, cta, bgImage, ratingImage, stats } = DIGITAL_FOUNDAT
             src={ratingImage}
             width={215}
             height={59}
-            alt="Clutch rating"
+            alt="Clutch 5-star client rating badge"
             class="h-[59px] w-auto max-w-[215px] object-contain"
             loading="lazy"
             decoding="async"
@@ -72,12 +72,12 @@ const { title, description, cta, bgImage, ratingImage, stats } = DIGITAL_FOUNDAT
         {
           stats.map((stat) => (
             <div class="flex flex-wrap items-center justify-center gap-2 border border-white/30 p-5">
-              <h3
+              <p
                 class="text-[32px] font-semibold leading-none md:text-[40px]"
                 data-stat-value={stat.value}
               >
                 {stat.value}
-              </h3>
+              </p>
               <p class="text-center text-xs font-normal md:text-lg">{stat.label}</p>
             </div>
           ))

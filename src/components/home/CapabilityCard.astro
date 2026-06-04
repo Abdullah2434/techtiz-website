@@ -29,6 +29,7 @@ const capDuration = '700ms';
     <img
       src={image}
       alt=""
+      role="presentation"
       class="size-full object-contain"
       loading="lazy"
       decoding="async"
@@ -45,7 +46,7 @@ const capDuration = '700ms';
         >
           <img
             src={image}
-            alt={subtitle}
+            alt={`${subtitle} — ${mainText}`}
             width={420}
             height={300}
             loading="lazy"

@@ -4,24 +4,85 @@
   const items = document.querySelectorAll('.nav-item');
   if (!items.length) return;
 
+  function resetMegaAnimation(mega) {
+    if (!mega) return;
+    mega.style.animation = 'none';
+    void mega.offsetHeight;
+    mega.style.removeProperty('animation');
+  }
+
+  function isNavOpen(item) {
+    return item.classList.contains('open') || item.dataset.open === 'true';
+  }
+
+  function closeItem(item, animate) {
+    const mega = item.querySelector('.mega');
+    const btn = item.querySelector('.nav-link');
+    const wasOpen = isNavOpen(item);
+
+    item.classList.remove('open');
+    item.dataset.open = 'false';
+    if (btn) btn.setAttribute('aria-expanded', 'false');
+
+    if (!mega) {
+      item.classList.remove('is-closing');
+      return;
+    }
+
+    if (!wasOpen) {
+      item.classList.remove('is-closing');
+      resetMegaAnimation(mega);
+      return;
+    }
+
+    if (!animate || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      item.classList.remove('is-closing');
+      resetMegaAnimation(mega);
+      return;
+    }
+
+    item.classList.add('is-closing');
+    mega.style.animation = 'none';
+    void mega.offsetHeight;
+    mega.style.removeProperty('animation');
+
+    const onEnd = (e) => {
+      if (e.target !== mega || e.animationName !== 'mega-menu-close') return;
+      item.classList.remove('is-closing');
+      mega.removeEventListener('animationend', onEnd);
+    };
+    mega.addEventListener('animationend', onEnd);
+  }
+
   function openItem(el) {
+    // Instantly hide any other open menu — avoid playing close animation on a closed panel
+    // (that flashes the wrong mega at opacity 1 before fading out).
     items.forEach((i) => {
-      if (i !== el) i.classList.remove('open');
-      i.dataset.open = i === el ? 'true' : 'false';
+      if (i !== el) closeItem(i, false);
     });
-    el.classList.add('open');
-    el.dataset.open = 'true';
+
+    const mega = el.querySelector('.mega');
     const btn = el.querySelector('.nav-link');
-    if (btn) btn.setAttribute('aria-expanded', 'true');
+
+    if (isNavOpen(el)) return;
+
+    el.classList.remove('is-closing');
+    resetMegaAnimation(mega);
+
+    // One frame without .open so the open keyframe always runs.
+    el.classList.remove('open');
+    el.dataset.open = 'false';
+    if (btn) btn.setAttribute('aria-expanded', 'false');
+
+    requestAnimationFrame(() => {
+      el.classList.add('open');
+      el.dataset.open = 'true';
+      if (btn) btn.setAttribute('aria-expanded', 'true');
+    });
   }
 
   function closeAll() {
-    items.forEach((i) => {
-      i.classList.remove('open');
-      i.dataset.open = 'false';
-      const btn = i.querySelector('.nav-link');
-      if (btn) btn.setAttribute('aria-expanded', 'false');
-    });
+    items.forEach((i) => closeItem(i, isNavOpen(i)));
   }
 
   function toggleItem(item) {
@@ -185,15 +246,50 @@
       .map(
         (s) =>
           '<div class="flex flex-col gap-2 px-4 py-3">' +
-          '<span class="text-[18px] font-semibold leading-none text-[#153A60]">' +
+          '<h3 class="mega-industry-sub-title">' +
           s.name +
-          '</span>' +
-          (s.desc
-            ? '<span class="text-xs leading-[120%] text-[#101010]/60">' + s.desc + '</span>'
-            : '') +
+          '</h3>' +
+          (s.desc ? '<p class="mega-industry-sub-desc">' + s.desc + '</p>' : '') +
           '</div>',
       )
       .join('');
+  }
+
+  function swapMegaPanel(panelEl, renderFn) {
+    if (!panelEl) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      renderFn();
+      return;
+    }
+
+    const runEnter = () => {
+      renderFn();
+      panelEl.classList.remove('mega-panel-exit');
+      panelEl.style.animation = 'none';
+      void panelEl.offsetHeight;
+      panelEl.style.removeProperty('animation');
+      panelEl.classList.add('mega-panel-enter');
+
+      const onEnterEnd = (e) => {
+        if (e.target !== panelEl || e.animationName !== 'mega-panel-enter') return;
+        panelEl.classList.remove('mega-panel-enter');
+        panelEl.removeEventListener('animationend', onEnterEnd);
+      };
+      panelEl.addEventListener('animationend', onEnterEnd);
+    };
+
+    panelEl.classList.remove('mega-panel-enter', 'mega-panel-exit');
+    panelEl.style.animation = 'none';
+    void panelEl.offsetHeight;
+    panelEl.style.removeProperty('animation');
+    panelEl.classList.add('mega-panel-exit');
+
+    const onExitEnd = (e) => {
+      if (e.target !== panelEl || e.animationName !== 'mega-panel-exit') return;
+      panelEl.removeEventListener('animationend', onExitEnd);
+      runEnter();
+    };
+    panelEl.addEventListener('animationend', onExitEnd);
   }
 
   document.querySelectorAll('[data-list]').forEach((list) => {
@@ -206,9 +302,13 @@
         item.classList.add('active');
         const k = item.dataset.key;
         const d = data[key] && data[key][k];
-        if (!d || !featBlock || !subBlock) return;
-        if (key === 'services') renderServicesPanel(d, featBlock, subBlock);
-        else renderIndustriesPanel(d, featBlock);
+        if (!d || !featBlock) return;
+        if (key === 'services' && !subBlock) return;
+
+        swapMegaPanel(featBlock, () => {
+          if (key === 'services') renderServicesPanel(d, featBlock, subBlock);
+          else renderIndustriesPanel(d, featBlock);
+        });
       };
       item.addEventListener('click', (e) => {
         e.preventDefault();

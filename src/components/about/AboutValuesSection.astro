@@ -1,0 +1,92 @@
+---
+import type { AboutValue } from '../../lib/types/about';
+
+interface Props {
+  values: AboutValue[];
+}
+
+const { values } = Astro.props;
+
+const cardBase =
+  'about-value-card group relative flex min-h-[180px] min-w-0 cursor-pointer flex-col border-white/20 bg-[#163B5A] transition-all duration-500 md:min-h-[260px] md:flex-1 md:border-r md:last:border-r-0 max-md:w-full max-md:border-b max-md:last:border-b-0';
+---
+
+<section class="mx-auto w-full max-w-[1400px] px-2 py-10 text-white md:py-16" data-about-values>
+  <div
+    data-about-values-track
+    class="flex w-full flex-col overflow-hidden rounded-lg border border-[#1E3C5A] max-md:overflow-visible md:min-h-[500px] md:flex-row"
+    data-aos="fade-up"
+    data-aos-delay="100"
+  >
+    {
+      values.map((val, idx) => (
+        <div class={cardBase} data-about-value-card data-index={idx}>
+          <div
+            data-about-value-video-wrap
+            class="absolute inset-0 z-0 h-full w-full overflow-hidden opacity-0 transition-all duration-500"
+          >
+            <div
+              data-about-value-spinner
+              class="absolute inset-0 z-20 hidden items-center justify-center bg-black/50"
+              aria-hidden="true"
+            >
+              <div class="size-8 animate-spin rounded-full border-4 border-white border-t-transparent" />
+            </div>
+            <video
+              data-about-value-video
+              src={val.video}
+              loop
+              muted
+              playsinline
+              preload="metadata"
+              class="h-full w-full object-cover"
+            />
+            <div class="absolute inset-0 z-10 bg-black/20" aria-hidden="true" />
+          </div>
+
+          <div
+            data-about-value-content
+            class="relative z-20 flex h-full w-full flex-col p-6 transition-all duration-700 sm:p-8"
+          >
+            <span
+              data-about-value-collapsed-num
+              class="mb-0 text-xl font-normal text-white transition-opacity duration-500 max-md:text-xl md:text-3xl lg:text-4xl"
+            >
+              {val.number}
+            </span>
+            <h4
+              data-about-value-collapsed-title
+              class="mt-auto mb-0 whitespace-pre-line text-base font-normal leading-[120%] text-white transition-opacity duration-500 md:text-lg lg:text-[24px]"
+            >
+              {val.title}
+            </h4>
+
+            <div
+              data-about-value-expanded
+              class="pointer-events-none absolute inset-0 z-30 flex h-full w-full flex-col items-start justify-center p-6 text-left max-md:justify-start sm:p-8"
+            >
+              <span
+                data-about-value-expanded-num
+                class="mb-2 text-xl font-normal leading-[120%] text-white max-md:text-xl md:text-[30px]"
+              >
+                {val.number}
+              </span>
+              <h4
+                data-about-value-expanded-title
+                class="mb-4 mt-2 whitespace-pre-line text-base font-medium leading-[120%] text-white md:text-lg lg:text-[24px]"
+              >
+                {val.title}
+              </h4>
+              <p
+                data-about-value-expanded-desc
+                class="max-w-[95%] whitespace-pre-line text-sm font-normal leading-[130%] text-white md:text-base"
+              >
+                {val.description}
+              </p>
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>

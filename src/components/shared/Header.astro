@@ -234,7 +234,11 @@ const megaPanelIndustries = `${megaPanelBase} before:left-1/2 before:-translate-
       >
         Case Studies
       </a>
-      <a href="/" class:list={navLinkClass('/')}>
+      <a
+        href={ROUTES.careers}
+        class:list={navLinkClass(ROUTES.careers)}
+        aria-current={currentPage === ROUTES.careers ? 'page' : undefined}
+      >
         Careers
       </a>
     </nav>

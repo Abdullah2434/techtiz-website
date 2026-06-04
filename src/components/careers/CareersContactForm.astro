@@ -1,0 +1,184 @@
+---
+import { SITE } from '../../lib/constants/site';
+import { CAREERS_FORM_SUCCESS_MESSAGE } from '../../lib/constants/pages/careers';
+
+const careersEmail = SITE.email.careers;
+---
+
+<section class="mx-auto w-full max-w-[1400px] px-2 py-10 md:py-16" id="contact-form">
+  <div class="flex flex-col gap-12 md:flex-row">
+    <div class="career-form-panel w-full md:w-1/2" data-career-form-panel>
+      <form class="flex flex-col gap-12" id="career-application-form" data-career-form novalidate>
+        <div class="flex flex-col gap-12 sm:flex-row">
+          <div class="w-full sm:w-1/2">
+            <input
+              type="text"
+              name="firstName"
+              placeholder="First name"
+              autocomplete="given-name"
+              class="career-field"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            />
+            <p class="career-field-error hidden" data-error-for="firstName"></p>
+          </div>
+          <div class="w-full sm:w-1/2">
+            <input
+              type="text"
+              name="lastName"
+              placeholder="Last name"
+              autocomplete="family-name"
+              class="career-field"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            />
+            <p class="career-field-error hidden" data-error-for="lastName"></p>
+          </div>
+        </div>
+
+        <div>
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter your email address"
+            autocomplete="email"
+            class="career-field"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          />
+          <p class="career-field-error hidden" data-error-for="email"></p>
+        </div>
+
+        <div>
+          <input
+            type="tel"
+            name="phone"
+            placeholder="Phone number"
+            autocomplete="tel"
+            class="career-field"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          />
+          <p class="career-field-error hidden" data-error-for="phone"></p>
+        </div>
+
+        <div>
+          <textarea
+            name="message"
+            placeholder="Cover letter (optional)"
+            rows={4}
+            class="career-field resize-none"
+            data-aos="fade-up"
+            data-aos-delay="100"></textarea>
+        </div>
+
+        <div>
+          <label
+            for="cv-upload"
+            class="group flex w-full cursor-pointer flex-col items-start justify-center rounded-[8px] border-[1.7px] border-dashed border-[#88998D] bg-[#F6F6F6] px-8 py-[25.4px] transition-all duration-300 hover:border-[#18B0E6]"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="mb-2 flex items-center gap-3">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                class="text-[#1E1E1E] transition-colors duration-300 group-hover:text-[#18b0e6]"
+                aria-hidden="true"
+              >
+                <path
+                  d="M17 9.00195C19.175 9.01395 20.353 9.11095 21.121 9.87895C22 10.758 22 12.172 22 15V16C22 18.829 22 20.243 21.121 21.122C20.243 22 18.828 22 16 22H8C5.172 22 3.757 22 2.879 21.122C2 20.242 2 18.829 2 16V15C2 12.172 2 10.758 2.879 9.87895C3.647 9.11095 4.825 9.01395 7 9.00195"
+                  stroke="currentColor"
+                  stroke-linecap="round"></path>
+                <path
+                  d="M12 15V2M12 2L15 5.5M12 2L9 5.5"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
+              <span
+                class="text-[16px] leading-[130%] font-normal text-[#1E1E1E] transition-colors duration-300 group-hover:text-[#18b0e6]"
+              >
+                Upload your CV
+              </span>
+            </div>
+            <span class="mt-1 hidden text-[14px] text-[#18B0E6]" data-cv-filename></span>
+            <input id="cv-upload" type="file" name="cv" accept=".pdf,.doc,.docx" class="hidden" />
+          </label>
+          <p class="career-field-error hidden" data-error-for="cv"></p>
+        </div>
+
+        <input
+          type="text"
+          name="company"
+          tabindex="-1"
+          autocomplete="off"
+          class="hidden"
+          aria-hidden="true"
+        />
+
+        <div data-aos="fade-up" data-aos-delay="100">
+          <button
+            type="submit"
+            class="group flex h-[48px] w-full cursor-pointer items-center justify-center gap-2 rounded-[2px] border border-[#1E1E1E] px-2 text-[16px] font-normal text-[#1E1E1E] transition-all duration-300 hover:bg-[#1E1E1E] hover:text-white disabled:cursor-not-allowed disabled:border-[#1E1E1E] disabled:bg-[#1E1E1E] disabled:text-white md:w-[145px]"
+            data-career-submit
+          >
+            <span data-career-submit-label>Confirm</span>
+            <svg
+              width="18"
+              height="14"
+              class="mt-px transition-transform duration-300 group-hover:translate-x-1 group-disabled:hidden"
+              viewBox="0 0 18 14"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M1 7.01097L16.8124 6.99999M11.5858 13L17 6.99999L11.5858 1"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div
+      class="career-form-success w-full rounded-[8px] border border-line bg-seasalt p-8 md:w-1/2"
+      data-career-form-success
+      hidden
+    >
+      <h3 class="mb-3 text-[24px] font-semibold text-[#153A5F]">Almost there</h3>
+      <p class="mb-6 text-[16px] leading-[140%] text-[#101010]">{CAREERS_FORM_SUCCESS_MESSAGE}</p>
+      <a
+        href={`mailto:${careersEmail}`}
+        class="inline-flex items-center gap-2 border-b-2 border-cyan pb-0.5 text-[15px] font-bold text-yale"
+        data-career-mailto
+      >
+        Email {careersEmail}
+      </a>
+    </div>
+
+    <div class="block w-full md:w-1/2" data-career-form-image>
+      <div class="h-full w-full overflow-hidden rounded-[8px]">
+        <img
+          src="/images/careers/Frame.png"
+          alt="Join the Techtiz team"
+          width={563}
+          height={450}
+          class="h-full w-full max-h-[450px] object-cover"
+          loading="lazy"
+          decoding="async"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ careersEmail }}>
+  window.__CAREERS_EMAIL__ = careersEmail;
+</script>

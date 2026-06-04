@@ -1,0 +1,32 @@
+---
+import type { CareersContactHeroData } from '../../lib/types/careers';
+
+interface Props extends CareersContactHeroData {}
+
+const { heading, headingHighlight, description } = Astro.props;
+---
+
+<section class="mx-auto w-full max-w-[1400px] px-2 py-10 md:py-16">
+  <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+    <div class="flex-1">
+      <h2
+        class="mb-2 text-center text-[40px] leading-[120%] font-normal md:text-left md:text-[56px]"
+        data-aos="fade-up"
+        data-aos-delay="100"
+      >
+        {heading}
+        <br />
+        <span class="font-bold text-[#18B0E6]">{headingHighlight}</span>
+      </h2>
+    </div>
+    <div class="mb-3 flex-1">
+      <p
+        class="text-center text-[18px] font-normal text-[#101010] md:text-right"
+        data-aos="fade-up"
+        data-aos-delay="100"
+      >
+        {description}
+      </p>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,60 @@
+/* Careers page — application form (legacy contact Input variant) */
+
+/* Hero video visibility (also in industries.css; kept here if page imports careers.css only) */
+.ind-hero-vid.is-loaded {
+  opacity: 1;
+}
+
+.career-field {
+  width: 100%;
+  border-bottom: 1px solid #88998d;
+  background: transparent;
+  padding: 0.5rem 0;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 130%;
+  color: #1e1e1e;
+  outline: none;
+  transition:
+    border-color 0.3s,
+    color 0.3s;
+}
+
+.career-field::placeholder {
+  color: #1e1e1e;
+}
+
+.career-field:hover {
+  border-color: #18b0e6;
+  color: #153a60;
+}
+
+.career-field:hover::placeholder {
+  color: #153a60;
+}
+
+.career-field:focus {
+  border-color: #18b0e6;
+}
+
+.career-field.is-invalid {
+  border-color: #ef4444;
+}
+
+.career-field-error {
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  color: #ef4444;
+}
+
+.career-form-success {
+  display: none;
+}
+
+.career-form-success.is-visible {
+  display: block;
+}
+
+.career-form-panel.is-hidden {
+  display: none;
+}

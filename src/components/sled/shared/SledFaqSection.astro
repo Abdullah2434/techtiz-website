@@ -1,0 +1,158 @@
+---
+import ChevronDown from '@lucide/astro/icons/chevron-down';
+import type { SledFaqContent } from '../../../lib/constants/pages/sled-faq';
+import { SITE } from '../../../lib/constants/site';
+import Eyebrow from '../../shared/Eyebrow.astro';
+import SledPageWrap from './SledPageWrap.astro';
+
+interface Props extends SledFaqContent {
+  /** Canonical path for FAQPage JSON-LD (e.g. `/us-sled/contact/`). */
+  canonicalPath: string;
+  sectionId?: string;
+}
+
+const {
+  eyebrow,
+  heading,
+  intro,
+  items,
+  canonicalPath,
+  sectionId = 'faq',
+} = Astro.props;
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${SITE.url}${canonicalPath}#faq`,
+  mainEntity: items.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+};
+---
+
+<section class="sled-section bg-white" id={sectionId} aria-labelledby={`${sectionId}-heading`}>
+  <SledPageWrap>
+    <div class="mx-auto mb-8 flex max-w-3xl flex-col md:mb-10 md:items-center md:text-center">
+      <Eyebrow text={eyebrow} showGlyph class="mb-4" />
+      <h2
+        id={`${sectionId}-heading`}
+        class="text-[clamp(1.75rem,3.5vw,2.25rem)] font-semibold leading-[1.15] tracking-[-0.02em] text-yale-dark"
+      >
+        {heading}
+      </h2>
+      {intro && (
+        <p class="mt-3 max-w-xl text-[15px] leading-[1.65] text-muted md:mt-4">{intro}</p>
+      )}
+    </div>
+
+    <div class="mx-auto w-full max-w-3xl" data-sled-faq-list>
+      {items.map((item) => (
+        <details class="group border-b border-line first:border-t [&.is-closing_[data-faq-panel]]:grid-rows-[0fr]">
+          <summary
+            class="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-left font-medium text-yale-dark transition-opacity duration-200 hover:opacity-80 focus-visible:rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan [&::-webkit-details-marker]:hidden"
+          >
+            <span class="text-[15px] leading-snug">{item.question}</span>
+            <ChevronDown
+              class="size-4 shrink-0 text-muted transition-transform duration-500 ease-in-out group-open:rotate-180 motion-reduce:transition-none"
+              stroke-width="2"
+              aria-hidden="true"
+            />
+          </summary>
+          <div
+            data-faq-panel
+            class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-in-out will-change-[grid-template-rows] group-open:grid-rows-[1fr] motion-reduce:transition-none"
+          >
+            <div class="overflow-hidden">
+              <div
+                class="translate-y-1 pb-4 opacity-0 transition-[opacity,transform] duration-500 ease-in-out group-open:translate-y-0 group-open:opacity-100 motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none"
+              >
+                <p class="text-sm leading-relaxed text-muted">{item.answer}</p>
+              </div>
+            </div>
+          </div>
+        </details>
+      ))}
+    </div>
+  </SledPageWrap>
+
+  <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+</section>
+
+<script>
+  function closeFaqDetails(details: HTMLDetailsElement, animate: boolean): Promise<void> {
+    if (!details.open) return Promise.resolve();
+
+    if (!animate) {
+      details.open = false;
+      details.classList.remove('is-closing');
+      return Promise.resolve();
+    }
+
+    return new Promise((resolve) => {
+      details.classList.add('is-closing');
+
+      const panel = details.querySelector<HTMLElement>('[data-faq-panel]');
+      if (!panel) {
+        details.open = false;
+        details.classList.remove('is-closing');
+        resolve();
+        return;
+      }
+
+      const finishClose = (transitionEvent: TransitionEvent) => {
+        if (transitionEvent.target !== panel || transitionEvent.propertyName !== 'grid-template-rows') {
+          return;
+        }
+
+        panel.removeEventListener('transitionend', finishClose);
+        details.open = false;
+        details.classList.remove('is-closing');
+        resolve();
+      };
+
+      panel.addEventListener('transitionend', finishClose);
+    });
+  }
+
+  function initSledFaqLists(root: ParentNode = document) {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    root.querySelectorAll<HTMLElement>('[data-sled-faq-list]').forEach((list) => {
+      if (list.dataset.sledFaqInit === 'true') return;
+      list.dataset.sledFaqInit = 'true';
+
+      const allDetails = () =>
+        Array.from(list.querySelectorAll<HTMLDetailsElement>('details'));
+
+      list.querySelectorAll<HTMLDetailsElement>('details').forEach((details) => {
+        const summary = details.querySelector('summary');
+        if (!summary) return;
+
+        summary.addEventListener('click', (event) => {
+          event.preventDefault();
+
+          const animate = !prefersReducedMotion;
+
+          if (details.open) {
+            void closeFaqDetails(details, animate);
+            return;
+          }
+
+          const othersOpen = allDetails().filter((item) => item !== details && item.open);
+
+          void Promise.all(othersOpen.map((item) => closeFaqDetails(item, animate))).then(() => {
+            details.open = true;
+          });
+        });
+      });
+    });
+  }
+
+  initSledFaqLists();
+  document.addEventListener('astro:page-load', () => initSledFaqLists());
+</script>

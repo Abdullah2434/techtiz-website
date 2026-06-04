@@ -1,7 +1,9 @@
 ---
 import ContactIntakeSection from '../../components/sled/contact/ContactIntakeSection.astro';
+import SledFaqSection from '../../components/sled/shared/SledFaqSection.astro';
 import SledLayout from '../../layouts/SledLayout.astro';
 import { CONTACT_SEO } from '../../lib/constants/pages/contact';
+import { CONTACT_FAQ } from '../../lib/constants/pages/sled-faq';
 import '../../styles/sled.css';
 
 const { title, description, canonicalPath, ogImage } = CONTACT_SEO;
@@ -11,6 +13,7 @@ const { title, description, canonicalPath, ogImage } = CONTACT_SEO;
   <div class="sled-contact-page">
     <!-- <ContactSlaStrip /> -->
     <ContactIntakeSection />
+    <SledFaqSection {...CONTACT_FAQ} canonicalPath={canonicalPath} />
   </div>
   <script src="/scripts/sled-hub.js" is:inline></script>
 </SledLayout>

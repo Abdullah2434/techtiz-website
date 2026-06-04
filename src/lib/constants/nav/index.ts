@@ -32,7 +32,7 @@ export const PRIMARY_NAV = [
   { label: 'Services', mega: 'services' as const },
   { label: 'Industries', mega: 'industries' as const },
   { label: 'Case Studies', href: ROUTES.caseStudies },
-  { label: 'Careers', href: ROUTES.home },
+  { label: 'Careers', href: ROUTES.careers },
 ] as const;
 
 /** Optional structured footer columns (SLED block is separate in Footer.astro). */
@@ -55,7 +55,7 @@ export const FOOTER_COLUMNS = [
     heading: 'Company',
     links: [
       { label: 'About', href: ROUTES.home },
-      { label: 'Careers', href: ROUTES.home },
+      { label: 'Careers', href: ROUTES.careers },
       { label: 'Case Studies', href: ROUTES.caseStudies },
       { label: 'Contact', href: ROUTES.sledContact },
     ],

@@ -1,17 +1,18 @@
 ---
 import ProcurementVehiclesBoundarySection from '../../components/sled/procurement-vehicles/ProcurementVehiclesBoundarySection.astro';
 import ProcurementVehiclesContractTypesSection from '../../components/sled/procurement-vehicles/ProcurementVehiclesContractTypesSection.astro';
-import ProcurementVehiclesCtaSection from '../../components/sled/procurement-vehicles/ProcurementVehiclesCtaSection.astro';
 import ProcurementVehiclesGridSection from '../../components/sled/procurement-vehicles/ProcurementVehiclesGridSection.astro';
 import ProcurementVehiclesModesSection from '../../components/sled/procurement-vehicles/ProcurementVehiclesModesSection.astro';
 import ProcurementVehiclesRegistrationStrip from '../../components/sled/procurement-vehicles/ProcurementVehiclesRegistrationStrip.astro';
 import ProcurementVehiclesSubcontractSection from '../../components/sled/procurement-vehicles/ProcurementVehiclesSubcontractSection.astro';
+import SledFaqSection from '../../components/sled/shared/SledFaqSection.astro';
 import SledInnerHero from '../../components/sled/shared/SledInnerHero.astro';
 import SledLayout from '../../layouts/SledLayout.astro';
 import {
-  PROCUREMENT_VEHICLES_HERO,
-  PROCUREMENT_VEHICLES_SEO,
+PROCUREMENT_VEHICLES_HERO,
+PROCUREMENT_VEHICLES_SEO,
 } from '../../lib/constants/pages/procurement-vehicles';
+import { PROCUREMENT_VEHICLES_FAQ } from '../../lib/constants/pages/sled-faq';
 import '../../styles/sled.css';
 
 const { title, description, canonicalPath, ogImage } = PROCUREMENT_VEHICLES_SEO;
@@ -31,7 +32,7 @@ const { title, description, canonicalPath, ogImage } = PROCUREMENT_VEHICLES_SEO;
     <ProcurementVehiclesContractTypesSection />
     <ProcurementVehiclesModesSection />
     <ProcurementVehiclesBoundarySection />
-    <ProcurementVehiclesCtaSection />
+    <SledFaqSection {...PROCUREMENT_VEHICLES_FAQ} canonicalPath={canonicalPath} />
   </div>
   <script src="/scripts/sled-hub.js" is:inline></script>
 </SledLayout>

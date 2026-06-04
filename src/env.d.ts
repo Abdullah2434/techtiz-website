@@ -2,7 +2,7 @@
 
 declare global {
   interface Window {
-    AOS: import('aos');
+    AOS: import("aos");
   }
 }
 

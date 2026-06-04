@@ -27,11 +27,8 @@ const boundaryIcons = [Ban, FileSearch, Building2, PhoneOff] as const;
         const Icon = boundaryIcons[idx];
         return (
           <div class="sled-card group flex gap-4 p-6 sm:p-7">
-            <div class="grid size-11 shrink-0 place-items-center rounded-xl border border-amber/20 bg-amber/10 text-amber transition-transform duration-300 group-hover:scale-105">
-              <Icon class="size-5" stroke-width="1.75" aria-hidden="true" />
-            </div>
             <div class="min-w-0">
-              <h4 class="text-[16px] font-extrabold leading-[1.25] text-yale-dark">{b.heading}</h4>
+              <h4 class="text-[16px] font-extrabold text-yale-dark">{b.heading}</h4>
               <p class="mt-2.5 text-[14px] leading-[1.6] text-muted">{b.body}</p>
             </div>
           </div>

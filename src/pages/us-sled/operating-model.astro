@@ -5,9 +5,11 @@ import OperatingModelFrameworksSection from '../../components/sled/operating-mod
 import OperatingModelHeroAside from '../../components/sled/operating-model/OperatingModelHeroAside.astro';
 import OperatingModelPipelineSection from '../../components/sled/operating-model/OperatingModelPipelineSection.astro';
 import OperatingModelStatesSection from '../../components/sled/operating-model/OperatingModelStatesSection.astro';
+import SledFaqSection from '../../components/sled/shared/SledFaqSection.astro';
 import SledInnerHero from '../../components/sled/shared/SledInnerHero.astro';
 import SledLayout from '../../layouts/SledLayout.astro';
 import { OPERATING_MODEL_HERO, OPERATING_MODEL_SEO } from '../../lib/constants/pages/operating-model';
+import { OPERATING_MODEL_FAQ } from '../../lib/constants/pages/sled-faq';
 import '../../styles/sled.css';
 
 const { title, description, canonicalPath, ogImage } = OPERATING_MODEL_SEO;
@@ -27,6 +29,7 @@ const { title, description, canonicalPath, ogImage } = OPERATING_MODEL_SEO;
     <OperatingModelStatesSection />
     <OperatingModelDisclosureSection />
     <OperatingModelPipelineSection />
+    <SledFaqSection {...OPERATING_MODEL_FAQ} canonicalPath={canonicalPath} />
     <!-- <OperatingModelCtaSection /> -->
   </div>
   <script src="/scripts/sled-hub.js" is:inline></script>

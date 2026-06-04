@@ -1,6 +1,9 @@
 ---
+import SledFaqSection from '../../components/sled/shared/SledFaqSection.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { CAPABILITY_STATEMENT_FAQ } from '../../lib/constants/pages/sled-faq';
 import { SITE } from '../../lib/constants/site';
+import '../../styles/sled.css';
 
 const seo = {
   title: 'Capability Statement | Techtiz · U.S. SLED Subcontractor',
@@ -139,6 +142,8 @@ const seo = {
 
     </div>
   </div>
+
+  <SledFaqSection {...CAPABILITY_STATEMENT_FAQ} canonicalPath={seo.canonicalPath} />
 </div>
 
 </BaseLayout>

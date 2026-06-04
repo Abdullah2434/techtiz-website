@@ -1,15 +1,17 @@
 ---
-import '../../styles/sled.css';
-import SledLayout from '../../layouts/SledLayout.astro';
 import CapabilitiesBoundariesSection from '../../components/sled/capabilities/CapabilitiesBoundariesSection.astro';
 import CapabilitiesEngageSection from '../../components/sled/capabilities/CapabilitiesEngageSection.astro';
 import CapabilitiesFrameworksSection from '../../components/sled/capabilities/CapabilitiesFrameworksSection.astro';
 import CapabilitiesMatrixSection from '../../components/sled/capabilities/CapabilitiesMatrixSection.astro';
 import CapabilitiesProcStrip from '../../components/sled/capabilities/CapabilitiesProcStrip.astro';
 import CapabilitiesTechStackSection from '../../components/sled/capabilities/CapabilitiesTechStackSection.astro';
+import SledFaqSection from '../../components/sled/shared/SledFaqSection.astro';
 import SledFinalCta from '../../components/sled/shared/SledFinalCta.astro';
 import SledInnerHero from '../../components/sled/shared/SledInnerHero.astro';
-import { CAPABILITIES_SEO, CAPABILITIES_HERO } from '../../lib/constants/pages/capabilities';
+import SledLayout from '../../layouts/SledLayout.astro';
+import { CAPABILITIES_HERO, CAPABILITIES_SEO } from '../../lib/constants/pages/capabilities';
+import { CAPABILITIES_FAQ } from '../../lib/constants/pages/sled-faq';
+import '../../styles/sled.css';
 
 const { title, description, canonicalPath, ogImage } = CAPABILITIES_SEO;
 ---
@@ -25,7 +27,8 @@ const { title, description, canonicalPath, ogImage } = CAPABILITIES_SEO;
   <CapabilitiesFrameworksSection />
   <CapabilitiesMatrixSection />
   <CapabilitiesTechStackSection />
-  <CapabilitiesEngageSection />
   <CapabilitiesBoundariesSection />
+  <CapabilitiesEngageSection />
   <SledFinalCta />
+  <SledFaqSection {...CAPABILITIES_FAQ} canonicalPath={canonicalPath} />
 </SledLayout>

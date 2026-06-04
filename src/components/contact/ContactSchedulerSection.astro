@@ -1,0 +1,323 @@
+---
+import { CONTACT_SCHEDULER } from '../../lib/constants/pages/commercial-contact';
+import { SITE } from '../../lib/constants/site';
+
+const contactEmail = SITE.email.contact;
+const {
+  heading,
+  headingAccent,
+  steps,
+  stepper,
+  selectTimeLabel,
+  selectDateFirst,
+  noSlots,
+  nextLabel,
+  backLabel,
+  confirmLabel,
+  confirmingLabel,
+  successTitle,
+  successMessage,
+} = CONTACT_SCHEDULER;
+---
+
+<section
+  class="mx-auto w-full max-w-[1280px] px-3 py-10"
+  id="schedule-consultation"
+  data-contact-scheduler
+>
+  <div class="grid grid-cols-1 items-start gap-12 lg:grid-cols-2">
+    <div>
+      <h2
+        class="mb-8 text-[40px] leading-tight font-normal sm:text-[56px]"
+        data-aos="fade-up"
+        data-aos-delay="100"
+      >
+        {heading}
+        <br />
+        <span class="font-bold text-cyan">{headingAccent}</span>
+      </h2>
+      <div class="space-y-6">
+        {
+          steps.map((step) => (
+            <div>
+              <h3
+                class="mb-0 text-[22px] font-semibold text-cyan"
+                data-aos="fade-up"
+                data-aos-delay="100"
+              >
+                {step.title}
+              </h3>
+              <p
+                class="text-[18px] leading-[130%] font-normal text-[#101010]"
+                data-aos="fade-up"
+                data-aos-delay="100"
+              >
+                {step.body}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="w-full">
+      <div
+        class="mb-10 flex flex-col items-center justify-center gap-4 md:mb-0 md:flex-row md:justify-start md:gap-0 md:pl-[23px]"
+        data-scheduler-stepper
+        aria-label="Booking steps"
+      >
+        {
+          stepper.map((s, index) => (
+            <div class="contents">
+              <div class="flex items-center">
+                <div
+                  class="contact-scheduler-stepper-dot is-inactive flex h-8 w-8 items-center justify-center rounded-full text-[14px] font-medium transition-all duration-300"
+                  data-scheduler-step-dot={s.id}
+                >
+                  {s.id}
+                </div>
+                <span
+                  class="contact-scheduler-stepper-label is-inactive ml-3 text-[18px] font-medium transition-colors duration-300"
+                  data-scheduler-step-label={s.id}
+                >
+                  {s.name}
+                </span>
+              </div>
+              {index < stepper.length - 1 ? (
+                <div
+                  class="mx-4 h-0.5 w-[250px] bg-cyan/20 md:w-[120px]"
+                  aria-hidden="true"
+                />
+              ) : null}
+            </div>
+          ))
+        }
+      </div>
+
+      <div
+        class="contact-scheduler-success rounded-[8px] border border-line bg-seasalt p-8"
+        data-scheduler-success
+        hidden
+      >
+        <h3 class="mb-3 text-[24px] font-semibold text-[#153A5F]">{successTitle}</h3>
+        <p class="mb-6 text-[16px] leading-[140%] text-[#101010]">{successMessage}</p>
+        <a
+          href={`mailto:${contactEmail}`}
+          class="inline-flex items-center gap-2 border-b-2 border-cyan pb-0.5 text-[15px] font-bold text-yale"
+          data-scheduler-mailto
+        >
+          Email {contactEmail}
+        </a>
+      </div>
+
+      <div class="contact-scheduler-panel md:p-6" data-scheduler-panel>
+        <div data-scheduler-animate>
+          <div class="contact-scheduler-step is-visible" data-scheduler-step="1">
+            <div class="mb-6 overflow-hidden rounded-[16px] bg-cyan/20 p-4">
+              <div class="mb-4 flex items-center justify-between px-4 pt-1">
+                <p
+                  class="text-[18px] font-normal text-[#101010]"
+                  data-scheduler-month-label
+                >
+                </p>
+                <div class="flex items-center space-x-1">
+                  <button
+                    type="button"
+                    class="cursor-pointer rounded-full p-1 text-[#101010] transition-colors duration-300 hover:bg-cyan/50 hover:text-white disabled:cursor-not-allowed disabled:text-gray-400"
+                    data-scheduler-prev-month
+                    aria-label="Previous month"
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path
+                        d="M6 15L12 9L18 15"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="square"
+                        stroke-linejoin="round"></path>
+                    </svg>
+                  </button>
+                  <button
+                    type="button"
+                    class="cursor-pointer rounded-full p-1 text-[#101010] transition-colors duration-300 hover:bg-cyan/50 hover:text-white disabled:cursor-not-allowed disabled:text-gray-400"
+                    data-scheduler-next-month
+                    aria-label="Next month"
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path
+                        d="M6 9L12 15L18 9"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="square"
+                        stroke-linejoin="round"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div
+                class="mb-2 grid grid-cols-7 gap-1 pl-[7px]"
+                data-scheduler-day-names
+                aria-hidden="true"
+              >
+              </div>
+              <div class="grid min-h-64 grid-cols-7 gap-1 pl-[7px]" data-scheduler-days></div>
+            </div>
+            <p class="contact-field-error mb-4 hidden" data-scheduler-error="date"></p>
+
+            <div class="mb-6">
+              <p class="mb-3 text-[18px] font-normal tracking-wide text-cyan">
+                {selectTimeLabel}
+              </p>
+              <p class="hidden py-8 text-center text-gray-500" data-scheduler-times-empty>
+                {selectDateFirst}
+              </p>
+              <p class="hidden py-8 text-center text-gray-500" data-scheduler-times-none>
+                {noSlots}
+              </p>
+              <div
+                class="grid grid-cols-2 gap-3 md:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4"
+                data-scheduler-times
+              >
+              </div>
+            </div>
+            <p class="contact-field-error mb-4 hidden" data-scheduler-error="time"></p>
+
+            <div class="flex justify-end border-t border-[#88998D] pt-7">
+              <button
+                type="button"
+                class="group flex h-[48px] w-[110px] cursor-pointer items-center justify-center gap-2 rounded-[2px] border border-[#1E1E1E] bg-transparent text-[16px] font-normal text-[#1E1E1E] transition-all duration-300 hover:bg-[#1E1E1E] hover:text-white"
+                data-scheduler-next
+              >
+                {nextLabel}
+                <svg
+                  width="18"
+                  height="14"
+                  class="transition-transform duration-300 group-hover:translate-x-1"
+                  viewBox="0 0 18 14"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M1 7.01097L16.8124 6.99999M11.5858 13L17 6.99999L11.5858 1"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="contact-scheduler-step is-hidden" data-scheduler-step="2">
+            <div class="mb-6 mt-4 space-y-12 md:mt-12">
+              <div class="grid grid-cols-1 gap-12 sm:grid-cols-2">
+                <div>
+                  <input
+                    type="text"
+                    name="schedulerFirstName"
+                    placeholder="First name"
+                    autocomplete="given-name"
+                    class="contact-field"
+                    data-scheduler-field="firstName"
+                    maxlength="50"
+                  />
+                  <p class="contact-field-error hidden" data-scheduler-field-error="firstName"></p>
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    name="schedulerLastName"
+                    placeholder="Last name"
+                    autocomplete="family-name"
+                    class="contact-field"
+                    data-scheduler-field="lastName"
+                    maxlength="50"
+                  />
+                  <p class="contact-field-error hidden" data-scheduler-field-error="lastName"></p>
+                </div>
+              </div>
+              <div>
+                <input
+                  type="email"
+                  name="schedulerEmail"
+                  placeholder="Enter your email address"
+                  autocomplete="email"
+                  class="contact-field"
+                  data-scheduler-field="email"
+                />
+                <p class="contact-field-error hidden" data-scheduler-field-error="email"></p>
+              </div>
+              <div>
+                <input
+                  type="tel"
+                  name="schedulerPhone"
+                  placeholder="Phone number"
+                  autocomplete="tel"
+                  class="contact-field"
+                  data-scheduler-field="phone"
+                />
+                <p class="contact-field-error hidden" data-scheduler-field-error="phone"></p>
+              </div>
+              <input
+                type="text"
+                name="schedulerCompany"
+                tabindex="-1"
+                autocomplete="off"
+                class="hidden"
+                aria-hidden="true"
+                data-scheduler-field="company"
+              />
+            </div>
+
+            <div class="flex justify-between gap-4 border-t border-[#88998D] pt-7">
+              <button
+                type="button"
+                class="group flex h-[48px] w-[119px] cursor-pointer items-center justify-center gap-2 rounded-[2px] border border-[#1E1E1E] bg-transparent text-[16px] font-normal text-[#1E1E1E] transition-all duration-300 hover:bg-[#1E1E1E] hover:text-white disabled:cursor-not-allowed"
+                data-scheduler-back
+              >
+                <svg
+                  width="18"
+                  height="14"
+                  class="transition-transform duration-300 group-hover:-translate-x-1"
+                  viewBox="0 0 18 14"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M17 7.01097L1.18756 6.99999M6.41423 13L1 6.99999L6.41421 1"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+                </svg>
+                {backLabel}
+              </button>
+              <button
+                type="button"
+                class="flex h-[48px] w-[145px] cursor-pointer items-center justify-center gap-2 rounded-[2px] border border-[#1E1E1E] bg-transparent text-[16px] font-normal text-[#1E1E1E] transition-all duration-300 hover:bg-[#1E1E1E] hover:text-white disabled:cursor-not-allowed disabled:bg-[#1E1E1E] disabled:text-white"
+                data-scheduler-confirm
+              >
+                <span data-scheduler-confirm-label>{confirmLabel}</span>
+                <svg
+                  width="18"
+                  height="14"
+                  class="transition-transform duration-300 group-hover:translate-x-1"
+                  viewBox="0 0 18 14"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M1 7.01097L16.8124 6.99999M11.5858 13L17 6.99999L11.5858 1"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ contactEmail }}>
+  window.__CONTACT_EMAIL__ = contactEmail;
+</script>

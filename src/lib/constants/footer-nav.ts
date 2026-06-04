@@ -52,7 +52,7 @@ export const FOOTER_NAV_SECTIONS: FooterNavSectionData[] = [
     links: [
       { name: 'About', href: ROUTES.about },
       { name: 'Team', href: '/' },
-      { name: 'Careers', href: '/' },
+      { name: 'Careers', href: ROUTES.careers },
       { name: 'Case Studies', href: ROUTES.caseStudies },
       { name: 'Press', href: '/' },
       { name: 'Contact', href: '/' },

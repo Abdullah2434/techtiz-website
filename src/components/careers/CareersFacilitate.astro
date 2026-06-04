@@ -1,0 +1,47 @@
+---
+import type { CareersBenefitItem } from '../../lib/types/careers';
+
+interface Props {
+  benefits: CareersBenefitItem[];
+}
+
+const { benefits } = Astro.props;
+---
+
+<section class="mx-auto w-full max-w-[1400px] px-2 pt-2 pb-16 md:py-16">
+  <div class="mb-14 text-center" data-aos="fade-up" data-aos-delay="100">
+    <h2 class="mb-4 text-[32px] font-medium text-[#101010] md:text-[40px]">How we facilitate</h2>
+    <p class="mx-auto max-w-[630px] text-[16px] leading-[130%] text-[#101010] md:text-[18px]">
+      At TECHTIZ, we believe people thrive when they're supported, challenged, and trusted. That's why we
+      create an environment where creativity meets clarity, and growth is backed by structure.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-5 lg:gap-6">
+    {
+      benefits.map((benefit) => (
+        <div class="text-center">
+          <div
+            class="mx-auto mb-4 flex h-[112px] w-[112px] items-center justify-center rounded-[16px] bg-[#D9D9D94D]"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <span class="inline-flex [&>svg]:max-h-[70px] [&>svg]:max-w-[69px]" set:html={benefit.icon} />
+          </div>
+          <h3
+            class="mx-auto mb-1 max-w-[150px] text-center text-[18px] leading-[120%] font-medium text-[#4F4F4F]"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            {benefit.titleHtml ? <Fragment set:html={benefit.titleHtml} /> : benefit.title}
+          </h3>
+          {benefit.subtitle && (
+            <p class="text-center text-[15px] leading-[120%] font-normal text-[#4F4F4F]" data-aos="fade-up" data-aos-delay="100">
+              {benefit.subtitle}
+            </p>
+          )}
+        </div>
+      ))
+    }
+  </div>
+</section>

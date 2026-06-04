@@ -1,0 +1,63 @@
+---
+import type { CareersHiringStep } from '../../lib/types/careers';
+
+interface Props {
+  steps: CareersHiringStep[];
+}
+
+const { steps } = Astro.props;
+---
+
+<div class="mx-auto h-full w-full max-w-[1400px] px-2 py-10 md:py-16">
+  <section class="relative z-10 flex items-start rounded-[8px] px-2 lg:min-h-[654px] lg:px-0">
+    <div class="relative flex w-full flex-col gap-10 pt-10 lg:flex-row lg:gap-0">
+      <div class="flex w-full flex-col justify-center lg:w-1/2">
+        <h2
+          class="mb-6 text-[32px] font-medium text-[#153A5F] md:text-[48px]"
+          data-aos="fade-up"
+          data-aos-delay="300"
+        >
+          Our Hiring Process
+        </h2>
+        <div>
+          {
+            steps.map((step, index) => (
+              <div class="flex items-start gap-5">
+                <div class="flex flex-col items-center">
+                  <div class="flex h-[30px] w-[30px] items-center justify-center rounded-full border-2 border-[#153A5F] bg-transparent">
+                    <span class="text-left text-[19px] font-medium text-[#153A5F]" data-aos="zoom-in" data-aos-delay="300">
+                      {step.number}
+                    </span>
+                  </div>
+                  {index < steps.length - 1 && (
+                    <div class="h-[55px] w-0.5 bg-[#153A5F]" data-aos="zoom-in" data-aos-delay="400" />
+                  )}
+                </div>
+                <div class="flex-1">
+                  <h3
+                    class="text-left text-[18px] font-medium text-[#153A5F] md:text-[22px]"
+                    data-aos="fade-up"
+                    data-aos-delay="400"
+                  >
+                    {step.title}
+                  </h3>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+      <div class="flex w-full items-center justify-center lg:w-1/2">
+        <img
+          src="/images/careers/hiring-image.png"
+          alt="Hiring process at Techtiz"
+          width={653}
+          height={550}
+          class="h-auto w-full max-w-[653px] object-cover"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,41 @@
+---
+import '../styles/industries.css';
+import '../styles/careers.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/shared/Header.astro';
+import Footer from '../components/shared/Footer.astro';
+import IndustryHero from '../components/industries/IndustryHero.astro';
+import CareersOurValues from '../components/careers/CareersOurValues.astro';
+import CareersHiringProcess from '../components/careers/CareersHiringProcess.astro';
+import CareersFacilitate from '../components/careers/CareersFacilitate.astro';
+import CareersContactHero from '../components/careers/CareersContactHero.astro';
+import CareersContactForm from '../components/careers/CareersContactForm.astro';
+import { CAREERS_SEO } from '../lib/config/careers';
+import {
+  CAREERS_BENEFITS,
+  CAREERS_CONTACT_HERO,
+  CAREERS_HERO,
+  CAREERS_HIRING_STEPS,
+  CAREERS_VALUES,
+} from '../lib/constants/pages/careers';
+import { ROUTES } from '../lib/constants/routes';
+
+const { title, description, canonicalPath } = CAREERS_SEO;
+---
+
+<BaseLayout {title} {description} {canonicalPath}>
+  <Header currentPage={ROUTES.careers} />
+  <main class="bg-white">
+    <IndustryHero {...CAREERS_HERO} />
+    <CareersOurValues values={CAREERS_VALUES} />
+    <CareersHiringProcess steps={CAREERS_HIRING_STEPS} />
+    <CareersFacilitate benefits={CAREERS_BENEFITS} />
+    <CareersContactHero {...CAREERS_CONTACT_HERO} />
+    <CareersContactForm />
+  </main>
+  <Footer />
+  <script src="/scripts/nav.js" is:inline></script>
+  <script src="/scripts/mobile-nav.js" is:inline></script>
+  <script src="/scripts/industry-hero.js" is:inline></script>
+  <script src="/scripts/careers-form.js" is:inline></script>
+</BaseLayout>

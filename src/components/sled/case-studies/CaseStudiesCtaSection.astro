@@ -1,0 +1,26 @@
+---
+import Eyebrow from '../../shared/Eyebrow.astro';
+import SledButton from '../shared/SledButton.astro';
+import SledPageWrap from '../shared/SledPageWrap.astro';
+---
+
+<section class="sled-final-cta relative overflow-hidden bg-yale-dark">
+  <div
+    class="sled-hero-glow-b pointer-events-none absolute right-[-10%] top-[-30%] size-[min(55vw,480px)] rounded-full bg-[radial-gradient(circle,rgba(24,176,230,0.14)_0%,transparent_70%)] blur-[90px] motion-reduce:hidden"
+    aria-hidden="true"
+  />
+  <SledPageWrap class="relative z-2 py-[clamp(4.5rem,8vw,5.5rem)]">
+    <div class="sled-reveal mx-auto max-w-[700px] text-center" data-sled-reveal>
+      <Eyebrow text="Capture manager or BD lead at a U.S. prime?" onDark showGlyph class="mb-4 justify-center" />
+      <h2 class="text-[clamp(1.875rem,4vw,2.375rem)] font-extrabold leading-[1.1] tracking-[-0.02em] text-white">
+        Request a reference conversation.
+      </h2>
+      <p class="mx-auto mt-4 max-w-[560px] text-[15.5px] leading-[1.65] text-white/72">
+        NDA-first introduction. We'll route you to the right named reference for the engagement type closest to your pursuit.
+      </p>
+      <div class="mt-8 flex justify-center max-[600px]:[&_a]:w-full max-[600px]:[&_a]:justify-center">
+        <SledButton href="/us-sled/contact/" label="Start an NDA conversation" variant="cta" />
+      </div>
+    </div>
+  </SledPageWrap>
+</section>

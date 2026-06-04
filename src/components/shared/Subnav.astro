@@ -1,5 +1,6 @@
 ---
 import { SLED_SUBNAV } from '../../lib/constants/routes';
+import { SITE } from '../../lib/constants/site';
 
 interface Props {
   currentPath: string;
@@ -18,7 +19,7 @@ const crumbs = buildCrumbs(currentPath);
 
 function buildCrumbs(path: string) {
   const crumbList: Array<{ label: string; href?: string }> = [
-    { label: 'Techtiz', href: '/' },
+    { label: SITE.name, href: '/' },
   ];
   if (path.startsWith('/us-sled')) {
     crumbList.push({ label: 'SLED Partnerships', href: '/us-sled/' });
@@ -34,7 +35,7 @@ function buildCrumbs(path: string) {
 }
 ---
 
-<div class="subnav sticky top-[76px] z-40 border-b border-line bg-white/96 backdrop-blur-[10px] max-[900px]:static">
+<div class="subnav sticky top-[76px] z-40 border-b border-line/90 bg-white/90 shadow-[0_8px_24px_-20px_rgba(14,38,64,0.12)] backdrop-blur-md max-[900px]:static">
   <div class="subnav-inner mx-auto max-w-[1280px] px-12 max-[1024px]:px-8 max-[900px]:px-6 max-[600px]:px-[18px] flex h-[52px] items-center justify-between max-[900px]:h-auto max-[900px]:py-[8px]">
     <div class="crumbs mr-6 flex shrink-0 items-center gap-2.5 font-mono text-[11.5px] tracking-[0.04em] whitespace-nowrap text-muted max-[900px]:hidden">
       {crumbs.map((c, i) => (

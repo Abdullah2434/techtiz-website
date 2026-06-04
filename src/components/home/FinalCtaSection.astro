@@ -1,5 +1,6 @@
 ---
 import PageWrap from './PageWrap.astro';
+import { SITE, mailtoGeneral } from '../../lib/constants/site';
 ---
 
 <section class="relative overflow-hidden bg-yale text-white">
@@ -60,7 +61,7 @@ import PageWrap from './PageWrap.astro';
       data-aos="fade-up"
       data-aos-delay="500"
     >
-      Or email <a class="border-b border-cyan/40 text-cyan hover:border-cyan" href="mailto:hello@techtiz.co">hello@techtiz.co</a>
+      Or email <a class="border-b border-cyan/40 text-cyan hover:border-cyan" href={mailtoGeneral()}>{SITE.email.general}</a>
     </p>
   </PageWrap>
 </section>

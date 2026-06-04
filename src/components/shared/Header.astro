@@ -1,5 +1,6 @@
 ---
 import '../../styles/chrome.css';
+import { SITE } from '../../lib/constants/site';
 import { ROUTES } from '../../lib/constants/routes';
 
 interface Props {
@@ -21,8 +22,8 @@ const navLinkClass = (href: string) =>
 
 <header class="top sticky top-0 z-50 border-b border-line bg-white/94 backdrop-blur-[10px]">
   <div class:list={[wrap, 'nav grid h-[76px] grid-cols-[1fr_auto_1fr] items-center max-[900px]:flex max-[900px]:h-16 max-[900px]:justify-between']}>
-    <a href="/" class="brand" aria-label="Techtiz home">
-      <img src="/assets/logo.svg" alt="Techtiz" class="brand-logo block h-[26px] w-auto" />
+    <a href="/" class="brand" aria-label={`${SITE.name} home`}>
+      <img src={SITE.logo.dark} alt={SITE.name} class="brand-logo block h-[26px] w-auto" />
     </a>
 
     <nav class="primary-nav inline-flex items-center gap-0.5 max-[900px]:hidden" aria-label="Primary">

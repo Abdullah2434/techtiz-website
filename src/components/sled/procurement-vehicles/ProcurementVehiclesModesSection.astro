@@ -1,0 +1,25 @@
+---
+import { PRE_AWARD_NOTE } from '../../../lib/constants/pages/procurement-vehicles';
+import Eyebrow from '../../shared/Eyebrow.astro';
+import SledPageWrap from '../shared/SledPageWrap.astro';
+---
+
+<section class="sled-section bg-white">
+  <SledPageWrap>
+    <div class="sled-reveal sled-glass grid grid-cols-1 gap-6 rounded-2xl border border-line p-6 sm:p-8 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-10" data-sled-reveal>
+      <div>
+        <Eyebrow text={PRE_AWARD_NOTE.eyebrow} showGlyph class="mb-4" />
+        <h2 class="text-[clamp(1.375rem,2.5vw,1.75rem)] font-extrabold leading-[1.15] tracking-[-0.02em] text-yale-dark">
+          {PRE_AWARD_NOTE.heading}
+        </h2>
+        <p class="mt-3 max-w-[640px] text-[15px] leading-[1.65] text-muted">{PRE_AWARD_NOTE.body}</p>
+      </div>
+      <a
+        href={PRE_AWARD_NOTE.linkHref}
+        class="inline-flex shrink-0 items-center gap-2 self-start border-b-2 border-cyan pb-0.5 text-[14px] font-bold text-yale transition-colors hover:text-yale-dark lg:self-center"
+      >
+        {PRE_AWARD_NOTE.linkLabel} →
+      </a>
+    </div>
+  </SledPageWrap>
+</section>

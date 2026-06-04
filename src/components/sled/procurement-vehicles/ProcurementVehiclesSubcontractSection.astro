@@ -1,0 +1,29 @@
+---
+import { SUBCONTRACT_MODEL } from '../../../lib/constants/pages/procurement-vehicles';
+import Eyebrow from '../../shared/Eyebrow.astro';
+import SledPageWrap from '../shared/SledPageWrap.astro';
+---
+
+<section class="sled-section bg-white">
+  <SledPageWrap>
+    <div class="sled-reveal mb-12 grid grid-cols-1 gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-end" data-sled-reveal>
+      <div>
+        <Eyebrow text={SUBCONTRACT_MODEL.eyebrow} showGlyph class="mb-4" />
+        <h2 class="text-[clamp(1.75rem,3.8vw,2.5rem)] font-extrabold leading-[1.08] tracking-[-0.02em] text-yale-dark">
+          {SUBCONTRACT_MODEL.heading}
+        </h2>
+      </div>
+      <p class="max-w-[520px] text-[15.5px] leading-[1.65] text-muted lg:justify-self-end">{SUBCONTRACT_MODEL.sub}</p>
+    </div>
+
+    <div class="sled-reveal-stagger grid grid-cols-1 gap-5 md:grid-cols-3" data-sled-reveal>
+      {SUBCONTRACT_MODEL.cards.map((card, idx) => (
+        <article class="sled-card rounded-2xl p-6 sm:p-7">
+          <div class="mb-3 font-mono text-[11px] font-bold tracking-[0.12em] text-cyan-strong">0{idx + 1}</div>
+          <h3 class="text-[17px] font-extrabold leading-[1.25] text-yale-dark">{card.heading}</h3>
+          <p class="mt-3 text-[14px] leading-[1.6] text-muted">{card.body}</p>
+        </article>
+      ))}
+    </div>
+  </SledPageWrap>
+</section>

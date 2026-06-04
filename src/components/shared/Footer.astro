@@ -1,6 +1,6 @@
 ---
 import '../../styles/chrome.css';
-import { SITE, LEGAL_LINKS } from '../../lib/constants/site';
+import { SITE, SITE_COPYRIGHT, LEGAL_LINKS } from '../../lib/constants/site';
 import { ROUTES } from '../../lib/constants/routes';
 
 const wrap =
@@ -17,10 +17,10 @@ const wrap =
     <div class="cols relative mb-14 grid grid-cols-[1.5fr_repeat(4,1fr)] gap-10 max-[900px]:grid-cols-1">
       <div class="brand-foot">
         <a href="/" class="brand-mark inline-block">
-          <img src="/assets/logo-light.svg" alt="Techtiz" class="brand-logo block h-[30px] w-auto" />
+          <img src={SITE.logo.light} alt={SITE.name} class="brand-logo block h-[30px] w-auto" />
         </a>
         <p class="my-[18px] mb-[22px] max-w-[290px] text-sm leading-[1.55] text-white/70">
-          An AI-native engineering studio building adaptive systems for ambitious teams.
+          {SITE.description}
         </p>
         <div class="socials flex gap-2.5">
           <a
@@ -42,7 +42,7 @@ const wrap =
             </svg>
           </a>
           <a
-            href="#"
+            href={SITE.socials.facebook}
             aria-label="Facebook"
             class="grid size-[34px] place-items-center rounded-md border border-white/18 text-white/70 transition-[color,border-color] duration-[180ms] ease-out hover:border-cyan hover:text-cyan"
           >
@@ -84,7 +84,7 @@ const wrap =
           <li><a href="/us-sled/how-we-engage/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">How We Engage</a></li>
           <li><a href="/us-sled/operating-model/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Operating Model</a></li>
           <li><a href="/us-sled/case-studies/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Engagement Examples</a></li>
-          <li><a href="/us-sled/#vehicles" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Procurement Vehicles</a></li>
+          <li><a href="/us-sled/procurement-vehicles/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Procurement Vehicles</a></li>
           <li><a href="/us-sled/contact/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">SLED Contact</a></li>
         </ul>
       </div>
@@ -103,7 +103,7 @@ const wrap =
     </div>
 
     <div class="strip relative flex items-center justify-between border-t border-white/10 pt-6 text-[13px] text-white/55 max-[600px]:flex-col max-[600px]:items-start max-[600px]:gap-3.5">
-      <div>© 2026 Techtiz · Lahore HQ · U.S. office</div>
+      <div>{SITE_COPYRIGHT}</div>
       <div class="legal flex gap-6">
         {LEGAL_LINKS.map((link) => (
           <a href={link.href} class="hover:text-cyan">

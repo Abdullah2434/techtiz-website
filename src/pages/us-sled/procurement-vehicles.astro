@@ -1,0 +1,37 @@
+---
+import ProcurementVehiclesBoundarySection from '../../components/sled/procurement-vehicles/ProcurementVehiclesBoundarySection.astro';
+import ProcurementVehiclesContractTypesSection from '../../components/sled/procurement-vehicles/ProcurementVehiclesContractTypesSection.astro';
+import ProcurementVehiclesCtaSection from '../../components/sled/procurement-vehicles/ProcurementVehiclesCtaSection.astro';
+import ProcurementVehiclesGridSection from '../../components/sled/procurement-vehicles/ProcurementVehiclesGridSection.astro';
+import ProcurementVehiclesModesSection from '../../components/sled/procurement-vehicles/ProcurementVehiclesModesSection.astro';
+import ProcurementVehiclesRegistrationStrip from '../../components/sled/procurement-vehicles/ProcurementVehiclesRegistrationStrip.astro';
+import ProcurementVehiclesSubcontractSection from '../../components/sled/procurement-vehicles/ProcurementVehiclesSubcontractSection.astro';
+import SledInnerHero from '../../components/sled/shared/SledInnerHero.astro';
+import SledLayout from '../../layouts/SledLayout.astro';
+import {
+  PROCUREMENT_VEHICLES_HERO,
+  PROCUREMENT_VEHICLES_SEO,
+} from '../../lib/constants/pages/procurement-vehicles';
+import '../../styles/sled.css';
+
+const { title, description, canonicalPath, ogImage } = PROCUREMENT_VEHICLES_SEO;
+---
+
+<SledLayout {title} {description} {canonicalPath} {ogImage} currentPage="/us-sled/procurement-vehicles/">
+  <div class="sled-vehicles-page">
+    <SledInnerHero
+      eyebrow={PROCUREMENT_VEHICLES_HERO.eyebrow}
+      heading={PROCUREMENT_VEHICLES_HERO.heading}
+      body={PROCUREMENT_VEHICLES_HERO.body}
+      ctas={PROCUREMENT_VEHICLES_HERO.ctas}
+    />
+    <ProcurementVehiclesRegistrationStrip />
+    <ProcurementVehiclesGridSection />
+    <ProcurementVehiclesSubcontractSection />
+    <ProcurementVehiclesContractTypesSection />
+    <ProcurementVehiclesModesSection />
+    <ProcurementVehiclesBoundarySection />
+    <ProcurementVehiclesCtaSection />
+  </div>
+  <script src="/scripts/sled-hub.js" is:inline></script>
+</SledLayout>

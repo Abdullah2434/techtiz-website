@@ -1,0 +1,43 @@
+---
+interface Props {
+  href: string;
+  label: string;
+  variant?: 'cta' | 'ghost-dark' | 'ghost-light' | 'primary';
+}
+
+const { href, label, variant = 'cta' } = Astro.props;
+---
+
+{variant === 'cta' && (
+  <a
+    href={href}
+    class="sled-btn-cta inline-flex items-center gap-2.5 whitespace-nowrap rounded-xl bg-cyan px-6 py-3.5 text-[14.5px] font-bold text-yale-dark shadow-[0_4px_14px_-4px_rgba(24,176,230,0.5)] transition-[transform,box-shadow] duration-[220ms] ease-out hover:-translate-y-0.5 hover:shadow-[0_14px_32px_-8px_rgba(24,176,230,0.55)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
+  >
+    {label}
+    <span class="sled-btn-arr relative inline-block size-3.5" aria-hidden="true"></span>
+  </a>
+)}
+{variant === 'ghost-dark' && (
+  <a
+    href={href}
+    class="inline-flex items-center gap-2.5 whitespace-nowrap rounded-xl border border-white/28 bg-white/5 px-6 py-3.5 text-[14.5px] font-bold text-white backdrop-blur-sm transition-[border-color,background,transform] duration-[220ms] ease-out hover:-translate-y-0.5 hover:border-white/50 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60"
+  >
+    {label}
+  </a>
+)}
+{variant === 'ghost-light' && (
+  <a
+    href={href}
+    class="inline-flex items-center gap-2.5 whitespace-nowrap rounded-xl border border-line bg-white px-6 py-3.5 text-[14.5px] font-bold text-yale shadow-[0_4px_14px_-10px_rgba(21,58,95,0.12)] transition-[border-color,background,transform] duration-[220ms] ease-out hover:-translate-y-0.5 hover:border-yale/25 hover:bg-seasalt focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
+  >
+    {label}
+  </a>
+)}
+{variant === 'primary' && (
+  <a
+    href={href}
+    class="inline-flex items-center gap-2.5 whitespace-nowrap rounded-xl bg-yale px-6 py-3.5 text-[14.5px] font-bold text-white shadow-[0_8px_22px_-10px_rgba(21,58,95,0.45)] transition-[background,transform,box-shadow] duration-[220ms] ease-out hover:-translate-y-0.5 hover:bg-yale-dark hover:shadow-[0_14px_28px_-10px_rgba(14,38,64,0.4)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yale"
+  >
+    {label}
+  </a>
+)}

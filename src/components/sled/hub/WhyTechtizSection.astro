@@ -1,0 +1,27 @@
+---
+import { WHY_CARDS, WHY_SECTION } from '../../../lib/constants/pages/sled-hub';
+import Eyebrow from '../../shared/Eyebrow.astro';
+import SledPageWrap from '../shared/SledPageWrap.astro';
+---
+
+<section class="sled-section border-t border-line bg-white" data-screen-label="09 Why Techtiz">
+  <SledPageWrap>
+    <div class="sled-reveal mb-12 lg:max-w-[620px]" data-sled-reveal>
+      <Eyebrow text={WHY_SECTION.eyebrow} showGlyph class="mb-4" />
+      <h2 class="text-[clamp(1.75rem,3.5vw,2.5rem)] font-extrabold leading-[1.08] text-yale-dark">{WHY_SECTION.heading}</h2>
+    </div>
+
+    <div class="sled-reveal-stagger grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-6" data-sled-reveal>
+      {WHY_CARDS.map((c) => (
+        <div class="sled-card group flex flex-col p-7">
+          <div class="mb-4 font-mono text-[11px] tracking-[0.16em] uppercase text-cyan-strong">{c.num}</div>
+          <h3 class="mb-4 text-[clamp(1.125rem,2vw,1.375rem)] font-extrabold leading-[1.2] text-yale">{c.heading}</h3>
+          <p class="mb-5 flex-1 text-[14.5px] leading-[1.65] text-muted">{c.body}</p>
+          <div class="rounded-xl border border-line bg-seasalt px-4 py-3 font-mono text-[11px] leading-[1.45] tracking-[0.04em] text-ink transition-colors duration-300 group-hover:border-cyan/20 group-hover:bg-cyan-soft/30">
+            <em class="not-italic text-cyan-strong">Counter to</em> {c.counter.replace('Counter to ', '')}
+          </div>
+        </div>
+      ))}
+    </div>
+  </SledPageWrap>
+</section>

@@ -1,0 +1,53 @@
+---
+import BadgeCheck from '@lucide/astro/icons/badge-check';
+import MessageSquareOff from '@lucide/astro/icons/message-square-off';
+import ShieldCheck from '@lucide/astro/icons/shield-check';
+import Users from '@lucide/astro/icons/users';
+import { PRINCIPLES } from '../../../lib/constants/pages/how-we-engage';
+import Eyebrow from '../../shared/Eyebrow.astro';
+import SledPageWrap from '../shared/SledPageWrap.astro';
+
+const principleIcons = [MessageSquareOff, BadgeCheck, ShieldCheck, Users] as const;
+---
+
+<section class="sled-principles sled-section relative overflow-hidden bg-yale-dark text-white/70" id="principles">
+  <div
+    class="pointer-events-none absolute -right-10 top-[60px] size-[480px] [background:repeating-linear-gradient(0deg,transparent_0_40px,rgba(24,176,230,0.04)_40px_41px),repeating-linear-gradient(90deg,transparent_0_40px,rgba(24,176,230,0.04)_40px_41px)]"
+    aria-hidden="true"
+  />
+  <div
+    class="sled-hero-glow-a pointer-events-none absolute bottom-[-20%] left-[-8%] size-[min(50vw,420px)] rounded-full bg-[radial-gradient(circle,rgba(24,176,230,0.12)_0%,transparent_70%)] blur-[80px] motion-reduce:hidden"
+    aria-hidden="true"
+  />
+
+  <SledPageWrap class="relative z-[2]">
+    <div class="grid grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+      <div class="sled-reveal lg:sticky lg:top-[140px] lg:self-start" data-sled-reveal>
+        <Eyebrow text="Locked in teaming letter" onDark showGlyph class="mb-5" />
+        <h2 class="text-[clamp(1.75rem,3.5vw,2.5rem)] font-extrabold leading-[1.08] text-white">
+          Four non-negotiables, in writing.
+        </h2>
+        <p class="mt-4 max-w-[400px] text-[15.5px] leading-[1.65] text-white/72">
+          These show up in the teaming letter draft we send in Step 3. They are not negotiable; they are how the practice operates.
+        </p>
+      </div>
+
+      <div class="sled-reveal-stagger space-y-3.5" data-sled-reveal>
+        {PRINCIPLES.map((p, idx) => {
+          const Icon = principleIcons[idx];
+          return (
+            <div class="sled-card-dark group flex gap-4 rounded-2xl p-5 sm:p-6">
+              <div class="grid size-11 shrink-0 place-items-center rounded-xl bg-cyan/15 text-cyan transition-transform duration-300 group-hover:scale-105">
+                <Icon class="size-5" stroke-width="1.75" aria-hidden="true" />
+              </div>
+              <div class="min-w-0">
+                <h4 class="text-[16px] font-extrabold leading-[1.25] text-white">{p.heading}</h4>
+                <p class="mt-2 text-[14px] leading-[1.6] text-white/72">{p.body}</p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </SledPageWrap>
+</section>

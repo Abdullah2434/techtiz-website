@@ -1,0 +1,255 @@
+---
+import Calendar from '@lucide/astro/icons/calendar';
+import CircleQuestionMark from '@lucide/astro/icons/circle-question-mark';
+import FileSearch from '@lucide/astro/icons/file-search';
+import Mail from '@lucide/astro/icons/mail';
+import Send from '@lucide/astro/icons/send';
+import Users from '@lucide/astro/icons/users';
+import Zap from '@lucide/astro/icons/zap';
+import {
+  CEILING_OPTIONS,
+  CLEARANCE_OPTIONS,
+  CONTACT_HERO,
+  INTENT_OPTIONS,
+  ROLE_OPTIONS,
+  TIMING_OPTIONS,
+  VEHICLE_OPTIONS,
+  WHAT_HAPPENS_NEXT,
+} from '../../../lib/constants/pages/contact';
+import { SITE, highlightSledEmailHtml } from '../../../lib/constants/site';
+import Eyebrow from '../../shared/Eyebrow.astro';
+import SledPageWrap from '../shared/SledPageWrap.astro';
+
+const intentIcons = [Zap, FileSearch, Users, CircleQuestionMark] as const;
+const stepIcons = [Mail, Calendar, FileSearch] as const;
+
+const inputClass =
+  'w-full rounded-xl border border-line bg-white px-4 py-3.5 text-[14px] text-ink outline-none transition-[border-color,box-shadow,transform] duration-200 ease-out placeholder:text-muted/70 focus:border-cyan focus:shadow-[0_0_0_3px_rgba(24,176,230,0.18)] focus:-translate-y-px';
+
+const labelClass = 'mb-2 block text-[13.5px] font-semibold text-yale-dark';
+const sectionLabelClass = 'font-mono text-[10.5px] font-bold tracking-[0.18em] text-cyan-strong uppercase';
+---
+
+<section class="sled-section bg-seasalt" id="intake">
+  <SledPageWrap>
+    <div class="grid grid-cols-1 items-start gap-10 lg:grid-cols-[1.2fr_0.88fr] lg:gap-12">
+      <div class="sled-reveal min-w-0" data-sled-reveal>
+        <div class="mb-8 max-w-[860px]">
+          <Eyebrow text={CONTACT_HERO.eyebrow} showGlyph class="mb-4" />
+          <h1
+            class="text-[clamp(2rem,4.5vw,3rem)] font-extrabold leading-[1.05] tracking-[-0.022em] text-yale-dark"
+            set:html={CONTACT_HERO.heading}
+          />
+          <p class="mt-4 text-[15.5px] leading-[1.65] text-muted">{CONTACT_HERO.desc}</p>
+        </div>
+
+        <form
+          class="overflow-hidden rounded-2xl border border-line bg-white shadow-[0_24px_56px_-32px_rgba(14,38,64,0.28)]"
+          id="intakeForm"
+          data-mailto={SITE.email.sled}
+          novalidate
+        >
+          <div class="border-b border-line bg-gradient-to-r from-seasalt to-white px-6 py-5 sm:px-8">
+            <div class={sectionLabelClass}>Section 01</div>
+            <div class="mt-1.5 text-[18px] font-extrabold text-yale-dark">About you</div>
+          </div>
+          <div class="space-y-5 px-6 py-6 sm:px-8 sm:py-7">
+            <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+              <div>
+                <label for="name" class={labelClass}>Full name <span class="text-amber">*</span></label>
+                <input id="name" name="name" type="text" placeholder="Jane Doe" required class={inputClass} />
+              </div>
+              <div>
+                <label for="email" class={labelClass}>Work email <span class="text-amber">*</span></label>
+                <input id="email" name="email" type="email" placeholder="jane@firm.com" required class={inputClass} />
+              </div>
+            </div>
+            <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+              <div>
+                <label for="firm" class={labelClass}>Prime firm name <span class="text-amber">*</span></label>
+                <input id="firm" name="firm" type="text" placeholder="e.g. National Environmental Consulting LLP" required class={inputClass} />
+              </div>
+              <div>
+                <label for="role" class={labelClass}>Your role</label>
+                <select id="role" name="role" class={inputClass}>
+                  {ROLE_OPTIONS.map((opt) => <option>{opt}</option>)}
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="border-y border-line bg-seasalt/50 px-6 py-5 sm:px-8">
+            <div class={sectionLabelClass}>Section 02</div>
+            <div class="mt-1.5 text-[18px] font-extrabold text-yale-dark">About the engagement</div>
+          </div>
+          <div class="space-y-5 px-6 py-6 sm:px-8 sm:py-7">
+            <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+              <div>
+                <label for="vehicle" class={labelClass}>
+                  Contract vehicle <span class="font-normal text-muted">(if known)</span>
+                </label>
+                <select id="vehicle" name="vehicle" class={inputClass}>
+                  {VEHICLE_OPTIONS.map((opt) => <option>{opt}</option>)}
+                </select>
+              </div>
+              <div>
+                <label for="timing" class={labelClass}>Engagement timing</label>
+                <select id="timing" name="timing" class={inputClass}>
+                  {TIMING_OPTIONS.map((opt) => <option>{opt}</option>)}
+                </select>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+              <div>
+                <label for="solicitation" class={labelClass}>
+                  Solicitation / RFP number <span class="font-normal text-muted">(optional)</span>
+                </label>
+                <input id="solicitation" name="solicitation" type="text" placeholder="e.g. RFP-2026-0142" class={inputClass} />
+              </div>
+              <div>
+                <label for="ceiling" class={labelClass}>
+                  Estimated contract ceiling <span class="font-normal text-muted">(optional)</span>
+                </label>
+                <select id="ceiling" name="ceiling" class={inputClass}>
+                  {CEILING_OPTIONS.map((opt) => <option>{opt}</option>)}
+                </select>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+              <div>
+                <label for="clearance" class={labelClass}>
+                  Security clearance required <span class="font-normal text-muted">(optional)</span>
+                </label>
+                <select id="clearance" name="clearance" class={inputClass}>
+                  {CLEARANCE_OPTIONS.map((opt) => <option>{opt}</option>)}
+                </select>
+              </div>
+            </div>
+            <div>
+              <label for="desc" class={labelClass}>Brief description</label>
+              <textarea
+                id="desc"
+                name="desc"
+                placeholder="What's the engagement type? Subcontract under a master? Teaming letter in place or imminent? What technical surface area are you looking to staff?"
+                class:list={[inputClass, 'min-h-[120px] resize-y']}
+              />
+            </div>
+          </div>
+
+          <div class="border-y border-line bg-seasalt/50 px-6 py-5 sm:px-8">
+            <div class={sectionLabelClass}>Section 03</div>
+            <div class="mt-1.5 text-[18px] font-extrabold text-yale-dark">What you'd like from us</div>
+          </div>
+          <div class="grid grid-cols-1 gap-3.5 px-6 py-6 sm:grid-cols-2 sm:px-8 sm:py-7">
+            {INTENT_OPTIONS.map((opt, i) => {
+              const IntentIcon = intentIcons[i];
+              return (
+                <label
+                  class:list={[
+                    'intent-option sled-card group cursor-pointer rounded-2xl p-5 transition-[border-color,background,transform] duration-200',
+                    { on: i === 0 },
+                  ]}
+                >
+                  <input type="radio" name="intent" value={opt.value} checked={i === 0} class="sr-only" />
+                  <div class="flex items-start gap-3">
+                    <span class="grid size-10 shrink-0 place-items-center rounded-xl bg-cyan-soft text-cyan-strong transition-transform group-hover:scale-105 group-[.on]:bg-yale-dark group-[.on]:text-cyan">
+                      <IntentIcon class="size-[18px]" stroke-width="1.75" aria-hidden="true" />
+                    </span>
+                    <span class="min-w-0 flex-1">
+                      <span class="l block text-[14.5px] font-extrabold leading-tight text-yale-dark">{opt.label}</span>
+                      <span class="d mt-1 block text-[13.5px] leading-[1.55] text-muted">{opt.desc}</span>
+                    </span>
+                    <span class="mt-2 grid size-5 shrink-0 place-items-center rounded-full border border-line bg-white">
+                      <span class="hidden size-2 rounded-full bg-cyan group-[.on]:block" aria-hidden="true" />
+                    </span>
+                  </div>
+                </label>
+              );
+            })}
+          </div>
+
+          <div class="flex flex-wrap items-center justify-between gap-4 border-t border-line bg-seasalt/40 px-6 py-5 sm:px-8">
+            <div class="text-[13.5px] leading-[1.55] text-muted">All fields are confidential. NDA on request before review.</div>
+            <button
+              type="submit"
+              class="inline-flex items-center justify-center gap-2.5 rounded-xl bg-yale px-6 py-3.5 text-[14px] font-bold text-white shadow-[0_8px_22px_-10px_rgba(21,58,95,0.45)] transition-[transform,background,box-shadow] duration-200 ease-out hover:-translate-y-0.5 hover:bg-yale-dark hover:shadow-[0_14px_28px_-10px_rgba(14,38,64,0.4)]"
+            >
+              Send to Techtiz
+              <Send class="size-4" aria-hidden="true" />
+            </button>
+          </div>
+        </form>
+
+        <div
+          class="sled-inquiry-success hidden flex-col items-center rounded-2xl border border-line bg-white px-8 py-14 text-center shadow-[0_24px_56px_-32px_rgba(14,38,64,0.28)] sm:px-10"
+          id="formSuccess"
+          role="status"
+        >
+          <div class="mb-6 grid size-14 place-items-center rounded-full bg-cyan-soft">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--color-cyan-strong)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"></path></svg>
+          </div>
+          <h3 class="mb-2.5 text-2xl font-extrabold text-yale-dark">Your inquiry is ready to send.</h3>
+          <p
+            class="mx-auto mb-6 max-w-[420px] text-[15px] leading-[1.55] text-muted"
+            set:html={highlightSledEmailHtml(
+              `Your email client should have opened a pre-filled message to ${SITE.email.sled}. If it didn't, copy your details into an email to that address — we reply within one business day with a mutual NDA template.`,
+            )}
+          />
+          <a
+            id="formReset"
+            href="#"
+            class="inline-flex items-center justify-center rounded-xl border border-line bg-white px-5 py-3 text-sm font-bold text-yale transition-[border-color,background] duration-200 hover:border-yale hover:bg-seasalt"
+          >
+            Submit another inquiry
+          </a>
+        </div>
+      </div>
+
+      <aside class="sled-reveal-stagger space-y-5 lg:sticky lg:top-[120px] lg:self-start" data-sled-reveal>
+        <div class="sled-card overflow-hidden rounded-2xl p-0">
+          <div class="border-b border-line bg-gradient-to-br from-yale-dark to-yale px-6 py-5 text-white sm:px-7">
+            <div class={sectionLabelClass}>What happens next</div>
+            <h2 class="mt-2 text-[22px] font-extrabold leading-tight">Three steps. Two of them are ours.</h2>
+          </div>
+          <div class="space-y-3 p-5 sm:p-6">
+            {WHAT_HAPPENS_NEXT.map((step, idx) => {
+              const StepIcon = stepIcons[idx];
+              return (
+                <div class="flex gap-3.5 rounded-xl border border-line bg-seasalt/80 p-4 transition-colors hover:bg-seasalt">
+                  <div class="grid size-10 shrink-0 place-items-center rounded-xl bg-white text-yale-dark shadow-[0_4px_12px_-8px_rgba(21,58,95,0.2)]">
+                    <StepIcon class="size-[18px]" stroke-width="1.75" aria-hidden="true" />
+                  </div>
+                  <div class="text-[13.5px] leading-[1.55] text-muted">
+                    <span class="mb-0.5 block font-mono text-[11px] font-extrabold text-cyan-strong">{step.n}</span>
+                    <em class="block not-italic font-semibold text-yale-dark">{step.timing}</em>
+                    {step.text}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        <div class="sled-card rounded-2xl p-6 sm:p-7">
+          <div class={sectionLabelClass}>Or skip the form</div>
+          <h3 class="mt-2 text-[18px] font-extrabold leading-tight text-yale-dark">Email the SLED desk directly.</h3>
+          <p class="mt-2 text-[13.5px] leading-[1.6] text-muted">
+            If you'd rather start with a short email, send a one-line description of the engagement type and your role. Our U.S.-based partner manager routes it from there, usually within one business day.
+          </p>
+          <a
+            class="mt-5 inline-flex w-full items-center justify-center gap-2.5 rounded-xl border border-line bg-seasalt px-4 py-3.5 text-[14px] font-semibold text-yale transition-[border-color,background,transform] duration-200 hover:-translate-y-px hover:border-cyan/40 hover:bg-cyan-soft/50"
+            href={`mailto:${SITE.email.sled}`}
+          >
+            <Mail class="size-4 text-cyan-strong" stroke-width="1.75" aria-hidden="true" />
+            {SITE.email.sled}
+          </a>
+        </div>
+      </aside>
+    </div>
+  </SledPageWrap>
+</section>
+
+<script>
+  import { initContactIntakeForm } from './contact-intake-form';
+  initContactIntakeForm();
+</script>

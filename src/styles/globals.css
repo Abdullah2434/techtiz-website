@@ -42,5 +42,9 @@ body {
   --color-amber: var(--amber);
 
   --font-sans: 'Manrope', system-ui, sans-serif;
+  --font-poppins: 'Poppins', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
+
+/* After Tailwind layers so header chrome wins utility conflicts */
+@import './chrome.css';

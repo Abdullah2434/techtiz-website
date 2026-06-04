@@ -11,10 +11,121 @@
   transform: rotate(-135deg) translate(-1px, -1px);
 }
 
-.nav-item.open .mega {
-  opacity: 1;
+/* Mega dropdown — legacy Header.tsx: opacity + scaleY(0.95→1), 300ms ease-out.
+   Keyframe animation (not transition) so open always runs when .open is toggled. */
+@keyframes mega-menu-open {
+  from {
+    opacity: 0;
+    transform: var(--mega-transform-from);
+  }
+  to {
+    opacity: 1;
+    transform: var(--mega-transform-to);
+  }
+}
+
+@keyframes mega-menu-close {
+  from {
+    opacity: 1;
+    transform: var(--mega-transform-to);
+  }
+  to {
+    opacity: 0;
+    transform: var(--mega-transform-from);
+  }
+}
+
+.nav-item .mega {
+  opacity: 0;
+  pointer-events: none;
+  transform: var(--mega-transform-from);
+  transform-origin: top center;
+  --mega-transform-from: translateX(-50%) scaleY(0.95);
+  --mega-transform-to: translateX(-50%) scaleY(1);
+}
+
+.nav-item[data-mega='services'] .mega,
+.nav-item[data-mega='industries'] .mega {
+  left: 50%;
+}
+
+.nav-item.open .mega,
+.nav-item[data-open='true'] .mega {
   pointer-events: auto;
-  scale: 1 1;
+  animation: mega-menu-open 300ms ease-out forwards;
+}
+
+.nav-item.is-closing .mega {
+  pointer-events: none;
+  animation: mega-menu-close 300ms ease-out forwards;
+}
+
+@media (max-width: 1180px) {
+  .nav-item[data-mega='services'] .mega {
+    left: 0;
+    right: auto;
+    --mega-transform-from: translateX(0) scaleY(0.95);
+    --mega-transform-to: translateX(0) scaleY(1);
+  }
+
+  .nav-item[data-mega='industries'] .mega {
+    left: auto;
+    right: 0;
+    --mega-transform-from: translateX(0) scaleY(0.95);
+    --mega-transform-to: translateX(0) scaleY(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-item.open .mega,
+  .nav-item[data-open='true'] .mega,
+  .nav-item.is-closing .mega {
+    animation: none;
+  }
+
+  .nav-item.open .mega,
+  .nav-item[data-open='true'] .mega {
+    opacity: 1;
+    transform: var(--mega-transform-to);
+  }
+}
+
+/* Right panel — legacy AnimatedContent fadeSlide (250ms) */
+@keyframes mega-panel-exit {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+@keyframes mega-panel-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mega-panel-body.mega-panel-exit {
+  animation: mega-panel-exit 250ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.mega-panel-body.mega-panel-enter {
+  animation: mega-panel-enter 250ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mega-panel-body.mega-panel-exit,
+  .mega-panel-body.mega-panel-enter {
+    animation: none;
+  }
 }
 
 .mega-item.active {
@@ -26,13 +137,54 @@
   opacity: 0.6;
 }
 
-/* Services mega — legacy TwoColumnDropdown / DropdownCategoryDetails */
+/* Mega menu typography — legacy uses Poppins (layout.tsx body) */
+.mega,
+.mega-panel-body {
+  font-family: var(--font-poppins);
+}
+
+.mega-feat-title {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 110%;
+  letter-spacing: -0.02em;
+  color: #141414;
+}
+
+.mega-feat-desc {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 120%;
+  color: rgba(30, 30, 30, 0.6);
+}
+
+.mega-industry-sub-title {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 100%;
+  letter-spacing: 0;
+  color: #153a60;
+}
+
+.mega-industry-sub-desc {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 120%;
+  color: rgba(16, 16, 16, 0.6);
+}
+
+.group:hover .mega-industry-sub-title {
+  color: #18b0e6;
+}
+
+/* Services mega — legacy DropdownCategoryDetails */
 .mega-service-link {
   display: block;
   border-radius: 2px;
   padding: 12px 16px;
   font-size: 16px;
-  line-height: 1;
+  line-height: 100%;
+  letter-spacing: 0;
   font-weight: 400;
   color: #838383;
   transition:

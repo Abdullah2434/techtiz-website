@@ -1,5 +1,4 @@
 ---
-import '../../styles/chrome.css';
 import { SITE } from '../../lib/constants/site';
 import { ROUTES } from '../../lib/constants/routes';
 import {
@@ -31,11 +30,11 @@ const navLinkBase =
 const navLinkClass = (href: string) =>
   [navLinkBase, currentPage === href && 'bg-yale/8 text-yale'].filter(Boolean);
 
-/** Legacy Header.tsx: opacity + scale-y-95 → scale-y-100, 300ms ease-out, origin-top */
+/** Position + layout only; open/close animation lives in chrome.css (.mega transform) */
 const megaPanelBase =
-  'mega pointer-events-none absolute top-[calc(100%+14px)] z-60 w-[min(900px,calc(100vw-32px))] origin-top scale-y-95 rounded-2xl border border-line bg-white p-[22px] opacity-0 shadow-[0_30px_60px_-20px_rgba(14,38,64,0.22),0_6px_18px_-8px_rgba(14,38,64,0.10)] transition-all duration-300 ease-out before:absolute before:-top-2 before:size-3.5 before:rotate-45 before:rounded-tl before:border-t before:border-l before:border-line before:bg-white before:content-[\'\']';
-const megaPanelServices = `${megaPanelBase} left-1/2 -translate-x-1/2 before:left-1/2 before:-translate-x-1/2 max-[1180px]:left-0 max-[1180px]:translate-x-0 max-[1180px]:before:left-10`;
-const megaPanelIndustries = `${megaPanelBase} left-1/2 -translate-x-1/2 before:left-1/2 before:-translate-x-1/2 max-[1180px]:left-auto max-[1180px]:right-0 max-[1180px]:translate-x-0 max-[1180px]:before:left-auto max-[1180px]:before:right-10`;
+  'mega absolute top-[calc(100%+14px)] z-60 w-[min(900px,calc(100vw-32px))] rounded-2xl border border-line bg-white p-[22px] shadow-[0_30px_60px_-20px_rgba(14,38,64,0.22),0_6px_18px_-8px_rgba(14,38,64,0.10)] before:absolute before:-top-2 before:size-3.5 before:rotate-45 before:rounded-tl before:border-t before:border-l before:border-line before:bg-white before:content-[\'\']';
+const megaPanelServices = `${megaPanelBase} before:left-1/2 before:-translate-x-1/2 max-[1180px]:before:left-10`;
+const megaPanelIndustries = `${megaPanelBase} before:left-1/2 before:-translate-x-1/2 max-[1180px]:before:left-auto max-[1180px]:before:right-10`;
 ---
 
 
@@ -90,8 +89,8 @@ const megaPanelIndustries = `${megaPanelBase} left-1/2 -translate-x-1/2 before:l
               </div>
             </div>
             <div class="mega-right flex min-w-0 flex-col pl-[22px]" data-mega-panel="services">
-              <div data-feature="services" class="flex flex-col gap-4">
-                <div class="mega-feature rounded-[7px] bg-[#18B0E633] px-4 py-[15px]">
+              <div data-feature="services" class="mega-panel-body flex flex-col gap-4">
+                <div class="mega-feature rounded-[7.3px] bg-[#18B0E633] px-4 py-[15.4px]">
                   <div class="flex items-start gap-4">
                     <div class="feat-icon shrink-0" data-feat-icon>
                       <img
@@ -103,23 +102,17 @@ const megaPanelIndustries = `${megaPanelBase} left-1/2 -translate-x-1/2 before:l
                         data-feat-icon-img
                       />
                     </div>
-                    <div class="min-w-0">
-                      <h4
-                        data-feat-title
-                        class="text-[24px] leading-[110%] font-semibold tracking-[-0.02em] text-[#141414]"
-                      >
+                    <div class="flex min-w-0 flex-col gap-2">
+                      <h3 data-feat-title class="mega-feat-title">
                         {firstServicesCategory.title}
-                      </h4>
-                      <p
-                        data-feat-desc
-                        class="mt-2 text-xs leading-[120%] font-normal text-[#1E1E1E]/60"
-                      >
+                      </h3>
+                      <p data-feat-desc class="mega-feat-desc">
                         {firstServicesCategory.description}
                       </p>
                     </div>
                   </div>
                 </div>
-                <div class="mega-sublinks flex flex-col gap-0.5" data-sublinks="services">
+                <div class="mega-sublinks flex flex-col gap-2" data-sublinks="services">
                   {
                     firstServicesCategory.subs.map((sub) => (
                       <a href={sub.href} class="mega-service-link">
@@ -178,13 +171,13 @@ const megaPanelIndustries = `${megaPanelBase} left-1/2 -translate-x-1/2 before:l
               </div>
             </div>
             <div class="mega-right flex min-w-0 flex-col pl-[22px]">
-              <div data-feature="industries" class="flex flex-col gap-3">
+              <div data-feature="industries" class="mega-panel-body flex flex-col gap-3">
                 <a
                   href={firstIndustryCategory.landingHref}
                   data-industry-panel
-                  class="mega-industry-panel group -m-2 flex flex-col gap-3 rounded-[8px] border-2 border-transparent p-2 transition-all duration-300 hover:border-cyan hover:bg-cyan/5"
+                  class="mega-industry-panel group -m-2 flex flex-col gap-3 rounded-[8px] border-2 border-transparent p-2 transition-all duration-300 hover:border-[#18B0E6] hover:bg-[#18B0E610]"
                 >
-                  <div class="mega-feature rounded-[7px] bg-[#F6F6F6] px-4 py-[15px] transition-colors group-hover:bg-cyan/10">
+                  <div class="mega-feature rounded-[7.3px] bg-[#F6F6F6] px-4 py-[15.4px] transition-colors group-hover:bg-[#18B0E615]">
                     <div class="flex items-start gap-4">
                       <div class="feat-icon shrink-0" data-feat-icon>
                         <img
@@ -195,33 +188,26 @@ const megaPanelIndustries = `${megaPanelBase} left-1/2 -translate-x-1/2 before:l
                           class="size-10 object-contain"
                         />
                       </div>
-                      <div class="min-w-0">
-                        <h4
+                      <div class="flex min-w-0 flex-col gap-2">
+                        <h3
                           data-feat-title
-                          class="text-[24px] leading-[110%] font-semibold tracking-[-0.02em] text-[#141414] transition-colors group-hover:text-cyan"
+                          class="mega-feat-title transition-colors group-hover:text-[#18B0E6]"
                         >
                           {firstIndustryCategory.title}
-                        </h4>
-                        <p
-                          data-feat-desc
-                          class="mt-2 text-xs leading-[120%] font-normal text-[#1E1E1E]/60"
-                        >
+                        </h3>
+                        <p data-feat-desc class="mega-feat-desc">
                           {firstIndustryCategory.description}
                         </p>
                       </div>
                     </div>
                   </div>
-                  <div class="h-0.5 bg-[#EAEAEA] transition-colors group-hover:bg-cyan" aria-hidden="true"></div>
+                  <div class="h-[2px] bg-[#EAEAEA] transition-colors group-hover:bg-[#18B0E6]" aria-hidden="true"></div>
                   <div class="mega-sublinks flex flex-col gap-3" data-sublinks="industries">
                     {
                       firstIndustryCategory.subs.map((sub) => (
                         <div class="flex flex-col gap-2 px-4 py-3">
-                          <span class="block text-[18px] font-semibold leading-none text-[#153A60] group-hover:text-cyan">
-                            {sub.name}
-                          </span>
-                          <span class="block text-xs leading-[120%] text-[#101010]/60">
-                            {sub.desc}
-                          </span>
+                          <h3 class="mega-industry-sub-title">{sub.name}</h3>
+                          <p class="mega-industry-sub-desc">{sub.desc}</p>
                         </div>
                       ))
                     }

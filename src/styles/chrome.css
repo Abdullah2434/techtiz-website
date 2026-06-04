@@ -13,11 +13,8 @@
 
 .nav-item.open .mega {
   opacity: 1;
-  visibility: visible;
   pointer-events: auto;
-  /* Don't hardcode X translate — allow Tailwind classes to control it.
-     We only need to bring Y into view when open. */
-  translate: var(--tw-translate-x, 0) 0;
+  scale: 1 1;
 }
 
 .mega-item.active {

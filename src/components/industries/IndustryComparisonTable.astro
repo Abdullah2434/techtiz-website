@@ -1,0 +1,94 @@
+---
+import type { IndustryComparisonData } from '../../lib/types/industry';
+import {
+  getDefaultComparisonIcon,
+  getHeaderBgColor,
+} from '../../lib/constants/industry-comparison-icons';
+
+interface Props extends IndustryComparisonData {}
+
+const { mainTitle, description, columns, rows } = Astro.props;
+
+function colWidthClass(index: number, total: number): string {
+  if (total === 2) return index === 0 ? 'w-[35%]' : 'w-[65%]';
+  if (total === 3) return index === 0 ? 'w-[25%]' : 'w-[37.5%]';
+  return 'w-1/4';
+}
+---
+
+<section class="mx-auto w-full max-w-[1400px] bg-white px-2 py-10 md:py-16">
+  {
+    (mainTitle || description) && (
+      <div class="mb-12 grid grid-cols-1 gap-1 lg:grid-cols-2">
+        {mainTitle && (
+          <h2 class="max-w-[600px] text-[32px] leading-[120%] font-normal tracking-[-0.02em] md:text-[40px]">
+            {mainTitle}
+          </h2>
+        )}
+        {description && (
+          <div class="flex items-start justify-end">
+            <p class="max-w-[490px] text-right text-[16px] leading-[130%] font-normal text-[#101010] md:text-[18px]">
+              {description}
+            </p>
+          </div>
+        )}
+      </div>
+    )
+  }
+  <div class="overflow-hidden overflow-x-auto rounded-[8px] bg-white">
+    <table class="w-full min-w-[600px] table-fixed border-collapse">
+      <colgroup>
+        {columns.map((_, index) => (
+          <col class={colWidthClass(index, columns.length)} />
+        ))}
+      </colgroup>
+      <thead>
+        <tr>
+          {
+            columns.map((col) => {
+              const iconHtml =
+                typeof col.icon === 'string' && col.icon
+                  ? col.icon
+                  : getDefaultComparisonIcon(col.type);
+              return (
+                <th
+                  class:list={[
+                    getHeaderBgColor(col.type),
+                    'border-r border-[#9E9E9E] px-2 py-[26px] text-left text-white last:border-r-0 lg:px-6',
+                  ]}
+                >
+                  <div class="flex items-center">
+                    <div
+                      class="mr-2 flex h-6 w-6 shrink-0 items-center justify-center text-white md:mr-4 md:h-8 md:w-8 lg:h-12 lg:w-12 [&>svg]:h-full [&>svg]:w-full"
+                      set:html={iconHtml}
+                    />
+                    <span class="text-[18px] leading-[120%] font-normal lg:text-[26px]">
+                      {col.title}
+                    </span>
+                  </div>
+                </th>
+              );
+            })
+          }
+        </tr>
+      </thead>
+      <tbody>
+        {
+          rows.map((row) => (
+            <tr class="border-b border-[#153A5F33] last:border-b-0">
+              {
+                row.values.map((value) => (
+                  <td class="border-r border-[#153A5F33] bg-[#F6F6F6] px-2 pt-3 pb-6 text-[#101010] last:border-r-0 md:pt-6 md:pb-10 lg:px-6">
+                    <span class="text-[19px] leading-[120%] font-normal lg:text-[22px]">
+                      {value}
+                    </span>
+                  </td>
+                ))
+              }
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+</section>

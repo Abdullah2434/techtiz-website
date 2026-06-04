@@ -1,0 +1,80 @@
+---
+interface Props {
+  ctaTitle: string;
+  ctaButtonText: string;
+  ctaButtonUrl: string;
+  /** Desktop grid card vs mobile stacked bar */
+  decor?: 'grid' | 'mobile';
+}
+
+const { ctaTitle, ctaButtonText, ctaButtonUrl, decor = 'grid' } = Astro.props;
+
+const decorClass =
+  decor === 'grid'
+    ? 'absolute -top-48 -right-20 z-10'
+    : 'absolute -top-44 right-0 z-10';
+---
+
+<div
+  class="ind-solutions-cta relative flex h-full flex-col justify-center overflow-hidden rounded-[4px] bg-[#18B0E6] p-7 text-white"
+>
+  <div class="relative z-20 flex flex-1 flex-col justify-center">
+    <h3 class="relative z-20 mb-1 text-[24px] leading-[120%] font-semibold text-white md:text-[32px]">
+      {ctaTitle}
+    </h3>
+
+    <svg
+      width="485"
+      height="402"
+      class:list={[decorClass, 'pointer-events-none']}
+      viewBox="0 0 485 402"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <g opacity="0.8">
+        <g opacity="0.1">
+          <path
+            d="M207.459 528.695L369.707 421.814L531.956 314.932L476.589 584.062L207.459 528.695Z"
+            fill="white"></path>
+          <path
+            d="M531.961 314.926L369.713 421.808L207.464 528.689L262.831 259.559L531.961 314.926Z"
+            fill="white"></path>
+        </g>
+        <g opacity="0.1">
+          <path
+            d="M121.092 313.996L246.616 231.307L372.14 148.617L329.305 356.831L121.092 313.996Z"
+            fill="white"></path>
+          <path
+            d="M372.137 148.617L246.613 231.307L121.089 313.996L163.923 105.783L372.137 148.617Z"
+            fill="white"></path>
+        </g>
+      </g>
+    </svg>
+
+    <div class="relative z-20 mt-5">
+      <a
+        href={ctaButtonUrl}
+        class="group flex w-full items-center justify-between rounded-[2px] border border-white bg-white/10 px-6 py-[12.7px] text-[16px] font-normal text-white transition-all duration-300 hover:border-white/50 hover:bg-white hover:text-[#18B0E6]"
+      >
+        <span class="mr-3">{ctaButtonText}</span>
+        <svg
+          width="16"
+          height="12"
+          viewBox="0 0 18 14"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          class="shrink-0 transition-transform duration-300 group-hover:translate-x-0.5"
+          aria-hidden="true"
+        >
+          <path
+            d="M1 7.01097L16.8124 6.99999M11.5858 13L17 6.99999L11.5858 1"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</div>

@@ -3,8 +3,6 @@
 (function () {
   const items = document.querySelectorAll('.nav-item');
   if (!items.length) return;
-  let openTimer = null;
-  let closeTimer = null;
 
   function openItem(el) {
     items.forEach((i) => {
@@ -26,27 +24,29 @@
     });
   }
 
+  function toggleItem(item) {
+    if (item.classList.contains('open')) closeAll();
+    else openItem(item);
+  }
+
+  // Legacy Header.tsx: click to toggle (no hover); click outside to close.
   items.forEach((item) => {
-    item.addEventListener('mouseenter', () => {
-      clearTimeout(closeTimer);
-      openTimer = setTimeout(() => openItem(item), 80);
-    });
-    item.addEventListener('mouseleave', () => {
-      clearTimeout(openTimer);
-      closeTimer = setTimeout(closeAll, 180);
-    });
     const btn = item.querySelector('.nav-link');
+    const megaKey = item.getAttribute('data-mega') || '';
     if (btn) {
+      btn.setAttribute('data-dropdown-button', megaKey);
       btn.addEventListener('click', (e) => {
         e.preventDefault();
-        if (item.classList.contains('open')) closeAll();
-        else openItem(item);
+        e.stopPropagation();
+        toggleItem(item);
       });
     }
   });
 
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest('.nav-item')) closeAll();
+  document.addEventListener('mousedown', (e) => {
+    const target = e.target;
+    if (target.closest('.nav-item')) return;
+    closeAll();
   });
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeAll();
@@ -164,10 +164,13 @@
       .join('');
   }
 
-  function renderIndustriesPanel(d, featBlock, subBlock) {
-    const titleEl = featBlock.querySelector('[data-feat-title]');
-    const descEl = featBlock.querySelector('[data-feat-desc]');
-    const iconWrap = featBlock.querySelector('[data-feat-icon]');
+  function renderIndustriesPanel(d, featureRoot) {
+    const panelLink = featureRoot.querySelector('[data-industry-panel]');
+    const titleEl = featureRoot.querySelector('[data-feat-title]');
+    const descEl = featureRoot.querySelector('[data-feat-desc]');
+    const iconWrap = featureRoot.querySelector('[data-feat-icon]');
+    const subBlock = featureRoot.querySelector('[data-sublinks="industries"]');
+    if (panelLink && d.landingHref) panelLink.href = d.landingHref;
     if (titleEl) titleEl.textContent = d.title;
     if (descEl) descEl.textContent = d.desc;
     if (iconWrap && d.icon) {
@@ -179,21 +182,17 @@
     if (!subBlock || !d.subs) return;
     subBlock.className = 'mega-sublinks flex flex-col gap-3';
     subBlock.innerHTML = d.subs
-      .map((s) => {
-        const href = s.href || '/';
-        return (
-          '<a href="' +
-          href +
-          '" class="flex flex-col gap-2 rounded-[2px] px-4 py-3 transition-colors hover:bg-[#EAEAEA]">' +
+      .map(
+        (s) =>
+          '<div class="flex flex-col gap-2 px-4 py-3">' +
           '<span class="text-[18px] font-semibold leading-none text-[#153A60]">' +
           s.name +
           '</span>' +
           (s.desc
             ? '<span class="text-xs leading-[120%] text-[#101010]/60">' + s.desc + '</span>'
             : '') +
-          '</a>'
-        );
-      })
+          '</div>',
+      )
       .join('');
   }
 
@@ -202,14 +201,19 @@
     const featBlock = document.querySelector('[data-feature="' + key + '"]');
     const subBlock = document.querySelector('[data-sublinks="' + key + '"]');
     list.querySelectorAll('.mega-item').forEach((item) => {
-      item.addEventListener('mouseenter', () => {
+      const activate = () => {
         list.querySelectorAll('.mega-item').forEach((i) => i.classList.remove('active'));
         item.classList.add('active');
         const k = item.dataset.key;
         const d = data[key] && data[key][k];
         if (!d || !featBlock || !subBlock) return;
         if (key === 'services') renderServicesPanel(d, featBlock, subBlock);
-        else renderIndustriesPanel(d, featBlock, subBlock);
+        else renderIndustriesPanel(d, featBlock);
+      };
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        activate();
       });
     });
   });

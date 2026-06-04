@@ -1,0 +1,65 @@
+---
+import type { IndustrySolutionsData } from '../../lib/types/industry';
+import IndustrySolutionsCtaPanel from './IndustrySolutionsCtaPanel.astro';
+import { ROUTES } from '../../lib/constants/routes';
+
+interface Props extends IndustrySolutionsData {}
+
+const {
+  solutions,
+  mainTitle,
+  ctaTitle = "Do you have idea, Let's Build it.",
+  ctaButtonText = 'Book a Call',
+  ctaButtonUrl = ROUTES.sledContact,
+  solutionColumns = 3,
+} = Astro.props;
+
+const cols = solutionColumns === 2 ? 'lg:grid-cols-2' : solutionColumns === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3';
+const total = solutions.length;
+const emptySpots = solutionColumns - (total % solutionColumns);
+const showCtaInGrid = emptySpots > 0 && emptySpots < solutionColumns;
+const ctaSpan =
+  emptySpots === 3 ? 'lg:col-span-3' : emptySpots === 2 ? 'lg:col-span-2' : emptySpots === 1 ? 'lg:col-span-1' : '';
+---
+
+<section class="mx-auto w-full max-w-[1400px] overflow-hidden bg-white px-2 py-10 md:py-16">
+  <h2 class="mb-12 text-left text-[40px] leading-[120%] font-normal tracking-[-0.02em]">
+    {mainTitle}
+  </h2>
+  <div class={`grid grid-cols-1 gap-4 md:grid-cols-2 ${cols}`}>
+    {
+      solutions.map((solution) => (
+        <article class="flex w-full flex-col rounded-[4px] bg-[#F6F6F6] p-6 transition-shadow duration-300 hover:shadow-md">
+          {solution.iconPath && (
+            <img
+              src={solution.iconPath}
+              alt=""
+              width={42}
+              height={42}
+              class="mb-5 object-contain"
+              loading="lazy"
+            />
+          )}
+          <h3 class="mb-3 text-[24px] leading-[120%] font-normal tracking-[-0.02em] text-[#141414]">
+            {solution.title}
+          </h3>
+          {solution.description && (
+            <p class="text-[16px] leading-[130%] font-normal tracking-normal text-[#101010]">
+              {solution.description}
+            </p>
+          )}
+        </article>
+      ))
+    }
+    {
+      showCtaInGrid && (
+        <div class:list={['hidden lg:block', ctaSpan]}>
+          <IndustrySolutionsCtaPanel {ctaTitle} {ctaButtonText} {ctaButtonUrl} decor="grid" />
+        </div>
+      )
+    }
+  </div>
+  <div class="mt-8 lg:hidden">
+    <IndustrySolutionsCtaPanel {ctaTitle} {ctaButtonText} {ctaButtonUrl} decor="mobile" />
+  </div>
+</section>

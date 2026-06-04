@@ -11,15 +11,27 @@
     mega.style.removeProperty('animation');
   }
 
+  function isNavOpen(item) {
+    return item.classList.contains('open') || item.dataset.open === 'true';
+  }
+
   function closeItem(item, animate) {
     const mega = item.querySelector('.mega');
     const btn = item.querySelector('.nav-link');
+    const wasOpen = isNavOpen(item);
+
     item.classList.remove('open');
     item.dataset.open = 'false';
     if (btn) btn.setAttribute('aria-expanded', 'false');
 
     if (!mega) {
       item.classList.remove('is-closing');
+      return;
+    }
+
+    if (!wasOpen) {
+      item.classList.remove('is-closing');
+      resetMegaAnimation(mega);
       return;
     }
 
@@ -43,33 +55,34 @@
   }
 
   function openItem(el) {
+    // Instantly hide any other open menu — avoid playing close animation on a closed panel
+    // (that flashes the wrong mega at opacity 1 before fading out).
     items.forEach((i) => {
-      if (i !== el) closeItem(i, true);
-      else i.dataset.open = 'true';
+      if (i !== el) closeItem(i, false);
     });
 
     const mega = el.querySelector('.mega');
     const btn = el.querySelector('.nav-link');
 
-    el.classList.remove('open', 'is-closing');
-    el.dataset.open = 'false';
-    if (btn) btn.setAttribute('aria-expanded', 'false');
+    if (isNavOpen(el)) return;
+
+    el.classList.remove('is-closing');
     resetMegaAnimation(mega);
 
+    // One frame without .open so the open keyframe always runs.
+    el.classList.remove('open');
+    el.dataset.open = 'false';
+    if (btn) btn.setAttribute('aria-expanded', 'false');
+
     requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        el.classList.add('open');
-        el.dataset.open = 'true';
-        if (btn) btn.setAttribute('aria-expanded', 'true');
-      });
+      el.classList.add('open');
+      el.dataset.open = 'true';
+      if (btn) btn.setAttribute('aria-expanded', 'true');
     });
   }
 
   function closeAll() {
-    items.forEach((i) => {
-      if (i.classList.contains('open') || i.dataset.open === 'true') closeItem(i, true);
-      else closeItem(i, false);
-    });
+    items.forEach((i) => closeItem(i, isNavOpen(i)));
   }
 
   function toggleItem(item) {

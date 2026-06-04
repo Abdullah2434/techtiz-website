@@ -1,8 +1,9 @@
 ---
 import ChevronDown from '@lucide/astro/icons/chevron-down';
 import type { SledFaqContent } from '../../../lib/constants/pages/sled-faq';
-import { SITE } from '../../../lib/constants/site';
+import { absoluteUrl, faqPageJsonLd } from '../../../lib/seo/json-ld';
 import Eyebrow from '../../shared/Eyebrow.astro';
+import JsonLd from '../../seo/JsonLd.astro';
 import SledPageWrap from './SledPageWrap.astro';
 
 interface Props extends SledFaqContent {
@@ -20,19 +21,8 @@ const {
   sectionId = 'faq',
 } = Astro.props;
 
-const faqJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  '@id': `${SITE.url}${canonicalPath}#faq`,
-  mainEntity: items.map((item) => ({
-    '@type': 'Question',
-    name: item.question,
-    acceptedAnswer: {
-      '@type': 'Answer',
-      text: item.answer,
-    },
-  })),
-};
+const pageUrl = absoluteUrl(canonicalPath);
+const faqJsonLd = faqPageJsonLd(items, pageUrl);
 ---
 
 <section class="sled-section bg-white" id={sectionId} aria-labelledby={`${sectionId}-heading`}>
@@ -80,7 +70,7 @@ const faqJsonLd = {
     </div>
   </SledPageWrap>
 
-  <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+  <JsonLd data={faqJsonLd} />
 </section>
 
 <script>

@@ -1,7 +1,10 @@
 ---
 import 'aos/dist/aos.css';
 import '../styles/globals.css';
-import { SITE } from '../lib/constants/site';
+import JsonLd from '../components/seo/JsonLd.astro';
+import Seo from '../components/seo/Seo.astro';
+import { siteGraphJsonLd } from '../lib/seo/json-ld';
+import type { JsonLdNode } from '../lib/seo/types';
 
 interface Props {
   title: string;
@@ -10,20 +13,26 @@ interface Props {
   ogImage?: string;
   ogTitle?: string;
   ogDescription?: string;
+  noindex?: boolean;
+  /** Page-specific JSON-LD graphs (merged with Organization + WebSite). */
+  jsonLd?: JsonLdNode[];
+  /** Set false to omit global Organization/WebSite graphs (rare). */
+  includeSiteGraph?: boolean;
 }
 
 const {
   title,
   description,
   canonicalPath,
-  ogImage = '/assets/capitol.png',
+  ogImage,
   ogTitle,
   ogDescription,
+  noindex,
+  jsonLd = [],
+  includeSiteGraph = true,
 } = Astro.props;
 
-const siteUrl = SITE.url;
-const canonical = `${siteUrl}${canonicalPath}`;
-const resolvedOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
+const graphs = includeSiteGraph ? siteGraphJsonLd(jsonLd) : jsonLd;
 ---
 
 <!doctype html>
@@ -32,30 +41,32 @@ const resolvedOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogIm
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Primary SEO -->
-  <title>{title}</title>
-  <meta name="description" content={description} />
-  <link rel="canonical" href={canonical} />
-
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content={canonical} />
-  <meta property="og:title" content={ogTitle ?? title} />
-  <meta property="og:description" content={ogDescription ?? description} />
-  <meta property="og:image" content={resolvedOgImage} />
-  <meta property="og:site_name" content={SITE.name} />
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content={canonical} />
-  <meta name="twitter:title" content={ogTitle ?? title} />
-  <meta name="twitter:description" content={ogDescription ?? description} />
-  <meta name="twitter:image" content={resolvedOgImage} />
+  <Seo
+    {title}
+    {description}
+    {canonicalPath}
+    {ogImage}
+    {ogTitle}
+    {ogDescription}
+    {noindex}
+  />
+  <JsonLd data={graphs} />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet"
+    media="print"
+    onload="this.media='all'"
+  />
+  <noscript>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </noscript>
 
   <slot name="head" />
 </head>
@@ -82,6 +93,10 @@ const resolvedOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogIm
     window.setTimeout(() => AOS.refresh(), 100);
   };
 
-  initAos();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAos, { once: true });
+  } else {
+    initAos();
+  }
   document.addEventListener('astro:page-load', initAos);
 </script>

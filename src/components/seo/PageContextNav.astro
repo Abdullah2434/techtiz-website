@@ -1,0 +1,31 @@
+---
+interface Link {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  links: Link[];
+  class?: string;
+}
+
+const { links, class: className } = Astro.props;
+---
+
+{
+  links.length > 0 && (
+    <nav
+      aria-label="Related pages"
+      class:list={[
+        'flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-line pt-8 text-sm font-medium text-yale',
+        className,
+      ]}
+    >
+      {links.map((link) => (
+        <a href={link.href} class="transition-colors hover:text-cyan">
+          {link.label}
+        </a>
+      ))}
+    </nav>
+  )
+}

@@ -1,22 +1,20 @@
 ---
 import SledFaqSection from '../../components/sled/shared/SledFaqSection.astro';
+import Breadcrumbs from '../../components/seo/Breadcrumbs.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { CAPABILITY_STATEMENT_SEO } from '../../lib/constants/pages/capability-statement';
 import { CAPABILITY_STATEMENT_FAQ } from '../../lib/constants/pages/sled-faq';
 import { SITE } from '../../lib/constants/site';
 import '../../styles/sled.css';
 
-const seo = {
-  title: 'Capability Statement | Techtiz · U.S. SLED Subcontractor',
-  description: 'Techtiz capability statement for U.S. SLED prime contractors — core competencies, differentiators, codes, and contact. NDA-first, subcontract-only.',
-  canonicalPath: '/us-sled/capability-statement/',
-  ogImage: '/assets/logo.svg',
-};
+const seo = CAPABILITY_STATEMENT_SEO;
 ---
 
 <BaseLayout {...seo}>
 
 <div class="bg-seasalt py-8 print:bg-white print:py-0">
   <div class="mx-auto max-w-[980px] px-12 max-[1024px]:px-8 max-[900px]:px-6 max-[600px]:px-[18px] print:hidden">
+    <Breadcrumbs canonicalPath={seo.canonicalPath} class="mb-4" />
     <div class="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-line bg-white px-5 py-4">
       <span class="font-mono text-[11px] font-bold tracking-[0.14em] uppercase text-muted">
         Capability Statement · pre-deploy draft

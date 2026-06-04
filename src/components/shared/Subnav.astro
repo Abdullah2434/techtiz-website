@@ -1,6 +1,8 @@
 ---
 import { SLED_SUBNAV } from '../../lib/constants/routes';
-import { SITE } from '../../lib/constants/site';
+import { buildBreadcrumbs } from '../../lib/seo/crumbs';
+import { absoluteUrl, breadcrumbListJsonLd } from '../../lib/seo/json-ld';
+import JsonLd from '../seo/JsonLd.astro';
 
 interface Props {
   currentPath: string;
@@ -15,40 +17,26 @@ function isActive(href: string) {
   return normalized === hrefNorm || normalized === hrefNorm.replace(/\/$/, '');
 }
 
-const crumbs = buildCrumbs(currentPath);
-
-function buildCrumbs(path: string) {
-  const crumbList: Array<{ label: string; href?: string }> = [
-    { label: SITE.name, href: '/' },
-  ];
-  if (path.startsWith('/us-sled')) {
-    crumbList.push({ label: 'SLED Partnerships', href: '/us-sled/' });
-    const sub = SLED_SUBNAV.find(l => l.href !== '/us-sled/' && path.startsWith(l.href.replace(/\/$/, '')));
-    if (sub) {
-      crumbList[crumbList.length - 1] = { label: 'SLED Partnerships', href: '/us-sled/' };
-      crumbList.push({ label: sub.label });
-    } else if (path === '/us-sled/' || path === '/us-sled') {
-      crumbList[crumbList.length - 1] = { label: 'SLED Partnerships' };
-    }
-  }
-  return crumbList;
-}
+const crumbs = buildBreadcrumbs(currentPath);
+const pageUrl = absoluteUrl(currentPath);
 ---
 
 <div class="subnav sticky top-[76px] z-40 border-b border-line/90 bg-white/90 shadow-[0_8px_24px_-20px_rgba(14,38,64,0.12)] backdrop-blur-md max-[900px]:static">
   <div class="subnav-inner mx-auto max-w-[1280px] px-12 max-[1024px]:px-8 max-[900px]:px-6 max-[600px]:px-[18px] flex h-[52px] items-center justify-between max-[900px]:h-auto max-[900px]:py-[8px]">
-    <div class="crumbs mr-6 flex shrink-0 items-center gap-2.5 font-mono text-[11.5px] tracking-[0.04em] whitespace-nowrap text-muted max-[900px]:hidden">
-      {crumbs.map((c, i) => (
-        <>
-          {i > 0 && <span class="sep text-line">/</span>}
-          {c.href ? (
-            <a href={c.href} class="text-muted transition-colors duration-[180ms] ease-out hover:text-yale">{c.label}</a>
-          ) : (
-            <span class="here font-semibold text-yale">{c.label}</span>
-          )}
-        </>
-      ))}
-    </div>
+    <nav aria-label="Breadcrumb" class="crumbs mr-6 flex shrink-0 items-center gap-2.5 font-mono text-[11.5px] tracking-[0.04em] whitespace-nowrap text-muted max-[900px]:hidden">
+      <ol class="flex items-center gap-2.5">
+        {crumbs.map((c, i) => (
+          <li class="flex items-center gap-2.5">
+            {i > 0 && <span class="sep text-line" aria-hidden="true">/</span>}
+            {c.href ? (
+              <a href={c.href} class="text-muted transition-colors duration-[180ms] ease-out hover:text-yale">{c.label}</a>
+            ) : (
+              <span class="here font-semibold text-yale" aria-current="page">{c.label}</span>
+            )}
+          </li>
+        ))}
+      </ol>
+    </nav>
     <div
       class="sub-links flex shrink-0 flex-nowrap gap-[22px] max-[900px]:overflow-x-auto max-[900px]:scrollbar-none"
       data-spy
@@ -62,7 +50,7 @@ function buildCrumbs(path: string) {
             },
           ]}
           class="border-b-2 border-transparent px-0 py-1.5 text-[13.5px] font-medium whitespace-nowrap text-muted transition-[color,border-color] duration-[180ms] ease-out hover:text-yale [&.on]:border-cyan [&.on]:font-semibold [&.on]:text-yale"
-          data-spy-id={'spyId' in link ? (link as any).spyId : undefined}
+          data-spy-id={'spyId' in link ? (link as { spyId?: string }).spyId : undefined}
         >
           {link.label}
         </a>
@@ -70,3 +58,5 @@ function buildCrumbs(path: string) {
     </div>
   </div>
 </div>
+
+{crumbs.length > 1 && <JsonLd data={breadcrumbListJsonLd(crumbs, pageUrl)} />}

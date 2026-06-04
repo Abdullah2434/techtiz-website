@@ -15,7 +15,14 @@ const isVideo = isVideoMedia(media);
     isVideo ? (
       <video src={media} autoplay muted loop playsinline class="size-full object-cover" />
     ) : (
-      <img src={media} alt={title} class="size-full object-cover" loading="eager" decoding="async" />
+      <img
+        src={media}
+        alt={`${title} case study hero`}
+        class="size-full object-cover"
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+      />
     )
   }
   <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>

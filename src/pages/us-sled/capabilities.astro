@@ -1,0 +1,31 @@
+---
+import '../../styles/sled.css';
+import SledLayout from '../../layouts/SledLayout.astro';
+import CapabilitiesBoundariesSection from '../../components/sled/capabilities/CapabilitiesBoundariesSection.astro';
+import CapabilitiesEngageSection from '../../components/sled/capabilities/CapabilitiesEngageSection.astro';
+import CapabilitiesFrameworksSection from '../../components/sled/capabilities/CapabilitiesFrameworksSection.astro';
+import CapabilitiesMatrixSection from '../../components/sled/capabilities/CapabilitiesMatrixSection.astro';
+import CapabilitiesProcStrip from '../../components/sled/capabilities/CapabilitiesProcStrip.astro';
+import CapabilitiesTechStackSection from '../../components/sled/capabilities/CapabilitiesTechStackSection.astro';
+import SledFinalCta from '../../components/sled/shared/SledFinalCta.astro';
+import SledInnerHero from '../../components/sled/shared/SledInnerHero.astro';
+import { CAPABILITIES_SEO, CAPABILITIES_HERO } from '../../lib/constants/pages/capabilities';
+
+const { title, description, canonicalPath, ogImage } = CAPABILITIES_SEO;
+---
+
+<SledLayout {title} {description} {canonicalPath} {ogImage} currentPage="/us-sled/capabilities/">
+  <SledInnerHero
+    eyebrow={CAPABILITIES_HERO.eyebrow}
+    heading={CAPABILITIES_HERO.heading}
+    body={CAPABILITIES_HERO.body}
+    ctas={CAPABILITIES_HERO.ctas}
+  />
+  <CapabilitiesProcStrip />
+  <CapabilitiesFrameworksSection />
+  <CapabilitiesMatrixSection />
+  <CapabilitiesTechStackSection />
+  <CapabilitiesEngageSection />
+  <CapabilitiesBoundariesSection />
+  <SledFinalCta />
+</SledLayout>

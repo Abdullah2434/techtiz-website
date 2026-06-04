@@ -8,6 +8,7 @@ Follow the rules in:
 
 Follow the skills in:
 
+- `.claude/skills/sled-strategy.md`
 - `.claude/skills/astro-html-migration.md`
 - `.claude/skills/frontend.md`
 - `.claude/skills/ui-system.md`

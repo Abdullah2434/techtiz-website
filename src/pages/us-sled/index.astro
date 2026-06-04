@@ -1,0 +1,37 @@
+---
+import BackboneSection from '../../components/sled/hub/BackboneSection.astro';
+import HubInquirySection from '../../components/sled/hub/HubInquirySection.astro';
+import OnshoreSection from '../../components/sled/hub/OnshoreSection.astro';
+import OperatingPrinciplesSection from '../../components/sled/hub/OperatingPrinciplesSection.astro';
+import OutcomesSection from '../../components/sled/hub/OutcomesSection.astro';
+import SledHubHero from '../../components/sled/hub/SledHubHero.astro';
+import SledTrustStrip from '../../components/sled/hub/SledTrustStrip.astro';
+import SpecializationsSection from '../../components/sled/hub/SpecializationsSection.astro';
+import TwoStagesSection from '../../components/sled/hub/TwoStagesSection.astro';
+import VehiclesSection from '../../components/sled/hub/VehiclesSection.astro';
+import WhoWeAreNotStripe from '../../components/sled/hub/WhoWeAreNotStripe.astro';
+import WhyTechtizSection from '../../components/sled/hub/WhyTechtizSection.astro';
+import SledLayout from '../../layouts/SledLayout.astro';
+import { SLED_HUB_SEO } from '../../lib/constants/pages/sled-hub';
+import '../../styles/sled.css';
+
+const { title, description, canonicalPath, ogImage } = SLED_HUB_SEO;
+---
+
+<SledLayout {title} {description} {canonicalPath} {ogImage} currentPage="/us-sled/">
+  <div class="sled-hub-page">
+  <SledHubHero />
+  <SledTrustStrip />
+  <WhoWeAreNotStripe />
+  <TwoStagesSection />
+  <OnshoreSection />
+  <OperatingPrinciplesSection />
+  <BackboneSection />
+  <OutcomesSection />
+  <SpecializationsSection />
+  <VehiclesSection />
+  <WhyTechtizSection />
+  <HubInquirySection />
+  </div>
+  <script src="/scripts/sled-hub.js" is:inline></script>
+</SledLayout>

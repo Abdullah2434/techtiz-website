@@ -1,0 +1,33 @@
+---
+import OperatingModelArchitectureSection from '../../components/sled/operating-model/OperatingModelArchitectureSection.astro';
+import OperatingModelDisclosureSection from '../../components/sled/operating-model/OperatingModelDisclosureSection.astro';
+import OperatingModelFrameworksSection from '../../components/sled/operating-model/OperatingModelFrameworksSection.astro';
+import OperatingModelHeroAside from '../../components/sled/operating-model/OperatingModelHeroAside.astro';
+import OperatingModelPipelineSection from '../../components/sled/operating-model/OperatingModelPipelineSection.astro';
+import OperatingModelStatesSection from '../../components/sled/operating-model/OperatingModelStatesSection.astro';
+import SledInnerHero from '../../components/sled/shared/SledInnerHero.astro';
+import SledLayout from '../../layouts/SledLayout.astro';
+import { OPERATING_MODEL_HERO, OPERATING_MODEL_SEO } from '../../lib/constants/pages/operating-model';
+import '../../styles/sled.css';
+
+const { title, description, canonicalPath, ogImage } = OPERATING_MODEL_SEO;
+---
+
+<SledLayout {title} {description} {canonicalPath} {ogImage} currentPage="/us-sled/operating-model/">
+  <div class="sled-operating-model-page">
+    <SledInnerHero
+      eyebrow={OPERATING_MODEL_HERO.eyebrow}
+      heading={OPERATING_MODEL_HERO.heading}
+      body={OPERATING_MODEL_HERO.body}
+    >
+      <OperatingModelHeroAside />
+    </SledInnerHero>
+    <OperatingModelArchitectureSection />
+    <OperatingModelFrameworksSection />
+    <OperatingModelStatesSection />
+    <OperatingModelDisclosureSection />
+    <OperatingModelPipelineSection />
+    <!-- <OperatingModelCtaSection /> -->
+  </div>
+  <script src="/scripts/sled-hub.js" is:inline></script>
+</SledLayout>

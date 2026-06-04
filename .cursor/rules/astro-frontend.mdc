@@ -8,3 +8,4 @@ Astro frontend rules:
 - **Rendering**: server-first by default; use islands (`client:*`) only when necessary.
 - **Code style**: keep files small, avoid deep nesting, prefer early returns, prefer `const`.
 - **State**: keep state local to islands; avoid global stores unless multiple islands must coordinate.
+- **Legacy migration**: compare against `legacy/` HTML before changing marketing UI; preserve section order, interactive behavior (tabs, mega menus), and responsive breakpoints; extract data to `src/lib/constants/pages/*`.

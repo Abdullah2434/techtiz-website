@@ -1,0 +1,130 @@
+---
+import type { SuccessStory } from '../../lib/types/case-study';
+
+interface Props {
+  story: SuccessStory;
+}
+
+const { story } = Astro.props;
+const { quote, company, founder, challenges, solutions, detailsUrl, videoId } = story;
+---
+
+<article class="cs-testimonial-card shrink-0">
+  <div class="mb-12 grid gap-6 md:grid-cols-2 md:gap-8 lg:gap-12">
+    <div class="flex flex-col">
+      <div class="mb-6">
+        <svg width="50" height="32" viewBox="0 0 50 32" fill="none" aria-hidden="true">
+          <path
+            d="M16.9863 32H0L14.3836 0H25.3425L16.9863 32ZM41.6438 32H24.6575L39.0411 0H50L41.6438 32Z"
+            fill="#153A5F"
+          />
+        </svg>
+      </div>
+      <p class="mb-6 min-h-[120px] text-base leading-6 text-[#141414] md:mb-10">{quote}</p>
+      <h3 class="text-2xl font-medium leading-[1.2] tracking-[-0.02em] md:text-[32px]">
+        <a href={detailsUrl} class="text-cyan transition-colors hover:text-cyan-strong">
+          {company}
+        </a>
+      </h3>
+    </div>
+
+    <div class="flex flex-col gap-6 border-l-2 border-black pt-7 pl-6 md:gap-8 md:pl-9">
+      <div>
+        <div class="mb-3 flex items-start gap-3 md:mb-4 md:gap-4">
+          <div class="flex size-8 shrink-0 items-center justify-center rounded bg-[#FFCA2833]">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path
+                d="M2.6725 3.12443C2.61871 3.17106 2.5755 3.22863 2.54575 3.2933C2.516 3.35797 2.5004 3.42825 2.5 3.49943V13.9994C2.5 14.132 2.55268 14.2592 2.64645 14.353C2.74021 14.4468 2.86739 14.4994 3 14.4994C3.13261 14.4994 3.25979 14.4468 3.35355 14.353C3.44732 14.2592 3.5 14.132 3.5 13.9994V11.2351C5.17438 9.91256 6.61687 10.6257 8.27812 11.4482C9.30312 11.9551 10.4069 12.5013 11.5906 12.5013C12.4613 12.5013 13.3744 12.2044 14.3294 11.3763C14.3832 11.3297 14.4264 11.2721 14.4561 11.2074C14.4859 11.1428 14.5015 11.0725 14.5019 11.0013V3.49943C14.5016 3.40346 14.4738 3.30958 14.4217 3.22901C14.3695 3.14843 14.2953 3.08456 14.2079 3.04502C14.1204 3.00548 14.0234 2.99194 13.9285 3.00603C13.8336 3.02011 13.7447 3.06121 13.6725 3.12443C11.9225 4.63881 10.44 3.90506 8.72188 3.05443C6.94188 2.17193 4.92375 1.17381 2.6725 3.12443ZM13.5 10.7651C11.8256 12.0876 10.3831 11.3738 8.72188 10.5519C7.15938 9.78006 5.42125 8.91881 3.5 10.0269V3.73631C5.17438 2.41381 6.61687 3.12693 8.27812 3.94881C9.84062 4.72068 11.5794 5.58193 13.5 4.47381V10.7651Z"
+                fill="#FF9900"
+              />
+            </svg>
+          </div>
+          <div>
+            <h4 class="mb-2 text-lg font-semibold leading-[1.2] tracking-[-0.02em] text-[#141414]">
+              Challenges
+            </h4>
+            <p class="text-sm leading-6 text-[#101010]/70">{challenges}</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="mb-3 flex items-start gap-3 md:mb-4 md:gap-4">
+          <div class="flex size-8 shrink-0 items-center justify-center rounded bg-[#FF990033]">
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
+              <path
+                d="M4 7.5L7 10L11 5M7.5 0.5L0.5 4.5V5.22C0.499785 7.3174 1.18291 9.35777 2.44597 11.0322C3.70902 12.7067 5.48323 13.924 7.5 14.5C9.51677 13.924 11.291 12.7067 12.554 11.0322C13.8171 9.35777 14.5002 7.3174 14.5 5.22V4.5L7.5 0.5Z"
+                stroke="#FF9900"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+          <div>
+            <h4 class="mb-2 text-lg font-semibold leading-[1.2] tracking-[-0.02em] text-[#141414]">
+              Solutions
+            </h4>
+            <p class="text-sm leading-6 text-[#101010]/70">{solutions}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex w-full flex-wrap items-center justify-between gap-x-4 gap-y-6">
+    <div class="flex items-center gap-3">
+      <img
+        src={founder.image}
+        alt={founder.name}
+        width={40}
+        height={40}
+        class="size-10 rounded-full object-cover"
+        loading="lazy"
+        decoding="async"
+      />
+      <div>
+        <p class="mb-1 text-sm font-semibold leading-[1.2] tracking-[-0.02em] text-[#0E0E0E]">
+          {founder.name}
+        </p>
+        <p class="text-[10px] leading-[1.2] tracking-[-0.02em] text-[#0E0E0E]">{founder.role}</p>
+      </div>
+      {
+        videoId && (
+          <button
+            type="button"
+            class="ml-3 flex size-10 cursor-pointer items-center justify-center rounded-full bg-[#0E0E0E33] transition-colors hover:bg-[#0E0E0E66]"
+            data-video-open={videoId}
+            aria-label={`Play ${company} video`}
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="ml-0.5 mt-0.5" aria-hidden="true">
+              <path
+                d="M13.9268 5.88247C14.311 6.08679 14.6324 6.39181 14.8565 6.76483C15.0806 7.13786 15.199 7.56483 15.199 8.00001C15.199 8.43518 15.0806 8.86216 14.8565 9.23518C14.6324 9.60821 14.311 9.91322 13.9268 10.1175L3.67749 15.691C2.02714 16.5894 0 15.4214 0 13.5742V2.42657C0 0.578629 2.02714 -0.588537 3.67749 0.308237L13.9268 5.88247Z"
+                fill="#0E0E0E"
+              />
+            </svg>
+          </button>
+        )
+      }
+    </div>
+    <a
+      href={detailsUrl}
+      class="group inline-flex w-fit items-center gap-4 text-lg font-normal uppercase text-cyan transition-all hover:gap-5"
+    >
+      SEE DETAILS
+      <svg
+        width="14"
+        height="12"
+        class="transition-transform group-hover:translate-x-1"
+        viewBox="0 0 14 12"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M0.803762 10.599L12.1295 0.809738M12.0694 7.22556L12.2639 0.693694L4.69787 0.861589"
+          stroke="#18B0E6"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </a>
+  </div>
+</article>

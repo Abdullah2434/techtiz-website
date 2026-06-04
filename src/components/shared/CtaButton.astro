@@ -1,0 +1,102 @@
+---
+import ArrowRight from '@lucide/astro/icons/arrow-right';
+
+interface Props {
+  label: string;
+  href?: string;
+  type?: 'button' | 'submit';
+  variant?: 'cta' | 'primary' | 'ghost-dark' | 'ghost-light';
+  showArrow?: boolean;
+  animated?: boolean;
+  class?: string;
+}
+
+const {
+  label,
+  href,
+  type = 'button',
+  variant = 'cta',
+  showArrow = true,
+  animated = false,
+  class: className = '',
+} = Astro.props;
+
+const base =
+  'inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-lg text-sm font-bold transition-[transform,box-shadow,background,border-color,color] duration-[180ms] ease-out';
+
+const ctaStyles =
+  'bg-cyan px-5 py-3 text-white hover:-translate-y-px hover:bg-cyan-strong hover:text-white hover:shadow-[0_10px_24px_-8px_rgba(24,176,230,0.55)]';
+
+const primaryLink =
+  'relative z-[1] bg-yale px-[22px] py-[13px] text-[14.5px] text-white hover:-translate-y-px hover:bg-yale-dark hover:shadow-[0_12px_28px_-10px_rgba(21,58,95,0.55)]';
+
+const isCtaButton = variant === 'cta' && !href;
+const isCtaLink = variant === 'cta' && href;
+---
+
+{
+  isCtaLink && (
+    <a href={href} class:list={[base, ctaStyles, className]}>
+      {label}
+      {showArrow && <ArrowRight class="size-4 shrink-0" aria-hidden="true" />}
+    </a>
+  )
+}
+{
+  isCtaButton && (
+    <button type={type} class:list={[base, ctaStyles, className]}>
+      {label}
+      {showArrow && <ArrowRight class="size-4 shrink-0" aria-hidden="true" />}
+    </button>
+  )
+}
+{
+  variant === 'primary' && animated && href && (
+    <span class="cta-animated relative inline-flex overflow-hidden rounded-lg p-[2px]">
+      <span class="cta-animated-spin" aria-hidden="true"></span>
+      <span class="cta-animated-pulse" aria-hidden="true"></span>
+      <a href={href} class:list={[base, primaryLink, 'rounded-[6px]', className]}>
+        {label}
+        {showArrow && <ArrowRight class="size-4 shrink-0" aria-hidden="true" />}
+      </a>
+    </span>
+  )
+}
+{
+  variant === 'primary' && !animated && href && (
+    <a href={href} class:list={[base, primaryLink, className]}>
+      {label}
+      {showArrow && <ArrowRight class="size-4 shrink-0" aria-hidden="true" />}
+    </a>
+  )
+}
+{
+  variant === 'ghost-dark' && href && (
+    <a
+      href={href}
+      class:list={[
+        base,
+        'border border-white/32 px-5 py-3 text-white hover:border-white hover:bg-white/8',
+        className,
+      ]}
+    >
+      {label}
+      {showArrow && <ArrowRight class="size-4 shrink-0" aria-hidden="true" />}
+    </a>
+  )
+}
+{
+  variant === 'ghost-light' && href && (
+    <a
+      href={href}
+      class:list={[
+        base,
+        'border border-line bg-white px-5 py-3 text-yale hover:border-yale hover:bg-seasalt',
+        className,
+      ]}
+    >
+      {label}
+      {showArrow && <ArrowRight class="size-4 shrink-0" aria-hidden="true" />}
+    </a>
+  )
+}

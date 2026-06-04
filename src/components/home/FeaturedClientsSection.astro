@@ -1,0 +1,49 @@
+---
+import PageWrap from './PageWrap.astro';
+import { FEATURED_CLIENTS } from '../../lib/constants/pages/home';
+
+const marqueeClients = [...FEATURED_CLIENTS, ...FEATURED_CLIENTS];
+---
+
+<section class="bg-white py-10 max-[640px]:py-8 md:py-16" aria-labelledby="featured-clients-heading">
+  <PageWrap>
+    <h2
+      id="featured-clients-heading"
+      class="mb-6 text-left text-[18px] font-medium uppercase tracking-[0.18em] text-ink max-[640px]:mb-4 max-[640px]:text-[15px]"
+      data-aos="fade-up"
+      data-aos-delay="100"
+    >
+      Featured Clients
+    </h2>
+
+    <div
+      class="home-logo-cloud overflow-hidden py-2 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]"
+      data-aos="fade-up"
+      data-aos-delay="200"
+    >
+      <div class="home-logo-marquee flex w-max items-center gap-10 md:gap-16 lg:gap-20">
+        {
+          marqueeClients.map((client, index) => (
+            <div
+              class="flex shrink-0 items-center justify-center px-3 md:px-4"
+              aria-hidden={index >= FEATURED_CLIENTS.length ? 'true' : undefined}
+            >
+              <img
+                src={client.image}
+                alt={client.name}
+                width={150}
+                height={80}
+                loading="lazy"
+                decoding="async"
+                class:list={[
+                  'h-auto max-h-[56px] w-auto max-w-[120px] object-contain transition-transform duration-500 ease-out hover:scale-110 md:max-h-[70px] md:max-w-[150px]',
+                  'imageClass' in client ? client.imageClass : undefined,
+                ]}
+              />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </PageWrap>
+</section>

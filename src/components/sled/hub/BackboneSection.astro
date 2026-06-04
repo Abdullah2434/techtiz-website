@@ -1,0 +1,32 @@
+---
+import { BACKBONE, BACKBONE_CARDS } from '../../../lib/constants/pages/sled-hub';
+import Eyebrow from '../../shared/Eyebrow.astro';
+import SledPageWrap from '../shared/SledPageWrap.astro';
+---
+
+<section class="sled-section bg-seasalt" data-screen-label="06 Backbone">
+  <SledPageWrap>
+    <div class="sled-reveal mb-14 flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end lg:gap-12" data-sled-reveal>
+      <div class="max-w-[700px]">
+        <Eyebrow text={BACKBONE.eyebrow} showGlyph class="mb-4" />
+        <h2 class="text-[clamp(1.75rem,3.8vw,2.75rem)] font-extrabold tracking-[-0.022em] text-yale-dark">{BACKBONE.heading}</h2>
+        <p class="mt-4 max-w-[620px] text-[15.5px] leading-[1.65] text-muted">{BACKBONE.sub}</p>
+      </div>
+      <a class="sled-link-accent shrink-0 pb-1 text-sm" href={BACKBONE.linkHref}>
+        {BACKBONE.linkLabel} <span aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <div class="sled-reveal-stagger grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3" data-sled-reveal>
+      {BACKBONE_CARDS.map((card) => (
+        <a class="sled-card group flex flex-col gap-3 px-7 py-8" href={card.href}>
+          <div class="flex items-center gap-3">
+            <span class="font-mono text-[10px] tracking-[0.14em] uppercase text-cyan-strong">{card.badgeNo}</span>
+          </div>
+          <h3 class="text-[18px] font-extrabold leading-[1.2] text-yale-dark">{card.heading}</h3>
+          <p class="text-[13.5px] leading-[1.58] text-muted">{card.body}</p>
+        </a>
+      ))}
+    </div>
+  </SledPageWrap>
+</section>

@@ -1,0 +1,197 @@
+/* Case studies portfolio + success stories carousel */
+
+.cs-scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.cs-scrollbar-hide::-webkit-scrollbar {
+  display: none;
+  height: 0;
+}
+
+.cs-section-header-title {
+  font-size: 24px;
+  font-weight: 400;
+  color: rgb(30 30 30 / 0.8);
+  line-height: 1.1;
+}
+
+.cs-section-header-rule {
+  width: 100%;
+  height: 2px;
+  background: #d0d0d0;
+}
+
+.cs-section-header-desc {
+  font-size: clamp(32px, 4vw, 40px);
+  font-weight: 400;
+  color: #1e1e1e;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  max-width: 79%;
+}
+
+.cs-arrow-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 2px;
+  border: 1px solid #1e1e1e;
+  background: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.cs-arrow-btn:hover {
+  background: #f3f7fb;
+  border-color: #153a5f;
+}
+
+.cs-testimonial-card {
+  background: #f3f7fb;
+  border-radius: 8px;
+  padding: 24px;
+  max-width: 340px;
+  transition: box-shadow 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .cs-testimonial-card {
+    padding: 32px;
+    max-width: 670px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cs-testimonial-card {
+    padding: 40px 32px;
+    max-width: 800px;
+  }
+}
+
+.cs-testimonial-card:hover {
+  box-shadow: 0 10px 30px -12px rgb(21 58 95 / 0.2);
+}
+
+.cs-video-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgb(14 38 64 / 0.72);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.cs-video-modal.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.cs-video-modal__dialog {
+  position: relative;
+  width: min(960px, 100%);
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.cs-video-modal__close {
+  position: absolute;
+  top: -44px;
+  right: 0;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+}
+
+.cs-tab-active {
+  background: #18b0e6;
+  color: #fff;
+}
+
+.cs-tab-inactive {
+  background: #f6f6f6;
+  color: #838383;
+}
+
+.cs-tab-inactive:hover {
+  background: #e6e6e6;
+  color: #101010;
+}
+
+.cs-card {
+  background: #f6f6f6;
+  border-radius: 8px;
+  overflow: hidden;
+  max-width: 700px;
+  transition: box-shadow 0.3s ease;
+}
+
+.cs-card:hover {
+  box-shadow: 0 16px 40px -20px rgb(21 58 95 / 0.18);
+}
+
+@keyframes cs-fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cs-listing-panel.cs-panel-enter {
+  animation: cs-fade-in-up 0.6s ease-out 0.2s both;
+}
+
+[data-cs-listing][data-cs-loading] [data-cs-panel] {
+  transition: min-height 0.1s ease-out;
+}
+
+/* Case study download form (legacy CaseStudyForm) */
+.cs-form-input {
+  width: 100%;
+  border-bottom: 2px solid #d1d5db;
+  background: transparent;
+  padding: 12px 0;
+  font-size: 16px;
+  font-weight: 400;
+  color: #1e1e1e;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.cs-form-input::placeholder {
+  color: #1e1e1e;
+}
+
+.cs-form-input:focus {
+  border-color: #000;
+}
+
+.cs-form-input.cs-input-invalid {
+  border-color: #ef4444;
+}
+
+.cs-form-error.is-visible {
+  display: block;
+}
+
+.cs-form-submit:disabled {
+  pointer-events: none;
+  opacity: 0.65;
+}

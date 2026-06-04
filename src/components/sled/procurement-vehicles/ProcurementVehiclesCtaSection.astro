@@ -1,0 +1,34 @@
+---
+import { VEHICLES_CTA } from '../../../lib/constants/pages/procurement-vehicles';
+import { SITE } from '../../../lib/constants/site';
+import Eyebrow from '../../shared/Eyebrow.astro';
+import SledButton from '../shared/SledButton.astro';
+import SledPageWrap from '../shared/SledPageWrap.astro';
+---
+
+<section class="sled-final-cta relative overflow-hidden bg-yale-dark">
+  <div
+    class="sled-hero-glow-b pointer-events-none absolute right-[-10%] top-[-30%] size-[min(55vw,480px)] rounded-full bg-[radial-gradient(circle,rgba(24,176,230,0.14)_0%,transparent_70%)] blur-[90px] motion-reduce:hidden"
+    aria-hidden="true"
+  />
+  <SledPageWrap class="relative z-2 py-[clamp(4.5rem,8vw,5.5rem)]">
+    <div class="sled-reveal mx-auto max-w-[700px] text-center" data-sled-reveal>
+      <Eyebrow text={VEHICLES_CTA.eyebrow} onDark showGlyph class="mb-4 justify-center" />
+      <h2 class="text-[clamp(1.875rem,4vw,2.375rem)] font-extrabold leading-[1.1] tracking-[-0.02em] text-white">
+        {VEHICLES_CTA.heading}
+      </h2>
+      <p class="mx-auto mt-4 max-w-[560px] text-[15.5px] leading-[1.65] text-white/72">
+        {VEHICLES_CTA.body}
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4 max-[600px]:[&_a]:w-full max-[600px]:[&_a]:justify-center">
+        <SledButton href="/us-sled/contact/" label="Start an NDA conversation" variant="cta" />
+        <a
+          href={`mailto:${SITE.email.sled}`}
+          class="inline-flex items-center justify-center rounded-full border border-white/25 px-6 py-3 text-[14px] font-bold text-white transition-colors hover:border-cyan hover:text-cyan"
+        >
+          {SITE.email.sled}
+        </a>
+      </div>
+    </div>
+  </SledPageWrap>
+</section>

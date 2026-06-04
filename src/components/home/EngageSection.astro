@@ -1,0 +1,50 @@
+---
+import { ENGAGE_MODELS, ENGAGE_SECTION } from '../../lib/constants/pages/home';
+import BlockHead from '../shared/BlockHead.astro';
+import EngageModelCard from './EngageModelCard.astro';
+import PageWrap from './PageWrap.astro';
+
+const sectionId = 'how-we-work';
+---
+
+<section
+  id={sectionId}
+  class="scroll-mt-24 bg-white py-10 md:py-16 lg:py-[110px]"
+  aria-labelledby={`${sectionId}-heading`}
+>
+  <PageWrap>
+    <div data-aos="fade-up" data-aos-delay="100">
+      <BlockHead
+        eyebrow={ENGAGE_SECTION.eyebrow}
+        heading={ENGAGE_SECTION.heading}
+        sub={ENGAGE_SECTION.sub}
+        rightLinkLabel={ENGAGE_SECTION.cta.label}
+        rightLinkHref={ENGAGE_SECTION.cta.href}
+      />
+      <h2 id={`${sectionId}-heading`} class="sr-only">
+        {ENGAGE_SECTION.heading}
+      </h2>
+    </div>
+
+    <div
+      class="grid grid-cols-1 gap-4 sm:gap-[18px] md:grid-cols-2 lg:grid-cols-3"
+      role="list"
+    >
+      {
+        ENGAGE_MODELS.map((model, i) => {
+          const isFeatured = 'feature' in model && model.feature;
+          return (
+            <div
+              role="listitem"
+              data-aos="fade-up"
+              data-aos-delay={150 + i * 80}
+              class:list={[isFeatured && 'md:col-span-2 lg:col-span-1']}
+            >
+              <EngageModelCard model={model} />
+            </div>
+          );
+        })
+      }
+    </div>
+  </PageWrap>
+</section>

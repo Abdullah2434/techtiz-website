@@ -1,0 +1,59 @@
+---
+interface Props {
+  eyebrow: string;
+  heading: string;
+  sub?: string;
+  rightLinkLabel?: string;
+  rightLinkHref?: string;
+  light?: boolean;
+}
+
+const { eyebrow, heading, sub, rightLinkLabel, rightLinkHref, light = false } = Astro.props;
+---
+
+<div class="mb-9 flex flex-wrap items-end justify-between gap-x-6 gap-y-4 max-[900px]:mb-7">
+  <div class="max-w-[700px]">
+    <span
+      class:list={[
+        'mb-3.5 inline-flex font-mono text-[11px] font-bold tracking-[0.18em] uppercase max-[640px]:mb-3 max-[640px]:text-[10px]',
+        light ? 'text-cyan' : 'text-cyan-strong',
+      ]}
+    >
+      {eyebrow}
+    </span>
+    <h2
+      class:list={[
+        'text-[44px] font-extrabold leading-[1.05] tracking-[-0.022em] max-[900px]:text-[30px] max-[640px]:text-[24px] max-[640px]:leading-[1.1] max-[480px]:text-[22px]',
+        light ? 'text-white' : 'text-yale',
+      ]}
+      set:html={heading}
+    />
+    {
+      sub && (
+        <p
+          class:list={[
+            'mt-3.5 max-w-[620px] text-[15px] leading-normal max-[640px]:mt-3 max-[640px]:text-[14px]',
+            light ? 'text-white/72' : 'text-muted',
+          ]}
+        >
+          {sub}
+        </p>
+      )
+    }
+  </div>
+  {
+    rightLinkLabel && rightLinkHref && (
+      <div class="shrink-0 pb-1 max-[640px]:w-full">
+        <a
+          href={rightLinkHref}
+          class:list={[
+            'inline-flex items-center gap-2 border-b-2 border-cyan pb-1 text-sm font-bold transition-[gap] duration-200 ease-out hover:gap-3.5',
+            light ? 'text-cyan' : 'text-yale',
+          ]}
+        >
+          {rightLinkLabel}
+        </a>
+      </div>
+    )
+  }
+</div>

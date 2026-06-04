@@ -1,0 +1,13 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: extraClass = '' } = Astro.props;
+const wrap =
+  'mx-auto w-full max-w-[1400px] px-2 max-[600px]:px-[18px]';
+---
+
+<div class:list={[wrap, extraClass]}>
+  <slot />
+</div>

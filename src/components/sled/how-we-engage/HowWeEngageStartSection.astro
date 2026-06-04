@@ -1,0 +1,51 @@
+---
+import Check from '@lucide/astro/icons/check';
+import ListChecks from '@lucide/astro/icons/list-checks';
+import { FIRST_EMAIL_CHECKLIST } from '../../../lib/constants/pages/how-we-engage';
+import Eyebrow from '../../shared/Eyebrow.astro';
+import SledButton from '../shared/SledButton.astro';
+import SledPageWrap from '../shared/SledPageWrap.astro';
+---
+
+<section class="sled-final-cta sled-section-tight relative overflow-hidden bg-white" id="start">
+  <SledPageWrap class="relative z-[2]">
+    <div class="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1.02fr] lg:gap-14 lg:items-start">
+      <div class="sled-reveal" data-sled-reveal>
+        <Eyebrow text="Start the sequence" showGlyph class="mb-4" />
+        <h2 class="text-[clamp(1.875rem,4vw,2.5rem)] font-extrabold leading-[1.08] tracking-[-0.02em] text-yale-dark">
+          Step 01 is one email.
+        </h2>
+        <p class="mt-4 max-w-[520px] text-[15.5px] leading-[1.65] text-muted">
+          From a capture manager, BD lead, or program manager at a U.S. prime. One business day later, a US-based partner manager replies with the NDA and a calendar slot.
+        </p>
+        <div class="mt-8">
+          <SledButton href="/us-sled/contact/" label="Start an NDA conversation" variant="cta" />
+        </div>
+      </div>
+
+      <div
+        class="sled-reveal sled-glass overflow-hidden rounded-2xl border border-line shadow-[0_24px_48px_-28px_rgba(21,58,95,0.18)]"
+        data-sled-reveal
+      >
+        <div class="border-b border-line/80 bg-gradient-to-r from-seasalt to-white px-6 py-5 sm:px-7">
+          <div class="flex items-center gap-3">
+            <div class="grid size-10 place-items-center rounded-xl bg-yale-dark text-cyan">
+              <ListChecks class="size-5" stroke-width="1.75" aria-hidden="true" />
+            </div>
+            <h4 class="text-[16px] font-extrabold text-yale-dark">What to include in the first email</h4>
+          </div>
+        </div>
+        <ul class="space-y-0 divide-y divide-line/70 px-6 py-2 sm:px-7">
+          {FIRST_EMAIL_CHECKLIST.map((item) => (
+            <li class="flex gap-3 py-3.5 text-[14px] leading-[1.55] text-muted">
+              <span class="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-cyan-soft text-cyan-strong">
+                <Check class="size-3" stroke-width="2.5" aria-hidden="true" />
+              </span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </SledPageWrap>
+</section>

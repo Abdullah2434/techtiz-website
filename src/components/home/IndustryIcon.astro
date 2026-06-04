@@ -1,0 +1,26 @@
+---
+import Activity from '@lucide/astro/icons/activity';
+import TrendingUp from '@lucide/astro/icons/trending-up';
+import House from '@lucide/astro/icons/house';
+import ShoppingCart from '@lucide/astro/icons/shopping-cart';
+import Truck from '@lucide/astro/icons/truck';
+import GraduationCap from '@lucide/astro/icons/graduation-cap';
+import Sparkles from '@lucide/astro/icons/sparkles';
+
+interface Props {
+  name: string;
+  class?: string;
+}
+
+const { name, class: extraClass = 'size-[22px]' } = Astro.props;
+const iconClass = extraClass;
+const strokeWidth = 1.7;
+---
+
+{name === 'heart' && <Activity class={iconClass} stroke-width={strokeWidth} />}
+{name === 'growth' && <TrendingUp class={iconClass} stroke-width={strokeWidth} />}
+{name === 'house' && <House class={iconClass} stroke-width={strokeWidth} />}
+{name === 'cart' && <ShoppingCart class={iconClass} stroke-width={strokeWidth} />}
+{name === 'truck' && <Truck class={iconClass} stroke-width={strokeWidth} />}
+{name === 'grad' && <GraduationCap class={iconClass} stroke-width={strokeWidth} />}
+{name === 'sparkle' && <Sparkles class={iconClass} stroke-width={strokeWidth} />}

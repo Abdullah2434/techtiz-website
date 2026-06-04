@@ -1,0 +1,42 @@
+---
+import Ban from '@lucide/astro/icons/ban';
+import Building2 from '@lucide/astro/icons/building-2';
+import FileSearch from '@lucide/astro/icons/file-search';
+import PhoneOff from '@lucide/astro/icons/phone-off';
+import { BOUNDARY_CARDS } from '../../../lib/constants/pages/how-we-engage';
+import Eyebrow from '../../shared/Eyebrow.astro';
+import SledPageWrap from '../shared/SledPageWrap.astro';
+
+const boundaryIcons = [Ban, FileSearch, Building2, PhoneOff] as const;
+---
+
+<section class="sled-section-tight bg-seasalt" id="boundaries">
+  <SledPageWrap>
+    <div class="sled-reveal mb-12 max-w-[720px]" data-sled-reveal>
+      <Eyebrow text="What we do not do" showGlyph class="mb-4" />
+      <h2 class="text-[clamp(1.75rem,3.5vw,2.375rem)] font-extrabold leading-[1.1] tracking-[-0.02em] text-yale-dark">
+        The boundaries are the credibility.
+      </h2>
+      <p class="mt-3.5 text-[15.5px] leading-[1.65] text-muted">
+        Every engagement begins with a structured relationship. The behaviors below are out of bounds, full stop. This isn't a sales line; it's how the practice is operated.
+      </p>
+    </div>
+
+    <div class="sled-reveal-stagger grid grid-cols-1 gap-4 sm:grid-cols-2" data-sled-reveal>
+      {BOUNDARY_CARDS.map((b, idx) => {
+        const Icon = boundaryIcons[idx];
+        return (
+          <div class="sled-card group flex gap-4 p-6 sm:p-7">
+            <div class="grid size-11 shrink-0 place-items-center rounded-xl border border-amber/20 bg-amber/10 text-amber transition-transform duration-300 group-hover:scale-105">
+              <Icon class="size-5" stroke-width="1.75" aria-hidden="true" />
+            </div>
+            <div class="min-w-0">
+              <h4 class="text-[16px] font-extrabold leading-[1.25] text-yale-dark">{b.heading}</h4>
+              <p class="mt-2.5 text-[14px] leading-[1.6] text-muted">{b.body}</p>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </SledPageWrap>
+</section>

@@ -1,0 +1,96 @@
+---
+import Eyebrow from "../shared/Eyebrow.astro";
+import CtaButton from "../shared/CtaButton.astro";
+import TextInput from "../shared/TextInput.astro";
+import PageWrap from "./PageWrap.astro";
+import { FINAL_CTA } from "../../lib/constants/pages/home";
+import { SITE, mailtoGeneral } from "../../lib/constants/site";
+
+const { eyebrow, heading, headingAccent, body, form, footnotePrefix } =
+  FINAL_CTA;
+const sectionId = "final-cta";
+---
+
+<section
+  id={sectionId}
+  class="relative scroll-mt-24 overflow-hidden bg-yale text-white"
+  aria-labelledby={`${sectionId}-heading`}
+>
+  <div
+    class="pointer-events-none absolute -top-[60px] -right-[60px] size-[min(360px,55vw)] rotate-[15deg] bg-[linear-gradient(45deg,transparent_48%,rgba(24,176,230,0.16)_48%_52%,transparent_52%),linear-gradient(-45deg,transparent_49%,rgba(255,255,255,0.05)_49%_51%,transparent_51%)] bg-size-[32px_32px]"
+    aria-hidden="true"
+  >
+  </div>
+  <div
+    class="pointer-events-none absolute -bottom-10 -left-10 size-[min(220px,40vw)] rotate-[15deg] bg-[linear-gradient(45deg,transparent_49%,rgba(24,176,230,0.10)_49%_51%,transparent_51%)] bg-size-[24px_24px] opacity-60"
+    aria-hidden="true"
+  >
+  </div>
+
+  <PageWrap class="relative z-[2] py-10 text-center md:py-16 lg:py-[110px]">
+    <div
+      class="mb-4 max-[640px]:mb-3.5"
+      data-aos="fade-up"
+      data-aos-delay="100"
+    >
+      <Eyebrow text={eyebrow} onDark />
+    </div>
+
+    <h2
+      id={`${sectionId}-heading`}
+      class="mx-auto mb-5 max-w-[760px] text-[44px] font-extrabold leading-[1.05] tracking-[-0.022em] max-[900px]:text-[30px] max-[640px]:mb-4 max-[640px]:text-[24px] max-[640px]:leading-[1.1] max-[480px]:text-[22px]"
+      data-aos="fade-up"
+      data-aos-delay="200"
+    >
+      {heading}
+      <br />
+      <span class="text-cyan">{headingAccent}</span>
+    </h2>
+
+    <p
+      class="mx-auto mb-8 max-w-[540px] text-[15px] leading-[1.55] text-white/78 max-[640px]:mb-7 max-[640px]:text-[14px]"
+      data-aos="fade-up"
+      data-aos-delay="300"
+    >
+      {body}
+    </p>
+
+    <form
+      class="mx-auto flex w-full max-w-[520px] flex-col gap-2 rounded-xl bg-white p-2 sm:flex-row sm:items-stretch sm:gap-1.5 sm:rounded-[10px] sm:p-1.5"
+      action={form.action}
+      method="get"
+      data-aos="fade-up"
+      data-aos-delay="400"
+    >
+      <TextInput
+        type="email"
+        name={form.emailName}
+        label={form.emailLabel}
+        hideLabel
+        placeholder={form.emailPlaceholder}
+        required
+        variant="inline"
+      />
+      <CtaButton
+        type="submit"
+        label={form.submitLabel}
+        variant="cta"
+        class="w-full shrink-0 sm:w-auto"
+      />
+    </form>
+
+    <p
+      class="mt-6 text-[13.5px] text-white/60 max-[640px]:mt-5 max-[640px]:text-[13px]"
+      data-aos="fade-up"
+      data-aos-delay="500"
+    >
+      {footnotePrefix}{" "}
+      <a
+        class="border-b border-cyan/40 text-cyan transition-colors duration-200 hover:border-cyan"
+        href={mailtoGeneral()}
+      >
+        {SITE.email.contact}
+      </a>
+    </p>
+  </PageWrap>
+</section>

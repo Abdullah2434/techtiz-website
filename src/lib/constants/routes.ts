@@ -1,5 +1,7 @@
 export const ROUTES = {
   home: '/',
+  privacyPolicy: '/privacy-policy/',
+  termsOfService: '/terms-of-service/',
   services: '/services/',
   industries: '/industries/',
   caseStudies: '/case-studies/',

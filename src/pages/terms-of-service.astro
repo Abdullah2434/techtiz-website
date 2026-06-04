@@ -1,0 +1,17 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/shared/Header.astro";
+import Footer from "../components/shared/Footer.astro";
+import TermsOfServiceContent from "../components/legal/TermsOfServiceContent.astro";
+import { TERMS_OF_SERVICE_SEO } from "../lib/constants/pages/terms-of-service";
+
+const { title, description, canonicalPath } = TERMS_OF_SERVICE_SEO;
+---
+
+<BaseLayout {title} {description} {canonicalPath}>
+  <Header />
+  <main id="main-content" class="bg-white">
+    <TermsOfServiceContent />
+  </main>
+  <Footer />
+</BaseLayout>

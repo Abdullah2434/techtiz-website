@@ -22,6 +22,19 @@ export const SITE = {
       tel: "",
     },
   },
+  addresses: {
+    lahore: {
+      label: "Lahore HQ",
+      line: "34, Block, Civic Center St, Township Scheme Lahore",
+      mapsUrl: "https://maps.app.goo.gl/UapeEhDaEaERnE1W7",
+    },
+    us: {
+      label: "U.S. office",
+      line: "US Office 30 N GOULD ST STE 25148 SHERIDAN, WY 82801",
+      mapsUrl:
+        "https://maps.google.com/?q=30+N+GOULD+ST+STE+25148+SHERIDAN+WY+82801",
+    },
+  },
   offices: {
     lahore: "Lahore HQ",
     us: "U.S. office",
@@ -53,11 +66,12 @@ export const SITE = {
 } as const;
 
 export const LEGAL_LINKS = [
-  { label: "Privacy", href: "/" },
-  { label: "Terms", href: "/" },
-  { label: "Cookies", href: "/" },
-  { label: "Accessibility", href: "/" },
+  { label: "About", href: "/about/" },
+  { label: "Privacy", href: "/privacy-policy/" },
+  { label: "Terms", href: "/terms-of-service/" },
+  { label: "Careers", href: "/careers/" },
   { label: "Sitemap", href: "/sitemap-index.xml" },
+  { label: "Contact", href: "/contact/" },
 ] as const;
 
 /** Page title suffix: `Capabilities | Techtiz` */

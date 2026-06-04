@@ -19,12 +19,31 @@ export function organizationJsonLd(): JsonLdNode {
     email: SITE.email.contact,
     logo: absoluteUrl(SITE.logo.png),
     sameAs: Object.values(SITE.socials),
+    telephone: SITE.phone.tel,
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'customer support',
       email: SITE.email.contact,
+      telephone: SITE.phone.tel,
       availableLanguage: ['English'],
     },
+    address: [
+      {
+        '@type': 'PostalAddress',
+        name: SITE.addresses.lahore.label,
+        streetAddress: SITE.addresses.lahore.line,
+        addressCountry: 'PK',
+      },
+      {
+        '@type': 'PostalAddress',
+        name: SITE.addresses.us.label,
+        streetAddress: SITE.addresses.us.line,
+        addressLocality: 'Sheridan',
+        addressRegion: 'WY',
+        postalCode: '82801',
+        addressCountry: 'US',
+      },
+    ],
     areaServed: ['US', 'PK'],
     knowsAbout: [
       'AI-native software engineering',

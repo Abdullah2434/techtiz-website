@@ -1,0 +1,25 @@
+---
+interface Props {
+  href: string;
+  name: string;
+  multiLine?: boolean;
+}
+
+const { href, name, multiLine } = Astro.props;
+const useBreaks = multiLine || /<br\s*\/?>/i.test(name);
+const lines = useBreaks ? name.split(/<br\s*\/?>/i) : [name];
+---
+
+<a
+  href={href}
+  class="block min-w-0 break-words pb-2 text-[14px] font-normal leading-[150%] text-white transition-all duration-300 hover:text-cyan"
+>
+  {
+    lines.map((line, i) => (
+      <>
+        {line.trim()}
+        {i < lines.length - 1 && <br />}
+      </>
+    ))
+  }
+</a>

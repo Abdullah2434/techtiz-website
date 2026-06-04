@@ -1,67 +1,96 @@
 ---
-import PageWrap from './PageWrap.astro';
-import { SITE, mailtoGeneral } from '../../lib/constants/site';
+import Eyebrow from "../shared/Eyebrow.astro";
+import CtaButton from "../shared/CtaButton.astro";
+import TextInput from "../shared/TextInput.astro";
+import PageWrap from "./PageWrap.astro";
+import { FINAL_CTA } from "../../lib/constants/pages/home";
+import { SITE, mailtoGeneral } from "../../lib/constants/site";
+
+const { eyebrow, heading, headingAccent, body, form, footnotePrefix } =
+  FINAL_CTA;
+const sectionId = "final-cta";
 ---
 
-<section class="relative overflow-hidden bg-yale text-white">
+<section
+  id={sectionId}
+  class="relative scroll-mt-24 overflow-hidden bg-yale text-white"
+  aria-labelledby={`${sectionId}-heading`}
+>
   <div
-    class="pointer-events-none absolute -right-[60px] -top-[60px] size-[360px] rotate-[15deg] bg-[linear-gradient(45deg,transparent_48%,rgba(24,176,230,0.16)_48%_52%,transparent_52%),linear-gradient(-45deg,transparent_49%,rgba(255,255,255,0.05)_49%_51%,transparent_51%)] bg-size-[32px_32px]"
+    class="pointer-events-none absolute -top-[60px] -right-[60px] size-[min(360px,55vw)] rotate-[15deg] bg-[linear-gradient(45deg,transparent_48%,rgba(24,176,230,0.16)_48%_52%,transparent_52%),linear-gradient(-45deg,transparent_49%,rgba(255,255,255,0.05)_49%_51%,transparent_51%)] bg-size-[32px_32px]"
     aria-hidden="true"
-  ></div>
+  >
+  </div>
   <div
-    class="pointer-events-none absolute -bottom-10 -left-10 size-[220px] rotate-[15deg] opacity-60 bg-[linear-gradient(45deg,transparent_49%,rgba(24,176,230,0.10)_49%_51%,transparent_51%)] bg-size-[24px_24px]"
+    class="pointer-events-none absolute -bottom-10 -left-10 size-[min(220px,40vw)] rotate-[15deg] bg-[linear-gradient(45deg,transparent_49%,rgba(24,176,230,0.10)_49%_51%,transparent_51%)] bg-size-[24px_24px] opacity-60"
     aria-hidden="true"
-  ></div>
+  >
+  </div>
 
-  <PageWrap class="relative z-[2] py-[110px] text-center max-[900px]:py-14">
-    <span
-      class="mb-[18px] inline-block font-mono text-[11px] font-bold tracking-[0.18em] uppercase text-cyan"
+  <PageWrap class="relative z-[2] py-10 text-center md:py-16 lg:py-[110px]">
+    <div
+      class="mb-4 max-[640px]:mb-3.5"
       data-aos="fade-up"
       data-aos-delay="100"
-    >Start the conversation</span>
+    >
+      <Eyebrow text={eyebrow} onDark />
+    </div>
+
     <h2
-      class="mx-auto mb-[22px] max-w-[760px] text-[52px] font-extrabold leading-[1.05] tracking-[-0.022em] max-[900px]:text-[30px]"
+      id={`${sectionId}-heading`}
+      class="mx-auto mb-5 max-w-[760px] text-[44px] font-extrabold leading-[1.05] tracking-[-0.022em] max-[900px]:text-[30px] max-[640px]:mb-4 max-[640px]:text-[24px] max-[640px]:leading-[1.1] max-[480px]:text-[22px]"
       data-aos="fade-up"
       data-aos-delay="200"
     >
-      Have an idea worth building?<br />
-      <span class="text-cyan">Let's pressure-test it.</span>
+      {heading}
+      <br />
+      <span class="text-cyan">{headingAccent}</span>
     </h2>
+
     <p
-      class="mx-auto mb-9 max-w-[540px] text-[16.5px] leading-[1.55] text-white/78"
+      class="mx-auto mb-8 max-w-[540px] text-[15px] leading-[1.55] text-white/78 max-[640px]:mb-7 max-[640px]:text-[14px]"
       data-aos="fade-up"
       data-aos-delay="300"
     >
-      A 30-minute call with a senior engineer. No deck, no pitch. We'll sketch the system on the call.
+      {body}
     </p>
+
     <form
-      class="mx-auto flex max-w-[520px] gap-2 rounded-[10px] bg-white p-1.5"
-      action="/us-sled/contact/"
+      class="mx-auto flex w-full max-w-[520px] flex-col gap-2 rounded-xl bg-white p-2 sm:flex-row sm:items-stretch sm:gap-1.5 sm:rounded-[10px] sm:p-1.5"
+      action={form.action}
       method="get"
       data-aos="fade-up"
       data-aos-delay="400"
     >
-      <input
+      <TextInput
         type="email"
-        name="email"
-        placeholder="you@company.com"
-        aria-label="Your email"
+        name={form.emailName}
+        label={form.emailLabel}
+        hideLabel
+        placeholder={form.emailPlaceholder}
         required
-        class="min-w-0 flex-1 border-0 bg-transparent px-3.5 py-2.5 font-sans text-[14.5px] text-ink outline-none placeholder:text-muted"
+        variant="inline"
       />
-      <button
+      <CtaButton
         type="submit"
-        class="inline-flex shrink-0 items-center gap-2 rounded-md bg-cyan px-[22px] py-3 text-sm font-bold whitespace-nowrap text-yale-dark transition-[background,color] duration-[180ms] hover:bg-cyan-strong hover:text-white"
-      >
-        Book a Consultation →
-      </button>
+        label={form.submitLabel}
+        variant="cta"
+        class="w-full shrink-0 sm:w-auto"
+      />
     </form>
+
     <p
-      class="mt-[22px] text-[13.5px] text-white/60"
+      class="mt-6 text-[13.5px] text-white/60 max-[640px]:mt-5 max-[640px]:text-[13px]"
       data-aos="fade-up"
       data-aos-delay="500"
     >
-      Or email <a class="border-b border-cyan/40 text-cyan hover:border-cyan" href={mailtoGeneral()}>{SITE.email.general}</a>
+      {footnotePrefix}{" "}
+      <a
+        class="border-b border-cyan/40 text-cyan transition-colors duration-200 hover:border-cyan"
+        href={mailtoGeneral()}
+      >
+        {SITE.email.contact}
+      </a>
     </p>
   </PageWrap>
 </section>

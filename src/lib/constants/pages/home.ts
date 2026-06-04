@@ -485,6 +485,31 @@ export const CASE_STUDIES = [
   },
 ] as const;
 
+export const FINAL_CTA = {
+  eyebrow: "Start the conversation",
+  heading: "Have an idea worth building?",
+  headingAccent: "Let's pressure-test it.",
+  body: "A 30-minute call with a senior engineer. No deck, no pitch. We'll sketch the system on the call.",
+  form: {
+    action: "/us-sled/contact/",
+    emailName: "email",
+    emailLabel: "Your email",
+    emailPlaceholder: "you@company.com",
+    submitLabel: "Book a Consultation",
+  },
+  footnotePrefix: "Or email",
+} as const;
+
+export const ENGAGE_SECTION = {
+  eyebrow: "How we work",
+  heading: "Three ways to engage. One bar for quality.",
+  sub: "Pick the commercial model that matches your scope certainty—from fixed delivery to an embedded squad.",
+  cta: {
+    label: "Talk through your model →",
+    href: "/us-sled/contact/",
+  },
+} as const;
+
 export const ENGAGE_MODELS = [
   {
     num: "01 · Fixed scope",

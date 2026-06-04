@@ -47,14 +47,15 @@ export const FOOTER_NAV_SECTIONS: FooterNavSectionData[] = [
       { name: "SLED Contact", href: ROUTES.sledContact },
     ],
   },
-  // {
-  //   title: "Company",
-  //   links: [
-  //     { name: "About", href: "/" },
-  //     { name: "Team", href: "/" },
-  //     { name: "Careers", href: "/" },
-  //     { name: "Case Studies", href: ROUTES.caseStudies },
-  //     { name: "Contact", href: "/" },
-  //   ],
-  // },
+  {
+    title: 'Company',
+    links: [
+      { name: 'About', href: ROUTES.about },
+      { name: 'Team', href: '/' },
+      { name: 'Careers', href: '/' },
+      { name: 'Case Studies', href: ROUTES.caseStudies },
+      { name: 'Press', href: '/' },
+      { name: 'Contact', href: '/' },
+    ],
+  },
 ];

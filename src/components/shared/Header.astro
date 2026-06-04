@@ -45,7 +45,11 @@ const megaPanelIndustries = `${megaPanelBase} before:left-1/2 before:-translate-
     </a>
 
     <nav class="primary-nav inline-flex items-center gap-0.5 max-[900px]:hidden" aria-label="Primary">
-      <a href="/" class:list={navLinkClass('/')} aria-current={currentPage === '/' ? 'page' : undefined}>
+      <a
+        href={ROUTES.about}
+        class:list={navLinkClass(ROUTES.about)}
+        aria-current={currentPage === ROUTES.about ? 'page' : undefined}
+      >
         About Us
       </a>
 

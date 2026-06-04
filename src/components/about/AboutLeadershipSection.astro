@@ -1,0 +1,60 @@
+---
+import type { AboutLeader } from '../../lib/types/about';
+
+interface Props {
+  leaders: AboutLeader[];
+}
+
+const { leaders } = Astro.props;
+
+function linkedInIcon(clipId: string) {
+  return `<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g clip-path="url(#${clipId})"><path d="M12.7227 0C6.09453 0 0.722656 5.37188 0.722656 12C0.722656 18.6281 6.09453 24 12.7227 24C19.3508 24 24.7227 18.6281 24.7227 12C24.7227 5.37188 19.3508 0 12.7227 0ZM9.36641 17.0203H7.02734V9.53437H9.36641V17.0203ZM8.13359 8.59687H8.11484C7.26641 8.59687 6.71797 8.025 6.71797 7.29844C6.71797 6.55781 7.28516 6 8.14766 6C9.01016 6 9.53984 6.55781 9.55859 7.29844C9.56328 8.02031 9.01484 8.59687 8.13359 8.59687ZM18.7227 17.0203H16.0695V13.1484C16.0695 12.1359 15.657 11.4422 14.743 11.4422C14.0445 11.4422 13.6555 11.9109 13.4773 12.3609C13.4117 12.5203 13.4211 12.7453 13.4211 12.975V17.0203H10.7914C10.7914 17.0203 10.8242 10.1578 10.7914 9.53437H13.4211V10.7109C13.5758 10.1953 14.4148 9.46406 15.7555 9.46406C17.4195 9.46406 18.7227 10.5422 18.7227 12.8578V17.0203Z" fill="#18B0E6"/></g><defs><clipPath id="${clipId}"><rect width="24" height="24" fill="white" transform="translate(0.722656)"/></clipPath></defs></svg>`;
+}
+---
+
+<section class="mx-auto w-full max-w-[1400px] px-2 py-10 md:py-16">
+  <h2 class="mb-16 text-center text-[32px] font-normal md:text-[48px]" data-aos="fade-up" data-aos-delay="100">
+    Meet the <span class="font-semibold tracking-[-0.02em] text-[#18B0E6]">Leadership</span>
+  </h2>
+  <div class="flex flex-col items-stretch justify-center gap-10 lg:flex-row lg:gap-16">
+    {
+      leaders.map((leader, index) => (
+        <article class="flex w-full max-w-[610px] flex-col rounded-xl bg-white shadow-none md:flex-row lg:w-1/2">
+          <div class="flex shrink-0 items-center justify-center md:items-start">
+            <img
+              src={leader.image}
+              alt={leader.name}
+              width={250}
+              height={400}
+              class="mx-auto min-h-[400px] w-full rounded-sm object-cover md:mx-0 md:w-[250px]"
+              loading="eager"
+              decoding="async"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            />
+          </div>
+          <div
+            class="flex flex-col items-start justify-center px-0 py-6 text-left md:px-6 md:py-0"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <h3 class="text-[30px] leading-[120%] font-medium text-[#153A5F] md:text-[40px]">{leader.name}</h3>
+            <p class="mb-6 text-[20px] font-medium text-[#18B0E6]">{leader.title}</p>
+            <p class="mb-10 max-w-[340px] text-[16px] leading-[130%] font-normal tracking-normal text-[#153A5F] md:text-[18px] xl:mb-24">
+              {leader.description}
+            </p>
+            <a
+              href={leader.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-2 text-[16px] font-medium text-[#183B56] transition-colors hover:text-[#18B0E6]"
+            >
+              <span class="inline-flex shrink-0" set:html={linkedInIcon(`about-li-clip-${index}`)} />
+              Connect on LinkedIn
+            </a>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>

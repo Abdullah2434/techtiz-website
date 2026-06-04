@@ -1,0 +1,123 @@
+/* About page — values cards + stat fade-in (paired with public/scripts/about-*.js) */
+
+@keyframes about-fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* --- Values cards (legacy ValueCard / ValueCardContent) --- */
+
+[data-about-value-expanded] {
+  display: none;
+}
+
+.about-value-card.is-active [data-about-value-expanded] {
+  display: flex;
+}
+
+.about-value-card.is-active [data-about-value-collapsed-num],
+.about-value-card.is-active [data-about-value-collapsed-title] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.about-value-card.is-active [data-about-value-expanded-num],
+.about-value-card.is-active [data-about-value-expanded-title],
+.about-value-card.is-active [data-about-value-expanded-desc] {
+  opacity: 0;
+  transition-property: opacity;
+}
+
+.about-value-card.is-active [data-about-value-expanded-num],
+.about-value-card.is-active [data-about-value-expanded-title] {
+  transition-duration: 500ms;
+}
+
+.about-value-card.is-active [data-about-value-expanded-desc] {
+  transition-duration: 700ms;
+}
+
+.about-value-card.is-show-description [data-about-value-expanded-num],
+.about-value-card.is-show-description [data-about-value-expanded-title],
+.about-value-card.is-show-description [data-about-value-expanded-desc] {
+  opacity: 1;
+}
+
+.about-value-card.is-show-description [data-about-value-expanded-num],
+.about-value-card.is-show-description [data-about-value-expanded-title] {
+  animation: about-fadein 0.6s forwards;
+}
+
+.about-value-card.is-show-description [data-about-value-expanded-desc] {
+  animation: about-fadein 0.6s forwards;
+}
+
+@media (min-width: 769px) {
+  .about-value-card.is-active {
+    flex: 2 1 0%;
+    z-index: 10;
+  }
+
+  .about-value-card.is-active [data-about-value-content] {
+    padding: 7rem;
+  }
+}
+
+@media (max-width: 768px) {
+  [data-about-values-track] {
+    overflow: visible;
+  }
+
+  .about-value-card.is-active {
+    z-index: 10;
+    min-height: 320px;
+    height: auto;
+    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  }
+
+  /* Remove collapsed labels from flex flow so expanded copy does not shift upward */
+  .about-value-card.is-active [data-about-value-collapsed-num],
+  .about-value-card.is-active [data-about-value-collapsed-title] {
+    position: absolute;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .about-value-card.is-active [data-about-value-content] {
+    min-height: 320px;
+    height: auto;
+  }
+
+  /* Top-aligned copy — avoid justify-center clipping tall descriptions */
+  .about-value-card.is-active [data-about-value-expanded] {
+    position: relative;
+    inset: auto;
+    height: auto;
+    min-height: 280px;
+    justify-content: flex-start;
+    overflow: visible;
+  }
+}
+
+[data-about-value-video-wrap].is-active {
+  opacity: 1;
+}
+
+[data-about-value-video-wrap]:not(.is-active) {
+  opacity: 0;
+}
+
+[data-about-value-spinner].is-loading {
+  display: flex;
+}
+
+[data-about-value-spinner]:not(.is-loading) {
+  display: none;
+}

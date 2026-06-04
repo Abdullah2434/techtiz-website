@@ -1,0 +1,33 @@
+---
+import Clock from '@lucide/astro/icons/clock';
+import FileLock from '@lucide/astro/icons/file-lock';
+import Handshake from '@lucide/astro/icons/handshake';
+import Shield from '@lucide/astro/icons/shield';
+import { SLA_ITEMS } from '../../../lib/constants/pages/contact';
+import SledPageWrap from '../shared/SledPageWrap.astro';
+
+const slaIcons = [Clock, FileLock, Handshake, Shield] as const;
+---
+
+<section class="border-b border-line/80 bg-white py-5" aria-label="Our commitment to primes">
+  <SledPageWrap>
+    <div class="sled-reveal sled-glass flex flex-col gap-4 rounded-2xl border border-line/90 px-5 py-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6 sm:gap-y-3 sm:px-6" data-sled-reveal>
+      <span class="shrink-0 font-mono text-[10.5px] font-bold tracking-[0.18em] uppercase text-cyan-strong">
+        Our commitment to primes
+      </span>
+      <div class="flex flex-wrap gap-x-5 gap-y-3">
+        {SLA_ITEMS.map((item, idx) => {
+          const Icon = slaIcons[idx];
+          return (
+            <span class="inline-flex items-center gap-2.5 text-[13.5px] leading-[1.55] text-muted">
+              <span class="grid size-8 place-items-center rounded-lg bg-cyan-soft text-cyan-strong">
+                <Icon class="size-3.5" stroke-width="1.75" aria-hidden="true" />
+              </span>
+              {item}
+            </span>
+          );
+        })}
+      </div>
+    </div>
+  </SledPageWrap>
+</section>

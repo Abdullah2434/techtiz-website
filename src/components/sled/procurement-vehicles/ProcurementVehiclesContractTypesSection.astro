@@ -1,0 +1,37 @@
+---
+import { CONTRACT_TYPE_MAPPING } from '../../../lib/constants/pages/procurement-vehicles';
+import Eyebrow from '../../shared/Eyebrow.astro';
+import SledPageWrap from '../shared/SledPageWrap.astro';
+---
+
+<section class="sled-section border-t border-line/60 bg-seasalt">
+  <SledPageWrap>
+    <div class="sled-reveal mb-10 max-w-[720px]" data-sled-reveal>
+      <Eyebrow text={CONTRACT_TYPE_MAPPING.eyebrow} showGlyph class="mb-4" />
+      <h2 class="text-[clamp(1.75rem,3.8vw,2.5rem)] font-extrabold leading-[1.08] tracking-[-0.02em] text-yale-dark">
+        {CONTRACT_TYPE_MAPPING.heading}
+      </h2>
+      <p class="mt-4 text-[15.5px] leading-[1.65] text-muted">{CONTRACT_TYPE_MAPPING.sub}</p>
+    </div>
+
+    <div class="sled-reveal overflow-hidden rounded-2xl border border-line bg-white shadow-[0_24px_48px_-28px_rgba(21,58,95,0.14)]" data-sled-reveal>
+      <div class="hidden border-b border-line bg-seasalt/80 px-6 py-3 font-mono text-[10.5px] font-bold tracking-[0.14em] uppercase text-muted md:grid md:grid-cols-[1.1fr_1fr_0.7fr]">
+        <span>Delivery model</span>
+        <span>Typical vehicle structure</span>
+        <span>FAR reference</span>
+      </div>
+      {CONTRACT_TYPE_MAPPING.rows.map((row, idx) => (
+        <div
+          class:list={[
+            'grid grid-cols-1 gap-2 px-6 py-5 md:grid-cols-[1.1fr_1fr_0.7fr] md:items-center md:gap-6',
+            idx < CONTRACT_TYPE_MAPPING.rows.length - 1 && 'border-b border-line',
+          ]}
+        >
+          <div class="text-[15px] font-extrabold text-yale-dark">{row.delivery}</div>
+          <div class="text-[14px] leading-[1.55] text-muted">{row.vehicle}</div>
+          <div class="font-mono text-[11.5px] tracking-[0.06em] text-cyan-strong">{row.reference}</div>
+        </div>
+      ))}
+    </div>
+  </SledPageWrap>
+</section>

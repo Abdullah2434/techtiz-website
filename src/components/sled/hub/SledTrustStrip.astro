@@ -1,0 +1,45 @@
+---
+import { TRUST_ITEMS } from '../../../lib/constants/pages/sled-hub';
+import SledIcon from '../shared/SledIcon.astro';
+import SledPageWrap from '../shared/SledPageWrap.astro';
+---
+
+<div class="sled-glass border-b border-line/80 py-6" data-sled-reveal>
+  <SledPageWrap>
+    <div class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4 max-[600px]:grid-cols-1 max-[600px]:gap-5">
+      {TRUST_ITEMS.map((item, idx) => {
+        const inner = (
+          <>
+            <div class="grid size-12 shrink-0 place-items-center rounded-xl border border-line/80 bg-white shadow-[0_8px_20px_-14px_rgba(21,58,95,0.18)] text-cyan-strong transition-transform duration-300 group-hover:scale-105">
+              <SledIcon name={item.icon} class="size-[22px]" />
+            </div>
+            <div class="flex min-w-0 flex-col gap-1">
+              <span class="font-mono text-[9.5px] leading-[1.3] tracking-[0.14em] uppercase text-muted">{item.label}</span>
+              <span
+                class:list={[
+                  'font-mono text-[12.5px] font-semibold tracking-[0.02em] text-yale',
+                  'pending' in item && item.pending && 'border-b border-dashed border-line pb-px italic text-muted',
+                ]}
+              >
+                {item.value}
+              </span>
+            </div>
+          </>
+        );
+
+        const itemClass = [
+          'group flex items-center gap-4 rounded-xl px-3 py-2 transition-colors duration-200 hover:bg-white/60',
+          idx > 0 && 'max-[600px]:border-t max-[600px]:border-line max-[600px]:pt-5',
+        ];
+
+        return 'href' in item && item.href ? (
+          <a class:list={itemClass} href={item.href}>
+            {inner}
+          </a>
+        ) : (
+          <div class:list={itemClass}>{inner}</div>
+        );
+      })}
+    </div>
+  </SledPageWrap>
+</div>

@@ -1,0 +1,74 @@
+---
+import Clock from '@lucide/astro/icons/clock';
+import FileText from '@lucide/astro/icons/file-text';
+import Mail from '@lucide/astro/icons/mail';
+import Shield from '@lucide/astro/icons/shield';
+import { SEQUENCE_STEPS } from '../../../lib/constants/pages/how-we-engage';
+import Eyebrow from '../../shared/Eyebrow.astro';
+import SledPageWrap from '../shared/SledPageWrap.astro';
+
+const stepIcons = [Mail, Shield, FileText] as const;
+---
+
+<section class="sled-section border-b border-line/60 bg-white" id="sequence">
+  <SledPageWrap>
+    <div class="sled-reveal mb-14 grid grid-cols-1 gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-end" data-sled-reveal>
+      <div>
+        <Eyebrow text="The sequence" showGlyph class="mb-4" />
+        <h2 class="text-[clamp(1.75rem,3.8vw,2.5rem)] font-extrabold leading-[1.08] tracking-[-0.02em] text-yale-dark">
+          Three steps. Predictable timing. Same playbook every time.
+        </h2>
+      </div>
+      <p class="max-w-[520px] text-[15.5px] leading-[1.65] text-muted lg:justify-self-end">
+        The structured-relationship sequence is itself the credibility signal. Capture managers and BD leads at U.S. primes know the rhythm; we hold to it.
+      </p>
+    </div>
+
+    <div class="sled-engage-timeline sled-reveal-stagger relative space-y-6" data-sled-reveal>
+      {SEQUENCE_STEPS.map((step, stepIdx) => {
+        const StepIcon = stepIcons[stepIdx];
+        return (
+          <article class="sled-card group relative overflow-hidden rounded-2xl p-0 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(280px,360px)]">
+            <div class="flex flex-col gap-5 p-6 sm:p-7 lg:p-8">
+              <div class="flex flex-wrap items-start gap-4 sm:gap-5">
+                <div class="flex shrink-0 flex-col items-center gap-2">
+                  <div class="grid size-14 place-items-center rounded-2xl bg-yale-dark font-mono text-[15px] font-extrabold tracking-[0.04em] text-cyan shadow-[0_10px_28px_-12px_rgba(14,38,64,0.55)] transition-transform duration-300 group-hover:scale-[1.03]">
+                    {step.n}
+                  </div>
+                </div>
+
+                <div class="min-w-0 flex-1">
+                  <div class="mb-3 flex flex-wrap items-center gap-3">
+                    <span class="inline-flex items-center gap-2 rounded-full border border-line bg-seasalt px-3 py-1.5 font-mono text-[10.5px] font-bold tracking-[0.14em] uppercase text-cyan-strong">
+                      <Clock class="size-3.5 shrink-0" aria-hidden="true" />
+                      {step.when}
+                    </span>
+                    <span class="grid size-9 place-items-center rounded-xl bg-cyan-soft text-cyan-strong transition-colors duration-300 group-hover:bg-cyan/15">
+                      <StepIcon class="size-[18px]" stroke-width="1.75" aria-hidden="true" />
+                    </span>
+                  </div>
+                  <h3 class="text-[clamp(1.125rem,2vw,1.25rem)] font-extrabold leading-[1.2] text-yale-dark">{step.heading}</h3>
+                  <p class="mt-2.5 text-[14px] leading-[1.6] text-muted">{step.body}</p>
+                </div>
+              </div>
+            </div>
+
+            <aside class="border-t border-line bg-gradient-to-br from-seasalt via-white to-cyan-soft/25 p-6 sm:p-7 lg:border-t-0 lg:border-l lg:p-8">
+              <div class="mb-3 font-mono text-[10.5px] font-bold tracking-[0.14em] uppercase text-cyan-strong">
+                {step.detailLabel}
+              </div>
+              <ul class="space-y-2.5">
+                {step.details.map((d) => (
+                  <li class="flex gap-2.5 text-[13.5px] leading-[1.55] text-muted">
+                    <span class="mt-2 size-1.5 shrink-0 rounded-full bg-cyan" aria-hidden="true" />
+                    <span>{d}</span>
+                  </li>
+                ))}
+              </ul>
+            </aside>
+          </article>
+        );
+      })}
+    </div>
+  </SledPageWrap>
+</section>

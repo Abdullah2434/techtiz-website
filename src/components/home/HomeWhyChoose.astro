@@ -1,110 +1,138 @@
 ---
 import { WHY_DATA, WHY_TABS } from '../../lib/constants/pages/home';
+import CtaButton from '../shared/CtaButton.astro';
 import IndustryIcon from './IndustryIcon.astro';
 import PageWrap from './PageWrap.astro';
+import WhyHighlightItem from './WhyHighlightItem.astro';
+import WhyIcon from './WhyIcon.astro';
 
 const initial = WHY_DATA.expert;
+const WHY_TRANSITION_MS = 400;
+const WHY_KEYS = ['expert', 'ontime', 'scalable', 'ongoing'] as const;
 ---
 
 <section class="relative bg-white py-[110px] max-[900px]:py-14">
   <PageWrap>
-    <div class="mb-9 max-w-[700px]">
-      <span class="mb-3.5 inline-flex font-mono text-[11px] font-bold tracking-[0.18em] uppercase text-cyan-strong">Why teams choose us</span>
-      <h2 class="text-[44px] font-extrabold leading-[1.05] tracking-[-0.022em] text-yale max-[900px]:text-[30px]">
+    <div class="mb-9 max-w-[700px] max-[640px]:mb-7">
+      <span class="mb-3.5 inline-flex font-mono text-[11px] font-bold tracking-[0.18em] uppercase text-cyan-strong max-[640px]:text-[10px]">Why teams choose us</span>
+      <h2 class="text-[44px] font-extrabold leading-[1.05] tracking-[-0.022em] text-yale max-[900px]:text-[30px] max-[640px]:text-[24px] max-[640px]:leading-[1.1] max-[480px]:text-[22px]">
         Four reasons the engagement keeps compounding.
       </h2>
-      <p class="mt-3.5 max-w-[620px] text-[15px] text-muted">Pick a pillar to see the shape of how we work.</p>
+      <p class="mt-3.5 max-w-[620px] text-[15px] text-muted max-[640px]:mt-3 max-[640px]:text-[14px]">Pick a pillar to see the shape of how we work.</p>
     </div>
 
-    <div class="relative mb-6 grid grid-cols-4 gap-2.5 border-b border-line pb-6 max-[1024px]:grid-cols-2 max-[600px]:grid-cols-1" role="tablist" data-why-tabs>
-      {WHY_TABS.map((tab, i) => (
-        <button
-          type="button"
-          class:list={[
-            'relative flex cursor-pointer items-start gap-[18px] rounded-[14px] border px-[22px] py-[18px] text-left font-inherit transition-[border-color,background,transform] duration-220',
-            i === 0
-              ? 'border-cyan bg-white shadow-[0_8px_24px_-14px_rgba(24,176,230,0.45),inset_0_0_0_1px_var(--color-cyan-soft)] after:absolute after:-bottom-[25px] after:left-1/2 after:z-[1] after:size-3 after:-translate-x-1/2 after:rotate-45 after:border-r after:border-b after:border-line after:bg-seasalt after:content-[\'\']'
-              : 'border-transparent bg-white hover:bg-seasalt',
-          ]}
-          role="tab"
-          data-why={tab.id}
-          aria-selected={i === 0 ? 'true' : 'false'}
-        >
-          <span class:list={['mt-1 font-mono text-[28px] font-extrabold leading-none tracking-[-0.04em]', i === 0 ? 'text-cyan' : 'text-line']}>
-            {tab.num}
-          </span>
-          <span class="flex min-w-0 flex-col gap-1.5">
-            <span class:list={['text-[16.5px] font-bold leading-[1.15] tracking-[-0.005em]', i === 0 ? 'text-yale-dark' : 'text-muted']}>
-              {tab.title}
+    <div
+      class="relative mb-6 grid grid-cols-4 gap-2.5 border-b border-line pb-6 max-[1024px]:grid-cols-2 max-[600px]:grid-cols-1 max-[640px]:mb-5 max-[640px]:gap-2 max-[640px]:pb-5"
+      role="tablist"
+      data-why-tabs
+    >
+      {
+        WHY_TABS.map((tab, i) => (
+          <button
+            type="button"
+            class:list={[
+              'home-why-tab relative flex cursor-pointer items-start gap-[18px] rounded-[14px] border border-transparent bg-white px-[22px] py-[18px] text-left font-inherit hover:bg-seasalt max-[640px]:gap-3 max-[640px]:px-4 max-[640px]:py-3.5',
+              i === 0 && 'is-active',
+            ]}
+            role="tab"
+            data-why={tab.id}
+            aria-selected={i === 0 ? 'true' : 'false'}
+          >
+            <span class="home-why-tab-num mt-1 font-mono text-[28px] font-extrabold leading-none tracking-[-0.04em] text-line max-[900px]:text-[22px] max-[640px]:mt-0.5 max-[640px]:text-[18px] max-[480px]:text-[16px]">
+              {tab.num}
             </span>
-            <span class:list={['line-clamp-1 text-[12.5px] leading-[1.4]', i === 0 ? 'text-ink' : 'text-muted']}>{tab.tag}</span>
-          </span>
-        </button>
-      ))}
+            <span class="flex min-w-0 flex-col gap-1.5">
+              <span class="home-why-tab-title text-[16.5px] font-bold leading-[1.15] tracking-[-0.005em] text-muted max-[640px]:text-[15px] max-[480px]:text-[14px]">
+                {tab.title}
+              </span>
+              <span class="home-why-tab-tag line-clamp-1 text-[12.5px] leading-[1.4] text-muted max-[640px]:text-[12px]">{tab.tag}</span>
+            </span>
+          </button>
+        ))
+      }
     </div>
 
     <div class="grid grid-cols-[1.35fr_0.85fr] gap-4 max-[900px]:grid-cols-1" data-why-panel>
-      <div class="rounded-2xl border border-line bg-seasalt p-8 max-[600px]:p-6">
-        <div class="mb-5 flex items-center gap-3">
-          <div class="grid size-10 place-items-center rounded-lg bg-cyan-soft text-cyan-strong" data-why-icon>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="size-5">
-              <path d="M12 2 L4 6 v6 c0 4 3.5 8 8 10 c4.5 -2 8 -6 8 -10 V6 z" /><path d="M9 12 l2 2 l4 -4" />
-            </svg>
+      <div class="home-why-pane rounded-2xl border border-line bg-seasalt p-8 max-[600px]:p-6">
+        <div class="home-why-stagger">
+          <div class="mb-5 flex items-center gap-3">
+            <div class="grid size-10 place-items-center rounded-lg bg-cyan-soft text-cyan-strong" data-why-icon>
+              <WhyIcon name="expert" />
+            </div>
+            <div class="font-mono text-xs font-bold uppercase tracking-[0.16em] text-yale-dark" data-why-eyebrow>
+              {initial.eyebrow}
+            </div>
           </div>
-          <div class="font-mono text-xs font-bold uppercase tracking-[0.16em] text-yale-dark" data-why-eyebrow>{initial.eyebrow}</div>
-        </div>
-        <h3 class="text-[32px] font-extrabold leading-[1.1] text-yale" data-why-title>
-          {initial.title}<span class="text-cyan">.</span>
-        </h3>
-        <p class="mt-4 text-[15px] leading-[1.6] text-muted" data-why-desc>{initial.desc}</p>
-        <div class="my-7 h-px bg-line"></div>
-        <div class="flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <div class="text-[48px] font-extrabold leading-none tracking-[-0.04em] text-yale" data-why-stat-n>{initial.statN}</div>
-            <div class="mt-2 font-mono text-[11px] uppercase tracking-[0.14em] text-muted" data-why-stat-l>{initial.statL}</div>
+          <h3 class="text-[32px] font-extrabold leading-[1.1] text-yale max-[900px]:text-[26px] max-[640px]:text-[22px] max-[480px]:text-[20px]" data-why-title>
+            {initial.title}<span class="text-cyan">.</span>
+          </h3>
+          <p class="mt-4 text-[15px] leading-[1.6] text-muted max-[640px]:mt-3 max-[640px]:text-[14px]" data-why-desc>{initial.desc}</p>
+          <div class="my-7 h-px bg-line"></div>
+          <div class="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <div class="text-[48px] font-extrabold leading-none tracking-[-0.04em] text-yale max-[900px]:text-[36px] max-[640px]:text-[30px] max-[480px]:text-[26px]" data-why-stat-n>
+                {initial.statN}
+              </div>
+              <div class="mt-2 font-mono text-[11px] uppercase tracking-[0.14em] text-muted" data-why-stat-l>
+                {initial.statL}
+              </div>
+            </div>
+            <CtaButton href="/us-sled/contact/" label="Get started" variant="primary" />
           </div>
-          <a
-            href="/us-sled/contact/"
-            class="inline-flex items-center gap-2 rounded-lg bg-yale px-5 py-3 text-sm font-bold text-white transition-[background,transform] duration-[180ms] hover:-translate-y-px hover:bg-yale-dark"
-          >
-            Get started
-            <span class="relative inline-block size-3" aria-hidden="true">
-              <span class="absolute right-0 top-0 size-[7px] rotate-45 border-t-[1.6px] border-r-[1.6px] border-current"></span>
-              <span class="absolute left-0 right-1 top-1/2 h-[1.6px] -translate-y-1/2 bg-current"></span>
-            </span>
-          </a>
         </div>
       </div>
 
-      <div class="flex flex-col rounded-2xl border border-line bg-white p-[30px]">
-        <h4 class="mb-5 font-mono text-xs font-bold uppercase tracking-[0.16em] text-yale-dark">Key Highlights</h4>
-        <ul class="mb-6 flex flex-col gap-3.5" data-why-highlights>
-          {initial.highlights.map((h) => (
-            <li class="flex items-center gap-3 text-[14.5px] leading-[1.4] text-ink">
-              <span class="relative grid size-[22px] shrink-0 place-items-center rounded-full border-[1.5px] border-cyan after:size-[9px] after:-translate-x-px after:translate-y-px after:rotate-[-45deg] after:border-b-[1.8px] after:border-l-[1.8px] after:border-cyan-strong after:content-['']"></span>
-              {h}
-            </li>
-          ))}
-        </ul>
-        <div class="mt-auto border-t border-line pt-[22px]">
-          <div class="mb-3 inline-flex items-center gap-2">
-            <IndustryIcon name="sparkle" class="size-4 text-cyan-strong" />
-            <span class="font-mono text-[11.5px] font-bold uppercase tracking-[0.16em] text-yale-dark">Our Pledge</span>
+      <div class="home-why-pane flex flex-col rounded-2xl border border-line bg-white p-[30px] max-[640px]:p-5">
+        <div class="home-why-stagger flex flex-1 flex-col">
+          <h4 class="mb-5 font-mono text-xs font-bold uppercase tracking-[0.16em] text-yale-dark">Key Highlights</h4>
+          <ul class="mb-6 flex flex-col gap-3.5" data-why-highlights>
+            {initial.highlights.map((h) => (
+              <WhyHighlightItem text={h} />
+            ))}
+          </ul>
+          <div class="mt-auto border-t border-line pt-[22px]">
+            <div class="mb-3 inline-flex items-center gap-2">
+              <IndustryIcon name="sparkle" class="size-4 text-cyan-strong" />
+              <span class="font-mono text-[11.5px] font-bold uppercase tracking-[0.16em] text-yale-dark">Our Pledge</span>
+            </div>
+            <p class="text-[13.5px] leading-[1.6] text-muted">
+              Clear scope. Fast feedback. No surprises. Transparent milestones with quality gates before every release.
+            </p>
           </div>
-          <p class="text-[13.5px] leading-[1.6] text-muted">
-            Clear scope. Fast feedback. No surprises. Transparent milestones with quality gates before every release.
-          </p>
         </div>
       </div>
+    </div>
+
+    <div class="hidden" aria-hidden="true" id="home-why-icon-templates">
+      {
+        WHY_KEYS.map((key) => (
+          <div data-why-icon={key}>
+            <WhyIcon name={key} />
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="hidden" aria-hidden="true" id="home-why-highlight-templates">
+      {
+        WHY_KEYS.map((key) => (
+          <ul data-why-highlights={key} class="mb-6 flex flex-col gap-3.5">
+            {WHY_DATA[key].highlights.map((h) => (
+              <WhyHighlightItem text={h} />
+            ))}
+          </ul>
+        ))
+      }
     </div>
   </PageWrap>
 </section>
 
-<script define:vars={{ whyData: WHY_DATA }}>
+<script define:vars={{ whyData: WHY_DATA, whyTransitionMs: WHY_TRANSITION_MS }}>
   const panel = document.querySelector('[data-why-panel]');
   const tabs = document.querySelectorAll('[data-why-tabs] [data-why]');
   if (!panel || !tabs.length) return;
 
+  const panes = panel.querySelectorAll('.home-why-pane');
   const iconEl = panel.querySelector('[data-why-icon]');
   const ebEl = panel.querySelector('[data-why-eyebrow]');
   const titleEl = panel.querySelector('[data-why-title]');
@@ -112,78 +140,87 @@ const initial = WHY_DATA.expert;
   const statN = panel.querySelector('[data-why-stat-n]');
   const statL = panel.querySelector('[data-why-stat-l]');
   const hlEl = panel.querySelector('[data-why-highlights]');
+  const iconTemplates = document.getElementById('home-why-icon-templates');
+  const highlightTemplates = document.getElementById('home-why-highlight-templates');
 
-  const icons = {
-    expert: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="size-5"><path d="M12 2 L4 6 v6 c0 4 3.5 8 8 10 c4.5 -2 8 -6 8 -10 V6 z"/><path d="M9 12 l2 2 l4 -4"/></svg>',
-    ontime: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="size-5"><circle cx="12" cy="13" r="8"/><path d="M12 9 v4 l3 2"/><path d="M9 2 h6"/><path d="M12 5 V2"/></svg>',
-    scalable: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="size-5"><polygon points="12 3 21 8 12 13 3 8 12 3"/><polyline points="3 13 12 18 21 13"/><polyline points="3 18 12 23 21 18"/></svg>',
-    ongoing: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="size-5"><path d="M12 2 a10 10 0 0 1 10 10 a10 10 0 0 1 -10 10 a10 10 0 0 1 -10 -10 v0"/><path d="M2 12 a10 10 0 0 1 4 -8"/><circle cx="12" cy="12" r="3"/></svg>',
+  let activeKey = 'expert';
+  let animating = false;
+
+  const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  const getIconMarkup = (key) => {
+    const template = iconTemplates?.querySelector(`[data-why-icon="${key}"]`);
+    return template?.innerHTML ?? '';
   };
 
-  const onClasses = [
-    'border-cyan',
-    'bg-white',
-    'shadow-[0_8px_24px_-14px_rgba(24,176,230,0.45),inset_0_0_0_1px_var(--color-cyan-soft)]',
-    'after:absolute',
-    'after:-bottom-[25px]',
-    'after:left-1/2',
-    'after:z-[1]',
-    'after:size-3',
-    'after:-translate-x-1/2',
-    'after:rotate-45',
-    'after:border-r',
-    'after:border-b',
-    'after:border-line',
-    'after:bg-seasalt',
-    "after:content-['']",
-  ];
+  const getHighlightsMarkup = (key) => {
+    const template = highlightTemplates?.querySelector(`[data-why-highlights="${key}"]`);
+    return template?.innerHTML ?? '';
+  };
 
-  function setTabState(tab, on) {
+  const setTabState = (tab, on) => {
     tab.setAttribute('aria-selected', on ? 'true' : 'false');
-    const num = tab.querySelector('span');
-    const ttl = tab.querySelectorAll('span')[2];
-    const tag = tab.querySelectorAll('span')[3];
-    if (on) {
-      tab.className = `relative flex cursor-pointer items-start gap-[18px] rounded-[14px] border px-[22px] py-[18px] text-left font-inherit transition-[border-color,background,transform] duration-220 ${onClasses.join(' ')}`;
-      if (num) num.className = 'mt-1 font-mono text-[28px] font-extrabold leading-none tracking-[-0.04em] text-cyan';
-      if (ttl) ttl.className = 'text-[16.5px] font-bold leading-[1.15] tracking-[-0.005em] text-yale-dark';
-      if (tag) tag.className = 'line-clamp-1 text-[12.5px] leading-[1.4] text-ink';
-    } else {
-      tab.className =
-        'relative flex cursor-pointer items-start gap-[18px] rounded-[14px] border border-transparent bg-white px-[22px] py-[18px] text-left font-inherit transition-[border-color,background,transform] duration-220 hover:bg-seasalt';
-      if (num) num.className = 'mt-1 font-mono text-[28px] font-extrabold leading-none tracking-[-0.04em] text-line';
-      if (ttl) ttl.className = 'text-[16.5px] font-bold leading-[1.15] tracking-[-0.005em] text-muted';
-      if (tag) tag.className = 'line-clamp-1 text-[12.5px] leading-[1.4] text-muted';
-    }
-  }
+    tab.classList.toggle('is-active', on);
+  };
 
-  function renderWhy(key) {
+  const updateContent = (key) => {
     const d = whyData[key];
     if (!d) return;
-    panel.classList.add('home-why-panel-fade');
-    setTimeout(() => {
-      if (iconEl) iconEl.innerHTML = icons[key] || '';
-      if (ebEl) ebEl.textContent = d.eyebrow;
-      if (titleEl) titleEl.innerHTML = `${d.title}<span class="text-cyan">.</span>`;
-      if (descEl) descEl.textContent = d.desc;
-      if (statN) statN.textContent = d.statN;
-      if (statL) statL.textContent = d.statL;
-      if (hlEl) {
-        hlEl.innerHTML = d.highlights
-          .map(
-            (h) =>
-              `<li class="flex items-center gap-3 text-[14.5px] leading-[1.4] text-ink"><span class="relative grid size-[22px] shrink-0 place-items-center rounded-full border-[1.5px] border-cyan after:size-[9px] after:-translate-x-px after:translate-y-px after:rotate-[-45deg] after:border-b-[1.8px] after:border-l-[1.8px] after:border-cyan-strong after:content-['']"></span>${h}</li>`,
-          )
-          .join('');
-      }
-      panel.classList.remove('home-why-panel-fade');
-    }, 160);
-  }
+
+    const iconMarkup = getIconMarkup(key);
+    if (iconEl && iconMarkup) iconEl.innerHTML = iconMarkup;
+    if (ebEl) ebEl.textContent = d.eyebrow;
+    if (titleEl) titleEl.innerHTML = `${d.title}<span class="text-cyan">.</span>`;
+    if (descEl) descEl.textContent = d.desc;
+    if (statN) statN.textContent = d.statN;
+    if (statL) statL.textContent = d.statL;
+    if (hlEl) {
+      const highlightsMarkup = getHighlightsMarkup(key);
+      if (highlightsMarkup) hlEl.innerHTML = highlightsMarkup;
+    }
+  };
+
+  const runPanelTransition = async (key) => {
+    if (animating || key === activeKey) return;
+    animating = true;
+
+    panes.forEach((pane) => {
+      pane.classList.remove('home-why-enter');
+      pane.classList.add('home-why-exit');
+    });
+
+    await wait(whyTransitionMs);
+
+    panel.classList.remove('home-why-panel-ready');
+    panel.classList.add('home-why-revealing');
+    updateContent(key);
+    activeKey = key;
+
+    panes.forEach((pane) => {
+      pane.classList.remove('home-why-exit');
+      pane.classList.add('home-why-enter');
+    });
+
+    await wait(20);
+
+    panes.forEach((pane) => pane.classList.remove('home-why-enter'));
+    panel.classList.add('home-why-panel-ready');
+
+    await wait(whyTransitionMs);
+
+    panel.classList.remove('home-why-revealing');
+    animating = false;
+  };
+
+  panel.classList.add('home-why-panel-ready');
 
   tabs.forEach((tab) => {
     tab.addEventListener('click', () => {
+      const key = tab.getAttribute('data-why');
+      if (!key || key === activeKey) return;
+
       tabs.forEach((t) => setTabState(t, t === tab));
-      renderWhy(tab.getAttribute('data-why'));
+      runPanelTransition(key);
     });
   });
 </script>

@@ -1,0 +1,19 @@
+---
+import ShieldCheck from '@lucide/astro/icons/shield-check';
+import Clock from '@lucide/astro/icons/clock';
+import Layers from '@lucide/astro/icons/layers';
+import RefreshCw from '@lucide/astro/icons/refresh-cw';
+
+interface Props {
+  name: string;
+  class?: string;
+}
+
+const { name, class: iconClass = 'size-5' } = Astro.props;
+const strokeWidth = 1.7;
+---
+
+{name === 'expert' && <ShieldCheck class={iconClass} stroke-width={strokeWidth} />}
+{name === 'ontime' && <Clock class={iconClass} stroke-width={strokeWidth} />}
+{name === 'scalable' && <Layers class={iconClass} stroke-width={strokeWidth} />}
+{name === 'ongoing' && <RefreshCw class={iconClass} stroke-width={strokeWidth} />}

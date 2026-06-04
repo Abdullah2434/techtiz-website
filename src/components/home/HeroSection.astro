@@ -1,165 +1,245 @@
 ---
-import PageWrap from './PageWrap.astro';
-import Eyebrow from '../shared/Eyebrow.astro';
+import PageWrap from "./PageWrap.astro";
+import Eyebrow from "../shared/Eyebrow.astro";
+import CtaButton from "../shared/CtaButton.astro";
+import ChevronRight from "@lucide/astro/icons/chevron-right";
+import HeroResolutionChart from "./HeroResolutionChart.astro";
+import { HOME_HERO } from "../../lib/constants/pages/home";
+
+const {
+  eyebrow,
+  sector,
+  heading,
+  headingAccent,
+  headingEnd,
+  body,
+  cta,
+} = HOME_HERO;
 ---
 
-<section class="relative overflow-hidden bg-white py-[72px] pb-24 max-[900px]:py-12">
+<section
+  class="relative overflow-hidden bg-gradient-to-b from-white via-white to-seasalt py-[88px] pb-28 max-[900px]:py-14 max-[900px]:pb-20"
+>
   <div
-    class="pointer-events-none absolute inset-0 opacity-50 before:absolute before:-right-20 before:-top-[60px] before:size-[360px] before:rotate-[15deg] before:bg-[linear-gradient(45deg,transparent_49%,rgba(24,176,230,0.10)_49%_51%,transparent_51%),linear-gradient(-45deg,transparent_49%,rgba(21,58,95,0.04)_49%_51%,transparent_51%)] before:bg-size-[36px_36px] after:absolute after:-bottom-10 after:-left-20 after:size-[280px] after:rotate-[15deg] after:opacity-60 after:bg-[linear-gradient(45deg,transparent_49%,rgba(24,176,230,0.10)_49%_51%,transparent_51%),linear-gradient(-45deg,transparent_49%,rgba(21,58,95,0.04)_49%_51%,transparent_51%)] after:bg-size-[36px_36px]"
+    class="pointer-events-none absolute inset-0 z-0 overflow-hidden"
     aria-hidden="true"
-  ></div>
+  >
+    <div
+      class="absolute inset-0 opacity-55 bg-[linear-gradient(to_right,rgba(21,58,95,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(21,58,95,0.06)_1px,transparent_1px)] bg-size-[5rem_4rem] [mask-image:radial-gradient(ellipse_85%_65%_at_50%_35%,#000_30%,transparent_78%)]"
+    ></div>
+    <div
+      class="absolute top-[-8%] right-[8%] size-[min(42vw,520px)] rounded-full bg-[radial-gradient(circle,rgba(24,176,230,0.22)_0%,rgba(24,176,230,0)_70%)] blur-[72px] will-change-transform animate-[hero-glow-a_20s_ease-in-out_infinite_alternate] motion-reduce:animate-none"
+    ></div>
+    <div
+      class="absolute bottom-[-12%] left-[-4%] size-[min(36vw,440px)] rounded-full bg-[radial-gradient(circle,rgba(21,58,95,0.14)_0%,rgba(21,58,95,0)_72%)] blur-[72px] will-change-transform animate-[hero-glow-b_24s_ease-in-out_infinite_alternate] motion-reduce:animate-none"
+    ></div>
+    <div
+      class="absolute -right-20 -top-[60px] size-[360px] rotate-[15deg] opacity-40 max-[900px]:opacity-25 bg-[linear-gradient(45deg,transparent_49%,rgba(24,176,230,0.12)_49%_51%,transparent_51%),linear-gradient(-45deg,transparent_49%,rgba(21,58,95,0.05)_49%_51%,transparent_51%)] bg-size-[36px_36px]"
+    ></div>
+    <div
+      class="absolute -bottom-10 -left-20 size-[280px] rotate-[15deg] opacity-30 max-[900px]:opacity-20 bg-[linear-gradient(45deg,transparent_49%,rgba(24,176,230,0.12)_49%_51%,transparent_51%),linear-gradient(-45deg,transparent_49%,rgba(21,58,95,0.05)_49%_51%,transparent_51%)] bg-size-[36px_36px]"
+    ></div>
+  </div>
 
   <PageWrap class="relative z-[2]">
-    <div class="grid grid-cols-[1.05fr_1fr] items-center gap-16 max-[900px]:grid-cols-1 max-[900px]:gap-10">
-      <div>
-        <div class="home-sector-on mb-[22px] inline-flex gap-0.5 rounded-full border border-line bg-white p-[5px] shadow-[0_4px_12px_-6px_rgba(14,38,64,0.08)]">
-          <span class="inline-flex items-center gap-2 rounded-full bg-yale px-4 py-2 text-[13px] font-semibold text-white">
-            <span class="home-sector-dot inline-block size-2 rotate-[15deg] bg-cyan"></span>
-            International teams
+    <div
+      class="grid grid-cols-[1.05fr_1fr] items-center gap-20 max-[900px]:grid-cols-1 max-[900px]:gap-12"
+    >
+      <div class="flex min-w-0 flex-col items-start">
+        <div
+          class="home-sector-on mb-7 inline-flex w-fit max-w-full gap-0.5 rounded-full border border-line bg-white/90 p-[5px] shadow-[0_4px_12px_-6px_rgba(14,38,64,0.08)] backdrop-blur-sm max-[640px]:mb-5 max-[640px]:gap-0 max-[640px]:p-[3px]"
+        >
+          <span
+            class="inline-flex items-center gap-2 rounded-full bg-yale px-4 py-2 text-[13px] font-semibold text-white max-[640px]:gap-1.5 max-[640px]:px-2.5 max-[640px]:py-1.5 max-[640px]:text-[11px]"
+          >
+            <span
+              class="home-sector-dot inline-block size-2 rotate-[15deg] bg-cyan max-[640px]:size-1.5"
+            ></span>
+            {sector.international}
           </span>
           <a
-            href="/us-sled/"
-            class="group inline-flex items-center gap-2 rounded-full px-4 py-2 text-[13px] font-semibold text-yale transition-[background,color] duration-200 hover:bg-cyan-soft hover:text-cyan-strong"
+            href={sector.sled.href}
+            class="group inline-flex items-center gap-2 rounded-full px-4 py-2 text-[13px] font-semibold text-yale transition-[background,color] duration-200 hover:bg-cyan-soft hover:text-cyan-strong max-[640px]:gap-1 max-[640px]:px-2.5 max-[640px]:py-1.5 max-[640px]:text-[11px]"
             aria-label="View SLED Partnerships hub"
           >
-            <span class="inline-block size-2 rotate-[15deg] bg-cyan"></span>
-            U.S. SLED primes
-            <span class="text-[13px] transition-transform duration-220 group-hover:translate-x-1" aria-hidden="true">→</span>
+            <span class="inline-block size-2 rotate-[15deg] bg-cyan max-[640px]:size-1.5"></span>
+            {sector.sled.label}
+            <ChevronRight
+              class="size-3.5 transition-transform duration-220 group-hover:translate-x-1 max-[640px]:size-3"
+              aria-hidden="true"
+            />
           </a>
         </div>
 
-        <Eyebrow text="Techtiz · AI-native engineering" showGlyph class="mb-[22px]" />
+        <Eyebrow
+          text={eyebrow}
+          showGlyph
+          class="mb-7 flex w-full max-[640px]:mb-5 max-[640px]:text-[10px] max-[640px]:tracking-[0.14em]"
+        />
 
-        <h1 class="mb-[22px] text-[64px] font-extrabold leading-[1.02] tracking-[-0.03em] text-yale max-[1024px]:text-[56px] max-[900px]:text-[clamp(30px,7vw,52px)]">
-          Reinvent your business with <span class="inline-block text-cyan">AI systems</span> that adapt and improve.
+        <h1
+          class="mb-8 max-w-[540px] text-[48px] font-extrabold leading-[1.12] tracking-[-0.025em] text-yale max-[1024px]:text-[44px] max-[900px]:mb-7 max-[900px]:text-[clamp(28px,6.5vw,40px)] max-[900px]:leading-[1.14] max-[640px]:mb-5 max-[640px]:max-w-none max-[640px]:text-[clamp(24px,7.2vw,32px)] max-[480px]:text-[24px]"
+        >
+          {heading}{' '}
+          <span class="inline-block text-cyan">{headingAccent}</span>{' '}
+          {headingEnd}
         </h1>
 
-        <p class="mb-8 max-w-[520px] text-lg leading-[1.55] text-muted">
-          An AI-native engineering studio for ambitious product teams worldwide, and a technical subcontractor to U.S. SLED prime contractors for back-office engineering delivery.
+        <p class="mb-10 max-w-[500px] text-[17px] leading-[1.65] text-muted max-[900px]:mb-8 max-[640px]:mb-6 max-[640px]:max-w-none max-[640px]:text-[15px] max-[640px]:leading-[1.6] max-[480px]:text-[14px]">
+          {body}
         </p>
 
-        <div class="mb-7 flex flex-wrap gap-3">
-          <a
-            href="/us-sled/contact/"
-            class="inline-flex items-center gap-2.5 rounded-lg bg-yale px-[22px] py-[13px] text-[14.5px] font-bold text-white transition-[background,transform] duration-[180ms] hover:-translate-y-px hover:bg-yale-dark"
-          >
-            Talk to an Expert
-            <span class="relative inline-block size-3.5" aria-hidden="true">
-              <span class="absolute right-0 top-0 size-[7px] rotate-45 border-t-[1.6px] border-r-[1.6px] border-current"></span>
-              <span class="absolute left-0 right-[3px] top-1/2 h-[1.6px] -translate-y-1/2 bg-current"></span>
-            </span>
-          </a>
-          <a
-            href="/#intro"
-            class="inline-flex items-center gap-2.5 rounded-lg border border-line bg-white px-5 py-3 text-[14.5px] font-bold text-yale transition-[border-color,background] duration-[180ms] hover:border-yale hover:bg-seasalt"
-          >
-            <span class="inline-block size-0 border-y-[5px] border-l-8 border-y-transparent border-l-cyan" aria-hidden="true"></span>
-            Watch 90-sec intro
-          </a>
-        </div>
-
-        <div class="flex flex-wrap gap-x-[22px] gap-y-2 font-mono text-[11.5px] font-medium tracking-[0.04em] text-muted">
-          {['Security-controlled delivery', 'Teams in 3 timezones', 'AI-native by default'].map((item) => (
-            <span class="inline-flex items-center gap-2 before:inline-block before:size-1.5 before:rotate-[15deg] before:bg-cyan before:content-['']">
-              {item}
-            </span>
-          ))}
-        </div>
+        <CtaButton href={cta.href} label={cta.label} variant="primary" animated />
       </div>
 
-      <div class="relative" aria-hidden="true">
-        <span class="home-float-a absolute -left-[18px] -top-3.5 size-[22px] rotate-[15deg] bg-cyan opacity-[0.22]"></span>
-        <span class="home-float-b absolute bottom-[-18px] right-[30%] size-3.5 rotate-[15deg] bg-cyan opacity-40"></span>
-        <span class="home-float-c absolute top-[30%] -right-7 size-[30px] rotate-[15deg] bg-cyan opacity-[0.15]"></span>
+      <div class="relative min-w-0" aria-hidden="true">
+        <span
+          class="home-float-a absolute -left-[18px] -top-3.5 size-[22px] rotate-[15deg] bg-cyan opacity-[0.22] max-[640px]:hidden"
+        ></span>
+        <span
+          class="home-float-b absolute bottom-[-18px] right-[30%] size-3.5 rotate-[15deg] bg-cyan opacity-40 max-[640px]:hidden"
+        ></span>
+        <span
+          class="home-float-c absolute top-[30%] -right-7 size-[30px] rotate-[15deg] bg-cyan opacity-[0.15] max-[640px]:hidden"
+        ></span>
 
         <div
-          class="home-mockup overflow-hidden rounded-[14px] border border-line bg-white shadow-[0_30px_60px_-30px_rgba(14,38,64,0.20),0_8px_24px_-16px_rgba(14,38,64,0.10)]"
+          class="home-mockup overflow-hidden rounded-[14px] border border-line bg-white shadow-[0_30px_60px_-30px_rgba(14,38,64,0.20),0_8px_24px_-16px_rgba(14,38,64,0.10)] max-[640px]:rounded-xl"
           role="img"
           aria-label="Production AI agent dashboard mockup"
         >
-          <div class="flex items-center gap-2.5 border-b border-line-soft bg-seasalt px-4 py-3">
-            <div class="flex gap-1.5">
-              <span class="size-2.5 rounded-full bg-line"></span>
-              <span class="size-2.5 rounded-full bg-line"></span>
-              <span class="size-2.5 rounded-full bg-line"></span>
+          <div
+            class="flex items-center gap-2.5 border-b border-line-soft bg-seasalt px-4 py-3 max-[640px]:gap-2 max-[640px]:px-3 max-[640px]:py-2"
+          >
+            <div class="flex shrink-0 gap-1.5 max-[640px]:gap-1">
+              <span class="size-2.5 rounded-full bg-line max-[640px]:size-2"></span>
+              <span class="size-2.5 rounded-full bg-line max-[640px]:size-2"></span>
+              <span class="size-2.5 rounded-full bg-line max-[640px]:size-2"></span>
             </div>
-            <div class="mx-3 flex-1 rounded border border-line bg-white px-3 py-1 font-mono text-[11px] text-muted">
+            <div
+              class="mx-3 min-w-0 flex-1 truncate rounded border border-line bg-white px-3 py-1 font-mono text-[11px] text-muted max-[640px]:mx-2 max-[640px]:px-2 max-[640px]:py-0.5 max-[640px]:text-[9px]"
+            >
               agents.techtiz.io / <span class="text-cyan">triage-v3</span>
             </div>
-            <div class="inline-flex items-center gap-1.5 font-mono text-[10.5px] font-semibold uppercase tracking-[0.08em] text-green">
-              <span class="home-health-blink size-[7px] rounded-full bg-green"></span>
-              Healthy
+            <div
+              class="inline-flex shrink-0 items-center gap-1.5 font-mono text-[10.5px] font-semibold uppercase tracking-[0.08em] text-green max-[640px]:gap-1 max-[640px]:text-[8px]"
+            >
+              <span class="home-health-blink size-[7px] rounded-full bg-green max-[640px]:size-[5px]"
+              ></span>
+              <span class="max-[480px]:sr-only">Healthy</span>
             </div>
           </div>
 
-          <div class="flex items-start justify-between gap-4 px-[22px] pt-[22px] pb-4">
-            <div class="flex items-center gap-3">
-              <div class="relative grid size-[38px] place-items-center rounded-lg bg-yale-dark before:size-4 before:rotate-[15deg] before:bg-cyan before:content-[''] after:absolute after:left-[11px] after:top-[11px] after:size-1 after:bg-white after:content-['']"></div>
-              <div>
-                <div class="text-[14.5px] font-bold leading-[1.2] text-yale-dark">Customer triage agent</div>
-                <div class="mt-1 font-mono text-[10.5px] tracking-[0.05em] text-muted">v3.2 · prod · region us-east</div>
+          <div
+            class="flex flex-col gap-3 px-[22px] pt-[22px] pb-4 max-[640px]:gap-2 max-[640px]:px-3.5 max-[640px]:pt-3.5 max-[640px]:pb-3"
+          >
+            <div class="flex min-w-0 items-center gap-3 max-[640px]:gap-2">
+              <div
+                class="relative grid size-[38px] shrink-0 place-items-center rounded-lg bg-yale-dark before:size-4 before:rotate-[15deg] before:bg-cyan before:content-[''] after:absolute after:left-[11px] after:top-[11px] after:size-1 after:bg-white after:content-[''] max-[640px]:size-[30px] max-[640px]:rounded-md max-[640px]:before:size-3 max-[640px]:after:left-[9px] max-[640px]:after:top-[9px]"
+              >
+              </div>
+              <div class="min-w-0">
+                <div
+                  class="truncate text-[14.5px] font-bold leading-[1.2] text-yale-dark max-[640px]:text-[12px]"
+                >
+                  Customer triage agent
+                </div>
+                <div
+                  class="mt-1 truncate font-mono text-[10.5px] tracking-[0.05em] text-muted max-[640px]:mt-0.5 max-[640px]:text-[9px]"
+                >
+                  v3.2 · prod · region us-east
+                </div>
               </div>
             </div>
-            <div class="flex gap-3.5 pt-3 font-mono text-[10.5px] text-muted">
-              <span class="home-menu-on relative text-yale after:absolute after:-bottom-3.5 after:left-0 after:right-0 after:h-0.5 after:bg-cyan after:content-['']">Overview</span>
-              <span>Eval</span>
-              <span>Cost</span>
-              <span>Logs</span>
+            <div class="flex gap-3.5 overflow-x-auto font-mono text-[10.5px] text-muted max-[640px]:gap-2.5 max-[640px]:text-[9px] [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              <span
+                class="home-menu-on relative shrink-0 text-yale after:absolute after:-bottom-2 after:left-0 after:right-0 after:h-0.5 after:bg-cyan after:content-[''] max-[640px]:after:-bottom-1.5"
+                >Overview</span
+              >
+              <span class="shrink-0">Eval</span>
+              <span class="shrink-0">Cost</span>
+              <span class="shrink-0">Logs</span>
             </div>
           </div>
 
-          <div class="grid grid-cols-3 border-y border-line-soft max-[600px]:grid-cols-3">
-            <div class="border-r border-line-soft px-5 py-4 last:border-r-0">
-              <div class="mb-1.5 font-mono text-[9.5px] uppercase tracking-[0.10em] text-muted">Resolved</div>
-              <div class="home-kpi-v text-[22px] font-extrabold leading-none tracking-[-0.02em] text-yale-dark">
-                94<span class="ml-1 text-xs font-semibold text-muted">%</span>
+          <div
+            class="grid grid-cols-3 border-y border-line-soft"
+          >
+            <div class="border-r border-line-soft px-5 py-4 last:border-r-0 max-[640px]:px-2.5 max-[640px]:py-3">
+              <div
+                class="mb-1.5 font-mono text-[9.5px] uppercase tracking-[0.10em] text-muted max-[640px]:mb-1 max-[640px]:text-[8px]"
+              >
+                Resolved
               </div>
-              <div class="mt-1 font-mono text-[10.5px] text-green">▲ 2.1 this week</div>
-            </div>
-            <div class="border-r border-line-soft px-5 py-4 last:border-r-0">
-              <div class="mb-1.5 font-mono text-[9.5px] uppercase tracking-[0.10em] text-muted">p95 latency</div>
-              <div class="home-kpi-v home-kpi-v-2 text-[22px] font-extrabold leading-none tracking-[-0.02em] text-yale-dark">
-                312<span class="ml-1 text-xs font-semibold text-muted">ms</span>
+              <div
+                class="home-kpi-v text-[22px] font-extrabold leading-none tracking-[-0.02em] text-yale-dark max-[640px]:text-[16px]"
+              >
+                94<span class="ml-1 text-xs font-semibold text-muted max-[640px]:text-[10px]">%</span>
               </div>
-              <div class="mt-1 font-mono text-[10.5px] text-green">▼ 48 vs v3.1</div>
+              <div class="mt-1 font-mono text-[10.5px] text-green max-[640px]:mt-0.5 max-[640px]:text-[8px]">
+                ▲ 2.1 this week
+              </div>
             </div>
-            <div class="px-5 py-4">
-              <div class="mb-1.5 font-mono text-[9.5px] uppercase tracking-[0.10em] text-muted">Cost / run</div>
-              <div class="home-kpi-v home-kpi-v-3 text-[22px] font-extrabold leading-none tracking-[-0.02em] text-yale-dark">$0.018</div>
-              <div class="mt-1 font-mono text-[10.5px] text-muted">stable</div>
+            <div class="border-r border-line-soft px-5 py-4 last:border-r-0 max-[640px]:px-2.5 max-[640px]:py-3">
+              <div
+                class="mb-1.5 font-mono text-[9.5px] uppercase tracking-[0.10em] text-muted max-[640px]:mb-1 max-[640px]:text-[8px]"
+              >
+                p95 latency
+              </div>
+              <div
+                class="home-kpi-v home-kpi-v-2 text-[22px] font-extrabold leading-none tracking-[-0.02em] text-yale-dark max-[640px]:text-[16px]"
+              >
+                312<span class="ml-1 text-xs font-semibold text-muted max-[640px]:text-[10px]">ms</span>
+              </div>
+              <div class="mt-1 font-mono text-[10.5px] text-green max-[640px]:mt-0.5 max-[640px]:text-[8px]">
+                ▼ 48 vs v3.1
+              </div>
+            </div>
+            <div class="px-5 py-4 max-[640px]:px-2.5 max-[640px]:py-3">
+              <div
+                class="mb-1.5 font-mono text-[9.5px] uppercase tracking-[0.10em] text-muted max-[640px]:mb-1 max-[640px]:text-[8px]"
+              >
+                Cost / run
+              </div>
+              <div
+                class="home-kpi-v home-kpi-v-3 text-[22px] font-extrabold leading-none tracking-[-0.02em] text-yale-dark max-[640px]:text-[16px]"
+              >
+                $0.018
+              </div>
+              <div class="mt-1 font-mono text-[10.5px] text-muted max-[640px]:mt-0.5 max-[640px]:text-[8px]">stable</div>
             </div>
           </div>
 
-          <div class="px-[22px] pt-5 pb-[18px]">
-            <div class="mb-3 flex items-center justify-between">
-              <div class="text-xs font-bold text-yale-dark">Resolution rate · last 14 days</div>
-              <div class="flex gap-3.5 font-mono text-[10px] text-muted">
-                <span class="inline-flex items-center gap-1.5 before:inline-block before:size-2 before:rotate-[15deg] before:bg-cyan before:content-['']">Auto-resolved</span>
-                <span class="inline-flex items-center gap-1.5 before:inline-block before:size-2 before:rotate-[15deg] before:bg-yale before:content-['']">Escalated</span>
+          <div class="px-[22px] pt-5 pb-[18px] max-[640px]:px-3.5 max-[640px]:pt-3.5 max-[640px]:pb-3">
+            <div class="mb-3 flex flex-col gap-2 max-[640px]:mb-2 max-[640px]:gap-1.5 sm:flex-row sm:items-center sm:justify-between">
+              <div class="text-xs font-bold text-yale-dark max-[640px]:text-[11px]">
+                Resolution rate · last 14 days
+              </div>
+              <div class="flex flex-wrap gap-2.5 font-mono text-[10px] text-muted max-[640px]:gap-2 max-[640px]:text-[8px]">
+                <span
+                  class="inline-flex items-center gap-1.5 before:inline-block before:size-2 before:rotate-[15deg] before:bg-cyan before:content-[''] max-[640px]:gap-1 max-[640px]:before:size-1.5"
+                  >Auto-resolved</span
+                >
+                <span
+                  class="inline-flex items-center gap-1.5 before:inline-block before:size-2 before:rotate-[15deg] before:bg-yale before:content-[''] max-[640px]:gap-1 max-[640px]:before:size-1.5"
+                  >Escalated</span
+                >
               </div>
             </div>
-            <div class="h-[90px]">
-              <svg viewBox="0 0 320 90" preserveAspectRatio="none" class="size-full">
-                <g class="[&_line]:stroke-line-soft">
-                  <line x1="0" y1="22" x2="320" y2="22" />
-                  <line x1="0" y1="45" x2="320" y2="45" />
-                  <line x1="0" y1="68" x2="320" y2="68" />
-                </g>
-                <path d="M0,70 L23,68 L46,65 L69,66 L92,63 L115,60 L138,58 L161,56 L184,52 L207,50 L230,46 L253,42 L276,38 L299,34 L320,30 L320,90 L0,90 Z" fill="#153A5F" opacity="0.10" />
-                <path class="home-chart-line-yale" d="M0,70 L23,68 L46,65 L69,66 L92,63 L115,60 L138,58 L161,56 L184,52 L207,50 L230,46 L253,42 L276,38 L299,34 L320,30" fill="none" stroke="#153A5F" stroke-width="1.5" />
-                <path d="M0,55 L23,52 L46,46 L69,48 L92,40 L115,38 L138,30 L161,32 L184,24 L207,22 L230,18 L253,16 L276,12 L299,14 L320,8 L320,90 L0,90 Z" fill="#18B0E6" opacity="0.13" />
-                <path class="home-chart-line-cyan" d="M0,55 L23,52 L46,46 L69,48 L92,40 L115,38 L138,30 L161,32 L184,24 L207,22 L230,18 L253,16 L276,12 L299,14 L320,8" fill="none" stroke="#18B0E6" stroke-width="2" />
-                <circle class="home-chart-dot" cx="299" cy="14" r="3" fill="#18B0E6" />
-                <circle class="home-chart-dot home-chart-dot-delay" cx="320" cy="8" r="3" fill="#18B0E6" />
-              </svg>
+            <div class="h-[90px] max-[640px]:h-[72px]">
+              <HeroResolutionChart class="size-full" />
             </div>
           </div>
 
-          <div class="flex items-center justify-between border-t border-line-soft bg-seasalt px-[22px] py-3.5 font-mono text-[10.5px] text-muted">
-            <div class="home-badge-twist inline-flex items-center gap-2 font-semibold uppercase tracking-[0.06em] text-cyan-strong before:inline-block before:size-2 before:rotate-[15deg] before:bg-cyan before:content-['']">
+          <div
+            class="flex flex-col gap-1.5 border-t border-line-soft bg-seasalt px-[22px] py-3.5 font-mono text-[10.5px] text-muted max-[640px]:gap-1 max-[640px]:px-3.5 max-[640px]:py-2.5 max-[640px]:text-[8px] sm:flex-row sm:items-center sm:justify-between"
+          >
+            <div
+              class="home-badge-twist inline-flex items-center gap-2 font-semibold uppercase tracking-[0.06em] text-cyan-strong before:inline-block before:size-2 before:rotate-[15deg] before:bg-cyan before:content-[''] max-[640px]:gap-1.5 max-[640px]:before:size-1.5"
+            >
               Self-improving
             </div>
-            <div>3 evals running · 87 traces / hr</div>
+            <div class="truncate">3 evals running · 87 traces / hr</div>
           </div>
         </div>
       </div>

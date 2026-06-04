@@ -77,7 +77,7 @@ export const FOOTER_COLUMNS = [
       { label: 'How We Engage', href: '/us-sled/how-we-engage/' },
       { label: 'Operating Model', href: '/us-sled/operating-model/' },
       { label: 'Engagement Examples', href: '/us-sled/case-studies/' },
-      { label: 'Procurement Vehicles', href: '/us-sled/#vehicles' },
+      { label: 'Procurement Vehicles', href: '/us-sled/procurement-vehicles/' },
       { label: 'Capability Statement', href: '/us-sled/capability-statement/' },
       { label: 'SLED Contact', href: '/us-sled/contact/' },
     ],

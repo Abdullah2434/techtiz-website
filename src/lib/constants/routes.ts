@@ -7,7 +7,7 @@ export const ROUTES = {
   sledHowWeEngage: '/us-sled/how-we-engage/',
   sledOperatingModel: '/us-sled/operating-model/',
   sledContact: '/us-sled/contact/',
-  sledVehicles: '/us-sled/#vehicles',
+  sledVehicles: '/us-sled/procurement-vehicles/',
 } as const;
 
 export const SLED_SUBNAV = [
@@ -16,6 +16,6 @@ export const SLED_SUBNAV = [
   { label: 'Operating Model', href: '/us-sled/operating-model/' },
   { label: 'Capabilities', href: '/us-sled/capabilities/' },
   { label: 'Engagement Examples', href: '/us-sled/case-studies/' },
-  { label: 'Procurement Vehicles', href: '/us-sled/#vehicles' },
+  { label: 'Procurement Vehicles', href: '/us-sled/procurement-vehicles/' },
   { label: 'Contact', href: '/us-sled/contact/' },
 ] as const;

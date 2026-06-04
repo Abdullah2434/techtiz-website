@@ -1,0 +1,43 @@
+---
+import FileX from '@lucide/astro/icons/file-x';
+import Lock from '@lucide/astro/icons/lock';
+import MessageSquareOff from '@lucide/astro/icons/message-square-off';
+import Users from '@lucide/astro/icons/users';
+import { CONFIDENTIALITY_ROWS } from '../../../lib/constants/pages/case-studies';
+import Eyebrow from '../../shared/Eyebrow.astro';
+import SledPageWrap from '../shared/SledPageWrap.astro';
+
+const rowIcons = [Lock, FileX, MessageSquareOff, Users] as const;
+---
+
+<section class="sled-section-tight border-t border-line bg-seasalt" id="confidentiality">
+  <SledPageWrap>
+    <div class="grid grid-cols-1 gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:gap-14">
+      <div class="sled-reveal lg:sticky lg:top-[140px] lg:self-start" data-sled-reveal>
+        <Eyebrow text="What we cannot show publicly" showGlyph class="mb-4 text-amber" />
+        <h2 class="text-[clamp(1.75rem,3.5vw,2.25rem)] font-extrabold leading-[1.08] tracking-[-0.02em] text-yale-dark">
+          Most of our SLED work stays under NDA.
+        </h2>
+        <p class="mt-4 max-w-[400px] text-[15px] leading-[1.65] text-muted">
+          The engagements above are summarized at the technical-deliverable level. Specifics live on a separate call, behind a mutual NDA, with the prime in the room.
+        </p>
+      </div>
+
+      <div class="sled-reveal-stagger space-y-3" data-sled-reveal>
+        {CONFIDENTIALITY_ROWS.map((row, idx) => {
+          const Icon = rowIcons[idx];
+          return (
+            <div class="sled-card group flex gap-4 rounded-2xl p-5 sm:p-6">
+              <div class="grid size-10 shrink-0 place-items-center rounded-xl border border-amber/20 bg-amber/10 text-amber transition-transform duration-300 group-hover:scale-105">
+                <Icon class="size-[18px]" stroke-width="1.75" aria-hidden="true" />
+              </div>
+              <p class="m-0 text-[14px] leading-[1.6] text-ink">
+                <strong class="font-bold text-yale-dark">{row.heading}</strong> {row.body}
+              </p>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </SledPageWrap>
+</section>

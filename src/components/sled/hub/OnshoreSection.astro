@@ -1,0 +1,73 @@
+---
+import { ONSHORE } from '../../../lib/constants/pages/sled-hub';
+import Eyebrow from '../../shared/Eyebrow.astro';
+import SledIcon from '../shared/SledIcon.astro';
+import SledPageWrap from '../shared/SledPageWrap.astro';
+---
+
+<section class="sled-section bg-white" id="onshore" data-screen-label="03 Onshore PM-led">
+  <SledPageWrap>
+    <div class="sled-reveal" data-sled-reveal>
+      <Eyebrow text={ONSHORE.eyebrow} showGlyph class="mb-4" />
+
+      <div class="mb-12 grid grid-cols-1 gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-end">
+        <h2 class="text-[clamp(1.75rem,3.5vw,2.5rem)] font-extrabold tracking-[-0.022em] text-yale-dark">
+          {ONSHORE.heading}
+        </h2>
+        <p class="max-w-[480px] text-[15.5px] leading-[1.65] text-muted lg:justify-self-end">{ONSHORE.sub}</p>
+      </div>
+    </div>
+
+    <div
+      class="sled-reveal mb-8 grid grid-cols-1 gap-8 overflow-hidden rounded-2xl border border-line bg-gradient-to-br from-seasalt via-white to-cyan-soft/30 p-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:p-10"
+      data-sled-reveal
+    >
+      <div>
+        <div class="mb-3 font-mono text-[11px] tracking-[0.14em] uppercase text-cyan-strong">
+          {ONSHORE.clock.label}
+        </div>
+        <h3 class="text-[clamp(1.125rem,2vw,1.375rem)] font-extrabold leading-[1.2] text-yale-dark">{ONSHORE.clock.heading}</h3>
+      </div>
+      <div class="flex flex-col gap-3">
+        <div class="grid grid-cols-9 pb-1 font-mono text-[10px] text-muted sm:text-[10.5px]">
+          {['12a', '3a', '6a', '9a', '12p', '3p', '6p', '9p', '12a'].map((t) => (
+            <span class="text-center tracking-[0.06em]">{t}</span>
+          ))}
+        </div>
+        <div class="relative h-[76px] rounded-xl border border-line bg-white p-2 shadow-inner">
+          <div class="absolute left-[6%] top-[10px] flex h-7 w-[36%] items-center rounded-md bg-cyan px-3 font-mono text-[10.5px] font-semibold tracking-[0.06em] text-yale-dark shadow-[0_4px_12px_-6px_rgba(24,176,230,0.5)] sm:text-[11px]">
+            {ONSHORE.clock.pkBar}
+          </div>
+          <div class="absolute left-[38%] top-[38px] flex h-7 w-[38%] items-center rounded-md bg-yale-dark px-3 font-mono text-[10.5px] font-semibold tracking-[0.06em] text-white shadow-[0_4px_12px_-6px_rgba(14,38,64,0.45)] sm:text-[11px]">
+            {ONSHORE.clock.usBar}
+          </div>
+        </div>
+        <div class="mt-1 flex flex-wrap justify-between gap-2 font-mono text-[10px] tracking-[0.04em] text-muted sm:text-[10.5px]">
+          <span>{ONSHORE.clock.leftNote}</span>
+          <span class="rounded-full bg-cyan-soft px-2.5 py-0.5 font-semibold text-cyan-strong">{ONSHORE.clock.overlap}</span>
+          <span>{ONSHORE.clock.rightNote}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sled-reveal-stagger grid grid-cols-1 gap-5 lg:grid-cols-2" data-sled-reveal>
+      {ONSHORE.concerns.map((c) => (
+        <div class="sled-card group grid grid-cols-[48px_1fr] gap-5 p-6 lg:p-7">
+          <div class="grid size-12 place-items-center rounded-xl bg-yale-dark text-cyan shadow-[0_8px_20px_-10px_rgba(14,38,64,0.5)] transition-transform duration-300 group-hover:scale-105">
+            <SledIcon name={c.icon} class="size-[22px]" />
+          </div>
+          <div>
+            <div class="mb-1.5 font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted">{c.num}</div>
+            <h4 class="mb-3.5 text-[17px] font-extrabold leading-[1.25] text-yale-dark">{c.heading}</h4>
+            <div class="mb-3 rounded-r-lg border-l-[3px] border-line bg-seasalt/80 py-2 pl-3.5 text-[13px] leading-[1.55] text-muted italic">
+              <strong class="not-italic font-bold text-yale-dark">Pain:</strong> {c.pain}
+            </div>
+            <div class="rounded-r-lg border-l-[3px] border-cyan bg-cyan-soft/40 py-2 pl-3.5 text-[13px] leading-[1.55] text-ink">
+              <strong class="font-bold text-yale-dark">Our fix:</strong> {c.fix}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </SledPageWrap>
+</section>

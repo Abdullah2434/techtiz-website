@@ -1,0 +1,26 @@
+---
+import Eyebrow from '../../shared/Eyebrow.astro';
+import SledButton from '../shared/SledButton.astro';
+import SledPageWrap from '../shared/SledPageWrap.astro';
+---
+
+<section class="sled-final-cta relative overflow-hidden bg-yale-dark py-[clamp(4.5rem,8vw,5.5rem)]">
+  <div
+    class="sled-hero-glow-b pointer-events-none absolute right-[-10%] top-[-30%] size-[min(55vw,480px)] rounded-full bg-[radial-gradient(circle,rgba(24,176,230,0.14)_0%,transparent_70%)] blur-[90px] motion-reduce:hidden"
+    aria-hidden="true"
+  />
+  <SledPageWrap class="relative z-2">
+    <div class="sled-reveal mx-auto max-w-[920px] text-center" data-sled-reveal>
+      <Eyebrow text="Engage us" onDark showGlyph class="mb-4 justify-center" />
+      <h2 class="text-[clamp(1.875rem,4vw,2.5rem)] font-extrabold leading-[1.1] tracking-[-0.02em] text-white">
+        Need the full operating-model pack before your next subcontract review?
+      </h2>
+      <p class="mx-auto mt-4 max-w-[760px] text-[15.5px] leading-[1.65] text-white/72">
+        The architecture diagram, control mapping, per-state posture page, and personnel attestation template, sent under NDA within one business day.
+      </p>
+      <div class="mt-8 flex justify-center">
+        <SledButton href="/us-sled/contact/" label="Request the operating-model pack" variant="cta" />
+      </div>
+    </div>
+  </SledPageWrap>
+</section>

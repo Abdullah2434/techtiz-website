@@ -1,0 +1,42 @@
+---
+import OutlinedButton from '../shared/OutlinedButton.astro';
+import PageWrap from '../home/PageWrap.astro';
+import { CASE_STUDIES_CONTACT_HREF, CASE_STUDIES_LISTING_HERO } from '../../lib/config/case-studies';
+
+const { title, subtitle, ctaLabel } = CASE_STUDIES_LISTING_HERO;
+---
+
+<section class="py-10 md:py-16">
+  <PageWrap>
+    <div
+      class="flex flex-col gap-y-10 md:flex-row md:items-start md:justify-between md:gap-x-[clamp(2rem,6vw,80px)] md:gap-y-0"
+    >
+      <div class="min-w-[260px] max-w-[420px] flex-1">
+        <div data-aos="fade-up" data-aos-delay="100">
+          <h2 class="mb-2 text-[30px] font-bold leading-[1.2] text-cyan md:text-[56px]">{title}</h2>
+        </div>
+        <div data-aos="fade-up" data-aos-delay="100">
+          <h1 class="mb-6 text-xl font-semibold leading-[1.1] text-[#101010] md:text-2xl">{subtitle}</h1>
+        </div>
+        <div data-aos="fade-up" data-aos-delay="100">
+          <OutlinedButton href={CASE_STUDIES_CONTACT_HREF} label={ctaLabel} />
+        </div>
+      </div>
+      <div class="mb-3 mr-0 max-w-[800px] flex-1">
+        <div data-aos="fade-up" data-aos-delay="100">
+          <h3 class="mb-2 text-[28px] leading-[1.2] font-semibold md:text-[38px]">
+            <span class="font-bold text-cyan">Real-world success stories</span> showcasing the impact of
+            solutions we offered
+          </h3>
+        </div>
+        <div data-aos="fade-up" data-aos-delay="100">
+          <p class="mt-5 max-w-[700px] text-base font-normal text-[#101010] md:text-lg">
+            Our work speaks for itself through transformative platforms, intelligent automation, and
+            modern user experiences tailored to specific industries. Explore how we've helped startups
+            scale, enterprises modernize, and innovators bring their ideas to life.
+          </p>
+        </div>
+      </div>
+    </div>
+  </PageWrap>
+</section>

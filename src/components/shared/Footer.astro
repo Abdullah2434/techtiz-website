@@ -1,6 +1,7 @@
 ---
 import '../../styles/chrome.css';
 import { SITE, LEGAL_LINKS } from '../../lib/constants/site';
+import { ROUTES } from '../../lib/constants/routes';
 
 const wrap =
   'mx-auto w-full max-w-[1400px] px-2 max-[600px]:px-[18px]';
@@ -94,6 +95,7 @@ const wrap =
           <li><a href="/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">About</a></li>
           <li><a href="/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Team</a></li>
           <li><a href="/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Careers</a></li>
+          <li><a href={ROUTES.caseStudies} class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Case Studies</a></li>
           <li><a href="/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Press</a></li>
           <li><a href="/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Contact</a></li>
         </ul>

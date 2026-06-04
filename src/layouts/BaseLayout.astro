@@ -1,4 +1,5 @@
 ---
+import 'aos/dist/aos.css';
 import '../styles/globals.css';
 
 interface Props {
@@ -61,3 +62,25 @@ const resolvedOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogIm
   <slot />
 </body>
 </html>
+
+<script>
+  import AOS from 'aos';
+
+  (globalThis as typeof globalThis & { AOS: typeof AOS }).AOS = AOS;
+
+  const initAos = () => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+      mirror: false,
+      offset: 100,
+      disable: false,
+      debounceDelay: 50,
+      throttleDelay: 99,
+    });
+    window.setTimeout(() => AOS.refresh(), 100);
+  };
+
+  initAos();
+  document.addEventListener('astro:page-load', initAos);
+</script>

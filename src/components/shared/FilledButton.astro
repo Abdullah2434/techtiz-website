@@ -1,0 +1,52 @@
+---
+/** Legacy `Button` variant="filled" with optional down arrow (case study PDF submit). */
+interface Props {
+  label: string;
+  type?: "button" | "submit";
+  class?: string;
+  downArrow?: boolean;
+}
+
+const {
+  label,
+  type = "button",
+  class: className = "",
+  downArrow = false,
+} = Astro.props;
+---
+
+<button
+  type={type}
+  class:list={[
+    "group relative inline-flex min-h-[42px] min-w-[116px] transform-gpu cursor-pointer items-center justify-center overflow-hidden rounded-[2px] border border-cyan bg-cyan px-6 py-[11px] text-base font-normal text-white transition-all duration-300 ease-in-out before:absolute before:inset-0 before:translate-x-[-100%] before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:transition-transform before:duration-700 before:ease-in-out hover:-translate-y-0.5 hover:scale-[1.02] hover:border-cyan hover:bg-transparent hover:text-cyan hover:shadow-[0_0_20px_rgba(24,176,230,0.4)] hover:shadow-lg hover:before:translate-x-[100%]",
+    className,
+  ]}
+>
+  <span
+    class="relative z-10 flex cursor-pointer items-center transition-all duration-300 group-hover:drop-shadow-sm"
+  >
+    <span data-submit-label>{label}</span>
+    {
+      downArrow && (
+        <span class="ml-4 flex items-center">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            class="stroke-[#101010] transition-all duration-300 ease-in-out group-hover:translate-y-1 group-hover:scale-110 group-hover:stroke-cyan"
+            aria-hidden="true"
+          >
+            <path
+              d="M12 5v14M5 12l7 7 7-7"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </span>
+      )
+    }
+  </span>
+</button>

@@ -1,20 +1,32 @@
 ---
 import type { IndustryChallengesData } from '../../lib/types/industry';
+import { getDefaultComparisonIcon } from '../../lib/constants/industry-comparison-icons';
 
 interface Props extends IndustryChallengesData {}
 
 const { items } = Astro.props;
+const challengeIcon = getDefaultComparisonIcon('challenge');
 ---
 
 <section class="mx-auto w-full max-w-[1400px] bg-white px-2 py-10 md:py-16">
   <div class="overflow-hidden overflow-x-auto rounded-lg border border-[#9E9E9E] bg-white">
     <table class="w-full min-w-[600px] border-collapse">
+      <colgroup>
+        <col class="w-[40%]" />
+        <col class="w-[60%]" />
+      </colgroup>
       <thead>
         <tr class="border-b border-[#9E9E9E]">
-          <th class="w-[40%] border-r border-[#9E9E9E] bg-[#153A5F] px-2 py-[26px] text-left text-white lg:px-6">
-            <span class="text-[18px] leading-[120%] font-normal lg:text-[26px]">Challenges</span>
+          <th class="border-r border-[#9E9E9E] bg-[#153A5F] px-2 py-[26px] text-left text-white lg:px-6">
+            <div class="flex items-center">
+              <div
+                class="mr-2 flex h-[24px] w-[24px] shrink-0 text-white md:mr-4 md:h-[32px] md:w-[32px] lg:h-[48px] lg:w-[48px] [&>svg]:h-full [&>svg]:w-full"
+                set:html={challengeIcon}
+              />
+              <span class="text-[18px] leading-[120%] font-normal lg:text-[26px]">Challenges</span>
+            </div>
           </th>
-          <th class="bg-[#F6F6F6] px-2 py-[26px] text-left text-[#153A5F] lg:px-6">
+          <th class="border-l border-[#9E9E9E] bg-[#F6F6F6] px-2 py-[26px] text-left text-[#153A5F] lg:px-6">
             <span class="text-[20px] leading-[120%] font-bold md:text-[24px] lg:text-[28px]">Solution</span>
           </th>
         </tr>

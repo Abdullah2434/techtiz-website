@@ -1,0 +1,36 @@
+---
+import '../../styles/industries.css';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/shared/Header.astro';
+import Footer from '../../components/shared/Footer.astro';
+import IndustrySections from '../../components/industries/IndustrySections.astro';
+import {
+  getAllIndustrySlugs,
+  getIndustryBySlug,
+} from '../../lib/constants/industries-portfolio';
+import { industryDetailSeo } from '../../lib/config/industries';
+import { ROUTES } from '../../lib/constants/routes';
+
+export function getStaticPaths() {
+  return getAllIndustrySlugs().map((slug) => ({
+    params: { slug },
+  }));
+}
+
+const slug = Astro.params.slug ?? '';
+const industry = getIndustryBySlug(slug)!;
+const { title, description, canonicalPath } = industryDetailSeo(industry);
+---
+
+<BaseLayout {title} {description} {canonicalPath}>
+  <Header currentPage={ROUTES.industries} />
+  <main class="bg-white">
+    <IndustrySections sections={industry.sections} />
+  </main>
+  <Footer />
+  <script src="/scripts/nav.js" is:inline></script>
+  <script src="/scripts/mobile-nav.js" is:inline></script>
+  <script src="/scripts/industry-hero.js" is:inline></script>
+  <script src="/scripts/industry-tabs.js" is:inline></script>
+  <script src="/scripts/industry-scroll.js" is:inline></script>
+</BaseLayout>

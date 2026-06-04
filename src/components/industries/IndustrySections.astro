@@ -1,0 +1,36 @@
+---
+import type { IndustrySection } from '../../lib/types/industry';
+import IndustryHero from './IndustryHero.astro';
+import IndustrySolutionsGrid from './IndustrySolutionsGrid.astro';
+import IndustryComparisonTable from './IndustryComparisonTable.astro';
+import IndustryFeaturePair from './IndustryFeaturePair.astro';
+import IndustryScrollList from './IndustryScrollList.astro';
+import IndustryChallenges from './IndustryChallenges.astro';
+import IndustryWhoWeServe from './IndustryWhoWeServe.astro';
+import IndustryTabs from './IndustryTabs.astro';
+import IndustryCta from './IndustryCta.astro';
+import SuccessStoriesSection from '../home/SuccessStoriesSection.astro';
+
+interface Props {
+  sections: IndustrySection[];
+}
+
+const { sections } = Astro.props;
+---
+
+{
+  sections.map((section) => (
+    <>
+      {section.type === 'hero' && <IndustryHero {...section.data} />}
+      {section.type === 'solutions' && <IndustrySolutionsGrid {...section.data} />}
+      {section.type === 'comparison' && <IndustryComparisonTable {...section.data} />}
+      {section.type === 'features' && <IndustryFeaturePair {...section.data} />}
+      {section.type === 'scrollList' && <IndustryScrollList {...section.data} />}
+      {section.type === 'challenges' && <IndustryChallenges {...section.data} />}
+      {section.type === 'whoWeServe' && <IndustryWhoWeServe {...section.data} />}
+      {section.type === 'tabs' && <IndustryTabs {...section.data} />}
+      {section.type === 'successStories' && <SuccessStoriesSection />}
+      {section.type === 'cta' && <IndustryCta {...section.data} />}
+    </>
+  ))
+}

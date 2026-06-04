@@ -1,0 +1,28 @@
+---
+import type { IndustryCtaData } from '../../lib/types/industry';
+import CtaButton from '../shared/CtaButton.astro';
+import { ROUTES } from '../../lib/constants/routes';
+
+interface Props extends IndustryCtaData {}
+
+const { title1, title2, description, buttonText, buttonUrl } = Astro.props;
+const href = buttonUrl || ROUTES.sledContact;
+---
+
+<section class="mx-auto w-full max-w-[1400px] bg-white px-2 py-10 md:py-16">
+  <div class="flex flex-col items-center justify-between gap-8 md:flex-row md:items-start md:gap-0">
+    <div class="mb-6 w-full flex-1 text-left md:mb-0">
+      <h2 class="text-[32px] leading-tight font-normal tracking-[-0.02em] text-[#1E1E1E] lg:text-[48px]">
+        {title1}
+        <br class="hidden lg:block" />
+        <span class="font-semibold">{title2}</span>
+      </h2>
+    </div>
+    <div class="flex w-full flex-1 flex-col items-center md:items-end md:text-right">
+      <p class="mb-6 max-w-[533px] text-[15px] leading-[130%] font-normal text-[#101010] lg:text-[18px]">
+        {description}
+      </p>
+      <CtaButton label={buttonText} href={href} variant="ghost-light" showArrow={true} class="min-w-[260px]" />
+    </div>
+  </div>
+</section>

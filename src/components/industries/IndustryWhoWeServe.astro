@@ -1,0 +1,133 @@
+---
+import type { IndustryWhoWeServeData } from '../../lib/types/industry';
+import CtaButton from '../shared/CtaButton.astro';
+import IndustryStatBox from './IndustryStatBox.astro';
+import { ROUTES } from '../../lib/constants/routes';
+
+interface Props extends IndustryWhoWeServeData {}
+
+const {
+  variant,
+  title,
+  description,
+  stats = [],
+  educationBoxes = [],
+  buttonText = 'Book a Free Consultation',
+  buttonUrl = ROUTES.sledContact,
+} = Astro.props;
+
+const isRealEstate = variant === 'real-estate' || variant === 'logistics';
+const isEducation = variant === 'education';
+const statVariant = variant === 'logistics' ? 'logistics' : isRealEstate ? 'real-estate' : 'digital-marketing';
+
+const headingClass =
+  'mb-4 text-[28px] leading-tight font-semibold md:mb-6 md:text-[36px] lg:text-[48px]';
+---
+
+{
+  isRealEstate ? (
+    <section class="mx-auto w-full max-w-[1400px] bg-white px-2 py-10 md:py-16">
+      <div class="relative overflow-hidden rounded-lg border border-white bg-[#153A60]">
+        <div class="pointer-events-none absolute inset-0 z-0">
+          <img
+            src="/svgs/transparent-bg.svg"
+            alt=""
+            class="h-full w-full object-cover object-top-right opacity-70"
+            aria-hidden="true"
+          />
+        </div>
+
+        <div class="relative z-10 px-6 py-8 md:px-8 md:py-10 lg:px-12 lg:py-12">
+          <h2 class:list={[headingClass, 'text-white']}>{title}</h2>
+          <p class="mb-6 max-w-[600px] text-[16px] leading-[130%] font-normal text-white md:text-[18px]">
+            {description}
+          </p>
+          <CtaButton label={buttonText} href={buttonUrl} variant="primary" showArrow={true} />
+        </div>
+
+        <div class="relative z-10 bg-transparent p-3 md:p-4 lg:p-5">
+          <div class="flex flex-col md:flex-row">
+            {
+              stats.map((stat, index) => (
+                <IndustryStatBox
+                  stat={stat}
+                  isFirst={index === 0}
+                  isLast={index === stats.length - 1}
+                  variant={statVariant}
+                />
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </section>
+  ) : isEducation ? (
+    <section class="bg-white px-2 py-10 md:py-16">
+      <div class="mx-auto flex max-w-[1400px] flex-col items-start gap-8 lg:flex-row lg:gap-12">
+        <div class="w-full lg:w-[45%]">
+          <h2 class:list={[headingClass, 'text-[#101010]']}>{title}</h2>
+          <p class="text-[16px] leading-[130%] font-normal text-[#101010] md:text-[18px]">
+            {description}
+          </p>
+        </div>
+        <div class="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:w-[55%]">
+          {
+            educationBoxes.map((box) => (
+              <div class="relative flex min-h-[140px] items-start overflow-hidden rounded-lg border border-white bg-[#153A60] p-6">
+                <div class="pointer-events-none absolute inset-0 z-0">
+                  <img
+                    src="/svgs/transparent-bg.svg"
+                    alt=""
+                    class="h-full w-full object-cover object-top-right opacity-70"
+                    aria-hidden="true"
+                  />
+                </div>
+                <h3 class="relative z-10 text-[16px] leading-[130%] font-normal text-white md:text-[18px] lg:text-[20px]">
+                  {box.title}
+                </h3>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+  ) : (
+    <section class="bg-white px-2 py-10 md:py-16">
+      <div class="mx-auto max-w-[1400px]">
+        <div class="overflow-hidden rounded-lg border border-white bg-[#153A60]">
+          <div class="flex flex-col lg:flex-row">
+            <div class="w-full px-6 py-8 md:px-8 md:py-10 lg:w-[45%] lg:px-12 lg:py-12">
+              <h2 class:list={[headingClass, 'text-white']}>{title}</h2>
+              <p class="max-w-[600px] text-[16px] leading-[130%] font-normal text-white md:text-[18px]">
+                {description}
+              </p>
+            </div>
+
+            <div class="relative flex w-full items-center overflow-hidden lg:w-[55%]">
+              <div class="pointer-events-none absolute inset-0 z-0">
+                <img
+                  src="/svgs/transparent-bg.svg"
+                  alt=""
+                  class="h-full w-auto min-w-full object-cover object-top-right opacity-70"
+                  aria-hidden="true"
+                />
+              </div>
+              <div class="relative z-10 flex w-full flex-row p-4 md:p-5 lg:p-6">
+                {
+                  stats.map((stat, index) => (
+                    <IndustryStatBox
+                      stat={stat}
+                      isFirst={index === 0}
+                      isLast={index === stats.length - 1}
+                      variant="digital-marketing"
+                    />
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}

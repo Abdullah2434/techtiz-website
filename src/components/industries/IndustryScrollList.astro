@@ -1,0 +1,122 @@
+---
+import type { IndustryScrollListData } from '../../lib/types/industry';
+
+interface Props extends IndustryScrollListData {}
+
+const { heading, highlightText, highlightColor = '#18B6F6', items } = Astro.props;
+
+function renderHeadingLine(line: string) {
+  if (!highlightText || !line.includes(highlightText)) return line;
+  const idx = line.indexOf(highlightText);
+  return {
+    before: line.slice(0, idx),
+    highlight: highlightText,
+    after: line.slice(idx + highlightText.length),
+  };
+}
+
+const lines = heading.split('\n');
+const scrollHeightVh = Math.max(items.length * 80, 400);
+const uid = `ind-scroll-${Math.random().toString(36).slice(2, 9)}`;
+---
+
+<section
+  class="ind-scroll-list relative w-full"
+  data-industry-scroll={uid}
+  data-highlight-color={highlightColor}
+  style={`height: ${scrollHeightVh}vh`}
+>
+  <div
+    class="ind-scroll-sticky sticky top-10 mx-auto flex min-h-[600px] w-full max-w-[1400px] flex-col items-start gap-8 overflow-x-hidden px-2 py-10 md:flex-row md:gap-16 md:py-16"
+  >
+    <div
+      class="ind-scroll-heading mb-8 flex w-full items-start justify-start md:mb-0 md:w-1/2"
+      data-scroll-heading
+    >
+      <h2 class="mb-4 text-[30px] leading-tight font-normal md:text-[48px]">
+        {
+          lines.map((line, lineIdx) => {
+            const parts = renderHeadingLine(line);
+            if (typeof parts === 'string') {
+              return (
+                <>
+                  {parts}
+                  {lineIdx < lines.length - 1 && <br />}
+                </>
+              );
+            }
+            return (
+              <>
+                {parts.before}
+                <span class="font-bold" style={`color: ${highlightColor}`}>
+                  {parts.highlight}
+                </span>
+                {parts.after}
+                {lineIdx < lines.length - 1 && <br />}
+              </>
+            );
+          })
+        }
+      </h2>
+    </div>
+
+    <div class="relative w-full md:w-1/2">
+      <div class="relative min-h-[500px] w-full">
+        <div
+          class="absolute top-0 bottom-0 left-8 w-1 overflow-hidden rounded-full bg-gray-100"
+          aria-hidden="true"
+        >
+          <div
+            class="ind-scroll-progress absolute top-0 left-0 w-full origin-top rounded-full"
+            data-scroll-progress
+            style="height: 0%"
+          ></div>
+        </div>
+
+        <div class="relative pl-20">
+          {
+            items.map((item, index) => {
+              const stepNum = String(index + 1).padStart(2, '0');
+              const isLast = index === items.length - 1;
+              return (
+                <div
+                  class="ind-scroll-step group relative mb-16 last:mb-0"
+                  data-scroll-step={index}
+                  data-step-total={items.length}
+                >
+                  <div
+                    class="ind-scroll-badge absolute top-0 z-10 flex size-16 items-center justify-center rounded-full border-2 border-white text-[20px] font-bold text-white shadow-xl group-hover:scale-110 group-hover:shadow-2xl group-hover:transition-transform group-hover:duration-300"
+                    style={`left: -78px; background-color: ${highlightColor}`}
+                  >
+                    <span class="ind-scroll-badge-num relative z-10">{stepNum}</span>
+                    <span
+                      class="ind-scroll-badge-glow absolute inset-0 rounded-full opacity-0 blur-md"
+                      style={`background-color: ${highlightColor}`}
+                      aria-hidden="true"
+                    ></span>
+                  </div>
+                  {!isLast && (
+                    <div
+                      class="ind-scroll-connector absolute top-16 h-16 w-1 rounded-full bg-gray-200 opacity-0"
+                      style="left: -48px"
+                      data-step-connector
+                      aria-hidden="true"
+                    ></div>
+                  )}
+                  <div class="pl-2">
+                    <h3 class="ind-scroll-step-title mb-3 text-[24px] font-semibold text-[#222] transition-colors duration-300 group-hover:text-[#18B0E6] md:text-[28px]">
+                      {item.title}
+                    </h3>
+                    <p class="ind-scroll-step-desc text-lg leading-relaxed font-normal text-[#101010]">
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+              );
+            })
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

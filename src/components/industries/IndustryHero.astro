@@ -1,0 +1,61 @@
+---
+import type { IndustryHeroData } from '../../lib/types/industry';
+
+interface Props extends IndustryHeroData {}
+
+const { videoSrc, title, heading, bottomHeading, description, titleMaxWidth = '600px' } =
+  Astro.props;
+const headingLines = heading.split('\n');
+const bottomLines = bottomHeading ? bottomHeading.split('\n') : [];
+---
+
+<section class="ind-hero mx-auto w-full max-w-[1400px] overflow-hidden bg-white px-2 py-10 md:py-16">
+  <div
+    class="ind-hero-video relative aspect-[2.3/1] min-h-[300px] w-full rounded-2xl md:min-h-[480px]"
+    data-video-container
+    data-video-src={videoSrc}
+  >
+    <video
+      class="ind-hero-vid absolute inset-0 z-0 h-full w-full rounded-2xl object-cover opacity-0 transition-opacity duration-500"
+      muted
+      loop
+      playsinline
+      preload="none"
+      data-industry-hero-video
+    ></video>
+    <div class="absolute inset-0 z-10 rounded-2xl bg-[#001840]/20" aria-hidden="true"></div>
+    <div
+      class="absolute bottom-0 left-0 z-20 flex w-full flex-col items-start pb-8 pl-4 md:pl-12"
+      style={`max-width: ${titleMaxWidth}`}
+    >
+      {title && (
+        <div class="mb-2 text-[16px] font-normal text-white md:mb-4 md:text-[20px]">{title}</div>
+      )}
+      <h1 class="max-w-[446px] text-left text-[28px] leading-tight font-medium text-white md:text-[56px]">
+        {headingLines.map((line, i) => (
+          <>
+            {line}
+            {i < headingLines.length - 1 && <br />}
+          </>
+        ))}
+      </h1>
+    </div>
+  </div>
+  <div class="mt-12 flex max-w-[1400px] flex-col gap-8 md:flex-row md:gap-20">
+    <div class="flex max-w-[642px] flex-1 items-center">
+      {bottomHeading && (
+        <h2 class="text-left text-[28px] leading-snug font-medium text-[#222] md:text-[34px] lg:text-[46px]">
+          {bottomLines.map((line, i) => (
+            <>
+              {line}
+              {i < bottomLines.length - 1 && <br />}
+            </>
+          ))}
+        </h2>
+      )}
+    </div>
+    <div class="flex max-w-[623px] flex-1 items-center text-[18px] font-normal text-[#222]">
+      {description}
+    </div>
+  </div>
+</section>

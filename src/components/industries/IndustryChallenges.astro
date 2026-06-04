@@ -1,0 +1,40 @@
+---
+import type { IndustryChallengesData } from '../../lib/types/industry';
+
+interface Props extends IndustryChallengesData {}
+
+const { items } = Astro.props;
+---
+
+<section class="mx-auto w-full max-w-[1400px] bg-white px-2 py-10 md:py-16">
+  <div class="overflow-hidden overflow-x-auto rounded-lg border border-[#9E9E9E] bg-white">
+    <table class="w-full min-w-[600px] border-collapse">
+      <thead>
+        <tr class="border-b border-[#9E9E9E]">
+          <th class="w-[40%] border-r border-[#9E9E9E] bg-[#153A5F] px-2 py-[26px] text-left text-white lg:px-6">
+            <span class="text-[18px] leading-[120%] font-normal lg:text-[26px]">Challenges</span>
+          </th>
+          <th class="bg-[#F6F6F6] px-2 py-[26px] text-left text-[#153A5F] lg:px-6">
+            <span class="text-[20px] leading-[120%] font-bold md:text-[24px] lg:text-[28px]">Solution</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          items.map((item) => (
+            <tr class="border-b border-[#9E9E9E] last:border-b-0">
+              <td class="border-r border-[#9E9E9E] bg-[#153A5F] px-2 py-3 text-white md:py-6 lg:px-6">
+                <span class="text-[16px] leading-[120%] font-normal md:text-[19px] lg:text-[22px]">
+                  {item.challenge}
+                </span>
+              </td>
+              <td class="border-l border-[#9E9E9E] bg-[#F6F6F6] px-2 py-3 text-[#101010] md:py-6 lg:px-6">
+                <span class="text-[16px] leading-[120%] font-medium">{item.solution}</span>
+              </td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+</section>

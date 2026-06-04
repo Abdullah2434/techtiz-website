@@ -2,6 +2,8 @@
 import "../../styles/chrome.css";
 import { SITE, SITE_COPYRIGHT, LEGAL_LINKS } from "../../lib/constants/site";
 import { ROUTES } from "../../lib/constants/routes";
+import { SERVICE_CATEGORIES_NAV } from "../../lib/constants/nav/services";
+import { INDUSTRY_CATEGORIES_NAV } from "../../lib/constants/nav/industries";
 import ServerStackLoader from "./ServerStackLoader.astro";
 
 const wrap =
@@ -109,42 +111,18 @@ const wrap =
           Solutions
         </h5>
         <ul class="m-0 flex list-none flex-col gap-2.5 p-0">
-          <li>
-            <a
-              href="/case-studies/"
-              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
-              >Case Studies</a>
-          </li>
-          <li>
-            <a
-              href="/"
-              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
-              >Development</a>
-          </li>
-          <li>
-            <a
-              href="/"
-              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
-              >AI &amp; Intelligence</a>
-          </li>
-          <li>
-            <a
-              href="/"
-              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
-              >Automation &amp; AI</a>
-          </li>
-          <li>
-            <a
-              href="/"
-              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
-              >Digital Transformation</a>
-          </li>
-          <li>
-            <a
-              href="/"
-              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
-              >UX Design</a>
-          </li>
+          {
+            SERVICE_CATEGORIES_NAV.map((cat) => (
+              <li>
+                <a
+                  href={cat.landingHref}
+                  class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
+                >
+                  {cat.title}
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </div>
 
@@ -155,42 +133,18 @@ const wrap =
           Industries
         </h5>
         <ul class="m-0 flex list-none flex-col gap-2.5 p-0">
-          <li>
-            <a
-              href="/"
-              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
-              >Healthcare</a>
-          </li>
-          <li>
-            <a
-              href="/"
-              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
-              >Digital Marketing</a>
-          </li>
-          <li>
-            <a
-              href="/"
-              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
-              >E-commerce</a>
-          </li>
-          <li>
-            <a
-              href="/"
-              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
-              >Real Estate</a>
-          </li>
-          <li>
-            <a
-              href="/"
-              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
-              >Logistics</a>
-          </li>
-          <li>
-            <a
-              href="/"
-              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
-              >Education</a>
-          </li>
+          {
+            INDUSTRY_CATEGORIES_NAV.map((cat) => (
+              <li>
+                <a
+                  href={cat.landingHref}
+                  class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
+                >
+                  {cat.title}
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </div>
 

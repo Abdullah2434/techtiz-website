@@ -1,0 +1,93 @@
+---
+import type { IndustryStat } from '../../lib/types/industry';
+
+interface Props {
+  stat: IndustryStat;
+  isFirst: boolean;
+  isLast: boolean;
+  variant: 'digital-marketing' | 'real-estate' | 'logistics';
+}
+
+const { stat, isFirst, isLast, variant } = Astro.props;
+const isStatsVariant = variant === 'real-estate' || variant === 'logistics';
+
+const borderClasses = isStatsVariant
+  ? [
+      'border border-white',
+      isFirst && 'rounded-tl rounded-tr md:rounded-tr-none md:rounded-bl',
+      !isFirst && 'md:-ml-px max-md:-mt-px md:mt-0',
+      isLast && 'rounded-bl rounded-br md:rounded-bl-none md:rounded-tr',
+      !isFirst && !isLast && 'md:-ml-px max-md:-mt-px md:mt-0',
+    ]
+  : [
+      'border-t border-b border-r border-white',
+      isFirst && 'rounded-l border-l',
+      isLast && 'rounded-r',
+    ];
+
+const valueClass =
+  'text-[32px] font-bold text-[#18B0E6] md:text-[40px] lg:text-[48px]';
+const labelClass = 'text-[16px] font-normal text-white md:text-[18px]';
+const unitClass = 'text-[20px] font-normal text-white md:text-[24px] lg:text-[28px]';
+---
+
+<div
+  class:list={[
+    'flex flex-1 flex-col items-center justify-center px-6 py-4 text-center md:px-8 md:py-5 lg:px-10 lg:py-6',
+    borderClasses,
+    isStatsVariant ? 'bg-transparent' : '',
+  ]}
+>
+  <div class="flex flex-col items-center">
+    {
+      isStatsVariant ? (
+        <>
+          {stat.topLabel ? (
+            <div class="mb-2 flex items-baseline justify-center gap-2">
+              <p class={labelClass}>{stat.topLabel}</p>
+              <span class={valueClass}>{stat.value}</span>
+            </div>
+          ) : stat.middleLabel ? (
+            <div class="mb-2 flex items-baseline justify-center gap-2">
+              <span class={valueClass}>{stat.value}</span>
+              <p class={labelClass}>{stat.middleLabel}</p>
+            </div>
+          ) : (
+            <div class="mb-2 flex items-center justify-center gap-2">
+              {stat.arrowDirection && (
+                <svg
+                  width="48"
+                  height="48"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="text-[#18B0E6]"
+                  aria-hidden="true"
+                >
+                  {stat.arrowDirection === 'up' ? (
+                    <path d="M12 4L8 8H11V16H13V8H16L12 4Z" fill="currentColor" />
+                  ) : (
+                    <path d="M12 20L16 16H13V8H11V16H8L12 20Z" fill="currentColor" />
+                  )}
+                </svg>
+              )}
+              <span class={valueClass}>{stat.value}</span>
+            </div>
+          )}
+          {stat.unit && (
+            <p class:list={[unitClass, stat.label?.trim() && 'mb-0']}>{stat.unit}</p>
+          )}
+          {stat.label?.trim() && <p class={labelClass}>{stat.label}</p>}
+        </>
+      ) : (
+        <>
+          <div class="mb-2 flex items-baseline justify-center gap-2">
+            <span class={valueClass}>{stat.value}</span>
+            {stat.unit && <span class={unitClass}>{stat.unit}</span>}
+          </div>
+          {stat.label && <p class={labelClass}>{stat.label}</p>}
+        </>
+      )
+    }
+  </div>
+</div>

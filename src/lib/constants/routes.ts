@@ -1,5 +1,7 @@
 export const ROUTES = {
   home: '/',
+  services: '/services/',
+  industries: '/industries/',
   caseStudies: '/case-studies/',
   sledHub: '/us-sled/',
   sledCapabilities: '/us-sled/capabilities/',
@@ -10,6 +12,18 @@ export const ROUTES = {
   sledContact: '/us-sled/contact/',
   sledVehicles: '/us-sled/procurement-vehicles/',
 } as const;
+
+/** `/services/{slug}/` with trailing slash (matches `trailingSlash: 'always'`). */
+export function serviceSlug(slug: string): string {
+  const normalized = slug.replace(/^\/+|\/+$/g, '');
+  return `${ROUTES.services}${normalized}/`;
+}
+
+/** `/industries/{slug}/` with trailing slash (matches `trailingSlash: 'always'`). */
+export function industrySlug(slug: string): string {
+  const normalized = slug.replace(/^\/+|\/+$/g, '');
+  return `${ROUTES.industries}${normalized}/`;
+}
 
 export const SLED_SUBNAV = [
   { label: 'Hub', href: '/us-sled/', spyId: 'top' },

@@ -1,0 +1,27 @@
+# Techtiz
+
+> AI-native engineering studio and U.S. SLED technical subcontractor for prime contractors.
+
+Techtiz builds adaptive software systems for product teams and delivers back-office engineering as a named subcontractor to U.S. state, local, and education (SLED) prime contractors. Engagements are NDA-first and subcontract-only—we never face the agency directly.
+
+## Primary pages
+
+- [Home](https://techtiz.co/): AI-native engineering studio overview
+- [Case studies](https://techtiz.co/case-studies/): Commercial software delivery portfolio
+- [U.S. SLED hub](https://techtiz.co/us-sled/): Prime contractor teaming and subcontract positioning
+- [Capabilities](https://techtiz.co/us-sled/capabilities/): SLED technical backbone and compliance frameworks
+- [How we engage](https://techtiz.co/us-sled/how-we-engage/): NDA-first teaming sequence
+- [Operating model](https://techtiz.co/us-sled/operating-model/): Onshore-controlled, offshore-engineered delivery
+- [Engagement examples](https://techtiz.co/us-sled/case-studies/): NDA-safe SLED past performance summaries
+- [Procurement vehicles](https://techtiz.co/us-sled/procurement-vehicles/): Subcontract paths via prime vehicles
+- [Contact / intake](https://techtiz.co/us-sled/contact/): Prime-focused subcontract inquiry
+- [Capability statement](https://techtiz.co/us-sled/capability-statement/): Downloadable prime-facing statement
+
+## Contact
+
+- General: contact@techtiz.co
+- SLED partnerships: sled@techtiz.co
+
+## Optional
+
+- [Sitemap](https://techtiz.co/sitemap-index.xml)

@@ -11,12 +11,22 @@ import SledInnerHero from '../../components/sled/shared/SledInnerHero.astro';
 import SledLayout from '../../layouts/SledLayout.astro';
 import { CAPABILITIES_HERO, CAPABILITIES_SEO } from '../../lib/constants/pages/capabilities';
 import { CAPABILITIES_FAQ } from '../../lib/constants/pages/sled-faq';
+import { absoluteUrl, serviceJsonLd } from '../../lib/seo/json-ld';
 import '../../styles/sled.css';
 
 const { title, description, canonicalPath, ogImage } = CAPABILITIES_SEO;
+
+const jsonLd = [
+  serviceJsonLd({
+    name: 'Techtiz SLED technical subcontracting',
+    description,
+    url: absoluteUrl(canonicalPath),
+    serviceType: 'U.S. SLED back-office engineering subcontract',
+  }),
+];
 ---
 
-<SledLayout {title} {description} {canonicalPath} {ogImage} currentPage="/us-sled/capabilities/">
+<SledLayout {title} {description} {canonicalPath} {ogImage} {jsonLd} currentPage="/us-sled/capabilities/">
   <SledInnerHero
     eyebrow={CAPABILITIES_HERO.eyebrow}
     heading={CAPABILITIES_HERO.heading}

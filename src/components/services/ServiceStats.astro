@@ -1,0 +1,125 @@
+---
+import type { ServiceStatsData } from '../../lib/types/service';
+import CtaButton from '../shared/CtaButton.astro';
+import { ROUTES } from '../../lib/constants/routes';
+
+interface Props extends ServiceStatsData {
+  ctaText?: string;
+  ctaHref?: string;
+}
+
+const { stats, ctaText = 'Book a Free Consultation', ctaHref = ROUTES.sledContact } = Astro.props;
+---
+
+<section class="mx-auto w-full max-w-[1400px] px-2 py-10 md:py-16" data-service-stats-section>
+  <div class="relative flex min-h-[520px] flex-col justify-center overflow-hidden rounded-md bg-yale px-6 md:px-12">
+    <img
+      src="/images/digital-section-bg.png"
+      alt=""
+      class="pointer-events-none absolute inset-0 h-full w-full object-cover object-right select-none"
+      loading="lazy"
+    />
+    <div class="relative z-10 mt-3 flex flex-col gap-6 md:flex-row md:items-start">
+      <div class="max-w-[650px]">
+        <h2 class="mb-3 font-poppins text-[24px] leading-[48px] font-normal tracking-[-0.8px] text-white md:text-[40px]">
+          Efficiency Gains
+        </h2>
+        <p class="mb-5 font-poppins text-[12px] leading-[24px] font-normal tracking-[-0.32px] text-white/70 md:text-[16px]">
+          We offer automation strategies, data insights, and digital tools to enhance efficiency
+          and success in today's competitive landscape.
+        </p>
+        <div data-service-cta>
+          <CtaButton label={ctaText} href={ctaHref} variant="cta" />
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="relative z-10 mt-10 mb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 md:mb-0"
+      data-service-stats
+    >
+      {
+        stats.map((stat) => (
+          <div class="flex flex-col items-center justify-center border border-gray-400/50 p-5 text-center">
+            <h3
+              class="mb-2 text-center font-poppins text-[32px] font-semibold text-cyan md:text-[40px]"
+              data-stat-value={stat.value}
+            >
+              {stat.value}
+            </h3>
+            <p class="text-center text-[14px] leading-[130%] font-normal text-white md:text-[18px]">
+              {stat.label}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  const root = document.querySelector('[data-service-stats]');
+  const ctaLink = document.querySelector('[data-service-cta] a');
+
+  const setCtaLabel = () => {
+    if (!ctaLink) return;
+    const label =
+      window.innerWidth >= 768 ? 'Book a Free Consultation' : 'Book a Consultation';
+    for (const node of ctaLink.childNodes) {
+      if (node.nodeType === Node.TEXT_NODE && node.textContent?.trim()) {
+        node.textContent = label;
+        break;
+      }
+    }
+  };
+
+  setCtaLabel();
+  window.addEventListener('resize', setCtaLabel);
+
+  if (!root) {
+    /* stats grid optional when section is present */
+  } else {
+    const parseStat = (value) => {
+      const match = String(value).match(/^(\d+(?:\.\d+)?)(.*)$/);
+      if (!match) return { num: 0, suffix: value, decimals: 0 };
+      const num = parseFloat(match[1]);
+      const suffix = match[2];
+      const decimals = match[1].includes('.') ? 1 : 0;
+      return { num, suffix, decimals };
+    };
+
+    const animateStat = (el, target, duration = 2000) => {
+      const { num, suffix, decimals } = parseStat(target);
+      if (num <= 0) return;
+
+      const start = performance.now();
+      const step = (now) => {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = num * eased;
+        el.textContent =
+          (decimals > 0 ? current.toFixed(decimals) : Math.floor(current).toString()) + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+        else el.textContent = target;
+      };
+      requestAnimationFrame(step);
+    };
+
+    let played = false;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (!entry?.isIntersecting || played) return;
+        played = true;
+        root.querySelectorAll('[data-stat-value]').forEach((el) => {
+          const target = el.getAttribute('data-stat-value');
+          if (target) animateStat(el, target);
+        });
+        observer.disconnect();
+      },
+      { threshold: 0.3 },
+    );
+
+    observer.observe(root);
+  }
+</script>

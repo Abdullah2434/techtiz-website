@@ -2,6 +2,19 @@
 import '../../styles/chrome.css';
 import { SITE } from '../../lib/constants/site';
 import { ROUTES } from '../../lib/constants/routes';
+import {
+  SERVICE_CATEGORIES_NAV,
+  SERVICES_MEGA_NAV_DATA,
+} from '../../lib/constants/nav/services';
+import {
+  INDUSTRY_CATEGORIES,
+  INDUSTRIES_MEGA_NAV_DATA,
+} from '../../lib/constants/nav/industries';
+
+const firstServicesCategory = SERVICE_CATEGORIES_NAV[0];
+const firstIndustryCategory = INDUSTRY_CATEGORIES[0];
+const servicesMegaJson = JSON.stringify(SERVICES_MEGA_NAV_DATA);
+const industriesMegaJson = JSON.stringify(INDUSTRIES_MEGA_NAV_DATA);
 
 interface Props {
   currentPage?: string;
@@ -40,53 +53,78 @@ const navLinkClass = (href: string) =>
           Services <span class="chev size-[7px] -translate-x-px -translate-y-px rotate-45 border-r-[1.6px] border-b-[1.6px] border-current opacity-55 transition-transform duration-220 ease-out"></span>
         </button>
         <div
-          class="mega pointer-events-none invisible absolute top-[calc(100%+14px)] left-1/2 z-60 w-[min(760px,calc(100vw-32px))] -translate-x-1/2 -translate-y-1 rounded-2xl border border-line bg-white p-[22px] opacity-0 shadow-[0_30px_60px_-20px_rgba(14,38,64,0.22),0_6px_18px_-8px_rgba(14,38,64,0.10)] transition-[opacity,transform,visibility] duration-[180ms] ease-out before:absolute before:-top-2 before:left-1/2 before:size-3.5 before:-translate-x-1/2 before:rotate-45 before:rounded-tl before:border-t before:border-l before:border-line before:bg-white before:content-[''] max-[1180px]:left-0 max-[1180px]:translate-x-0 max-[1180px]:before:left-10"
+          class="mega pointer-events-none invisible absolute top-[calc(100%+14px)] left-1/2 z-60 w-[min(900px,calc(100vw-32px))] -translate-x-1/2 -translate-y-1 rounded-2xl border border-line bg-white p-[22px] opacity-0 shadow-[0_30px_60px_-20px_rgba(14,38,64,0.22),0_6px_18px_-8px_rgba(14,38,64,0.10)] transition-[opacity,transform,visibility] duration-[180ms] ease-out before:absolute before:-top-2 before:left-1/2 before:size-3.5 before:-translate-x-1/2 before:rotate-45 before:rounded-tl before:border-t before:border-l before:border-line before:bg-white before:content-[''] max-[1180px]:left-0 max-[1180px]:translate-x-0 max-[1180px]:before:left-10"
           role="menu"
         >
-          <div class="mega-inner grid grid-cols-[250px_1fr] gap-[22px]">
-            <div class="mega-left">
-              <div class="mega-eyebrow mb-3.5 px-1.5 text-[17px] font-extrabold tracking-[-0.01em] text-yale-dark">We Offer</div>
+          <div class="mega-inner grid grid-cols-[minmax(240px,280px)_1fr] gap-[22px]">
+            <div class="mega-left border-r border-[#EAEAEA] pr-4">
+              <div class="mega-eyebrow mb-2 px-1 text-xl font-semibold text-[#141414]">We Offer</div>
               <div class="mega-list flex flex-col gap-0.5" data-list="services">
-                <a class="mega-item active flex cursor-pointer items-center justify-between rounded-lg px-3.5 py-[11px] text-sm font-semibold text-ink transition-[background,color] duration-[180ms] ease-out hover:bg-cyan-soft hover:text-yale-dark" data-key="development" href="/">
-                  Development
-                  <span class="arr-r size-2 rotate-[-45deg] border-r-[1.6px] border-b-[1.6px] border-current opacity-0 transition-opacity duration-[180ms] ease-out"></span>
-                </a>
-                <a class="mega-item flex cursor-pointer items-center justify-between rounded-lg px-3.5 py-[11px] text-sm font-semibold text-ink transition-[background,color] duration-[180ms] ease-out hover:bg-cyan-soft hover:text-yale-dark" data-key="ai" href="/">
-                  AI &amp; Intelligence
-                  <span class="arr-r size-2 rotate-[-45deg] border-r-[1.6px] border-b-[1.6px] border-current opacity-0 transition-opacity duration-[180ms] ease-out"></span>
-                </a>
-                <a class="mega-item flex cursor-pointer items-center justify-between rounded-lg px-3.5 py-[11px] text-sm font-semibold text-ink transition-[background,color] duration-[180ms] ease-out hover:bg-cyan-soft hover:text-yale-dark" data-key="automation" href="/">
-                  Automation &amp; AI Solutions
-                  <span class="arr-r size-2 rotate-[-45deg] border-r-[1.6px] border-b-[1.6px] border-current opacity-0 transition-opacity duration-[180ms] ease-out"></span>
-                </a>
-                <a class="mega-item flex cursor-pointer items-center justify-between rounded-lg px-3.5 py-[11px] text-sm font-semibold text-ink transition-[background,color] duration-[180ms] ease-out hover:bg-cyan-soft hover:text-yale-dark" data-key="transformation" href="/">
-                  Digital Transformation
-                  <span class="arr-r size-2 rotate-[-45deg] border-r-[1.6px] border-b-[1.6px] border-current opacity-0 transition-opacity duration-[180ms] ease-out"></span>
-                </a>
-                <a class="mega-item flex cursor-pointer items-center justify-between rounded-lg px-3.5 py-[11px] text-sm font-semibold text-ink transition-[background,color] duration-[180ms] ease-out hover:bg-cyan-soft hover:text-yale-dark" data-key="ux" href="/">
-                  UX Design / Enablement
-                  <span class="arr-r size-2 rotate-[-45deg] border-r-[1.6px] border-b-[1.6px] border-current opacity-0 transition-opacity duration-[180ms] ease-out"></span>
-                </a>
+                {
+                  SERVICE_CATEGORIES_NAV.map((cat, index) => (
+                    <a
+                      class:list={[
+                        'mega-item group flex cursor-pointer items-center justify-between rounded-[2px] px-4 py-3 text-base font-normal leading-none text-[#1E1E1E] transition-[background,color] duration-[400ms] ease-out hover:bg-[#EAEAEA]',
+                        index === 0 && 'active',
+                      ]}
+                      data-key={cat.megaKey}
+                      href={cat.landingHref}
+                    >
+                      {cat.title}
+                      <svg
+                        class="ml-2 size-4 shrink-0 opacity-0 transition-opacity duration-200 group-hover:opacity-100 [.mega-item.active_&]:opacity-100"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                      </svg>
+                    </a>
+                  ))
+                }
               </div>
             </div>
-            <div class="mega-right flex flex-col border-l border-line-soft pl-[22px]">
-              <div class="mega-feature mb-3.5 flex items-start gap-3.5 rounded-[10px] bg-cyan-soft p-4 px-[18px]" data-feature="services">
-                <div class="feat-icon grid size-[38px] shrink-0 place-items-center text-yale-dark" data-feat-icon>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="size-[30px]">
-                    <polyline points="16 18 22 12 16 6"></polyline>
-                    <polyline points="8 6 2 12 8 18"></polyline>
-                  </svg>
+            <div class="mega-right flex min-w-0 flex-col pl-[22px]" data-mega-panel="services">
+              <div data-feature="services" class="flex flex-col gap-4">
+                <div class="mega-feature rounded-[7px] bg-[#18B0E633] px-4 py-[15px]">
+                  <div class="flex items-start gap-4">
+                    <div class="feat-icon shrink-0" data-feat-icon>
+                      <img
+                        src={firstServicesCategory.icon}
+                        alt=""
+                        width={40}
+                        height={40}
+                        class="size-10 object-contain"
+                        data-feat-icon-img
+                      />
+                    </div>
+                    <div class="min-w-0">
+                      <h4
+                        data-feat-title
+                        class="text-[24px] leading-[110%] font-semibold tracking-[-0.02em] text-[#141414]"
+                      >
+                        {firstServicesCategory.title}
+                      </h4>
+                      <p
+                        data-feat-desc
+                        class="mt-2 text-xs leading-[120%] font-normal text-[#1E1E1E]/60"
+                      >
+                        {firstServicesCategory.description}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <h4 data-feat-title class="mb-1 text-[17px] leading-[1.2] text-yale-dark">Development</h4>
-                  <p data-feat-desc class="m-0 max-w-[360px] text-[12.5px] leading-[1.45] text-muted">Build robust, scalable digital products designed to grow with your business.</p>
+                <div class="mega-sublinks flex flex-col gap-0.5" data-sublinks="services">
+                  {
+                    firstServicesCategory.subs.map((sub) => (
+                      <a href={sub.href} class="mega-service-link">
+                        {sub.name}
+                      </a>
+                    ))
+                  }
                 </div>
-              </div>
-              <div class="mega-sublinks grid grid-cols-2 gap-x-2 gap-y-0.5 py-1" data-sublinks="services">
-                <a href="/" class="rounded-md px-3 py-2 text-[13.5px] font-medium text-muted transition-[background,color] duration-[180ms] ease-out hover:bg-seasalt hover:text-yale">Custom Software</a>
-                <a href="/" class="rounded-md px-3 py-2 text-[13.5px] font-medium text-muted transition-[background,color] duration-[180ms] ease-out hover:bg-seasalt hover:text-yale">Mobile Apps</a>
-                <a href="/" class="rounded-md px-3 py-2 text-[13.5px] font-medium text-muted transition-[background,color] duration-[180ms] ease-out hover:bg-seasalt hover:text-yale">Low code / No-code Dev</a>
-                <a href="/" class="rounded-md px-3 py-2 text-[13.5px] font-medium text-muted transition-[background,color] duration-[180ms] ease-out hover:bg-seasalt hover:text-yale">Vibe code Dev</a>
               </div>
               <div class="mega-footer mt-3.5 flex items-center justify-between border-t border-line-soft pt-3.5">
                 <span class="mega-tag font-mono text-[10.5px] tracking-[0.14em] text-cyan-strong uppercase">U.S. SLED prime contractor?</span>
@@ -106,56 +144,83 @@ const navLinkClass = (href: string) =>
           Industries <span class="chev size-[7px] -translate-x-px -translate-y-px rotate-45 border-r-[1.6px] border-b-[1.6px] border-current opacity-55 transition-transform duration-220 ease-out"></span>
         </button>
         <div
-          class="mega pointer-events-none invisible absolute top-[calc(100%+14px)] left-1/2 z-60 w-[min(760px,calc(100vw-32px))] -translate-x-1/2 -translate-y-1 rounded-2xl border border-line bg-white p-[22px] opacity-0 shadow-[0_30px_60px_-20px_rgba(14,38,64,0.22),0_6px_18px_-8px_rgba(14,38,64,0.10)] transition-[opacity,transform,visibility] duration-[180ms] ease-out before:absolute before:-top-2 before:left-1/2 before:size-3.5 before:-translate-x-1/2 before:rotate-45 before:rounded-tl before:border-t before:border-l before:border-line before:bg-white before:content-[''] max-[1180px]:left-auto max-[1180px]:right-0 max-[1180px]:translate-x-0 max-[1180px]:before:left-auto max-[1180px]:before:right-10"
+          class="mega pointer-events-none invisible absolute top-[calc(100%+14px)] left-1/2 z-60 w-[min(900px,calc(100vw-32px))] -translate-x-1/2 -translate-y-1 rounded-2xl border border-line bg-white p-[22px] opacity-0 shadow-[0_30px_60px_-20px_rgba(14,38,64,0.22),0_6px_18px_-8px_rgba(14,38,64,0.10)] transition-[opacity,transform,visibility] duration-[180ms] ease-out before:absolute before:-top-2 before:left-1/2 before:size-3.5 before:-translate-x-1/2 before:rotate-45 before:rounded-tl before:border-t before:border-l before:border-line before:bg-white before:content-[''] max-[1180px]:left-auto max-[1180px]:right-0 max-[1180px]:translate-x-0 max-[1180px]:before:left-auto max-[1180px]:before:right-10"
           role="menu"
         >
-          <div class="mega-inner grid grid-cols-[250px_1fr] gap-[22px]">
-            <div class="mega-left">
-              <div class="mega-eyebrow mb-3.5 px-1.5 text-[17px] font-extrabold tracking-[-0.01em] text-yale-dark">Industries</div>
+          <div class="mega-inner grid grid-cols-[minmax(240px,280px)_1fr] gap-[22px]">
+            <div class="mega-left border-r border-[#EAEAEA] pr-4">
+              <div class="mega-eyebrow mb-2 px-1 text-xl font-semibold text-[#141414]">Industries</div>
               <div class="mega-list flex flex-col gap-0.5" data-list="industries">
-                <a class="mega-item active flex cursor-pointer items-center justify-between rounded-lg px-3.5 py-[11px] text-sm font-semibold text-ink transition-[background,color] duration-[180ms] ease-out hover:bg-cyan-soft hover:text-yale-dark" data-key="healthcare" href="/">
-                  Healthcare
-                  <span class="arr-r size-2 rotate-[-45deg] border-r-[1.6px] border-b-[1.6px] border-current opacity-0 transition-opacity duration-[180ms] ease-out"></span>
-                </a>
-                <a class="mega-item flex cursor-pointer items-center justify-between rounded-lg px-3.5 py-[11px] text-sm font-semibold text-ink transition-[background,color] duration-[180ms] ease-out hover:bg-cyan-soft hover:text-yale-dark" data-key="marketing" href="/">
-                  Digital Marketing
-                  <span class="arr-r size-2 rotate-[-45deg] border-r-[1.6px] border-b-[1.6px] border-current opacity-0 transition-opacity duration-[180ms] ease-out"></span>
-                </a>
-                <a class="mega-item flex cursor-pointer items-center justify-between rounded-lg px-3.5 py-[11px] text-sm font-semibold text-ink transition-[background,color] duration-[180ms] ease-out hover:bg-cyan-soft hover:text-yale-dark" data-key="realestate" href="/">
-                  Real Estate
-                  <span class="arr-r size-2 rotate-[-45deg] border-r-[1.6px] border-b-[1.6px] border-current opacity-0 transition-opacity duration-[180ms] ease-out"></span>
-                </a>
-                <a class="mega-item flex cursor-pointer items-center justify-between rounded-lg px-3.5 py-[11px] text-sm font-semibold text-ink transition-[background,color] duration-[180ms] ease-out hover:bg-cyan-soft hover:text-yale-dark" data-key="ecommerce" href="/">
-                  E-commerce
-                  <span class="arr-r size-2 rotate-[-45deg] border-r-[1.6px] border-b-[1.6px] border-current opacity-0 transition-opacity duration-[180ms] ease-out"></span>
-                </a>
-                <a class="mega-item flex cursor-pointer items-center justify-between rounded-lg px-3.5 py-[11px] text-sm font-semibold text-ink transition-[background,color] duration-[180ms] ease-out hover:bg-cyan-soft hover:text-yale-dark" data-key="logistics" href="/">
-                  Logistics &amp; Supply Chain
-                  <span class="arr-r size-2 rotate-[-45deg] border-r-[1.6px] border-b-[1.6px] border-current opacity-0 transition-opacity duration-[180ms] ease-out"></span>
-                </a>
-                <a class="mega-item flex cursor-pointer items-center justify-between rounded-lg px-3.5 py-[11px] text-sm font-semibold text-ink transition-[background,color] duration-[180ms] ease-out hover:bg-cyan-soft hover:text-yale-dark" data-key="education" href="/">
-                  Education
-                  <span class="arr-r size-2 rotate-[-45deg] border-r-[1.6px] border-b-[1.6px] border-current opacity-0 transition-opacity duration-[180ms] ease-out"></span>
-                </a>
+                {
+                  INDUSTRY_CATEGORIES.map((cat, index) => (
+                    <a
+                      class:list={[
+                        'mega-item group flex cursor-pointer items-center justify-between rounded-[2px] px-4 py-3 text-base font-normal leading-none text-[#1E1E1E] transition-[background,color] duration-[400ms] ease-out hover:bg-[#EAEAEA]',
+                        index === 0 && 'active',
+                      ]}
+                      data-key={cat.megaKey}
+                      href="/"
+                    >
+                      {cat.title}
+                      <svg
+                        class="ml-2 size-4 shrink-0 opacity-0 transition-opacity duration-200 group-hover:opacity-100 [.mega-item.active_&]:opacity-100"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                      </svg>
+                    </a>
+                  ))
+                }
               </div>
             </div>
-            <div class="mega-right flex flex-col border-l border-line-soft pl-[22px]">
-              <div class="mega-feature mb-3.5 flex items-start gap-3.5 rounded-[10px] bg-cyan-soft p-4 px-[18px]" data-feature="industries">
-                <div class="feat-icon grid size-[38px] shrink-0 place-items-center text-yale-dark" data-feat-icon>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="size-[30px]">
-                    <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                  </svg>
+            <div class="mega-right flex min-w-0 flex-col pl-[22px]">
+              <div data-feature="industries" class="flex flex-col gap-3">
+                <div class="mega-feature rounded-[7px] bg-[#F6F6F6] px-4 py-[15px]">
+                  <div class="flex items-start gap-4">
+                    <div class="feat-icon shrink-0" data-feat-icon>
+                      <img
+                        src={firstIndustryCategory.icon}
+                        alt=""
+                        width={40}
+                        height={40}
+                        class="size-10 object-contain"
+                      />
+                    </div>
+                    <div class="min-w-0">
+                      <h4
+                        data-feat-title
+                        class="text-[24px] leading-[110%] font-semibold tracking-[-0.02em] text-[#141414]"
+                      >
+                        {firstIndustryCategory.title}
+                      </h4>
+                      <p
+                        data-feat-desc
+                        class="mt-2 text-xs leading-[120%] font-normal text-[#1E1E1E]/60"
+                      >
+                        {firstIndustryCategory.description}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <h4 data-feat-title class="mb-1 text-[17px] leading-[1.2] text-yale-dark">Healthcare</h4>
-                  <p data-feat-desc class="m-0 max-w-[360px] text-[12.5px] leading-[1.45] text-muted">Techtiz streamlines admin tasks for healthcare teams, enhancing efficiency and safety.</p>
+                <div class="h-0.5 bg-[#EAEAEA]" aria-hidden="true"></div>
+                <div class="mega-sublinks flex flex-col gap-3" data-sublinks="industries">
+                  {
+                    firstIndustryCategory.subs.map((sub) => (
+                      <a href={sub.href} class="mega-industry-link group/sub">
+                        <span class="block text-[18px] font-semibold leading-none text-[#153A60] group-hover/sub:text-cyan">
+                          {sub.name}
+                        </span>
+                        <span class="mt-2 block text-xs leading-[120%] text-[#101010]/60">
+                          {sub.desc}
+                        </span>
+                      </a>
+                    ))
+                  }
                 </div>
-              </div>
-              <div class="mega-sublinks grid grid-cols-2 gap-x-2 gap-y-0.5 py-1" data-sublinks="industries">
-                <a href="/" class="rounded-md px-3 py-2 text-[13.5px] font-medium text-muted transition-[background,color] duration-[180ms] ease-out hover:bg-seasalt hover:text-yale">AI Appointment Management</a>
-                <a href="/" class="rounded-md px-3 py-2 text-[13.5px] font-medium text-muted transition-[background,color] duration-[180ms] ease-out hover:bg-seasalt hover:text-yale">AI-Powered Communication</a>
-                <a href="/" class="rounded-md px-3 py-2 text-[13.5px] font-medium text-muted transition-[background,color] duration-[180ms] ease-out hover:bg-seasalt hover:text-yale">Reporting Optimization</a>
-                <a href="/" class="rounded-md px-3 py-2 text-[13.5px] font-medium text-muted transition-[background,color] duration-[180ms] ease-out hover:bg-seasalt hover:text-yale">Patient Records</a>
               </div>
               <div class="mega-footer mt-3.5 flex items-center justify-between border-t border-line-soft pt-3.5">
                 <span class="mega-tag font-mono text-[10.5px] tracking-[0.14em] text-cyan-strong uppercase">U.S. SLED prime contractor?</span>
@@ -188,4 +253,6 @@ const navLinkClass = (href: string) =>
       </a>
     </div>
   </div>
+  <script id="services-mega-nav" type="application/json" set:html={servicesMegaJson} />
+  <script id="industries-mega-nav" type="application/json" set:html={industriesMegaJson} />
 </header>

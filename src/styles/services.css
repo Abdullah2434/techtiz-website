@@ -1,0 +1,99 @@
+/* Services hub + detail (ported from legacy Next.js service pages) */
+
+@keyframes service-tech-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.service-tech-marquee {
+  display: flex;
+  width: max-content;
+  animation: service-tech-marquee 40s linear infinite;
+}
+
+.service-tech-marquee:hover {
+  animation-play-state: paused;
+}
+
+.service-tech-track {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.service-workflow-card {
+  flex: 0 0 min(340px, 85vw);
+}
+
+@media (min-width: 1024px) {
+  .service-workflow-card {
+    flex: 1 1 calc(25% - 12px);
+    min-width: 0;
+  }
+}
+
+/* Workflow card hover (desktop) and tap-active (mobile) */
+@media (hover: hover) {
+  .workflow-card-inner:hover {
+    background-color: #153a5f;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  }
+
+  .workflow-card-inner:hover .workflow-card-bg {
+    opacity: 1;
+  }
+
+  .workflow-card-inner:hover .workflow-card-icon {
+    color: #fff !important;
+  }
+
+  .workflow-card-inner:hover .workflow-step-title {
+    color: #fff;
+  }
+
+  .workflow-card-inner:hover .workflow-step-desc {
+    display: none;
+  }
+
+  .workflow-card-inner:hover .workflow-artifacts {
+    max-height: 200px;
+    opacity: 1;
+  }
+
+  .workflow-card-inner:hover .workflow-artifacts-label {
+    color: #fff;
+  }
+}
+
+[data-workflow-card].is-active .workflow-card-inner {
+  background-color: #153a5f;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+
+[data-workflow-card].is-active .workflow-card-bg {
+  opacity: 1;
+}
+
+[data-workflow-card].is-active .workflow-card-icon {
+  color: #fff !important;
+}
+
+[data-workflow-card].is-active .workflow-step-title {
+  color: #fff;
+}
+
+[data-workflow-card].is-active .workflow-step-desc {
+  display: none;
+}
+
+[data-workflow-card].is-active .workflow-artifacts {
+  max-height: 200px;
+  opacity: 1;
+}
+
+[data-workflow-card].is-active .workflow-artifacts-label {
+  color: #fff;
+}

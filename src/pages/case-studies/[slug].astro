@@ -8,7 +8,11 @@ import ClientOverview from "../../components/case-studies/ClientOverview.astro";
 import MetricsSection from "../../components/case-studies/MetricsSection.astro";
 import CaseStudyDownload from "../../components/case-studies/CaseStudyDownload.astro";
 import SuccessStoriesSection from "../../components/home/SuccessStoriesSection.astro";
+import Breadcrumbs from "../../components/seo/Breadcrumbs.astro";
+import PageContextNav from "../../components/seo/PageContextNav.astro";
 import { CASE_STUDIES_PORTFOLIO } from "../../lib/constants/case-studies-portfolio";
+import { absoluteUrl, articleJsonLd } from "../../lib/seo/json-ld";
+import { sitePageTitle } from "../../lib/constants/site";
 
 export function getStaticPaths() {
   return CASE_STUDIES_PORTFOLIO.map((study) => ({
@@ -18,15 +22,28 @@ export function getStaticPaths() {
 }
 
 const { study } = Astro.props;
-const title = `${study.title} Case Study - Software Development Success | Techtiz`;
+const title = sitePageTitle(`${study.title} Case Study`);
 const description = `${study.overview.slice(0, 155)}...`;
 const canonicalPath = `/case-studies/${study.slug}/`;
 const ogImage = study.image.endsWith(".mp4") ? study.appLogo : study.image;
+const pageUrl = absoluteUrl(canonicalPath);
+
+const jsonLd = [
+  articleJsonLd({
+    headline: `${study.title} — Software Development Case Study`,
+    description: study.overview,
+    url: pageUrl,
+    image: ogImage,
+  }),
+];
 ---
 
-<BaseLayout {title} {description} {canonicalPath} {ogImage}>
+<BaseLayout {title} {description} {canonicalPath} {ogImage} {jsonLd}>
   <Header currentPage="/case-studies/" />
-  <main>
+  <main id="main-content">
+    <div class="mx-auto max-w-[1400px] px-2 pt-4 max-[600px]:px-[18px]">
+      <Breadcrumbs canonicalPath={canonicalPath} />
+    </div>
     <DetailHero title={study.title} media={study.image} />
     <ClientOverview
       appLogo={study.appLogo}
@@ -40,6 +57,15 @@ const ogImage = study.image.endsWith(".mp4") ? study.appLogo : study.image;
       )
     }
     <CaseStudyDownload pdfUrl={study.pdfUrl} />
+    <div class="mx-auto max-w-[1400px] px-2 pb-8 max-[600px]:px-[18px]">
+      <PageContextNav
+        links={[
+          { label: "← All case studies", href: "/case-studies/" },
+          { label: "U.S. SLED partnerships", href: "/us-sled/" },
+          { label: "Contact", href: "/us-sled/contact/" },
+        ]}
+      />
+    </div>
     <SuccessStoriesSection />
   </main>
   <Footer />

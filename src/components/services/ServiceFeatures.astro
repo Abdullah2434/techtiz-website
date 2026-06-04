@@ -1,0 +1,41 @@
+---
+import type { ServiceFeaturesData } from '../../lib/types/service';
+import ServiceFeatureIcon from './ServiceFeatureIcon.astro';
+
+interface Props extends ServiceFeaturesData {}
+
+const { title, description, features } = Astro.props;
+---
+
+<section class="mx-auto w-full max-w-[1400px] px-2 py-10 md:py-16">
+  <div class="mb-14">
+    <h2 class="mb-5 text-left font-poppins text-[32px] leading-[120%] font-normal tracking-[-0.02em] text-[#141414] md:text-[40px]">
+      {title}
+    </h2>
+    <p class="max-w-[1005px] font-poppins text-[16px] leading-[130%] font-normal tracking-normal text-[#101010]/70">
+      {description}
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+    {
+      features.map((feature, index) => (
+        <article
+          class="flex w-full flex-col rounded-lg bg-[#F3F7FB] p-6 transition-shadow duration-300 hover:shadow-md"
+          data-aos="fade-up"
+          data-aos-delay={String(100 + index * 100)}
+        >
+          <div class="mb-5 flex items-center justify-start">
+            <ServiceFeatureIcon index={index} />
+          </div>
+          <h3 class="mb-4 text-[28px] leading-[120%] font-semibold tracking-[-0.02em] text-[#141414]">
+            {feature.title}
+          </h3>
+          <p class="text-[16px] leading-[130%] font-normal tracking-normal text-[#101010]/70">
+            {feature.description}
+          </p>
+        </article>
+      ))
+    }
+  </div>
+</section>

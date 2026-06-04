@@ -18,7 +18,7 @@ export const HOME_HERO = {
   headingAccent: "AI systems",
   headingEnd: "that adapt and improve.",
   body: "We design automation systems that reduce busywork, enhance clarity, and support your growth. An AI-native engineering studio for ambitious product teams—and a technical subcontractor to U.S. SLED prime contractors.",
-  cta: { label: "Talk to an Expert", href: "/us-sled/contact/" },
+  cta: { label: "Talk to an Expert", href: "/contact/" },
 } as const;
 
 export const FEATURED_CLIENTS = [
@@ -373,7 +373,7 @@ export const DIGITAL_FOUNDATION = {
   description:
     "Develop, evaluate, and implement AI agents using a robust visual interface tailored for engineering and innovation teams.",
   cta: {
-    href: "/us-sled/contact/",
+    href: "/contact/",
     labelDesktop: "Book a Free Consultation",
     labelMobile: "Book a Consultation",
   },
@@ -431,7 +431,7 @@ export const FINAL_CTA = {
   headingAccent: "Let's pressure-test it.",
   body: "A 30-minute call with a senior engineer. No deck, no pitch. We'll sketch the system on the call.",
   form: {
-    action: "/us-sled/contact/",
+    action: "/contact/",
     emailName: "email",
     emailLabel: "Your email",
     emailPlaceholder: "you@company.com",
@@ -446,7 +446,7 @@ export const ENGAGE_SECTION = {
   sub: "Pick the commercial model that matches your scope certainty—from fixed delivery to an embedded squad.",
   cta: {
     label: "Talk through your model →",
-    href: "/us-sled/contact/",
+    href: "/contact/",
   },
 } as const;
 

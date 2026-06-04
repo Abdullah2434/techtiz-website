@@ -51,13 +51,4 @@ export const FOOTER_COLUMNS = [
       href: cat.landingHref,
     })),
   },
-  {
-    heading: 'Company',
-    links: [
-      { label: 'About', href: ROUTES.home },
-      { label: 'Careers', href: ROUTES.careers },
-      { label: 'Case Studies', href: ROUTES.caseStudies },
-      { label: 'Contact', href: ROUTES.sledContact },
-    ],
-  },
 ] as const;

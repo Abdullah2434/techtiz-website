@@ -1,154 +1,27 @@
 ---
-import Eyebrow from '../../components/shared/Eyebrow.astro';
-import SledButton from '../../components/sled/shared/SledButton.astro';
+import CaseStudiesConfidentialitySection from '../../components/sled/case-studies/CaseStudiesConfidentialitySection.astro';
+import CaseStudiesCtaSection from '../../components/sled/case-studies/CaseStudiesCtaSection.astro';
+import CaseStudiesEngagementsSection from '../../components/sled/case-studies/CaseStudiesEngagementsSection.astro';
+import CaseStudiesTrustStrip from '../../components/sled/case-studies/CaseStudiesTrustStrip.astro';
 import SledInnerHero from '../../components/sled/shared/SledInnerHero.astro';
-import SledPageWrap from '../../components/sled/shared/SledPageWrap.astro';
 import SledLayout from '../../layouts/SledLayout.astro';
-import {
-CASE_STUDIES_HERO,
-CASE_STUDIES_SEO,
-CONFIDENTIALITY_ROWS,
-ENGAGEMENT_CARDS,
-TRUST_ITEMS
-} from '../../lib/constants/pages/case-studies';
+import { CASE_STUDIES_HERO, CASE_STUDIES_SEO } from '../../lib/constants/pages/case-studies';
 import '../../styles/sled.css';
 
 const { title, description, canonicalPath, ogImage } = CASE_STUDIES_SEO;
 ---
 
 <SledLayout {title} {description} {canonicalPath} {ogImage} currentPage="/us-sled/case-studies/">
-
-<SledInnerHero eyebrow={CASE_STUDIES_HERO.eyebrow} heading={CASE_STUDIES_HERO.heading} body={CASE_STUDIES_HERO.body} />
-
-<!-- TRUST STRIP (legacy .trust) -->
-<section class="border-y border-line bg-white py-7">
-  <SledPageWrap>
-    <div class="grid grid-cols-[minmax(0,200px)_repeat(3,minmax(0,1fr))] items-center max-[900px]:grid-cols-[1fr_1fr] max-[900px]:gap-y-3.5 max-[600px]:grid-cols-1">
-      <span class="font-mono text-[11px] font-bold tracking-[0.14em] uppercase text-muted">
-        Operating boundaries
-      </span>
-      {TRUST_ITEMS.map((item, idx) => (
-        <span
-          class:list={[
-            'flex items-center gap-3 py-2 text-[13.5px] font-semibold text-yale',
-            idx > 0 && 'border-l border-line pl-6 max-[900px]:border-l-0 max-[900px]:pl-0',
-          ]}
-        >
-          <span class="inline-block size-2.5 shrink-0 rotate-15 bg-cyan" aria-hidden="true"></span>
-          {item}
-        </span>
-      ))}
-    </div>
-  </SledPageWrap>
-</section>
-
-<!-- ENGAGEMENT EXAMPLES (legacy .examples-section) -->
-<section class="bg-white py-20 pb-[60px]">
-  <SledPageWrap>
-    <div class="mb-12 max-w-[720px]">
-      <Eyebrow text="Delivered engagements" class="mb-3.5" />
-      <h2 class="text-[40px] font-extrabold leading-[1.1] tracking-[-0.02em] text-yale-dark max-[900px]:text-[30px] max-[600px]:text-[26px]">
-        What we shipped, under whose roof, on what vehicle.
-      </h2>
-      <p class="mt-3.5 max-w-[620px] text-[15.5px] leading-relaxed text-muted">
-        Each card describes a delivered subcontract engagement: the technical surface area, the prime relationship type, the deliverables that shipped, and the procurement vehicle the work moved through. References available with NDA.
-      </p>
-    </div>
-
-    <div class="grid grid-cols-2 gap-5 max-[900px]:grid-cols-1">
-      {ENGAGEMENT_CARDS.map(card => (
-        <article class="flex flex-col rounded-[14px] border border-line bg-white px-8 pt-8 pb-7 transition-[border-color,box-shadow,transform] duration-[220ms] ease-out hover:-translate-y-0.5 hover:border-[#C2CCD9] hover:shadow-[0_18px_36px_-20px_rgba(21,58,95,0.16)]">
-          <div class="mb-5 flex items-center gap-3.5 border-b border-line-soft pb-5">
-            <span class="rounded-full bg-[rgba(31,120,85,0.10)] px-3 py-1.5 font-mono text-[10.5px] font-bold tracking-[0.14em] text-[#1F7855] uppercase">
-              {card.badge}
-            </span>
-            <span class="ml-auto font-mono text-[10.5px] tracking-[0.10em] text-muted uppercase">
-              {card.anon}
-            </span>
-          </div>
-
-          <h3 class="mb-4 text-[21px] font-extrabold leading-[1.25] text-yale-dark">{card.heading}</h3>
-
-          <div class="mb-5 flex flex-wrap gap-1.5">
-            {card.meta.map(m => (
-              <span class="rounded border border-line bg-seasalt px-2.5 py-1 font-mono text-[10.5px] tracking-[0.04em] text-muted">
-                {m}
-              </span>
-            ))}
-          </div>
-
-          <div class="flex-1">
-            {card.rows.map((row, rowIdx) => (
-              <div
-                class:list={[
-                  'grid grid-cols-[92px_1fr] gap-3.5 border-t border-line-soft py-3 max-[420px]:grid-cols-1',
-                  rowIdx === card.rows.length - 1 && 'mb-4 border-b border-line-soft',
-                ]}
-              >
-                <span class="pt-0.5 font-mono text-[10px] font-bold tracking-[0.14em] text-cyan-strong uppercase">
-                  {row.lbl}
-                </span>
-                <span class="text-[13.5px] leading-[1.55] text-ink [&_strong]:font-bold [&_strong]:text-yale-dark" set:html={row.val} />
-              </div>
-            ))}
-          </div>
-
-          <div class="mt-auto flex items-center gap-2 font-mono text-[11px] tracking-[0.06em] text-muted uppercase">
-            <span class="inline-block size-1.5 shrink-0 rotate-15 bg-cyan" aria-hidden="true"></span>
-            Vehicle · {card.vehicle}
-          </div>
-        </article>
-      ))}
-    </div>
-  </SledPageWrap>
-</section>
-
-<!-- CONFIDENTIALITY (legacy .confid) -->
-<section class="border-t border-line bg-seasalt py-20">
-  <SledPageWrap>
-    <div class="grid grid-cols-[0.85fr_1.15fr] items-start gap-14 max-[900px]:grid-cols-1 max-[900px]:gap-5">
-      <div>
-        <Eyebrow text="What we cannot show publicly" class="mb-4 text-amber" />
-        <h2 class="text-[36px] font-extrabold leading-[1.1] tracking-[-0.02em] text-yale-dark max-[900px]:text-[30px] max-[600px]:text-[26px]">
-          Most of our SLED work stays under NDA.
-        </h2>
-        <p class="mt-4 max-w-[380px] text-[15px] leading-[1.6] text-muted">
-          The engagements above are summarized at the technical-deliverable level. Specifics live on a separate call, behind a mutual NDA, with the prime in the room.
-        </p>
-      </div>
-
-      <div class="rounded-xl border border-line bg-white px-9 py-8 max-[600px]:px-6 max-[600px]:py-6">
-        {CONFIDENTIALITY_ROWS.map((row, idx) => (
-          <div
-            class:list={[
-              'grid grid-cols-1 gap-3.5 py-3.5',
-              idx < CONFIDENTIALITY_ROWS.length - 1 && 'border-b border-line-soft',
-            ]}
-          >
-            <p class="m-0 text-[14px] leading-[1.55] text-ink">
-              <strong class="font-bold text-yale-dark">{row.heading}</strong> {row.body}
-            </p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </SledPageWrap>
-</section>
-
-<!-- CTA BAND (legacy .cta-band) -->
-<section class="sled-final-cta relative overflow-hidden bg-yale-dark text-white">
-  <SledPageWrap class="relative z-[2] py-20 text-center">
-    <Eyebrow text="Capture manager or BD lead at a U.S. prime?" onDark class="mb-4 justify-center" />
-    <h2 class="mx-auto max-w-[700px] text-[38px] font-extrabold leading-[1.1] tracking-[-0.02em] text-white max-[900px]:text-[30px] max-[600px]:text-[26px]">
-      Request a reference conversation.
-    </h2>
-    <p class="mx-auto mt-4 max-w-[560px] text-base leading-[1.55] text-white/[0.78]">
-      NDA-first introduction. We'll route you to the right named reference for the engagement type closest to your pursuit.
-    </p>
-    <div class="mt-7 flex justify-center max-[600px]:[&_a]:w-full max-[600px]:[&_a]:justify-center">
-      <SledButton href="/us-sled/contact/" label="Start an NDA conversation" variant="cta" />
-    </div>
-  </SledPageWrap>
-</section>
-
+  <div class="sled-case-studies-page">
+    <SledInnerHero
+      eyebrow={CASE_STUDIES_HERO.eyebrow}
+      heading={CASE_STUDIES_HERO.heading}
+      body={CASE_STUDIES_HERO.body}
+    />
+    <CaseStudiesTrustStrip />
+    <CaseStudiesEngagementsSection />
+    <CaseStudiesConfidentialitySection />
+    <CaseStudiesCtaSection />
+  </div>
+  <script src="/scripts/sled-hub.js" is:inline></script>
 </SledLayout>

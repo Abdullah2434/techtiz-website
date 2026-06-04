@@ -1,0 +1,81 @@
+---
+import ChartColumn from '@lucide/astro/icons/chart-column';
+import Building2 from '@lucide/astro/icons/building-2';
+import Globe from '@lucide/astro/icons/globe';
+import Landmark from '@lucide/astro/icons/landmark';
+import Map from '@lucide/astro/icons/map';
+import Accessibility from '@lucide/astro/icons/accessibility';
+import { ENGAGEMENT_CARDS } from '../../../lib/constants/pages/case-studies';
+import Eyebrow from '../../shared/Eyebrow.astro';
+import SledPageWrap from '../shared/SledPageWrap.astro';
+
+const cardIcons = [Map, Accessibility, Building2, Globe, ChartColumn, Landmark] as const;
+---
+
+<section class="sled-section bg-white" id="engagements">
+  <SledPageWrap>
+    <div class="sled-reveal mb-12 grid grid-cols-1 gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-end" data-sled-reveal>
+      <div>
+        <Eyebrow text="Delivered engagements" showGlyph class="mb-4" />
+        <h2 class="text-[clamp(1.75rem,3.8vw,2.5rem)] font-extrabold leading-[1.08] tracking-[-0.02em] text-yale-dark">
+          What we shipped, under whose roof, on what vehicle.
+        </h2>
+      </div>
+      <p class="max-w-[520px] text-[15.5px] leading-[1.65] text-muted lg:justify-self-end">
+        Each card describes a delivered subcontract engagement: the technical surface area, the prime relationship type, the deliverables that shipped, and the procurement vehicle the work moved through. References available with NDA.
+      </p>
+    </div>
+
+    <div class="sled-reveal-stagger grid grid-cols-1 gap-5 lg:grid-cols-2" data-sled-reveal>
+      {ENGAGEMENT_CARDS.map((card, idx) => {
+        const Icon = cardIcons[idx];
+        return (
+          <article class="sled-card group flex flex-col overflow-hidden rounded-2xl p-0">
+            <div class="flex items-center gap-3.5 border-b border-line px-6 py-5 sm:px-7">
+              <div class="grid size-10 shrink-0 place-items-center rounded-xl bg-[rgba(31,120,85,0.10)] text-[#1F7855] transition-transform duration-300 group-hover:scale-105">
+                <Icon class="size-5" stroke-width="1.75" aria-hidden="true" />
+              </div>
+              <span class="rounded-full bg-[rgba(31,120,85,0.10)] px-3 py-1.5 font-mono text-[10.5px] font-bold tracking-[0.14em] text-[#1F7855] uppercase">
+                {card.badge}
+              </span>
+              <span class="ml-auto font-mono text-[10.5px] tracking-[0.10em] text-muted uppercase">
+                {card.anon}
+              </span>
+            </div>
+
+            <div class="flex flex-1 flex-col px-6 pb-6 pt-5 sm:px-7 sm:pb-7">
+              <h3 class="mb-4 text-[clamp(1.0625rem,2vw,1.3125rem)] font-extrabold leading-[1.25] text-yale-dark">{card.heading}</h3>
+
+              <div class="mb-5 flex flex-wrap gap-1.5">
+                {card.meta.map((m) => (
+                  <span class="rounded-full border border-line bg-seasalt px-2.5 py-1 font-mono text-[10.5px] tracking-[0.04em] text-muted">{m}</span>
+                ))}
+              </div>
+
+              <div class="flex-1 space-y-0">
+                {card.rows.map((row, rowIdx) => (
+                  <div
+                    class:list={[
+                      'grid grid-cols-1 gap-1 border-t border-line-soft py-3.5 sm:grid-cols-[92px_1fr] sm:gap-3.5',
+                      rowIdx === card.rows.length - 1 && 'border-b border-line-soft',
+                    ]}
+                  >
+                    <span class="font-mono text-[10px] font-bold tracking-[0.14em] text-cyan-strong uppercase sm:pt-0.5">
+                      {row.lbl}
+                    </span>
+                    <span class="text-[13.5px] leading-[1.55] text-ink [&_strong]:font-bold [&_strong]:text-yale-dark" set:html={row.val} />
+                  </div>
+                ))}
+              </div>
+
+              <div class="mt-5 flex items-center gap-2 font-mono text-[11px] tracking-[0.06em] text-muted uppercase">
+                <span class="size-1.5 shrink-0 rounded-full bg-cyan" aria-hidden="true" />
+                Vehicle · {card.vehicle}
+              </div>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </SledPageWrap>
+</section>

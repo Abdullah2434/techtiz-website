@@ -34,6 +34,7 @@ description: >-
 | `/us-sled/contact/` | `contact.astro` | contact constants + inquiry |
 | `/us-sled/capability-statement/` | `capability-statement.astro` | PDF/download CTA |
 | `/us-sled/case-studies/` | `case-studies.astro` | NDA-safe case narratives |
+| `/us-sled/procurement-vehicles/` | `procurement-vehicles.astro` | `procurement-vehicles.ts` → vehicle grid, FAR mapping, subcontract model |
 
 Shared: `SledLayout.astro`, `src/styles/sled.css`, `public/scripts/sled-hub.js` (hub interactivity only).
 

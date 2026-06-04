@@ -1,0 +1,22 @@
+---
+import { REGISTRATION_STRIP } from '../../../lib/constants/pages/procurement-vehicles';
+import Eyebrow from '../../shared/Eyebrow.astro';
+import SledPageWrap from '../shared/SledPageWrap.astro';
+---
+
+<section class="border-b border-line/80 bg-white py-10" aria-label="Procurement registration">
+  <SledPageWrap>
+    <div class="sled-reveal" data-sled-reveal>
+      <Eyebrow text={REGISTRATION_STRIP.eyebrow} showGlyph class="mb-6" />
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+        {REGISTRATION_STRIP.items.map((item) => (
+          <div class="rounded-2xl border border-line bg-seasalt/60 px-5 py-5">
+            <div class="font-mono text-[10.5px] font-bold tracking-[0.14em] uppercase text-cyan-strong">{item.label}</div>
+            <div class="mt-2 text-[17px] font-extrabold text-yale-dark">{item.value}</div>
+            <p class="mt-2 text-[13px] leading-[1.55] text-muted">{item.caption}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </SledPageWrap>
+</section>

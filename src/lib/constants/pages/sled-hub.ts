@@ -115,39 +115,6 @@ export const BACKBONE_CARDS = [
   },
 ] as const;
 
-export const VEHICLES = [
-  {
-    heading: "NASPO ValuePoint",
-    sub: "Multi-state cooperative, via prime",
-    note: "50 states eligible",
-  },
-  {
-    heading: "GSA MAS / IT-70",
-    sub: "Federal schedule, via prime",
-    note: "Cooperative purchase eligible",
-  },
-  {
-    heading: "State Master Agreements",
-    sub: "CA CMAS, NY OGS, TX DIR, prime-held",
-    note: "Via your prime's state vehicles",
-  },
-  {
-    heading: "Direct Subcontract",
-    sub: "Prime-contractor teaming letter",
-    note: "Standard 7-day turnaround",
-  },
-  {
-    heading: "Local Co-ops",
-    sub: "OMNIA, Sourcewell, regional",
-    note: "Via partner primes",
-  },
-  {
-    heading: "Open RFP / RFQ",
-    sub: "Bid support as named subcontractor",
-    note: "Pre-award volumes under teaming letter",
-  },
-] as const;
-
 export const WHY_CARDS = [
   {
     num: "01 · Specialization depth",
@@ -416,13 +383,6 @@ export const SPECIALIZATIONS = {
     linkLabel: "Start an NDA conversation",
     linkHref: "/us-sled/contact/",
   },
-} as const;
-
-export const VEHICLES_SECTION = {
-  eyebrow: "Procurement Vehicles",
-  heading: "Easy to put on contract.",
-  sub: "We work through your existing vehicles. Tell us how the agency buys and we'll structure the teaming agreement to fit.",
-  emailPrompt: "Don't see your vehicle?",
 } as const;
 
 export const WHY_SECTION = {

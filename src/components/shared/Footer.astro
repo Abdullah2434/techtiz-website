@@ -1,9 +1,10 @@
 ---
-import { SITE, SITE_COPYRIGHT, LEGAL_LINKS } from "../../lib/constants/site";
-import { ROUTES } from "../../lib/constants/routes";
-import { SERVICE_CATEGORIES_NAV } from "../../lib/constants/nav/services";
-import { INDUSTRY_CATEGORIES_NAV } from "../../lib/constants/nav/industries";
-import ServerStackLoader from "./ServerStackLoader.astro";
+import { FOOTER_CONTACT_INFO } from "../../lib/constants/footer-contact";
+import { FOOTER_NAV_SECTIONS } from "../../lib/constants/footer-nav";
+import { LEGAL_LINKS, SITE, SITE_COPYRIGHT } from "../../lib/constants/site";
+import "../../styles/chrome.css";
+import FooterContactInfoItem from "./FooterContactInfoItem.astro";
+import FooterNavSection from "./FooterNavSection.astro";
 
 const wrap =
   "relative mx-auto w-full max-w-[1400px] px-2 max-[600px]:px-[18px]";
@@ -18,23 +19,11 @@ const wrap =
   >
   </div>
 
-  <div
-    class="pointer-events-none absolute inset-x-0 top3 z-[3] px-2 max-[600px]:top-3 max-[600px]:px-[18px]"
-  >
-    <div class="mx-auto flex w-full max-w-[1400px] justify-end">
-      <ServerStackLoader
-        idPrefix="footer-server-stack"
-        size="sm"
-        class="max-[600px]:scale-90"
-      />
-    </div>
-  </div>
-
   <div class={wrap}>
     <div
-      class="cols relative mb-14 grid grid-cols-[1.5fr_repeat(4,1fr)] gap-10 max-[900px]:grid-cols-1"
+      class="relative mb-10 flex flex-wrap items-start justify-between gap-6 md:mb-14"
     >
-      <div class="brand-foot">
+      <div class="brand-foot min-w-0 max-w-xl">
         <a href="/" class="brand-mark inline-block">
           <img
             src={SITE.logo.light}
@@ -43,11 +32,12 @@ const wrap =
           />
         </a>
         <p
-          class="my-[18px] mb-[22px] max-w-[290px] text-sm leading-[1.55] text-white/70"
+          class="my-[18px] mb-0 max-w-xl text-sm leading-[1.55] text-white/70 md:mb-[22px]"
         >
           {SITE.description}
         </p>
-        <div class="socials flex gap-2.5">
+      </div>
+      <div class="socials flex shrink-0 gap-2.5">
           <a
             href={SITE.socials.google}
             aria-label="Google"
@@ -100,155 +90,28 @@ const wrap =
               ></path>
             </svg>
           </a>
-        </div>
       </div>
+    </div>
 
-      <div>
-        <h5
-          class="mb-[18px] font-mono text-[11px] font-semibold tracking-[0.14em] text-cyan uppercase"
-        >
-          Solutions
-        </h5>
-        <ul class="m-0 flex list-none flex-col gap-2.5 p-0">
-          {
-            SERVICE_CATEGORIES_NAV.map((cat) => (
-              <li>
-                <a
-                  href={cat.landingHref}
-                  class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
-                >
-                  {cat.title}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
+    <div
+      class="foot-nav relative mb-10 grid min-w-0 grid-cols-1 items-stretch gap-8 md:mb-14 md:grid-cols-2 md:gap-x-10 md:gap-y-12 lg:grid-cols-3 lg:gap-x-0 lg:gap-y-0 lg:divide-x lg:divide-white/50 [&>div]:min-w-0 [&>div:last-child]:md:col-span-2 [&>div:last-child]:lg:col-span-1 [&>div]:lg:px-10 [&>div:first-child]:lg:pl-0 [&>div:last-child]:lg:pr-0"
+    >
+      {
+        FOOTER_NAV_SECTIONS.map((section) => (
+          <FooterNavSection title={section.title} links={section.links} />
+        ))
+      }
+    </div>
 
-      <div>
-        <h5
-          class="mb-[18px] font-mono text-[11px] font-semibold tracking-[0.14em] text-cyan uppercase"
-        >
-          Industries
-        </h5>
-        <ul class="m-0 flex list-none flex-col gap-2.5 p-0">
-          {
-            INDUSTRY_CATEGORIES_NAV.map((cat) => (
-              <li>
-                <a
-                  href={cat.landingHref}
-                  class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
-                >
-                  {cat.title}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-
-      <div>
-        <h5
-          class="mb-[18px] font-mono text-[11px] font-semibold tracking-[0.14em] text-cyan uppercase"
-        >
-          SLED Partnerships
-        </h5>
-        <ul class="m-0 flex list-none flex-col gap-2.5 p-0">
-          <li>
-            <a
-              href="/us-sled/"
-              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
-              >SLED Hub</a>
-          </li>
-          <li>
-            <a
-              href="/us-sled/capabilities/"
-              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
-              >Capabilities</a>
-          </li>
-          <li>
-            <a
-              href="/us-sled/how-we-engage/"
-              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
-              >How We Engage</a>
-          </li>
-          <li>
-            <a
-              href="/us-sled/operating-model/"
-              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
-              >Operating Model</a>
-          </li>
-          <li>
-            <a
-              href="/us-sled/case-studies/"
-              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
-              >Engagement Examples</a>
-          </li>
-          <li>
-            <a
-              href="/us-sled/procurement-vehicles/"
-              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
-              >Procurement Vehicles</a>
-          </li>
-          <li>
-            <a
-              href="/us-sled/capability-statement/"
-              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
-              >Capability Statement</a>
-          </li>
-          <li>
-            <a
-              href="/us-sled/contact/"
-              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
-              >SLED Contact</a>
-          </li>
-        </ul>
-      </div>
-
-      <div>
-        <h5
-          class="mb-[18px] font-mono text-[11px] font-semibold tracking-[0.14em] text-cyan uppercase"
-        >
-          Company
-        </h5>
-        <ul class="m-0 flex list-none flex-col gap-2.5 p-0">
-          <li>
-            <a
-              href="/about/"
-              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
-              >About</a>
-          </li>
-          <li>
-            <a
-              href="/"
-              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
-              >Team</a>
-          </li>
-          <li>
-            <a
-              href="/"
-              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
-              >Careers</a>
-          </li>
-          <li>
-            <a
-              href={ROUTES.caseStudies}
-              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
-              >Case Studies</a>
-          </li>
-          <li>
-            <a
-              href="/"
-              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
-              >Press</a>
-          </li>
-          <li>
-            <a
-              href="/"
-              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
-              >Contact</a>
-          </li>
-        </ul>
+    <div class="border-b border-white pt-6 pb-12">
+      <div
+        class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 md:gap-10 lg:gap-14"
+      >
+        {
+          FOOTER_CONTACT_INFO.map((contact) => (
+            <FooterContactInfoItem {...contact} />
+          ))
+        }
       </div>
     </div>
 

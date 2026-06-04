@@ -5,15 +5,21 @@ export const SITE = {
   description:
     "An AI-native engineering studio building adaptive systems for ambitious teams.",
   url: "https://techtiz.co",
+  /** Legacy Next.js site: Footer + contact/appointment APIs use contact@; contact-us page lists info@. */
   email: {
-    general: "hello@techtiz.co",
+    general: "contact@techtiz.co",
+    contact: "contact@techtiz.co",
+    info: "info@techtiz.co",
     sled: "sled@techtiz.co",
+    careers: "careers@techtiz.co",
+    hr: "hr@techtiz.co",
   },
   phone: {
-    display: "+1 (XXX) XXX-XXXX",
-    tel: "",
+    display: "+92 326 1199244",
+    tel: "+923261199244",
     sled: {
       display: "+1 (XXX) XXX-XXXX",
+      tel: "",
     },
   },
   offices: {
@@ -29,10 +35,12 @@ export const SITE = {
     light: "/assets/logo-light.svg",
     png: "/assets/logo.png",
   },
+  /** Legacy Footer.tsx social links */
   socials: {
-    linkedin: "#",
-    x: "#",
-    facebook: "#",
+    google: "https://www.google.com/search?q=techtiz",
+    facebook: "https://www.facebook.com/techtiz",
+    x: "https://x.com/techtiz",
+    linkedin: "https://www.linkedin.com/company/techtiz/",
   },
   og: {
     image: "/assets/capitol.png",
@@ -75,7 +83,9 @@ export function mailto(
 }
 
 export const mailtoGeneral = (options?: { subject?: string; body?: string }) =>
-  mailto(SITE.email.general, options);
+  mailto(SITE.email.contact, options);
+
+export const mailtoContact = mailtoGeneral;
 
 export const mailtoSled = (options?: { subject?: string; body?: string }) =>
   mailto(SITE.email.sled, options);

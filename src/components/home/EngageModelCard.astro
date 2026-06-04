@@ -1,0 +1,80 @@
+---
+import type { ENGAGE_MODELS } from '../../lib/constants/pages/home';
+
+type EngageModel = (typeof ENGAGE_MODELS)[number];
+
+interface Props {
+  model: EngageModel;
+}
+
+const { model } = Astro.props;
+const isFeatured = 'feature' in model && model.feature;
+---
+
+<article
+  class:list={[
+    'group relative flex h-full flex-col gap-4 rounded-2xl border px-6 py-7 transition-[transform,box-shadow,border-color] duration-240 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-cyan sm:px-8 sm:py-9',
+    isFeatured
+      ? 'overflow-hidden border-yale-dark bg-yale-dark text-white'
+      : 'border-line bg-white hover:border-yale/20',
+    !isFeatured && 'hover:-translate-y-0.5 hover:shadow-[0_18px_36px_-18px_rgba(21,58,95,0.16)]',
+    isFeatured && 'hover:-translate-y-0.5 hover:shadow-[0_22px_44px_-20px_rgba(14,38,64,0.35)]',
+  ]}
+>
+  {'badge' in model && model.badge && (
+    <span class="absolute top-5 right-5 rounded-md bg-cyan px-2.5 py-1 font-mono text-[10px] font-bold tracking-[0.14em] text-yale-dark uppercase sm:top-[22px] sm:right-[22px]">
+      {model.badge}
+    </span>
+  )}
+
+  {isFeatured && (
+    <div
+      class="pointer-events-none absolute -bottom-[30px] -left-[30px] size-[180px] rotate-[15deg] bg-[linear-gradient(45deg,transparent_48%,rgba(24,176,230,0.12)_48%_52%,transparent_52%)] bg-size-[24px_24px]"
+      aria-hidden="true"
+    />
+  )}
+
+  <span
+    class:list={[
+      'font-mono text-[11px] tracking-[0.14em] uppercase',
+      isFeatured ? 'text-cyan' : 'text-cyan-strong',
+    ]}
+  >
+    {model.num}
+  </span>
+
+  <h3
+    class:list={[
+      'text-[22px] font-extrabold leading-[1.15] tracking-[-0.02em] sm:text-[26px]',
+      isFeatured ? 'text-white' : 'text-yale',
+    ]}
+  >
+    {model.title}
+  </h3>
+
+  <p
+    class:list={[
+      'text-[14px] leading-[1.55] sm:text-[14.5px]',
+      isFeatured ? 'text-white/75' : 'text-muted',
+    ]}
+  >
+    {model.desc}
+  </p>
+
+  <div
+    class:list={[
+      'mt-auto border-t pt-4 text-[13px] leading-[1.5]',
+      isFeatured ? 'border-white/14 text-white/90' : 'border-line text-ink',
+    ]}
+  >
+    <span
+      class:list={[
+        'mb-1.5 block font-mono text-[10px] tracking-[0.12em] uppercase',
+        isFeatured ? 'text-cyan' : 'text-cyan-strong',
+      ]}
+    >
+      Best for
+    </span>
+    {model.best}
+  </div>
+</article>

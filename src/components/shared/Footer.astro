@@ -1,115 +1,304 @@
 ---
-import '../../styles/chrome.css';
-import { SITE, SITE_COPYRIGHT, LEGAL_LINKS } from '../../lib/constants/site';
-import { ROUTES } from '../../lib/constants/routes';
+import "../../styles/chrome.css";
+import { SITE, SITE_COPYRIGHT, LEGAL_LINKS } from "../../lib/constants/site";
+import { ROUTES } from "../../lib/constants/routes";
+import ServerStackLoader from "./ServerStackLoader.astro";
 
 const wrap =
-  'mx-auto w-full max-w-[1400px] px-2 max-[600px]:px-[18px]';
+  "relative mx-auto w-full max-w-[1400px] px-2 max-[600px]:px-[18px]";
 ---
 
-<footer class="foot relative overflow-hidden bg-yale-dark py-20 pb-8 text-white/70">
+<footer
+  class="foot relative overflow-hidden bg-yale-dark py-20 pb-8 text-white/70"
+>
   <div
     class="pointer-events-none absolute -bottom-10 -left-10 size-[260px] rotate-[15deg] opacity-60 bg-[linear-gradient(45deg,transparent_48%,rgba(24,176,230,0.14)_48%_52%,transparent_52%)] bg-size-[30px_30px]"
     aria-hidden="true"
-  ></div>
+  >
+  </div>
+
+  <div
+    class="pointer-events-none absolute inset-x-0 top3 z-[3] px-2 max-[600px]:top-3 max-[600px]:px-[18px]"
+  >
+    <div class="mx-auto flex w-full max-w-[1400px] justify-end">
+      <ServerStackLoader
+        idPrefix="footer-server-stack"
+        size="sm"
+        class="max-[600px]:scale-90"
+      />
+    </div>
+  </div>
 
   <div class={wrap}>
-    <div class="cols relative mb-14 grid grid-cols-[1.5fr_repeat(4,1fr)] gap-10 max-[900px]:grid-cols-1">
+    <div
+      class="cols relative mb-14 grid grid-cols-[1.5fr_repeat(4,1fr)] gap-10 max-[900px]:grid-cols-1"
+    >
       <div class="brand-foot">
         <a href="/" class="brand-mark inline-block">
-          <img src={SITE.logo.light} alt={SITE.name} class="brand-logo block h-[30px] w-auto" />
+          <img
+            src={SITE.logo.light}
+            alt={SITE.name}
+            class="brand-logo block h-[30px] w-auto"
+          />
         </a>
-        <p class="my-[18px] mb-[22px] max-w-[290px] text-sm leading-[1.55] text-white/70">
+        <p
+          class="my-[18px] mb-[22px] max-w-[290px] text-sm leading-[1.55] text-white/70"
+        >
           {SITE.description}
         </p>
         <div class="socials flex gap-2.5">
           <a
-            href={SITE.socials.linkedin}
-            aria-label="LinkedIn"
+            href={SITE.socials.google}
+            aria-label="Google"
+            target="_blank"
+            rel="noopener noreferrer"
             class="grid size-[34px] place-items-center rounded-md border border-white/18 text-white/70 transition-[color,border-color] duration-[180ms] ease-out hover:border-cyan hover:text-cyan"
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14M8.6 18.3v-7.6H6.07v7.6H8.6m-1.27-8.67a1.45 1.45 0 0 0 1.45-1.45A1.45 1.45 0 0 0 7.33 6.7a1.46 1.46 0 0 0-1.46 1.46 1.46 1.46 0 0 0 1.46 1.45m11 8.67v-4.18c0-2.2-1.18-3.22-2.76-3.22a2.38 2.38 0 0 0-2.16 1.19v-1.02h-2.45v7.6h2.53v-4.22c0-1.12.43-1.78 1.39-1.78s1.4.62 1.4 1.78v4.22h2.55z"></path>
-            </svg>
-          </a>
-          <a
-            href={SITE.socials.x}
-            aria-label="X"
-            class="grid size-[34px] place-items-center rounded-md border border-white/18 text-white/70 transition-[color,border-color] duration-[180ms] ease-out hover:border-cyan hover:text-cyan"
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M18.2 2H21l-6.5 7.4L22 22h-6.6l-5.2-6.8L4.2 22H1.5l7-8L1.2 2h6.8l4.7 6.2L18.2 2zm-1.2 18h1.8L7.2 4H5.3l11.7 16z"></path>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path
+                d="M21.8055 10.0415H21V10H12V14H17.6515C16.827 16.3285 14.6115 18 12 18C8.6865 18 6 15.3135 6 12C6 8.6865 8.6865 6 12 6C13.5295 6 14.921 6.577 15.9805 7.5195L18.809 4.691C17.023 3.0265 14.634 2 12 2C6.4775 2 2 6.4775 2 12C2 17.5225 6.4775 22 12 22C17.5225 22 22 17.5225 22 12C22 11.3295 21.931 10.675 21.8055 10.0415Z"
+              ></path>
             </svg>
           </a>
           <a
             href={SITE.socials.facebook}
             aria-label="Facebook"
+            target="_blank"
+            rel="noopener noreferrer"
             class="grid size-[34px] place-items-center rounded-md border border-white/18 text-white/70 transition-[color,border-color] duration-[180ms] ease-out hover:border-cyan hover:text-cyan"
           >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M13.5 21.95v-7.78H16l.37-2.9H13.5V9.41c0-.84.23-1.41 1.43-1.41h1.53V5.4a20 20 0 0 0-2.23-.11c-2.2 0-3.7 1.34-3.7 3.8v2.18H8V14h2.53v7.95h2.97z"></path>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path
+                d="M22 12C22 6.48 17.52 2 12 2C6.48 2 2 6.48 2 12C2 16.84 5.44 20.87 10 21.8V15H8V12H10V9.5C10 7.57 11.57 6 13.5 6H16V9H14C13.45 9 13 9.45 13 10V12H16V15H13V21.95C18.05 21.45 22 17.19 22 12Z"
+              ></path>
+            </svg>
+          </a>
+          <a
+            href={SITE.socials.x}
+            aria-label="X"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="grid size-[34px] place-items-center rounded-md border border-white/18 text-white/70 transition-[color,border-color] duration-[180ms] ease-out hover:border-cyan hover:text-cyan"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path
+                d="M18.2 2H21l-6.5 7.4L22 22h-6.6l-5.2-6.8L4.2 22H1.5l7-8L1.2 2h6.8l4.7 6.2L18.2 2zm-1.2 18h1.8L7.2 4H5.3l11.7 16z"
+              ></path>
+            </svg>
+          </a>
+          <a
+            href={SITE.socials.linkedin}
+            aria-label="LinkedIn"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="grid size-[34px] place-items-center rounded-md border border-white/18 text-white/70 transition-[color,border-color] duration-[180ms] ease-out hover:border-cyan hover:text-cyan"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path
+                d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14M8.6 18.3v-7.6H6.07v7.6H8.6m-1.27-8.67a1.45 1.45 0 0 0 1.45-1.45A1.45 1.45 0 0 0 7.33 6.7a1.46 1.46 0 0 0-1.46 1.46 1.46 1.46 0 0 0 1.46 1.45m11 8.67v-4.18c0-2.2-1.18-3.22-2.76-3.22a2.38 2.38 0 0 0-2.16 1.19v-1.02h-2.45v7.6h2.53v-4.22c0-1.12.43-1.78 1.39-1.78s1.4.62 1.4 1.78v4.22h2.55z"
+              ></path>
             </svg>
           </a>
         </div>
       </div>
 
       <div>
-        <h5 class="mb-[18px] font-mono text-[11px] font-semibold tracking-[0.14em] text-cyan uppercase">Solutions</h5>
+        <h5
+          class="mb-[18px] font-mono text-[11px] font-semibold tracking-[0.14em] text-cyan uppercase"
+        >
+          Solutions
+        </h5>
         <ul class="m-0 flex list-none flex-col gap-2.5 p-0">
-          <li><a href="/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Development</a></li>
-          <li><a href="/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">AI &amp; Intelligence</a></li>
-          <li><a href="/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Automation &amp; AI</a></li>
-          <li><a href="/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Digital Transformation</a></li>
-          <li><a href="/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">UX Design</a></li>
+          <li>
+            <a
+              href="/"
+              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
+              >Development</a>
+          </li>
+          <li>
+            <a
+              href="/"
+              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
+              >AI &amp; Intelligence</a>
+          </li>
+          <li>
+            <a
+              href="/"
+              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
+              >Automation &amp; AI</a>
+          </li>
+          <li>
+            <a
+              href="/"
+              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
+              >Digital Transformation</a>
+          </li>
+          <li>
+            <a
+              href="/"
+              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
+              >UX Design</a>
+          </li>
         </ul>
       </div>
 
       <div>
-        <h5 class="mb-[18px] font-mono text-[11px] font-semibold tracking-[0.14em] text-cyan uppercase">Industries</h5>
+        <h5
+          class="mb-[18px] font-mono text-[11px] font-semibold tracking-[0.14em] text-cyan uppercase"
+        >
+          Industries
+        </h5>
         <ul class="m-0 flex list-none flex-col gap-2.5 p-0">
-          <li><a href="/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Healthcare</a></li>
-          <li><a href="/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Digital Marketing</a></li>
-          <li><a href="/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">E-commerce</a></li>
-          <li><a href="/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Real Estate</a></li>
-          <li><a href="/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Logistics</a></li>
-          <li><a href="/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Education</a></li>
+          <li>
+            <a
+              href="/"
+              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
+              >Healthcare</a>
+          </li>
+          <li>
+            <a
+              href="/"
+              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
+              >Digital Marketing</a>
+          </li>
+          <li>
+            <a
+              href="/"
+              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
+              >E-commerce</a>
+          </li>
+          <li>
+            <a
+              href="/"
+              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
+              >Real Estate</a>
+          </li>
+          <li>
+            <a
+              href="/"
+              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
+              >Logistics</a>
+          </li>
+          <li>
+            <a
+              href="/"
+              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
+              >Education</a>
+          </li>
         </ul>
       </div>
 
       <div>
-        <h5 class="mb-[18px] font-mono text-[11px] font-semibold tracking-[0.14em] text-cyan uppercase">SLED Partnerships</h5>
+        <h5
+          class="mb-[18px] font-mono text-[11px] font-semibold tracking-[0.14em] text-cyan uppercase"
+        >
+          SLED Partnerships
+        </h5>
         <ul class="m-0 flex list-none flex-col gap-2.5 p-0">
-          <li><a href="/us-sled/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">SLED Hub</a></li>
-          <li><a href="/us-sled/capabilities/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Capabilities</a></li>
-          <li><a href="/us-sled/how-we-engage/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">How We Engage</a></li>
-          <li><a href="/us-sled/operating-model/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Operating Model</a></li>
-          <li><a href="/us-sled/case-studies/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Engagement Examples</a></li>
-          <li><a href="/us-sled/procurement-vehicles/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Procurement Vehicles</a></li>
-          <li><a href="/us-sled/contact/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">SLED Contact</a></li>
+          <li>
+            <a
+              href="/us-sled/"
+              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
+              >SLED Hub</a>
+          </li>
+          <li>
+            <a
+              href="/us-sled/capabilities/"
+              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
+              >Capabilities</a>
+          </li>
+          <li>
+            <a
+              href="/us-sled/how-we-engage/"
+              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
+              >How We Engage</a>
+          </li>
+          <li>
+            <a
+              href="/us-sled/operating-model/"
+              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
+              >Operating Model</a>
+          </li>
+          <li>
+            <a
+              href="/us-sled/case-studies/"
+              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
+              >Engagement Examples</a>
+          </li>
+          <li>
+            <a
+              href="/us-sled/procurement-vehicles/"
+              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
+              >Procurement Vehicles</a>
+          </li>
+          <li>
+            <a
+              href="/us-sled/contact/"
+              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
+              >SLED Contact</a>
+          </li>
         </ul>
       </div>
 
       <div>
-        <h5 class="mb-[18px] font-mono text-[11px] font-semibold tracking-[0.14em] text-cyan uppercase">Company</h5>
+        <h5
+          class="mb-[18px] font-mono text-[11px] font-semibold tracking-[0.14em] text-cyan uppercase"
+        >
+          Company
+        </h5>
         <ul class="m-0 flex list-none flex-col gap-2.5 p-0">
-          <li><a href="/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">About</a></li>
-          <li><a href="/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Team</a></li>
-          <li><a href="/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Careers</a></li>
-          <li><a href={ROUTES.caseStudies} class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Case Studies</a></li>
-          <li><a href="/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Press</a></li>
-          <li><a href="/" class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan">Contact</a></li>
+          <li>
+            <a
+              href="/"
+              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
+              >About</a>
+          </li>
+          <li>
+            <a
+              href="/"
+              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
+              >Team</a>
+          </li>
+          <li>
+            <a
+              href="/"
+              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
+              >Careers</a>
+          </li>
+          <li>
+            <a
+              href={ROUTES.caseStudies}
+              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
+              >Case Studies</a>
+          </li>
+          <li>
+            <a
+              href="/"
+              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
+              >Press</a>
+          </li>
+          <li>
+            <a
+              href="/"
+              class="text-sm text-white/78 transition-colors duration-[180ms] hover:text-cyan"
+              >Contact</a>
+          </li>
         </ul>
       </div>
     </div>
 
-    <div class="strip relative flex items-center justify-between border-t border-white/10 pt-6 text-[13px] text-white/55 max-[600px]:flex-col max-[600px]:items-start max-[600px]:gap-3.5">
+    <div
+      class="strip relative flex items-center justify-between border-t border-white/10 pt-6 text-[13px] text-white/55 max-[600px]:flex-col max-[600px]:items-start max-[600px]:gap-3.5"
+    >
       <div>{SITE_COPYRIGHT}</div>
       <div class="legal flex gap-6">
-        {LEGAL_LINKS.map((link) => (
-          <a href={link.href} class="hover:text-cyan">
-            {link.label}
-          </a>
-        ))}
+        {
+          LEGAL_LINKS.map((link) => (
+            <a href={link.href} class="hover:text-cyan">
+              {link.label}
+            </a>
+          ))
+        }
       </div>
     </div>
   </div>

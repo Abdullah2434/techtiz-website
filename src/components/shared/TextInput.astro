@@ -1,0 +1,79 @@
+---
+interface Props {
+  name: string;
+  type?: 'text' | 'email' | 'tel';
+  id?: string;
+  placeholder?: string;
+  label?: string;
+  hideLabel?: boolean;
+  required?: boolean;
+  value?: string;
+  variant?: 'default' | 'inline';
+  class?: string;
+}
+
+const {
+  name,
+  type = 'text',
+  id,
+  placeholder,
+  label,
+  hideLabel = false,
+  required = false,
+  value,
+  variant = 'default',
+  class: className = '',
+} = Astro.props;
+
+const inputId = id ?? name;
+
+const inputClass = {
+  default:
+    'w-full rounded-xl border border-line bg-white px-4 py-3.5 text-[14px] text-ink outline-none transition-[border-color,box-shadow,transform] duration-200 ease-out placeholder:text-muted/70 focus:border-cyan focus:shadow-[0_0_0_3px_rgba(24,176,230,0.18)] focus:-translate-y-px',
+  inline:
+    'min-w-0 w-full flex-1 border-0 bg-transparent px-3.5 py-2.5 font-sans text-[14.5px] text-ink outline-none placeholder:text-muted',
+}[variant];
+---
+
+{
+  variant === 'inline' ? (
+    <>
+      {label && hideLabel && (
+        <label for={inputId} class="sr-only">
+          {label}
+        </label>
+      )}
+      <input
+        type={type}
+        id={inputId}
+        name={name}
+        placeholder={placeholder}
+        required={required}
+        value={value}
+        class:list={[inputClass, className]}
+      />
+    </>
+  ) : (
+    <div class:list={['w-full', className]}>
+      {label && !hideLabel && (
+        <label for={inputId} class="mb-2 block text-[13.5px] font-semibold text-yale-dark">
+          {label}
+        </label>
+      )}
+      {label && hideLabel && (
+        <label for={inputId} class="sr-only">
+          {label}
+        </label>
+      )}
+      <input
+        type={type}
+        id={inputId}
+        name={name}
+        placeholder={placeholder}
+        required={required}
+        value={value}
+        class={inputClass}
+      />
+    </div>
+  )
+}

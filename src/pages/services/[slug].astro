@@ -1,0 +1,48 @@
+---
+import '../../styles/services.css';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/shared/Header.astro';
+import Footer from '../../components/shared/Footer.astro';
+import ServiceHero from '../../components/services/ServiceHero.astro';
+import ServiceFeatures from '../../components/services/ServiceFeatures.astro';
+import ServiceWorkflow from '../../components/services/ServiceWorkflow.astro';
+import ServiceStats from '../../components/services/ServiceStats.astro';
+import ServiceCta from '../../components/services/ServiceCta.astro';
+import SuccessStoriesSection from '../../components/home/SuccessStoriesSection.astro';
+import {
+  getAllServiceSlugs,
+  getServiceBySlug,
+} from '../../lib/constants/services-portfolio';
+import { serviceDetailSeo } from '../../lib/config/services';
+import { ROUTES } from '../../lib/constants/routes';
+
+export function getStaticPaths() {
+  return getAllServiceSlugs().map((slug) => ({
+    params: { slug },
+  }));
+}
+
+const slug = Astro.params.slug ?? '';
+const service = getServiceBySlug(slug)!;
+const { title, description, canonicalPath } = serviceDetailSeo(service);
+---
+
+<BaseLayout {title} {description} {canonicalPath}>
+  <Header currentPage={ROUTES.services} />
+  <main>
+    <ServiceHero {...service.hero} />
+    <ServiceFeatures {...service.features} />
+    <ServiceWorkflow {...service.workflow} />
+    <SuccessStoriesSection />
+    <ServiceStats
+      {...service.stats}
+      ctaText={service.hero.ctaText}
+      ctaHref={service.hero.ctaUrl}
+    />
+    <ServiceCta {...service.cta} />
+  </main>
+  <Footer />
+  <script src="/scripts/nav.js" is:inline></script>
+  <script src="/scripts/mobile-nav.js" is:inline></script>
+  <script src="/scripts/service-workflow.js" is:inline></script>
+</BaseLayout>

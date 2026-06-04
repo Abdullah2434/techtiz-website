@@ -1,0 +1,106 @@
+---
+import '../../styles/services.css';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/shared/Header.astro';
+import Footer from '../../components/shared/Footer.astro';
+import CtaButton from '../../components/shared/CtaButton.astro';
+import { SERVICES_HUB_SEO } from '../../lib/config/services';
+import { servicesData } from '../../lib/constants/services-portfolio';
+import { SERVICE_CATEGORIES, servicePath } from '../../lib/constants/nav/services';
+import { ROUTES } from '../../lib/constants/routes';
+
+const { title, description, canonicalPath } = SERVICES_HUB_SEO;
+const wrap = 'mx-auto w-full max-w-[1400px] px-2';
+
+const hubSections = SERVICE_CATEGORIES.map((category) => ({
+  title: category.title,
+  description: category.description,
+  landingHref: servicePath(category.landingSlug),
+  services: category.subs
+    .map((sub) => {
+      const service = servicesData[sub.slug];
+      if (!service) return null;
+      const cardTitle =
+        service.hero.title + (service.hero.titleLine2 ? ` ${service.hero.titleLine2}` : '');
+      return {
+        name: sub.name,
+        href: servicePath(sub.slug),
+        cardTitle,
+        description: service.hero.description,
+      };
+    })
+    .filter((entry) => entry !== null),
+}));
+---
+
+<BaseLayout {title} {description} {canonicalPath}>
+  <Header currentPage={ROUTES.services} />
+  <main>
+    <section class:list={[wrap, 'py-10 md:py-16']}>
+      <div class="flex flex-col gap-4 md:gap-6">
+        <h1 class="text-[32px] leading-tight font-medium text-[#101010] md:text-[44px] lg:text-[56px]">
+          Services
+        </h1>
+        <p class="max-w-3xl text-[16px] leading-[140%] font-normal text-[#4D4D4D] md:text-[18px]">
+          We build scalable software and AI-powered systems that streamline operations, automate
+          workflows, and accelerate growth. Browse all services below.
+        </p>
+      </div>
+    </section>
+
+    {
+      hubSections.map((section, index) => (
+        <section
+          class:list={[
+            wrap,
+            'pb-12 md:pb-16',
+            index > 0 && 'border-t border-line-soft',
+          ]}
+        >
+          <div class="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+            <div class="max-w-3xl">
+              <h2 class="text-[26px] leading-tight font-semibold tracking-[-0.02em] text-[#141414] md:text-[32px]">
+                {section.title}
+              </h2>
+              <p class="mt-2 text-[15px] leading-[140%] text-[#4D4D4D] md:text-[16px]">
+                {section.description}
+              </p>
+            </div>
+            <CtaButton
+              label="View category"
+              href={section.landingHref}
+              variant="ghost-light"
+              showArrow={true}
+              class="shrink-0"
+            />
+          </div>
+          <div class="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
+            {
+              section.services.map((service) => (
+                <article class="flex w-full flex-col rounded-lg bg-[#F3F7FB] p-6 transition-shadow duration-300 hover:shadow-md md:p-8">
+                  <h3 class="text-[20px] leading-[120%] font-semibold tracking-[-0.02em] text-[#141414] md:text-[24px]">
+                    {service.cardTitle}
+                  </h3>
+                  <p class="mt-3 text-[14px] leading-[140%] font-normal text-[#101010]/70 md:text-[16px]">
+                    {service.description}
+                  </p>
+                  <div class="mt-6">
+                    <CtaButton
+                      label="View details"
+                      href={service.href}
+                      variant="primary"
+                      showArrow={true}
+                    />
+                  </div>
+                </article>
+              ))
+            }
+          </div>
+        </section>
+      ))
+    }
+  </main>
+  <Footer />
+  <script src="/scripts/nav.js" is:inline></script>
+  <script src="/scripts/mobile-nav.js" is:inline></script>
+</BaseLayout>

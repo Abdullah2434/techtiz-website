@@ -1,3 +1,5 @@
+import { HOME_CAPABILITIES_FROM_NAV } from '../nav/services';
+
 export const HOME_SEO = {
   title: "Techtiz | AI-native engineering studio",
   description:
@@ -39,105 +41,43 @@ export const FEATURED_CLIENTS = [
   { name: "TokenMart", image: "/images/clientfeature/tokenmart.png" },
 ] as const;
 
-export const HOME_CAPABILITIES = [
+const HOME_CAPABILITY_COPY = [
   {
-    title: "Building Future Ready Products",
-    subtitle: "Software Development",
-    image: "/images/capabilities/custom-software-development.png",
-    mainText: "Building Future Ready Products",
-    url: "/services/custom-software",
-    serviceLinks: [
-      { name: "Custom Software", href: "/services/custom-software" },
-      { name: "Mobile Apps", href: "/services/mobile-apps" },
-      { name: "Low code/No-code Dev", href: "/services/low-code-development" },
-      { name: "Vibe code Dev", href: "/services/vibe-code-dev" },
-    ],
+    title: 'Building Future Ready Products',
+    subtitle: 'Software Development',
+    mainText: 'Building Future Ready Products',
   },
   {
-    title: "AI & Intelligence",
-    subtitle: "AI & Intelligence",
-    image: "/images/capabilities/ai-intelligence.png",
-    mainText: "Smarter Decisions Intelligent Systems",
-    url: "/services/ai-consultation",
-    serviceLinks: [
-      { name: "AI Agent", href: "/services/ai-agent" },
-      {
-        name: "Machine Learning & Predictive Intelligence",
-        href: "/services/machine-learning-predictive-intelligence",
-      },
-      { name: "AI Consultation", href: "/services/ai-consultation" },
-      {
-        name: "GenAI / LLM / RAG Solutions",
-        href: "/services/genai-llm-rag-solutions",
-      },
-    ],
+    title: 'AI & Intelligence',
+    subtitle: 'AI & Intelligence',
+    mainText: 'Smarter Decisions Intelligent Systems',
   },
   {
-    title: "Automation & AI Solutions",
-    subtitle: "Automation & AI Solutions",
-    image: "/images/capabilities/automation-ai-solutions.png",
-    mainText: "Automate to Achieve More",
-    url: "/services/sales-automation",
-    serviceLinks: [
-      { name: "Sales Automation", href: "/services/sales-automation" },
-      {
-        name: "Customer Service Automation",
-        href: "/services/customer-service-automation",
-      },
-      { name: "CRM Automation", href: "/services/crm-automation" },
-      { name: "Marketing Automation", href: "/services/marketing-automation" },
-      { name: "Lead Generation", href: "/services/lead-generation" },
-      { name: "SEO Automation", href: "/services/seo-automation" },
-      {
-        name: "AI Appointment Scheduling",
-        href: "/services/ai-appointment-scheduling",
-      },
-    ],
+    title: 'Automation & AI Solutions',
+    subtitle: 'Automation & AI Solutions',
+    mainText: 'Automate to Achieve More',
   },
   {
-    title: "Digital Transformation",
-    subtitle: "Digital Transformation",
-    image: "/images/capabilities/digital-transformation.png",
-    mainText: "Reimagine Reinvent",
-    url: "/services/innovation-digital-evolution",
-    serviceLinks: [
-      {
-        name: "Innovation & Digital Evolution",
-        href: "/services/innovation-digital-evolution",
-      },
-      {
-        name: "System Modernization & Optimization",
-        href: "/services/system-modernization-optimization",
-      },
-      {
-        name: "Automation & Workflow Transformation",
-        href: "/services/automation-workflow-transformation",
-      },
-      {
-        name: "Data Intelligence & Insight Systems",
-        href: "/services/data-intelligence-insight-systems",
-      },
-      {
-        name: "Strategic Enablement & Change Management",
-        href: "/services/strategic-enablement-change-management",
-      },
-    ],
+    title: 'Digital Transformation',
+    subtitle: 'Digital Transformation',
+    mainText: 'Reimagine Reinvent',
   },
   {
-    title: "UX Design / Enablement",
-    subtitle: "UX Design / Enablement",
-    image: "/images/capabilities/ux-design-enablement.png",
-    mainText: "Design That Drives Experience",
-    url: "/services/ui-ux-design",
-    serviceLinks: [
-      {
-        name: "Monitoring & Optimization",
-        href: "/services/monitoring-optimization",
-      },
-      { name: "UI/UX Design", href: "/services/ui-ux-design" },
-    ],
+    title: 'UX Design / Enablement',
+    subtitle: 'UX Design / Enablement',
+    mainText: 'Design That Drives Experience',
   },
 ] as const;
+
+export const HOME_CAPABILITIES = HOME_CAPABILITY_COPY.map((copy, index) => {
+  const nav = HOME_CAPABILITIES_FROM_NAV[index];
+  return {
+    ...copy,
+    image: nav.image,
+    url: nav.url,
+    serviceLinks: nav.serviceLinks,
+  };
+}) as const;
 
 /** @deprecated Use HOME_CAPABILITIES — kept for any stale imports */
 export const CAPABILITIES = HOME_CAPABILITIES;

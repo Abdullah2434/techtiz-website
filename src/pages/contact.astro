@@ -1,0 +1,58 @@
+---
+import '../styles/contact.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/shared/Header.astro';
+import Footer from '../components/shared/Footer.astro';
+import ContactHero from '../components/contact/ContactHero.astro';
+import ContactFormSection from '../components/contact/ContactFormSection.astro';
+import ContactSchedulerSection from '../components/contact/ContactSchedulerSection.astro';
+import { COMMERCIAL_CONTACT_SEO } from '../lib/config/commercial-contact';
+import { ROUTES } from '../lib/constants/routes';
+import { SITE } from '../lib/constants/site';
+
+const { title, description, canonicalPath, ogImage } = COMMERCIAL_CONTACT_SEO;
+
+const contactPageJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  '@id': `${SITE.url}${ROUTES.contact}#contactpage`,
+  url: `${SITE.url}${ROUTES.contact}`,
+  name: title,
+  description,
+  isPartOf: {
+    '@type': 'WebSite',
+    '@id': `${SITE.url}/#website`,
+  },
+  about: {
+    '@type': 'Organization',
+    '@id': `${SITE.url}/#organization`,
+  },
+  mainEntity: {
+    '@type': 'ContactPoint',
+    contactType: 'Customer Service',
+    email: SITE.email.info,
+    availableLanguage: ['English'],
+    areaServed: 'Worldwide',
+  },
+};
+---
+
+<BaseLayout
+  {title}
+  {description}
+  {canonicalPath}
+  {ogImage}
+  jsonLd={[contactPageJsonLd]}
+>
+  <Header currentPage={ROUTES.contact} />
+  <main class="bg-white">
+    <ContactHero />
+    <ContactFormSection />
+    <ContactSchedulerSection />
+  </main>
+  <Footer />
+  <script src="/scripts/nav.js" is:inline></script>
+  <script src="/scripts/mobile-nav.js" is:inline></script>
+  <script src="/scripts/contact-form.js" is:inline></script>
+  <script src="/scripts/contact-scheduler.js" is:inline></script>
+</BaseLayout>

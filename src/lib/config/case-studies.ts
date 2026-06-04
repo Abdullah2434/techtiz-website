@@ -1,4 +1,5 @@
 import type { CaseStudyTabConfig } from '../types/case-study';
+import { ROUTES } from '../constants/routes';
 
 export const CASE_STUDY_TABS: CaseStudyTabConfig[] = [
   { name: 'All', minWidth: 'md:min-w-[83px] min-w-full' },
@@ -27,8 +28,8 @@ export const CASE_STUDIES_SEO_PORTFOLIO = {
   ogImage: '/images/case-studies/BG.png',
 } as const;
 
-/** Legacy case studies CTAs use `/contact-us`; point to SLED contact until a global contact page exists. */
-export const CASE_STUDIES_CONTACT_HREF = '/us-sled/contact/';
+/** Commercial case study CTAs → global contact page. */
+export const CASE_STUDIES_CONTACT_HREF = ROUTES.contact;
 
 export const CASE_STUDIES_LISTING_HERO = {
   title: 'Case Studies',

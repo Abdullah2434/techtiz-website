@@ -9,6 +9,12 @@ export const PAGE_KEYWORDS: Record<string, readonly string[]> = {
     'AI automation',
     'U.S. SLED subcontractor',
   ],
+  '/contact/': [
+    'contact techtiz',
+    'software development consultation',
+    'custom software quote',
+    'schedule consultation',
+  ],
   '/case-studies/': [
     'software development case studies',
     'mobile app development',

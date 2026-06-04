@@ -2,6 +2,7 @@ export const ROUTES = {
   home: '/',
   about: '/about/',
   careers: '/careers/',
+  contact: '/contact/',
   privacyPolicy: '/privacy-policy/',
   termsOfService: '/terms-of-service/',
   services: '/services/',

@@ -10,7 +10,7 @@ export const servicesData: Record<string, ServiceData> = {
       description:
         "We build custom software that streamlines operations, enhances performance, and scales with your business.",
       ctaText: "Get a Free Consultation",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
       techStack: [
         { name: "Python", icon: "/images/tech-icons/python.png" },
         { name: "Go", icon: "/images/tech-icons/go.png" },
@@ -109,7 +109,7 @@ export const servicesData: Record<string, ServiceData> = {
       description:
         "Custom solutions designed to accelerate growth and streamline operations.",
       ctaText: "Book a Free Consultation",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
     },
   },
   "ai-agent": {
@@ -121,7 +121,7 @@ export const servicesData: Record<string, ServiceData> = {
       description:
         "Automate processes, make smarter decisions, and enhance business efficiency with AI-powered agents.",
       ctaText: "Let's Build Smarter",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
       techStack: [
         { name: "AI Tools", icon: "/images/tech-icons/ai-1.png" },
         { name: "LangChain", icon: "/images/tech-icons/langchain.png" },
@@ -221,7 +221,7 @@ export const servicesData: Record<string, ServiceData> = {
       description:
         "Automate, optimize, and scale smarter with intelligent AI systems.",
       ctaText: "Talk to Our Experts",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
     },
   },
   "sales-automation": {
@@ -233,7 +233,7 @@ export const servicesData: Record<string, ServiceData> = {
       description:
         "Streamline lead management, nurture pipelines, and boost conversions with smart automation.",
       ctaText: "Boost Sales Now",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
       techStack: [
         { name: "AI CRM", icon: "/images/tech-icons/ai-3.png" },
         { name: "Integromat", icon: "/images/tech-icons/integromat.png" },
@@ -328,7 +328,7 @@ export const servicesData: Record<string, ServiceData> = {
       title2: "Your Sales?",
       description: "Maximize revenue with intelligent sales automation.",
       ctaText: "Book a Free Consultation",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
     },
   },
   "innovation-digital-evolution": {
@@ -340,7 +340,7 @@ export const servicesData: Record<string, ServiceData> = {
       description:
         "Adopt cutting-edge technologies and transform processes for next-level efficiency.",
       ctaText: "Start Your Transformation",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
       techStack: [
         { name: "Power Platform", icon: "/images/tech-icons/power.png" },
         { name: "AWS", icon: "/images/tech-icons/aws.png" },
@@ -439,7 +439,7 @@ export const servicesData: Record<string, ServiceData> = {
       description:
         "Innovate smarter with a structured digital transformation roadmap.",
       ctaText: "Talk to Our Experts",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
     },
   },
   "monitoring-optimization": {
@@ -451,7 +451,7 @@ export const servicesData: Record<string, ServiceData> = {
       description:
         "Monitor your systems and processes with advanced analytics and actionable insights.",
       ctaText: "Start Optimizing",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
       techStack: [
         {
           name: "Data Visualization",
@@ -552,7 +552,7 @@ export const servicesData: Record<string, ServiceData> = {
       title2: "Your Operations?",
       description: "Leverage monitoring and analytics to stay ahead.",
       ctaText: "Talk to Our Experts",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
     },
   },
   "mobile-apps": {
@@ -564,7 +564,7 @@ export const servicesData: Record<string, ServiceData> = {
       description:
         "Deliver seamless experiences on iOS and Android, tailored to your users and business goals.",
       ctaText: "Build Your App",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
       techStack: [
         { name: "React Native", icon: "/images/tech-icons/react.png" },
         { name: "Flutter", icon: "/images/tech-icons/flutter.png" },
@@ -662,7 +662,7 @@ export const servicesData: Record<string, ServiceData> = {
       title2: "Your Mobile App?",
       description: "Build apps that users love and business thrives on.",
       ctaText: "Book a Free Consultation",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
     },
   },
   "machine-learning-predictive-intelligence": {
@@ -674,7 +674,7 @@ export const servicesData: Record<string, ServiceData> = {
       description:
         "Transform data into actionable predictions to drive smarter business decisions.",
       ctaText: "Discover ML Solutions",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
       techStack: [
         { name: "Python", icon: "/images/tech-icons/python.png" },
         { name: "AI ML", icon: "/images/tech-icons/ai-2.png" },
@@ -772,7 +772,7 @@ export const servicesData: Record<string, ServiceData> = {
       title2: "Smarter?",
       description: "Leverage AI to make informed, data-driven decisions.",
       ctaText: "Talk to Our Experts",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
     },
   },
   "customer-service-automation": {
@@ -784,7 +784,7 @@ export const servicesData: Record<string, ServiceData> = {
       description:
         "Automate support, reduce response times, and delight your customers at every touchpoint.",
       ctaText: "Automate Support",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
       techStack: [
         { name: "AI Chat", icon: "/images/tech-icons/ai-1.png" },
         { name: "Integromat", icon: "/images/tech-icons/integromat.png" },
@@ -882,7 +882,7 @@ export const servicesData: Record<string, ServiceData> = {
       title2: "Customer Support?",
       description: "Deliver faster, smarter, and more consistent service.",
       ctaText: "Book a Free Consultation",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
     },
   },
   "system-modernization-optimization": {
@@ -894,7 +894,7 @@ export const servicesData: Record<string, ServiceData> = {
       description:
         "Upgrade legacy systems, optimize processes, and drive digital agility.",
       ctaText: "Start Modernization",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
       techStack: [
         { name: "AWS", icon: "/images/tech-icons/aws.png" },
         { name: "Azure", icon: "/images/tech-icons/azure.png" },
@@ -992,7 +992,7 @@ export const servicesData: Record<string, ServiceData> = {
       title2: "Your Systems?",
       description: "Optimize and future-proof your technology stack.",
       ctaText: "Talk to Our Experts",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
     },
   },
   "ui-ux-design": {
@@ -1004,7 +1004,7 @@ export const servicesData: Record<string, ServiceData> = {
       description:
         "Create intuitive, engaging, and impactful digital experiences for your audience.",
       ctaText: "Start Designing",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
       techStack: [
         { name: "Framer", icon: "/images/tech-icons/framer.png" },
         { name: "Webflow", icon: "/images/tech-icons/webflow.png" },
@@ -1102,7 +1102,7 @@ export const servicesData: Record<string, ServiceData> = {
       title2: "User Experiences?",
       description: "Design digital products that users love.",
       ctaText: "Book a Free Consultation",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
     },
   },
   "low-code-development": {
@@ -1114,7 +1114,7 @@ export const servicesData: Record<string, ServiceData> = {
       description:
         "Accelerate development and reduce costs with visual development platforms.",
       ctaText: "Start Building",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
       techStack: [
         { name: "Bubble", icon: "/images/tech-icons/bubble.png" },
         { name: "Retool", icon: "/images/tech-icons/retool.png" },
@@ -1212,7 +1212,7 @@ export const servicesData: Record<string, ServiceData> = {
       title2: "Without Code?",
       description: "Accelerate app delivery with low-code/no-code platforms.",
       ctaText: "Talk to Our Experts",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
     },
   },
   "ai-consultation": {
@@ -1224,7 +1224,7 @@ export const servicesData: Record<string, ServiceData> = {
       description:
         "Leverage AI strategies, implementation, and advisory to maximize impact and innovation.",
       ctaText: "Get AI Consultation",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
       techStack: [
         { name: "AI Tools", icon: "/images/tech-icons/ai-1.png" },
         { name: "AI ML", icon: "/images/tech-icons/ai-2.png" },
@@ -1322,7 +1322,7 @@ export const servicesData: Record<string, ServiceData> = {
       title2: " AI?",
       description: "Turn AI into actionable, high-impact solutions.",
       ctaText: "Talk to Our Experts",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
     },
   },
   "crm-automation": {
@@ -1334,7 +1334,7 @@ export const servicesData: Record<string, ServiceData> = {
       description:
         "Streamline client interactions, lead management, and reporting with automated CRM workflows.",
       ctaText: "Automate CRM",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
       techStack: [
         { name: "AI CRM", icon: "/images/tech-icons/ai-4.png" },
         { name: "Integromat", icon: "/images/tech-icons/integromat.png" },
@@ -1433,7 +1433,7 @@ export const servicesData: Record<string, ServiceData> = {
       description:
         "Enhance productivity and client engagement with intelligent CRM automation.",
       ctaText: "Book a Free Consultation",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
     },
   },
   "automation-workflow-transformation": {
@@ -1445,7 +1445,7 @@ export const servicesData: Record<string, ServiceData> = {
       description:
         "Streamline operations, reduce errors, and scale efficiently with smart automation.",
       ctaText: "Start Workflow Automation",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
       techStack: [
         { name: "Integromat", icon: "/images/tech-icons/integromat.png" },
         { name: "Power Automate", icon: "/images/tech-icons/power.png" },
@@ -1543,7 +1543,7 @@ export const servicesData: Record<string, ServiceData> = {
       title2: "Your Workflows?",
       description: "Drive efficiency and scale with intelligent automation.",
       ctaText: "Talk to Our Experts",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
     },
   },
   "vibe-code-dev": {
@@ -1555,7 +1555,7 @@ export const servicesData: Record<string, ServiceData> = {
       description:
         "Create robust, scalable, and future-proof applications with our Vibe Code approach.",
       ctaText: "Start Vibe Coding",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
       techStack: [
         { name: "Node.js", icon: "/images/tech-icons/node.png" },
         { name: "React", icon: "/images/tech-icons/react.png" },
@@ -1653,7 +1653,7 @@ export const servicesData: Record<string, ServiceData> = {
       title2: "with Vibe Code?",
       description: "Deliver custom, scalable, and efficient applications.",
       ctaText: "Book a Free Consultation",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
     },
   },
   "genai-llm-rag-solutions": {
@@ -1665,7 +1665,7 @@ export const servicesData: Record<string, ServiceData> = {
       description:
         "Build intelligent solutions with LLMs, RAG, and GenAI for next-level automation and insights.",
       ctaText: "Explore GenAI Solutions",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
       techStack: [
         { name: "AI Tools", icon: "/images/tech-icons/ai-1.png" },
         { name: "AI Platform", icon: "/images/tech-icons/ai-2.png" },
@@ -1764,7 +1764,7 @@ export const servicesData: Record<string, ServiceData> = {
       description:
         "Build AI-powered solutions for smarter business operations.",
       ctaText: "Talk to Our Experts",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
     },
   },
   "marketing-automation": {
@@ -1776,7 +1776,7 @@ export const servicesData: Record<string, ServiceData> = {
       description:
         "Streamline campaigns, nurture leads, and drive conversions with intelligent marketing automation.",
       ctaText: "Start Marketing Automation",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
       techStack: [
         { name: "AI Marketing", icon: "/images/tech-icons/ai-4.png" },
         { name: "Integromat", icon: "/images/tech-icons/integromat.png" },
@@ -1874,7 +1874,7 @@ export const servicesData: Record<string, ServiceData> = {
       title2: "Your Marketing?",
       description: "Deliver smarter, faster, and more personalized campaigns.",
       ctaText: "Book a Free Consultation",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
     },
   },
   "data-intelligence-insight-systems": {
@@ -1886,7 +1886,7 @@ export const servicesData: Record<string, ServiceData> = {
       description:
         "Leverage advanced analytics and intelligence systems to make smarter decisions.",
       ctaText: "Unlock Data Insights",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
       techStack: [
         { name: "Tableau", icon: "/images/tech-icons/tebleau.png" },
         { name: "Power BI", icon: "/images/tech-icons/power.png" },
@@ -1987,7 +1987,7 @@ export const servicesData: Record<string, ServiceData> = {
       title2: "Your Data?",
       description: "Turn data into actionable insights that drive growth.",
       ctaText: "Talk to Our Experts",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
     },
   },
   "lead-generation": {
@@ -1999,7 +1999,7 @@ export const servicesData: Record<string, ServiceData> = {
       description:
         "Automate prospecting, scoring, and nurturing to fuel sales growth.",
       ctaText: "Start Generating Leads",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
       techStack: [
         { name: "AI Lead Gen", icon: "/images/tech-icons/ai-5.png" },
         { name: "Integromat", icon: "/images/tech-icons/integromat.png" },
@@ -2097,7 +2097,7 @@ export const servicesData: Record<string, ServiceData> = {
       title2: "Leads Smarter?",
       description: "Automate prospecting and focus on closing deals.",
       ctaText: "Book a Free Consultation",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
     },
   },
   "strategic-enablement-change-management": {
@@ -2109,7 +2109,7 @@ export const servicesData: Record<string, ServiceData> = {
       description:
         "Drive organizational transformation with enablement programs and change management strategies.",
       ctaText: "Enable Your Teams",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
       techStack: [
         { name: "Power Platform", icon: "/images/tech-icons/power.png" },
         { name: "Azure", icon: "/images/tech-icons/azure.png" },
@@ -2207,7 +2207,7 @@ export const servicesData: Record<string, ServiceData> = {
       title2: "Your Teams?",
       description: "Drive successful transformation with strategic enablement.",
       ctaText: "Talk to Our Experts",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
     },
   },
   "seo-automation": {
@@ -2219,7 +2219,7 @@ export const servicesData: Record<string, ServiceData> = {
       description:
         "Streamline SEO tasks, reporting, and optimization for higher rankings and traffic.",
       ctaText: "Start SEO Automation",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
       techStack: [
         { name: "AI SEO", icon: "/images/tech-icons/ai-2.png" },
         { name: "Google Forms", icon: "/images/tech-icons/googleForm.png" },
@@ -2320,7 +2320,7 @@ export const servicesData: Record<string, ServiceData> = {
       title2: "SEO?",
       description: "Boost rankings and traffic with intelligent automation.",
       ctaText: "Book a Free Consultation",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
     },
   },
   "ai-appointment-scheduling": {
@@ -2332,7 +2332,7 @@ export const servicesData: Record<string, ServiceData> = {
       description:
         "Automate appointment booking, reminders, and follow-ups with intelligent AI solutions.",
       ctaText: "Automate Scheduling",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
       techStack: [
         { name: "AI Scheduling", icon: "/images/tech-icons/ai-3.png" },
         { name: "Power Automate", icon: "/images/tech-icons/power.png" },
@@ -2430,7 +2430,7 @@ export const servicesData: Record<string, ServiceData> = {
       title2: "Appointments?",
       description: "Save time and improve scheduling efficiency with AI.",
       ctaText: "Talk to Our Experts",
-      ctaUrl: "/us-sled/contact/",
+      ctaUrl: "/contact/",
     },
   },
 };

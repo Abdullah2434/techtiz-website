@@ -21,12 +21,47 @@
 }
 
 .mega-item.active {
-  background: var(--cyan-soft);
-  color: var(--yale-dark);
+  background: rgba(24, 176, 230, 0.2);
+  color: #1e1e1e;
 }
 
 .mega-item.active .arr-r {
   opacity: 0.6;
+}
+
+/* Services mega — legacy TwoColumnDropdown / DropdownCategoryDetails */
+.mega-service-link {
+  display: block;
+  border-radius: 2px;
+  padding: 12px 16px;
+  font-size: 16px;
+  line-height: 1;
+  font-weight: 400;
+  color: #838383;
+  transition:
+    background 0.4s ease,
+    color 0.4s ease;
+}
+
+.mega-service-link:hover {
+  background: #eaeaea;
+  color: #1e1e1e;
+}
+
+.mega-service-link.is-on {
+  background: rgba(24, 176, 230, 0.2);
+  color: #1e1e1e;
+}
+
+.mega-industry-link {
+  display: block;
+  border-radius: 2px;
+  padding: 12px 16px;
+  transition: background 0.3s ease;
+}
+
+.mega-industry-link:hover {
+  background: #eaeaea;
 }
 
 body.m-nav-open {
@@ -97,6 +132,37 @@ body.m-nav-open .m-nav-drawer {
   font-weight: 600;
   color: var(--ink);
   border-bottom: 1px solid var(--line-soft);
+}
+
+.m-nav-drawer a.on {
+  color: var(--yale);
+}
+
+.m-nav-drawer .m-grp-h {
+  margin-top: 18px;
+  margin-bottom: 4px;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cyan-strong);
+}
+
+.m-nav-drawer .m-grp-sub {
+  display: block;
+  margin-top: 12px;
+  margin-bottom: 2px;
+  padding: 0 4px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--yale-dark);
+}
+
+.m-nav-drawer .m-grp a {
+  padding-left: 12px;
+  font-size: 15px;
+  font-weight: 500;
 }
 
 .m-nav-drawer .m-cta {

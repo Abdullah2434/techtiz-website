@@ -1,5 +1,6 @@
 ---
 import { HOME_CAPABILITIES } from '../../lib/constants/pages/home';
+import { ROUTES } from '../../lib/constants/routes';
 import PageWrap from './PageWrap.astro';
 import CapabilityCard from './CapabilityCard.astro';
 ---
@@ -27,7 +28,7 @@ import CapabilityCard from './CapabilityCard.astro';
           Accelerate Your Growth
         </p>
         <a
-          href="/contact-us"
+          href={ROUTES.sledContact}
           class="home-cap-btn-outline hidden min-h-[42px] min-w-[116px] items-center justify-center rounded-[2px] border border-[#4D4D4D] bg-transparent px-6 py-[11px] text-base font-normal text-[#4D4D4D] transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan hover:bg-cyan hover:text-white hover:shadow-md md:inline-flex"
         >
           Book a Consultation

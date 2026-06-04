@@ -1,0 +1,77 @@
+---
+/** Legacy WorkflowIcons.tsx — cycled by step index % 4 */
+export const SERVICE_WORKFLOW_ICON_COUNT = 4;
+
+interface Props {
+  index: number;
+  class?: string;
+}
+
+const { index, class: className = 'size-8' } = Astro.props;
+const variant = index % SERVICE_WORKFLOW_ICON_COUNT;
+---
+
+<span class:list={['inline-flex shrink-0', className]} aria-hidden="true">
+  {
+    variant === 0 && (
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="size-full">
+        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        ></circle>
+        <path
+          d="m20 20-4.35-4.35"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </svg>
+    )
+  }
+  {
+    variant === 1 && (
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="size-full">
+        <path
+          d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+        <path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        ></path>
+        <path d="M10 13l-2 2 2 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        ></path>
+        <path d="M14 13l2 2-2 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        ></path>
+      </svg>
+    )
+  }
+  {
+    variant === 2 && (
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="size-full">
+        <path
+          d="M12 2L2 7l10 5 10-5-10-5z"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+        <path d="M2 17l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        ></path>
+        <path d="M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        ></path>
+      </svg>
+    )
+  }
+  {
+    variant === 3 && (
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="size-full">
+        <path d="M3 3v18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        ></path>
+        <path d="M18 17V9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        ></path>
+        <path d="M13 17V5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        ></path>
+        <path d="M8 17v-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        ></path>
+      </svg>
+    )
+  }
+</span>

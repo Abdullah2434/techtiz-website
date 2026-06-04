@@ -1,0 +1,123 @@
+---
+import LegalPageShell from "./LegalPageShell.astro";
+
+const p = "mt-3 text-[16px] leading-[150%] text-muted";
+const h2 = "text-[22px] md:text-[24px] font-medium text-yale leading-[130%]";
+const ul = "mt-4 list-disc space-y-2 pl-5 text-[16px] leading-[150%] text-muted";
+---
+
+<LegalPageShell title="PRIVACY POLICY">
+  <p slot="intro" class="mt-4 text-[16px] leading-[150%] text-muted">
+    This privacy policy explains how your personal information is collected, used,
+    and disclosed by Techtiz.co.
+  </p>
+
+  <section>
+    <h2 class={h2}>Information We Collect</h2>
+    <p class={p}>
+      We may collect the following categories of personal information:
+    </p>
+    <ul class={ul}>
+      <li>
+        Contact information, such as your name, email address, and phone number.
+      </li>
+      <li>
+        Billing information, such as billing address and payment card details.
+      </li>
+      <li>
+        Other information you provide to us, such as when you participate in a
+        survey, contest, or promotion; when you request customer support; or when
+        you communicate with us in any other way.
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 class={h2}>How We Use Your Information</h2>
+    <p class={p}>
+      We may use your personal information for the following purposes:
+    </p>
+    <ul class={ul}>
+      <li>To provide, maintain, and improve our services.</li>
+      <li>To personalize your experience on our website.</li>
+      <li>
+        To communicate with you, including responding to your comments,
+        questions, and requests; providing customer service and support; and
+        sending you technical notices, updates, security alerts, and
+        administrative messages.
+      </li>
+      <li>
+        To send you marketing and promotional communications, such as
+        newsletters, special offers, and product announcements.
+      </li>
+      <li>To process your transactions.</li>
+      <li>To comply with legal obligations.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 class={h2}>Information Sharing and Disclosure</h2>
+    <p class={p}>
+      We may share your personal information with the following categories of
+      third parties:
+    </p>
+    <ul class={ul}>
+      <li>
+        Service providers who perform services on our behalf, such as payment
+        processing, data analysis, email delivery, hosting services, customer
+        service, and marketing.
+      </li>
+      <li>Business partners who offer a service to you jointly with us.</li>
+      <li>
+        Other users of the website, if you choose to post information publicly.
+      </li>
+      <li>
+        Third parties as required by law or subpoena or if we reasonably believe
+        that such action is necessary to (a) comply with the law and the
+        reasonable requests of law enforcement; (b) to enforce our Terms of Use
+        or to protect the security or integrity of our Service; and/or (c) to
+        exercise or protect the rights, property, or personal safety of our users
+        or others.
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 class={h2}>Your Choices</h2>
+    <p class={p}>
+      You may opt-out of receiving promotional emails from us by following the
+      instructions in those emails. If you opt-out, we may still send you
+      non-promotional emails, such as those about your account or our ongoing
+      business relations.
+    </p>
+  </section>
+
+  <section>
+    <h2 class={h2}>Security</h2>
+    <p class={p}>
+      We take reasonable measures to help protect your personal information from
+      loss, theft, misuse, and unauthorized access, disclosure, alteration, and
+      destruction.
+    </p>
+  </section>
+
+  <section>
+    <h2 class={h2}>Changes to This Privacy Policy</h2>
+    <p class={p}>
+      We may change this privacy policy from time to time. If we make changes, we
+      will notify you by revising the date at the top of the policy and, in some
+      cases, we may provide you with additional notice (such as adding a statement
+      to our website or sending you a notification). We encourage you to review
+      the privacy policy whenever you access the website to stay informed about
+      our information practices and the ways you can help protect your privacy.
+    </p>
+  </section>
+
+  <section>
+    <h2 class={h2}>Contact Us</h2>
+    <p class={p}>
+      If you have any questions or concerns about this privacy policy, please
+      contact us.
+    </p>
+  </section>
+</LegalPageShell>

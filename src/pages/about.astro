@@ -1,0 +1,38 @@
+---
+import '../styles/about.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/shared/Header.astro';
+import Footer from '../components/shared/Footer.astro';
+import AboutHero from '../components/about/AboutHero.astro';
+import AboutValuesSection from '../components/about/AboutValuesSection.astro';
+import AboutStatsSection from '../components/about/AboutStatsSection.astro';
+import AboutLeadershipSection from '../components/about/AboutLeadershipSection.astro';
+import IndustryCta from '../components/industries/IndustryCta.astro';
+import { ABOUT_SEO } from '../lib/config/about';
+import {
+  ABOUT_CTA,
+  ABOUT_HERO,
+  ABOUT_LEADERS,
+  ABOUT_STATS,
+  ABOUT_VALUES,
+} from '../lib/constants/pages/about';
+import { ROUTES } from '../lib/constants/routes';
+
+const { title, description, canonicalPath } = ABOUT_SEO;
+---
+
+<BaseLayout {title} {description} {canonicalPath}>
+  <Header currentPage={ROUTES.about} />
+  <main class="bg-white">
+    <AboutHero {...ABOUT_HERO} />
+    <AboutValuesSection values={ABOUT_VALUES} />
+    <AboutStatsSection stats={ABOUT_STATS} />
+    <AboutLeadershipSection leaders={ABOUT_LEADERS} />
+    <IndustryCta {...ABOUT_CTA} />
+  </main>
+  <Footer />
+  <script src="/scripts/nav.js" is:inline></script>
+  <script src="/scripts/mobile-nav.js" is:inline></script>
+  <script src="/scripts/about-values.js" is:inline></script>
+  <script src="/scripts/about-stats.js" is:inline></script>
+</BaseLayout>

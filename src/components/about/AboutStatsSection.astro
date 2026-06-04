@@ -1,0 +1,37 @@
+---
+import type { AboutStat } from '../../lib/types/about';
+
+interface Props {
+  stats: AboutStat[];
+}
+
+const { stats } = Astro.props;
+---
+
+<section class="mx-auto w-full max-w-[1400px] px-2 py-10 md:py-16" data-about-stats>
+  <div
+    class="flex flex-col items-stretch justify-between divide-y divide-gray-200 rounded-xl shadow-none sm:flex-row sm:divide-x sm:divide-y-0"
+  >
+    {
+      stats.map((stat) => (
+        <div class="flex flex-1 flex-col items-center justify-center py-8 text-center sm:px-6 sm:py-0">
+          <div data-aos="fade-up" data-aos-delay="100">
+            <span
+              class="text-[30px] font-normal text-inherit lg:text-[68px]"
+              data-about-stat-value
+              data-value={stat.value}
+              data-suffix={stat.suffix}
+            >
+              0{stat.suffix}
+            </span>
+          </div>
+          <div data-aos="fade-up" data-aos-delay="100">
+            <span class="mt-2 text-[18px] leading-[120%] font-medium text-inherit lg:text-[24px]">
+              {stat.label}
+            </span>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>

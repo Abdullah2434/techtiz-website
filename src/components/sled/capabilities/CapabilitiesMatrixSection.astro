@@ -1,7 +1,7 @@
 ---
+import { CAPABILITY_MATRIX } from '../../../lib/constants/pages/capabilities';
 import Eyebrow from '../../shared/Eyebrow.astro';
 import SledPageWrap from '../shared/SledPageWrap.astro';
-import { CAPABILITY_MATRIX } from '../../../lib/constants/pages/capabilities';
 ---
 
 <section class="bg-white py-[100px] pb-20">
@@ -24,9 +24,7 @@ import { CAPABILITY_MATRIX } from '../../../lib/constants/pages/capabilities';
       {CAPABILITY_MATRIX.map((row) => (
         <div class="sled-matrix-row grid grid-cols-[280px_1.4fr_1fr] border-t border-line max-[900px]:grid-cols-1 max-[900px]:gap-3 max-[900px]:p-5">
           <div class="flex items-start gap-3.5 border-r border-line px-[26px] py-[22px] max-[900px]:border-r-0 max-[900px]:px-0 max-[900px]:py-0">
-            <div class="grid size-9 shrink-0 place-items-center rounded-md bg-cyan-soft text-cyan-strong">
-              <svg class="size-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 L4 6 v6 c0 4 3.5 8 8 10 c4.5 -2 8 -6 8 -10 V6 z"/></svg>
-            </div>
+            
             <div class="text-[15px] font-bold leading-[1.3] text-yale">{row.name}</div>
           </div>
           <div class="border-r border-line px-[26px] py-[22px] text-[14px] leading-[1.55] text-ink max-[900px]:border-r-0 max-[900px]:px-0 max-[900px]:py-0">

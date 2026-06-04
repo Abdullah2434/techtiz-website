@@ -14,7 +14,12 @@ export {
 
 export {
   INDUSTRY_CATEGORIES,
+  INDUSTRY_CATEGORIES_NAV,
   INDUSTRIES_MEGA_NAV_DATA,
+  INDUSTRIES_HUB_CTA,
+  industryPath,
+  type IndustryNavCategory,
+  type IndustryNavSub,
 } from './industries';
 
 import { SERVICE_CATEGORIES_NAV } from './services';
@@ -43,7 +48,7 @@ export const FOOTER_COLUMNS = [
     heading: 'Industries',
     links: INDUSTRY_CATEGORIES.map((cat) => ({
       label: cat.title,
-      href: '/',
+      href: cat.landingHref,
     })),
   },
   {

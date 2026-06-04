@@ -1,0 +1,44 @@
+---
+import type { IndustryFeaturePairData } from '../../lib/types/industry';
+
+interface Props extends IndustryFeaturePairData {}
+
+const { title, description, features } = Astro.props;
+const titleLines = title.split('\n');
+---
+
+<div class="mx-auto w-full max-w-[1400px] bg-white px-2 py-10 md:py-16">
+  <div class="grid grid-cols-1 items-start gap-8 lg:grid-cols-4 lg:gap-16">
+    <div class="lg:col-span-2">
+      <h2 class="mb-4 text-[30px] leading-tight font-normal md:text-[45px]">
+        {titleLines.map((line, i) => (
+          <>
+            {line}
+            {i < titleLines.length - 1 && <br />}
+          </>
+        ))}
+      </h2>
+      <p class="text-lg text-gray-600">{description}</p>
+    </div>
+    <div class="space-y-[30px] lg:col-span-2 md:space-y-[100px]">
+      {
+        features.map((feature) => (
+          <div class="flex items-start gap-5">
+            <img
+              src={feature.icon}
+              alt=""
+              width={42}
+              height={42}
+              class="mt-4 shrink-0 object-contain"
+              loading="lazy"
+            />
+            <div class="mt-1">
+              <h3 class="mb-2 text-[20px] font-normal md:text-[28px]">{feature.title}</h3>
+              <p class="text-[16px] text-[#5A5A5A]">{feature.description}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+.ind-hero-vid.is-loaded {
+  opacity: 1;
+}
+
+.ind-tab-btn[aria-selected='true'] .ind-tab-pill {
+  opacity: 1;
+}
+
+.ind-tab-btn[aria-selected='true'] {
+  color: #fff;
+}
+
+/* Scroll timeline — initial hidden until JS runs (legacy Framer initial state) */
+.ind-scroll-list.is-enhanced .ind-scroll-heading,
+.ind-scroll-list.is-enhanced .ind-scroll-step {
+  opacity: 0;
+}
+
+.ind-scroll-list.is-enhanced .ind-scroll-connector {
+  opacity: 0;
+}
+
+.ind-scroll-list.is-enhanced .ind-scroll-heading,
+.ind-scroll-list.is-enhanced .ind-scroll-step,
+.ind-scroll-list.is-enhanced .ind-scroll-step-title,
+.ind-scroll-list.is-enhanced .ind-scroll-step-desc,
+.ind-scroll-list.is-enhanced .ind-scroll-badge,
+.ind-scroll-list.is-enhanced .ind-scroll-badge-num {
+  transition: none !important;
+}
+
+.ind-scroll-heading,
+.ind-scroll-step,
+.ind-scroll-connector {
+  will-change: transform, opacity;
+}
+
+.ind-scroll-progress {
+  will-change: height;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ind-scroll-list.is-enhanced .ind-scroll-heading,
+  .ind-scroll-list.is-enhanced .ind-scroll-step,
+  .ind-scroll-list.is-enhanced .ind-scroll-connector {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .ind-scroll-step-title,
+  .ind-scroll-step-desc,
+  .ind-scroll-badge,
+  .ind-scroll-badge-num {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

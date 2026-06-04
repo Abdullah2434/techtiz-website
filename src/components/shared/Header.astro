@@ -30,6 +30,12 @@ const navLinkBase =
 
 const navLinkClass = (href: string) =>
   [navLinkBase, currentPage === href && 'bg-yale/8 text-yale'].filter(Boolean);
+
+/** Legacy Header.tsx: opacity + scale-y-95 → scale-y-100, 300ms ease-out, origin-top */
+const megaPanelBase =
+  'mega pointer-events-none absolute top-[calc(100%+14px)] z-60 w-[min(900px,calc(100vw-32px))] origin-top scale-y-95 rounded-2xl border border-line bg-white p-[22px] opacity-0 shadow-[0_30px_60px_-20px_rgba(14,38,64,0.22),0_6px_18px_-8px_rgba(14,38,64,0.10)] transition-all duration-300 ease-out before:absolute before:-top-2 before:size-3.5 before:rotate-45 before:rounded-tl before:border-t before:border-l before:border-line before:bg-white before:content-[\'\']';
+const megaPanelServices = `${megaPanelBase} left-1/2 -translate-x-1/2 before:left-1/2 before:-translate-x-1/2 max-[1180px]:left-0 max-[1180px]:translate-x-0 max-[1180px]:before:left-10`;
+const megaPanelIndustries = `${megaPanelBase} left-1/2 -translate-x-1/2 before:left-1/2 before:-translate-x-1/2 max-[1180px]:left-auto max-[1180px]:right-0 max-[1180px]:translate-x-0 max-[1180px]:before:left-auto max-[1180px]:before:right-10`;
 ---
 
 
@@ -50,25 +56,22 @@ const navLinkClass = (href: string) =>
           type="button"
           aria-expanded="false"
         >
-          Services <span class="chev size-[7px] -translate-x-px -translate-y-px rotate-45 border-r-[1.6px] border-b-[1.6px] border-current opacity-55 transition-transform duration-220 ease-out"></span>
+          Services <span class="chev size-[7px] -translate-x-px -translate-y-px rotate-45 border-r-[1.6px] border-b-[1.6px] border-current opacity-55 transition-transform duration-300 ease-out"></span>
         </button>
-        <div
-          class="mega pointer-events-none invisible absolute top-[calc(100%+14px)] left-1/2 z-60 w-[min(900px,calc(100vw-32px))] -translate-x-1/2 -translate-y-1 rounded-2xl border border-line bg-white p-[22px] opacity-0 shadow-[0_30px_60px_-20px_rgba(14,38,64,0.22),0_6px_18px_-8px_rgba(14,38,64,0.10)] transition-[opacity,transform,visibility] duration-[180ms] ease-out before:absolute before:-top-2 before:left-1/2 before:size-3.5 before:-translate-x-1/2 before:rotate-45 before:rounded-tl before:border-t before:border-l before:border-line before:bg-white before:content-[''] max-[1180px]:left-0 max-[1180px]:translate-x-0 max-[1180px]:before:left-10"
-          role="menu"
-        >
+        <div class={megaPanelServices} role="menu">
           <div class="mega-inner grid grid-cols-[minmax(240px,280px)_1fr] gap-[22px]">
             <div class="mega-left border-r border-[#EAEAEA] pr-4">
               <div class="mega-eyebrow mb-2 px-1 text-xl font-semibold text-[#141414]">We Offer</div>
               <div class="mega-list flex flex-col gap-0.5" data-list="services">
                 {
                   SERVICE_CATEGORIES_NAV.map((cat, index) => (
-                    <a
+                    <button
+                      type="button"
                       class:list={[
-                        'mega-item group flex cursor-pointer items-center justify-between rounded-[2px] px-4 py-3 text-base font-normal leading-none text-[#1E1E1E] transition-[background,color] duration-[400ms] ease-out hover:bg-[#EAEAEA]',
+                        'mega-item group flex w-full cursor-pointer items-center justify-between rounded-[2px] border-0 bg-transparent px-4 py-3 text-left text-base font-normal leading-none text-[#1E1E1E] transition-[background,color] duration-[400ms] ease-out hover:bg-[#EAEAEA]',
                         index === 0 && 'active',
                       ]}
                       data-key={cat.megaKey}
-                      href={cat.landingHref}
                     >
                       {cat.title}
                       <svg
@@ -81,7 +84,7 @@ const navLinkClass = (href: string) =>
                       >
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                       </svg>
-                    </a>
+                    </button>
                   ))
                 }
               </div>
@@ -141,25 +144,22 @@ const navLinkClass = (href: string) =>
           type="button"
           aria-expanded="false"
         >
-          Industries <span class="chev size-[7px] -translate-x-px -translate-y-px rotate-45 border-r-[1.6px] border-b-[1.6px] border-current opacity-55 transition-transform duration-220 ease-out"></span>
+          Industries <span class="chev size-[7px] -translate-x-px -translate-y-px rotate-45 border-r-[1.6px] border-b-[1.6px] border-current opacity-55 transition-transform duration-300 ease-out"></span>
         </button>
-        <div
-          class="mega pointer-events-none invisible absolute top-[calc(100%+14px)] left-1/2 z-60 w-[min(900px,calc(100vw-32px))] -translate-x-1/2 -translate-y-1 rounded-2xl border border-line bg-white p-[22px] opacity-0 shadow-[0_30px_60px_-20px_rgba(14,38,64,0.22),0_6px_18px_-8px_rgba(14,38,64,0.10)] transition-[opacity,transform,visibility] duration-[180ms] ease-out before:absolute before:-top-2 before:left-1/2 before:size-3.5 before:-translate-x-1/2 before:rotate-45 before:rounded-tl before:border-t before:border-l before:border-line before:bg-white before:content-[''] max-[1180px]:left-auto max-[1180px]:right-0 max-[1180px]:translate-x-0 max-[1180px]:before:left-auto max-[1180px]:before:right-10"
-          role="menu"
-        >
+        <div class={megaPanelIndustries} role="menu">
           <div class="mega-inner grid grid-cols-[minmax(240px,280px)_1fr] gap-[22px]">
             <div class="mega-left border-r border-[#EAEAEA] pr-4">
               <div class="mega-eyebrow mb-2 px-1 text-xl font-semibold text-[#141414]">Industries</div>
               <div class="mega-list flex flex-col gap-0.5" data-list="industries">
                 {
                   INDUSTRY_CATEGORIES.map((cat, index) => (
-                    <a
+                    <button
+                      type="button"
                       class:list={[
-                        'mega-item group flex cursor-pointer items-center justify-between rounded-[2px] px-4 py-3 text-base font-normal leading-none text-[#1E1E1E] transition-[background,color] duration-[400ms] ease-out hover:bg-[#EAEAEA]',
+                        'mega-item group flex w-full cursor-pointer items-center justify-between rounded-[2px] border-0 bg-transparent px-4 py-3 text-left text-base font-normal leading-none text-[#1E1E1E] transition-[background,color] duration-[400ms] ease-out hover:bg-[#EAEAEA]',
                         index === 0 && 'active',
                       ]}
                       data-key={cat.megaKey}
-                      href="/"
                     >
                       {cat.title}
                       <svg
@@ -172,55 +172,61 @@ const navLinkClass = (href: string) =>
                       >
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                       </svg>
-                    </a>
+                    </button>
                   ))
                 }
               </div>
             </div>
             <div class="mega-right flex min-w-0 flex-col pl-[22px]">
               <div data-feature="industries" class="flex flex-col gap-3">
-                <div class="mega-feature rounded-[7px] bg-[#F6F6F6] px-4 py-[15px]">
-                  <div class="flex items-start gap-4">
-                    <div class="feat-icon shrink-0" data-feat-icon>
-                      <img
-                        src={firstIndustryCategory.icon}
-                        alt=""
-                        width={40}
-                        height={40}
-                        class="size-10 object-contain"
-                      />
-                    </div>
-                    <div class="min-w-0">
-                      <h4
-                        data-feat-title
-                        class="text-[24px] leading-[110%] font-semibold tracking-[-0.02em] text-[#141414]"
-                      >
-                        {firstIndustryCategory.title}
-                      </h4>
-                      <p
-                        data-feat-desc
-                        class="mt-2 text-xs leading-[120%] font-normal text-[#1E1E1E]/60"
-                      >
-                        {firstIndustryCategory.description}
-                      </p>
+                <a
+                  href={firstIndustryCategory.landingHref}
+                  data-industry-panel
+                  class="mega-industry-panel group -m-2 flex flex-col gap-3 rounded-[8px] border-2 border-transparent p-2 transition-all duration-300 hover:border-cyan hover:bg-cyan/5"
+                >
+                  <div class="mega-feature rounded-[7px] bg-[#F6F6F6] px-4 py-[15px] transition-colors group-hover:bg-cyan/10">
+                    <div class="flex items-start gap-4">
+                      <div class="feat-icon shrink-0" data-feat-icon>
+                        <img
+                          src={firstIndustryCategory.icon}
+                          alt=""
+                          width={40}
+                          height={40}
+                          class="size-10 object-contain"
+                        />
+                      </div>
+                      <div class="min-w-0">
+                        <h4
+                          data-feat-title
+                          class="text-[24px] leading-[110%] font-semibold tracking-[-0.02em] text-[#141414] transition-colors group-hover:text-cyan"
+                        >
+                          {firstIndustryCategory.title}
+                        </h4>
+                        <p
+                          data-feat-desc
+                          class="mt-2 text-xs leading-[120%] font-normal text-[#1E1E1E]/60"
+                        >
+                          {firstIndustryCategory.description}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="h-0.5 bg-[#EAEAEA]" aria-hidden="true"></div>
-                <div class="mega-sublinks flex flex-col gap-3" data-sublinks="industries">
-                  {
-                    firstIndustryCategory.subs.map((sub) => (
-                      <a href={sub.href} class="mega-industry-link group/sub">
-                        <span class="block text-[18px] font-semibold leading-none text-[#153A60] group-hover/sub:text-cyan">
-                          {sub.name}
-                        </span>
-                        <span class="mt-2 block text-xs leading-[120%] text-[#101010]/60">
-                          {sub.desc}
-                        </span>
-                      </a>
-                    ))
-                  }
-                </div>
+                  <div class="h-0.5 bg-[#EAEAEA] transition-colors group-hover:bg-cyan" aria-hidden="true"></div>
+                  <div class="mega-sublinks flex flex-col gap-3" data-sublinks="industries">
+                    {
+                      firstIndustryCategory.subs.map((sub) => (
+                        <div class="flex flex-col gap-2 px-4 py-3">
+                          <span class="block text-[18px] font-semibold leading-none text-[#153A60] group-hover:text-cyan">
+                            {sub.name}
+                          </span>
+                          <span class="block text-xs leading-[120%] text-[#101010]/60">
+                            {sub.desc}
+                          </span>
+                        </div>
+                      ))
+                    }
+                  </div>
+                </a>
               </div>
               <div class="mega-footer mt-3.5 flex items-center justify-between border-t border-line-soft pt-3.5">
                 <span class="mega-tag font-mono text-[10.5px] tracking-[0.14em] text-cyan-strong uppercase">U.S. SLED prime contractor?</span>

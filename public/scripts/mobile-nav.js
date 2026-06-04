@@ -95,7 +95,43 @@
       });
     });
     html += '</div>';
-  } else {
+  }
+
+  var industriesMega = null;
+  try {
+    var industriesEl = document.getElementById('industries-mega-nav');
+    if (industriesEl && industriesEl.textContent) {
+      industriesMega = JSON.parse(industriesEl.textContent);
+    }
+  } catch (_) {
+    industriesMega = null;
+  }
+
+  if (industriesMega) {
+    html += '<div class="m-grp"><div class="m-grp-h">Industries</div>';
+    html +=
+      '<a href="/industries/"' +
+      (isOn('/industries/') ? ' class="on"' : '') +
+      '>All industries</a>';
+    Object.keys(industriesMega).forEach(function (key) {
+      var cat = industriesMega[key];
+      if (!cat) return;
+      html += '<span class="m-grp-sub">' + cat.title + '</span>';
+      if (cat.landingHref) {
+        html +=
+          '<a href="' +
+          cat.landingHref +
+          '"' +
+          (isOn(cat.landingHref) ? ' class="on"' : '') +
+          '>' +
+          cat.title +
+          ' overview</a>';
+      }
+    });
+    html += '</div>';
+  }
+
+  if (!servicesMega && !industriesMega) {
     header.querySelectorAll('.primary-nav .nav-item > .nav-link').forEach(function (el) {
       var label = el.textContent.replace(/\s+/g, ' ').trim();
       html += '<span class="m-grp-h">' + label + '</span>';

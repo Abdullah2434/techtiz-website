@@ -13,7 +13,11 @@ const WHY_KEYS = ['expert', 'ontime', 'scalable', 'ongoing'] as const;
 
 <section class="relative bg-white py-[110px] max-[900px]:py-14">
   <PageWrap>
-    <div class="mb-9 max-w-[700px] max-[640px]:mb-7">
+    <div
+      class="mb-9 max-w-[700px] max-[640px]:mb-7"
+      data-aos="fade-up"
+      data-aos-delay="100"
+    >
       <span class="mb-3.5 inline-flex font-mono text-[11px] font-bold tracking-[0.18em] uppercase text-cyan-strong max-[640px]:text-[10px]">Why teams choose us</span>
       <h2 class="text-[44px] font-extrabold leading-[1.05] tracking-[-0.022em] text-yale max-[900px]:text-[30px] max-[640px]:text-[24px] max-[640px]:leading-[1.1] max-[480px]:text-[22px]">
         Four reasons the engagement keeps compounding.
@@ -25,6 +29,8 @@ const WHY_KEYS = ['expert', 'ontime', 'scalable', 'ongoing'] as const;
       class="relative mb-6 grid grid-cols-4 gap-2.5 border-b border-line pb-6 max-[1024px]:grid-cols-2 max-[600px]:grid-cols-1 max-[640px]:mb-5 max-[640px]:gap-2 max-[640px]:pb-5"
       role="tablist"
       data-why-tabs
+      data-aos="fade-up"
+      data-aos-delay="100"
     >
       {
         WHY_TABS.map((tab, i) => (
@@ -52,8 +58,15 @@ const WHY_KEYS = ['expert', 'ontime', 'scalable', 'ongoing'] as const;
       }
     </div>
 
-    <div class="grid grid-cols-[1.35fr_0.85fr] gap-4 max-[900px]:grid-cols-1" data-why-panel>
-      <div class="home-why-pane rounded-2xl border border-line bg-seasalt p-8 max-[600px]:p-6">
+    <div
+      class="home-why-panel grid grid-cols-[1.35fr_0.85fr] gap-4 max-[900px]:grid-cols-1"
+      data-why-panel
+      data-aos="fade-up"
+      data-aos-delay="200"
+    >
+      <div
+        class="home-why-pane rounded-2xl border border-line bg-seasalt p-8 max-[600px]:p-6"
+      >
         <div class="home-why-stagger">
           <div class="mb-5 flex items-center gap-3">
             <div class="grid size-10 place-items-center rounded-lg bg-cyan-soft text-cyan-strong" data-why-icon>
@@ -82,7 +95,9 @@ const WHY_KEYS = ['expert', 'ontime', 'scalable', 'ongoing'] as const;
         </div>
       </div>
 
-      <div class="home-why-pane flex flex-col rounded-2xl border border-line bg-white p-[30px] max-[640px]:p-5">
+      <div
+        class="home-why-pane flex flex-col rounded-2xl border border-line bg-white p-[30px] max-[640px]:p-5"
+      >
         <div class="home-why-stagger flex flex-1 flex-col">
           <h4 class="mb-5 font-mono text-xs font-bold uppercase tracking-[0.16em] text-yale-dark">Key Highlights</h4>
           <ul class="mb-6 flex flex-col gap-3.5" data-why-highlights>

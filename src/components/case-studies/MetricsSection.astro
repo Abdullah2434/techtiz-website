@@ -1,0 +1,88 @@
+---
+import PageWrap from "../home/PageWrap.astro";
+import type { CaseStudyMetric } from "../../lib/types/case-study";
+
+interface Props {
+  metrics: CaseStudyMetric[];
+}
+
+const { metrics } = Astro.props;
+---
+
+<section class="py-10 md:py-16">
+  <PageWrap>
+    <div
+      class="flex flex-col items-stretch divide-y divide-[#838383] text-center md:flex-row md:divide-x md:divide-y-0"
+      data-cs-metrics
+    >
+      {
+        metrics.map((metric, i) => (
+          <div
+            class="flex flex-1 flex-col items-center justify-center py-6 md:px-8 md:py-0"
+            data-aos="fade-up"
+            data-aos-delay={300 + i * 100}
+          >
+            <span
+              class="mb-4 text-[30px] font-semibold leading-[1.2] text-[#101010] md:text-[48px]"
+              data-stat-value={metric.value}
+            >
+              {metric.value}
+            </span>
+            <span class="text-xl font-semibold text-[#838383] md:text-2xl">
+              {metric.label}
+            </span>
+          </div>
+        ))
+      }
+    </div>
+  </PageWrap>
+</section>
+
+<script is:inline>
+  const root = document.querySelector("[data-cs-metrics]");
+  if (!root) return;
+
+  const parseStat = (value) => {
+    const match = String(value).match(/^(\d+(?:\.\d+)?)(.*)$/);
+    if (!match) return { num: 0, suffix: value, decimals: 0 };
+    const num = parseFloat(match[1]);
+    const suffix = match[2];
+    const decimals = match[1].includes(".") ? 1 : 0;
+    return { num, suffix, decimals };
+  };
+
+  const animateStat = (el, target, duration = 2000) => {
+    const { num, suffix, decimals } = parseStat(target);
+    if (num <= 0) return;
+
+    const start = performance.now();
+    const step = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = num * eased;
+      el.textContent =
+        (decimals > 0
+          ? current.toFixed(decimals)
+          : Math.floor(current).toString()) + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+      else el.textContent = target;
+    };
+    requestAnimationFrame(step);
+  };
+
+  let played = false;
+  const observer = new IntersectionObserver(
+    (entries) => {
+      const entry = entries[0];
+      if (!entry?.isIntersecting || played) return;
+      played = true;
+      root.querySelectorAll("[data-stat-value]").forEach((el) => {
+        animateStat(el, el.getAttribute("data-stat-value"));
+      });
+      observer.disconnect();
+    },
+    { threshold: 0.3 },
+  );
+
+  observer.observe(root);
+</script>

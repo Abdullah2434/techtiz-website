@@ -1,14 +1,24 @@
 ---
 import '../../styles/chrome.css';
 import { SITE } from '../../lib/constants/site';
+import { ROUTES } from '../../lib/constants/routes';
 
 interface Props {
   currentPage?: string;
 }
 
+const { currentPage = '' } = Astro.props;
+
 const wrap =
   'mx-auto w-full max-w-[1400px] px-2 max-[600px]:px-[18px]';
+
+const navLinkBase =
+  'nav-link inline-flex cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-lg border border-transparent bg-transparent px-4 py-2.5 font-sans text-[14.5px] font-semibold leading-none text-ink transition-[color,background,border-color] duration-[180ms] ease-out hover:bg-yale/4 hover:text-yale';
+
+const navLinkClass = (href: string) =>
+  [navLinkBase, currentPage === href && 'bg-yale/8 text-yale'].filter(Boolean);
 ---
+
 
 <header class="top sticky top-0 z-50 border-b border-line bg-white/94 backdrop-blur-[10px]">
   <div class:list={[wrap, 'nav grid h-[76px] grid-cols-[1fr_auto_1fr] items-center max-[900px]:flex max-[900px]:h-16 max-[900px]:justify-between']}>
@@ -17,10 +27,7 @@ const wrap =
     </a>
 
     <nav class="primary-nav inline-flex items-center gap-0.5 max-[900px]:hidden" aria-label="Primary">
-      <a
-        href="/"
-        class="nav-link inline-flex cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-lg border border-transparent bg-transparent px-4 py-2.5 font-sans text-[14.5px] font-semibold leading-none text-ink transition-[color,background,border-color] duration-[180ms] ease-out hover:bg-yale/4 hover:text-yale"
-      >
+      <a href="/" class:list={navLinkClass('/')} aria-current={currentPage === '/' ? 'page' : undefined}>
         About Us
       </a>
 
@@ -160,15 +167,13 @@ const wrap =
       </div>
 
       <a
-        href="/us-sled/case-studies/"
-        class="nav-link inline-flex cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-lg border border-transparent bg-transparent px-4 py-2.5 font-sans text-[14.5px] font-semibold leading-none text-ink transition-[color,background,border-color] duration-[180ms] ease-out hover:bg-yale/4 hover:text-yale"
+        href={ROUTES.caseStudies}
+        class:list={navLinkClass(ROUTES.caseStudies)}
+        aria-current={currentPage === ROUTES.caseStudies ? 'page' : undefined}
       >
         Case Studies
       </a>
-      <a
-        href="/"
-        class="nav-link inline-flex cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-lg border border-transparent bg-transparent px-4 py-2.5 font-sans text-[14.5px] font-semibold leading-none text-ink transition-[color,background,border-color] duration-[180ms] ease-out hover:bg-yale/4 hover:text-yale"
-      >
+      <a href="/" class:list={navLinkClass('/')}>
         Careers
       </a>
     </nav>

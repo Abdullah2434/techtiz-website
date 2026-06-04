@@ -1,0 +1,33 @@
+---
+import OutlinedButton from '../shared/OutlinedButton.astro';
+import PageWrap from '../home/PageWrap.astro';
+import { CASE_STUDIES_CONTACT_HREF, CASE_STUDIES_PAGE_CTA } from '../../lib/config/case-studies';
+
+const { title1, title2, description, buttonLabel } = CASE_STUDIES_PAGE_CTA;
+---
+
+<section class="py-10 md:py-16">
+  <PageWrap>
+    <div class="flex flex-col items-center justify-between gap-8 md:flex-row md:items-start md:gap-0">
+      <div class="mb-6 w-full flex-1 text-left md:mb-0">
+        <div data-aos="fade-up" data-aos-delay="100">
+          <h2 class="text-[32px] font-normal leading-tight tracking-[-0.02em] text-[#1E1E1E] lg:text-[48px]">
+            {title1}
+            <br class="hidden lg:block" />
+            <span class="font-semibold">{title2}</span>
+          </h2>
+        </div>
+      </div>
+      <div class="flex w-full flex-1 flex-col items-center md:items-end md:text-right">
+        <div data-aos="fade-up" data-aos-delay="100">
+          <p class="mb-6 max-w-[533px] text-[15px] font-normal leading-[1.3] text-[#101010] lg:text-lg">
+            {description}
+          </p>
+        </div>
+        <div data-aos="fade-up" data-aos-delay="100">
+          <OutlinedButton href={CASE_STUDIES_CONTACT_HREF} label={buttonLabel} minWidth="!min-w-[260px]" />
+        </div>
+      </div>
+    </div>
+  </PageWrap>
+</section>

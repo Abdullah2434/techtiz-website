@@ -1,0 +1,135 @@
+---
+import ArrowRight from '@lucide/astro/icons/arrow-right';
+import { DIGITAL_FOUNDATION } from '../../lib/constants/pages/home';
+import PageWrap from './PageWrap.astro';
+
+const { title, description, cta, bgImage, ratingImage, stats } = DIGITAL_FOUNDATION;
+---
+
+<section class="bg-white py-10 md:py-16" aria-labelledby="digital-foundation-heading">
+  <PageWrap>
+    <div
+      class="relative flex min-h-[520px] flex-col justify-center overflow-hidden rounded-md bg-yale px-6 md:px-12"
+      data-aos="fade-up"
+      data-aos-duration="800"
+      data-aos-offset="100"
+    >
+      <img
+        src={bgImage}
+        alt=""
+        class="pointer-events-none absolute inset-0 size-full object-cover object-right select-none"
+        loading="lazy"
+        decoding="async"
+        aria-hidden="true"
+      />
+
+      <div class="relative z-10 mt-3 flex flex-col gap-6 md:flex-row md:items-start">
+        <div class="max-w-[650px]" data-aos="fade-up" data-aos-delay="100">
+          <h2
+            id="digital-foundation-heading"
+            class="mb-3 text-[24px] font-normal leading-[1.2] tracking-[-0.02em] text-white md:text-[40px] md:leading-[48px] md:tracking-[-0.8px]"
+          >
+            {title}
+          </h2>
+          <p
+            class="mb-5 text-[12px] font-normal leading-6 tracking-[-0.02em] text-white/70 md:text-base md:leading-6"
+          >
+            {description}
+          </p>
+          <a href={cta.href} class="home-digital-cta group">
+            <span class="md:hidden">{cta.labelMobile}</span>
+            <span class="hidden md:inline">{cta.labelDesktop}</span>
+            <ArrowRight
+              class="size-[18px] shrink-0 transition-transform duration-300 group-hover:translate-x-0.5"
+              aria-hidden="true"
+            />
+          </a>
+        </div>
+
+        <div
+          class="flex justify-start md:ml-auto md:justify-end"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
+          <img
+            src={ratingImage}
+            width={215}
+            height={59}
+            alt="Clutch rating"
+            class="h-[59px] w-auto max-w-[215px] object-contain"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      </div>
+
+      <div
+        class="home-digital-stats relative z-10 mb-2 mt-10 grid min-h-[140px] grid-cols-2 rounded-md border border-white/30 text-white md:mt-16 md:grid-cols-4"
+        data-digital-stats
+        data-aos="fade-up"
+        data-aos-delay="300"
+      >
+        {
+          stats.map((stat) => (
+            <div class="flex flex-wrap items-center justify-center gap-2 border border-white/30 p-5">
+              <h3
+                class="text-[32px] font-semibold leading-none md:text-[40px]"
+                data-stat-value={stat.value}
+              >
+                {stat.value}
+              </h3>
+              <p class="text-center text-xs font-normal md:text-lg">{stat.label}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </PageWrap>
+</section>
+
+<script define:vars={{ statsData: stats }}>
+  const root = document.querySelector('[data-digital-stats]');
+  if (!root) return;
+
+  const parseStat = (value) => {
+    const match = String(value).match(/^(\d+(?:\.\d+)?)(.*)$/);
+    if (!match) return { num: 0, suffix: value, decimals: 0 };
+    const num = parseFloat(match[1]);
+    const suffix = match[2];
+    const decimals = match[1].includes('.') ? 1 : 0;
+    return { num, suffix, decimals };
+  };
+
+  const animateStat = (el, target, duration = 2000) => {
+    const { num, suffix, decimals } = parseStat(target);
+    if (num <= 0) return;
+
+    const start = performance.now();
+    const step = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = num * eased;
+      el.textContent =
+        (decimals > 0 ? current.toFixed(decimals) : Math.floor(current).toString()) + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+      else el.textContent = target;
+    };
+    requestAnimationFrame(step);
+  };
+
+  let played = false;
+  const observer = new IntersectionObserver(
+    (entries) => {
+      const entry = entries[0];
+      if (!entry?.isIntersecting || played) return;
+      played = true;
+      root.querySelectorAll('[data-stat-value]').forEach((el) => {
+        animateStat(el, el.getAttribute('data-stat-value'));
+      });
+      observer.disconnect();
+    },
+    { threshold: 0.3 },
+  );
+
+  observer.observe(root);
+</script>

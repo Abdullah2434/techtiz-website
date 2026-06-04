@@ -1,5 +1,6 @@
 export const ROUTES = {
   home: '/',
+  caseStudies: '/case-studies/',
   sledHub: '/us-sled/',
   sledCapabilities: '/us-sled/capabilities/',
   sledCapabilityStatement: '/us-sled/capability-statement/',

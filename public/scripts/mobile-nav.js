@@ -37,10 +37,18 @@
     html += '</div>';
   }
 
-  header.querySelectorAll('.primary-nav > a.nav-link, .primary-nav .nav-item > .nav-link').forEach(function (el) {
+  header.querySelectorAll('.primary-nav > a.nav-link').forEach(function (el) {
     var label = el.textContent.replace(/\s+/g, ' ').trim();
     var href = el.getAttribute('href');
-    html += '<a href="' + (href && href !== '#' ? href : '/') + '">' + label + '</a>';
+    if (!href || href === '#') return;
+    var path = window.location.pathname;
+    var on = href === '/' ? path === '/' : path === href || path.startsWith(href);
+    html += '<a href="' + href + '"' + (on ? ' class="on"' : '') + '>' + label + '</a>';
+  });
+
+  header.querySelectorAll('.primary-nav .nav-item > .nav-link').forEach(function (el) {
+    var label = el.textContent.replace(/\s+/g, ' ').trim();
+    html += '<span class="m-grp-h">' + label + '</span>';
   });
 
   html += '<a class="m-cta" href="/us-sled/">SLED Partnerships \u2192</a>';

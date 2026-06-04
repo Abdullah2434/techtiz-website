@@ -1,18 +1,18 @@
 ---
-import '../styles/home.css';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/shared/Header.astro';
-import Footer from '../components/shared/Footer.astro';
-import HeroSection from '../components/home/HeroSection.astro';
-import FeaturedClientsSection from '../components/home/FeaturedClientsSection.astro';
-import CapabilitiesSection from '../components/home/CapabilitiesSection.astro';
-import HomeIndustries from '../components/home/HomeIndustries.astro';
-import HomeWhyChoose from '../components/home/HomeWhyChoose.astro';
-import ProofBar from '../components/home/ProofBar.astro';
-import CaseStudiesSection from '../components/home/CaseStudiesSection.astro';
-import EngageSection from '../components/home/EngageSection.astro';
-import FinalCtaSection from '../components/home/FinalCtaSection.astro';
-import { HOME_SEO } from '../lib/constants/pages/home';
+import "../styles/home.css";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/shared/Header.astro";
+import Footer from "../components/shared/Footer.astro";
+import HeroSection from "../components/home/HeroSection.astro";
+import FeaturedClientsSection from "../components/home/FeaturedClientsSection.astro";
+import CapabilitiesSection from "../components/home/CapabilitiesSection.astro";
+import HomeIndustries from "../components/home/HomeIndustries.astro";
+import HomeWhyChoose from "../components/home/HomeWhyChoose.astro";
+import DigitalFoundationSection from "../components/home/DigitalFoundationSection.astro";
+import SuccessStoriesSection from "../components/home/SuccessStoriesSection.astro";
+import EngageSection from "../components/home/EngageSection.astro";
+import FinalCtaSection from "../components/home/FinalCtaSection.astro";
+import { HOME_SEO } from "../lib/constants/pages/home";
 ---
 
 <BaseLayout {...HOME_SEO}>
@@ -23,8 +23,8 @@ import { HOME_SEO } from '../lib/constants/pages/home';
     <CapabilitiesSection />
     <HomeIndustries />
     <HomeWhyChoose />
-    <ProofBar />
-    <CaseStudiesSection />
+    <DigitalFoundationSection />
+    <SuccessStoriesSection />
     <EngageSection />
     <FinalCtaSection />
   </main>

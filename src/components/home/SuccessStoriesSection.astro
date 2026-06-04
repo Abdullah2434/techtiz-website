@@ -1,0 +1,62 @@
+---
+import "../../styles/case-studies.css";
+import SectionHeader from "../case-studies/SectionHeader.astro";
+import TestimonialCard from "../case-studies/TestimonialCard.astro";
+import VideoModal from "../case-studies/VideoModal.astro";
+import PageWrap from "./PageWrap.astro";
+import { SUCCESS_STORIES } from "../../lib/constants/pages/success-stories";
+import { SUCCESS_STORIES_SECTION } from "../../lib/config/case-studies";
+---
+
+<section
+  id="case-studies"
+  class="bg-white py-10 md:py-16 scroll-mt-24"
+  aria-labelledby="success-stories-heading"
+>
+  <PageWrap>
+    <div
+      data-aos="fade-up"
+      data-aos-delay="100"
+    >
+      <SectionHeader
+        title={SUCCESS_STORIES_SECTION.title}
+        description={SUCCESS_STORIES_SECTION.description}
+        showArrows={true}
+        arrowsId="home-success-stories-arrows"
+      />
+    </div>
+    <h2 id="success-stories-heading" class="sr-only">
+      {SUCCESS_STORIES_SECTION.title}
+    </h2>
+
+    <div
+      class="relative mt-8"
+      data-cs-carousel
+      data-aos="fade-left"
+      data-aos-duration="1200"
+      data-aos-offset="100"
+    >
+      <div
+        class="cs-scrollbar-hide overflow-x-auto overflow-y-hidden pb-6"
+        data-cs-carousel-track
+      >
+        <div class="flex min-w-max gap-6">
+          {SUCCESS_STORIES.map((story) => <TestimonialCard story={story} />)}
+        </div>
+      </div>
+    </div>
+
+    <p class="mt-6 text-right" data-aos="fade-up" data-aos-delay="200">
+      <a
+        href={SUCCESS_STORIES_SECTION.exploreHref}
+        class="inline-flex items-center gap-2 border-b-2 border-cyan pb-1 text-sm font-bold text-yale transition-[gap] duration-200 hover:gap-3.5"
+      >
+        Explore All →
+      </a>
+    </p>
+  </PageWrap>
+  <VideoModal />
+</section>
+
+<script src="/scripts/success-stories.js" is:inline></script>
+<script src="/scripts/video-modal.js" is:inline></script>

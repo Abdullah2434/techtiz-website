@@ -62,9 +62,9 @@ export const INDUSTRIES_DATA = {
 
 export const PRIMARY_NAV = [
   { label: 'About Us', href: '/' },
-  { label: 'Services', mega: 'services' },
-  { label: 'Industries', mega: 'industries' },
-  { label: 'Engagement Examples', href: '/us-sled/case-studies/' },
+  { label: 'Services', mega: 'services' as const },
+  { label: 'Industries', mega: 'industries' as const },
+  { label: 'Case Studies', href: '/case-studies/' },
   { label: 'Careers', href: '/' },
 ] as const;
 
@@ -108,7 +108,7 @@ export const FOOTER_COLUMNS = [
     links: [
       { label: 'About', href: '/' },
       { label: 'Careers', href: '/' },
-      { label: 'Engagement Examples', href: '/us-sled/case-studies/' },
+      { label: 'Case Studies', href: '/case-studies/' },
       { label: 'Press', href: '/' },
       { label: 'Contact', href: '/us-sled/contact/' },
     ],

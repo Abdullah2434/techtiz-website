@@ -35,10 +35,12 @@ export const SITE = {
     light: "/assets/logo-light.svg",
     png: "/assets/logo.png",
   },
+  /** Legacy Footer.tsx social links */
   socials: {
-    linkedin: "#",
-    x: "#",
-    facebook: "#",
+    google: "https://www.google.com/search?q=techtiz",
+    facebook: "https://www.facebook.com/techtiz",
+    x: "https://x.com/techtiz",
+    linkedin: "https://www.linkedin.com/company/techtiz/",
   },
   og: {
     image: "/assets/capitol.png",

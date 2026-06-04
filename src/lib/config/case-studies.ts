@@ -20,9 +20,9 @@ export const CASE_STUDIES_OVERVIEW_WORD_LIMIT = 20;
 export const CASE_STUDIES_OVERVIEW_DISPLAY_WORDS = 18;
 
 export const CASE_STUDIES_SEO_PORTFOLIO = {
-  title: 'Case Studies | Client Success Stories | Techtiz',
+  title: 'Case Studies | Software Development Success Stories | Techtiz',
   description:
-    'Explore how Techtiz helps startups and enterprises build mobile apps, websites, AI automation, and low-code solutions.',
+    'Explore Techtiz case studies: mobile apps, web platforms, AI automation, and low-code delivery for startups and enterprises—real outcomes across industries.',
   canonicalPath: '/case-studies/',
   ogImage: '/images/case-studies/BG.png',
 } as const;

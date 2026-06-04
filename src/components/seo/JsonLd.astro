@@ -1,0 +1,15 @@
+---
+import type { JsonLdNode } from '../../lib/seo/types';
+
+interface Props {
+  data: JsonLdNode | JsonLdNode[];
+}
+
+const graphs = Array.isArray(Astro.props.data) ? Astro.props.data : [Astro.props.data];
+---
+
+{
+  graphs.map((graph) => (
+    <script type="application/ld+json" set:html={JSON.stringify(graph)} />
+  ))
+}

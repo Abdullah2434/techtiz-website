@@ -1,9 +1,9 @@
 export const HOME_SEO = {
   title: "Techtiz | AI-native engineering studio",
   description:
-    "Techtiz is an AI-native engineering studio building adaptive systems for ambitious teams. Specialized technical subcontractor for U.S. SLED prime contractors.",
+    "Techtiz is an AI-native engineering studio for custom software, AI automation, and adaptive systems—plus a U.S. SLED technical subcontractor for state, local, and education prime contractors.",
   canonicalPath: "/",
-  ogImage: "/assets/logo.svg",
+  ogImage: "/assets/capitol.png",
 } as const;
 
 export const HOME_HERO = {

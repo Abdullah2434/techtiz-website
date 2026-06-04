@@ -1,7 +1,7 @@
 export const CAPABILITIES_SEO = {
   title: "SLED Capabilities | The Techtiz SLED Backbone | Techtiz",
   description:
-    "The Techtiz SLED backbone: specialized engineering capabilities, technology stack, compliance frameworks, and clear delivery boundaries for U.S. public-sector prime contractors.",
+    "SLED technical capabilities for U.S. prime contractors: engineering backbone, GIS, statutory documents, AI automation, NIST 800-171 alignment, and clear subcontract delivery boundaries.",
   canonicalPath: "/us-sled/capabilities/",
   ogImage: "/assets/capitol.png",
 } as const;

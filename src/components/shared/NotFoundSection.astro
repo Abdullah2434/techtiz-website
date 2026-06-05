@@ -1,0 +1,69 @@
+---
+import CtaButton from './CtaButton.astro';
+import { NOT_FOUND_CONTENT } from '../../lib/constants/pages/not-found';
+
+const { code, heading, lines, cta } = NOT_FOUND_CONTENT;
+---
+
+<section
+  class="w-full px-2 py-10 md:py-16"
+  aria-labelledby="not-found-heading"
+>
+  <div class="mx-auto w-full max-w-[1400px]">
+    <div class="flex flex-col items-center justify-center text-center">
+      <div class="mb-6 w-full" data-aos="fade-up" data-aos-duration="600">
+        <p
+          class="mb-4 font-poppins text-[80px] leading-none font-bold text-cyan md:text-[120px] lg:text-[140px]"
+          aria-hidden="true"
+        >
+          {code}
+        </p>
+      </div>
+
+      <div
+        class="mb-6 w-full max-w-2xl"
+        data-aos="fade-up"
+        data-aos-duration="600"
+        data-aos-delay="100"
+      >
+        <h1
+          id="not-found-heading"
+          class="mb-4 font-poppins text-[32px] leading-[120%] font-normal tracking-[-0.02em] text-[#101010] md:text-[40px]"
+        >
+          {heading}
+        </h1>
+      </div>
+
+      <div
+        class="mb-8 w-full max-w-xl"
+        data-aos="fade-up"
+        data-aos-duration="600"
+        data-aos-delay="200"
+      >
+        {
+          lines.map((line) => (
+            <p class="text-base leading-[130%] font-normal text-[#4D4D4D] md:text-lg">
+              {line}
+            </p>
+          ))
+        }
+      </div>
+
+      <div
+        class="w-full"
+        data-aos="fade-up"
+        data-aos-duration="600"
+        data-aos-delay="300"
+      >
+        <div class="flex justify-center">
+          <CtaButton
+            href={cta.href}
+            label={cta.label}
+            variant="filled"
+            class="min-w-[180px]"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

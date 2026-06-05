@@ -20,11 +20,11 @@ export const SLED_HERO = {
       href: "/us-sled/contact/",
       variant: "cta",
     },
-    {
-      label: "Capability statement →",
-      href: "/us-sled/capability-statement/",
-      variant: "ghost-dark",
-    },
+    // {
+    //   label: "Capability statement →",
+    //   href: "/us-sled/capability-statement/",
+    //   variant: "ghost-dark",
+    // },
     {
       label: "How we engage →",
       href: "/us-sled/how-we-engage/",

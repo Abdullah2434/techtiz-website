@@ -19,11 +19,13 @@
     "aos": "^2.3.4",
     "astro": "^6.4.3",
     "nodemailer": "^8.0.10",
+    "pdfkit": "^0.18.0",
     "tailwindcss": "^4.3.0"
   },
   "devDependencies": {
     "@types/aos": "^3.0.8",
     "@types/nodemailer": "^8.0.0",
+    "@types/pdfkit": "^0.17.6",
     "vite": "^7.3.5"
   }
 }

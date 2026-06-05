@@ -97,14 +97,23 @@
     }
   };
 
-  const triggerPdfDownload = () => {
+  const triggerPdfDownload = async () => {
     if (!cfg.pdfUrl) return;
+
+    const response = await fetch(cfg.pdfUrl);
+    if (!response.ok) {
+      throw new Error("Failed to generate PDF");
+    }
+
+    const blob = await response.blob();
+    const objectUrl = URL.createObjectURL(blob);
     const link = document.createElement("a");
-    link.href = cfg.pdfUrl;
-    link.download = cfg.pdfUrl.split("/").pop() || "techtiz-case-study.pdf";
+    link.href = objectUrl;
+    link.download = cfg.pdfFilename || "techtiz-case-study.pdf";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    URL.revokeObjectURL(objectUrl);
   };
 
   const setStatus = (message, isError = false) => {
@@ -182,7 +191,7 @@
         throw new Error(result.error || "Failed to submit form");
       }
 
-      triggerPdfDownload();
+      await triggerPdfDownload();
       setStatus(
         "Form submitted successfully. Your download should begin shortly.",
       );
@@ -193,10 +202,14 @@
       const message =
         err instanceof Error ? err.message : "Something went wrong";
       if (cfg.pdfUrl && message.includes("Failed to fetch")) {
-        triggerPdfDownload();
-        setStatus(
-          "Download started. Form submission will be available when the API is connected.",
-        );
+        try {
+          await triggerPdfDownload();
+          setStatus(
+            "Download started. Form submission will be available when the API is connected.",
+          );
+        } catch {
+          setStatus(message, true);
+        }
       } else {
         setStatus(message, true);
       }

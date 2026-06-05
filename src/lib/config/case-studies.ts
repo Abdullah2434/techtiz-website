@@ -83,3 +83,6 @@ export const CASE_STUDY_DOWNLOAD_COPY = {
 
 /** POST target when a server/API route is available (legacy Next.js path). */
 export const CASE_STUDY_FORM_API = "/api/case-study/";
+
+/** On-demand PDF for a case study detail page. */
+export const caseStudyPdfUrl = (slug: string) => `/api/case-study/${slug}/pdf/`;

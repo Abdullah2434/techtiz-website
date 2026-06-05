@@ -1,4 +1,7 @@
 ---
+import ChevronLeft from '@lucide/astro/icons/chevron-left';
+import ChevronRight from '@lucide/astro/icons/chevron-right';
+
 interface Props {
   title: string;
   description: string;
@@ -16,28 +19,23 @@ const { title, description, showArrows = false, arrowsId = 'cs-carousel-arrows' 
     <h3 class="cs-section-header-desc">{description}</h3>
     {
       showArrows && (
-        <div class="flex items-center gap-2" id={arrowsId} data-cs-arrows>
-          <button type="button" class="cs-arrow-btn" data-cs-scroll="left" aria-label="Previous">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path
-                d="M13 18L7 12L13 6"
-                stroke="#1E1E1E"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
+        <div class="flex shrink-0 items-center gap-2.5" id={arrowsId} data-cs-arrows>
+          <button
+            type="button"
+            class="cs-arrow-btn"
+            data-cs-scroll="left"
+            aria-label="Previous success story"
+            disabled
+          >
+            <ChevronLeft class="size-5" aria-hidden="true" />
           </button>
-          <button type="button" class="cs-arrow-btn" data-cs-scroll="right" aria-label="Next">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path
-                d="M11 18L17 12L11 6"
-                stroke="#1E1E1E"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
+          <button
+            type="button"
+            class="cs-arrow-btn"
+            data-cs-scroll="right"
+            aria-label="Next success story"
+          >
+            <ChevronRight class="size-5" aria-hidden="true" />
           </button>
         </div>
       )

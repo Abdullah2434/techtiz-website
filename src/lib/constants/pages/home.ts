@@ -367,7 +367,13 @@ export const DIGITAL_FOUNDATION = {
     labelMobile: "Book a Consultation",
   },
   bgImage: "/images/digital-section-bg.png",
-  ratingImage: "/images/rating-image.png",
+  rating: {
+    href: "https://clutch.co/profile/techtiz-0",
+    image: "/images/rating-image.png",
+    alt: "Reviewed on Clutch — 5.0 rating",
+    width: 215,
+    height: 59,
+  },
   stats: [
     { id: "years", value: "5+", label: "Years of Experience" },
     { id: "satisfaction", value: "98%", label: "Client Satisfaction" },

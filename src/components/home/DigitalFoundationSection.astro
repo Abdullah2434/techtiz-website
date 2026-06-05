@@ -3,7 +3,7 @@ import CtaButton from '../shared/CtaButton.astro';
 import { DIGITAL_FOUNDATION } from '../../lib/constants/pages/home';
 import PageWrap from './PageWrap.astro';
 
-const { title, description, cta, bgImage, ratingImage, stats } = DIGITAL_FOUNDATION;
+const { title, description, cta, bgImage, rating, stats } = DIGITAL_FOUNDATION;
 ---
 
 <section class="bg-white py-10 md:py-16" aria-labelledby="digital-foundation-heading">
@@ -47,15 +47,23 @@ const { title, description, cta, bgImage, ratingImage, stats } = DIGITAL_FOUNDAT
           data-aos="fade-up"
           data-aos-delay="200"
         >
-          <img
-            src={ratingImage}
-            width={215}
-            height={59}
-            alt="Clutch 5-star client rating badge"
-            class="h-[59px] w-auto max-w-[215px] object-contain"
-            loading="lazy"
-            decoding="async"
-          />
+          <a
+            href={rating.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rounded-sm transition-opacity duration-200 hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            aria-label={rating.alt}
+          >
+            <img
+              src={rating.image}
+              width={rating.width}
+              height={rating.height}
+              alt={rating.alt}
+              class="h-[59px] w-auto max-w-[215px] object-contain"
+              loading="lazy"
+              decoding="async"
+            />
+          </a>
         </div>
       </div>
 

@@ -674,18 +674,11 @@ body.m-nav-open .m-nav-backdrop {
   background: var(--seasalt);
 }
 
-.m-nav-drawer .us-pill--drawer {
-  display: inline-flex;
-  width: 100%;
-  justify-content: center;
-  padding: 12px 14px;
-  box-sizing: border-box;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-}
-
-.m-nav-drawer .us-pill--drawer::after {
-  display: none;
+.m-nav-drawer-cta {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
 }
 
 @keyframes us-pill-dot-pulse {

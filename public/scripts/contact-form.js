@@ -13,6 +13,13 @@
   const siteKey = window.__CONTACT_FORM_CONFIG__?.siteKey;
   const apiUrl = window.__CONTACT_FORM_CONFIG__?.apiUrl || '/api/contact/';
 
+  const emailFromQuery = new URLSearchParams(window.location.search).get('email')?.trim();
+  const emailField = form.querySelector('[name="email"]');
+  if (emailFromQuery && emailField) {
+    emailField.value = emailFromQuery;
+    document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
   let recaptcha = null;
   if (recaptchaEl && siteKey && window.initRecaptchaWidget) {
     recaptcha = window.initRecaptchaWidget(recaptchaEl, siteKey);

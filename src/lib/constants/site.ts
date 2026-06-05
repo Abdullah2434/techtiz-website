@@ -76,6 +76,7 @@ export const LEGAL_LINKS = [
   { label: "Privacy", href: "/privacy-policy/" },
   { label: "Terms", href: "/terms-of-service/" },
   { label: "Careers", href: "/careers/" },
+  { label: "Contact", href: "/contact/" },
   { label: "Sitemap", href: "/sitemap-index.xml" },
 ] as const;
 

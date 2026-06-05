@@ -120,7 +120,7 @@ export const HOME_CAPABILITIES_GRID = [
     title: "Automation & AI",
     description:
       "Workflows and integrations that pay for themselves. Sales, support, CRM, and the back-office flows that drain a Tuesday.",
-    href: "#",
+    href: serviceSlug("sales-automation"),
     tags: ["Sales", "CRM", "Customer Service", "Marketing", "Scheduling"],
     moreLabel: "Explore automation",
     featured: false,
@@ -131,7 +131,7 @@ export const HOME_CAPABILITIES_GRID = [
     title: "Digital Transformation",
     description:
       "Modernize legacy stacks without halting the business. Strategy, migrations, data intelligence, and change management, in phases.",
-    href: "#",
+    href: serviceSlug("innovation-digital-evolution"),
     tags: [
       "Digital Evolution",
       "Modernization",
@@ -147,7 +147,7 @@ export const HOME_CAPABILITIES_GRID = [
     title: "UX Design",
     description:
       "Research-backed interfaces that feel inevitable, plus the monitoring and enablement to make sure teams actually adopt them.",
-    href: "#",
+    href: serviceSlug("ui-ux-design"),
     tags: ["UI/UX Design", "Research", "Prototyping", "Monitoring"],
     moreLabel: "Explore UX design",
     featured: false,
@@ -158,7 +158,7 @@ export const HOME_CAPABILITIES_GRID = [
     title: "Data & Platform",
     description:
       "Warehouses, lakehouses, and the pipelines that feed AI in production. Observability built in, not bolted on.",
-    href: "#",
+    href: serviceSlug("data-intelligence-insight-systems"),
     tags: ["Warehouse", "ETL", "Observability"],
     moreLabel: "Explore data",
     featured: false,

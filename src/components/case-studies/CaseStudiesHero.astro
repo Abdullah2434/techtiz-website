@@ -1,5 +1,5 @@
 ---
-import OutlinedButton from '../shared/OutlinedButton.astro';
+import CtaButton from '../shared/CtaButton.astro';
 import PageWrap from '../home/PageWrap.astro';
 import { CASE_STUDIES_CONTACT_HREF, CASE_STUDIES_LISTING_HERO } from '../../lib/config/case-studies';
 
@@ -19,7 +19,7 @@ const { title, subtitle, ctaLabel } = CASE_STUDIES_LISTING_HERO;
           <h1 class="mb-6 text-xl font-semibold leading-[1.1] text-[#101010] md:text-2xl">{subtitle}</h1>
         </div>
         <div data-aos="fade-up" data-aos-delay="100">
-          <OutlinedButton href={CASE_STUDIES_CONTACT_HREF} label={ctaLabel} />
+          <CtaButton href={CASE_STUDIES_CONTACT_HREF} label={ctaLabel} variant="outlined" />
         </div>
       </div>
       <div class="mb-3 mr-0 max-w-[800px] flex-1">

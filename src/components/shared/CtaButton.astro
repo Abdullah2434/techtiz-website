@@ -1,13 +1,22 @@
 ---
 import ArrowRight from '@lucide/astro/icons/arrow-right';
 
+type ButtonVariant =
+  | 'filled'
+  | 'outlined'
+  | 'yale'
+  | 'ghost-dark'
+  | 'ghost-light'
+  | 'cta'
+  | 'primary';
+
 interface Props {
-  label: string;
+  label?: string;
   href?: string;
   type?: 'button' | 'submit';
-  variant?: 'cta' | 'primary' | 'ghost-dark' | 'ghost-light';
+  variant?: ButtonVariant;
   showArrow?: boolean;
-  animated?: boolean;
+  id?: string;
   class?: string;
 }
 
@@ -17,86 +26,30 @@ const {
   type = 'button',
   variant = 'cta',
   showArrow = true,
-  animated = false,
+  id,
   class: className = '',
 } = Astro.props;
 
-const base =
-  'inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-lg text-sm font-bold transition-[transform,box-shadow,background,border-color,color] duration-[180ms] ease-out';
+function resolveVariant(v: ButtonVariant): string {
+  if (v === 'cta') return 'filled';
+  if (v === 'primary') return 'yale';
+  return v;
+}
 
-const ctaStyles =
-  'bg-cyan px-5 py-3 text-white hover:-translate-y-px hover:bg-cyan-strong hover:text-white hover:shadow-[0_10px_24px_-8px_rgba(24,176,230,0.55)]';
-
-const primaryLink =
-  'relative z-[1] bg-yale px-[22px] py-[13px] text-[14.5px] text-white hover:-translate-y-px hover:bg-yale-dark hover:shadow-[0_12px_28px_-10px_rgba(21,58,95,0.55)]';
-
-const isCtaButton = variant === 'cta' && !href;
-const isCtaLink = variant === 'cta' && href;
+const styleVariant = resolveVariant(variant);
+const btnClass = ['btn', `btn--${styleVariant}`, className];
+const Tag = href ? 'a' : 'button';
 ---
 
-{
-  isCtaLink && (
-    <a href={href} class:list={[base, ctaStyles, className]}>
-      {label}
-      {showArrow && <ArrowRight class="size-4 shrink-0" aria-hidden="true" />}
-    </a>
-  )
-}
-{
-  isCtaButton && (
-    <button type={type} class:list={[base, ctaStyles, className]}>
-      {label}
-      {showArrow && <ArrowRight class="size-4 shrink-0" aria-hidden="true" />}
-    </button>
-  )
-}
-{
-  variant === 'primary' && animated && href && (
-    <span class="cta-animated relative inline-flex overflow-hidden rounded-lg p-[2px]">
-      <span class="cta-animated-spin" aria-hidden="true"></span>
-      <span class="cta-animated-pulse" aria-hidden="true"></span>
-      <a href={href} class:list={[base, primaryLink, 'rounded-[6px]', className]}>
-        {label}
-        {showArrow && <ArrowRight class="size-4 shrink-0" aria-hidden="true" />}
-      </a>
-    </span>
-  )
-}
-{
-  variant === 'primary' && !animated && href && (
-    <a href={href} class:list={[base, primaryLink, className]}>
-      {label}
-      {showArrow && <ArrowRight class="size-4 shrink-0" aria-hidden="true" />}
-    </a>
-  )
-}
-{
-  variant === 'ghost-dark' && href && (
-    <a
-      href={href}
-      class:list={[
-        base,
-        'border border-white/32 px-5 py-3 text-white hover:border-white hover:bg-white/8',
-        className,
-      ]}
-    >
-      {label}
-      {showArrow && <ArrowRight class="size-4 shrink-0" aria-hidden="true" />}
-    </a>
-  )
-}
-{
-  variant === 'ghost-light' && href && (
-    <a
-      href={href}
-      class:list={[
-        base,
-        'border border-line bg-white px-5 py-3 text-yale hover:border-yale hover:bg-seasalt',
-        className,
-      ]}
-    >
-      {label}
-      {showArrow && <ArrowRight class="size-4 shrink-0" aria-hidden="true" />}
-    </a>
-  )
-}
+<Tag
+  {id}
+  href={href}
+  type={href ? undefined : type}
+  class:list={btnClass}
+>
+  <span class="btn__inner">
+    <slot />
+    {label}
+    {showArrow && <ArrowRight class="btn__arrow size-4 shrink-0" aria-hidden="true" />}
+  </span>
+</Tag>

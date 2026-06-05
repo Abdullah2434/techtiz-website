@@ -2,12 +2,119 @@
   opacity: 1;
 }
 
-.ind-tab-btn[aria-selected='true'] .ind-tab-pill {
-  opacity: 1;
+.ind-tab-btn {
+  color: #838383;
+}
+
+.ind-tab-btn:hover {
+  color: #18b0e6;
 }
 
 .ind-tab-btn[aria-selected='true'] {
   color: #fff;
+}
+
+.ind-tab-btn[aria-selected='true']:hover {
+  color: #fff;
+}
+
+.ind-tab-pill-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  border-radius: 6px;
+  background: rgb(24 176 230 / 0.8);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 0.6s cubic-bezier(0.34, 1.2, 0.64, 1),
+    width 0.6s cubic-bezier(0.34, 1.2, 0.64, 1),
+    height 0.6s cubic-bezier(0.34, 1.2, 0.64, 1),
+    opacity 0.2s ease;
+  will-change: transform, width, height;
+}
+
+.ind-tab-pill-slider.is-ready {
+  opacity: 1;
+}
+
+.ind-tab-panels {
+  position: relative;
+  width: 100%;
+  min-height: 320px;
+}
+
+.ind-tab-panel {
+  width: 100%;
+}
+
+.ind-tab-panel.is-hidden {
+  display: none;
+}
+
+.ind-tab-panel.is-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ind-tab-panel.is-exiting {
+  animation: ind-tab-exit 0.3s ease forwards;
+  pointer-events: none;
+}
+
+.ind-tab-panel.is-entering {
+  animation: ind-tab-enter 0.5s ease forwards;
+}
+
+.ind-tab-panel.is-entering img {
+  opacity: 0;
+  animation: ind-tab-image-enter 0.5s ease 0.15s forwards;
+}
+
+@keyframes ind-tab-enter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ind-tab-exit {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes ind-tab-image-enter {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ind-tab-pill-slider {
+    transition: none;
+  }
+
+  .ind-tab-panel.is-entering,
+  .ind-tab-panel.is-exiting {
+    animation: none;
+  }
 }
 
 /* Scroll timeline — initial hidden until JS runs (legacy Framer initial state) */

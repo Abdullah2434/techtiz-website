@@ -1,4 +1,6 @@
 ---
+import ArrowRight from '@lucide/astro/icons/arrow-right';
+import Play from '@lucide/astro/icons/play';
 import type { SuccessStory } from '../../lib/types/case-study';
 
 interface Props {
@@ -94,12 +96,7 @@ const { quote, company, founder, challenges, solutions, detailsUrl, videoId } = 
             data-video-open={videoId}
             aria-label={`Play ${company} video`}
           >
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="ml-0.5 mt-0.5" aria-hidden="true">
-              <path
-                d="M13.9268 5.88247C14.311 6.08679 14.6324 6.39181 14.8565 6.76483C15.0806 7.13786 15.199 7.56483 15.199 8.00001C15.199 8.43518 15.0806 8.86216 14.8565 9.23518C14.6324 9.60821 14.311 9.91322 13.9268 10.1175L3.67749 15.691C2.02714 16.5894 0 15.4214 0 13.5742V2.42657C0 0.578629 2.02714 -0.588537 3.67749 0.308237L13.9268 5.88247Z"
-                fill="#0E0E0E"
-              />
-            </svg>
+            <Play class="size-3.5 fill-[#0E0E0E] stroke-[#0E0E0E]" aria-hidden="true" />
           </button>
         )
       }
@@ -109,22 +106,7 @@ const { quote, company, founder, challenges, solutions, detailsUrl, videoId } = 
       class="group inline-flex w-fit items-center gap-4 text-lg font-normal uppercase text-cyan transition-all hover:gap-5"
     >
       SEE DETAILS
-      <svg
-        width="14"
-        height="12"
-        class="transition-transform group-hover:translate-x-1"
-        viewBox="0 0 14 12"
-        fill="none"
-        aria-hidden="true"
-      >
-        <path
-          d="M0.803762 10.599L12.1295 0.809738M12.0694 7.22556L12.2639 0.693694L4.69787 0.861589"
-          stroke="#18B0E6"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
+      <ArrowRight class="size-4 shrink-0 text-cyan transition-transform group-hover:translate-x-1" aria-hidden="true" />
     </a>
   </div>
 </article>

@@ -59,13 +59,13 @@ const { stats, ctaText = 'Book a Free Consultation', ctaHref = ROUTES.sledContac
 
 <script>
   const root = document.querySelector('[data-service-stats]');
-  const ctaLink = document.querySelector('[data-service-cta] a');
+  const ctaInner = document.querySelector('[data-service-cta] .btn__inner');
 
   const setCtaLabel = () => {
-    if (!ctaLink) return;
+    if (!ctaInner) return;
     const label =
       window.innerWidth >= 768 ? 'Book a Free Consultation' : 'Book a Consultation';
-    for (const node of ctaLink.childNodes) {
+    for (const node of ctaInner.childNodes) {
       if (node.nodeType === Node.TEXT_NODE && node.textContent?.trim()) {
         node.textContent = label;
         break;

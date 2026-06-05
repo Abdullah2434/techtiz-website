@@ -71,7 +71,6 @@ export const LEGAL_LINKS = [
   { label: "Terms", href: "/terms-of-service/" },
   { label: "Careers", href: "/careers/" },
   { label: "Sitemap", href: "/sitemap-index.xml" },
-  { label: "Contact", href: "/contact/" },
 ] as const;
 
 /** Page title suffix: `Capabilities | Techtiz` */

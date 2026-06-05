@@ -1,6 +1,7 @@
 ---
 import SledFaqSection from '../../components/sled/shared/SledFaqSection.astro';
 import Breadcrumbs from '../../components/seo/Breadcrumbs.astro';
+import CtaButton from '../../components/shared/CtaButton.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { CAPABILITY_STATEMENT_SEO } from '../../lib/constants/pages/capability-statement';
 import { CAPABILITY_STATEMENT_FAQ } from '../../lib/constants/pages/sled-faq';
@@ -21,13 +22,13 @@ const seo = CAPABILITY_STATEMENT_SEO;
       </span>
       <div class="flex flex-wrap items-center gap-3">
         <a href="/us-sled/" class="text-[13.5px] font-semibold text-yale hover:text-yale-dark">← Back to SLED hub</a>
-        <button
-          class="inline-flex items-center justify-center rounded-lg bg-yale px-4 py-2.5 text-[13.5px] font-bold text-white transition-[transform,background,box-shadow] duration-180 ease-out hover:-translate-y-px hover:bg-yale-dark hover:shadow-[0_16px_40px_-30px_rgba(14,38,64,0.35)]"
+        <CtaButton
+          id="capability-print-btn"
           type="button"
-          onclick="window.print()"
-        >
-          Save / print as PDF
-        </button>
+          label="Save / print as PDF"
+          variant="yale"
+          showArrow={false}
+        />
       </div>
     </div>
   </div>
@@ -145,4 +146,8 @@ const seo = CAPABILITY_STATEMENT_SEO;
 </div>
 
 </BaseLayout>
+
+<script is:inline>
+  document.getElementById('capability-print-btn')?.addEventListener('click', () => window.print());
+</script>
 

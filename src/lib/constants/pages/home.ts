@@ -36,7 +36,7 @@ export const FEATURED_CLIENTS = [
     image: "/images/clientfeature/g-tech.png",
     imageClass: "max-w-[110px]",
   },
-  { name: "Link Golf", image: "/images/clientfeature/golf.png" },
+  { name: "LinkedGolf", image: "/images/case-studies/c20-logo.png" },
   { name: "KH Medical", image: "/images/clientfeature/kh-medical.png" },
   { name: "TokenMart", image: "/images/clientfeature/tokenmart.png" },
 ] as const;

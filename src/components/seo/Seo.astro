@@ -27,10 +27,16 @@ const canonical = `${siteUrl}${canonicalPath}`;
 const resolvedOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
 const keywords = keywordsForPath(canonicalPath);
 const robots = noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large';
+const faviconQuery = `?v=${SITE.favicon.version}`;
+const faviconSvg = `${SITE.favicon.svg}${faviconQuery}`;
+const faviconIco = `${SITE.favicon.ico}${faviconQuery}`;
 ---
 
-<!-- Favicon -->
-<link rel="icon" href="/favicon.ico" sizes="32x32" />
+<!-- Favicon — legacy Techtiz icon mark (SVG + ICO); ?v= busts stale browser cache on prod -->
+<link rel="icon" type="image/svg+xml" href={faviconSvg} />
+<link rel="icon" type="image/x-icon" href={faviconIco} sizes="32x32" />
+<link rel="shortcut icon" type="image/x-icon" href={faviconIco} />
+<link rel="apple-touch-icon" href={SITE.logo.png} />
 
 <!-- Primary SEO -->
 <title>{title}</title>

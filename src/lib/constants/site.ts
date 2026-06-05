@@ -48,6 +48,12 @@ export const SITE = {
     light: "/assets/logo-light.svg",
     png: "/assets/logo.png",
   },
+  /** Legacy Next.js app/favicon.ico — bump version to bust browser/CDN cache after deploy. */
+  favicon: {
+    ico: "/favicon.ico",
+    svg: "/favicon.svg",
+    version: "2",
+  },
   /** Legacy Footer.tsx social links */
   socials: {
     google: "https://www.google.com/search?q=techtiz",

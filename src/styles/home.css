@@ -128,6 +128,11 @@
   animation-play-state: paused;
 }
 
+.home-cap-grid-more::after {
+  content: "→";
+  font-size: 16px;
+}
+
 .home-cap-scroll {
   -ms-overflow-style: none;
   scrollbar-width: none;

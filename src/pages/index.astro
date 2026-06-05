@@ -1,20 +1,20 @@
 ---
-import "../styles/home.css";
-import BaseLayout from "../layouts/BaseLayout.astro";
-import Header from "../components/shared/Header.astro";
-import Footer from "../components/shared/Footer.astro";
-import HeroSection from "../components/home/HeroSection.astro";
+import DigitalFoundationSection from "../components/home/DigitalFoundationSection.astro";
+import EngageSection from "../components/home/EngageSection.astro";
 import FeaturedClientsSection from "../components/home/FeaturedClientsSection.astro";
-import CapabilitiesSection from "../components/home/CapabilitiesSection.astro";
+import FinalCtaSection from "../components/home/FinalCtaSection.astro";
+import HeroSection from "../components/home/HeroSection.astro";
+import HomeCapabilitiesGridSection from "../components/home/HomeCapabilitiesGridSection.astro";
 import HomeIndustries from "../components/home/HomeIndustries.astro";
 import HomeWhyChoose from "../components/home/HomeWhyChoose.astro";
-import DigitalFoundationSection from "../components/home/DigitalFoundationSection.astro";
 import SuccessStoriesSection from "../components/home/SuccessStoriesSection.astro";
-import EngageSection from "../components/home/EngageSection.astro";
-import FinalCtaSection from "../components/home/FinalCtaSection.astro";
+import Footer from "../components/shared/Footer.astro";
+import Header from "../components/shared/Header.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 import { HOME_SEO } from "../lib/constants/pages/home";
 import { SITE } from "../lib/constants/site";
 import { webPageJsonLd } from "../lib/seo/json-ld";
+import "../styles/home.css";
 
 const { title, description, canonicalPath } = HOME_SEO;
 const homeJsonLd = webPageJsonLd({
@@ -29,7 +29,7 @@ const homeJsonLd = webPageJsonLd({
   <main id="main-content">
     <HeroSection />
     <FeaturedClientsSection />
-    <CapabilitiesSection />
+    <HomeCapabilitiesGridSection />
     <HomeIndustries />
     <HomeWhyChoose />
     <DigitalFoundationSection />

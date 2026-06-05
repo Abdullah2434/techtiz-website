@@ -1,0 +1,110 @@
+---
+import type { HOME_CAPABILITIES_GRID } from '../../lib/constants/pages/home';
+import HomeCapabilityGridIcon from './HomeCapabilityGridIcon.astro';
+
+type Capability = (typeof HOME_CAPABILITIES_GRID)[number];
+
+interface Props {
+  capability: Capability;
+}
+
+const { capability } = Astro.props;
+const isFeatured = capability.featured;
+---
+
+<a
+  href={capability.href}
+  class:list={[
+    'group relative flex h-full min-h-[280px] flex-col gap-3.5 overflow-hidden rounded-[10px] border px-7 py-[30px] transition-[transform,border-color,box-shadow] duration-240 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan',
+    isFeatured
+      ? 'border-yale-dark bg-yale-dark text-white hover:-translate-y-0.5 hover:shadow-[0_18px_36px_-18px_rgba(21,58,95,0.18)]'
+      : 'border-line bg-white hover:-translate-y-0.5 hover:border-[#C2CCD9] hover:shadow-[0_18px_36px_-18px_rgba(21,58,95,0.18)]',
+  ]}
+>
+  {
+    isFeatured && (
+      <div
+        class="pointer-events-none absolute -top-5 -right-5 size-[100px]"
+        aria-hidden="true"
+      >
+        <span class="absolute top-[22px] right-9 size-[18px] rotate-15 bg-cyan opacity-55" />
+        <span class="absolute top-[50px] right-3.5 size-[30px] rotate-15 bg-cyan opacity-[0.18]" />
+        <span class="absolute top-[60px] right-12 size-3 rotate-15 bg-cyan opacity-[0.35]" />
+      </div>
+    )
+  }
+
+  <div
+    class:list={[
+      'grid size-11 place-items-center rounded-lg',
+      isFeatured
+        ? 'bg-cyan/16 text-cyan'
+        : 'bg-cyan-soft text-cyan-strong',
+    ]}
+  >
+    <HomeCapabilityGridIcon name={capability.icon} />
+  </div>
+
+  <h3
+    class:list={[
+      'text-[22px] leading-[1.2] font-semibold tracking-[-0.018em]',
+      isFeatured ? 'text-white' : 'text-yale',
+    ]}
+  >
+    {capability.title}
+  </h3>
+
+  <p
+    class:list={[
+      'text-[14px] leading-[1.55]',
+      isFeatured ? 'text-white/74' : 'text-muted',
+    ]}
+  >
+    {capability.description}
+  </p>
+
+  <div class="mt-1.5 flex min-h-0 flex-1 flex-col">
+    <div class="flex flex-wrap gap-1.5">
+      {
+        capability.tags.map((tag) => (
+          <span
+            class:list={[
+              'rounded border px-2 py-1 font-mono text-[10.5px] leading-[1.4] tracking-[0.04em] whitespace-nowrap',
+              isFeatured
+                ? 'border-white/14 bg-white/5 text-cyan'
+                : 'border-line bg-seasalt text-yale',
+            ]}
+          >
+            {tag}
+          </span>
+        ))
+      }
+    </div>
+
+    {
+      'stack' in capability && capability.stack ? (
+        <div class="mt-4 border-t border-white/10 pt-4 font-mono text-[10.5px] leading-[1.6] tracking-widest text-cyan uppercase">
+          {capability.stack}
+        </div>
+      ) : (
+        <div
+          class="pointer-events-none mt-4 border-t border-transparent pt-4 font-mono text-[10.5px] leading-[1.6] tracking-widest uppercase opacity-0 select-none"
+          aria-hidden="true"
+        >
+          Anthropic · OpenAI · LangGraph · Pinecone · pgvector · Modal · Inngest
+        </div>
+      )
+    }
+  </div>
+
+  <span
+    class:list={[
+      'home-cap-grid-more mt-auto inline-flex items-center gap-2 text-[13.5px] font-bold transition-[gap,color] duration-200 group-hover:gap-3.5',
+      isFeatured
+        ? 'text-cyan group-hover:text-cyan'
+        : 'text-yale group-hover:text-cyan-strong',
+    ]}
+  >
+    {capability.moreLabel}
+  </span>
+</a>

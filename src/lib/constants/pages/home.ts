@@ -1,4 +1,5 @@
 import { HOME_CAPABILITIES_FROM_NAV } from "../nav/services";
+import { serviceSlug } from "../routes";
 
 export const HOME_SEO = {
   title: "Techtiz | AI-native engineering studio",
@@ -78,6 +79,92 @@ export const HOME_CAPABILITIES = HOME_CAPABILITY_COPY.map((copy, index) => {
     serviceLinks: nav.serviceLinks,
   };
 });
+
+export const HOME_CAPABILITIES_GRID_SECTION = {
+  eyebrow: "Capabilities",
+  heading: "A full engineering and design surface, wired for AI.",
+  sub: "Six interlocking practices. Engage one, or hand us the whole problem.",
+  rightLink: {
+    label: "See full capability matrix →",
+    href: "/services/",
+  },
+} as const;
+
+export const HOME_CAPABILITIES_GRID = [
+  {
+    id: "development",
+    title: "Development",
+    description:
+      "Production-grade web, mobile, and platform engineering, built around your workflow and shipped to scale by one team.",
+    href: serviceSlug("custom-software"),
+    tags: ["Custom Software", "Mobile Apps", "Low-code", "Vibe Code"],
+    moreLabel: "Explore development",
+    featured: false,
+    icon: "code",
+  },
+  {
+    id: "ai",
+    title: "AI & Intelligence",
+    description:
+      "Agents, ML models, and retrieval systems that act inside the tools you already run. Instrumented, evaluated, cost-controlled.",
+    href: serviceSlug("ai-agent"),
+    tags: ["AI Agents", "ML & Predictive", "AI Consultation", "GenAI / RAG"],
+    stack:
+      "Anthropic · OpenAI · LangGraph · Pinecone · pgvector · Modal · Inngest",
+    moreLabel: "Explore AI & intelligence",
+    featured: true,
+    icon: "ai",
+  },
+  {
+    id: "automation",
+    title: "Automation & AI",
+    description:
+      "Workflows and integrations that pay for themselves. Sales, support, CRM, and the back-office flows that drain a Tuesday.",
+    href: "#",
+    tags: ["Sales", "CRM", "Customer Service", "Marketing", "Scheduling"],
+    moreLabel: "Explore automation",
+    featured: false,
+    icon: "automation",
+  },
+  {
+    id: "transformation",
+    title: "Digital Transformation",
+    description:
+      "Modernize legacy stacks without halting the business. Strategy, migrations, data intelligence, and change management, in phases.",
+    href: "#",
+    tags: [
+      "Digital Evolution",
+      "Modernization",
+      "Data Intelligence",
+      "Change Mgmt",
+    ],
+    moreLabel: "Explore transformation",
+    featured: false,
+    icon: "transformation",
+  },
+  {
+    id: "ux",
+    title: "UX Design",
+    description:
+      "Research-backed interfaces that feel inevitable, plus the monitoring and enablement to make sure teams actually adopt them.",
+    href: "#",
+    tags: ["UI/UX Design", "Research", "Prototyping", "Monitoring"],
+    moreLabel: "Explore UX design",
+    featured: false,
+    icon: "ux",
+  },
+  {
+    id: "data",
+    title: "Data & Platform",
+    description:
+      "Warehouses, lakehouses, and the pipelines that feed AI in production. Observability built in, not bolted on.",
+    href: "#",
+    tags: ["Warehouse", "ETL", "Observability"],
+    moreLabel: "Explore data",
+    featured: false,
+    icon: "data",
+  },
+] as const;
 
 export const INDUSTRY_TABS = [
   { id: "healthcare", label: "Healthcare" },

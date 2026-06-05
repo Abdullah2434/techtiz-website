@@ -43,7 +43,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       role: "Founder & CEO",
       image: "/images/testimonial/matt.png",
     },
-    detailsUrl: "/success-stories/linkedgolf",
     videoId: "-tDeffu-czE",
     pdfUrl: "/Techtiz-Website.pdf",
   },
@@ -89,7 +88,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       role: "Co-founder Dashboard Earth",
       image: "/images/testimonial/Joris-Gunawardena.png",
     },
-    detailsUrl: "/success-stories/linkedgolf",
     videoId: "xMHDrCRN3V8",
     pdfUrl: "/assets/pdf/DashboardEarth.pdf",
   },
@@ -127,13 +125,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       { name: "Firebase", icon: "/images/tech-icons/firebase.png" },
     ],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "xMHDrCRN3V8",
     pdfUrl: "/assets/pdf/Qartt.pdf",
   },
 
@@ -172,13 +163,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       { name: "PostgreSQL", icon: "/images/tech-icons/postgresql.png" },
     ],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
   {
     title: "Curetrax – Remote Monitoring for Blood Cancer Recovery",
@@ -216,13 +200,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       { name: "Lambda", icon: "/images/tech-icons/lambda.png" },
     ],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
   {
     title: "Step App – Move-to-Earn Fitness Meets Web3 Rewards",
@@ -259,13 +236,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       { name: "PostgreSQL", icon: "/images/tech-icons/postgresql.png" },
     ],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
   {
     title: "EstheMate – Personalized, Data-Driven Skincare Companion",
@@ -300,13 +270,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       { name: "Node.js", icon: "/images/tech-icons/node.png" },
     ],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
   {
     title: "Orient Champions – Incentive Tracking for Sales Teams",
@@ -343,13 +306,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       { name: "MySQL", icon: "/images/tech-icons/mysql.png" },
     ],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
   {
     title: "'FT Play – Connecting Local Footballers Through Smart",
@@ -385,13 +341,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       { name: "PostgreSQL", icon: "/images/tech-icons/postgresql.png" },
     ],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
   {
     title: "Bluesky – A New Era in Decentralized Social Media",
@@ -426,13 +375,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       { name: "PostgreSQL", icon: "/images/tech-icons/postgresql.png" },
     ],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
   {
     title: "Uzman Restaurant – Authentic Turkish Dining in Doha",
@@ -462,13 +404,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       { name: "Tailwind", icon: "/images/tech-icons/tailwind.png" },
     ],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
   {
     title: "FastCat Mobile – Seamless Ferry Booking in the Philippines",
@@ -498,13 +433,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       { name: "PostgreSQL", icon: "/images/tech-icons/postgresql.png" },
     ],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
   {
     title: "OrientCare – Smart HVAC Solutions with Consumer-Centric Innovation",
@@ -533,13 +461,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       { name: "Tailwind", icon: "/images/tech-icons/tailwind.png" },
     ],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
   {
     title: "Token Mart – Empowering Web3 & AI Builders",
@@ -569,13 +490,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       { name: "PostgreSQL", icon: "/images/tech-icons/postgresql.png" },
     ],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
   {
     title: "AlKhazan – Premium Organic Food Supplier in MENA & Europe",
@@ -611,13 +525,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       { name: "Tailwind", icon: "/images/tech-icons/tailwind.png" },
     ],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
   {
     title: `KH Medicals – Qatar's Niche Medical Distributor & e-Pharmacy`,
@@ -651,13 +558,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       { name: "Tailwind", icon: "/images/tech-icons/tailwind.png" },
     ],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
   {
     title:
@@ -692,13 +592,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       { name: "Tailwind", icon: "/images/tech-icons/tailwind.png" },
     ],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
   {
     title: `Credence Global – Smart, Independent Investment Advisory`,
@@ -732,13 +625,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       { name: "PostgreSQL", icon: "/images/tech-icons/postgresql.png" },
     ],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
   {
     title: "Curetrax – Remote Monitoring for Blood Cancer Recovery",
@@ -774,13 +660,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       { name: "PostgreSQL", icon: "/images/tech-icons/postgresql.png" },
     ],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
   {
     title: "Linked Golf – Building Your Lifelong Foresome",
@@ -816,13 +695,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
     ],
     isFeatured: true,
     reviewVideoUrl: "https://www.youtube.com/embed/-tDeffu-czE",
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
   {
     title:
@@ -860,13 +732,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       { name: "PostgreSQL", icon: "/images/tech-icons/postgresql.png" },
     ],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "xMHDrCRN3V8",
   },
   {
     title: "Steppi – Move More, Save More",
@@ -902,13 +767,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       { name: "PostgreSQL", icon: "/images/tech-icons/postgresql.png" },
     ],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
   {
     title: "Capsule Lab – Web3-Powered Event Ticketing",
@@ -950,7 +808,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       role: "Founder & CEO Capsule Labs",
       image: "/images/testimonial/Kenny.png",
     },
-    detailsUrl: "/success-stories/company-3",
     videoId: "UOIOpaHtZxA",
   },
 
@@ -988,13 +845,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       { name: "PostgreSQL", icon: "/images/tech-icons/postgresql.png" },
     ],
     isFeatured: true,
-    // founder: {
-    //   name: "Kenny Kemsley",
-    //   role: "Founder & CEO Capsule Labs",
-    //   image: "/images/testimonial/Kenny.png",
-    // },
-    // detailsUrl: "/success-stories/company-3",
-    // videoId: "UOIOpaHtZxA",
   },
 
   {
@@ -1030,13 +880,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       { name: "PostgreSQL", icon: "/images/tech-icons/postgresql.png" },
     ],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
 
   {
@@ -1072,13 +915,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       { name: "Tailwind", icon: "/images/tech-icons/tailwind.png" },
     ],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
   {
     title: "Heavenly Tasty – Healthy, Organic Snacking for Kids",
@@ -1112,13 +948,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       { name: "Tailwind", icon: "/images/tech-icons/tailwind.png" },
     ],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
   {
     title: "E-Com Console – Custom E-Commerce Admin Panel Built with Retool",
@@ -1155,13 +984,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       { name: "PostgreSQL", icon: "/images/tech-icons/postgresql.png" },
     ],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
   {
     title:
@@ -1195,13 +1017,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
     ],
     technologies: [{ name: "Webflow", icon: "/images/tech-icons/webflow.png" }],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
   {
     title:
@@ -1235,13 +1050,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
     ],
     technologies: [{ name: "Bubble", icon: "/images/tech-icons/bubble.png" }],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
   {
     title: "Heartfelt Online Store for Pet Lovers with Lovable",
@@ -1280,13 +1088,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       { name: "Next.js", icon: "/images/tech-icons/next.png" },
     ],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
   {
     title: "Launching a Modern Security Agency Website with Framer for Nicaea",
@@ -1321,13 +1122,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
     ],
     technologies: [{ name: "Framer", icon: "/images/tech-icons/framer.png" }],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
   {
     title: "Automating Upwork Job Hunting with n8n",
@@ -1362,13 +1156,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
     ],
     technologies: [{ name: "n8n", icon: "/images/tech-icons/ai-4.png" }],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
   {
     title: "Automating Appointment Reminders with n8n",
@@ -1403,13 +1190,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
     ],
     technologies: [{ name: "n8n", icon: "/images/tech-icons/ai-4.png" }],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
   {
     title: "AI-Powered Client Insights Automation with Zapier",
@@ -1444,13 +1224,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       { name: "Google Forms", icon: "/images/tech-icons/googleForm.png" },
     ],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
   {
     title:
@@ -1485,13 +1258,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       { name: "Google Sheets", icon: "/images/tech-icons/googleSheet.png" },
     ],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
 
   // adding more case studies here (8 more case studies)
@@ -1528,13 +1294,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       { name: "Google Sheets", icon: "/images/tech-icons/googleSheet.png" },
     ],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
   {
     title:
@@ -1570,13 +1329,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       { name: "Google Sheets", icon: "/images/tech-icons/googleSheet.png" },
     ],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
   {
     title: "Job Scraper Pro – Full-Stack Job Intelligence Platform",
@@ -1611,13 +1363,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       { name: "Google Sheets", icon: "/images/tech-icons/googleSheet.png" },
     ],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
   {
     title: "Tectiz Lunch Automation System",
@@ -1652,13 +1397,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       { name: "Google Sheets", icon: "/images/tech-icons/googleSheet.png" },
     ],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
   {
     title: "Lead Management & Nurturing Automation System",
@@ -1692,13 +1430,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       { name: "Google Sheets", icon: "/images/tech-icons/googleSheet.png" },
     ],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
   {
     title: "Foodii – Community-Driven Recipe Sharing App Template",
@@ -1733,13 +1464,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       { name: "Google Sheets", icon: "/images/tech-icons/googleSheet.png" },
     ],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
   {
     title: "BitFlow – Cryptocurrency Trading App UI Kit",
@@ -1774,13 +1498,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       { name: "Google Sheets", icon: "/images/tech-icons/googleSheet.png" },
     ],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
   {
     title: "Kamquat – Consultation Platform UI Kit",
@@ -1814,13 +1531,6 @@ export const CASE_STUDIES_PORTFOLIO: CaseStudy[] = [
       { name: "Google Sheets", icon: "/images/tech-icons/googleSheet.png" },
     ],
     isFeatured: true,
-    // founder: {
-    //   name: "Matt Quattrani",
-    //   role: "Founder & CEO",
-    //   image: "/images/testimonial/matt.png",
-    // },
-    // detailsUrl: "/success-stories/linkedgolf",
-    // videoId: "-tDeffu-czE",
   },
 ];
 

@@ -1,5 +1,5 @@
 ---
-import OutlinedButton from '../shared/OutlinedButton.astro';
+import CtaButton from '../shared/CtaButton.astro';
 import PageWrap from '../home/PageWrap.astro';
 import { CASE_STUDIES_CONTACT_HREF, CASE_STUDIES_PAGE_CTA } from '../../lib/config/case-studies';
 
@@ -25,7 +25,12 @@ const { title1, title2, description, buttonLabel } = CASE_STUDIES_PAGE_CTA;
           </p>
         </div>
         <div data-aos="fade-up" data-aos-delay="100">
-          <OutlinedButton href={CASE_STUDIES_CONTACT_HREF} label={buttonLabel} minWidth="!min-w-[260px]" />
+          <CtaButton
+            href={CASE_STUDIES_CONTACT_HREF}
+            label={buttonLabel}
+            variant="outlined"
+            class="!min-w-[260px]"
+          />
         </div>
       </div>
     </div>

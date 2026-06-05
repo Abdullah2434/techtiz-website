@@ -1,0 +1,75 @@
+---
+import ArrowDown from '@lucide/astro/icons/arrow-down';
+import ArrowLeft from '@lucide/astro/icons/arrow-left';
+import ArrowRight from '@lucide/astro/icons/arrow-right';
+
+type FormVariant = 'form' | 'yale' | 'filled';
+
+interface Props {
+  label: string;
+  type?: 'button' | 'submit';
+  variant?: FormVariant;
+  showArrow?: boolean;
+  downArrow?: boolean;
+  leadingArrow?: boolean;
+  class?: string;
+  disabled?: boolean;
+  /** Sets data-* hooks for contact/careers/scheduler scripts */
+  track?: 'contact' | 'career' | 'scheduler-confirm' | 'scheduler-next' | 'scheduler-back' | 'case-study';
+}
+
+const {
+  label,
+  type = 'submit',
+  variant = 'form',
+  showArrow = true,
+  downArrow = false,
+  leadingArrow = false,
+  class: className = '',
+  disabled = false,
+  track,
+} = Astro.props;
+
+const labelAttrs: Record<string, string> = {};
+
+if (track === 'contact') {
+  labelAttrs['data-contact-submit-label'] = '';
+} else if (track === 'career') {
+  labelAttrs['data-career-submit-label'] = '';
+} else if (track === 'scheduler-confirm') {
+  labelAttrs['data-scheduler-confirm-label'] = '';
+} else if (track === 'case-study') {
+  labelAttrs['data-submit-label'] = '';
+}
+---
+
+<button
+  type={type}
+  class:list={['btn', `btn--${variant}`, downArrow && 'btn--down', leadingArrow && 'btn--leading', className]}
+  disabled={disabled}
+  data-contact-submit={track === 'contact' ? true : undefined}
+  data-career-submit={track === 'career' ? true : undefined}
+  data-scheduler-confirm={track === 'scheduler-confirm' ? true : undefined}
+  data-scheduler-next={track === 'scheduler-next' ? true : undefined}
+  data-scheduler-back={track === 'scheduler-back' ? true : undefined}
+>
+  <span class="btn__inner">
+    <slot />
+    {
+      leadingArrow && (
+        <ArrowLeft class="btn__arrow btn__arrow--leading size-4 shrink-0" aria-hidden="true" />
+      )
+    }
+    <span {...labelAttrs}>{label}</span>
+    {
+      showArrow && downArrow && (
+        <ArrowDown class="btn__arrow size-4 shrink-0" aria-hidden="true" />
+      )
+    }
+    {
+      showArrow && !downArrow && (
+        <ArrowRight class="btn__arrow size-4 shrink-0" aria-hidden="true" />
+      )
+    }
+  </span>
+</button>

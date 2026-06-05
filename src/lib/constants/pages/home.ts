@@ -1,4 +1,4 @@
-import { HOME_CAPABILITIES_FROM_NAV } from '../nav/services';
+import { HOME_CAPABILITIES_FROM_NAV } from "../nav/services";
 
 export const HOME_SEO = {
   title: "Techtiz | AI-native engineering studio",
@@ -43,29 +43,29 @@ export const FEATURED_CLIENTS = [
 
 const HOME_CAPABILITY_COPY = [
   {
-    title: 'Building Future Ready Products',
-    subtitle: 'Software Development',
-    mainText: 'Building Future Ready Products',
+    title: "Building Future Ready Products",
+    subtitle: "Software Development",
+    mainText: "Building Future Ready Products",
   },
   {
-    title: 'AI & Intelligence',
-    subtitle: 'AI & Intelligence',
-    mainText: 'Smarter Decisions Intelligent Systems',
+    title: "AI & Intelligence",
+    subtitle: "AI & Intelligence",
+    mainText: "Smarter Decisions Intelligent Systems",
   },
   {
-    title: 'Automation & AI Solutions',
-    subtitle: 'Automation & AI Solutions',
-    mainText: 'Automate to Achieve More',
+    title: "Automation & AI Solutions",
+    subtitle: "Automation & AI Solutions",
+    mainText: "Automate to Achieve More",
   },
   {
-    title: 'Digital Transformation',
-    subtitle: 'Digital Transformation',
-    mainText: 'Reimagine Reinvent',
+    title: "Digital Transformation",
+    subtitle: "Digital Transformation",
+    mainText: "Reimagine Reinvent",
   },
   {
-    title: 'UX Design / Enablement',
-    subtitle: 'UX Design / Enablement',
-    mainText: 'Design That Drives Experience',
+    title: "UX Design / Enablement",
+    subtitle: "UX Design / Enablement",
+    mainText: "Design That Drives Experience",
   },
 ] as const;
 
@@ -77,10 +77,7 @@ export const HOME_CAPABILITIES = HOME_CAPABILITY_COPY.map((copy, index) => {
     url: nav.url,
     serviceLinks: nav.serviceLinks,
   };
-}) as const;
-
-/** @deprecated Use HOME_CAPABILITIES — kept for any stale imports */
-export const CAPABILITIES = HOME_CAPABILITIES;
+});
 
 export const INDUSTRY_TABS = [
   { id: "healthcare", label: "Healthcare" },
@@ -359,14 +356,6 @@ export const WHY_DATA: Record<
     ],
   },
 };
-
-/** @deprecated Use DIGITAL_FOUNDATION.stats */
-export const PROOF_STATS = [
-  { n: "5", plus: "+", label: "Years shipping" },
-  { n: "98", plus: "%", label: "Client satisfaction" },
-  { n: "180", plus: "+", label: "Projects delivered" },
-  { n: "200", plus: "+", label: "Clients served" },
-] as const;
 
 export const DIGITAL_FOUNDATION = {
   title: "Crafting Scalable Digital Foundations for Businesses",

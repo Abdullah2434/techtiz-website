@@ -31,6 +31,18 @@
     return `${words.slice(0, DISPLAY_WORDS).join(" ")}...`;
   };
 
+  const getVideoId = (study) => {
+    if (study.videoId) return study.videoId;
+    const match = study.reviewVideoUrl?.match(/embed\/([^?&/]+)/);
+    return match?.[1] ?? null;
+  };
+
+  const arrowIcon =
+    '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 shrink-0" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>';
+
+  const playIcon =
+    '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#0E0E0E" stroke="#0E0E0E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3.5" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>';
+
   const filterByTab = (tab) =>
     tab === "All"
       ? portfolioLite
@@ -59,44 +71,44 @@
   const renderCard = (study) => {
     const href = `/case-studies/${study.slug}/`;
     const overview = truncate(study.overview);
+    const videoId = getVideoId(study);
     const media = isVideo(study.image)
       ? `<video src="${study.image}" autoplay muted loop playsinline class="h-[220px] w-full rounded-lg object-cover"></video>`
       : `<img src="${study.image}" alt="" width="700" height="220" class="h-[220px] w-full rounded-lg object-cover" loading="lazy" />`;
 
     const founderBlock = study.founder
-      ? `<div class="mt-auto flex max-w-[620px] flex-wrap justify-between">
-          <div class="flex items-center gap-3">
-            <img src="${study.founder.image}" alt="${study.founder.name}" width="40" height="40" class="size-10 rounded-full object-cover" />
-            <div>
-              <p class="mb-1 text-[11px] font-semibold text-[#0E0E0E]">${study.founder.name}</p>
-              <p class="text-[8px] text-[#0E0E0E]">${study.founder.role}</p>
-            </div>
-            ${
-              study.videoId
-                ? `<button type="button" class="ml-3 flex size-8 items-center justify-center rounded-full bg-[#0E0E0E33]" data-video-open="${study.videoId}" onclick="event.preventDefault();event.stopPropagation();" aria-label="Play video">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.9268 5.88247L3.67749 15.691L13.9268 5.88247Z" fill="#0E0E0E"/></svg>
-                  </button>`
-                : ""
-            }
-          </div>
-          <span class="mt-4 inline-flex items-center gap-4 text-base font-semibold uppercase text-[#1E1E1E] lg:mt-0">SEE DETAILS
-            <svg width="14" height="12" viewBox="0 0 14 12" fill="none"><path d="M0.803762 10.599L12.1295 0.809738" stroke="#1E1E1E" stroke-width="1.5"/></svg>
-          </span>
-        </div>`
-      : "";
-
-    return `<a href="${href}" class="cs-card group block">
-      <div class="flex flex-col">
-        <div class="min-h-[220px]" data-aos="fade-up" data-aos-delay="100">${media}</div>
-        <div class="flex flex-col gap-10 p-6" data-aos="fade-up" data-aos-delay="100">
+      ? `<div class="flex items-center gap-3">
+          <img src="${study.founder.image}" alt="${study.founder.name}" width="40" height="40" class="size-10 rounded-full object-cover" />
           <div>
-            <h3 class="mb-3 line-clamp-2 text-[30px] font-medium text-[#1E1E1E] md:text-[32px]">${study.title}</h3>
-            <p class="text-base text-[#1E1E1E]/60">${overview}</p>
+            <p class="mb-1 text-[11px] font-semibold leading-[1.2] tracking-[-0.02em] text-[#0E0E0E]">${study.founder.name}</p>
+            <p class="text-[8px] font-normal leading-[1.2] tracking-[-0.02em] text-[#0E0E0E]">${study.founder.role}</p>
           </div>
-          ${founderBlock}
+          ${
+            videoId
+              ? `<button type="button" class="ml-1 flex size-8 shrink-0 cursor-pointer items-center justify-center rounded-full bg-[#0E0E0E]/20 transition-colors hover:bg-[#0E0E0E]/40" data-video-open="${videoId}" aria-label="Play ${study.title} video">${playIcon}</button>`
+              : ""
+          }
+        </div>`
+      : "<div></div>";
+
+    return `<article class="cs-card group flex flex-col">
+      <a href="${href}" class="block flex-1">
+        <div class="min-h-[220px] max-w-[700px]" data-aos="fade-up" data-aos-delay="100">${media}</div>
+        <div class="flex max-w-[700px] flex-col gap-10 p-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="max-w-[620px] gap-2">
+            <h3 class="mb-3 line-clamp-2 text-[30px] font-medium leading-[1.2] tracking-[-0.64px] text-[#1E1E1E] md:text-[32px]">${study.title}</h3>
+            <p class="text-left text-base font-normal leading-[1.2] tracking-[-0.32px] text-[#1E1E1E]/60">${overview}</p>
+          </div>
         </div>
+      </a>
+      <div class="mt-auto flex max-w-[700px] flex-wrap items-center justify-between gap-4 px-6 pb-6">
+        ${founderBlock}
+        <a href="${href}" class="inline-flex items-center gap-3 text-base font-semibold uppercase leading-[1.2] tracking-[-0.02em] text-[#1E1E1E] transition-all group-hover:gap-4">
+          SEE DETAILS
+          ${arrowIcon}
+        </a>
       </div>
-    </a>`;
+    </article>`;
   };
 
   const updateUrl = (tab, page) => {

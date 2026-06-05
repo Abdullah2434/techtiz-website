@@ -1,6 +1,9 @@
 ---
 import { HUB_INQUIRY } from '../../../lib/constants/pages/sled-hub';
 import { SITE, highlightSledEmailHtml } from '../../../lib/constants/site';
+import Send from '@lucide/astro/icons/send';
+import CtaButton from '../../shared/CtaButton.astro';
+import FormButton from '../../shared/FormButton.astro';
 import Eyebrow from '../../shared/Eyebrow.astro';
 import SledPageWrap from '../shared/SledPageWrap.astro';
 
@@ -155,13 +158,14 @@ const inputClass =
           <div class="max-w-[380px] font-mono text-[10.5px] font-extrabold leading-[1.5] tracking-[0.06em] uppercase text-muted">
             {HUB_INQUIRY.ndaNote}
           </div>
-          <button
+          <FormButton
             type="submit"
-            class="inline-flex items-center justify-center gap-2.5 rounded-xl bg-yale-dark px-7 py-3.5 text-[14.5px] font-bold text-white shadow-[0_10px_28px_-10px_rgba(14,38,64,0.45)] transition-[transform,box-shadow] duration-200 ease-out hover:-translate-y-0.5 hover:shadow-[0_16px_36px_-10px_rgba(14,38,64,0.5)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
+            label={HUB_INQUIRY.submitLabel}
+            variant="yale"
+            showArrow={false}
           >
-            <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-            {HUB_INQUIRY.submitLabel}
-          </button>
+            <Send class="size-4 shrink-0" aria-hidden="true" />
+          </FormButton>
         </div>
       </form>
 
@@ -178,13 +182,13 @@ const inputClass =
           class="mx-auto mb-7 max-w-[420px] text-[15px] leading-[1.58] text-muted"
           set:html={highlightSledEmailHtml(HUB_INQUIRY.success.body)}
         />
-        <a
-          class="inline-flex items-center justify-center rounded-xl border border-line bg-white px-7 py-3.5 text-[14.5px] font-bold text-yale-dark shadow-[0_8px_20px_-12px_rgba(21,58,95,0.15)] transition-[transform,background] duration-200 ease-out hover:-translate-y-0.5 hover:bg-seasalt"
+        <CtaButton
           id="sledInquiryReset"
           href="#top"
-        >
-          {HUB_INQUIRY.success.resetLabel}
-        </a>
+          label={HUB_INQUIRY.success.resetLabel}
+          variant="ghost-light"
+          showArrow={false}
+        />
       </div>
     </div>
   </SledPageWrap>

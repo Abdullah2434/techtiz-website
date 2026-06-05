@@ -19,80 +19,88 @@ const highlightWord = titleWords.length >= 2 ? titleWords[1] : '';
   </div>
   <div class="mx-auto max-w-[1400px] px-2">
     <div class="grid grid-cols-1 gap-x-8 lg:grid-cols-3">
-      <ul class="flex flex-col divide-y divide-gray-200 bg-white" role="tablist">
+      <ul
+        class="relative flex flex-col divide-y divide-gray-200 bg-white"
+        role="tablist"
+        data-ind-tab-list
+      >
+        <span class="ind-tab-pill-slider" aria-hidden="true"></span>
         {
           tabs.map((tab, index) => (
-            <li>
+            <li class="relative z-10">
               <button
                 type="button"
                 role="tab"
-                class:list={[
-                  'ind-tab-btn relative my-4 w-full cursor-pointer rounded p-3 text-left text-[20px] font-medium transition-all duration-300 md:text-[24px]',
-                  index === 0 ? 'text-white' : 'text-[#838383] hover:text-cyan',
-                ]}
+                class="ind-tab-btn relative my-4 w-full cursor-pointer rounded p-3 text-left text-[20px] font-medium transition-colors duration-300 md:text-[24px]"
                 data-tab-index={index}
                 aria-selected={index === 0 ? 'true' : 'false'}
               >
-                <span class="ind-tab-pill absolute inset-0 rounded bg-cyan/80 opacity-0 transition-opacity" />
                 <span class="relative">{tab.title}</span>
               </button>
             </li>
           ))
         }
       </ul>
-      <div class="relative mt-8 flex min-h-[456px] items-start overflow-hidden rounded-lg bg-[#153A5F] p-10 text-white lg:col-span-2 lg:mt-0">
-        {
-          tabs.map((tab, index) => (
-            <div
-              class:list={['ind-tab-panel w-full', index !== 0 && 'hidden']}
-              data-tab-panel={index}
-              role="tabpanel"
-            >
-              <div class="flex w-full flex-col items-start gap-8 md:flex-row">
-                <div class="relative z-20 flex-1">
-                  <h3 class="mb-8 text-[30px] font-semibold text-white md:text-[40px]">
-                    {tab.content.title}
-                  </h3>
-                  <ul class="space-y-10">
-                    {
-                      tab.content.features.map((feature) => (
-                        <li class="flex items-start">
-                          <svg
-                            class="mr-4 mt-1 shrink-0"
-                            width="22"
-                            height="17"
-                            viewBox="0 0 22 17"
-                            fill="none"
-                            aria-hidden="true"
-                          >
-                            <path
-                              d="M1.66602 11.332C1.66602 11.332 3.66602 11.332 6.33268 15.9987C6.33268 15.9987 13.7447 3.77603 20.3327 1.33203"
-                              stroke="white"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                            />
-                          </svg>
-                          <span class="text-[16px] font-normal text-white/80">{feature}</span>
-                        </li>
-                      ))
-                    }
-                  </ul>
+      <div
+        class="relative mt-8 flex min-h-[456px] items-start overflow-hidden rounded-lg bg-[#153A5F] p-10 text-white lg:col-span-2 lg:mt-0"
+      >
+        <div class="ind-tab-panels">
+          {
+            tabs.map((tab, index) => (
+              <div
+                class:list={[
+                  'ind-tab-panel',
+                  index === 0 ? 'is-active' : 'is-hidden',
+                ]}
+                data-tab-panel={index}
+                role="tabpanel"
+              >
+                <div class="flex w-full flex-col items-start gap-8 md:flex-row">
+                  <div class="relative z-20 flex-1">
+                    <h3 class="mb-8 text-[30px] font-semibold text-white md:text-[40px]">
+                      {tab.content.title}
+                    </h3>
+                    <ul class="space-y-10">
+                      {
+                        tab.content.features.map((feature) => (
+                          <li class="flex items-start">
+                            <svg
+                              class="mr-4 mt-1 shrink-0"
+                              width="22"
+                              height="17"
+                              viewBox="0 0 22 17"
+                              fill="none"
+                              aria-hidden="true"
+                            >
+                              <path
+                                d="M1.66602 11.332C1.66602 11.332 3.66602 11.332 6.33268 15.9987C6.33268 15.9987 13.7447 3.77603 20.3327 1.33203"
+                                stroke="white"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              />
+                            </svg>
+                            <span class="text-[16px] font-normal text-white/80">{feature}</span>
+                          </li>
+                        ))
+                      }
+                    </ul>
+                  </div>
+                  {tab.content.image && (
+                    <img
+                      src={tab.content.image}
+                      alt=""
+                      width={320}
+                      height={140}
+                      class="absolute right-2 bottom-2 z-10 h-auto w-[200px] object-contain md:w-[320px]"
+                      loading="lazy"
+                    />
+                  )}
                 </div>
-                {tab.content.image && (
-                  <img
-                    src={tab.content.image}
-                    alt=""
-                    width={320}
-                    height={140}
-                    class="absolute right-2 bottom-2 z-10 h-auto w-[200px] object-contain md:w-[320px]"
-                    loading="lazy"
-                  />
-                )}
               </div>
-            </div>
-          ))
-        }
+            ))
+          }
+        </div>
       </div>
     </div>
   </div>

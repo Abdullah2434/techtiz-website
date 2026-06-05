@@ -17,6 +17,8 @@ import {
   WHAT_HAPPENS_NEXT,
 } from '../../../lib/constants/pages/contact';
 import { SITE, highlightSledEmailHtml } from '../../../lib/constants/site';
+import CtaButton from '../../shared/CtaButton.astro';
+import FormButton from '../../shared/FormButton.astro';
 import Eyebrow from '../../shared/Eyebrow.astro';
 import SledPageWrap from '../shared/SledPageWrap.astro';
 
@@ -170,13 +172,9 @@ const sectionLabelClass = 'font-mono text-[10.5px] font-bold tracking-[0.18em] t
 
           <div class="flex flex-wrap items-center justify-between gap-4 border-t border-line bg-seasalt/40 px-6 py-5 sm:px-8">
             <div class="text-[13.5px] leading-[1.55] text-muted">All fields are confidential. NDA on request before review.</div>
-            <button
-              type="submit"
-              class="inline-flex items-center justify-center gap-2.5 rounded-xl bg-yale px-6 py-3.5 text-[14px] font-bold text-white shadow-[0_8px_22px_-10px_rgba(21,58,95,0.45)] transition-[transform,background,box-shadow] duration-200 ease-out hover:-translate-y-0.5 hover:bg-yale-dark hover:shadow-[0_14px_28px_-10px_rgba(14,38,64,0.4)]"
-            >
-              Send to Techtiz
+            <FormButton type="submit" label="Send to Techtiz" variant="yale" showArrow={false}>
               <Send class="size-4" aria-hidden="true" />
-            </button>
+            </FormButton>
           </div>
         </form>
 
@@ -195,13 +193,13 @@ const sectionLabelClass = 'font-mono text-[10.5px] font-bold tracking-[0.18em] t
               `Your email client should have opened a pre-filled message to ${SITE.email.sled}. If it didn't, copy your details into an email to that address — we reply within one business day with a mutual NDA template.`,
             )}
           />
-          <a
+          <CtaButton
             id="formReset"
             href="#"
-            class="inline-flex items-center justify-center rounded-xl border border-line bg-white px-5 py-3 text-sm font-bold text-yale transition-[border-color,background] duration-200 hover:border-yale hover:bg-seasalt"
-          >
-            Submit another inquiry
-          </a>
+            label="Submit another inquiry"
+            variant="ghost-light"
+            showArrow={false}
+          />
         </div>
       </div>
 
@@ -236,13 +234,15 @@ const sectionLabelClass = 'font-mono text-[10.5px] font-bold tracking-[0.18em] t
           <p class="mt-2 text-[13.5px] leading-[1.6] text-muted">
             If you'd rather start with a short email, send a one-line description of the engagement type and your role. Our U.S.-based partner manager routes it from there, usually within one business day.
           </p>
-          <a
-            class="mt-5 inline-flex w-full items-center justify-center gap-2.5 rounded-xl border border-line bg-seasalt px-4 py-3.5 text-[14px] font-semibold text-yale transition-[border-color,background,transform] duration-200 hover:-translate-y-px hover:border-cyan/40 hover:bg-cyan-soft/50"
+          <CtaButton
             href={`mailto:${SITE.email.sled}`}
+            label={SITE.email.sled}
+            variant="ghost-light"
+            showArrow={false}
+            class="mt-5 w-full"
           >
             <Mail class="size-4 text-cyan-strong" stroke-width="1.75" aria-hidden="true" />
-            {SITE.email.sled}
-          </a>
+          </CtaButton>
         </div>
       </aside>
     </div>

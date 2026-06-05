@@ -1,4 +1,6 @@
 ---
+import CtaButton from '../shared/CtaButton.astro';
+
 interface Props {
   ctaTitle: string;
   ctaButtonText: string;
@@ -53,28 +55,12 @@ const decorClass =
     </svg>
 
     <div class="relative z-20 mt-5">
-      <a
+      <CtaButton
         href={ctaButtonUrl}
-        class="group flex w-full items-center justify-between rounded-[2px] border border-white bg-white/10 px-6 py-[12.7px] text-[16px] font-normal text-white transition-all duration-300 hover:border-white/50 hover:bg-white hover:text-[#18B0E6]"
-      >
-        <span class="mr-3">{ctaButtonText}</span>
-        <svg
-          width="16"
-          height="12"
-          viewBox="0 0 18 14"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          class="shrink-0 transition-transform duration-300 group-hover:translate-x-0.5"
-          aria-hidden="true"
-        >
-          <path
-            d="M1 7.01097L16.8124 6.99999M11.5858 13L17 6.99999L11.5858 1"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"></path>
-        </svg>
-      </a>
+        label={ctaButtonText}
+        variant="ghost-dark"
+        class="w-full !min-w-0 [&_.btn__inner]:w-full [&_.btn__inner]:justify-between"
+      />
     </div>
   </div>
 </div>

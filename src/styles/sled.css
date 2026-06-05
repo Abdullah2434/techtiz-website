@@ -192,30 +192,6 @@
   box-shadow: 0 24px 48px -24px rgba(0, 0, 0, 0.45);
 }
 
-/* CTA arrow (legacy .cta .arr) */
-.sled-btn-arr::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  top: 50%;
-  width: 8px;
-  height: 8px;
-  border-top: 1.8px solid currentColor;
-  border-right: 1.8px solid currentColor;
-  transform: translateY(-50%) rotate(45deg);
-}
-
-.sled-btn-arr::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 4px;
-  top: 50%;
-  height: 1.8px;
-  background: currentColor;
-  transform: translateY(-50%);
-}
-
 /* Pain-point label dot */
 .sled-pain-label::before {
   content: "";

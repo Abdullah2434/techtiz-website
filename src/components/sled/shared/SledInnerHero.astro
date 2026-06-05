@@ -1,6 +1,6 @@
 ---
 import Eyebrow from '../../shared/Eyebrow.astro';
-import SledButton from './SledButton.astro';
+import CtaButton from '../../shared/CtaButton.astro';
 import SledPageWrap from './SledPageWrap.astro';
 
 interface Props {
@@ -25,7 +25,12 @@ const { eyebrow, heading, body, ctas = [] } = Astro.props;
       {ctas.length > 0 && (
         <div class="mt-[26px] flex flex-wrap gap-[14px]">
           {ctas.map((cta) => (
-            <SledButton href={cta.href} label={cta.label} variant={cta.variant} />
+            <CtaButton
+              href={cta.href}
+              label={cta.label}
+              variant={cta.variant}
+              showArrow={cta.variant === 'cta'}
+            />
           ))}
         </div>
       )}

@@ -48,3 +48,4 @@ body {
 
 /* After Tailwind layers so header chrome wins utility conflicts */
 @import './chrome.css';
+@import './buttons.css';

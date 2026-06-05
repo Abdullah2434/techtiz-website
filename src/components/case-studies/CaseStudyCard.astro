@@ -1,4 +1,6 @@
 ---
+import ArrowRight from '@lucide/astro/icons/arrow-right';
+import Play from '@lucide/astro/icons/play';
 import type { CaseStudy } from '../../lib/types/case-study';
 import { isVideoMedia, truncateOverview } from '../../lib/utils/case-study';
 
@@ -10,10 +12,12 @@ const { study } = Astro.props;
 const overview = truncateOverview(study.overview);
 const isVideo = isVideoMedia(study.image);
 const detailHref = `/case-studies/${study.slug}/`;
+const videoId =
+  study.videoId ?? study.reviewVideoUrl?.match(/embed\/([^?&/]+)/)?.[1];
 ---
 
-<a href={detailHref} class="cs-card group block">
-  <div class="flex flex-col">
+<article class="cs-card group flex flex-col">
+  <a href={detailHref} class="block flex-1">
     <div class="min-h-[220px] max-w-[700px]" data-aos="fade-up" data-aos-delay="100">
       {
         isVideo ? (
@@ -39,7 +43,7 @@ const detailHref = `/case-studies/${study.slug}/`;
       }
     </div>
 
-    <div class="flex min-h-[229px] max-w-[700px] flex-col gap-10 p-6" data-aos="fade-up" data-aos-delay="100">
+    <div class="flex max-w-[700px] flex-col gap-10 p-6" data-aos="fade-up" data-aos-delay="100">
       <div class="max-w-[620px] gap-2">
         <h3 class="mb-3 line-clamp-2 text-[30px] font-medium leading-[1.2] tracking-[-0.64px] text-[#1E1E1E] md:text-[32px]">
           {study.title}
@@ -48,61 +52,52 @@ const detailHref = `/case-studies/${study.slug}/`;
           {overview}
         </p>
       </div>
-
-      {
-        study.founder && (
-          <div class="mt-auto flex max-w-[620px] flex-wrap justify-between">
-            <div class="flex items-center gap-3">
-              <img
-                src={study.founder.image}
-                alt={study.founder.name}
-                width={40}
-                height={40}
-                class="size-10 rounded-full object-cover"
-                loading="lazy"
-              />
-              <div>
-                <p class="mb-1 text-[11px] font-semibold leading-[1.2] tracking-[-0.02em] text-[#0E0E0E]">
-                  {study.founder.name}
-                </p>
-                <p class="text-[8px] font-normal leading-[1.2] tracking-[-0.02em] text-[#0E0E0E]">
-                  {study.founder.role}
-                </p>
-              </div>
-              {
-                study.videoId && (
-                  <button
-                    type="button"
-                    class="ml-3 flex size-8 cursor-pointer items-center justify-center rounded-full bg-[#0E0E0E33] hover:bg-[#0E0E0E66]"
-                    data-video-open={study.videoId}
-                    onclick="event.preventDefault(); event.stopPropagation();"
-                    aria-label="Play video"
-                  >
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="ml-0.5 p-0.5" aria-hidden="true">
-                      <path
-                        d="M13.9268 5.88247C14.311 6.08679 14.6324 6.39181 14.8565 6.76483C15.0806 7.13786 15.199 7.56483 15.199 8.00001C15.199 8.43518 15.0806 8.86216 14.8565 9.23518C14.6324 9.60821 14.311 9.91322 13.9268 10.1175L3.67749 15.691C2.02714 16.5894 0 15.4214 0 13.5742V2.42657C0 0.578629 2.02714 -0.588537 3.67749 0.308237L13.9268 5.88247Z"
-                        fill="#0E0E0E"
-                      />
-                    </svg>
-                  </button>
-                )
-              }
-            </div>
-            <span class="mt-4 inline-flex items-center gap-4 text-base font-semibold uppercase leading-[1.2] tracking-[-0.02em] text-[#1E1E1E] transition-all group-hover:gap-5 lg:mt-0">
-              SEE DETAILS
-              <svg width="14" height="12" viewBox="0 0 14 12" fill="none" aria-hidden="true">
-                <path
-                  d="M0.803762 10.599L12.1295 0.809738M12.0694 7.22556L12.2639 0.693694L4.69787 0.861589"
-                  stroke="#1E1E1E"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </span>
-          </div>
-        )
-      }
     </div>
+  </a>
+
+  <div class="mt-auto flex max-w-[700px] flex-wrap items-center justify-between gap-4 px-6 pb-6">
+    {
+      study.founder ? (
+        <div class="flex items-center gap-3">
+          <img
+            src={study.founder.image}
+            alt={study.founder.name}
+            width={40}
+            height={40}
+            class="size-10 rounded-full object-cover"
+            loading="lazy"
+          />
+          <div>
+            <p class="mb-1 text-[11px] font-semibold leading-[1.2] tracking-[-0.02em] text-[#0E0E0E]">
+              {study.founder.name}
+            </p>
+            <p class="text-[8px] font-normal leading-[1.2] tracking-[-0.02em] text-[#0E0E0E]">
+              {study.founder.role}
+            </p>
+          </div>
+          {
+            videoId && (
+              <button
+                type="button"
+                class="ml-1 flex size-8 shrink-0 cursor-pointer items-center justify-center rounded-full bg-[#0E0E0E]/20 transition-colors hover:bg-[#0E0E0E]/40"
+                data-video-open={videoId}
+                aria-label={`Play ${study.client} video`}
+              >
+                <Play class="size-3.5 fill-[#0E0E0E] stroke-[#0E0E0E]" aria-hidden="true" />
+              </button>
+            )
+          }
+        </div>
+      ) : (
+        <div />
+      )
+    }
+    <a
+      href={detailHref}
+      class="inline-flex items-center gap-3 text-base font-semibold uppercase leading-[1.2] tracking-[-0.02em] text-[#1E1E1E] transition-all group-hover:gap-4"
+    >
+      SEE DETAILS
+      <ArrowRight class="size-4 shrink-0" aria-hidden="true" />
+    </a>
   </div>
-</a>
+</article>

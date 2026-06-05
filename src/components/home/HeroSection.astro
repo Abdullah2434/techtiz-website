@@ -1,10 +1,10 @@
 ---
-import PageWrap from "./PageWrap.astro";
-import Eyebrow from "../shared/Eyebrow.astro";
-import CtaButton from "../shared/CtaButton.astro";
 import ChevronRight from "@lucide/astro/icons/chevron-right";
-import HeroResolutionChart from "./HeroResolutionChart.astro";
 import { HOME_HERO } from "../../lib/constants/pages/home";
+import CtaButton from "../shared/CtaButton.astro";
+import Eyebrow from "../shared/Eyebrow.astro";
+import HeroResolutionChart from "./HeroResolutionChart.astro";
+import PageWrap from "./PageWrap.astro";
 
 const {
   eyebrow,
@@ -32,12 +32,6 @@ const {
     ></div>
     <div
       class="absolute bottom-[-12%] left-[-4%] size-[min(36vw,440px)] rounded-full bg-[radial-gradient(circle,rgba(21,58,95,0.14)_0%,rgba(21,58,95,0)_72%)] blur-[72px] will-change-transform animate-[hero-glow-b_24s_ease-in-out_infinite_alternate] motion-reduce:animate-none"
-    ></div>
-    <div
-      class="absolute -right-20 -top-[60px] size-[360px] rotate-[15deg] opacity-40 max-[900px]:opacity-25 bg-[linear-gradient(45deg,transparent_49%,rgba(24,176,230,0.12)_49%_51%,transparent_51%),linear-gradient(-45deg,transparent_49%,rgba(21,58,95,0.05)_49%_51%,transparent_51%)] bg-size-[36px_36px]"
-    ></div>
-    <div
-      class="absolute -bottom-10 -left-20 size-[280px] rotate-[15deg] opacity-30 max-[900px]:opacity-20 bg-[linear-gradient(45deg,transparent_49%,rgba(24,176,230,0.12)_49%_51%,transparent_51%),linear-gradient(-45deg,transparent_49%,rgba(21,58,95,0.05)_49%_51%,transparent_51%)] bg-size-[36px_36px]"
     ></div>
   </div>
 

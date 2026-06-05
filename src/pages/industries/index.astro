@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/shared/Header.astro';
 import Footer from '../../components/shared/Footer.astro';
 import CtaButton from '../../components/shared/CtaButton.astro';
+import Breadcrumbs from '../../components/seo/Breadcrumbs.astro';
 import { INDUSTRIES_HUB_SEO } from '../../lib/config/industries';
 import { INDUSTRY_CATEGORIES } from '../../lib/constants/nav/industries';
 import { ROUTES } from '../../lib/constants/routes';
@@ -14,7 +15,10 @@ const wrap = 'mx-auto w-full max-w-[1400px] px-2';
 
 <BaseLayout {title} {description} {canonicalPath}>
   <Header currentPage={ROUTES.industries} />
-  <main class="bg-white">
+  <main id="main-content" class="bg-white">
+    <div class:list={[wrap, 'pt-4']}>
+      <Breadcrumbs {canonicalPath} />
+    </div>
     <section class:list={[wrap, 'py-10 md:py-16']}>
       <div class="flex flex-col gap-4 md:gap-6">
         <h1 class="text-[32px] leading-tight font-medium text-[#101010] md:text-[44px] lg:text-[56px]">

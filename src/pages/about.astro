@@ -8,6 +8,7 @@ import AboutValuesSection from '../components/about/AboutValuesSection.astro';
 import AboutStatsSection from '../components/about/AboutStatsSection.astro';
 import AboutLeadershipSection from '../components/about/AboutLeadershipSection.astro';
 import IndustryCta from '../components/industries/IndustryCta.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import { ABOUT_SEO } from '../lib/config/about';
 import {
   ABOUT_CTA,
@@ -17,13 +18,20 @@ import {
   ABOUT_VALUES,
 } from '../lib/constants/pages/about';
 import { ROUTES } from '../lib/constants/routes';
+import { SITE } from '../lib/constants/site';
+import { aboutPageJsonLd } from '../lib/seo/json-ld';
 
 const { title, description, canonicalPath } = ABOUT_SEO;
+const pageUrl = `${SITE.url}${canonicalPath}`;
+const aboutJsonLd = aboutPageJsonLd({ title, description, url: pageUrl });
 ---
 
-<BaseLayout {title} {description} {canonicalPath}>
+<BaseLayout {title} {description} {canonicalPath} jsonLd={[aboutJsonLd]}>
   <Header currentPage={ROUTES.about} />
-  <main class="bg-white">
+  <main id="main-content" class="bg-white">
+    <div class="mx-auto max-w-[1400px] px-2 pt-4">
+      <Breadcrumbs {canonicalPath} />
+    </div>
     <AboutHero {...ABOUT_HERO} />
     <AboutValuesSection values={ABOUT_VALUES} />
     <AboutStatsSection stats={ABOUT_STATS} />

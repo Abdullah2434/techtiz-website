@@ -7,6 +7,7 @@ import CareersOurValues from '../components/careers/CareersOurValues.astro';
 import IndustryHero from '../components/industries/IndustryHero.astro';
 import Footer from '../components/shared/Footer.astro';
 import Header from '../components/shared/Header.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { CAREERS_SEO } from '../lib/config/careers';
 import {
@@ -17,15 +18,26 @@ CAREERS_HIRING_STEPS,
 CAREERS_VALUES,
 } from '../lib/constants/pages/careers';
 import { ROUTES } from '../lib/constants/routes';
+import { SITE } from '../lib/constants/site';
+import { jobPostingJsonLd } from '../lib/seo/json-ld';
 import '../styles/careers.css';
 import '../styles/industries.css';
 
-const { title, description, canonicalPath } = CAREERS_SEO;
+const { title, description, canonicalPath, ogImage } = CAREERS_SEO;
+const pageUrl = `${SITE.url}${canonicalPath}`;
+const careersJsonLd = jobPostingJsonLd({
+  title: 'Software Development Careers at Techtiz',
+  description,
+  url: pageUrl,
+});
 ---
 
-<BaseLayout {title} {description} {canonicalPath}>
+<BaseLayout {title} {description} {canonicalPath} {ogImage} jsonLd={[careersJsonLd]}>
   <Header currentPage={ROUTES.careers} />
-  <main class="bg-white">
+  <main id="main-content" class="bg-white">
+    <div class="mx-auto max-w-[1400px] px-2 pt-4">
+      <Breadcrumbs {canonicalPath} />
+    </div>
     <IndustryHero {...CAREERS_HERO} title={CAREERS_HERO.title ?? ''} />
     <CareersOurValues values={CAREERS_VALUES} />
     <CareersHiringProcess steps={CAREERS_HIRING_STEPS} />

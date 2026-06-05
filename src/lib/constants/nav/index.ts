@@ -28,7 +28,7 @@ import { ROUTES } from '../routes';
 
 /** Top-level header links (commercial site). */
 export const PRIMARY_NAV = [
-  { label: 'About Us', href: ROUTES.home },
+  { label: 'About Us', href: ROUTES.about },
   { label: 'Services', mega: 'services' as const },
   { label: 'Industries', mega: 'industries' as const },
   { label: 'Case Studies', href: ROUTES.caseStudies },

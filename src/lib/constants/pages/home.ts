@@ -17,7 +17,6 @@ export const HOME_HERO = {
   },
   heading: "Bespoke solutions, tailored to your",
   headingAccent: "business needs.",
-  headingEnd: "",
   body: "We design automation systems that reduce busywork, enhance clarity, and support your growth. An AI-native engineering studio for ambitious product teams—and a technical subcontractor to U.S. SLED prime contractors.",
   cta: { label: "Talk to an Expert", href: "/contact/" },
 } as const;

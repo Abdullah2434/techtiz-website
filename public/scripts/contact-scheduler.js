@@ -1,4 +1,4 @@
-// Consultation scheduler — UI only; confirm opens mailto (no API yet).
+// Consultation scheduler — posts to /api/appointment/ with reCAPTCHA.
 
 (function () {
   const root = document.querySelector('[data-contact-scheduler]');
@@ -12,7 +12,8 @@
   };
 
   const DAY_NAMES = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'];
-  const contactEmail = window.__CONTACT_EMAIL__ || 'contact@techtiz.co';
+  const apiUrl = window.__SCHEDULER_CONFIG__?.apiUrl || '/api/appointment/';
+  const siteKey = window.__SCHEDULER_CONFIG__?.siteKey;
 
   const monthLabel = root.querySelector('[data-scheduler-month-label]');
   const dayNamesEl = root.querySelector('[data-scheduler-day-names]');
@@ -22,12 +23,17 @@
   const timesNone = root.querySelector('[data-scheduler-times-none]');
   const panel = root.querySelector('[data-scheduler-panel]');
   const success = root.querySelector('[data-scheduler-success]');
-  const mailtoLink = root.querySelector('[data-scheduler-mailto]');
   const animateWrap = root.querySelector('[data-scheduler-animate]');
   const step1 = root.querySelector('[data-scheduler-step="1"]');
   const step2 = root.querySelector('[data-scheduler-step="2"]');
   const confirmBtn = root.querySelector('[data-scheduler-confirm]');
   const confirmLabel = root.querySelector('[data-scheduler-confirm-label]');
+  const recaptchaEl = root.querySelector('[data-scheduler-recaptcha]');
+
+  let recaptcha = null;
+  if (recaptchaEl && siteKey && window.initRecaptchaWidget) {
+    recaptcha = window.initRecaptchaWidget(recaptchaEl, siteKey);
+  }
 
   let viewMonth = new Date();
   viewMonth.setDate(1);
@@ -169,7 +175,7 @@
 
     if (!daysEl) return;
     daysEl.innerHTML = cells
-      .map((day, index) => {
+      .map((day) => {
         if (!day) {
           return `<span class="invisible h-10 w-10" aria-hidden="true"></span>`;
         }
@@ -301,7 +307,9 @@
       company: getFieldValue('company'),
     };
     let valid = true;
-    ['firstName', 'lastName', 'email', 'phone'].forEach((k) => showFieldError(k, ''));
+    ['firstName', 'lastName', 'email', 'phone', 'recaptcha'].forEach((k) =>
+      showFieldError(k, ''),
+    );
 
     if (!data.firstName) {
       showFieldError('firstName', 'First name is required');
@@ -330,29 +338,7 @@
     return valid ? data : null;
   }
 
-  function showBookingSuccess(data) {
-    const selectedDate = new Date(
-      viewMonth.getFullYear(),
-      viewMonth.getMonth(),
-      selectedDay,
-    );
-    const subject = encodeURIComponent('Consultation request - Techtiz');
-    const body = encodeURIComponent(
-      [
-        `Name: ${data.firstName} ${data.lastName}`,
-        `Email: ${data.email}`,
-        `Phone: ${data.phone}`,
-        `Preferred date: ${selectedDate.toDateString()}`,
-        `Preferred time: ${selectedTime}`,
-        '',
-        'Please confirm this slot by reply email.',
-      ].join('\n'),
-    );
-
-    if (mailtoLink) {
-      mailtoLink.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
-    }
-
+  function showBookingSuccess() {
     if (panel) panel.classList.add('is-hidden');
     if (success) {
       success.hidden = false;
@@ -386,16 +372,52 @@
     goToStep(1);
   });
 
-  confirmBtn?.addEventListener('click', () => {
+  confirmBtn?.addEventListener('click', async () => {
     const data = validateStep2();
     if (!data) return;
+
+    const recaptchaToken = recaptcha?.getToken?.() || null;
+    if (!recaptchaToken) {
+      showFieldError('recaptcha', 'Please complete the reCAPTCHA verification');
+      return;
+    }
+
+    const selectedDate = new Date(
+      viewMonth.getFullYear(),
+      viewMonth.getMonth(),
+      selectedDay,
+    );
+
     if (confirmBtn) confirmBtn.disabled = true;
     if (confirmLabel) confirmLabel.textContent = 'Confirming...';
-    window.setTimeout(() => {
-      showBookingSuccess(data);
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...data,
+          date: selectedDate.toDateString(),
+          time: selectedTime,
+          recaptchaToken,
+        }),
+      });
+
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to book appointment');
+      }
+
+      recaptcha?.reset?.();
+      showBookingSuccess();
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Something went wrong';
+      showFieldError('email', message);
+      recaptcha?.reset?.();
+    } finally {
       if (confirmBtn) confirmBtn.disabled = false;
       if (confirmLabel) confirmLabel.textContent = 'Confirm';
-    }, 400);
+    }
   });
 
   renderDayNames();

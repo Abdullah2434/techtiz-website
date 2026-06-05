@@ -1,4 +1,5 @@
 // @ts-check
+import node from "@astrojs/node";
 import sitemap from "@astrojs/sitemap";
 import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
@@ -6,6 +7,7 @@ import { SITE } from "./src/lib/constants/site.ts";
 
 export default defineConfig({
   site: SITE.url,
+  adapter: node({ mode: "standalone" }),
   trailingSlash: "always",
   integrations: [
     sitemap({

@@ -1,4 +1,4 @@
-// Careers application form — client validation only (no API yet).
+// Careers application form — posts multipart data to /api/careers/ with reCAPTCHA.
 
 (function () {
   const form = document.querySelector('[data-career-form]');
@@ -14,12 +14,18 @@
   const panel = document.querySelector('[data-career-form-panel]');
   const success = document.querySelector('[data-career-form-success]');
   const imageCol = document.querySelector('[data-career-form-image]');
-  const mailtoLink = document.querySelector('[data-career-mailto]');
   const cvInput = form.querySelector('#cv-upload');
   const cvNameEl = form.querySelector('[data-cv-filename]');
   const submitBtn = form.querySelector('[data-career-submit]');
   const submitLabel = form.querySelector('[data-career-submit-label]');
-  const careersEmail = window.__CAREERS_EMAIL__ || 'careers@techtiz.co';
+  const recaptchaEl = form.querySelector('[data-career-recaptcha]');
+  const siteKey = window.__CAREERS_FORM_CONFIG__?.siteKey;
+  const apiUrl = window.__CAREERS_FORM_CONFIG__?.apiUrl || '/api/careers/';
+
+  let recaptcha = null;
+  if (recaptchaEl && siteKey && window.initRecaptchaWidget) {
+    recaptcha = window.initRecaptchaWidget(recaptchaEl, siteKey);
+  }
 
   function showError(name, message) {
     const field = form.querySelector(`[name="${name}"]`);
@@ -32,7 +38,9 @@
   }
 
   function clearErrors() {
-    ['firstName', 'lastName', 'email', 'phone', 'cv'].forEach((n) => showError(n, ''));
+    ['firstName', 'lastName', 'email', 'phone', 'cv', 'recaptcha'].forEach((n) =>
+      showError(n, ''),
+    );
   }
 
   function validate() {
@@ -42,6 +50,7 @@
       lastName: (form.querySelector('[name="lastName"]')?.value || '').trim(),
       email: (form.querySelector('[name="email"]')?.value || '').trim(),
       phone: (form.querySelector('[name="phone"]')?.value || '').trim(),
+      message: (form.querySelector('[name="message"]')?.value || '').trim(),
       company: (form.querySelector('[name="company"]')?.value || '').trim(),
     };
     const file = cvInput?.files?.[0] || null;
@@ -82,26 +91,7 @@
     return valid ? { data, file } : null;
   }
 
-  function showSuccess({ data, file }) {
-    const message = (form.querySelector('[name="message"]')?.value || '').trim();
-    const subject = encodeURIComponent(`Career Application - ${data.firstName} ${data.lastName}`);
-    const body = encodeURIComponent(
-      [
-        `Name: ${data.firstName} ${data.lastName}`,
-        `Email: ${data.email}`,
-        `Phone: ${data.phone}`,
-        message ? `Cover letter:\n${message}` : '',
-        '',
-        `Please attach your CV (${file.name}) when sending this email.`,
-      ]
-        .filter(Boolean)
-        .join('\n'),
-    );
-
-    if (mailtoLink) {
-      mailtoLink.href = `mailto:${careersEmail}?subject=${subject}&body=${body}`;
-    }
-
+  function showSuccess() {
     if (panel) panel.classList.add('is-hidden');
     if (imageCol) imageCol.classList.add('hidden');
     if (success) {
@@ -127,18 +117,52 @@
     });
   }
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const result = validate();
     if (!result) return;
 
+    const recaptchaToken = recaptcha?.getToken?.() || null;
+    if (!recaptchaToken) {
+      showError('recaptcha', 'Please complete the reCAPTCHA verification.');
+      return;
+    }
+
     if (submitBtn) submitBtn.disabled = true;
     if (submitLabel) submitLabel.textContent = 'Submitting...';
 
-    window.setTimeout(() => {
-      showSuccess(result);
+    try {
+      const formData = new FormData();
+      Object.entries(result.data).forEach(([key, value]) => {
+        if (value) formData.append(key, value);
+      });
+      formData.append('cv', result.file);
+      formData.append('recaptchaToken', recaptchaToken);
+
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        body: formData,
+      });
+
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(payload.error || 'Failed to submit application');
+      }
+
+      form.reset();
+      if (cvNameEl) {
+        cvNameEl.textContent = '';
+        cvNameEl.classList.add('hidden');
+      }
+      recaptcha?.reset?.();
+      showSuccess();
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Something went wrong';
+      showError('cv', message);
+      recaptcha?.reset?.();
+    } finally {
       if (submitBtn) submitBtn.disabled = false;
       if (submitLabel) submitLabel.textContent = 'Confirm';
-    }, 400);
+    }
   });
 })();

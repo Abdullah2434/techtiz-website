@@ -1,18 +1,18 @@
 ---
-import "../../styles/case-studies.css";
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import Header from "../../components/shared/Header.astro";
-import Footer from "../../components/shared/Footer.astro";
-import DetailHero from "../../components/case-studies/DetailHero.astro";
-import ClientOverview from "../../components/case-studies/ClientOverview.astro";
-import MetricsSection from "../../components/case-studies/MetricsSection.astro";
 import CaseStudyDownload from "../../components/case-studies/CaseStudyDownload.astro";
+import ClientOverview from "../../components/case-studies/ClientOverview.astro";
+import DetailHero from "../../components/case-studies/DetailHero.astro";
+import MetricsSection from "../../components/case-studies/MetricsSection.astro";
 import SuccessStoriesSection from "../../components/home/SuccessStoriesSection.astro";
 import Breadcrumbs from "../../components/seo/Breadcrumbs.astro";
 import PageContextNav from "../../components/seo/PageContextNav.astro";
+import Footer from "../../components/shared/Footer.astro";
+import Header from "../../components/shared/Header.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 import { CASE_STUDIES_PORTFOLIO } from "../../lib/constants/case-studies-portfolio";
-import { absoluteUrl, articleJsonLd } from "../../lib/seo/json-ld";
 import { sitePageTitle } from "../../lib/constants/site";
+import { absoluteUrl, articleJsonLd } from "../../lib/seo/json-ld";
+import "../../styles/case-studies.css";
 
 export function getStaticPaths() {
   return CASE_STUDIES_PORTFOLIO.map((study) => ({

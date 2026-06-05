@@ -63,8 +63,7 @@ export const SUCCESS_STORIES_SECTION = {
   exploreHref: "/case-studies/",
 } as const;
 
-/** reCAPTCHA v2 site key (public). */
-export const RECAPTCHA_SITE_KEY = "6LdSTzYsAAAAAF2rLcbZ-caQ7B6cPhr63HhTmSTt";
+export { RECAPTCHA_SITE_KEY } from "./recaptcha";
 
 export const CASE_STUDY_DOWNLOAD_COPY = {
   titleLine1: "Download Complete",
@@ -83,4 +82,4 @@ export const CASE_STUDY_DOWNLOAD_COPY = {
 } as const;
 
 /** POST target when a server/API route is available (legacy Next.js path). */
-export const CASE_STUDY_FORM_API = "/api/case-study";
+export const CASE_STUDY_FORM_API = "/api/case-study/";

@@ -170,6 +170,15 @@ const sectionLabelClass = 'font-mono text-[10.5px] font-bold tracking-[0.18em] t
             })}
           </div>
 
+          <input
+            type="text"
+            name="website"
+            tabindex="-1"
+            autocomplete="off"
+            class="hidden"
+            aria-hidden="true"
+          />
+
           <div class="flex flex-wrap items-center justify-between gap-4 border-t border-line bg-seasalt/40 px-6 py-5 sm:px-8">
             <div class="text-[13.5px] leading-[1.55] text-muted">All fields are confidential. NDA on request before review.</div>
             <FormButton type="submit" label="Send to Techtiz" variant="yale" showArrow={false}>
@@ -186,11 +195,11 @@ const sectionLabelClass = 'font-mono text-[10.5px] font-bold tracking-[0.18em] t
           <div class="mb-6 grid size-14 place-items-center rounded-full bg-cyan-soft">
             <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--color-cyan-strong)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"></path></svg>
           </div>
-          <h3 class="mb-2.5 text-2xl font-extrabold text-yale-dark">Your inquiry is ready to send.</h3>
+          <h3 class="mb-2.5 text-2xl font-extrabold text-yale-dark">Inquiry received.</h3>
           <p
             class="mx-auto mb-6 max-w-[420px] text-[15px] leading-[1.55] text-muted"
             set:html={highlightSledEmailHtml(
-              `Your email client should have opened a pre-filled message to ${SITE.email.sled}. If it didn't, copy your details into an email to that address — we reply within one business day with a mutual NDA template.`,
+              `Thank you for reaching out. Our U.S.-based partner manager will reply within one business day from ${SITE.email.sled} with a mutual NDA template and a calendar slot.`,
             )}
           />
           <CtaButton

@@ -215,8 +215,10 @@
 
 body.m-nav-open {
   overflow: hidden;
+  overflow-x: clip;
   position: fixed;
   width: 100%;
+  max-width: 100%;
 }
 
 body.m-nav-open .m-nav-toggle span:nth-child(1) {
@@ -295,7 +297,10 @@ body.m-nav-open .m-nav-backdrop {
 .m-nav-drawer-scroll {
   flex: 1;
   min-height: 0;
+  min-width: 0;
+  overflow-x: hidden;
   overflow-y: auto;
+  overscroll-behavior-x: contain;
   padding: 24px 24px 8px;
   -webkit-overflow-scrolling: touch;
   --m-nav-indent-cat: 28px;
@@ -392,15 +397,14 @@ body.m-nav-open .m-nav-backdrop {
 
 .m-nav-drawer-scroll a.on,
 .m-nav-drawer-scroll a[aria-current='page'] {
-  background: var(--yale);
+  background: var(--cyan);
   color: var(--white);
   border-radius: 0;
-  margin: 0;
-  /* Extend active background edge-to-edge (drawer has 24px horizontal padding) */
+  margin: 0 -24px;
+  /* Extend active background edge-to-edge without widening scroll width */
   position: relative;
-  left: -24px;
-  width: calc(100% + 48px);
-  padding: 13px 40px;
+  width: auto;
+  padding: 13px 36px;
 }
 
 .m-nav-drawer-scroll a.on::after {
@@ -408,7 +412,7 @@ body.m-nav-open .m-nav-backdrop {
 }
 
 .m-nav-drawer-scroll a.on .m-link-icon-wrap {
-  display: none;
+  background: rgb(255 255 255 / 0.22);
 }
 
 .m-nav-drawer-scroll a.on .m-link-label {
@@ -504,11 +508,11 @@ body.m-nav-open .m-nav-backdrop {
 }
 
 .m-nav-drawer .m-subsection-trigger.on {
-  background: var(--yale);
+  background: var(--cyan);
   color: var(--white);
   position: relative;
-  left: -24px;
-  width: calc(100% + 48px);
+  margin: 0 -24px;
+  width: auto;
   padding-left: calc(var(--m-nav-indent-cat) + 24px);
   padding-right: 36px;
 }
@@ -518,7 +522,7 @@ body.m-nav-open .m-nav-backdrop {
 }
 
 .m-nav-drawer .m-subsection-trigger.on .m-link-icon-wrap {
-  display: none;
+  background: rgb(255 255 255 / 0.22);
 }
 
 .m-nav-drawer .m-subsection[open] > .m-subsection-trigger {

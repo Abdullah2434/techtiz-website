@@ -3,6 +3,7 @@ import '../styles/contact.css';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/shared/Header.astro';
 import Footer from '../components/shared/Footer.astro';
+import Breadcrumbs from '../components/seo/Breadcrumbs.astro';
 import ContactHero from '../components/contact/ContactHero.astro';
 import ContactFormSection from '../components/contact/ContactFormSection.astro';
 import ContactSchedulerSection from '../components/contact/ContactSchedulerSection.astro';
@@ -33,6 +34,12 @@ const contactPageJsonLd = {
     email: SITE.email.info,
     availableLanguage: ['English'],
     areaServed: 'Worldwide',
+    serviceType: [
+      'Software Development Consultation',
+      'AI Solutions',
+      'Automation Services',
+      'Digital Transformation',
+    ],
   },
 };
 ---
@@ -45,7 +52,10 @@ const contactPageJsonLd = {
   jsonLd={[contactPageJsonLd]}
 >
   <Header currentPage={ROUTES.contact} />
-  <main class="bg-white">
+  <main id="main-content" class="bg-white">
+    <div class="mx-auto max-w-[1400px] px-2 pt-4">
+      <Breadcrumbs {canonicalPath} />
+    </div>
     <ContactHero />
     <ContactFormSection />
     <ContactSchedulerSection />

@@ -4,12 +4,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/shared/Header.astro';
 import Footer from '../../components/shared/Footer.astro';
 import CtaButton from '../../components/shared/CtaButton.astro';
+import Breadcrumbs from '../../components/seo/Breadcrumbs.astro';
 import { SERVICES_HUB_SEO } from '../../lib/config/services';
 import { servicesData } from '../../lib/constants/services-portfolio';
 import { SERVICE_CATEGORIES, servicePath } from '../../lib/constants/nav/services';
 import { ROUTES } from '../../lib/constants/routes';
 
 const { title, description, canonicalPath } = SERVICES_HUB_SEO;
+const wrapBreadcrumbs = 'mx-auto w-full max-w-[1400px] px-2 pt-4';
 const wrap = 'mx-auto w-full max-w-[1400px] px-2';
 
 const hubSections = SERVICE_CATEGORIES.map((category) => ({
@@ -29,13 +31,16 @@ const hubSections = SERVICE_CATEGORIES.map((category) => ({
         description: service.hero.description,
       };
     })
-    .filter((entry) => entry !== null),
+    .filter((entry): entry is NonNullable<typeof entry> => entry !== null),
 }));
 ---
 
 <BaseLayout {title} {description} {canonicalPath}>
   <Header currentPage={ROUTES.services} />
-  <main>
+  <main id="main-content">
+    <div class={wrapBreadcrumbs}>
+      <Breadcrumbs {canonicalPath} />
+    </div>
     <section class:list={[wrap, 'py-10 md:py-16']}>
       <div class="flex flex-col gap-4 md:gap-6">
         <h1 class="text-[32px] leading-tight font-medium text-[#101010] md:text-[44px] lg:text-[56px]">

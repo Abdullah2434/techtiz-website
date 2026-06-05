@@ -10,12 +10,33 @@ import CaseStudiesCta from "../../components/case-studies/CaseStudiesCta.astro";
 import VideoModal from "../../components/case-studies/VideoModal.astro";
 import Breadcrumbs from "../../components/seo/Breadcrumbs.astro";
 import { CASE_STUDIES_SEO_PORTFOLIO } from "../../lib/config/case-studies";
+import { CASE_STUDIES_PORTFOLIO } from "../../lib/constants/case-studies-portfolio";
+import { SITE } from "../../lib/constants/site";
+import { collectionPageJsonLd } from "../../lib/seo/json-ld";
 
 const { title, description, canonicalPath, ogImage } =
   CASE_STUDIES_SEO_PORTFOLIO;
+const pageUrl = `${SITE.url}${canonicalPath}`;
+const caseStudiesJsonLd = collectionPageJsonLd({
+  title,
+  description,
+  url: pageUrl,
+  items: CASE_STUDIES_PORTFOLIO.map((study) => ({
+    name: study.title,
+    description: study.overview,
+    url: `${SITE.url}/case-studies/${study.slug}/`,
+    image: study.image,
+  })),
+});
 ---
 
-<BaseLayout {title} {description} {canonicalPath} {ogImage}>
+<BaseLayout
+  {title}
+  {description}
+  {canonicalPath}
+  {ogImage}
+  jsonLd={[caseStudiesJsonLd]}
+>
   <Header currentPage="/case-studies/" />
   <main id="main-content">
     <div class="mx-auto max-w-[1400px] px-2 pt-4 max-[600px]:px-[18px]">

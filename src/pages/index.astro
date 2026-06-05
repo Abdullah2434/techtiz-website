@@ -13,9 +13,18 @@ import SuccessStoriesSection from "../components/home/SuccessStoriesSection.astr
 import EngageSection from "../components/home/EngageSection.astro";
 import FinalCtaSection from "../components/home/FinalCtaSection.astro";
 import { HOME_SEO } from "../lib/constants/pages/home";
+import { SITE } from "../lib/constants/site";
+import { webPageJsonLd } from "../lib/seo/json-ld";
+
+const { title, description, canonicalPath } = HOME_SEO;
+const homeJsonLd = webPageJsonLd({
+  title,
+  description,
+  url: `${SITE.url}${canonicalPath}`,
+});
 ---
 
-<BaseLayout {...HOME_SEO}>
+<BaseLayout {...HOME_SEO} jsonLd={[homeJsonLd]}>
   <Header currentPage="/" />
   <main id="main-content">
     <HeroSection />

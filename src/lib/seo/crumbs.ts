@@ -6,6 +6,23 @@ const SLED_EXTRA_LABELS: Record<string, string> = {
   '/us-sled/capability-statement/': 'Capability Statement',
 };
 
+const PAGE_LABELS: Record<string, string> = {
+  '/about/': 'About Us',
+  '/careers/': 'Careers',
+  '/contact/': 'Contact',
+  '/services/': 'Services',
+  '/industries/': 'Industries',
+  '/privacy-policy/': 'Privacy Policy',
+  '/terms-of-service/': 'Terms of Service',
+};
+
+function slugToLabel(slug: string): string {
+  return slug
+    .split('-')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
+
 function normalizePath(path: string): string {
   if (!path || path === '/') return '/';
   return path.endsWith('/') ? path : `${path}/`;
@@ -51,6 +68,30 @@ export function buildBreadcrumbs(path: string): BreadcrumbCrumb[] {
         .join(' ');
       crumbs.push({ label });
     }
+    return crumbs;
+  }
+
+  if (normalized.startsWith('/services')) {
+    crumbs.push({ label: 'Services', href: '/services/' });
+    if (normalized !== '/services/') {
+      const slug = normalized.replace('/services/', '').replace(/\/$/, '');
+      crumbs.push({ label: slugToLabel(slug) });
+    }
+    return crumbs;
+  }
+
+  if (normalized.startsWith('/industries')) {
+    crumbs.push({ label: 'Industries', href: '/industries/' });
+    if (normalized !== '/industries/') {
+      const slug = normalized.replace('/industries/', '').replace(/\/$/, '');
+      crumbs.push({ label: slugToLabel(slug) });
+    }
+    return crumbs;
+  }
+
+  const pageLabel = PAGE_LABELS[normalized];
+  if (pageLabel) {
+    crumbs.push({ label: pageLabel });
     return crumbs;
   }
 

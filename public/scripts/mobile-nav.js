@@ -348,9 +348,14 @@
   }
 
   var footerHtml =
-    '<a class="us-pill us-pill--drawer" href="/us-sled/">' +
+    '<div class="m-nav-drawer-cta">' +
+    '<a class="us-pill" href="/us-sled/">' +
     '<span class="sled-dot" aria-hidden="true"></span>' +
-    "SLED Partnerships</a>";
+    "SLED Partnerships</a>" +
+    '<a href="/us-sled/" aria-label="View SLED Partnerships" class="us-arrow">' +
+    '<svg aria-hidden="true" viewBox="0 0 20 20" class="size-4">' +
+    '<path d="M7 4.5 12.5 10 7 15.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />' +
+    "</svg></a></div>";
 
   var toggle = document.createElement("button");
   toggle.className = "m-nav-toggle";

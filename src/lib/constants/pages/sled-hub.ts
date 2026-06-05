@@ -12,7 +12,7 @@ export const SLED_HUB_SEO = {
 export const SLED_HERO = {
   eyebrow: "U.S. SLED · Active subcontractor for primes",
   heading:
-    'Back-office delivery for <span class="accent">U.S. SLED prime contractors.</span>',
+    'AI engineering for <span class="accent">U.S. SLED prime contractors.</span>',
   body: "Active technical subcontractor behind Tier 1 primes. Pre bid proposal support and post award delivery under teaming letter. NDA-Protected. Subcontract-Only. We never face the agency your PM stays the only voice upstream.",
   ctas: [
     {

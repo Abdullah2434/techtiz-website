@@ -11,15 +11,15 @@ export const CAPABILITIES_HERO = {
   heading: 'What we <span class="accent">bring on day one.</span>',
   body: "A reference page a prime can scan in two minutes to confirm Techtiz can plug into the bid stack.",
   ctas: [
-    // {
-    //   label: "Download capability statement",
-    //   href: "/us-sled/capability-statement/",
-    //   variant: "cta" as const,
-    // },
+    {
+      label: "Download capability statement",
+      href: "/us-sled/capability-statement/",
+      variant: "cta" as const,
+    },
     {
       label: "Start an NDA conversation",
       href: "/us-sled/contact/",
-      variant: "cta" as const,
+      variant: "ghost-light" as const,
     },
   ],
 } as const;

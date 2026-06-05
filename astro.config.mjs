@@ -1,5 +1,5 @@
 // @ts-check
-import node from "@astrojs/node";
+import vercel from "@astrojs/vercel";
 import sitemap from "@astrojs/sitemap";
 import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
@@ -7,7 +7,7 @@ import { SITE } from "./src/lib/constants/site.ts";
 
 export default defineConfig({
   site: SITE.url,
-  adapter: node({ mode: "standalone" }),
+  adapter: vercel(),
   trailingSlash: "always",
   integrations: [
     sitemap({

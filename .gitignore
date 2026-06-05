@@ -1,6 +1,7 @@
 /legacy
 /node_modules
 /dist
+.vercel
 .astro
 .env
 .node_modules

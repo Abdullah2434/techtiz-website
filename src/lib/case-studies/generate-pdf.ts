@@ -1,6 +1,4 @@
 import PDFDocument from "pdfkit";
-import { readFile } from "node:fs/promises";
-import path from "node:path";
 
 import type { CaseStudy } from "../types/case-study";
 import { SITE } from "../constants/site";
@@ -21,20 +19,14 @@ const loadPublicAsset = async (
   assetPath: string,
   origin?: string,
 ): Promise<Buffer | null> => {
-  const normalized = assetPath.startsWith("/") ? assetPath.slice(1) : assetPath;
+  if (!origin) return null;
 
   try {
-    const filePath = path.join(process.cwd(), "public", normalized);
-    return await readFile(filePath);
+    const response = await fetch(new URL(assetPath, origin));
+    if (!response.ok) return null;
+    return Buffer.from(await response.arrayBuffer());
   } catch {
-    if (!origin) return null;
-    try {
-      const response = await fetch(new URL(assetPath, origin));
-      if (!response.ok) return null;
-      return Buffer.from(await response.arrayBuffer());
-    } catch {
-      return null;
-    }
+    return null;
   }
 };
 

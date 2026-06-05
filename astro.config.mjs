@@ -7,7 +7,11 @@ import { SITE } from "./src/lib/constants/site.ts";
 
 export default defineConfig({
   site: SITE.url,
-  adapter: vercel(),
+  output: "static",
+  adapter: vercel({
+    imageService: false,
+    excludeFiles: ["./public/**"],
+  }),
   trailingSlash: "always",
   integrations: [
     sitemap({

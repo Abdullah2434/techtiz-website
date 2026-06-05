@@ -4,14 +4,18 @@ import FormButton from '../shared/FormButton.astro';
 import {
   CASE_STUDY_DOWNLOAD_COPY,
   CASE_STUDY_FORM_API,
+  caseStudyPdfUrl,
   RECAPTCHA_SITE_KEY,
 } from '../../lib/config/case-studies';
+import { caseStudyPdfFilename } from '../../lib/case-studies/generate-pdf';
 
 interface Props {
-  pdfUrl?: string;
+  slug: string;
 }
 
-const { pdfUrl = '' } = Astro.props;
+const { slug } = Astro.props;
+const pdfUrl = caseStudyPdfUrl(slug);
+const pdfFilename = caseStudyPdfFilename(slug);
 const copy = CASE_STUDY_DOWNLOAD_COPY;
 ---
 
@@ -149,7 +153,7 @@ const copy = CASE_STUDY_DOWNLOAD_COPY;
   </PageWrap>
 </section>
 
-<script define:vars={{ pdfUrl, apiUrl: CASE_STUDY_FORM_API, siteKey: RECAPTCHA_SITE_KEY, submitLabel: copy.submitLabel, loadingLabel: copy.submittingLabel }} is:inline>
-  window.__CS_DOWNLOAD_FORM__ = { pdfUrl, apiUrl, siteKey, submitLabel, loadingLabel };
+<script define:vars={{ pdfUrl, pdfFilename, apiUrl: CASE_STUDY_FORM_API, siteKey: RECAPTCHA_SITE_KEY, submitLabel: copy.submitLabel, loadingLabel: copy.submittingLabel }} is:inline>
+  window.__CS_DOWNLOAD_FORM__ = { pdfUrl, pdfFilename, apiUrl, siteKey, submitLabel, loadingLabel };
 </script>
 <script src="/scripts/case-study-form.js" is:inline></script>

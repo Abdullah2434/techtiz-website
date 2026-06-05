@@ -1,5 +1,6 @@
 ---
 import { INDUSTRIES_DATA, INDUSTRY_TABS } from "../../lib/constants/pages/home";
+import CtaButton from "../shared/CtaButton.astro";
 import IndustryIcon from "./IndustryIcon.astro";
 import PageWrap from "./PageWrap.astro";
 
@@ -177,20 +178,12 @@ const IND_ICON_KEYS = [
           >
             {initial.ctaSub}
           </p>
-          <a
+          <CtaButton
             href="/contact/"
-            class="mt-auto inline-flex w-full items-center justify-between rounded-lg border border-white/32 px-[22px] py-3.5 text-[14.5px] font-bold text-white transition-[background,border-color,color] duration-220 hover:border-cyan hover:bg-cyan hover:text-yale-dark"
-          >
-            Book intro call
-            <span class="relative inline-block size-3.5" aria-hidden="true">
-              <span
-                class="absolute right-0 top-1/2 size-2 -translate-y-1/2 rotate-45 border-t-[1.8px] border-r-[1.8px] border-current"
-              ></span>
-              <span
-                class="absolute left-0 right-1 top-1/2 h-[1.8px] -translate-y-1/2 bg-current"
-              ></span>
-            </span>
-          </a>
+            label="Book intro call"
+            variant="ghost-dark"
+            class="mt-auto w-full !min-w-0 [&_.btn__inner]:w-full [&_.btn__inner]:justify-between"
+          />
         </div>
       </div>
     </div>

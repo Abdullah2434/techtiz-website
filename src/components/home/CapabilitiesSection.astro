@@ -1,4 +1,5 @@
 ---
+import CtaButton from '../shared/CtaButton.astro';
 import { HOME_CAPABILITIES } from '../../lib/constants/pages/home';
 import { ROUTES } from '../../lib/constants/routes';
 import PageWrap from './PageWrap.astro';
@@ -27,12 +28,12 @@ import CapabilityCard from './CapabilityCard.astro';
         <p class="mb-1 max-w-[79%] text-left text-[32px] font-normal leading-[120%] tracking-[-0.02em] text-[#1E1E1E] md:text-[40px]">
           Accelerate Your Growth
         </p>
-        <a
+        <CtaButton
           href={ROUTES.contact}
-          class="home-cap-btn-outline hidden min-h-[42px] min-w-[116px] items-center justify-center rounded-[2px] border border-[#4D4D4D] bg-transparent px-6 py-[11px] text-base font-normal text-[#4D4D4D] transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan hover:bg-cyan hover:text-white hover:shadow-md md:inline-flex"
-        >
-          Book a Consultation
-        </a>
+          label="Book a Consultation"
+          variant="outlined"
+          class="hidden shrink-0 md:inline-flex"
+        />
       </div>
     </header>
 
@@ -60,12 +61,12 @@ import CapabilityCard from './CapabilityCard.astro';
       data-aos="fade-up"
       data-aos-delay="200"
     >
-      <a
-        href="/capabilities/ai-consultation"
-        class="home-cap-btn-outline mx-auto inline-flex min-h-[42px] min-w-[116px] items-center justify-center rounded-[2px] border border-[#4D4D4D] bg-transparent px-6 py-[11px] text-base font-normal text-[#4D4D4D] transition-all duration-300 hover:border-cyan hover:bg-cyan hover:text-white"
-      >
-        Book a Consultation
-      </a>
+      <CtaButton
+        href={ROUTES.contact}
+        label="Book a Consultation"
+        variant="outlined"
+        class="mx-auto"
+      />
     </div>
   </PageWrap>
 </section>

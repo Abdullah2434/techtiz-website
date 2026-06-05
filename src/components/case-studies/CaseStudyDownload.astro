@@ -1,6 +1,6 @@
 ---
 import PageWrap from '../home/PageWrap.astro';
-import FilledButton from '../shared/FilledButton.astro';
+import FormButton from '../shared/FormButton.astro';
 import {
   CASE_STUDY_DOWNLOAD_COPY,
   CASE_STUDY_FORM_API,
@@ -129,10 +129,12 @@ const copy = CASE_STUDY_DOWNLOAD_COPY;
           data-aos-delay="1000"
           data-aos-duration="1000"
         >
-          <FilledButton
+          <FormButton
             label={copy.submitLabel}
             type="submit"
+            variant="filled"
             downArrow={true}
+            track="case-study"
             class="cs-form-submit"
           />
         </div>

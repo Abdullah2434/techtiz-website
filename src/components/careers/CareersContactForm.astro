@@ -1,4 +1,5 @@
 ---
+import FormButton from '../shared/FormButton.astro';
 import { SITE } from '../../lib/constants/site';
 import { CAREERS_FORM_SUCCESS_MESSAGE } from '../../lib/constants/pages/careers';
 
@@ -120,27 +121,7 @@ const careersEmail = SITE.email.careers;
         />
 
         <div data-aos="fade-up" data-aos-delay="100">
-          <button
-            type="submit"
-            class="group flex h-[48px] w-full cursor-pointer items-center justify-center gap-2 rounded-[2px] border border-[#1E1E1E] px-2 text-[16px] font-normal text-[#1E1E1E] transition-all duration-300 hover:bg-[#1E1E1E] hover:text-white disabled:cursor-not-allowed disabled:border-[#1E1E1E] disabled:bg-[#1E1E1E] disabled:text-white md:w-[145px]"
-            data-career-submit
-          >
-            <span data-career-submit-label>Confirm</span>
-            <svg
-              width="18"
-              height="14"
-              class="mt-px transition-transform duration-300 group-hover:translate-x-1 group-disabled:hidden"
-              viewBox="0 0 18 14"
-              fill="none"
-              aria-hidden="true"
-            >
-              <path
-                d="M1 7.01097L16.8124 6.99999M11.5858 13L17 6.99999L11.5858 1"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"></path>
-            </svg>
-          </button>
+          <FormButton type="submit" label="Confirm" track="career" class="w-full md:!w-[145px]" />
         </div>
       </form>
     </div>

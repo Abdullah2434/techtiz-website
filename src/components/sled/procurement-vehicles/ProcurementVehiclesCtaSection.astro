@@ -2,7 +2,7 @@
 import { VEHICLES_CTA } from '../../../lib/constants/pages/procurement-vehicles';
 import { SITE } from '../../../lib/constants/site';
 import Eyebrow from '../../shared/Eyebrow.astro';
-import SledButton from '../shared/SledButton.astro';
+import CtaButton from '../../shared/CtaButton.astro';
 import SledPageWrap from '../shared/SledPageWrap.astro';
 ---
 
@@ -21,13 +21,14 @@ import SledPageWrap from '../shared/SledPageWrap.astro';
         {VEHICLES_CTA.body}
       </p>
       <div class="mt-8 flex flex-wrap justify-center gap-4 max-[600px]:[&_a]:w-full max-[600px]:[&_a]:justify-center">
-        <SledButton href="/us-sled/contact/" label="Start an NDA conversation" variant="cta" />
-        <a
+        <CtaButton href="/us-sled/contact/" label="Start an NDA conversation" variant="cta" />
+        <CtaButton
           href={`mailto:${SITE.email.sled}`}
-          class="inline-flex items-center justify-center rounded-full border border-white/25 px-6 py-3 text-[14px] font-bold text-white transition-colors hover:border-cyan hover:text-cyan"
-        >
-          {SITE.email.sled}
-        </a>
+          label={SITE.email.sled}
+          variant="ghost-dark"
+          showArrow={false}
+          class="rounded-full"
+        />
       </div>
     </div>
   </SledPageWrap>

@@ -1,0 +1,230 @@
+/* Unified CTA + form buttons — shine hover, no color/text flip on hover */
+
+.btn {
+  position: relative;
+  display: inline-flex;
+  min-height: 42px;
+  min-width: 116px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 11px 24px;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 130%;
+  text-decoration: none;
+  transition: opacity 300ms ease;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    45deg,
+    transparent 25%,
+    rgb(255 255 255 / 0.55) 50%,
+    transparent 75%,
+    transparent 100%
+  );
+  background-size: 250% 250%, 100% 100%;
+  background-position: 200% 0, 0 0;
+  background-repeat: no-repeat;
+  transition: background-position 0s ease;
+}
+
+.btn:hover::before {
+  background-position: -100% 0, 0 0;
+  transition-duration: 0.8s;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.btn:disabled::before {
+  display: none;
+}
+
+.btn__inner {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.btn__arrow {
+  flex-shrink: 0;
+  transition: transform 300ms ease;
+}
+
+.btn:hover .btn__arrow {
+  transform: translateX(4px);
+}
+
+.btn--down:hover .btn__arrow {
+  transform: translateY(4px);
+}
+
+.btn--leading:hover .btn__arrow--leading {
+  transform: translateX(-4px);
+}
+
+/* filled (legacy filled / cta) */
+.btn--filled {
+  border-color: var(--cyan);
+  background-color: var(--cyan);
+  color: #fff;
+}
+
+.btn--filled:hover {
+  opacity: 0.92;
+  color: #fff;
+}
+
+/* outlined — cyan shine on light surfaces (white shine is invisible here) */
+.btn--outlined {
+  border-color: #4d4d4d;
+  background-color: transparent;
+  color: #4d4d4d;
+  transition:
+    opacity 300ms ease,
+    border-color 300ms ease,
+    color 300ms ease;
+}
+
+.btn--outlined::before {
+  background: linear-gradient(
+    45deg,
+    transparent 25%,
+    rgb(24 176 230 / 0.5) 50%,
+    transparent 75%,
+    transparent 100%
+  );
+  background-size: 250% 250%, 100% 100%;
+  background-position: 200% 0, 0 0;
+  background-repeat: no-repeat;
+}
+
+.btn--outlined:hover {
+  border-color: var(--cyan);
+  color: var(--yale);
+  opacity: 1;
+}
+
+/* yale (legacy primary on dark) */
+.btn--yale {
+  border-color: var(--yale);
+  background-color: var(--yale);
+  color: #fff;
+}
+
+.btn--yale:hover {
+  opacity: 0.92;
+  color: #fff;
+}
+
+/* ghost on dark backgrounds */
+.btn--ghost-dark {
+  border-color: rgb(255 255 255 / 0.32);
+  background-color: transparent;
+  color: #fff;
+}
+
+.btn--ghost-dark:hover {
+  opacity: 0.92;
+  color: #fff;
+}
+
+/* ghost on light backgrounds — same cyan shine as outlined */
+.btn--ghost-light {
+  border-color: var(--line);
+  background-color: var(--white);
+  color: var(--yale);
+  transition:
+    opacity 300ms ease,
+    border-color 300ms ease;
+}
+
+.btn--ghost-light::before {
+  background: linear-gradient(
+    45deg,
+    transparent 25%,
+    rgb(24 176 230 / 0.5) 50%,
+    transparent 75%,
+    transparent 100%
+  );
+  background-size: 250% 250%, 100% 100%;
+  background-position: 200% 0, 0 0;
+  background-repeat: no-repeat;
+}
+
+.btn--ghost-light:hover {
+  border-color: var(--cyan);
+  color: var(--yale);
+  opacity: 1;
+}
+
+/* form submit — outline on light surfaces (cyan shine like outlined) */
+.btn--form {
+  border-color: #1e1e1e;
+  background-color: transparent;
+  color: #1e1e1e;
+  transition:
+    opacity 300ms ease,
+    border-color 300ms ease,
+    color 300ms ease,
+    background-color 300ms ease;
+}
+
+.btn--form::before {
+  background: linear-gradient(
+    45deg,
+    transparent 25%,
+    rgb(24 176 230 / 0.5) 50%,
+    transparent 75%,
+    transparent 100%
+  );
+  background-size: 250% 250%, 100% 100%;
+  background-position: 200% 0, 0 0;
+  background-repeat: no-repeat;
+}
+
+.btn--form:hover:not(:disabled) {
+  border-color: var(--cyan);
+  color: var(--yale);
+  opacity: 1;
+}
+
+.btn--form:disabled {
+  border-color: #1e1e1e;
+  background-color: #1e1e1e;
+  color: #fff;
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn::before {
+    display: none;
+  }
+
+  .btn:hover .btn__arrow,
+  .btn--down:hover .btn__arrow,
+  .btn--leading:hover .btn__arrow--leading {
+    transform: none;
+  }
+}

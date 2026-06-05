@@ -43,7 +43,6 @@ export interface CaseStudy {
   isFeatured?: boolean;
   reviewVideoUrl?: string;
   founder?: CaseStudyFounder;
-  detailsUrl?: string;
   videoId?: string;
   pdfUrl?: string;
 }

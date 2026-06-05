@@ -1,6 +1,6 @@
 ---
 import { SLED_HERO } from '../../../lib/constants/pages/sled-hub';
-import SledButton from '../shared/SledButton.astro';
+import CtaButton from '../../shared/CtaButton.astro';
 import SledPageWrap from '../shared/SledPageWrap.astro';
 ---
 
@@ -43,10 +43,11 @@ import SledPageWrap from '../shared/SledPageWrap.astro';
 
       <div class="flex flex-wrap gap-3 max-[600px]:flex-col max-[600px]:items-stretch">
         {SLED_HERO.ctas.map((cta) => (
-          <SledButton
+          <CtaButton
             href={cta.href}
             label={cta.label}
             variant={cta.variant === 'cta' ? 'cta' : 'ghost-dark'}
+            showArrow={cta.variant === 'cta'}
           />
         ))}
       </div>

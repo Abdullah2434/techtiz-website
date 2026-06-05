@@ -20,11 +20,11 @@ export const SLED_HERO = {
       href: "/us-sled/contact/",
       variant: "cta",
     },
-    {
-      label: "Capability statement →",
-      href: "/us-sled/capability-statement/",
-      variant: "ghost-dark",
-    },
+    // {
+    //   label: "Capability statement →",
+    //   href: "/us-sled/capability-statement/",
+    //   variant: "ghost-dark",
+    // },
     {
       label: "How we engage →",
       href: "/us-sled/how-we-engage/",
@@ -438,8 +438,8 @@ export const HUB_INQUIRY = {
     "By submitting, you agree to a mutual NDA on first substantive contact.",
   submitLabel: "Send Inquiry",
   success: {
-    heading: "Your inquiry is ready to send.",
-    body: `Your email client should have opened a pre-filled message to ${SITE.email.sled}. If it didn't, email that address directly — we reply within one business day with a mutual NDA template.`,
+    heading: "Inquiry received.",
+    body: `Thank you for reaching out. Our U.S.-based partner manager will reply within one business day from ${SITE.email.sled} with a mutual NDA template and a calendar slot.`,
     resetLabel: "Start another inquiry",
   },
 } as const;

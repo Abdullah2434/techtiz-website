@@ -76,4 +76,4 @@ export const CAREERS_CONTACT_HERO: CareersContactHeroData = {
 };
 
 export const CAREERS_FORM_SUCCESS_MESSAGE =
-  'Thanks for your interest! Online submissions are being set up — please email your CV to complete your application.';
+  'Your application has been submitted. Check your inbox for a confirmation email from our talent team.';

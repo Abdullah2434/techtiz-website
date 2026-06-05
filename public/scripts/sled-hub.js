@@ -46,18 +46,32 @@
 })();
 
 (function () {
+  const SLED_HUB_INQUIRY_API = '/api/sled-hub-inquiry/';
   const form = document.getElementById('sledInquiryForm');
   const success = document.getElementById('sledInquirySuccess');
   if (!form) return;
-  const mailtoEmail = form.dataset.mailto || '';
-  if (!mailtoEmail) return;
 
   function v(id) {
     const el = document.getElementById(id);
     return el ? el.value.trim() : '';
   }
 
-  form.addEventListener('submit', (e) => {
+  function getSelectedNeeds() {
+    return [...document.querySelectorAll('[data-sled-need-card].is-selected [data-sled-need-label]')]
+      .map((h) => h.textContent?.trim())
+      .filter(Boolean);
+  }
+
+  function resetNeedCards() {
+    document.querySelectorAll('[data-sled-need-card]').forEach((card) => {
+      const isDefault = card.dataset.need === 'pre';
+      card.classList.toggle('is-selected', isDefault);
+      card.classList.toggle('border-cyan', isDefault);
+      card.classList.toggle('bg-cyan-soft', isDefault);
+    });
+  }
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     let ok = true;
     ['sled-iq-company', 'sled-iq-email'].forEach((id) => {
@@ -71,32 +85,54 @@
     });
     if (!ok) return;
 
-    const needs = [...document.querySelectorAll('[data-sled-need-card].is-selected [data-sled-need-label]')]
-      .map((h) => h.textContent?.trim());
-    const lines = [
-      'U.S. SLED engagement inquiry (hub)',
-      '',
-      'Needs:       ' + (needs.join(', ') || '—'),
-      'Company:     ' + v('sled-iq-company'),
-      'Role:        ' + v('sled-iq-role'),
-      'RFP/RFQ:     ' + (v('sled-iq-rfp') || '—'),
-      'NDA status:  ' + (v('sled-iq-nda') || '—'),
-      'Vehicle:     ' + (v('sled-iq-vehicle') || '—'),
-      'Agency:      ' + (v('sled-iq-agency') || '—'),
-      'Email:       ' + v('sled-iq-email'),
-      'Phone:       ' + (v('sled-iq-phone') || '—'),
-      '',
-      'Description:',
-      v('sled-iq-desc') || '(none provided)',
-    ];
-    const subject = 'SLED engagement inquiry — ' + (v('sled-iq-company') || 'prime contractor');
-    window.location.href =
-      'mailto:' + mailtoEmail + '?subject=' +
-      encodeURIComponent(subject) +
-      '&body=' +
-      encodeURIComponent(lines.join('\n'));
-    form.classList.add('hidden');
-    success?.classList.add('is-visible');
+    const submitBtn = form.querySelector('button[type="submit"]');
+    if (submitBtn instanceof HTMLButtonElement) {
+      submitBtn.disabled = true;
+    }
+
+    const payload = {
+      needs: getSelectedNeeds().join(', ') || '—',
+      company: v('sled-iq-company'),
+      role: v('sled-iq-role'),
+      rfp: v('sled-iq-rfp'),
+      nda: v('sled-iq-nda'),
+      vehicle: v('sled-iq-vehicle'),
+      agency: v('sled-iq-agency'),
+      email: v('sled-iq-email'),
+      phone: v('sled-iq-phone'),
+      desc: v('sled-iq-desc'),
+      website: (form.querySelector('[name="website"]')?.value) || '',
+    };
+
+    try {
+      const response = await fetch(SLED_HUB_INQUIRY_API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to submit inquiry');
+      }
+
+      form.classList.add('hidden');
+      success?.classList.add('is-visible');
+      const y = success?.getBoundingClientRect().top ?? 0;
+      window.scrollTo({ top: Math.max(0, y + window.scrollY - 140), behavior: 'smooth' });
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Something went wrong';
+      const emailEl = document.getElementById('sled-iq-email');
+      if (emailEl instanceof HTMLInputElement) {
+        emailEl.style.borderColor = 'var(--color-amber)';
+        emailEl.setAttribute('aria-invalid', 'true');
+        emailEl.title = message;
+      }
+    } finally {
+      if (submitBtn instanceof HTMLButtonElement) {
+        submitBtn.disabled = false;
+      }
+    }
   });
 
   const reset = document.getElementById('sledInquiryReset');
@@ -106,6 +142,7 @@
       success?.classList.remove('is-visible');
       form.reset();
       form.classList.remove('hidden');
+      resetNeedCards();
     });
   }
 })();

@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/shared/Header.astro';
+import Footer from '../components/shared/Footer.astro';
+import NotFoundSection from '../components/shared/NotFoundSection.astro';
+import { NOT_FOUND_SEO } from '../lib/constants/pages/not-found';
+
+const { title, description, canonicalPath } = NOT_FOUND_SEO;
+---
+
+<BaseLayout {title} {description} {canonicalPath} noindex>
+  <div class="flex min-h-screen flex-col bg-white">
+    <Header />
+    <main id="main-content" class="flex flex-1 items-center justify-center">
+      <NotFoundSection />
+    </main>
+    <Footer />
+  </div>
+  <script src="/scripts/nav.js" is:inline></script>
+  <script src="/scripts/mobile-nav.js" is:inline></script>
+</BaseLayout>

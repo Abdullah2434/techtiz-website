@@ -15,9 +15,9 @@ export const CONTACT_FORM = {
   legalConnector: 'and have read and understood our',
   submitLabel: 'Confirm',
   submittingLabel: 'Submitting...',
-  successTitle: 'Almost there',
+  successTitle: 'Thank you',
   successMessage:
-    'Your message is ready to send. Open your email client, review the draft, and send it to our team.',
+    'Your message has been sent. Our team will get back to you within 24–48 hours. A confirmation email is on its way.',
 } as const;
 
 export const CONTACT_SCHEDULER = {
@@ -52,9 +52,9 @@ export const CONTACT_SCHEDULER = {
   backLabel: 'Back',
   confirmLabel: 'Confirm',
   confirmingLabel: 'Confirming...',
-  successTitle: 'Request ready to send',
+  successTitle: 'Appointment requested',
   successMessage:
-    'Open your email client to send your meeting request. Our team will confirm the slot by email.',
+    'Your consultation has been booked. Check your inbox for a confirmation email with the meeting details.',
   mailtoSubject: 'Consultation request',
 } as const;
 

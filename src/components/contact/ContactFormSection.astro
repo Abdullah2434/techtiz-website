@@ -1,5 +1,6 @@
 ---
 import FormButton from '../shared/FormButton.astro';
+import { RECAPTCHA_SITE_KEY } from '../../lib/config/recaptcha';
 import { CONTACT_FORM } from '../../lib/constants/pages/commercial-contact';
 import { ROUTES } from '../../lib/constants/routes';
 import { SITE } from '../../lib/constants/site';
@@ -11,7 +12,6 @@ const {
   legalPrefix,
   legalConnector,
   submitLabel,
-  submittingLabel,
   successTitle,
   successMessage,
 } = CONTACT_FORM;
@@ -125,11 +125,16 @@ const {
         </p>
 
         <div data-aos="fade-up" data-aos-delay="100">
+          <div data-contact-recaptcha></div>
+          <p class="contact-field-error hidden" data-error-for="recaptcha"></p>
+        </div>
+
+        <div data-aos="fade-up" data-aos-delay="100">
           <FormButton
             type="submit"
             label={submitLabel}
             track="contact"
-            class="w-full md:!w-[145px]"
+            class="w-full md:w-[145px]!"
           />
         </div>
       </form>
@@ -145,7 +150,6 @@ const {
       <a
         href={`mailto:${contactEmail}`}
         class="inline-flex items-center gap-2 border-b-2 border-cyan pb-0.5 text-[15px] font-bold text-yale"
-        data-contact-mailto
       >
         Email {contactEmail}
       </a>
@@ -169,6 +173,7 @@ const {
   </div>
 </section>
 
-<script define:vars={{ contactEmail }}>
+<script define:vars={{ contactEmail, siteKey: RECAPTCHA_SITE_KEY }}>
   window.__CONTACT_EMAIL__ = contactEmail;
+  window.__CONTACT_FORM_CONFIG__ = { siteKey, apiUrl: '/api/contact/' };
 </script>

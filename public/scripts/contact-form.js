@@ -1,4 +1,4 @@
-// Commercial contact form — client validation only (no API yet).
+// Commercial contact form — posts to /api/contact/ with reCAPTCHA.
 
 (function () {
   const form = document.querySelector('[data-contact-form]');
@@ -7,10 +7,16 @@
   const panel = document.querySelector('[data-contact-form-panel]');
   const success = document.querySelector('[data-contact-form-success]');
   const imageCol = document.querySelector('[data-contact-form-image]');
-  const mailtoLink = document.querySelector('[data-contact-mailto]');
   const submitBtn = document.querySelector('[data-contact-submit]');
   const submitLabel = document.querySelector('[data-contact-submit-label]');
-  const contactEmail = window.__CONTACT_EMAIL__ || 'contact@techtiz.co';
+  const recaptchaEl = form.querySelector('[data-contact-recaptcha]');
+  const siteKey = window.__CONTACT_FORM_CONFIG__?.siteKey;
+  const apiUrl = window.__CONTACT_FORM_CONFIG__?.apiUrl || '/api/contact/';
+
+  let recaptcha = null;
+  if (recaptchaEl && siteKey && window.initRecaptchaWidget) {
+    recaptcha = window.initRecaptchaWidget(recaptchaEl, siteKey);
+  }
 
   function showError(name, message) {
     const field = form.querySelector(`[name="${name}"]`);
@@ -23,7 +29,9 @@
   }
 
   function clearErrors() {
-    ['firstName', 'lastName', 'email', 'phone', 'message'].forEach((n) => showError(n, ''));
+    ['firstName', 'lastName', 'email', 'phone', 'message', 'recaptcha'].forEach((n) =>
+      showError(n, ''),
+    );
   }
 
   function validate() {
@@ -67,26 +75,7 @@
     return valid ? data : null;
   }
 
-  function showSuccess(data) {
-    const subject = encodeURIComponent(
-      `Contact inquiry - ${data.firstName} ${data.lastName}`,
-    );
-    const body = encodeURIComponent(
-      [
-        `Name: ${data.firstName} ${data.lastName}`,
-        `Email: ${data.email}`,
-        `Phone: ${data.phone}`,
-        `Newsletter: ${data.subscribe ? 'Yes' : 'No'}`,
-        '',
-        'Message:',
-        data.message,
-      ].join('\n'),
-    );
-
-    if (mailtoLink) {
-      mailtoLink.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
-    }
-
+  function showSuccess() {
     if (panel) panel.classList.add('is-hidden');
     if (imageCol) imageCol.classList.add('hidden');
     if (success) {
@@ -96,18 +85,42 @@
     success?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const data = validate();
     if (!data) return;
 
+    const recaptchaToken = recaptcha?.getToken?.() || null;
+    if (!recaptchaToken) {
+      showError('recaptcha', 'Please complete the reCAPTCHA verification.');
+      return;
+    }
+
     if (submitBtn) submitBtn.disabled = true;
     if (submitLabel) submitLabel.textContent = 'Submitting...';
 
-    window.setTimeout(() => {
-      showSuccess(data);
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...data, recaptchaToken }),
+      });
+
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to send message');
+      }
+
+      form.reset();
+      recaptcha?.reset?.();
+      showSuccess();
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Something went wrong';
+      showError('message', message);
+      recaptcha?.reset?.();
+    } finally {
       if (submitBtn) submitBtn.disabled = false;
       if (submitLabel) submitLabel.textContent = 'Confirm';
-    }, 400);
+    }
   });
 })();

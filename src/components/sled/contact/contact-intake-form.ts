@@ -1,6 +1,6 @@
-import { SITE } from '../../../lib/constants/site';
+const SLED_CONTACT_API = '/api/sled-contact/';
 
-export function initContactIntakeForm(sledEmail: string = SITE.email.sled): void {
+export function initContactIntakeForm(): void {
   document.querySelectorAll('.intent-option').forEach((opt) => {
     opt.addEventListener('click', () => {
       document.querySelectorAll('.intent-option').forEach((o) => o.classList.remove('on'));
@@ -16,10 +16,19 @@ export function initContactIntakeForm(sledEmail: string = SITE.email.sled): void
 
   function val(id: string): string {
     const el = document.getElementById(id);
-    return el instanceof HTMLInputElement ? el.value.trim() : '';
+    if (el instanceof HTMLSelectElement || el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement) {
+      return el.value.trim();
+    }
+    return '';
   }
 
-  form.addEventListener('submit', (e) => {
+  function getIntentLabel(): string {
+    const intentEl = form.querySelector('input[name="intent"]:checked');
+    const labelEl = intentEl?.closest('.intent-option')?.querySelector('.l');
+    return labelEl instanceof HTMLElement ? labelEl.textContent?.trim() || '—' : '—';
+  }
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     let ok = true;
     ['name', 'email', 'firm'].forEach((id) => {
@@ -33,43 +42,57 @@ export function initContactIntakeForm(sledEmail: string = SITE.email.sled): void
     });
     if (!ok) return;
 
-    const intentEl = form.querySelector('input[name="intent"]:checked');
-    const labelEl = intentEl?.closest('.intent-option')?.querySelector('.l');
-    const intent =
-      labelEl instanceof HTMLElement ? labelEl.textContent?.trim() : '—';
+    const submitBtn = form.querySelector('button[type="submit"]');
+    if (submitBtn instanceof HTMLButtonElement) {
+      submitBtn.disabled = true;
+    }
 
-    const lines = [
-      'U.S. SLED subcontract inquiry',
-      '',
-      'Name:        ' + val('name'),
-      'Work email:  ' + val('email'),
-      'Prime firm:  ' + val('firm'),
-      'Role:        ' + val('role'),
-      'Vehicle:     ' + val('vehicle'),
-      'Timing:      ' + val('timing'),
-      'Solicitation: ' + (val('solicitation') || '(not provided)'),
-      'Ceiling:     ' + val('ceiling'),
-      'Clearance:   ' + val('clearance'),
-      'Requesting:  ' + intent,
-      '',
-      'Description:',
-      val('desc') || '(none provided)',
-    ];
-    const subject =
-      'SLED subcontract inquiry — ' + (val('firm') || 'prime contractor');
-    window.location.href =
-      'mailto:' +
-      sledEmail +
-      '?subject=' +
-      encodeURIComponent(subject) +
-      '&body=' +
-      encodeURIComponent(lines.join('\n'));
-    form.classList.add('hidden');
-    if (success) {
-      success.classList.remove('hidden');
-      success.classList.add('is-visible', 'flex');
-      const y = success.getBoundingClientRect().top + window.scrollY - 140;
-      window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+    const payload = {
+      name: val('name'),
+      email: val('email'),
+      firm: val('firm'),
+      role: val('role'),
+      vehicle: val('vehicle'),
+      timing: val('timing'),
+      solicitation: val('solicitation'),
+      ceiling: val('ceiling'),
+      clearance: val('clearance'),
+      intent: getIntentLabel(),
+      desc: val('desc'),
+      website: (form.querySelector('[name="website"]') as HTMLInputElement | null)?.value || '',
+    };
+
+    try {
+      const response = await fetch(SLED_CONTACT_API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to submit inquiry');
+      }
+
+      form.classList.add('hidden');
+      if (success) {
+        success.classList.remove('hidden');
+        success.classList.add('is-visible', 'flex');
+        const y = success.getBoundingClientRect().top + window.scrollY - 140;
+        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+      }
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Something went wrong';
+      const descEl = document.getElementById('desc');
+      if (descEl instanceof HTMLTextAreaElement) {
+        descEl.style.borderColor = 'var(--color-amber)';
+        descEl.setAttribute('aria-invalid', 'true');
+        descEl.title = message;
+      }
+    } finally {
+      if (submitBtn instanceof HTMLButtonElement) {
+        submitBtn.disabled = false;
+      }
     }
   });
 
@@ -83,6 +106,9 @@ export function initContactIntakeForm(sledEmail: string = SITE.email.sled): void
       }
       form.reset();
       form.classList.remove('hidden');
+      document.querySelectorAll('.intent-option').forEach((o, i) => {
+        o.classList.toggle('on', i === 0);
+      });
     });
   }
 }

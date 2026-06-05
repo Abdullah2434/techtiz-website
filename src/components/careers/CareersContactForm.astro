@@ -1,16 +1,24 @@
 ---
-import FormButton from '../shared/FormButton.astro';
-import { RECAPTCHA_SITE_KEY } from '../../lib/config/recaptcha';
-import { SITE } from '../../lib/constants/site';
-import { CAREERS_FORM_SUCCESS_MESSAGE } from '../../lib/constants/pages/careers';
+import FormButton from "../shared/FormButton.astro";
+import { RECAPTCHA_SITE_KEY } from "../../lib/config/recaptcha";
+import { SITE } from "../../lib/constants/site";
+import { CAREERS_FORM_SUCCESS_MESSAGE } from "../../lib/constants/pages/careers";
 
 const careersEmail = SITE.email.careers;
 ---
 
-<section class="mx-auto w-full max-w-[1400px] px-2 py-10 md:py-16" id="contact-form">
+<section
+  class="mx-auto w-full max-w-[1400px] px-2 py-10 md:py-16"
+  id="contact-form"
+>
   <div class="flex flex-col gap-12 md:flex-row">
     <div class="career-form-panel w-full md:w-1/2" data-career-form-panel>
-      <form class="flex flex-col gap-12" id="career-application-form" data-career-form novalidate>
+      <form
+        class="flex flex-col gap-12"
+        id="career-application-form"
+        data-career-form
+        novalidate
+      >
         <div class="flex flex-col gap-12 sm:flex-row">
           <div class="w-full sm:w-1/2">
             <input
@@ -106,8 +114,16 @@ const careersEmail = SITE.email.careers;
                 Upload your CV
               </span>
             </div>
-            <span class="mt-1 hidden text-[14px] text-[#18B0E6]" data-cv-filename></span>
-            <input id="cv-upload" type="file" name="cv" accept=".pdf,.doc,.docx" class="hidden" />
+            <span
+              class="mt-1 hidden text-[14px] text-[#18B0E6]"
+              data-cv-filename></span>
+            <input
+              id="cv-upload"
+              type="file"
+              name="cv"
+              accept=".pdf,.doc,.docx"
+              class="hidden"
+            />
           </label>
           <p class="career-field-error hidden" data-error-for="cv"></p>
         </div>
@@ -127,7 +143,12 @@ const careersEmail = SITE.email.careers;
         </div>
 
         <div data-aos="fade-up" data-aos-delay="100">
-          <FormButton type="submit" label="Confirm" track="career" class="w-full md:w-[145px]!" />
+          <FormButton
+            type="submit"
+            label="Confirm"
+            track="career"
+            class="w-full md:w-[145px]!"
+          />
         </div>
       </form>
     </div>
@@ -137,8 +158,12 @@ const careersEmail = SITE.email.careers;
       data-career-form-success
       hidden
     >
-      <h3 class="mb-3 text-[24px] font-semibold text-[#153A5F]">Application received</h3>
-      <p class="mb-6 text-[16px] leading-[140%] text-[#101010]">{CAREERS_FORM_SUCCESS_MESSAGE}</p>
+      <h3 class="mb-3 text-[24px] font-semibold text-[#153A5F]">
+        Application received
+      </h3>
+      <p class="mb-6 text-[16px] leading-[140%] text-[#101010]">
+        {CAREERS_FORM_SUCCESS_MESSAGE}
+      </p>
       <a
         href={`mailto:${careersEmail}`}
         class="inline-flex items-center gap-2 border-b-2 border-cyan pb-0.5 text-[15px] font-bold text-yale"
@@ -167,5 +192,5 @@ const careersEmail = SITE.email.careers;
 
 <script define:vars={{ careersEmail, siteKey: RECAPTCHA_SITE_KEY }}>
   window.__CAREERS_EMAIL__ = careersEmail;
-  window.__CAREERS_FORM_CONFIG__ = { siteKey, apiUrl: '/api/careers/' };
+  window.__CAREERS_FORM_CONFIG__ = { siteKey, apiUrl: "/api/careers/" };
 </script>

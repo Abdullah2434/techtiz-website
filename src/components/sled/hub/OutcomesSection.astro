@@ -31,7 +31,7 @@ function formatStat(n: string) {
       <div class="mb-4 flex justify-center">
         <Eyebrow text={OUTCOMES.eyebrow} onDark showGlyph />
       </div>
-      <h2 class="mx-auto max-w-[640px] text-[clamp(1.5rem,3.2vw,2.25rem)] font-extrabold leading-[1.1] text-white">
+      <h2 class="sled-h2 mx-auto max-w-[640px] text-white">
         {OUTCOMES.heading}
       </h2>
       <p class="mx-auto mt-5 max-w-[660px] text-[14.5px] leading-[1.6] text-white/78">{OUTCOMES.sub}</p>
@@ -46,7 +46,7 @@ function formatStat(n: string) {
           ]}
         >
           <div
-            class="mb-4 text-[clamp(2rem,4vw,3rem)] font-extrabold leading-none tracking-[-0.03em] text-cyan transition-transform duration-300 group-hover:scale-105"
+            class="sled-stat mb-4 text-cyan transition-transform duration-300 group-hover:scale-105"
             set:html={formatStat(s.n)}
           />
           <div class="mx-auto max-w-[170px] font-mono text-[10.5px] leading-[1.45] tracking-[0.11em] uppercase text-white/82">

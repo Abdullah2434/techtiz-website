@@ -75,6 +75,43 @@
   color: var(--color-cyan);
 }
 
+/* SLED heading scale — tuned for mobile (min ~22–24px, scales up on desktop) */
+.sled-h1 {
+  font-size: clamp(1.5rem, 5.2vw, 3.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.022em;
+  font-weight: 800;
+}
+
+.sled-h2 {
+  font-size: clamp(1.375rem, 3.2vw, 2.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 800;
+}
+
+.sled-h2-lg {
+  font-size: clamp(1.375rem, 3.5vw, 2.75rem);
+  line-height: 1.08;
+  letter-spacing: -0.022em;
+  font-weight: 800;
+}
+
+.sled-stat {
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-weight: 800;
+}
+
+/* SLED subnav — horizontal scroll on mobile (flex child must stay width-bound) */
+@media (max-width: 900px) {
+  .subnav .sub-links {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+}
+
 /* Section rhythm */
 .sled-section {
   padding-block: clamp(4.5rem, 8vw, 6.875rem);

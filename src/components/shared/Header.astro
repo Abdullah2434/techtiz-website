@@ -7,19 +7,24 @@ import {
 SERVICE_CATEGORIES_NAV,
 SERVICES_MEGA_NAV_DATA,
 } from '../../lib/constants/nav/services';
-import { ROUTES } from '../../lib/constants/routes';
+import { ROUTES, SLED_SUBNAV } from '../../lib/constants/routes';
 import { SITE } from '../../lib/constants/site';
 
 const firstServicesCategory = SERVICE_CATEGORIES_NAV[0];
 const firstIndustryCategory = INDUSTRY_CATEGORIES[0];
 const servicesMegaJson = JSON.stringify(SERVICES_MEGA_NAV_DATA);
 const industriesMegaJson = JSON.stringify(INDUSTRIES_MEGA_NAV_DATA);
+const sledSubnavJson = JSON.stringify(
+  SLED_SUBNAV.map(({ label, href }) => ({ label, href })),
+);
 
 interface Props {
   currentPage?: string;
 }
 
 const { currentPage = '' } = Astro.props;
+const isSled =
+  currentPage.startsWith('/us-sled') || Astro.url.pathname.startsWith('/us-sled');
 
 const wrap =
   'mx-auto w-full max-w-[1400px] px-2 max-[600px]:px-[18px]';
@@ -243,16 +248,34 @@ const megaPanelIndustries = `${megaPanelBase} before:left-1/2 before:-translate-
       </a>
     </nav>
 
-    <div class="right-cta flex items-center justify-self-end max-[900px]:hidden">
+    <div class="right-cta flex items-center justify-self-end gap-3">
       <a
         href="/us-sled/"
-        class="us-pill inline-flex items-center gap-2 rounded-lg border border-line bg-white px-4 py-2.5 font-mono text-[13px] font-bold tracking-[0.04em] text-yale transition-[border-color,background] duration-[180ms] ease-out hover:border-yale hover:bg-seasalt"
+        class="us-pill"
+        aria-current={isSled ? 'page' : undefined}
       >
-        <span class="sled-dot inline-block size-2 shrink-0 rotate-[15deg] bg-cyan" aria-hidden="true"></span>
+        <span class="sled-dot" aria-hidden="true"></span>
         SLED Partnerships
+      </a>
+      <a
+        href="/us-sled/"
+        aria-label="View SLED Partnerships"
+        class="us-arrow"
+      >
+        <svg aria-hidden="true" viewBox="0 0 20 20" class="size-4">
+          <path
+            d="M7 4.5 12.5 10 7 15.5"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
       </a>
     </div>
   </div>
   <script id="services-mega-nav" type="application/json" set:html={servicesMegaJson} />
   <script id="industries-mega-nav" type="application/json" set:html={industriesMegaJson} />
+  <script id="sled-subnav" type="application/json" set:html={sledSubnavJson} />
 </header>

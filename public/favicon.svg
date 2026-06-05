@@ -1,4 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16">
-<path d="M0 0 C0 0.99 0 1.98 0 3 C0.99 2.67 1.98 2.34 3 2 C3 5.96 3 9.92 3 14 C-0.96 14 -4.92 14 -9 14 C-9.99 10.04 -10.98 6.08 -12 2 C-3.375 -1.125 -3.375 -1.125 0 0 Z " fill="#17AFE6" transform="translate(13,2)"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 98 96" role="img" aria-label="Techtiz">
+  <rect width="98" height="96" fill="#18b0e6" />
+  <path
+    fill="#ffffff"
+    d="M20.113 31.137 65.574 19.243 77.469 64.703 32.008 76.598Z"
+  />
 </svg>

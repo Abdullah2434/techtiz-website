@@ -1,122 +1,276 @@
-// Mobile nav drawer — primary links, collapsible mega sections, SLED subnav when present.
+// Mobile nav drawer — collapsible sections + nested category dropdowns.
 
 (function () {
-  var header = document.querySelector('header.top');
+  var header = document.querySelector("header.top");
   if (!header) return;
-  var nav = header.querySelector('.nav');
-  if (!nav || nav.querySelector('.m-nav-toggle')) return;
+  var nav = header.querySelector(".nav");
+  if (!nav || nav.querySelector(".m-nav-toggle")) return;
 
   var path = window.location.pathname;
+  var allHrefs = [];
+  var activeHref = null;
 
-  function isOn(href) {
-    if (!href || href === '#') return false;
-    if (href === '/') return path === '/';
-    return path === href || path.startsWith(href);
+  function normalizePath(href) {
+    if (!href || href === "#") return "";
+    if (href === "/") return "/";
+    return href.endsWith("/") ? href : href + "/";
   }
 
-  function openIfActive(hrefs) {
-    if (!hrefs || !hrefs.length) return '';
-    for (var i = 0; i < hrefs.length; i++) {
-      if (isOn(hrefs[i])) return ' open';
-    }
-    return '';
+  function trackHref(href) {
+    if (href && href !== "#") allHrefs.push(href);
+  }
+
+  function resolveActiveHref(hrefs) {
+    var current = normalizePath(path);
+    var best = null;
+    var bestLen = -1;
+
+    hrefs.forEach(function (href) {
+      var target = normalizePath(href);
+      if (!target) return;
+
+      var match = false;
+      if (target === "/") {
+        match = current === "/";
+      } else if (current === target) {
+        match = true;
+      } else if (current.startsWith(target)) {
+        match = true;
+      }
+
+      if (match && target.length > bestLen) {
+        best = href;
+        bestLen = target.length;
+      }
+    });
+
+    return best;
   }
 
   function chev() {
-    return '<span class="m-dropdown-chev" aria-hidden="true"></span>';
+    return '<span class="m-section-chev" aria-hidden="true"></span>';
   }
 
-  function linkRow(href, label, nested) {
-    var classes = 'm-dropdown-link' + (nested ? ' m-dropdown-link--nested' : '') + (isOn(href) ? ' on' : '');
-    return '<a href="' + href + '" class="' + classes + '">' + label + '</a>';
-  }
+  function buildSection(sectionKey, title, panelHtml, sectionHrefs) {
+    var open =
+      activeHref &&
+      sectionHrefs.some(function (href) {
+        return normalizePath(href) === normalizePath(activeHref);
+      });
 
-  function textRow(label, desc) {
-    var html = '<span class="m-dropdown-nolink">' + label + '</span>';
-    if (desc) html += '<span class="m-dropdown-nolink-desc">' + desc + '</span>';
-    return html;
-  }
-
-  function buildCategoryDropdown(title, panelHtml, activeHrefs) {
     return (
-      '<details class="m-dropdown m-dropdown--nested"' +
-      openIfActive(activeHrefs) +
-      '>' +
-      '<summary class="m-dropdown-trigger m-dropdown-trigger--nested">' +
+      '<details class="m-section" data-section="' +
+      sectionKey +
+      '"' +
+      (open ? " open" : "") +
+      ">" +
+      '<summary class="m-section-trigger">' +
       title +
       chev() +
-      '</summary>' +
-      '<div class="m-dropdown-panel m-dropdown-panel--nested">' +
+      "</summary>" +
+      '<div class="m-section-panel">' +
       panelHtml +
-      '</div>' +
-      '</details>'
+      "</div>" +
+      "</details>"
     );
   }
 
-  function buildSectionDropdown(title, panelHtml, activeHrefs) {
-    return (
-      '<details class="m-dropdown"' +
-      openIfActive(activeHrefs) +
-      '>' +
-      '<summary class="m-dropdown-trigger">' +
-      title +
-      chev() +
-      '</summary>' +
-      '<div class="m-dropdown-panel">' +
-      panelHtml +
-      '</div>' +
-      '</details>'
-    );
-  }
-
-  var toggle = document.createElement('button');
-  toggle.className = 'm-nav-toggle';
-  toggle.type = 'button';
-  toggle.setAttribute('aria-label', 'Open menu');
-  toggle.setAttribute('aria-expanded', 'false');
-  toggle.innerHTML = '<span></span><span></span><span></span>';
-  nav.appendChild(toggle);
-
-  var drawer = document.createElement('nav');
-  drawer.className = 'm-nav-drawer';
-  drawer.setAttribute('aria-label', 'Mobile');
-
-  var html = '';
-  var sectionHrefs = [];
-
-  var subLinks = document.querySelectorAll('.subnav .sub-links a');
-  if (subLinks.length) {
-    var sledPanel = '';
-    var sledHrefs = [];
-    subLinks.forEach(function (a) {
-      var href = a.getAttribute('href');
-      if (!href) return;
-      sledHrefs.push(href);
-      var active = a.classList.contains('on') || isOn(href);
-      sledPanel +=
-        '<a href="' +
-        href +
-        '" class="m-dropdown-link' +
-        (active ? ' on' : '') +
-        '">' +
-        a.textContent.trim() +
-        '</a>';
+  function buildSubSection(cat, subs) {
+    var catHrefs = [];
+    if (cat.landingHref) catHrefs.push(cat.landingHref);
+    subs.forEach(function (sub) {
+      catHrefs.push(sub.href);
     });
-    html += buildSectionDropdown('SLED Partnerships', sledPanel, sledHrefs);
-    sectionHrefs = sectionHrefs.concat(sledHrefs);
+
+    var open =
+      activeHref &&
+      catHrefs.some(function (href) {
+        return normalizePath(href) === normalizePath(activeHref);
+      });
+
+    var summaryActive =
+      cat.landingHref &&
+      activeHref &&
+      normalizePath(cat.landingHref) === normalizePath(activeHref);
+
+    var panel = "";
+    subs.forEach(function (sub) {
+      panel += link(sub.href, sub.name, null, true);
+    });
+
+    var iconHtml = cat.icon
+      ? '<span class="m-link-icon-wrap" aria-hidden="true">' +
+        '<img src="' +
+        cat.icon +
+        '" alt="" class="m-link-icon" width="24" height="24" />' +
+        "</span>"
+      : "";
+
+    return (
+      '<details class="m-subsection"' +
+      (open ? " open" : "") +
+      ">" +
+      '<summary class="m-subsection-trigger' +
+      (summaryActive ? " on" : "") +
+      '">' +
+      '<span class="m-subsection-label">' +
+      iconHtml +
+      '<span class="m-link-label">' +
+      cat.title +
+      "</span>" +
+      "</span>" +
+      chev() +
+      "</summary>" +
+      '<div class="m-subsection-panel">' +
+      panel +
+      "</div>" +
+      "</details>"
+    );
   }
 
-  header.querySelectorAll('.primary-nav > a.nav-link').forEach(function (el) {
-    var label = el.textContent.replace(/\s+/g, ' ').trim();
-    var href = el.getAttribute('href');
-    if (!href || href === '#') return;
-    html += linkRow(href, label, false);
-    sectionHrefs.push(href);
+  function link(href, label, icon, nested) {
+    var classes = [];
+    if (activeHref && normalizePath(href) === normalizePath(activeHref)) {
+      classes.push("on");
+    }
+    if (nested) classes.push("m-link--sub");
+    var classAttr = classes.length ? ' class="' + classes.join(" ") + '"' : "";
+
+    var content = icon
+      ? '<span class="m-link-start">' +
+        '<span class="m-link-icon-wrap" aria-hidden="true">' +
+        '<img src="' +
+        icon +
+        '" alt="" class="m-link-icon" width="24" height="24" />' +
+        "</span>" +
+        '<span class="m-link-label">' +
+        label +
+        "</span>" +
+        "</span>"
+      : '<span class="m-link-label">' + label + "</span>";
+
+    return '<a href="' + href + '"' + classAttr + ">" + content + "</a>";
+  }
+
+  function sledLink(href, label, activeFromDom) {
+    var active =
+      activeHref && normalizePath(href) === normalizePath(activeHref);
+    if (!activeHref && activeFromDom) active = true;
+
+    return (
+      '<a href="' +
+      href +
+      '"' +
+      (active ? ' class="on"' : "") +
+      '><span class="m-link-label">' +
+      label +
+      "</span></a>"
+    );
+  }
+
+  function collectServiceHrefs(servicesMega) {
+    var hrefs = ["/services/"];
+    Object.keys(servicesMega).forEach(function (key) {
+      var cat = servicesMega[key];
+      if (!cat) return;
+      if (cat.landingHref) hrefs.push(cat.landingHref);
+      (cat.subs || []).forEach(function (sub) {
+        if (sub && sub.href) hrefs.push(sub.href);
+      });
+    });
+    return hrefs;
+  }
+
+  function collectIndustryHrefs(industriesMega) {
+    var hrefs = ["/industries/"];
+    Object.keys(industriesMega).forEach(function (key) {
+      var cat = industriesMega[key];
+      if (cat && cat.landingHref) hrefs.push(cat.landingHref);
+    });
+    return hrefs;
+  }
+
+  function buildServicesPanel(servicesMega) {
+    // Keep `/services/` in hrefs so the Services section expands on the hub,
+    // but don't render the "All services" row in the drawer.
+    var panel = "";
+    var hrefs = ["/services/"];
+
+    Object.keys(servicesMega).forEach(function (key) {
+      var cat = servicesMega[key];
+      if (!cat) return;
+
+      var subs = (cat.subs || []).filter(function (sub) {
+        if (!sub || !sub.href) return false;
+        if (
+          cat.landingHref &&
+          normalizePath(sub.href) === normalizePath(cat.landingHref)
+        ) {
+          return false;
+        }
+        return true;
+      });
+
+      if (cat.landingHref) hrefs.push(cat.landingHref);
+      subs.forEach(function (sub) {
+        hrefs.push(sub.href);
+      });
+
+      if (subs.length) {
+        panel += buildSubSection(cat, subs);
+      } else if (cat.landingHref) {
+        panel += link(cat.landingHref, cat.title, cat.icon);
+      }
+    });
+
+    return { panel: panel, hrefs: hrefs };
+  }
+
+  function buildIndustriesPanel(industriesMega) {
+    // Keep `/industries/` in hrefs so the Industries section expands on the hub,
+    // but don't render the "All industries" row in the drawer.
+    var panel = "";
+    var hrefs = ["/industries/"];
+
+    Object.keys(industriesMega).forEach(function (key) {
+      var cat = industriesMega[key];
+      if (!cat || !cat.landingHref) return;
+      hrefs.push(cat.landingHref);
+      panel += link(cat.landingHref, cat.title, cat.icon);
+    });
+
+    return { panel: panel, hrefs: hrefs };
+  }
+
+  var sledItems = [];
+  try {
+    var sledEl = document.getElementById("sled-subnav");
+    if (sledEl && sledEl.textContent) {
+      sledItems = JSON.parse(sledEl.textContent);
+    }
+  } catch (_) {
+    sledItems = [];
+  }
+
+  sledItems.forEach(function (item) {
+    if (item && item.href) trackHref(item.href);
+  });
+
+  var primaryItems = [];
+  header.querySelectorAll(".primary-nav > a.nav-link").forEach(function (el) {
+    var href = el.getAttribute("href");
+    if (href && href !== "#") {
+      primaryItems.push({
+        href: href,
+        label: el.textContent.replace(/\s+/g, " ").trim(),
+      });
+      trackHref(href);
+    }
   });
 
   var servicesMega = null;
   try {
-    var servicesEl = document.getElementById('services-mega-nav');
+    var servicesEl = document.getElementById("services-mega-nav");
     if (servicesEl && servicesEl.textContent) {
       servicesMega = JSON.parse(servicesEl.textContent);
     }
@@ -124,36 +278,9 @@
     servicesMega = null;
   }
 
-  if (servicesMega) {
-    var servicesPanel = linkRow('/services/', 'All services', false);
-    var servicesHrefs = ['/services/'];
-
-    Object.keys(servicesMega).forEach(function (key) {
-      var cat = servicesMega[key];
-      if (!cat) return;
-      var catHrefs = [];
-      var catPanel = '';
-
-      if (cat.landingHref) {
-        catHrefs.push(cat.landingHref);
-        catPanel += linkRow(cat.landingHref, cat.title + ' overview', true);
-      }
-      (cat.subs || []).forEach(function (sub) {
-        if (!sub || !sub.href) return;
-        catHrefs.push(sub.href);
-        catPanel += linkRow(sub.href, sub.name, true);
-      });
-
-      servicesHrefs = servicesHrefs.concat(catHrefs);
-      servicesPanel += buildCategoryDropdown(cat.title, catPanel, catHrefs);
-    });
-
-    html += buildSectionDropdown('Services', servicesPanel, servicesHrefs);
-  }
-
   var industriesMega = null;
   try {
-    var industriesEl = document.getElementById('industries-mega-nav');
+    var industriesEl = document.getElementById("industries-mega-nav");
     if (industriesEl && industriesEl.textContent) {
       industriesMega = JSON.parse(industriesEl.textContent);
     }
@@ -161,65 +288,122 @@
     industriesMega = null;
   }
 
+  if (servicesMega) {
+    collectServiceHrefs(servicesMega).forEach(trackHref);
+  }
   if (industriesMega) {
-    var industriesPanel = linkRow('/industries/', 'All industries', false);
-    var industriesHrefs = ['/industries/'];
+    collectIndustryHrefs(industriesMega).forEach(trackHref);
+  }
 
-    Object.keys(industriesMega).forEach(function (key) {
-      var cat = industriesMega[key];
-      if (!cat) return;
-      var catHrefs = [];
-      var catPanel = '';
+  activeHref = resolveActiveHref(allHrefs);
 
-      if (cat.landingHref) {
-        catHrefs.push(cat.landingHref);
-        catPanel += linkRow(cat.landingHref, cat.title + ' overview', true);
-        industriesHrefs.push(cat.landingHref);
-      }
-      (cat.subs || []).forEach(function (sub) {
-        if (!sub || !sub.name) return;
-        catPanel += textRow(sub.name, sub.desc);
-      });
+  var html = "";
 
-      industriesPanel += buildCategoryDropdown(cat.title, catPanel, catHrefs);
+  if (sledItems.length) {
+    var sledPanel = "";
+    sledItems.forEach(function (item) {
+      sledPanel += sledLink(item.href, item.label, false);
     });
+    var sledHrefs = sledItems.map(function (item) {
+      return item.href;
+    });
+    html += buildSection("sled", "SLED Partnerships", sledPanel, sledHrefs);
+  }
 
-    html += buildSectionDropdown('Industries', industriesPanel, industriesHrefs);
+  primaryItems.forEach(function (item) {
+    html += link(item.href, item.label);
+  });
+
+  if (servicesMega) {
+    var servicesData = buildServicesPanel(servicesMega);
+    html += buildSection(
+      "services",
+      "Services",
+      servicesData.panel,
+      servicesData.hrefs,
+    );
+  }
+
+  if (industriesMega) {
+    var industriesData = buildIndustriesPanel(industriesMega);
+    html += buildSection(
+      "industries",
+      "Industries",
+      industriesData.panel,
+      industriesData.hrefs,
+    );
   }
 
   if (!servicesMega && !industriesMega) {
-    header.querySelectorAll('.primary-nav .nav-item > .nav-link').forEach(function (el) {
-      html +=
-        '<span class="m-grp-h">' + el.textContent.replace(/\s+/g, ' ').trim() + '</span>';
-    });
+    header
+      .querySelectorAll(".primary-nav .nav-item > .nav-link")
+      .forEach(function (el) {
+        html += buildSection(
+          "other",
+          el.textContent.replace(/\s+/g, " ").trim(),
+          '<span class="m-section-empty">Browse on desktop</span>',
+          [],
+        );
+      });
   }
 
-  html += '<a class="m-cta" href="/us-sled/">SLED Partnerships \u2192</a>';
-  drawer.innerHTML = html;
+  var footerHtml =
+    '<a class="us-pill us-pill--drawer" href="/us-sled/">' +
+    '<span class="sled-dot" aria-hidden="true"></span>' +
+    "SLED Partnerships</a>";
+
+  var toggle = document.createElement("button");
+  toggle.className = "m-nav-toggle";
+  toggle.type = "button";
+  toggle.setAttribute("aria-label", "Open menu");
+  toggle.setAttribute("aria-expanded", "false");
+  toggle.innerHTML = "<span></span><span></span><span></span>";
+  nav.appendChild(toggle);
+
+  var backdrop = document.createElement("div");
+  backdrop.className = "m-nav-backdrop";
+  backdrop.setAttribute("aria-hidden", "true");
+
+  var drawer = document.createElement("nav");
+  drawer.className = "m-nav-drawer";
+  drawer.setAttribute("aria-label", "Mobile");
+  drawer.innerHTML =
+    '<div class="m-nav-drawer-scroll">' +
+    html +
+    "</div>" +
+    '<div class="m-nav-drawer-footer">' +
+    footerHtml +
+    "</div>";
+
+  document.body.appendChild(backdrop);
   document.body.appendChild(drawer);
 
   function close() {
-    document.body.classList.remove('m-nav-open');
-    toggle.setAttribute('aria-expanded', 'false');
-    toggle.setAttribute('aria-label', 'Open menu');
-  }
-  function open() {
-    document.body.classList.add('m-nav-open');
-    toggle.setAttribute('aria-expanded', 'true');
-    toggle.setAttribute('aria-label', 'Close menu');
+    document.body.classList.remove("m-nav-open");
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-label", "Open menu");
+    document.body.style.overflow = "";
   }
 
-  toggle.addEventListener('click', function () {
-    if (document.body.classList.contains('m-nav-open')) close();
+  function open() {
+    document.body.classList.add("m-nav-open");
+    toggle.setAttribute("aria-expanded", "true");
+    toggle.setAttribute("aria-label", "Close menu");
+    document.body.style.overflow = "hidden";
+  }
+
+  toggle.addEventListener("click", function () {
+    if (document.body.classList.contains("m-nav-open")) close();
     else open();
   });
-  drawer.addEventListener('click', function (e) {
-    if (e.target.closest('a')) close();
+  backdrop.addEventListener("click", close);
+  drawer.addEventListener("click", function (e) {
+    if (e.target.closest("a")) close();
   });
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') close();
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") close();
   });
-  window.addEventListener('resize', function () {
+  window.addEventListener("resize", function () {
     if (window.innerWidth > 900) close();
   });
 })();

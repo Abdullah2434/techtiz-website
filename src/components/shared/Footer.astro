@@ -142,9 +142,9 @@ const wrap =
     <div
       class="strip relative flex items-center justify-between border-t border-white/10 pt-6 text-[13px] text-white/55 max-[600px]:flex-col max-[600px]:items-start max-[600px]:gap-3.5"
     >
-      <div>{SITE_COPYRIGHT}</div>
+      <div class="shrink-0">{SITE_COPYRIGHT}</div>
       <nav
-        class="legal flex w-full min-w-0 flex-wrap items-center gap-x-4 gap-y-2 sm:gap-x-6 max-[600px]:grid max-[600px]:grid-cols-3 max-[600px]:gap-x-3 max-[600px]:gap-y-2.5 max-[600px]:text-[12px]"
+        class="legal flex min-w-0 shrink-0 flex-wrap items-center justify-end gap-x-4 gap-y-2 sm:gap-x-6 max-[600px]:w-full max-[600px]:shrink max-[600px]:grid max-[600px]:grid-cols-3 max-[600px]:justify-items-start max-[600px]:gap-x-3 max-[600px]:gap-y-2.5 max-[600px]:text-[12px]"
         aria-label="Legal and site links"
       >
         {

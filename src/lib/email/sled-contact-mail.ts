@@ -5,9 +5,6 @@ export type SledContactPayload = {
   role: string;
   vehicle: string;
   timing: string;
-  solicitation: string;
-  ceiling: string;
-  clearance: string;
   intent: string;
   desc: string;
 };
@@ -42,12 +39,9 @@ export function createSledAdminEmailTemplate(data: SledContactPayload): string {
       <div class="field"><div class="label">Prime firm:</div><div class="value">${data.firm}</div></div>
       <div class="field"><div class="label">Role:</div><div class="value">${data.role || "Not provided"}</div></div>
       <div class="field"><div class="label">Contract vehicle:</div><div class="value">${data.vehicle || "Not provided"}</div></div>
-      <div class="field"><div class="label">Engagement timing:</div><div class="value">${data.timing || "Not provided"}</div></div>
-      <div class="field"><div class="label">Solicitation / RFP:</div><div class="value">${data.solicitation || "Not provided"}</div></div>
-      <div class="field"><div class="label">Estimated ceiling:</div><div class="value">${data.ceiling || "Not provided"}</div></div>
-      <div class="field"><div class="label">Clearance required:</div><div class="value">${data.clearance || "Not provided"}</div></div>
+      <div class="field"><div class="label">Timing:</div><div class="value">${data.timing || "Not provided"}</div></div>
       <div class="field"><div class="label">Requesting:</div><div class="value">${data.intent}</div></div>
-      <div class="field"><div class="label">Description:</div><div class="value">${data.desc || "(none provided)"}</div></div>
+      <div class="field"><div class="label">Engagement (phase, scope, timing):</div><div class="value">${data.desc || "(none provided)"}</div></div>
     </div>
     <div class="footer">
       <p>Submitted via the Techtiz U.S. SLED intake form.</p>

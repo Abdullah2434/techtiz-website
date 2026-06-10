@@ -1,14 +1,9 @@
 ---
 import Calendar from '@lucide/astro/icons/calendar';
-import CircleQuestionMark from '@lucide/astro/icons/circle-question-mark';
 import FileSearch from '@lucide/astro/icons/file-search';
 import Mail from '@lucide/astro/icons/mail';
 import Send from '@lucide/astro/icons/send';
-import Users from '@lucide/astro/icons/users';
-import Zap from '@lucide/astro/icons/zap';
 import {
-  CEILING_OPTIONS,
-  CLEARANCE_OPTIONS,
   INTENT_OPTIONS,
   ROLE_OPTIONS,
   TIMING_OPTIONS,
@@ -20,7 +15,6 @@ import CtaButton from '../../shared/CtaButton.astro';
 import FormButton from '../../shared/FormButton.astro';
 import SledPageWrap from '../shared/SledPageWrap.astro';
 
-const intentIcons = [Zap, FileSearch, Users, CircleQuestionMark] as const;
 const stepIcons = [Mail, Calendar, FileSearch] as const;
 
 const inputClass =
@@ -40,11 +34,28 @@ const sectionLabelClass = 'font-mono text-[10.5px] font-bold tracking-[0.18em] t
           data-mailto={SITE.email.sled}
           novalidate
         >
-          <div class="border-b border-line bg-gradient-to-r from-seasalt to-white px-6 py-5 sm:px-8">
-            <div class={sectionLabelClass}>Section 01</div>
-            <div class="mt-1.5 text-[18px] font-extrabold text-yale-dark">About you</div>
-          </div>
           <div class="space-y-5 px-6 py-6 sm:px-8 sm:py-7">
+            <div>
+              <label class={labelClass}>What would you like from us? <span class="text-cyan-strong">*</span></label>
+              <div class="intent-pills mt-2 flex flex-wrap gap-2">
+                {INTENT_OPTIONS.map((opt, i) => (
+                  <label
+                    class:list={[
+                      'intent-option inline-flex cursor-pointer items-center gap-2 rounded-full border border-line bg-seasalt px-3.5 py-2.5 transition-[border-color,background] duration-200 hover:border-cyan-strong hover:bg-white [&.on]:border-cyan [&.on]:bg-cyan-soft [&.on_.check]:border-cyan [&.on_.check]:bg-cyan',
+                      { on: i === 0 },
+                    ]}
+                  >
+                    <input type="radio" name="intent" value={opt.value} checked={i === 0} class="sr-only" />
+                    <span
+                      class="check size-2.5 shrink-0 rounded-full border-[1.5px] border-line bg-white"
+                      aria-hidden="true"
+                    />
+                    <span class="l text-[13px] font-semibold text-yale">{opt.label}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
             <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
               <div>
                 <label for="name" class={labelClass}>Full name <span class="text-amber">*</span></label>
@@ -52,13 +63,14 @@ const sectionLabelClass = 'font-mono text-[10.5px] font-bold tracking-[0.18em] t
               </div>
               <div>
                 <label for="email" class={labelClass}>Work email <span class="text-amber">*</span></label>
-                <input id="email" name="email" type="email" placeholder="jane@firm.com" required class={inputClass} />
+                <input id="email" name="email" type="email" placeholder="jane@prime.com" required class={inputClass} />
               </div>
             </div>
+
             <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
               <div>
-                <label for="firm" class={labelClass}>Prime firm name <span class="text-amber">*</span></label>
-                <input id="firm" name="firm" type="text" placeholder="e.g. National Environmental Consulting LLP" required class={inputClass} />
+                <label for="firm" class={labelClass}>Prime firm <span class="text-amber">*</span></label>
+                <input id="firm" name="firm" type="text" placeholder="Prime contractor name" required class={inputClass} />
               </div>
               <div>
                 <label for="role" class={labelClass}>Your role</label>
@@ -67,96 +79,31 @@ const sectionLabelClass = 'font-mono text-[10.5px] font-bold tracking-[0.18em] t
                 </select>
               </div>
             </div>
-          </div>
 
-          <div class="border-y border-line bg-seasalt/50 px-6 py-5 sm:px-8">
-            <div class={sectionLabelClass}>Section 02</div>
-            <div class="mt-1.5 text-[18px] font-extrabold text-yale-dark">About the engagement</div>
-          </div>
-          <div class="space-y-5 px-6 py-6 sm:px-8 sm:py-7">
             <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
               <div>
-                <label for="vehicle" class={labelClass}>
-                  Contract vehicle <span class="font-normal text-muted">(if known)</span>
-                </label>
+                <label for="vehicle" class={labelClass}>Contract vehicle</label>
                 <select id="vehicle" name="vehicle" class={inputClass}>
                   {VEHICLE_OPTIONS.map((opt) => <option>{opt}</option>)}
                 </select>
               </div>
               <div>
-                <label for="timing" class={labelClass}>Engagement timing</label>
+                <label for="timing" class={labelClass}>Timing</label>
                 <select id="timing" name="timing" class={inputClass}>
                   {TIMING_OPTIONS.map((opt) => <option>{opt}</option>)}
                 </select>
               </div>
             </div>
-            <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
-              <div>
-                <label for="solicitation" class={labelClass}>
-                  Solicitation / RFP number <span class="font-normal text-muted">(optional)</span>
-                </label>
-                <input id="solicitation" name="solicitation" type="text" placeholder="e.g. RFP-2026-0142" class={inputClass} />
-              </div>
-              <div>
-                <label for="ceiling" class={labelClass}>
-                  Estimated contract ceiling <span class="font-normal text-muted">(optional)</span>
-                </label>
-                <select id="ceiling" name="ceiling" class={inputClass}>
-                  {CEILING_OPTIONS.map((opt) => <option>{opt}</option>)}
-                </select>
-              </div>
-            </div>
-            <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
-              <div>
-                <label for="clearance" class={labelClass}>
-                  Security clearance required <span class="font-normal text-muted">(optional)</span>
-                </label>
-                <select id="clearance" name="clearance" class={inputClass}>
-                  {CLEARANCE_OPTIONS.map((opt) => <option>{opt}</option>)}
-                </select>
-              </div>
-            </div>
+
             <div>
-              <label for="desc" class={labelClass}>Brief description</label>
+              <label for="desc" class={labelClass}>Engagement: phase, scope, timing</label>
               <textarea
                 id="desc"
                 name="desc"
-                placeholder="What's the engagement type? Subcontract under a master? Teaming letter in place or imminent? What technical surface area are you looking to staff?"
+                placeholder="Subcontract under a master? Teaming letter in place? What technical surface area are you staffing? Add a solicitation number if you have one."
                 class:list={[inputClass, 'min-h-[120px] resize-y']}
               />
             </div>
-          </div>
-
-          <div class="border-y border-line bg-seasalt/50 px-6 py-5 sm:px-8">
-            <div class={sectionLabelClass}>Section 03</div>
-            <div class="mt-1.5 text-[18px] font-extrabold text-yale-dark">What you'd like from us</div>
-          </div>
-          <div class="grid grid-cols-1 gap-3.5 px-6 py-6 sm:grid-cols-2 sm:px-8 sm:py-7">
-            {INTENT_OPTIONS.map((opt, i) => {
-              const IntentIcon = intentIcons[i];
-              return (
-                <label
-                  class:list={[
-                    'intent-option sled-card group cursor-pointer rounded-2xl p-5 transition-[border-color,background,transform] duration-200',
-                    { on: i === 0 },
-                  ]}
-                >
-                  <input type="radio" name="intent" value={opt.value} checked={i === 0} class="sr-only" />
-                  <div class="flex items-start gap-3">
-                    <span class="grid size-10 shrink-0 place-items-center rounded-xl bg-cyan-soft text-cyan-strong transition-transform group-hover:scale-105 group-[.on]:bg-yale-dark group-[.on]:text-cyan">
-                      <IntentIcon class="size-[18px]" stroke-width="1.75" aria-hidden="true" />
-                    </span>
-                    <span class="min-w-0 flex-1">
-                      <span class="l block text-[14.5px] font-extrabold leading-tight text-yale-dark">{opt.label}</span>
-                      <span class="d mt-1 block text-[13.5px] leading-[1.55] text-muted">{opt.desc}</span>
-                    </span>
-                    <span class="mt-2 grid size-5 shrink-0 place-items-center rounded-full border border-line bg-white">
-                      <span class="hidden size-2 rounded-full bg-cyan group-[.on]:block" aria-hidden="true" />
-                    </span>
-                  </div>
-                </label>
-              );
-            })}
           </div>
 
           <input

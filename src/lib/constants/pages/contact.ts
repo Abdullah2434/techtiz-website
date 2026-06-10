@@ -39,17 +39,17 @@ export const WHAT_HAPPENS_NEXT = [
 export const INTENT_OPTIONS = [
   {
     value: 'post-award',
-    label: 'Post-award delivery support',
+    label: 'Post-award delivery',
     desc: 'Active engagement. Engineers, sprints, KT, integration work under your master subcontract.',
   },
   {
     value: 'pre-award',
-    label: 'Pre-award proposal support (under NDA)',
+    label: 'Pre-award support',
     desc: 'Teaming letter in place or imminent. Technical volume, compliance matrix, demo builds, past-performance packaging.',
   },
   {
     value: 'capability',
-    label: 'Capability conversation',
+    label: 'Capability chat',
     desc: 'No active bid. NDA-first introduction, capability overview, future pipeline alignment.',
   },
   {
@@ -74,29 +74,13 @@ export const VEHICLE_OPTIONS = [
   'State Master Agreement',
   'Direct Subcontract',
   'Local Co-op',
-  'Other',
+  'Open RFP / RFQ',
 ] as const;
 
 export const TIMING_OPTIONS = [
   'Not yet determined',
-  'Active engagement — immediate',
+  'Active engagement (immediate)',
   'Within 30 days',
   'Within 90 days',
   'Pipeline / future',
-] as const;
-
-export const CEILING_OPTIONS = [
-  'Prefer not to say',
-  'Under $250K',
-  '$250K – $1M',
-  '$1M – $5M',
-  '$5M – $25M',
-  'Over $25M',
-] as const;
-
-export const CLEARANCE_OPTIONS = [
-  'None / Public Trust',
-  'Secret',
-  'Top Secret / SCI',
-  'Not yet determined',
 ] as const;

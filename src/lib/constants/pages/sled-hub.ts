@@ -194,6 +194,27 @@ export const SLED_PROOF = {
   slides: readonly SledProofSlide[];
 };
 
+export const SLED_VEHICLES = {
+  eyebrow: "Procurement vehicles",
+  heading: "Easy to put on contract.",
+  linkHref: "/us-sled/how-we-engage/",
+  linkLabel: "How to put us on contract",
+  mapAriaLabel:
+    "Dotted map of the United States showing state and local coverage via primes",
+  mapLegend: [
+    { label: "Served via primes", variant: "served" },
+    { label: "Reachable on request", variant: "reachable" },
+  ],
+  chips: [
+    { name: "NASPO ValuePoint", meta: "50 states" },
+    { name: "GSA MAS / IT-70", meta: "via prime" },
+    { name: "State Masters", meta: "CMAS · OGS · DIR" },
+    { name: "Direct Subcontract", meta: "7-day" },
+    { name: "Local Co-ops", meta: "OMNIA · Sourcewell" },
+    { name: "Open RFP / RFQ", meta: "bid support" },
+  ],
+} as const;
+
 export type SledBackboneCard = {
   meta: string;
   heading: string;

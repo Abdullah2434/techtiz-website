@@ -614,6 +614,11 @@
   background: var(--color-cyan);
 }
 
+/* Vehicles — dotted US map */
+[data-sled-dotmap] circle {
+  transition: fill 0.5s ease, opacity 0.5s ease;
+}
+
 @media (prefers-reduced-motion: reduce) {
 
   .sled-hero-capitol,

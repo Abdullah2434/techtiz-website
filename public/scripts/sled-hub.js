@@ -230,6 +230,99 @@
 })();
 
 (function () {
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const svg = document.querySelector('[data-sled-dotmap]');
+  if (!(svg instanceof SVGSVGElement)) return;
+
+  function fill(len, ranges) {
+    const cells = new Array(len).fill('.');
+    ranges.forEach(([start, end]) => {
+      for (let i = start; i <= end; i += 1) cells[i] = '#';
+    });
+    return cells.join('');
+  }
+
+  const width = 46;
+  const rows = [
+    fill(width, [[5, 40]]),
+    fill(width, [[4, 41]]),
+    fill(width, [[3, 42]]),
+    fill(width, [[3, 43]]),
+    fill(width, [[3, 42]]),
+    fill(width, [[3, 41]]),
+    fill(width, [[3, 40]]),
+    fill(width, [[4, 40]]),
+    fill(width, [[4, 39]]),
+    fill(width, [[5, 39]]),
+    fill(width, [[5, 38]]),
+    fill(width, [[6, 38]]),
+    fill(width, [[6, 37]]),
+    fill(width, [[7, 18], [20, 37]]),
+    fill(width, [[8, 17], [21, 36], [38, 39]]),
+    fill(width, [[10, 16], [24, 33], [38, 40]]),
+    fill(width, [[12, 15], [38, 40]]),
+    fill(width, [[38, 40]]),
+    fill(width, [[38, 39]]),
+  ];
+
+  const rowCount = rows.length;
+  const padX = 14;
+  const padY = 12;
+  const vbW = 460;
+  const vbH = 280;
+  const stepX = (vbW - padX * 2) / (width - 1);
+  const stepY = (vbH - padY * 2) / (rowCount - 1);
+  const dotR = Math.min(stepX, stepY) * 0.3;
+  const fragment = document.createDocumentFragment();
+
+  for (let y = 0; y < rowCount; y += 1) {
+    for (let x = 0; x < width; x += 1) {
+      if (rows[y][x] !== '#') continue;
+      const cx = padX + x * stepX;
+      const cy = padY + y * stepY;
+      const isServed = x <= 25 || ((x * 3 + y * 7) % 9) < 2;
+      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      circle.setAttribute('cx', cx.toFixed(1));
+      circle.setAttribute('cy', cy.toFixed(1));
+      circle.setAttribute('r', dotR.toFixed(2));
+      circle.setAttribute('fill', '#D9DEE5');
+      if (isServed) circle.setAttribute('data-served', '1');
+      fragment.appendChild(circle);
+    }
+  }
+
+  svg.appendChild(fragment);
+
+  const servedCircles = [...svg.querySelectorAll('circle[data-served="1"]')].sort(
+    (a, b) => Number(a.getAttribute('cx')) - Number(b.getAttribute('cx'))
+  );
+
+  let swept = false;
+  function sweep() {
+    if (swept) return;
+    const rect = svg.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    if (rect.top > vh * 0.85 || rect.bottom < 0) return;
+    swept = true;
+    servedCircles.forEach((circle, i) => {
+      if (prefersReduced) {
+        circle.setAttribute('fill', '#18B0E6');
+        return;
+      }
+      setTimeout(() => {
+        circle.setAttribute('fill', '#18B0E6');
+      }, 150 + i * 7);
+    });
+  }
+
+  document.addEventListener('scroll', sweep, { passive: true });
+  window.addEventListener('resize', sweep);
+  window.addEventListener('load', sweep);
+  sweep();
+  setTimeout(sweep, 200);
+})();
+
+(function () {
   const SLED_HUB_INQUIRY_API = '/api/sled-hub-inquiry/';
   const form = document.getElementById('sledInquiryForm');
   const success = document.getElementById('sledInquirySuccess');

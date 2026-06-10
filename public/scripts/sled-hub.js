@@ -392,7 +392,6 @@
         throw new Error(result.error || 'Failed to submit inquiry');
       }
 
-      form.classList.add('hidden');
       success?.classList.add('is-visible');
       const y = success?.getBoundingClientRect().top ?? 0;
       window.scrollTo({ top: Math.max(0, y + window.scrollY - 140), behavior: 'smooth' });
@@ -417,7 +416,6 @@
       e.preventDefault();
       success?.classList.remove('is-visible');
       form.reset();
-      form.classList.remove('hidden');
       resetNeeds();
     });
   }

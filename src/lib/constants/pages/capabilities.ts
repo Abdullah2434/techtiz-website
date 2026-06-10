@@ -399,32 +399,32 @@ export const TECH_STACK = [
   },
 ] as const;
 
-export const BOUNDARIES = [
-  {
-    heading: "Fieldwork",
-    body: "Site visits, in-person stakeholder facilitation, on-site meeting moderation. We support remotely; the prime owns the physical room.",
-  },
-  {
-    heading: "Legal drafting",
-    body: "Legal counsel for statutory interpretation must come from the prime or a separate sub. We follow the legal opinion; we don't issue it.",
-  },
-  {
-    heading: "Prime contractor role",
-    body: "We don't bid against our partners. Subcontract-only. Direct-to-agency engagements are out of scope.",
-  },
-  {
-    heading: "Direct-to-agency engagements",
-    body: "Every engagement routes through a U.S. prime under a master subcontract. NDAs and IP through prime templates.",
-  },
-  {
-    heading: "Off-the-shelf product replacement",
-    body: "We don't compete with Tyler, Granicus, CivicPlus, OpenGov, GovPilot or other GovTech product companies. When a prime needs a product, we recommend the right one. We're the subcontractor that ships the custom piece the off-the-shelf platform doesn't cover.",
-  },
-  {
-    heading: "Procurement intelligence / capture-consulting analyst services",
-    body: "We do not sell access to public RFPs, anonymized tenders, or procurement subscription data. That lane is operated by Deltek GovWin, Bloomberg Government, and dedicated U.S. capture-consulting firms with analyst teams and regulatory structures. We are a technical implementation subcontractor that supports primes inside structured engagements.",
-  },
-] as const;
+export const SLED_CAPABILITIES_BOUNDARIES = {
+  eyebrow: "What we don't do",
+  heading: "Honest about the lane.",
+  body: "Trust comes from knowing where the work ends. These belong to the prime, a specialist sub, or nobody at all.",
+  items: [
+    {
+      heading: "Fieldwork",
+      body: "We support remotely; the prime owns the physical room.",
+    },
+    {
+      heading: "Legal drafting",
+      body: "We follow the legal opinion; we don't issue it.",
+    },
+    {
+      heading: "Product replacement",
+      body: "We don't compete with Tyler, Granicus, or OpenGov; we ship the custom piece they don't cover.",
+    },
+    {
+      heading: "Procurement intelligence",
+      body: "We don't sell or resell RFP, tender, or solicitation data.",
+    },
+  ],
+} as const;
+
+/** @deprecated Use SLED_CAPABILITIES_BOUNDARIES */
+export const BOUNDARIES = SLED_CAPABILITIES_BOUNDARIES.items;
 
 export const ENGAGE_STEPS = [
   {

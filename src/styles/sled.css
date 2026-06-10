@@ -72,8 +72,61 @@
 
 .sled-hub-hero h1 .accent,
 .sled-inner-hero h1 .accent,
+.sled-capabilities-hero h1 .accent,
 .sled-case-studies-hero h1 .accent {
   color: var(--color-cyan);
+}
+
+.sled-capabilities-hero::before {
+  content: '';
+  position: absolute;
+  right: -50px;
+  top: -50px;
+  z-index: 2;
+  width: 300px;
+  height: 300px;
+  pointer-events: none;
+  background: linear-gradient(45deg,
+      transparent 49%,
+      rgba(24, 176, 230, 0.16) 49% 51%,
+      transparent 51%);
+  background-size: 28px 28px;
+  transform: rotate(15deg);
+}
+
+/* Beam border — Tailwind can't express conic-gradient mask animation */
+@property --sled-beam-a {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.sled-beam::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(from var(--sled-beam-a),
+      transparent 0 62%,
+      rgb(24 176 230 / 0.25) 74%,
+      var(--color-cyan) 84%,
+      rgb(24 176 230 / 0.25) 92%,
+      transparent 100%);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: sled-beam-spin 5s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes sled-beam-spin {
+  to {
+    --sled-beam-a: 360deg;
+  }
 }
 
 /* SLED heading scale — tuned for mobile (min ~22–24px, scales up on desktop) */
@@ -250,30 +303,462 @@
   background-size: 100% 100%;
 }
 
-/* Stage tabs */
-.sled-stage-panel {
+/* Model section — accent underline */
+.sled-hl-u {
+  position: relative;
+}
+
+.sled-hl-u::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.08em;
+  height: 3px;
+  background: var(--color-cyan);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
+}
+
+.sled-reveal.is-visible .sled-hl-u::after {
+  transform: scaleX(1);
+}
+
+/* Model section — segmented control indicator */
+.sled-model-seg-ind {
+  transform: translateX(0);
+  transition:
+    transform 0.5s cubic-bezier(0.2, 0, 0, 1),
+    width 0.5s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.sled-model-tab {
+  gap: 0;
+  padding: 11px 22px;
+  line-height: 1;
+  transition: color 0.25s ease;
+}
+
+.sled-model-tab-chk {
+  width: 0;
+  min-width: 0;
+  margin-right: 0;
+  opacity: 0;
+  transition:
+    width 0.35s cubic-bezier(0.2, 0, 0, 1),
+    margin-right 0.35s cubic-bezier(0.2, 0, 0, 1),
+    opacity 0.2s ease;
+}
+
+.sled-model-tab[aria-selected="true"] {
+  gap: 7px;
+}
+
+.sled-model-tab[aria-selected="true"] .sled-model-tab-chk {
+  width: 17px;
+  min-width: 17px;
+  margin-right: 0;
+  opacity: 1;
+}
+
+.sled-model-panel {
   display: none;
 }
 
-.sled-stage-panel.is-visible {
+.sled-model-panel.is-active {
+  display: block;
+}
+
+.sled-model-panel.is-fade-in {
+  animation: sledModelFadeThrough 0.5s cubic-bezier(0.05, 0.7, 0.1, 1) both;
+}
+
+/* Specializations accordion */
+.sled-spec-body {
   display: grid;
-  animation: sledFadeUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.5s cubic-bezier(0.2, 0, 0, 1);
 }
 
-.sled-tab-pill {
+.sled-spec-item.is-open .sled-spec-body {
+  grid-template-rows: 1fr;
+}
+
+.sled-spec-body-inner {
+  overflow: hidden;
+}
+
+/* Capabilities frameworks — status badges in accordion head */
+.sled-fw-status {
+  padding: 5px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.sled-fw-status--in-progress {
+  color: var(--color-amber);
+  background: rgba(216, 144, 23, 0.1);
+}
+
+.sled-fw-status--applied {
+  color: #1f7855;
+  background: rgba(43, 165, 114, 0.12);
+}
+
+.sled-fw-status--aligned {
+  color: var(--color-cyan-strong);
+  background: var(--color-cyan-soft);
+}
+
+.sled-fw-status--posture {
+  color: var(--color-yale);
+  background: var(--color-seasalt);
+}
+
+/* Capabilities — bifurcated architecture board */
+.sled-arch-board {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 80px 1fr;
+  gap: 0;
+  overflow: hidden;
+  border: 1px solid var(--color-line-soft);
+  border-radius: 16px;
+  background: var(--color-white);
+  padding: clamp(24px, 3vw, 40px);
+  box-shadow: 0 8px 24px -12px rgba(21, 58, 95, 0.14);
+}
+
+.sled-arch-board::before {
+  content: attr(data-air-gap-label);
+  position: absolute;
+  top: clamp(24px, 3vw, 40px);
+  left: 50%;
+  z-index: 3;
+  transform: translateX(-50%);
+  padding: 4px 10px;
+  border: 1px solid var(--color-cyan);
+  border-radius: 5px;
+  background: var(--color-white);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-cyan-strong);
+}
+
+.sled-arch-col {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  border: 1px solid var(--color-line);
+  border-radius: 12px;
+  background: var(--color-seasalt);
+  padding: 28px;
+}
+
+.sled-arch-col--onshore {
+  border-color: var(--color-yale-mid);
+}
+
+.sled-arch-col-head {
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--color-line-soft);
+}
+
+.sled-arch-flag {
+  display: inline-block;
+  padding: 5px 9px;
+  border-radius: 5px;
+  background: var(--color-yale-dark);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.sled-arch-flag--offshore {
+  background: var(--color-cyan-strong);
+}
+
+.sled-arch-title {
+  margin: 14px 0 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--color-yale-dark);
+}
+
+.sled-arch-sub {
+  margin: 6px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--color-muted);
+}
+
+.sled-arch-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sled-arch-item {
+  display: grid;
+  grid-template-columns: 16px 1fr;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--color-ink);
+}
+
+.sled-arch-item p {
+  margin: 0;
+}
+
+.sled-arch-item strong {
+  color: var(--color-yale-dark);
+  font-weight: 700;
+}
+
+.sled-arch-dot {
+  width: 7px;
+  height: 7px;
+  margin-top: 6px;
+  margin-left: 4px;
+  border-radius: 1.5px;
+  background: var(--color-cyan);
+  transform: rotate(15deg);
+}
+
+.sled-arch-col--onshore .sled-arch-dot {
+  background: var(--color-yale-mid);
+}
+
+.sled-arch-data {
+  margin-top: auto;
+  padding-top: 18px;
+  border-top: 1px solid var(--color-line-soft);
+}
+
+.sled-arch-data-label {
+  margin-bottom: 10px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.sled-arch-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.sled-arch-pill {
+  padding: 4px 9px;
+  border: 1px solid var(--color-cyan-soft);
+  border-radius: 5px;
+  background: var(--color-cyan-soft);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-yale-dark);
+}
+
+.sled-arch-pill--offshore {
+  border-color: var(--color-line);
+  background: var(--color-white);
+  color: var(--color-muted);
+}
+
+.sled-arch-gap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.sled-arch-vline {
+  width: 1px;
+  flex: 1;
+  background: repeating-linear-gradient(to bottom,
+      var(--color-cyan) 0 6px,
+      transparent 6px 12px);
+}
+
+.sled-arch-lock {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin: 6px 0;
+  border: 1px solid var(--color-cyan);
+  border-radius: 50%;
+  background: var(--color-white);
+  color: var(--color-cyan-strong);
+}
+
+.sled-arch-gap-label {
+  margin-top: 4px;
+}
+
+/* Capabilities — state offshore posture board */
+.sled-posture-head {
+  border-top: 3px solid var(--color-line);
+}
+
+.sled-posture-col--serve .sled-posture-head {
+  border-top-color: var(--color-green);
+}
+
+.sled-posture-col--disclose .sled-posture-head {
+  border-top-color: var(--color-amber);
+}
+
+.sled-posture-col--waiver .sled-posture-head {
+  border-top-color: #c44;
+}
+
+.sled-posture-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.sled-posture-swatch {
+  width: 10px;
+  height: 10px;
+  flex: none;
+  border-radius: 3px;
+}
+
+.sled-posture-col--serve .sled-posture-label {
+  color: #1f7855;
+}
+
+.sled-posture-col--serve .sled-posture-swatch {
+  background: var(--color-green);
+}
+
+.sled-posture-col--disclose .sled-posture-label {
+  color: var(--color-amber);
+}
+
+.sled-posture-col--disclose .sled-posture-swatch {
+  background: var(--color-amber);
+}
+
+.sled-posture-col--waiver .sled-posture-label {
+  color: #b33;
+}
+
+.sled-posture-col--waiver .sled-posture-swatch {
+  background: #c44;
+}
+
+@media (max-width: 900px) {
+  .sled-arch-board {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .sled-arch-board::before {
+    display: none;
+  }
+
+  .sled-arch-gap {
+    flex-direction: row;
+    height: 40px;
+  }
+
+  .sled-arch-vline {
+    width: auto;
+    height: 1px;
+    flex: 1;
+    background: repeating-linear-gradient(to right,
+        var(--color-cyan) 0 6px,
+        transparent 6px 12px);
+  }
+
+  .sled-arch-gap-label {
+    margin-top: 0;
+    white-space: nowrap;
+  }
+}
+
+/* Backbone bento — detail overlay reveal */
+.sled-bento-detail {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
   transition:
-    background 0.25s ease,
-    color 0.25s ease,
-    box-shadow 0.25s ease,
-    transform 0.2s ease;
+    opacity 0.35s ease,
+    transform 0.35s cubic-bezier(0.2, 0, 0, 1),
+    visibility 0.35s;
 }
 
-.sled-tab-pill[aria-selected="true"] {
-  box-shadow: 0 8px 24px -10px rgba(14, 38, 64, 0.35);
+.sled-bento-card:hover .sled-bento-detail,
+.sled-bento-card:focus-within .sled-bento-detail,
+.sled-bento-card.is-open .sled-bento-detail {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
 }
 
-.sled-tab-pill:not([aria-selected="true"]):hover {
-  transform: translateY(-1px);
+/* Delivery model — clock grid + concern tabs */
+.sled-delivery-bars {
+  background: repeating-linear-gradient(90deg,
+      var(--color-line-soft) 0 1px,
+      transparent 1px 12.5%);
+}
+
+.sled-delivery-panel {
+  display: none;
+}
+
+.sled-delivery-panel.is-active {
+  display: flex;
+}
+
+.sled-delivery-panel.is-fade-in {
+  animation: sledModelFadeThrough 0.5s cubic-bezier(0.05, 0.7, 0.1, 1) both;
+}
+
+.sled-delivery-tab[aria-selected="true"] {
+  border-color: transparent;
+  background-color: var(--color-yale);
+}
+
+.sled-delivery-tab[aria-selected="true"] .sled-delivery-tab-num {
+  color: var(--color-cyan);
+}
+
+.sled-delivery-tab[aria-selected="true"] .sled-delivery-tab-label {
+  color: #fff;
+}
+
+@keyframes sledModelFadeThrough {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* Inquiry form */
@@ -286,39 +771,10 @@
   animation: sledFadeUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.sled-need-card.is-selected {
+[data-sled-inquiry-need].is-on {
   border-color: var(--color-cyan);
   background: var(--color-cyan-soft);
-  box-shadow: 0 0 0 3px rgba(24, 176, 230, 0.12);
-}
-
-.sled-need-card.is-selected .sled-need-check {
-  background: var(--color-cyan);
-  border-color: var(--color-cyan);
-}
-
-.sled-need-card.is-selected .sled-need-check::after {
-  content: "";
-  position: absolute;
-  left: 4px;
-  top: 1px;
-  width: 5px;
-  height: 9px;
-  border-right: 2px solid var(--color-yale-dark);
-  border-bottom: 2px solid var(--color-yale-dark);
-  transform: rotate(45deg);
-}
-
-.sled-need-card {
-  transition:
-    border-color 0.22s ease,
-    background 0.22s ease,
-    box-shadow 0.22s ease,
-    transform 0.22s ease;
-}
-
-.sled-need-card:hover {
-  transform: translateY(-1px);
+  color: var(--color-yale);
 }
 
 /* Matrix row hover */
@@ -397,6 +853,40 @@
 
 .sled-link-accent:hover::after {
   transform: scaleX(1.08);
+}
+
+/* Proof — engagement slider */
+.sled-proof-track {
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sled-proof-slide {
+  flex: 0 0 100%;
+  box-shadow: none;
+}
+
+.sled-proof-dot {
+  width: 8px;
+  height: 8px;
+  border: 0;
+  border-radius: 999px;
+  padding: 0;
+  background: var(--color-line);
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sled-proof-dot.is-active {
+  width: 24px;
+  border-radius: 5px;
+  background: var(--color-cyan);
+}
+
+/* Vehicles — dotted US map */
+[data-sled-dotmap] circle {
+  transition: fill 0.5s ease, opacity 0.5s ease;
 }
 
 /* How We Partner — spec accordion */
@@ -594,7 +1084,9 @@
 
   .sled-hero-capitol,
   .sled-hero-glow-a,
-  .sled-hero-glow-b {
+  .sled-hero-glow-b,
+  .sled-beam::before,
+  .btn--beam::after {
     animation: none;
   }
 
@@ -605,13 +1097,32 @@
     transition: none;
   }
 
+  .sled-bento-card:hover,
   .sled-card:hover,
-  .sled-need-card:hover,
-  .sled-tab-pill:not([aria-selected="true"]):hover {
+  .sled-model-panel.is-fade-in,
+  .sled-delivery-panel.is-fade-in {
     transform: none;
+    animation: none;
   }
 
-  .sled-stage-panel.is-visible {
-    animation: none;
+  .sled-bento-detail {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition: none;
+  }
+
+  .sled-spec-body {
+    grid-template-rows: 1fr;
+    transition: none;
+  }
+
+  .sled-hl-u::after {
+    transform: scaleX(1);
+    transition: none;
+  }
+
+  .sled-proof-track {
+    transition: none;
   }
 }

@@ -1,0 +1,161 @@
+---
+import FileLock from '@lucide/astro/icons/file-lock';
+import Lock from '@lucide/astro/icons/lock';
+import Sun from '@lucide/astro/icons/sun';
+import UserRoundCheck from '@lucide/astro/icons/user-round-check';
+import { SLED_DELIVERY } from '../../../lib/constants/pages/sled-hub';
+import Eyebrow from '../../shared/Eyebrow.astro';
+import SledPageWrap from '../shared/SledPageWrap.astro';
+
+const concernIcons = {
+  sun: Sun,
+  lock: Lock,
+  'file-lock': FileLock,
+  'user-round-check': UserRoundCheck,
+} as const;
+---
+
+<section class="sled-section bg-white" id="delivery" data-screen-label="Delivery model">
+  <SledPageWrap>
+    <div class="mb-6 grid grid-cols-1 items-end gap-3.5 lg:mb-[26px] lg:grid-cols-[1fr_auto] lg:gap-8">
+      <div class="sled-reveal" data-sled-reveal>
+        <Eyebrow text={SLED_DELIVERY.eyebrow} showGlyph class="mb-4" />
+        <h2 class="text-[clamp(1.7rem,2.5vw,2.3rem)] font-semibold leading-[1.12] tracking-[-0.02em] text-yale-dark">
+          {SLED_DELIVERY.heading}
+          <br />
+          {SLED_DELIVERY.headingLine2}
+        </h2>
+      </div>
+      <p
+        class="sled-reveal max-w-[46ch] text-[15px] leading-[1.55] text-muted lg:justify-self-end"
+        data-sled-reveal
+      >
+        {SLED_DELIVERY.sub}
+      </p>
+    </div>
+
+    <div
+      class="sled-reveal mb-[18px] rounded-2xl border border-line-soft bg-white px-[30px] py-[26px] shadow-[0_10px_30px_-20px_rgba(21,58,95,0.16)]"
+      data-sled-reveal
+    >
+      <div class="mb-[22px] flex flex-wrap items-baseline justify-between gap-6">
+        <span class="font-mono text-[11px] font-medium tracking-[0.1em] text-cyan-strong uppercase">
+          {SLED_DELIVERY.clock.label}
+        </span>
+        <h3 class="max-w-[42ch] text-[1.15rem] font-semibold leading-[1.25] text-yale-dark">
+          {SLED_DELIVERY.clock.heading}
+        </h3>
+      </div>
+
+      <div class="mb-4 flex justify-between border-b border-line pb-1.5 font-mono text-[10px] text-muted">
+        {SLED_DELIVERY.clock.ruler.map((tick) => (
+          <span>{tick}</span>
+        ))}
+      </div>
+
+      <div class="sled-delivery-bars relative mb-4 h-[76px]">
+        <div
+          class="pointer-events-none absolute -top-1 h-[84px] rounded border-x-[1.5px] border-dashed border-cyan bg-cyan/10"
+          style="left:33%;width:21%;"
+        >
+          <span class="absolute -top-5 left-1/2 -translate-x-1/2 font-mono text-[10px] font-semibold tracking-[0.06em] whitespace-nowrap text-cyan-strong uppercase">
+            {SLED_DELIVERY.clock.overlapTag}
+          </span>
+        </div>
+        <div
+          class="absolute top-0.5 flex h-[30px] items-center rounded-lg bg-yale px-3.5 font-mono text-[11px] font-semibold whitespace-nowrap text-white shadow-[0_4px_12px_-6px_rgba(14,38,64,0.35)]"
+          style="left:6%;width:48%;"
+        >
+          {SLED_DELIVERY.clock.pkBar}
+        </div>
+        <div
+          class="absolute top-11 flex h-[30px] items-center rounded-lg bg-cyan px-3.5 font-mono text-[11px] font-semibold whitespace-nowrap text-yale-dark shadow-[0_4px_12px_-6px_rgba(24,176,230,0.45)]"
+          style="left:33%;width:45%;"
+        >
+          {SLED_DELIVERY.clock.usBar}
+        </div>
+      </div>
+
+      <div class="flex flex-wrap justify-between gap-2 font-mono text-[11px] text-muted">
+        <span>{SLED_DELIVERY.clock.leftNote}</span>
+        <span>{SLED_DELIVERY.clock.rightNote}</span>
+      </div>
+    </div>
+
+    <div
+      class="sled-reveal mb-[18px] flex flex-wrap gap-2.5"
+      data-sled-delivery-tabs
+      data-sled-reveal
+      role="tablist"
+      aria-label={SLED_DELIVERY.tablistLabel}
+    >
+      {
+        SLED_DELIVERY.concerns.map((concern, idx) => (
+          <button
+            type="button"
+            role="tab"
+            data-sled-delivery-tab={idx}
+            aria-selected={idx === 0 ? 'true' : 'false'}
+            aria-controls={`sledDeliveryPanel${idx}`}
+            id={`sledDeliveryTab${idx}`}
+            class="sled-delivery-tab inline-flex items-center gap-2.5 rounded-full border border-line bg-white px-[18px] py-2.5 transition-[background,border-color] duration-200 hover:border-cyan"
+          >
+            <span class="sled-delivery-tab-num font-mono text-xs font-semibold text-cyan-strong">
+              {concern.tabNum}
+            </span>
+            <span class="sled-delivery-tab-label text-sm font-bold text-muted">
+              {concern.tabLabel}
+            </span>
+          </button>
+        ))
+      }
+    </div>
+
+    {
+      SLED_DELIVERY.concerns.map((concern, idx) => {
+        const Icon = concernIcons[concern.icon];
+        return (
+          <div
+            id={`sledDeliveryPanel${idx}`}
+            role="tabpanel"
+            aria-labelledby={`sledDeliveryTab${idx}`}
+            data-sled-delivery-panel={idx}
+            class:list={[
+              'sled-delivery-panel sled-reveal flex gap-5 rounded-2xl border border-line-soft bg-white px-[30px] py-7 shadow-[0_10px_30px_-20px_rgba(21,58,95,0.16)]',
+              idx === 0 && 'is-active',
+            ]}
+            data-sled-reveal
+            hidden={idx !== 0}
+          >
+            <div class="grid size-12 shrink-0 place-items-center rounded-[13px] bg-cyan-soft text-cyan-strong">
+              <Icon class="size-6" stroke-width="1.75" aria-hidden="true" />
+            </div>
+            <div class="min-w-0 flex-1">
+              <h4 class="mb-4 text-[1.2rem] font-semibold leading-[1.25] text-yale-dark">
+                {concern.heading}
+              </h4>
+              <div class="grid grid-cols-1 gap-7 lg:grid-cols-2 lg:gap-7">
+                <div>
+                  <span class="inline-flex items-center gap-1.5 font-mono text-[10px] font-semibold tracking-[0.1em] text-muted uppercase before:size-1.5 before:shrink-0 before:rounded-full before:bg-current">
+                    The trap
+                  </span>
+                  <p class="mt-1.5 pl-3 text-[13.5px] leading-normal text-muted">
+                    {concern.trap}
+                  </p>
+                </div>
+                <div>
+                  <span class="inline-flex items-center gap-1.5 font-mono text-[10px] font-semibold tracking-[0.1em] text-green uppercase before:size-1.5 before:shrink-0 before:rounded-full before:bg-current">
+                    Our fix
+                  </span>
+                  <p class="mt-1.5 pl-3 text-[13.5px] leading-normal text-ink">
+                    {concern.fix}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      })
+    }
+  </SledPageWrap>
+</section>

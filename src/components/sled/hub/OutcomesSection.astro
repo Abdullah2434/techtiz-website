@@ -1,59 +1,49 @@
 ---
-import { OUTCOMES, OUTCOMES_STATS } from '../../../lib/constants/pages/sled-hub';
+import { SLED_OUTCOMES } from '../../../lib/constants/pages/sled-hub';
 import Eyebrow from '../../shared/Eyebrow.astro';
 import SledPageWrap from '../shared/SledPageWrap.astro';
-
-function formatStat(n: string) {
-  if (n.includes('%')) {
-    const [value] = n.split('%');
-    return `${value}<span class="text-[24px]">%</span>`;
-  }
-  if (n.includes('/')) {
-    const [left, right] = n.split('/');
-    return `${left}<span class="text-[24px]">/${right}</span>`;
-  }
-  return n;
-}
 ---
 
-<section class="sled-section-tight relative overflow-hidden bg-yale py-[clamp(4rem,7vw,5.5rem)] text-white" data-screen-label="05 Outcomes">
-  <div
-    class="pointer-events-none absolute -right-10 -top-10 size-[280px] rotate-[15deg] [background:linear-gradient(45deg,transparent_48%,rgba(24,176,230,0.14)_48%_52%,transparent_52%)] [background-size:26px_26px]"
-    aria-hidden="true"
-  ></div>
-  <div
-    class="sled-hero-glow-b pointer-events-none absolute bottom-[-30%] left-[20%] size-[min(40vw,360px)] rounded-full bg-[radial-gradient(circle,rgba(24,176,230,0.15)_0%,transparent_68%)] blur-[72px] motion-reduce:hidden"
-    aria-hidden="true"
-  ></div>
-
-  <SledPageWrap class="relative z-[2]">
-    <div class="sled-reveal mb-14 text-center" data-sled-reveal>
-      <div class="mb-4 flex justify-center">
-        <Eyebrow text={OUTCOMES.eyebrow} onDark showGlyph />
-      </div>
-      <h2 class="sled-h2 mx-auto max-w-[640px] text-white">
-        {OUTCOMES.heading}
+<section
+  class="sled-section-tight bg-seasalt"
+  id="outcomes"
+  data-screen-label="Outcomes"
+>
+  <SledPageWrap>
+    <div class="sled-reveal mb-[30px] max-w-[680px]" data-sled-reveal>
+      <Eyebrow text={SLED_OUTCOMES.eyebrow} showGlyph class="mb-4" />
+      <h2 class="text-[clamp(1.7rem,2.5vw,2.3rem)] font-semibold leading-[1.12] tracking-[-0.02em] text-yale-dark">
+        {SLED_OUTCOMES.heading}
       </h2>
-      <p class="mx-auto mt-5 max-w-[660px] text-[14.5px] leading-[1.6] text-white/78">{OUTCOMES.sub}</p>
     </div>
 
-    <div class="sled-reveal-stagger grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-5 lg:gap-0" data-sled-reveal>
-      {OUTCOMES_STATS.map((s, idx) => (
-        <div
-          class:list={[
-            'group px-4 text-center sm:px-5',
-            idx > 0 && 'lg:border-l lg:border-white/14',
-          ]}
-        >
-          <div
-            class="sled-stat mb-4 text-cyan transition-transform duration-300 group-hover:scale-105"
-            set:html={formatStat(s.n)}
-          />
-          <div class="mx-auto max-w-[170px] font-mono text-[10.5px] leading-[1.45] tracking-[0.11em] uppercase text-white/82">
-            {s.l}
+    <div
+      class="sled-reveal grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-5 lg:gap-7"
+      data-sled-reveal
+    >
+      {
+        SLED_OUTCOMES.stats.map((stat) => (
+          <div class="min-w-0">
+            <div class="font-mono text-[clamp(2.1rem,3.2vw,2.8rem)] font-semibold leading-[0.95] tracking-[-0.02em] text-yale tabular-nums">
+              {
+                stat.tickerTo !== undefined ? (
+                  <>
+                    <span data-sled-ticker data-to={stat.tickerTo}>0</span>
+                    {stat.suffix && (
+                      <span class="text-[0.46em] text-cyan-strong">{stat.suffix}</span>
+                    )}
+                  </>
+                ) : (
+                  stat.value
+                )
+              }
+            </div>
+            <p class="mt-3 max-w-[21ch] text-[12.5px] leading-[1.45] text-muted">
+              {stat.label}
+            </p>
           </div>
-        </div>
-      ))}
+        ))
+      }
     </div>
   </SledPageWrap>
 </section>

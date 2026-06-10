@@ -6,9 +6,9 @@ export const CONTACT_SEO = {
 } as const;
 
 export const CONTACT_HERO = {
-  eyebrow: 'SLED intake',
+  eyebrow: 'U.S. SLED · Contact',
   heading: 'Talk to us about a <span class="accent">subcontract role.</span>',
-  desc: 'Capture managers, BD leads, and program managers at U.S. primes only. We reply within one business day with a mutual NDA template and a 30-minute calendar slot. No public materials are exchanged before the NDA is signed.',
+  body: 'For capture managers, BD leads, and PMs at U.S. primes. We reply within one business day with a mutual NDA and a 30-minute slot. No materials shared before the NDA.',
 } as const;
 
 export const SLA_ITEMS = [

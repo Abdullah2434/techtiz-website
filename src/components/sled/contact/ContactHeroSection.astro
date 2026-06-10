@@ -1,0 +1,38 @@
+---
+import { CONTACT_HERO } from '../../../lib/constants/pages/contact';
+import Eyebrow from '../../shared/Eyebrow.astro';
+import SledPageWrap from '../shared/SledPageWrap.astro';
+
+const { eyebrow, heading, body } = CONTACT_HERO;
+---
+
+<section
+  class="sled-contact-hero relative overflow-hidden border-b border-line-soft bg-seasalt"
+  data-screen-label="01 Hero"
+>
+  <div
+    class="pointer-events-none absolute inset-0 z-0 bg-[url('/assets/hero-contact.png')] bg-cover bg-[position:right_center] bg-no-repeat"
+    aria-hidden="true"
+  />
+  <div
+    class="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(100deg,var(--color-seasalt)_24%,rgba(248,248,248,0.82)_46%,rgba(248,248,248,0.34)_66%,transparent_88%)]"
+    aria-hidden="true"
+  />
+  <div
+    class="pointer-events-none absolute top-[-50px] right-[-50px] z-[1] size-[300px] rotate-[15deg] bg-[linear-gradient(45deg,transparent_49%,rgba(24,176,230,0.10)_49%_51%,transparent_51%)] bg-[length:28px_28px] motion-reduce:hidden"
+    aria-hidden="true"
+  />
+
+  <SledPageWrap class="relative z-[2] py-[clamp(3.375rem,6vw,5.25rem)] pb-[clamp(2.5rem,4.5vw,3.75rem)]">
+    <div class="sled-reveal max-w-[760px]" data-sled-reveal>
+      <Eyebrow text={eyebrow} showGlyph class="mb-[18px]" />
+      <h1
+        class="sled-h1 mb-5 max-w-[18ch] text-yale-dark [&_.accent]:text-cyan"
+        set:html={heading}
+      />
+      <p class="max-w-[560px] text-[clamp(1.02rem,1.4vw,1.125rem)] leading-[1.55] text-muted">
+        {body}
+      </p>
+    </div>
+  </SledPageWrap>
+</section>

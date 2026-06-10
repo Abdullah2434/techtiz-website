@@ -185,12 +185,6 @@
 })();
 
 (function () {
-  document.querySelectorAll('[data-sled-need-card]').forEach((card) => {
-    card.addEventListener('click', () => card.classList.toggle('is-selected'));
-  });
-})();
-
-(function () {
   const slider = document.querySelector('[data-sled-proof-slider]');
   const track = document.querySelector('[data-sled-proof-track]');
   const prev = document.querySelector('[data-sled-proof-prev]');
@@ -334,19 +328,25 @@
   }
 
   function getSelectedNeeds() {
-    return [...document.querySelectorAll('[data-sled-need-card].is-selected [data-sled-need-label]')]
-      .map((h) => h.textContent?.trim())
-      .filter(Boolean);
+    return [...form.querySelectorAll('input[name="need"]:checked')].map((input) => input.value);
   }
 
-  function resetNeedCards() {
-    document.querySelectorAll('[data-sled-need-card]').forEach((card) => {
-      const isDefault = card.dataset.need === 'pre';
-      card.classList.toggle('is-selected', isDefault);
-      card.classList.toggle('border-cyan', isDefault);
-      card.classList.toggle('bg-cyan-soft', isDefault);
+  function resetNeeds() {
+    form.querySelectorAll('[data-sled-inquiry-need]').forEach((label) => {
+      const input = label.querySelector('input[name="need"]');
+      if (!(input instanceof HTMLInputElement)) return;
+      input.checked = input.defaultChecked;
+      label.classList.toggle('is-on', input.checked);
     });
   }
+
+  form.querySelectorAll('[data-sled-inquiry-need]').forEach((label) => {
+    const input = label.querySelector('input[name="need"]');
+    if (!(input instanceof HTMLInputElement)) return;
+    input.addEventListener('change', () => {
+      label.classList.toggle('is-on', input.checked);
+    });
+  });
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -371,8 +371,8 @@
       needs: getSelectedNeeds().join(', ') || '—',
       company: v('sled-iq-company'),
       role: v('sled-iq-role'),
-      rfp: v('sled-iq-rfp'),
-      nda: v('sled-iq-nda'),
+      rfp: '',
+      nda: '',
       vehicle: v('sled-iq-vehicle'),
       agency: v('sled-iq-agency'),
       email: v('sled-iq-email'),
@@ -419,7 +419,7 @@
       success?.classList.remove('is-visible');
       form.reset();
       form.classList.remove('hidden');
-      resetNeedCards();
+      resetNeeds();
     });
   }
 })();

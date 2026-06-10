@@ -613,36 +613,34 @@ export const SLED_SPECIALIZATIONS = {
   };
 };
 
-export const HUB_INQUIRY = {
+export const SLED_HUB_INQUIRY = {
   aside: {
     eyebrow: "Partner with us",
-    heading: "NDA first. Subcontract second. White-label always.",
-    body: `Capture managers, BD leads, and program managers at U.S. primes: email ${SITE.email.sled} or use this form. A U.S. partner manager replies within one business day with a mutual NDA template and a 30-minute calendar slot. No public materials exchanged before the NDA is signed.`,
+    heading: "NDA first. Subcontract second.",
+    headingAccent: "White-label always.",
+    body: "For capture managers, BD leads, and PMs at U.S. primes. A US partner manager replies within one business day, no public materials, no agency contact.",
     bullets: [
-      `${SITE.email.sled} · ${SITE.responseSla.sled}`,
-      "Mutual NDA on first contact",
-      "Teaming letter template included",
-      "Background-check-ready · CUI-aware delivery",
+      "Reply within 1 business day from a US partner manager",
+      "Mutual NDA template + a 30-minute calendar slot",
+      "Everything stays behind your brand, always",
     ],
-  },
-  form: {
-    rfpLabel: "RFP / RFQ / solicitation #",
-    rfpPlaceholder: "e.g. RFP-2026-0142 (pre-award)",
-    ndaLabel: "NDA status",
-    ndaPlaceholder: "Select…",
-    ndaOptions: ["Not started", "In progress", "Executed teaming agreement"],
+    imageSrc: "/assets/dotmap-brand.png",
+    imageAlt: "Techtiz product dashboard mockup",
   },
   needOptions: [
     {
-      id: "pre",
-      label: "Pre-Award Proposal Support",
-      desc: "Under NDA + teaming letter",
+      value: "Pre-award proposal support",
+      label: "Pre-award proposal support",
       defaultOn: true,
     },
     {
-      id: "post",
-      label: "Post-Award Delivery",
-      desc: "Engineers, sprints, KT",
+      value: "Post-award delivery",
+      label: "Post-award delivery",
+      defaultOn: false,
+    },
+    {
+      value: "Both / not sure yet",
+      label: "Both / not sure",
       defaultOn: false,
     },
   ],
@@ -653,11 +651,12 @@ export const HUB_INQUIRY = {
     "Direct Subcontract",
     "Local Co-op",
     "Open RFP / RFQ",
-    "Other",
   ],
-  ndaNote:
-    "By submitting, you agree to a mutual NDA on first substantive contact.",
-  submitLabel: "Send Inquiry",
+  descLabel: "Engagement phase, scope, timing",
+  descPlaceholder: "Tell us about the pursuit or active contract…",
+  submitLabel: "Send inquiry",
+  reassure:
+    "Our U.S. partner manager replies within one business day. Mutual NDA available before any details are shared.",
   success: {
     heading: "Inquiry received.",
     body: `Thank you for reaching out. Our U.S.-based partner manager will reply within one business day from ${SITE.email.sled} with a mutual NDA template and a calendar slot.`,

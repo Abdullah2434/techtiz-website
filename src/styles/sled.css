@@ -439,39 +439,10 @@
   animation: sledFadeUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.sled-need-card.is-selected {
+[data-sled-inquiry-need].is-on {
   border-color: var(--color-cyan);
   background: var(--color-cyan-soft);
-  box-shadow: 0 0 0 3px rgba(24, 176, 230, 0.12);
-}
-
-.sled-need-card.is-selected .sled-need-check {
-  background: var(--color-cyan);
-  border-color: var(--color-cyan);
-}
-
-.sled-need-card.is-selected .sled-need-check::after {
-  content: "";
-  position: absolute;
-  left: 4px;
-  top: 1px;
-  width: 5px;
-  height: 9px;
-  border-right: 2px solid var(--color-yale-dark);
-  border-bottom: 2px solid var(--color-yale-dark);
-  transform: rotate(45deg);
-}
-
-.sled-need-card {
-  transition:
-    border-color 0.22s ease,
-    background 0.22s ease,
-    box-shadow 0.22s ease,
-    transform 0.22s ease;
-}
-
-.sled-need-card:hover {
-  transform: translateY(-1px);
+  color: var(--color-yale);
 }
 
 /* Matrix row hover */
@@ -638,7 +609,6 @@
 
   .sled-bento-card:hover,
   .sled-card:hover,
-  .sled-need-card:hover,
   .sled-model-panel.is-fade-in,
   .sled-delivery-panel.is-fade-in {
     transform: none;

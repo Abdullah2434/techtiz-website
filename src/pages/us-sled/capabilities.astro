@@ -1,17 +1,14 @@
 ---
 import CapabilitiesArchitectureSection from '../../components/sled/capabilities/CapabilitiesArchitectureSection.astro';
 import CapabilitiesBoundariesSection from '../../components/sled/capabilities/CapabilitiesBoundariesSection.astro';
-import CapabilitiesEngageSection from '../../components/sled/capabilities/CapabilitiesEngageSection.astro';
+import CapabilitiesCtaSection from '../../components/sled/capabilities/CapabilitiesCtaSection.astro';
+import CapabilitiesFaqSection from '../../components/sled/capabilities/CapabilitiesFaqSection.astro';
 import CapabilitiesFrameworksSection from '../../components/sled/capabilities/CapabilitiesFrameworksSection.astro';
 import CapabilitiesMatrixSection from '../../components/sled/capabilities/CapabilitiesMatrixSection.astro';
 import CapabilitiesStateRestrictionsSection from '../../components/sled/capabilities/CapabilitiesStateRestrictionsSection.astro';
-import CapabilitiesTechStackSection from '../../components/sled/capabilities/CapabilitiesTechStackSection.astro';
-import SledFaqSection from '../../components/sled/shared/SledFaqSection.astro';
-import SledFinalCta from '../../components/sled/shared/SledFinalCta.astro';
 import CapabilitiesHero from '../../components/sled/capabilities/CapabilitiesHero.astro';
 import SledLayout from '../../layouts/SledLayout.astro';
 import { CAPABILITIES_SEO } from '../../lib/constants/pages/capabilities';
-import { CAPABILITIES_FAQ } from '../../lib/constants/pages/sled-faq';
 import { absoluteUrl, serviceJsonLd } from '../../lib/seo/json-ld';
 import '../../styles/sled.css';
 
@@ -34,9 +31,7 @@ const jsonLd = [
   <CapabilitiesArchitectureSection />
   <CapabilitiesStateRestrictionsSection />
   <CapabilitiesBoundariesSection />
-  <CapabilitiesTechStackSection />
-  <CapabilitiesEngageSection />
-  <SledFinalCta />
-  <SledFaqSection {...CAPABILITIES_FAQ} canonicalPath={canonicalPath} />
+  <CapabilitiesFaqSection {canonicalPath} />
+  <CapabilitiesCtaSection />
   <script src="/scripts/sled-hub.js" is:inline></script>
 </SledLayout>

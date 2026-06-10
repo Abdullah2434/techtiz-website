@@ -1,0 +1,34 @@
+---
+import { SLED_CAPABILITIES_CTA } from '../../../lib/constants/pages/capabilities';
+import CtaButton from '../../shared/CtaButton.astro';
+import Eyebrow from '../../shared/Eyebrow.astro';
+import SledPageWrap from '../shared/SledPageWrap.astro';
+---
+
+<section class="sled-final-cta relative overflow-hidden bg-yale-dark" data-screen-label="07 CTA">
+  <div
+    class="sled-hero-glow-b pointer-events-none absolute right-[-10%] top-[-30%] size-[min(55vw,480px)] rounded-full bg-[radial-gradient(circle,rgba(24,176,230,0.14)_0%,transparent_70%)] blur-[90px] motion-reduce:hidden"
+    aria-hidden="true"
+  />
+  <SledPageWrap class="relative z-[2] py-[clamp(3.75rem,7vw,5.625rem)]">
+    <div class="sled-reveal mx-auto max-w-[680px] text-center" data-sled-reveal>
+      <Eyebrow text={SLED_CAPABILITIES_CTA.eyebrow} onDark showGlyph class="mb-4 justify-center" />
+      <h2 class="text-[clamp(1.9rem,3vw,2.5rem)] font-semibold leading-[1.12] tracking-[-0.02em] text-white">
+        {SLED_CAPABILITIES_CTA.heading}
+      </h2>
+      <p class="mx-auto mt-4 max-w-[580px] text-base leading-[1.6] text-white/78">
+        {SLED_CAPABILITIES_CTA.body}
+      </p>
+      <div class="mt-7 flex flex-wrap justify-center gap-3.5 max-[600px]:flex-col max-[600px]:items-stretch">
+        {SLED_CAPABILITIES_CTA.ctas.map((cta) => (
+          <CtaButton
+            href={cta.href}
+            label={cta.label}
+            variant={cta.variant}
+            showArrow={cta.showArrow}
+          />
+        ))}
+      </div>
+    </div>
+  </SledPageWrap>
+</section>

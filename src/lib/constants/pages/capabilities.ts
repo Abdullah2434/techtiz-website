@@ -30,30 +30,6 @@ export const SLED_CAPABILITIES_HERO = {
 /** @deprecated Use SLED_CAPABILITIES_HERO */
 export const CAPABILITIES_HERO = SLED_CAPABILITIES_HERO;
 
-export const PROCUREMENT_STRIP = {
-  eyebrow: "Procurement & registration",
-  items: [
-    {
-      label: "NAICS Codes",
-      value: "541511 · 541512",
-      caption: "Custom Computer Programming · Computer Systems Design",
-      icon: "card",
-    },
-    {
-      label: "NIGP Codes",
-      value: "918-46 · 918-00",
-      caption: "Software Development · Technology",
-      icon: "building",
-    },
-    {
-      label: "Insurance",
-      value: "Per engagement",
-      caption: "Routed through prime master agreement",
-      icon: "shield",
-    },
-  ],
-} as const;
-
 export type SledFrameworkStatusVariant =
   | "in-progress"
   | "posture"
@@ -341,64 +317,6 @@ export const SLED_CAPABILITIES_MATRIX = {
 /** @deprecated Use SLED_CAPABILITIES_MATRIX */
 export const CAPABILITY_MATRIX = SLED_CAPABILITIES_MATRIX.rows;
 
-export const TECH_STACK = [
-  {
-    heading: "GIS",
-    subLabel: "Spatial & data",
-    tools: [
-      "ArcGIS Pro",
-      "ArcGIS Online",
-      "PostGIS",
-      "GeoPandas",
-      "Mapbox",
-      "Leaflet",
-      "QGIS",
-      "Turf.js",
-    ],
-  },
-  {
-    heading: "Engagement & Automation",
-    subLabel: "Public-facing workflows",
-    tools: [
-      "Make.com",
-      "n8n",
-      "Zapier",
-      "Custom survey platforms",
-      "SurveyMonkey API",
-      "Twilio",
-      "SendGrid",
-      "i18next",
-    ],
-  },
-  {
-    heading: "Docs & Publishing",
-    subLabel: "Statutory-format deliverables",
-    tools: [
-      "Adobe InDesign",
-      "Adobe Acrobat Pro",
-      "Microsoft Office",
-      "PDF/UA",
-      "LaTeX",
-      "Pandoc",
-      "Word XML",
-    ],
-  },
-  {
-    heading: "Data & Reporting",
-    subLabel: "Audit, grant, compliance",
-    tools: [
-      "PostgreSQL",
-      "Supabase",
-      "Metabase",
-      "DuckDB",
-      "dbt",
-      "Airbyte",
-      "Workday Adaptive",
-      "S3",
-    ],
-  },
-] as const;
-
 export const SLED_CAPABILITIES_BOUNDARIES = {
   eyebrow: "What we don't do",
   heading: "Honest about the lane.",
@@ -426,23 +344,22 @@ export const SLED_CAPABILITIES_BOUNDARIES = {
 /** @deprecated Use SLED_CAPABILITIES_BOUNDARIES */
 export const BOUNDARIES = SLED_CAPABILITIES_BOUNDARIES.items;
 
-export const ENGAGE_STEPS = [
-  {
-    n: "01",
-    heading: "Introduction",
-    body: "Email or LinkedIn from a capture manager, BD lead, or program manager at a U.S. prime. Within one business day, a Techtiz partner manager replies with a mutual NDA template and a calendar slot.",
-    when: "Day 1 to 5",
-  },
-  {
-    n: "02",
-    heading: "Capability conversation under NDA",
-    body: "30 to 60 minute call. The prime describes the engagement type, the procurement vehicle, and any sensitive context. We describe which Backbone capabilities apply, the team shape, and the contracting structure.",
-    when: "Week 1 to 2",
-  },
-  {
-    n: "03",
-    heading: "Scoped subcontract conversation",
-    body: "If the engagement fits, we deliver a scoped statement of work, teaming letter draft, and named-resume options. Your contracts team takes it from there. Subcontract paperwork closes within 7 to 14 days for most vehicles.",
-    when: "Week 2 to 4",
-  },
-] as const;
+export const SLED_CAPABILITIES_CTA = {
+  eyebrow: "Engage us",
+  heading: "Need the full compliance pack before your next subcontract review?",
+  body: "The capability statement, architecture diagram, control mapping, per-state posture page, and personnel attestation template, sent under NDA within one business day.",
+  ctas: [
+    {
+      label: "Request the compliance pack",
+      href: "/us-sled/contact/",
+      variant: "cta" as const,
+      showArrow: true,
+    },
+    {
+      label: "See how we partner",
+      href: "/us-sled/how-we-engage/",
+      variant: "ghost-dark" as const,
+      showArrow: false,
+    },
+  ],
+} as const;

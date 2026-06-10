@@ -92,22 +92,10 @@ export const PAGE_KEYWORDS: Record<string, readonly string[]> = {
     'mutual NDA',
     'prime contractor onboarding',
   ],
-  '/us-sled/operating-model/': [
-    'onshore offshore delivery model',
-    'CJIS CUI FCI',
-    'government data architecture',
-    'background-checked personnel',
-  ],
   '/us-sled/case-studies/': [
     'SLED engagement examples',
     'subcontractor past performance',
     'NDA-safe case studies',
-  ],
-  '/us-sled/procurement-vehicles/': [
-    'NASPO ValuePoint subcontract',
-    'GSA MAS teaming',
-    'state master agreement',
-    'cooperative procurement',
   ],
   '/us-sled/contact/': [
     'SLED subcontract intake',

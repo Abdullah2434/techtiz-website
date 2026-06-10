@@ -52,8 +52,8 @@ export const FRAMEWORKS_SECTION = {
   eyebrow: "Compliance frameworks",
   heading: "What a prime compliance officer is looking for.",
   body: "Specific framework claims with status, scope, and target dates. We don't list controls we can't substantiate. Where a framework is in-progress, the target is on the page.",
-  linkLabel: "See the full operating model and architecture",
-  linkHref: "/us-sled/operating-model/",
+  linkLabel: "Request compliance documentation",
+  linkHref: "/us-sled/contact/",
 } as const;
 
 export const COMPLIANCE_FRAMEWORKS = [

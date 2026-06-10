@@ -81,7 +81,7 @@ export const ESCONDIDO_CASE_STUDY = {
         date: "Jun 18, 2026",
         label: "Proposals due, 2 PM PDT",
         detail: "Single email. No late acceptance",
-        hard: true,
+        // hard: true,
       },
       {
         date: "Jun 22 to 26",

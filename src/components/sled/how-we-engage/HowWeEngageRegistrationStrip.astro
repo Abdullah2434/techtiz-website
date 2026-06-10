@@ -1,0 +1,42 @@
+---
+import BadgeCheck from '@lucide/astro/icons/badge-check';
+import CalendarDays from '@lucide/astro/icons/calendar-days';
+import Landmark from '@lucide/astro/icons/landmark';
+import { REGISTRATION_STRIP } from '../../../lib/constants/pages/how-we-engage';
+import Eyebrow from '../../shared/Eyebrow.astro';
+import SledPageWrap from '../shared/SledPageWrap.astro';
+
+const iconMap = {
+  'badge-check': BadgeCheck,
+  'calendar-days': CalendarDays,
+  landmark: Landmark,
+} as const;
+---
+
+<section class="border-y border-line/60 bg-white py-10" aria-label="Registration and codes" data-screen-label="06 Registration">
+  <SledPageWrap>
+    <div class="sled-reveal mb-6" data-sled-reveal>
+      <Eyebrow text={REGISTRATION_STRIP.eyebrow} showGlyph class="justify-center" />
+    </div>
+    <div class="sled-reveal overflow-hidden rounded-[14px] border border-line bg-white" data-sled-reveal>
+      <div class="grid grid-cols-1 md:grid-cols-3">
+        {REGISTRATION_STRIP.items.map((item, idx) => {
+          const ItemIcon = iconMap[item.icon as keyof typeof iconMap];
+          return (
+            <div
+              class:list={[
+                'px-[26px] py-6',
+                idx > 0 && 'border-t border-line md:border-t-0 md:border-l',
+              ]}
+            >
+              {ItemIcon && <ItemIcon class="mb-3 size-[26px] text-cyan-strong" aria-hidden="true" />}
+              <div class="mb-1.5 font-mono text-[10px] tracking-[0.14em] uppercase text-muted">{item.label}</div>
+              <div class="mb-1.5 font-mono text-[13px] font-bold leading-[1.4] text-yale">{item.value}</div>
+              <div class="text-[11.5px] leading-[1.4] text-muted">{item.caption}</div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </SledPageWrap>
+</section>

@@ -1,0 +1,191 @@
+---
+import Accessibility from '@lucide/astro/icons/accessibility';
+import BadgeCheck from '@lucide/astro/icons/badge-check';
+import ChartColumn from '@lucide/astro/icons/chart-column';
+import BellRing from '@lucide/astro/icons/bell-ring';
+import BookCheck from '@lucide/astro/icons/book-check';
+import Briefcase from '@lucide/astro/icons/briefcase';
+import Building from '@lucide/astro/icons/building';
+import Building2 from '@lucide/astro/icons/building-2';
+import Cable from '@lucide/astro/icons/cable';
+import Calculator from '@lucide/astro/icons/calculator';
+import ChartNoAxesCombined from '@lucide/astro/icons/chart-no-axes-combined';
+import Check from '@lucide/astro/icons/check';
+import Clock from '@lucide/astro/icons/clock';
+import Cloud from '@lucide/astro/icons/cloud';
+import Compass from '@lucide/astro/icons/compass';
+import CopyX from '@lucide/astro/icons/copy-x';
+import Database from '@lucide/astro/icons/database';
+import DatabaseBackup from '@lucide/astro/icons/database-backup';
+import Droplets from '@lucide/astro/icons/droplets';
+import EyeOff from '@lucide/astro/icons/eye-off';
+import FileCheck from '@lucide/astro/icons/file-check';
+import FileLock from '@lucide/astro/icons/file-lock';
+import FilePenLine from '@lucide/astro/icons/file-pen-line';
+import FileQuestionMark from '@lucide/astro/icons/file-question-mark';
+import FileSearch from '@lucide/astro/icons/file-search';
+import Signature from '@lucide/astro/icons/signature';
+import FileSpreadsheet from '@lucide/astro/icons/file-spreadsheet';
+import FileText from '@lucide/astro/icons/file-text';
+import TriangleAlert from '@lucide/astro/icons/triangle-alert';
+import FileX from '@lucide/astro/icons/file-x';
+import Flag from '@lucide/astro/icons/flag';
+import Flame from '@lucide/astro/icons/flame';
+import FolderLock from '@lucide/astro/icons/folder-lock';
+import Gavel from '@lucide/astro/icons/gavel';
+import GitCompare from '@lucide/astro/icons/git-compare';
+import GitFork from '@lucide/astro/icons/git-fork';
+import GitMerge from '@lucide/astro/icons/git-merge';
+import GitPullRequestArrow from '@lucide/astro/icons/git-pull-request-arrow';
+import Globe from '@lucide/astro/icons/globe';
+import GlobeLock from '@lucide/astro/icons/globe-lock';
+import HardHat from '@lucide/astro/icons/hard-hat';
+import Info from '@lucide/astro/icons/info';
+import KeyRound from '@lucide/astro/icons/key-round';
+import Landmark from '@lucide/astro/icons/landmark';
+import Laptop from '@lucide/astro/icons/laptop';
+import LayoutGrid from '@lucide/astro/icons/layout-grid';
+import Leaf from '@lucide/astro/icons/leaf';
+import ListChecks from '@lucide/astro/icons/list-checks';
+import ListX from '@lucide/astro/icons/list-x';
+import Lock from '@lucide/astro/icons/lock';
+import LockKeyhole from '@lucide/astro/icons/lock-keyhole';
+import Mail from '@lucide/astro/icons/mail';
+import MailWarning from '@lucide/astro/icons/mail-warning';
+import MailX from '@lucide/astro/icons/mail-x';
+import MegaphoneOff from '@lucide/astro/icons/megaphone-off';
+import Network from '@lucide/astro/icons/network';
+import Package from '@lucide/astro/icons/package';
+import PhoneCall from '@lucide/astro/icons/phone-call';
+import PhoneOff from '@lucide/astro/icons/phone-off';
+import Plug from '@lucide/astro/icons/plug';
+import Radar from '@lucide/astro/icons/radar';
+import Receipt from '@lucide/astro/icons/receipt';
+import ReceiptText from '@lucide/astro/icons/receipt-text';
+import Route from '@lucide/astro/icons/route';
+import Scale from '@lucide/astro/icons/scale';
+import ScrollText from '@lucide/astro/icons/scroll-text';
+import SearchCheck from '@lucide/astro/icons/search-check';
+import Send from '@lucide/astro/icons/send';
+import Server from '@lucide/astro/icons/server';
+import ServerCrash from '@lucide/astro/icons/server-crash';
+import Shield from '@lucide/astro/icons/shield';
+import ShieldCheck from '@lucide/astro/icons/shield-check';
+import Stamp from '@lucide/astro/icons/stamp';
+import Tag from '@lucide/astro/icons/tag';
+import Tags from '@lucide/astro/icons/tags';
+import Target from '@lucide/astro/icons/target';
+import TimerOff from '@lucide/astro/icons/timer-off';
+import Umbrella from '@lucide/astro/icons/umbrella';
+import Unplug from '@lucide/astro/icons/unplug';
+import CloudUpload from '@lucide/astro/icons/cloud-upload';
+import UserRound from '@lucide/astro/icons/user-round';
+import UserX from '@lucide/astro/icons/user-x';
+import Users from '@lucide/astro/icons/users';
+import VolumeX from '@lucide/astro/icons/volume-x';
+import Wind from '@lucide/astro/icons/wind';
+import Zap from '@lucide/astro/icons/zap';
+import type { AstroComponentFactory } from 'astro/runtime/server/index.js';
+
+interface Props {
+  name: string;
+  class?: string;
+}
+
+const { name, class: className = 'size-4' } = Astro.props;
+
+const iconMap: Record<string, AstroComponentFactory> = {
+  accessibility: Accessibility,
+  'alert-triangle': TriangleAlert,
+  'badge-check': BadgeCheck,
+  'bar-chart-3': ChartColumn,
+  'bell-ring': BellRing,
+  'book-check': BookCheck,
+  briefcase: Briefcase,
+  building: Building,
+  'building-2': Building2,
+  cable: Cable,
+  calculator: Calculator,
+  'chart-no-axes-combined': ChartNoAxesCombined,
+  check: Check,
+  clock: Clock,
+  cloud: Cloud,
+  compass: Compass,
+  'copy-x': CopyX,
+  database: Database,
+  'database-backup': DatabaseBackup,
+  droplets: Droplets,
+  'eye-off': EyeOff,
+  'file-check-2': FileCheck,
+  'file-lock-2': FileLock,
+  'file-pen-line': FilePenLine,
+  'file-question': FileQuestionMark,
+  'file-search': FileSearch,
+  'file-signature': Signature,
+  'file-spreadsheet': FileSpreadsheet,
+  'file-text': FileText,
+  'file-warning': TriangleAlert,
+  'file-x': FileX,
+  flag: Flag,
+  flame: Flame,
+  'folder-lock': FolderLock,
+  gavel: Gavel,
+  'git-compare': GitCompare,
+  'git-fork': GitFork,
+  'git-merge': GitMerge,
+  'git-pull-request-arrow': GitPullRequestArrow,
+  globe: Globe,
+  'globe-lock': GlobeLock,
+  'hard-hat': HardHat,
+  info: Info,
+  'key-round': KeyRound,
+  landmark: Landmark,
+  laptop: Laptop,
+  'layout-grid': LayoutGrid,
+  leaf: Leaf,
+  'list-checks': ListChecks,
+  'list-x': ListX,
+  lock: Lock,
+  'lock-keyhole': LockKeyhole,
+  mail: Mail,
+  'mail-warning': MailWarning,
+  'mail-x': MailX,
+  'megaphone-off': MegaphoneOff,
+  network: Network,
+  package: Package,
+  'phone-call': PhoneCall,
+  'phone-off': PhoneOff,
+  plug: Plug,
+  radar: Radar,
+  receipt: Receipt,
+  'receipt-text': ReceiptText,
+  route: Route,
+  scale: Scale,
+  'scroll-text': ScrollText,
+  'search-check': SearchCheck,
+  send: Send,
+  server: Server,
+  'server-crash': ServerCrash,
+  shield: Shield,
+  'shield-check': ShieldCheck,
+  stamp: Stamp,
+  tag: Tag,
+  tags: Tags,
+  target: Target,
+  'timer-off': TimerOff,
+  'triangle-alert': TriangleAlert,
+  umbrella: Umbrella,
+  unplug: Unplug,
+  'upload-cloud': CloudUpload,
+  'user-round': UserRound,
+  'user-x': UserX,
+  users: Users,
+  'volume-x': VolumeX,
+  wind: Wind,
+  zap: Zap,
+};
+
+const Icon = iconMap[name];
+---
+
+{Icon ? <Icon class={className} aria-hidden="true" /> : null}

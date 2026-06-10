@@ -1,0 +1,1238 @@
+---
+import type { SledCaseStudy } from '../../../lib/constants/pages/sled-case-studies';
+import { sectionHead } from '../../../lib/sled-case-studies/section-head';
+import ChevronDown from '@lucide/astro/icons/chevron-down';
+import Lock from '@lucide/astro/icons/lock';
+import CtaButton from '../../shared/CtaButton.astro';
+import Eyebrow from '../../shared/Eyebrow.astro';
+import SledPageWrap from '../shared/SledPageWrap.astro';
+import CaseStudyFailureTabs from './CaseStudyFailureTabs.astro';
+import CaseStudyIcon from './CaseStudyIcon.astro';
+import CaseStudyModHead from './CaseStudyModHead.astro';
+
+interface Props {
+  study: SledCaseStudy;
+}
+
+const { study } = Astro.props;
+
+let sectionIdx = 0;
+
+function sectionClass(tight = false) {
+  const bg = sectionIdx % 2 === 0 ? 'bg-white' : 'bg-seasalt';
+  sectionIdx += 1;
+  return tight ? `sled-section-tight ${bg}` : `sled-section ${bg}`;
+}
+
+function factSub(fact: { small?: string; sub?: string }) {
+  return fact.small ?? fact.sub ?? '';
+}
+
+function rowValue(row: { value?: string; valueHtml?: string }) {
+  return row.valueHtml ?? row.value ?? '';
+}
+
+function estFlagText(flag: string | { text?: string }) {
+  if (typeof flag === 'string') return flag;
+  return flag.text ?? '';
+}
+
+function barWidth(bar: { width?: number; pct?: number | string; value?: number }) {
+  if (typeof bar.width === 'number') return bar.width;
+  if (typeof bar.value === 'number') return bar.value;
+  if (typeof bar.pct === 'number') return bar.pct;
+  if (typeof bar.pct === 'string') {
+    const parsed = parseInt(bar.pct.replace(/[^\d]/g, ''), 10);
+    return Number.isFinite(parsed) ? parsed : 0;
+  }
+  return 0;
+}
+
+function segmentWidth(seg: { pct?: number; width?: number }) {
+  return seg.pct ?? seg.width ?? 0;
+}
+
+function eventTagLive(event: {
+  tag?: { live?: string; past?: string };
+  tagLive?: string;
+}) {
+  if (event.tag?.live) return event.tag.live;
+  if (event.tagLive) return event.tagLive;
+  return '';
+}
+
+function eventTagPast(event: {
+  tag?: { live?: string; past?: string };
+  tagPast?: string;
+}) {
+  if (event.tag?.past) return event.tag.past;
+  if (event.tagPast) return event.tagPast;
+  return '';
+}
+
+function segmentTier(seg: { tier?: string; variant?: string }) {
+  return seg.tier ?? seg.variant ?? 'mid';
+}
+
+function legendTier(leg: object) {
+  if ('tier' in leg && typeof leg.tier === 'string') return leg.tier;
+  if ('variant' in leg && typeof leg.variant === 'string') return leg.variant;
+  return 'mid';
+}
+
+function isLiveOnlySection(section: object | undefined) {
+  if (!section || !('liveOnly' in section)) return true;
+  return (section as { liveOnly?: boolean }).liveOnly !== false;
+}
+
+function statLabel(stat: object) {
+  if ('l' in stat && typeof stat.l === 'string') return stat.l;
+  if ('label' in stat && typeof stat.label === 'string') return stat.label;
+  return '';
+}
+
+function statNumber(stat: object) {
+  if ('n' in stat && typeof stat.n === 'string') return stat.n;
+  if ('value' in stat && typeof stat.value === 'string') return stat.value;
+  return '';
+}
+
+function statSuffix(stat: object) {
+  if ('nSuffix' in stat && typeof stat.nSuffix === 'string') return stat.nSuffix;
+  if ('valueSuffix' in stat && typeof stat.valueSuffix === 'string') return stat.valueSuffix;
+  if ('nSmall' in stat && typeof stat.nSmall === 'string') return stat.nSmall;
+  return '';
+}
+
+const tierBarClass: Record<string, string> = {
+  nat: 'bg-yale',
+  large: 'bg-cyan-strong',
+  mid: 'bg-cyan',
+  bout: 'bg-cyan-soft border border-line',
+};
+
+const tierLegendClass: Record<string, string> = {
+  nat: 'bg-yale',
+  large: 'bg-cyan-strong',
+  mid: 'bg-cyan',
+  bout: 'bg-cyan-soft border border-line',
+};
+
+function resolveCta(cta: NonNullable<SledCaseStudy['cta']>) {
+  const hasDual = 'live' in cta && typeof cta.live === 'object';
+
+  if (hasDual) {
+    const live = cta.live as {
+      eyebrow?: string;
+      heading?: string;
+      h2?: string;
+      body?: string;
+      buttons?: readonly { label: string; href: string; variant?: string }[];
+    };
+    const past = cta.past as {
+      eyebrow?: string;
+      heading?: string;
+      h2?: string;
+      body?: string;
+      buttons?: readonly { label: string; href: string; variant?: string }[];
+    };
+    return {
+      eyebrowLive: live.eyebrow ?? '',
+      eyebrowPast: past.eyebrow ?? '',
+      headingLive: live.heading ?? live.h2 ?? '',
+      headingPast: past.heading ?? past.h2 ?? '',
+      bodyLive: live.body ?? '',
+      bodyPast: past.body ?? '',
+      dualBody: true,
+      buttons: live.buttons ?? past.buttons ?? ('buttons' in cta ? cta.buttons : []),
+    };
+  }
+
+  const flat = cta as {
+    eyebrow?: string | { live: string; past: string };
+    heading?: string | { live: string; past: string };
+    h2?: string;
+    body?: string;
+    buttons?: readonly { label: string; href: string; variant?: string }[];
+  };
+
+  const eyebrowLive =
+    typeof flat.eyebrow === 'object' ? flat.eyebrow.live : (flat.eyebrow ?? '');
+  const eyebrowPast =
+    typeof flat.eyebrow === 'object' ? flat.eyebrow.past : eyebrowLive;
+  const headingLive =
+    typeof flat.heading === 'object'
+      ? flat.heading.live
+      : (flat.heading ?? flat.h2 ?? '');
+  const headingPast =
+    typeof flat.heading === 'object' ? flat.heading.past : headingLive;
+
+  return {
+    eyebrowLive,
+    eyebrowPast,
+    headingLive,
+    headingPast,
+    bodyLive: flat.body ?? '',
+    bodyPast: flat.body ?? '',
+    dualBody: false,
+    buttons: flat.buttons ?? [],
+  };
+}
+
+function ctaVariant(variant?: string) {
+  if (variant === 'cyan') return 'cta' as const;
+  if (variant === 'ghost') return 'ghost-dark' as const;
+  return 'ghost-dark' as const;
+}
+
+const awardModel = 'awardModel' in study ? study.awardModel : undefined;
+const awardHead = awardModel ? sectionHead(awardModel) : null;
+
+const failureTabs = 'failureTabs' in study ? study.failureTabs : undefined;
+const failureHead = failureTabs
+  ? sectionHead('modHead' in failureTabs ? failureTabs.modHead : failureTabs)
+  : null;
+const failureAccent =
+  failureTabs && 'modHead' in failureTabs && 'eyebrowAccent' in failureTabs.modHead
+    ? Boolean(failureTabs.modHead.eyebrowAccent)
+    : false;
+
+const taskAllocation = 'taskAllocation' in study ? study.taskAllocation : undefined;
+const taskHead = taskAllocation ? sectionHead(taskAllocation) : null;
+
+const emphasis = 'emphasis' in study ? study.emphasis : undefined;
+const evaluation = 'evaluation' in study ? study.evaluation : undefined;
+const evalHead = emphasis
+  ? sectionHead(emphasis)
+  : evaluation
+    ? sectionHead(evaluation)
+    : null;
+
+const capabilityGrid = 'capabilityGrid' in study ? study.capabilityGrid : undefined;
+const capHead = capabilityGrid ? sectionHead(capabilityGrid) : null;
+
+const pricing = 'pricing' in study ? study.pricing : undefined;
+const priceHead = pricing ? sectionHead(pricing) : null;
+
+const securityGrid = 'securityGrid' in study ? study.securityGrid : undefined;
+const secHead = securityGrid ? sectionHead(securityGrid) : null;
+
+const agency = 'agency' in study ? study.agency : undefined;
+const agencyHead = agency ? sectionHead(agency) : null;
+const agencyBody =
+  agency && 'bodyHtml' in agency
+    ? agency.bodyHtml
+    : agency && 'body' in agency
+      ? agency.body
+      : '';
+
+const competingField = 'competingField' in study ? study.competingField : undefined;
+const fieldHead = competingField ? sectionHead(competingField) : null;
+
+const response = 'response' in study ? study.response : undefined;
+const responseHead = response ? sectionHead(response) : null;
+
+const strategicQuestions =
+  'strategicQuestions' in study ? study.strategicQuestions : undefined;
+const stratHead = strategicQuestions ? sectionHead(strategicQuestions) : null;
+const stratLiveOnly = isLiveOnlySection(strategicQuestions);
+
+const techtizApproach = 'techtizApproach' in study ? study.techtizApproach : undefined;
+const approachHead = techtizApproach ? sectionHead(techtizApproach) : null;
+const approachLiveOnly = isLiveOnlySection(techtizApproach);
+
+const ctaResolved = 'cta' in study ? resolveCta(study.cta) : null;
+
+const barSegments =
+  competingField && 'barSegments' in competingField
+    ? competingField.barSegments
+    : competingField && 'segments' in competingField
+      ? competingField.segments
+      : competingField && 'bar' in competingField
+        ? competingField.bar.segments
+        : undefined;
+
+const fieldLegends =
+  competingField && 'legends' in competingField
+    ? competingField.legends
+    : competingField && 'bar' in competingField
+      ? competingField.bar.legends
+      : undefined;
+
+const techtizSlot =
+  taskAllocation && 'techtizSlot' in taskAllocation
+    ? taskAllocation.techtizSlot
+    : taskAllocation?.canColumn && 'techtizSlot' in taskAllocation.canColumn
+      ? taskAllocation.canColumn.techtizSlot
+      : undefined;
+---
+
+{study.facts && study.facts.length > 0 && (
+  <section class={sectionClass(true)}>
+    <SledPageWrap>
+      <div
+        class="sled-reveal grid grid-cols-1 overflow-hidden rounded-[14px] border border-line-soft bg-white shadow-[0_8px_24px_-16px_rgba(21,58,95,0.12)] sm:grid-cols-2 lg:grid-cols-4"
+        data-sled-reveal
+      >
+        {study.facts.map((fact, idx) => (
+          <div
+            class:list={[
+              'border-line-soft px-[22px] py-5',
+              idx > 0 && 'border-t sm:border-t-0 sm:border-l',
+              idx === 1 && 'sm:border-t-0',
+              idx >= 2 && 'lg:border-t-0',
+            ]}
+          >
+            <div class="mb-2 font-mono text-[10px] tracking-[0.13em] text-cyan-strong uppercase">
+              {fact.key}
+            </div>
+            <div class="text-[14.5px] leading-[1.3] font-semibold text-yale">
+              {fact.value}
+              {factSub(fact) && (
+                <small class="mt-0.5 block font-mono text-[11.5px] font-medium text-muted">
+                  {factSub(fact)}
+                </small>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </SledPageWrap>
+  </section>
+)}
+
+{'keyDates' in study && study.keyDates && (
+  <section class={sectionClass()}>
+    <SledPageWrap>
+      <CaseStudyModHead {...sectionHead(study.keyDates)} />
+      <div
+        class="sled-reveal grid grid-cols-1 overflow-hidden rounded-[14px] border border-line-soft bg-white shadow-[0_8px_24px_-16px_rgba(21,58,95,0.12)] sm:grid-cols-2 lg:grid-cols-4"
+        data-sled-reveal
+      >
+        {study.keyDates.events.map((event, idx) => (
+          <div
+            class:list={[
+              'relative border-line-soft px-[18px] py-[18px]',
+              idx > 0 && 'border-t sm:border-t-0 sm:border-l',
+              'hard' in event && event.hard && 'bg-yale-dark',
+            ]}
+          >
+            {'hard' in event && event.hard && (
+              <span
+                class="absolute top-3.5 right-3.5 size-2 rounded-full bg-cyan motion-reduce:animate-none"
+                aria-hidden="true"
+              />
+            )}
+            <div
+              class:list={[
+                'mb-2 font-mono text-[11px] font-semibold tracking-[0.04em]',
+                'hard' in event && event.hard ? 'text-cyan' : 'text-cyan-strong',
+              ]}
+            >
+              {event.date}
+            </div>
+            <div
+              class:list={[
+                'text-[13px] leading-[1.4] font-semibold',
+                'hard' in event && event.hard ? 'text-white' : 'text-ink',
+              ]}
+            >
+              {event.label}
+            </div>
+            <div
+              class:list={[
+                'mt-1.5 text-[11.5px] leading-[1.4]',
+                'hard' in event && event.hard ? 'text-white/72' : 'text-muted',
+              ]}
+            >
+              {event.detail}
+            </div>
+            {('tag' in event && event.tag) || ('tagLive' in event && event.tagLive) ? (
+              <div class="mt-2.5">
+                <span class="sled-cs-live-only inline-flex items-center gap-1.5 rounded-md border border-green/30 bg-green/12 px-2.5 py-1 font-mono text-[10px] font-bold tracking-[0.1em] text-[#1F7855] uppercase">
+                  <span class="size-1.5 rounded-full bg-green" aria-hidden="true" />
+                  {eventTagLive(event)}
+                </span>
+                <span class="sled-cs-past-only hidden inline-flex items-center gap-1.5 rounded-md border border-line bg-seasalt px-2.5 py-1 font-mono text-[10px] font-bold tracking-[0.1em] text-muted uppercase">
+                  {eventTagPast(event)}
+                </span>
+              </div>
+            ) : null}
+          </div>
+        ))}
+      </div>
+      {'foot' in study.keyDates && study.keyDates.foot && (
+        <p class="sled-reveal mt-4 font-mono text-[11.5px] tracking-[0.04em] text-muted" data-sled-reveal>
+          {'prefix' in study.keyDates.foot && study.keyDates.foot.prefix}
+          {'live' in study.keyDates.foot && typeof study.keyDates.foot.live === 'string' && !('prefix' in study.keyDates.foot) ? (
+            <>
+              <span class="sled-cs-live-only">{study.keyDates.foot.live}</span>
+              <span class="sled-cs-past-only hidden">{study.keyDates.foot.past}</span>
+            </>
+          ) : (
+            <>
+              <span class="sled-cs-live-only text-green">{study.keyDates.foot.live}</span>
+              <span class="sled-cs-past-only hidden">{study.keyDates.foot.past}</span>
+              {'suffix' in study.keyDates.foot && study.keyDates.foot.suffix}
+            </>
+          )}
+        </p>
+      )}
+    </SledPageWrap>
+  </section>
+)}
+
+{awardModel && awardHead && (
+  <section class={sectionClass()}>
+    <SledPageWrap>
+      <CaseStudyModHead {...awardHead} />
+      {'rows' in awardModel && awardModel.rows && (
+        <div
+          class="sled-reveal rounded-[14px] border border-line-soft border-t-[3px] border-t-cyan bg-white px-[34px] py-[30px] shadow-[0_8px_24px_-16px_rgba(21,58,95,0.12)]"
+          data-sled-reveal
+        >
+          {awardModel.rows.map((row, idx) => (
+            <div
+              class:list={[
+                'grid gap-[5px] py-[15px] sm:grid-cols-[180px_1fr] sm:gap-x-5',
+                idx > 0 && 'border-t border-line-soft',
+                idx === 0 && 'pt-1',
+              ]}
+            >
+              <span class="pt-0.5 font-mono text-[10.5px] tracking-[0.1em] text-cyan-strong uppercase">
+                {row.label}
+              </span>
+              <span class="text-sm leading-[1.55] text-ink [&_strong]:text-yale-dark" set:html={rowValue(row)} />
+            </div>
+          ))}
+        </div>
+      )}
+      {'pools' in awardModel && awardModel.pools && (
+        <div class="sled-reveal-stagger grid grid-cols-1 gap-4 lg:grid-cols-2" data-sled-reveal>
+          {awardModel.pools.map((pool) => (
+            <article
+              class:list={[
+                'overflow-hidden rounded-[14px] border border-line-soft bg-white shadow-[0_8px_24px_-16px_rgba(21,58,95,0.12)]',
+                pool.variant === 'shelter' && 'border-t-[3px] border-t-green',
+                pool.variant === 'open' && 'border-t-[3px] border-t-cyan',
+              ]}
+            >
+              <div class="border-b border-line-soft px-6 py-5">
+                <span class="mb-3 inline-flex items-center gap-2 font-mono text-[10.5px] font-bold tracking-[0.12em] text-cyan-strong uppercase">
+                  <span
+                    class:list={[
+                      'size-2 rotate-[15deg] rounded-[2px]',
+                      pool.variant === 'shelter' ? 'bg-green' : 'bg-cyan',
+                    ]}
+                    aria-hidden="true"
+                  />
+                  {pool.label}
+                </span>
+                <h3 class="text-[1.15rem] leading-[1.2] font-bold text-yale-dark">{pool.h3}</h3>
+                <p class="mt-2 text-sm leading-[1.55] text-muted">{pool.p}</p>
+                <div class="mt-4 font-mono text-[1.65rem] leading-none font-bold tracking-[-0.02em] text-yale-dark">
+                  {pool.cap}
+                  <small class="mt-1 block text-[11px] font-medium text-muted">{pool.capSmall}</small>
+                </div>
+              </div>
+              <div class="px-6 py-4">
+                <div class="mb-3 font-mono text-[10px] tracking-[0.1em] text-muted uppercase">
+                  Scoring, out of 100 · tap a row
+                </div>
+                <div class="divide-y divide-line-soft border-y border-line-soft">
+                  {pool.scoring.map((item) => (
+                    <details class="group">
+                      <summary class="flex cursor-pointer list-none flex-wrap items-center gap-3 py-3 [&::-webkit-details-marker]:hidden">
+                        <span class="min-w-0 flex-1 text-sm text-ink">{item.name}</span>
+                        <span class="font-mono text-sm font-bold text-yale-dark">{item.value}</span>
+                        <span class="h-1.5 w-16 overflow-hidden rounded bg-seasalt">
+                          <span
+                            class="sled-cs-iv-fill block h-full rounded bg-cyan"
+                            style={`--w: ${item.value}%`}
+                          />
+                        </span>
+                      </summary>
+                      <p class="pb-3 text-[13px] leading-[1.55] text-muted">{item.desc}</p>
+                    </details>
+                  ))}
+                </div>
+              </div>
+              <div class="flex items-center gap-2 border-t border-line-soft bg-seasalt px-6 py-3 font-mono text-[11px] text-muted">
+                <CaseStudyIcon name="file-text" class="size-3.5" />
+                Cover sheet {pool.coverSheet}
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
+      {'note' in awardModel && awardModel.note && (
+        <div class="sled-reveal mt-4 flex items-start gap-2.5 text-[13px] leading-[1.55] text-muted" data-sled-reveal>
+          <CaseStudyIcon name={awardModel.note.icon} class="mt-0.5 size-4 shrink-0 text-cyan-strong" />
+          <span set:html={awardModel.note.html} />
+        </div>
+      )}
+    </SledPageWrap>
+  </section>
+)}
+
+{'differentiator' in study && study.differentiator && (
+  <section class={sectionClass()}>
+    <SledPageWrap>
+      <div
+        class="sled-reveal grid grid-cols-1 items-start gap-4 rounded-[14px] bg-yale-dark px-[26px] py-[30px] text-white sm:grid-cols-[auto_1fr] sm:gap-[26px] sm:px-10 sm:py-[38px]"
+        data-sled-reveal
+      >
+        <span class="grid size-[46px] shrink-0 place-items-center rounded-xl bg-cyan/16 text-cyan">
+          {'mark' in study.differentiator && study.differentiator.mark ? (
+            <span class="text-2xl leading-none font-serif text-cyan">{study.differentiator.mark}</span>
+          ) : 'icon' in study.differentiator ? (
+            <CaseStudyIcon name={study.differentiator.icon} class="size-6" />
+          ) : (
+            <CaseStudyIcon name="git-merge" class="size-6" />
+          )}
+        </span>
+        <div>
+          <div class="mb-3.5 font-mono text-[10.5px] tracking-[0.12em] text-cyan uppercase">
+            {study.differentiator.tag}
+          </div>
+          <div class="text-[clamp(1.2rem,2vw,1.5rem)] leading-[1.32] font-semibold tracking-[-0.01em]">
+            {study.differentiator.quote}
+          </div>
+          <p class="mt-3.5 max-w-[660px] text-sm leading-[1.6] text-white/74">
+            {study.differentiator.sub}
+          </p>
+          {'liveNote' in study.differentiator && study.differentiator.liveNote && (
+            <div class="sled-cs-live-only mt-4 flex items-start gap-2.5 border-t border-white/14 pt-3.5 text-[13.5px] text-white">
+              <CaseStudyIcon name="zap" class="mt-0.5 size-4 shrink-0 text-cyan" />
+              <span>{study.differentiator.liveNote}</span>
+            </div>
+          )}
+        </div>
+      </div>
+    </SledPageWrap>
+  </section>
+)}
+
+{taskAllocation && taskHead && (
+  <section class={sectionClass()}>
+    <SledPageWrap>
+      <CaseStudyModHead {...taskHead} />
+      {'legalBar' in taskAllocation && taskAllocation.legalBar && (
+        <div
+          class="sled-reveal mb-[22px] flex items-start gap-3.5 rounded-[14px] border border-amber/28 bg-amber/8 px-5 py-4"
+          data-sled-reveal
+        >
+          <CaseStudyIcon name={taskAllocation.legalBar.icon} class="mt-0.5 size-[19px] shrink-0 text-amber" />
+          <p class="text-[13.5px] leading-[1.55] text-ink [&_strong]:text-yale-dark" set:html={taskAllocation.legalBar.html} />
+        </div>
+      )}
+      <div class="sled-reveal grid grid-cols-1 gap-4 lg:grid-cols-2" data-sled-reveal>
+        <div class="overflow-hidden rounded-[14px] border border-line-soft bg-white">
+          <div class="flex items-center gap-3 border-b border-line-soft px-[22px] py-[18px]">
+            <span class="grid size-[34px] shrink-0 place-items-center rounded-lg bg-cyan/12 text-cyan-strong">
+              <CaseStudyIcon name={taskAllocation.canColumn.icon} class="size-[18px]" />
+            </span>
+            <div>
+              <div class="text-[14.5px] leading-[1.2] font-bold text-yale-dark">
+                {taskAllocation.canColumn.title}
+              </div>
+              <div class="mt-0.5 font-mono text-[10px] tracking-[0.1em] text-muted uppercase">
+                {taskAllocation.canColumn.subtitle}
+              </div>
+            </div>
+          </div>
+          {taskAllocation.canColumn.items.map((item) => (
+            <div class="grid grid-cols-[20px_1fr] gap-3 border-t border-line-soft px-[22px] py-3">
+              <CaseStudyIcon name="check" class="mt-0.5 size-[15px] text-cyan-strong" />
+              <p class="text-[13px] leading-[1.5] text-ink">{item}</p>
+            </div>
+          ))}
+          {techtizSlot && (
+            <div class="sled-cs-live-only flex items-start gap-2.5 border-t border-line-soft bg-seasalt px-[22px] py-3.5 text-[13px] text-ink">
+              {typeof techtizSlot === 'object' ? (
+                <>
+                  <CaseStudyIcon name={techtizSlot.icon} class="mt-0.5 size-4 shrink-0 text-cyan-strong" />
+                  <span set:html={techtizSlot.html} />
+                </>
+              ) : (
+                <>
+                  <CaseStudyIcon name="zap" class="mt-0.5 size-4 shrink-0 text-cyan-strong" />
+                  <span set:html={techtizSlot} />
+                </>
+              )}
+            </div>
+          )}
+        </div>
+        <div class="overflow-hidden rounded-[14px] border border-line-soft bg-white">
+          <div class="flex items-center gap-3 border-b border-line-soft px-[22px] py-[18px]">
+            <span class="grid size-[34px] shrink-0 place-items-center rounded-lg bg-green/10 text-[#1F7855]">
+              <CaseStudyIcon name={taskAllocation.primeColumn.icon} class="size-[18px]" />
+            </span>
+            <div>
+              <div class="text-[14.5px] leading-[1.2] font-bold text-yale-dark">
+                {taskAllocation.primeColumn.title}
+              </div>
+              <div class="mt-0.5 font-mono text-[10px] tracking-[0.1em] text-muted uppercase">
+                {taskAllocation.primeColumn.subtitle}
+              </div>
+            </div>
+          </div>
+          {taskAllocation.primeColumn.items.map((item) => (
+            <div class="grid grid-cols-[20px_1fr] gap-3 border-t border-line-soft px-[22px] py-3">
+              <CaseStudyIcon name="shield" class="mt-0.5 size-[15px] text-[#1F7855]" />
+              <p class="text-[13px] leading-[1.5] text-ink">{item}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+      {'hardLimit' in taskAllocation && taskAllocation.hardLimit && (
+        <div
+          class="sled-reveal mt-4 flex items-start gap-3.5 rounded-[14px] border border-[rgba(196,68,68,0.3)] bg-[rgba(196,68,68,0.07)] px-5 py-4"
+          data-sled-reveal
+        >
+          <CaseStudyIcon name={taskAllocation.hardLimit.icon} class="mt-0.5 size-[19px] shrink-0 text-[#B33]" />
+          <p class="text-[13.5px] leading-[1.55] text-ink [&_strong]:text-[#B33]" set:html={taskAllocation.hardLimit.html} />
+        </div>
+      )}
+    </SledPageWrap>
+  </section>
+)}
+
+{failureTabs && failureHead && (
+  <section class={sectionClass()}>
+    <SledPageWrap>
+      <CaseStudyFailureTabs
+        modHead={{ ...failureHead, eyebrowAccent: failureAccent }}
+        tabs={failureTabs.tabs}
+      />
+    </SledPageWrap>
+  </section>
+)}
+
+{(emphasis || evaluation) && evalHead && (
+  <section class={sectionClass()}>
+    <SledPageWrap>
+      <CaseStudyModHead {...evalHead} />
+      {emphasis && (
+        <div class="sled-reveal rounded-[14px] border border-line-soft bg-white p-[28px] sm:p-[30px]" data-sled-reveal>
+          {'estFlag' in emphasis && emphasis.estFlag && (
+            <span class="mb-4 inline-flex items-center gap-1.5 rounded-md border border-amber/28 bg-amber/10 px-2.5 py-1.5 font-mono text-[10px] font-bold tracking-[0.08em] text-amber uppercase">
+              <CaseStudyIcon name="triangle-alert" class="size-3.5" />
+              {estFlagText(emphasis.estFlag)}
+            </span>
+          )}
+          <div class="space-y-4">
+            {emphasis.bars.map((bar) => (
+              <div>
+                <div class="mb-1.5 flex items-baseline justify-between gap-3">
+                  <span class="text-[13px] text-ink">
+                    <b class="mr-1.5 font-mono text-[10px] tracking-[0.06em] text-cyan-strong">{bar.num}</b>
+                    {bar.label}
+                  </span>
+                  <span class="font-mono text-[13px] font-bold text-yale-dark">~{bar.pct}%</span>
+                </div>
+                <div class="h-[7px] overflow-hidden rounded bg-seasalt">
+                  <span class="sled-cs-iv-fill block h-full rounded bg-cyan" style={`--w: ${bar.pct}%`} />
+                </div>
+              </div>
+            ))}
+          </div>
+          {'note' in emphasis && emphasis.note && (
+            <p class="mt-2 text-[12.5px] leading-[1.55] text-muted">{emphasis.note}</p>
+          )}
+        </div>
+      )}
+      {evaluation && 'variant' in evaluation && evaluation.variant === 'qualitative' && (
+        <div class="sled-reveal grid grid-cols-1 gap-[18px] lg:grid-cols-2" data-sled-reveal>
+          {evaluation.cards.map((card) => (
+            <div class="rounded-[14px] border border-line-soft bg-white p-[28px] sm:p-[30px]">
+              <h3 class="mb-4 text-[1.1rem] text-yale-dark">{card.title}</h3>
+              <div class="flex flex-col gap-3.5">
+                {card.items.map((item) => (
+                  <div class="grid grid-cols-[26px_1fr] gap-3">
+                    {item.type === 'num' ? (
+                      <span class="grid size-[26px] place-items-center rounded-full border border-line bg-seasalt font-mono text-[11px] font-bold text-yale-dark">
+                        {item.num}
+                      </span>
+                    ) : (
+                      <span class="grid size-[26px] place-items-center rounded-full border border-line bg-seasalt text-cyan-strong">
+                        <CaseStudyIcon name={item.icon} class="size-3.5" />
+                      </span>
+                    )}
+                    <p class="text-[13px] leading-[1.55] text-ink [&_strong]:text-yale-dark" set:html={item.text} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+      {evaluation && 'committee' in evaluation && evaluation.committee && (
+        <div class="sled-reveal grid grid-cols-1 gap-[18px] lg:grid-cols-2" data-sled-reveal>
+          <div class="rounded-[14px] border border-line-soft bg-white p-[28px] sm:p-[30px]">
+            <h3 class="mb-4 text-[1.1rem] text-yale-dark">{evaluation.committee.h3}</h3>
+            <div class="flex flex-col gap-3.5">
+              {evaluation.committee.items.map((item) => (
+                <div class="grid grid-cols-[26px_1fr] gap-3">
+                  <span class="grid size-[26px] place-items-center rounded-full border border-line bg-seasalt font-mono text-[11px] font-bold text-yale-dark">
+                    {item.num}
+                  </span>
+                  <p class="text-[13px] leading-[1.55] text-ink [&_strong]:text-yale-dark" set:html={item.html} />
+                </div>
+              ))}
+            </div>
+          </div>
+          {'interview' in evaluation && evaluation.interview && (
+            <div class="rounded-[14px] border border-line-soft bg-white p-[28px] sm:p-[30px]">
+              <h3 class="mb-4 text-[1.1rem] text-yale-dark">{evaluation.interview.h3}</h3>
+              <div class="space-y-4">
+                {evaluation.interview.bars.map((bar) => (
+                  <div>
+                    <div class="mb-1.5 flex items-baseline justify-between gap-3">
+                      <span class="text-[13px] text-ink">{bar.label}</span>
+                      <span class="font-mono text-[13px] font-bold text-yale-dark">{bar.value}</span>
+                    </div>
+                    <div class="h-[7px] overflow-hidden rounded bg-seasalt">
+                      <span
+                        class="sled-cs-iv-fill block h-full rounded bg-cyan"
+                        style={`--w: ${barWidth(bar)}%`}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+              {'note' in evaluation.interview && evaluation.interview.note && (
+                <p class="mt-2 text-[12.5px] leading-[1.55] text-muted">{evaluation.interview.note}</p>
+              )}
+            </div>
+          )}
+        </div>
+      )}
+      {evaluation &&
+        'bars' in evaluation &&
+        Array.isArray(evaluation.bars) &&
+        !('committee' in evaluation) &&
+        (!('variant' in evaluation) || evaluation.variant === 'bars') && (
+          <div class="sled-reveal rounded-[14px] border border-line-soft bg-white p-[28px] sm:p-[30px]" data-sled-reveal>
+            {'estFlag' in evaluation && evaluation.estFlag && (
+              <span class="mb-4 inline-flex items-center gap-1.5 rounded-md border border-amber/28 bg-amber/10 px-2.5 py-1.5 font-mono text-[10px] font-bold tracking-[0.08em] text-amber uppercase">
+                <CaseStudyIcon
+                  name={
+                    typeof evaluation.estFlag === 'object' && 'icon' in evaluation.estFlag
+                      ? evaluation.estFlag.icon
+                      : 'triangle-alert'
+                  }
+                  class="size-3.5"
+                />
+                {typeof evaluation.estFlag === 'string'
+                  ? evaluation.estFlag
+                  : 'text' in evaluation.estFlag
+                    ? evaluation.estFlag.text
+                    : ''}
+              </span>
+            )}
+            {'cardTitle' in evaluation && evaluation.cardTitle && (
+              <h3 class="mb-4 text-[1.1rem] text-yale-dark">{evaluation.cardTitle}</h3>
+            )}
+            <div class="space-y-4">
+              {'bars' in evaluation &&
+                evaluation.bars.map((bar) => (
+                  <div>
+                    <div class="mb-1.5 flex items-baseline justify-between gap-3">
+                      <span class="text-[13px] text-ink">
+                        {'num' in bar && bar.num && (
+                          <b class="mr-1.5 font-mono text-[10px] tracking-[0.06em] text-cyan-strong">{bar.num}</b>
+                        )}
+                        {bar.label}
+                      </span>
+                      <span class="font-mono text-[13px] font-bold text-yale-dark">
+                        {typeof bar.pct === 'string'
+                          ? bar.pct
+                          : `${'pct' in bar && typeof bar.pct === 'number' ? bar.pct : 'value' in bar ? bar.value : 0}%`}
+                      </span>
+                    </div>
+                    <div class="h-[7px] overflow-hidden rounded bg-seasalt">
+                      <span
+                        class="sled-cs-iv-fill block h-full rounded bg-cyan"
+                        style={`--w: ${barWidth(bar)}%`}
+                      />
+                    </div>
+                  </div>
+                ))}
+            </div>
+            {'note' in evaluation && evaluation.note && (
+              <p class="mt-2 text-[12.5px] leading-[1.55] text-muted [&_strong]:text-yale-dark" set:html={evaluation.note} />
+            )}
+          </div>
+        )}
+    </SledPageWrap>
+  </section>
+)}
+
+{capabilityGrid && capHead && (
+  <section class={sectionClass()}>
+    <SledPageWrap>
+      <CaseStudyModHead {...capHead} />
+      <div class="sled-reveal-stagger grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4" data-sled-reveal>
+        {capabilityGrid.items.map((item) => (
+          <article
+            class:list={[
+              'rounded-[14px] border border-line-soft bg-white p-5',
+              'star' in item && item.star && 'border-cyan shadow-[inset_0_0_0_1px_var(--color-cyan)]',
+              'dark' in item && item.dark && 'bg-yale-dark text-white',
+            ]}
+          >
+            <span
+              class:list={[
+                'mb-3 grid size-[34px] place-items-center rounded-lg bg-cyan-soft text-cyan-strong',
+                'dark' in item && item.dark && 'bg-white/10 text-cyan',
+              ]}
+            >
+              <CaseStudyIcon name={item.icon} class="size-[17px]" />
+            </span>
+            {'num' in item && item.num && (
+              <div class="mb-1.5 font-mono text-[9.5px] tracking-[0.12em] text-muted uppercase">
+                {item.num}
+              </div>
+            )}
+            {'meta' in item && item.meta && (
+              <div class="mb-1.5 font-mono text-[9.5px] tracking-[0.12em] text-muted uppercase">
+                {item.meta}
+              </div>
+            )}
+            <div
+              class:list={[
+                'text-[13.5px] leading-[1.25] font-bold text-yale-dark',
+                'dark' in item && item.dark && 'text-white',
+              ]}
+            >
+              {item.title}
+            </div>
+            <p
+              class:list={[
+                'mt-1.5 text-xs leading-[1.45] text-muted',
+                'dark' in item && item.dark && 'text-white/72',
+              ]}
+            >
+              {item.desc}
+            </p>
+          </article>
+        ))}
+      </div>
+    </SledPageWrap>
+  </section>
+)}
+
+{pricing && priceHead && (
+  <section class={sectionClass()}>
+    <SledPageWrap>
+      <CaseStudyModHead {...priceHead} />
+      <div class="sled-reveal grid grid-cols-1 gap-4 md:grid-cols-3" data-sled-reveal>
+        {pricing.scenarios.map((scenario) => {
+          const isMid =
+            ('highlight' in scenario && scenario.highlight) ||
+            ('mid' in scenario && scenario.mid) ||
+            ('recommended' in scenario && scenario.recommended);
+          return (
+            <article
+              class:list={[
+                'relative rounded-[14px] border border-line-soft bg-white px-6 py-[26px]',
+                isMid && 'border-cyan shadow-[inset_0_0_0_1px_var(--color-cyan),0_8px_24px_-16px_rgba(21,58,95,0.14)]',
+              ]}
+            >
+              <div class="mb-3.5 flex items-center justify-between gap-2">
+                <span
+                  class:list={[
+                    'font-mono text-[10.5px] font-semibold tracking-[0.12em] text-muted uppercase',
+                    isMid && 'text-cyan-strong',
+                  ]}
+                >
+                  {scenario.tier}
+                </span>
+                {'pill' in scenario && scenario.pill && (
+                  <span class="rounded bg-cyan/12 px-2 py-0.5 font-mono text-[9px] tracking-[0.1em] text-cyan-strong uppercase">
+                    {scenario.pill}
+                  </span>
+                )}
+              </div>
+              <div class="font-mono text-2xl leading-[1.05] font-bold tracking-[-0.02em] text-yale-dark">
+                {scenario.value}
+                {'valueSmall' in scenario && scenario.valueSmall && (
+                  <small class="text-[0.85rem] font-medium text-muted">{scenario.valueSmall}</small>
+                )}
+                {'unit' in scenario && scenario.unit && (
+                  <small class="text-[0.85rem] font-medium text-muted">{scenario.unit}</small>
+                )}
+              </div>
+              <p class="mt-2 text-[13px] leading-[1.5] text-muted">
+                {'desc' in scenario ? scenario.desc : 'detail' in scenario ? scenario.detail : ''}
+              </p>
+            </article>
+          );
+        })}
+      </div>
+      {'footnotes' in pricing &&
+        pricing.footnotes.map((note) => (
+          <div
+            class:list={[
+              'sled-reveal mt-4 flex items-start gap-2.5 text-[13px] leading-[1.6] text-muted',
+              'liveOnly' in note && note.liveOnly && 'sled-cs-live-only',
+            ]}
+            data-sled-reveal
+          >
+            <CaseStudyIcon name={note.icon} class="mt-0.5 size-4 shrink-0 text-amber" />
+            <span class="[&_strong]:text-yale-dark" set:html={note.html} />
+          </div>
+        ))}
+    </SledPageWrap>
+  </section>
+)}
+
+{securityGrid && secHead && (
+  <section class={sectionClass()}>
+    <SledPageWrap>
+      <CaseStudyModHead {...secHead} />
+      {'trigger' in securityGrid && securityGrid.trigger && (
+        <div class="sled-reveal mb-4 flex items-start gap-2.5 rounded-[14px] border border-line bg-white px-5 py-4 text-sm leading-[1.55] text-ink" data-sled-reveal>
+          <CaseStudyIcon name={securityGrid.trigger.icon} class="mt-0.5 size-4 shrink-0 text-cyan-strong" />
+          <span set:html={securityGrid.trigger.html} />
+        </div>
+      )}
+      {'items' in securityGrid && securityGrid.items && (
+        <div class="sled-reveal-stagger grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4" data-sled-reveal>
+          {securityGrid.items.map((item) => (
+            <article class="rounded-[14px] border border-line-soft bg-white p-5">
+              <span class="mb-3 grid size-[34px] place-items-center rounded-lg bg-cyan-soft text-cyan-strong">
+                <CaseStudyIcon name={item.icon} class="size-[17px]" />
+              </span>
+              <div class="text-[13.5px] leading-[1.25] font-bold text-yale-dark">{item.title}</div>
+              <p class="mt-1.5 text-xs leading-[1.45] text-muted">{item.desc}</p>
+            </article>
+          ))}
+        </div>
+      )}
+      {'insurance' in securityGrid && securityGrid.insurance && (
+        <div class="sled-reveal mt-4 flex items-start gap-2.5 rounded-[14px] border border-line bg-seasalt px-5 py-4" data-sled-reveal>
+          <CaseStudyIcon name={securityGrid.insurance.icon} class="mt-0.5 size-[18px] shrink-0 text-yale" />
+          <p class="text-[13px] leading-[1.55] text-ink [&_strong]:text-yale-dark" set:html={securityGrid.insurance.html} />
+        </div>
+      )}
+      {'risks' in securityGrid && securityGrid.risks && (
+        <div class="sled-reveal-stagger mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3" data-sled-reveal>
+          {securityGrid.risks.map((risk) => (
+            <article class="rounded-[14px] border border-line-soft bg-white px-5 py-[18px]">
+              <div class="mb-2 flex items-center gap-2">
+                <CaseStudyIcon name={risk.icon} class="size-4 text-amber" />
+                <div class="text-[13px] leading-[1.2] font-bold text-yale-dark">{risk.title}</div>
+              </div>
+              <p class="text-xs leading-[1.5] text-muted">{risk.text}</p>
+            </article>
+          ))}
+        </div>
+      )}
+    </SledPageWrap>
+  </section>
+)}
+
+{agency && agencyHead && (
+  <section class={sectionClass()}>
+    <SledPageWrap>
+      <CaseStudyModHead {...agencyHead} />
+      <div
+        class="sled-reveal grid grid-cols-1 overflow-hidden rounded-[14px] border border-line-soft bg-white shadow-[0_8px_24px_-16px_rgba(21,58,95,0.12)] lg:grid-cols-[320px_1fr]"
+        data-sled-reveal
+      >
+        {'photo' in agency && agency.photo && (
+          <div class="border-b border-line-soft bg-seasalt lg:border-r lg:border-b-0">
+            <img
+              src={agency.photo}
+              alt={agency.photoAlt ?? ''}
+              class="block min-h-[200px] w-full object-cover lg:min-h-[230px] lg:h-full"
+              loading="lazy"
+            />
+          </div>
+        )}
+        <div class="px-8 py-7">
+          <p class="text-[14.5px] leading-[1.6] text-ink [&_strong]:text-yale-dark" set:html={agencyBody} />
+          {'stats' in agency && agency.stats && (
+            <div class="mt-5 flex flex-wrap gap-[26px]">
+              {agency.stats.map((stat) => (
+                <div>
+                  <div class="font-mono text-[1.55rem] font-bold text-yale-dark">
+                    {'n' in stat ? stat.n : stat.value}
+                    {'nSuffix' in stat && stat.nSuffix && (
+                      <small class="text-[0.95rem] text-cyan-strong">{stat.nSuffix}</small>
+                    )}
+                    {'nSmall' in stat && stat.nSmall && (
+                      <small class="text-[0.95rem] text-cyan-strong">{stat.nSmall}</small>
+                    )}
+                  </div>
+                  <div class="mt-1 text-xs text-muted">
+                    {'l' in stat ? stat.l : stat.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+          {'attribution' in agency && agency.attribution && (
+            <p class="mt-5 font-mono text-[10px] leading-[1.5] text-muted">{agency.attribution}</p>
+          )}
+        </div>
+      </div>
+    </SledPageWrap>
+  </section>
+)}
+
+{competingField && fieldHead && (
+  <section class={sectionClass()}>
+    <SledPageWrap>
+      <CaseStudyModHead {...fieldHead} />
+      {'stats' in competingField && competingField.stats && (
+        <div
+          class="sled-reveal grid grid-cols-1 overflow-hidden rounded-[14px] border border-line-soft bg-white shadow-[0_8px_24px_-16px_rgba(21,58,95,0.12)] sm:grid-cols-2 lg:grid-cols-4"
+          data-sled-reveal
+        >
+          {competingField.stats.map((stat, idx) => (
+            <div
+              class:list={[
+                'border-line-soft px-6 py-6',
+                idx > 0 && 'border-t sm:border-t-0 sm:border-l',
+              ]}
+            >
+              <div class="font-mono text-[1.95rem] leading-none font-bold tracking-[-0.02em] text-yale-dark">
+                {statNumber(stat)}
+                {statSuffix(stat) && (
+                  <small class="text-[0.95rem] text-cyan-strong">{statSuffix(stat)}</small>
+                )}
+              </div>
+              <div class="mt-2 text-[12.5px] leading-[1.4] text-muted">{statLabel(stat)}</div>
+            </div>
+          ))}
+        </div>
+      )}
+      {barSegments && barSegments.length > 0 && (
+        <div class="sled-reveal mt-[22px]" data-sled-reveal>
+          <div class="flex h-3.5 overflow-hidden rounded-full border border-line-soft">
+            {barSegments.map((seg) => (
+              <span
+                class:list={['h-full', tierBarClass[segmentTier(seg)] ?? 'bg-cyan']}
+                style={`width: ${segmentWidth(seg)}%`}
+              />
+            ))}
+          </div>
+          {fieldLegends && (
+            <div class="mt-3 flex flex-wrap gap-5 text-[12.5px] text-muted">
+              {fieldLegends.map((leg) => (
+                <span class="inline-flex items-center gap-2">
+                  <i
+                    class:list={[
+                      'inline-block size-2.5 rotate-[15deg] rounded-[2px]',
+                      tierLegendClass[legendTier(leg)] ?? 'bg-cyan',
+                    ]}
+                    aria-hidden="true"
+                  />
+                  <b class="text-yale-dark">{leg.count}</b> {leg.label}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+      {'notes' in competingField &&
+        competingField.notes?.map((note) => (
+          <div class="sled-reveal mt-4 flex items-start gap-2.5 text-[12.5px] leading-[1.55] text-muted" data-sled-reveal>
+            <CaseStudyIcon name={note.icon} class="mt-0.5 size-[15px] shrink-0 text-amber" />
+            <span class="[&_strong]:text-yale-dark" set:html={note.html} />
+          </div>
+        ))}
+      {'liveFootnote' in competingField && competingField.liveFootnote && (
+        <div class="sled-cs-live-only sled-reveal mt-4 flex items-start gap-2.5 text-[13px] leading-[1.6] text-muted" data-sled-reveal>
+          <CaseStudyIcon name={competingField.liveFootnote.icon} class="mt-0.5 size-4 shrink-0 text-cyan-strong" />
+          <span class="[&_strong]:text-yale-dark" set:html={competingField.liveFootnote.html} />
+        </div>
+      )}
+    </SledPageWrap>
+  </section>
+)}
+
+{response && responseHead && (
+  <section class={sectionClass()}>
+    <SledPageWrap>
+      <CaseStudyModHead {...responseHead} />
+      {'scopeChips' in response && response.scopeChips && (
+        <div class="sled-reveal flex flex-wrap gap-2" data-sled-reveal>
+          {response.scopeChips.map((chip) => (
+            <span class="inline-flex items-center gap-2 rounded-lg border border-line-soft bg-white px-[15px] py-2.5 text-[12.5px] leading-[1.2] text-ink shadow-[0_8px_24px_-16px_rgba(21,58,95,0.12)]">
+              <span class="font-mono text-[10px] font-bold text-cyan-strong">{chip.num}</span>
+              {chip.label}
+            </span>
+          ))}
+        </div>
+      )}
+      {'chips' in response && response.chips && (
+        <div class="sled-reveal flex flex-wrap gap-2" data-sled-reveal>
+          {response.chips.map((chip) =>
+            typeof chip === 'string' ? (
+              <span class="rounded-lg border border-line-soft bg-white px-[14px] py-2 text-[12.5px] text-ink shadow-[0_8px_24px_-16px_rgba(21,58,95,0.12)]">
+                {chip}
+              </span>
+            ) : (
+              <span class="inline-flex items-center gap-2 rounded-lg border border-line-soft bg-white px-[15px] py-2.5 text-[12.5px] leading-[1.2] text-ink shadow-[0_8px_24px_-16px_rgba(21,58,95,0.12)]">
+                <span class="font-mono text-[10px] font-bold text-cyan-strong">{chip.num}</span>
+                {chip.text}
+              </span>
+            ),
+          )}
+        </div>
+      )}
+      {'accordion' in response && response.accordion && (
+        <div class="sled-reveal border-t border-line" data-sled-spec-acc data-sled-reveal>
+          {response.accordion.map((item, idx) => (
+            <article
+              class:list={['sled-spec-item', idx === 0 && 'is-open']}
+              data-sled-spec-item
+            >
+              <button
+                type="button"
+                class="sled-spec-head"
+                aria-expanded={idx === 0 ? 'true' : 'false'}
+              >
+                <span class="sled-spec-num">{item.num}</span>
+                <span class="sled-spec-title">
+                  <CaseStudyIcon name={item.icon} class="size-[19px] shrink-0" />
+                  {item.title}
+                </span>
+                <span class="sled-spec-head-right">
+                  <span class="sled-spec-chev" aria-hidden="true">
+                    <ChevronDown class="size-5" />
+                  </span>
+                </span>
+              </button>
+              <div class="sled-spec-body">
+                <div class="sled-spec-body-in">
+                  <div class="sled-spec-body-pad">
+                    <p>{item.body}</p>
+                    {'tools' in item && item.tools && (
+                      <div class="sled-spec-tools">
+                        {item.tools.map((tool) => (
+                          <span>{tool}</span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
+      {'lockedNote' in response && response.lockedNote && (
+        <div class="sled-reveal mt-[22px] flex items-center gap-2.5 py-2.5 text-[13px] text-muted" data-sled-reveal>
+          <Lock class="size-[15px] shrink-0" aria-hidden="true" />
+          {response.lockedNote}
+        </div>
+      )}
+    </SledPageWrap>
+  </section>
+)}
+
+{'insurance' in study && study.insurance && (
+  <section class={sectionClass()}>
+    <SledPageWrap>
+      <div class="sled-reveal flex items-start gap-2.5 rounded-[14px] border border-line bg-seasalt px-5 py-4" data-sled-reveal>
+        <CaseStudyIcon name={study.insurance.icon} class="mt-0.5 size-[18px] shrink-0 text-yale" />
+        <p class="text-[13px] leading-[1.55] text-ink [&_strong]:text-yale-dark" set:html={study.insurance.html} />
+      </div>
+    </SledPageWrap>
+  </section>
+)}
+
+{strategicQuestions && stratHead && (
+  <section class:list={[sectionClass(), stratLiveOnly && 'sled-cs-live-only']}>
+    <SledPageWrap>
+      <CaseStudyModHead {...stratHead} />
+      <div class="sled-reveal-stagger grid grid-cols-1 gap-3.5 md:grid-cols-2" data-sled-reveal>
+        {strategicQuestions.questions.map((q) => (
+          <article class="rounded-[14px] border border-line-soft border-l-[3px] border-l-cyan bg-white px-[26px] py-6">
+            <div class="mb-2.5 font-mono text-[11px] font-bold tracking-[0.08em] text-cyan-strong">
+              {q.num}
+            </div>
+            <h4 class="mb-2 text-[1.02rem] leading-[1.3] text-yale-dark">{q.title}</h4>
+            <p class="text-[13px] leading-[1.55] text-muted">
+              {'body' in q ? q.body : 'desc' in q ? q.desc : ''}
+            </p>
+          </article>
+        ))}
+      </div>
+    </SledPageWrap>
+  </section>
+)}
+
+{techtizApproach && approachHead && (
+  <section class:list={[sectionClass(), approachLiveOnly && 'sled-cs-live-only']}>
+    <SledPageWrap>
+      <CaseStudyModHead {...approachHead} />
+      <div class="sled-reveal-stagger grid grid-cols-1 gap-3.5 sm:grid-cols-2 lg:grid-cols-4" data-sled-reveal>
+        {techtizApproach.cards.map((card) => (
+          <article class="rounded-[14px] border border-line-soft bg-white px-[22px] py-[22px]">
+            <span class="mb-3.5 inline-block size-3.5 rotate-[15deg] rounded-[3px] bg-cyan" aria-hidden="true" />
+            <h4 class="mb-1.5 text-base leading-[1.25] text-yale-dark">{card.title}</h4>
+            <p class="text-[12.5px] leading-[1.5] text-muted">
+              {'body' in card ? card.body : 'desc' in card ? card.desc : ''}
+            </p>
+          </article>
+        ))}
+      </div>
+      {'lockedNote' in techtizApproach && techtizApproach.lockedNote && (
+        <div class="sled-reveal mt-[22px] flex items-center gap-2.5 py-2.5 text-[13px] text-muted" data-sled-reveal>
+          <Lock class="size-[15px] shrink-0" aria-hidden="true" />
+          {techtizApproach.lockedNote}
+        </div>
+      )}
+    </SledPageWrap>
+  </section>
+)}
+
+{ctaResolved && (
+  <section class="sled-final-cta relative overflow-hidden bg-yale-dark">
+    <div
+      class="pointer-events-none absolute right-[-60px] top-[-60px] size-[340px] rotate-[15deg] bg-[linear-gradient(45deg,transparent_48%,rgba(24,176,230,0.16)_48%_52%,transparent_52%)] bg-[length:30px_30px] motion-reduce:hidden"
+      aria-hidden="true"
+    />
+    <SledPageWrap class="relative z-2 py-[clamp(3.75rem,7vw,5.625rem)]">
+      <div class="sled-reveal mx-auto max-w-[700px] text-center" data-sled-reveal>
+        <Eyebrow text={ctaResolved.eyebrowLive} onDark showGlyph class="sled-cs-live-only mb-4 justify-center" />
+        <Eyebrow
+          text={ctaResolved.eyebrowPast}
+          onDark
+          showGlyph
+          class="sled-cs-past-only mb-4 hidden justify-center"
+        />
+        <h2 class="sled-h2 mx-auto mb-4 max-w-[680px] text-white">
+          <span class="sled-cs-live-only">{ctaResolved.headingLive}</span>
+          <span class="sled-cs-past-only hidden">{ctaResolved.headingPast}</span>
+        </h2>
+        <p class="mx-auto mb-7 max-w-[580px] text-base leading-[1.6] text-white/78">
+          {ctaResolved.dualBody ? (
+            <>
+              <span class="sled-cs-live-only">{ctaResolved.bodyLive}</span>
+              <span class="sled-cs-past-only hidden">{ctaResolved.bodyPast}</span>
+            </>
+          ) : (
+            ctaResolved.bodyLive
+          )}
+        </p>
+        <div class="flex flex-wrap justify-center gap-3.5 max-[600px]:[&_a]:w-full max-[600px]:[&_a]:justify-center">
+          {ctaResolved.buttons.map((btn) => (
+            <CtaButton
+              href={btn.href}
+              label={btn.label}
+              variant={btn.variant === 'cyan' ? 'cta' : ctaVariant(btn.variant)}
+              showArrow={false}
+            />
+          ))}
+        </div>
+      </div>
+    </SledPageWrap>
+  </section>
+)}

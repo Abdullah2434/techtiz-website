@@ -46,18 +46,6 @@
   }
 }
 
-@keyframes sledStatShine {
-
-  0%,
-  100% {
-    opacity: 0.35;
-  }
-
-  50% {
-    opacity: 0.7;
-  }
-}
-
 .sled-hero-capitol {
   animation: capitolDrift 32s ease-in-out infinite alternate;
 }
@@ -72,7 +60,8 @@
 
 .sled-hub-hero h1 .accent,
 .sled-inner-hero h1 .accent,
-.sled-capabilities-hero h1 .accent {
+.sled-capabilities-hero h1 .accent,
+.sled-case-studies-hero h1 .accent {
   color: var(--color-cyan);
 }
 
@@ -85,12 +74,10 @@
   width: 300px;
   height: 300px;
   pointer-events: none;
-  background: linear-gradient(
-    45deg,
-    transparent 49%,
-    rgba(24, 176, 230, 0.16) 49% 51%,
-    transparent 51%
-  );
+  background: linear-gradient(45deg,
+      transparent 49%,
+      rgba(24, 176, 230, 0.16) 49% 51%,
+      transparent 51%);
   background-size: 28px 28px;
   transform: rotate(15deg);
 }
@@ -109,14 +96,12 @@
   z-index: 1;
   border-radius: inherit;
   padding: 1.5px;
-  background: conic-gradient(
-    from var(--sled-beam-a),
-    transparent 0 62%,
-    rgb(24 176 230 / 0.25) 74%,
-    var(--color-cyan) 84%,
-    rgb(24 176 230 / 0.25) 92%,
-    transparent 100%
-  );
+  background: conic-gradient(from var(--sled-beam-a),
+      transparent 0 62%,
+      rgb(24 176 230 / 0.25) 74%,
+      var(--color-cyan) 84%,
+      rgb(24 176 230 / 0.25) 92%,
+      transparent 100%);
   -webkit-mask:
     linear-gradient(#000 0 0) content-box,
     linear-gradient(#000 0 0);
@@ -151,13 +136,6 @@
   font-size: clamp(1.375rem, 3.5vw, 2.75rem);
   line-height: 1.08;
   letter-spacing: -0.022em;
-  font-weight: 800;
-}
-
-.sled-stat {
-  font-size: clamp(1.5rem, 4vw, 3rem);
-  line-height: 1;
-  letter-spacing: -0.03em;
   font-weight: 800;
 }
 
@@ -236,13 +214,6 @@
   -webkit-backdrop-filter: blur(12px);
 }
 
-.sled-glass-dark {
-  background: rgba(14, 38, 64, 0.55);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-}
-
 /* Interactive cards */
 .sled-card {
   position: relative;
@@ -276,14 +247,20 @@
   opacity: 1;
 }
 
-.sled-card-dark {
-  border-color: rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.03);
+.sled-engagement-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  background: linear-gradient(145deg, rgba(24, 176, 230, 0.07) 0%, transparent 48%);
+  transition: opacity 0.3s ease;
+  pointer-events: none;
 }
 
-.sled-card-dark:hover {
-  border-color: rgba(24, 176, 230, 0.35);
-  box-shadow: 0 24px 48px -24px rgba(0, 0, 0, 0.45);
+.sled-engagement-card:hover::before,
+.sled-engagement-card:focus-visible::before {
+  opacity: 1;
 }
 
 /* Pain-point label dot */
@@ -367,21 +344,6 @@
 
 .sled-model-panel.is-fade-in {
   animation: sledModelFadeThrough 0.5s cubic-bezier(0.05, 0.7, 0.1, 1) both;
-}
-
-/* Specializations accordion */
-.sled-spec-body {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.5s cubic-bezier(0.2, 0, 0, 1);
-}
-
-.sled-spec-item.is-open .sled-spec-body {
-  grid-template-rows: 1fr;
-}
-
-.sled-spec-body-inner {
-  overflow: hidden;
 }
 
 /* Capabilities frameworks — status badges in accordion head */
@@ -582,11 +544,9 @@
 .sled-arch-vline {
   width: 1px;
   flex: 1;
-  background: repeating-linear-gradient(
-    to bottom,
-    var(--color-cyan) 0 6px,
-    transparent 6px 12px
-  );
+  background: repeating-linear-gradient(to bottom,
+      var(--color-cyan) 0 6px,
+      transparent 6px 12px);
 }
 
 .sled-arch-lock {
@@ -683,11 +643,9 @@
     width: auto;
     height: 1px;
     flex: 1;
-    background: repeating-linear-gradient(
-      to right,
-      var(--color-cyan) 0 6px,
-      transparent 6px 12px
-    );
+    background: repeating-linear-gradient(to right,
+        var(--color-cyan) 0 6px,
+        transparent 6px 12px);
   }
 
   .sled-arch-gap-label {
@@ -717,11 +675,9 @@
 
 /* Delivery model — clock grid + concern tabs */
 .sled-delivery-bars {
-  background: repeating-linear-gradient(
-    90deg,
-    var(--color-line-soft) 0 1px,
-    transparent 1px 12.5%
-  );
+  background: repeating-linear-gradient(90deg,
+      var(--color-line-soft) 0 1px,
+      transparent 1px 12.5%);
 }
 
 .sled-delivery-panel {
@@ -782,20 +738,6 @@
   background: var(--color-seasalt);
 }
 
-/* Operating principles decorative grid */
-.sled-principles::after {
-  content: "";
-  position: absolute;
-  left: 40%;
-  bottom: -60px;
-  width: 380px;
-  height: 380px;
-  pointer-events: none;
-  background:
-    repeating-linear-gradient(0deg, transparent 0 40px, rgba(24, 176, 230, 0.03) 40px 41px),
-    repeating-linear-gradient(90deg, transparent 0 40px, rgba(24, 176, 230, 0.03) 40px 41px);
-}
-
 /* Inner page hero decoration */
 .sled-inner-hero::before {
   content: "";
@@ -810,24 +752,6 @@
   pointer-events: none;
 }
 
-/* How-we-engage sequence timeline */
-.sled-engage-timeline::before {
-  content: "";
-  position: absolute;
-  left: 27px;
-  top: 72px;
-  bottom: 72px;
-  width: 2px;
-  background: linear-gradient(180deg, rgba(24, 176, 230, 0.5), rgba(24, 176, 230, 0.06));
-  pointer-events: none;
-}
-
-@media (max-width: 1023px) {
-  .sled-engage-timeline::before {
-    display: none;
-  }
-}
-
 /* Final CTA decoration */
 .sled-final-cta::before {
   content: "";
@@ -840,52 +764,6 @@
   background-size: 30px 30px;
   transform: rotate(15deg);
   pointer-events: none;
-}
-
-/* Stat dividers */
-.sled-stat-divider {
-  position: relative;
-}
-
-.sled-stat-divider::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 15%;
-  bottom: 15%;
-  width: 1px;
-  background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.22), transparent);
-}
-
-/* Link underline accent */
-.sled-link-accent {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: 700;
-  color: var(--color-yale);
-  transition: gap 0.22s ease;
-}
-
-.sled-link-accent::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 2px;
-  background: var(--color-cyan);
-  transform-origin: left;
-  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.sled-link-accent:hover {
-  gap: 0.75rem;
-}
-
-.sled-link-accent:hover::after {
-  transform: scaleX(1.08);
 }
 
 /* Proof — engagement slider */
@@ -922,8 +800,184 @@
   transition: fill 0.5s ease, opacity 0.5s ease;
 }
 
-@media (prefers-reduced-motion: reduce) {
+/* How We Partner — spec accordion */
+.sled-spec-item {
+  border-bottom: 1px solid var(--color-line);
+}
 
+.sled-spec-acc-dark .sled-spec-item {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.sled-spec-head {
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  gap: 22px;
+  align-items: center;
+  width: 100%;
+  padding: 20px 8px;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.sled-spec-num {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 1.9rem;
+  font-weight: 600;
+  color: var(--color-line);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  transition: color 0.2s ease;
+}
+
+.sled-spec-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.18rem;
+  font-weight: 600;
+  color: var(--color-yale);
+  transition: color 0.2s ease;
+}
+
+.sled-spec-title svg {
+  color: var(--color-cyan-strong);
+}
+
+.sled-spec-head-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.sled-when-tag {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-cyan-strong);
+  white-space: nowrap;
+}
+
+.sled-spec-chev {
+  color: var(--color-muted);
+  display: flex;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), color 0.2s ease;
+}
+
+.sled-spec-head:hover .sled-spec-num,
+.sled-spec-head:hover .sled-spec-title {
+  color: var(--color-cyan-strong);
+}
+
+.sled-spec-item.is-open .sled-spec-chev {
+  transform: rotate(180deg);
+  color: var(--color-cyan-strong);
+}
+
+.sled-spec-item.is-open .sled-spec-num {
+  color: var(--color-cyan);
+}
+
+.sled-spec-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sled-spec-item.is-open .sled-spec-body {
+  grid-template-rows: 1fr;
+}
+
+.sled-spec-body-inner,
+.sled-spec-body-in {
+  overflow: hidden;
+}
+
+.sled-spec-body-pad {
+  padding: 0 8px 24px 86px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.sled-spec-body-pad p {
+  font-size: 14px;
+  color: var(--color-muted);
+  line-height: 1.55;
+  margin: 0;
+  max-width: 64ch;
+}
+
+.sled-spec-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.sled-spec-tools span {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 10.5px;
+  color: var(--color-muted);
+  background: var(--color-seasalt);
+  border: 1px solid var(--color-line);
+  border-radius: 6px;
+  padding: 5px 9px;
+  white-space: nowrap;
+}
+
+.sled-spec-acc-dark .sled-spec-num {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.sled-spec-acc-dark .sled-spec-title {
+  color: #fff;
+}
+
+.sled-spec-acc-dark .sled-spec-chev {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.sled-spec-acc-dark .sled-spec-head:hover .sled-spec-num,
+.sled-spec-acc-dark .sled-spec-head:hover .sled-spec-title {
+  color: var(--color-cyan);
+}
+
+.sled-spec-acc-dark .sled-spec-item.is-open .sled-spec-chev {
+  color: var(--color-cyan);
+}
+
+.sled-spec-acc-dark .sled-spec-item.is-open .sled-spec-num {
+  color: var(--color-cyan);
+}
+
+.sled-spec-acc-dark .sled-spec-body-pad p {
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.sled-spec-acc-dark .sled-spec-tools span {
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+@media (max-width: 760px) {
+  .sled-spec-head {
+    grid-template-columns: 40px 1fr auto;
+    gap: 14px;
+  }
+
+  .sled-spec-body-pad {
+    padding-left: 54px;
+  }
+
+  .sled-when-tag {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
   .sled-hero-capitol,
   .sled-hero-glow-a,
   .sled-hero-glow-b,
@@ -957,6 +1011,15 @@
   .sled-spec-body {
     grid-template-rows: 1fr;
     transition: none;
+  }
+
+  .sled-spec-item:not(.is-open) .sled-spec-body {
+    display: none;
+  }
+
+  .sled-spec-item.is-open .sled-spec-body {
+    display: block;
+    grid-template-rows: 1fr;
   }
 
   .sled-hl-u::after {

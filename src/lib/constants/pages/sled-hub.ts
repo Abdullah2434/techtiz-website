@@ -22,11 +22,17 @@ export const SLED_HERO = {
       beam: true,
     },
     {
-      label: "How we engage",
-      href: "/us-sled/how-we-engage/",
-      variant: "cta",
+      label: "How we partner →",
+      href: "/us-sled/how-we-partner/",
+      variant: "filled",
       showArrow: false,
     },
+  ],
+  stats: [
+    { n: "~10h", l: "US/PK overlap, daily" },
+    { n: "1 day", l: "Response SLA, NDA-bound" },
+    { n: "NDA", l: "First on substantive contact" },
+    { n: "0", l: "Agency-facing engagements" },
   ],
 } as const;
 
@@ -59,7 +65,8 @@ export const SLED_OUTCOMES = {
   heading: "What changes when Techtiz is on your team.",
   stats: [
     {
-      label: "GIS-tagged facility inventory delivered on a state environmental plan",
+      label:
+        "GIS-tagged facility inventory delivered on a state environmental plan",
       tickerTo: 100,
       suffix: "%",
     },
@@ -168,8 +175,16 @@ export const SLED_PROOF = {
       metrics: [
         { label: "Annual budget operated", value: "$3.9M" },
         { label: "Residents served", tickerTo: 43, tickerSuffix: "k" },
-        { label: "Cash-flow projection model", tickerTo: 10, tickerSuffix: "-yr" },
-        { label: "Engagement value (under NDA)", value: "NDA", variant: "cyan" },
+        {
+          label: "Cash-flow projection model",
+          tickerTo: 10,
+          tickerSuffix: "-yr",
+        },
+        {
+          label: "Engagement value (under NDA)",
+          value: "NDA",
+          variant: "cyan",
+        },
       ],
       tags: [
         "GAAP close",
@@ -242,7 +257,7 @@ export const SLED_BACKBONE = {
       detail: "GIS layers, spatial joins, and statutory map production.",
       stackHtml: "<b>ArcGIS</b> · <b>PostGIS</b> · GeoPandas · Mapbox",
       icon: "map",
-      dark: true,
+      dark: false,
     },
     {
       meta: "02 · ENGAGE",
@@ -598,7 +613,7 @@ export const SLED_SPECIALIZATIONS = {
   ],
   cta: {
     textHtml:
-      'A specialization not listed? <b>We\'ll map our team to your SOW.</b>',
+      "A specialization not listed? <b>We'll map our team to your SOW.</b>",
     linkLabel: "Start an NDA conversation",
     linkHref: "/us-sled/contact/",
   },

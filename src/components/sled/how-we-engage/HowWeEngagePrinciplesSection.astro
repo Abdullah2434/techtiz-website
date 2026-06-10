@@ -1,52 +1,31 @@
 ---
-import BadgeCheck from '@lucide/astro/icons/badge-check';
-import MessageSquareOff from '@lucide/astro/icons/message-square-off';
-import ShieldCheck from '@lucide/astro/icons/shield-check';
-import Users from '@lucide/astro/icons/users';
-import { PRINCIPLES } from '../../../lib/constants/pages/how-we-engage';
+import FileCheck from '@lucide/astro/icons/file-check';
+import { NON_NEGOTIABLES, NON_NEGOTIABLES_SECTION } from '../../../lib/constants/pages/how-we-engage';
 import Eyebrow from '../../shared/Eyebrow.astro';
 import SledPageWrap from '../shared/SledPageWrap.astro';
-
-const principleIcons = [MessageSquareOff, BadgeCheck, ShieldCheck, Users] as const;
+import SledSpecAccordion from '../shared/SledSpecAccordion.astro';
 ---
 
-<section class="sled-principles sled-section relative overflow-hidden bg-yale-dark text-white/70" id="principles">
+<section class="sled-section relative overflow-hidden bg-yale-dark text-white" id="principles" data-screen-label="03 Non-negotiables">
   <div
-    class="pointer-events-none absolute -right-10 top-[60px] size-[480px] [background:repeating-linear-gradient(0deg,transparent_0_40px,rgba(24,176,230,0.04)_40px_41px),repeating-linear-gradient(90deg,transparent_0_40px,rgba(24,176,230,0.04)_40px_41px)]"
-    aria-hidden="true"
-  />
-  <div
-    class="sled-hero-glow-a pointer-events-none absolute bottom-[-20%] left-[-8%] size-[min(50vw,420px)] rounded-full bg-[radial-gradient(circle,rgba(24,176,230,0.12)_0%,transparent_70%)] blur-[80px] motion-reduce:hidden"
+    class="pointer-events-none absolute -right-[60px] -top-[60px] size-[340px] [background:linear-gradient(45deg,transparent_48%,rgba(24,176,230,0.14)_48%_52%,transparent_52%)] [background-size:30px_30px] rotate-[15deg]"
     aria-hidden="true"
   />
 
-  <SledPageWrap class="relative z-[2]">
-    <div class="grid grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
-      <div class="sled-reveal lg:sticky lg:top-[140px] lg:self-start" data-sled-reveal>
-        <Eyebrow text="Locked in teaming letter" onDark showGlyph class="mb-5" />
-        <h2 class="sled-h2 leading-[1.08] text-white">
-          Four non-negotiables, in writing.
-        </h2>
-        <p class="mt-4 max-w-[400px] text-[15.5px] leading-[1.65] text-white/72">
-          These show up in the teaming letter draft we send in Step 3. They are not negotiable; they are how the practice operates.
-        </p>
+  <SledPageWrap class="relative z-2">
+    <div class="grid grid-cols-1 items-start gap-9 lg:grid-cols-[0.9fr_1.3fr] lg:gap-14">
+      <div class="sled-reveal" data-sled-reveal>
+        <Eyebrow text={NON_NEGOTIABLES_SECTION.eyebrow} onDark showGlyph class="mb-4" />
+        <h2 class="sled-h2 mb-[18px] leading-[1.1] text-white max-w-[450px] ">{NON_NEGOTIABLES_SECTION.heading}</h2>
+        <p class="max-w-[400px] text-[15px] leading-[1.6] text-white/74">{NON_NEGOTIABLES_SECTION.body}</p>
+        <span class="mt-6 inline-flex items-center gap-2.5 rounded-full border border-cyan/40 bg-cyan/6 px-4 py-2.5 font-mono text-[11px] tracking-[0.12em] uppercase text-cyan">
+          <FileCheck class="size-3.5" aria-hidden="true" />
+          {NON_NEGOTIABLES_SECTION.stamp}
+        </span>
       </div>
 
-      <div class="sled-reveal-stagger space-y-3.5" data-sled-reveal>
-        {PRINCIPLES.map((p, idx) => {
-          const Icon = principleIcons[idx];
-          return (
-            <div class="sled-card-dark group flex gap-4 rounded-2xl p-5 sm:p-6">
-              <div class="grid size-11 shrink-0 place-items-center rounded-xl bg-cyan/15 text-cyan transition-transform duration-300 group-hover:scale-105">
-                <Icon class="size-5" stroke-width="1.75" aria-hidden="true" />
-              </div>
-              <div class="min-w-0">
-                <h4 class="text-[16px] font-extrabold leading-[1.25] text-white">{p.heading}</h4>
-                <p class="mt-2 text-[14px] leading-[1.6] text-white/72">{p.body}</p>
-              </div>
-            </div>
-          );
-        })}
+      <div class="sled-reveal" data-sled-reveal>
+        <SledSpecAccordion items={NON_NEGOTIABLES} variant="dark" defaultOpen={0} />
       </div>
     </div>
   </SledPageWrap>

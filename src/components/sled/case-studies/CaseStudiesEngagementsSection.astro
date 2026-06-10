@@ -1,81 +1,93 @@
 ---
-import ChartColumn from '@lucide/astro/icons/chart-column';
-import Building2 from '@lucide/astro/icons/building-2';
-import Globe from '@lucide/astro/icons/globe';
-import Landmark from '@lucide/astro/icons/landmark';
-import Map from '@lucide/astro/icons/map';
-import Accessibility from '@lucide/astro/icons/accessibility';
-import { ENGAGEMENT_CARDS } from '../../../lib/constants/pages/case-studies';
+import ArrowRight from '@lucide/astro/icons/arrow-right';
+import FileClock from '@lucide/astro/icons/file-clock';
+import { ENGAGEMENTS_SECTION, FEATURE_CARDS } from '../../../lib/constants/pages/case-studies';
 import Eyebrow from '../../shared/Eyebrow.astro';
 import SledPageWrap from '../shared/SledPageWrap.astro';
-
-const cardIcons = [Map, Accessibility, Building2, Globe, ChartColumn, Landmark] as const;
 ---
 
-<section class="sled-section bg-white" id="engagements">
+<section class="sled-section bg-seasalt" id="engagements" aria-labelledby="engagements-heading">
   <SledPageWrap>
-    <div class="sled-reveal mb-12 grid grid-cols-1 gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-end" data-sled-reveal>
-      <div>
-        <Eyebrow text="Delivered engagements" showGlyph class="mb-4" />
-        <h2 class="sled-h2 leading-[1.08] text-yale-dark">
-          What we shipped, under whose roof, on what vehicle.
+    <div class="sled-reveal mb-[clamp(2.25rem,4.5vw,3.5rem)] flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between" data-sled-reveal>
+      <div class="max-w-[720px]">
+        <Eyebrow text={ENGAGEMENTS_SECTION.eyebrow} showGlyph class="mb-3.5" />
+        <h2 id="engagements-heading" class="sled-h2 leading-[1.12] text-yale-dark max-w-[20ch]">
+          {ENGAGEMENTS_SECTION.heading}
         </h2>
+        <p class="mt-3.5 max-w-[640px] text-[15.5px] leading-[1.6] text-muted">{ENGAGEMENTS_SECTION.body}</p>
       </div>
-      <p class="max-w-[520px] text-[15.5px] leading-[1.65] text-muted lg:justify-self-end">
-        Each card describes a delivered subcontract engagement: the technical surface area, the prime relationship type, the deliverables that shipped, and the procurement vehicle the work moved through. References available with NDA.
+      <p class="shrink-0 rounded-full border border-line bg-white px-4 py-2 font-mono text-[11px] font-semibold tracking-[0.12em] text-muted uppercase">
+        {FEATURE_CARDS.length} engagement examples
       </p>
     </div>
 
-    <div class="sled-reveal-stagger grid grid-cols-1 gap-5 lg:grid-cols-2" data-sled-reveal>
-      {ENGAGEMENT_CARDS.map((card, idx) => {
-        const Icon = cardIcons[idx];
-        return (
-          <article class="sled-card group flex flex-col overflow-hidden rounded-2xl p-0">
-            <div class="flex items-center gap-3.5 border-b border-line px-6 py-5 sm:px-7">
-              <div class="grid size-10 shrink-0 place-items-center rounded-xl bg-[rgba(31,120,85,0.10)] text-[#1F7855] transition-transform duration-300 group-hover:scale-105">
-                <Icon class="size-5" stroke-width="1.75" aria-hidden="true" />
+    <div class="sled-reveal-stagger grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-6" data-sled-reveal>
+      {FEATURE_CARDS.map((card) => (
+        <a
+          href={card.href}
+          class="sled-engagement-card group relative flex flex-col overflow-hidden rounded-[20px] border border-line/80 bg-white text-inherit no-underline shadow-[0_10px_30px_-18px_rgba(21,58,95,0.16)] transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:border-cyan/35 hover:shadow-[0_24px_48px_-22px_rgba(21,58,95,0.22)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
+        >
+          <div class="relative overflow-hidden bg-yale-dark px-5 py-5 sm:px-6">
+            <div
+              class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(24,176,230,0.22)_0%,transparent_55%),linear-gradient(135deg,rgba(14,38,64,0.2)_0%,transparent_50%)]"
+              aria-hidden="true"
+            />
+            <div class="relative flex flex-col gap-4 sm:flex-row sm:items-center">
+              <div class="flex h-[108px] w-full shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/95 p-4 shadow-[0_16px_36px_-14px_rgba(0,0,0,0.45)] backdrop-blur-sm sm:h-[112px] sm:w-[148px]">
+                <img
+                  src={card.logo}
+                  alt={card.logoAlt}
+                  class="h-auto max-h-[72px] w-full max-w-[120px] object-contain"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
-              <span class="rounded-full bg-[rgba(31,120,85,0.10)] px-3 py-1.5 font-mono text-[10.5px] font-bold tracking-[0.14em] text-[#1F7855] uppercase">
-                {card.badge}
-              </span>
-              <span class="ml-auto font-mono text-[10.5px] tracking-[0.10em] text-muted uppercase">
-                {card.anon}
-              </span>
+              <p class="font-mono text-[11px] leading-[1.55] text-white/72 sm:flex-1">{card.cap}</p>
             </div>
+          </div>
 
-            <div class="flex flex-1 flex-col px-6 pb-6 pt-5 sm:px-7 sm:pb-7">
-              <h3 class="mb-4 text-[clamp(1.0625rem,2vw,1.3125rem)] font-extrabold leading-[1.25] text-yale-dark">{card.heading}</h3>
-
-              <div class="mb-5 flex flex-wrap gap-1.5">
-                {card.meta.map((m) => (
-                  <span class="rounded-full border border-line bg-seasalt px-2.5 py-1 font-mono text-[10.5px] tracking-[0.04em] text-muted">{m}</span>
-                ))}
-              </div>
-
-              <div class="flex-1 space-y-0">
-                {card.rows.map((row, rowIdx) => (
-                  <div
-                    class:list={[
-                      'grid grid-cols-1 gap-1 border-t border-line-soft py-3.5 sm:grid-cols-[92px_1fr] sm:gap-3.5',
-                      rowIdx === card.rows.length - 1 && 'border-b border-line-soft',
-                    ]}
-                  >
-                    <span class="font-mono text-[10px] font-bold tracking-[0.14em] text-cyan-strong uppercase sm:pt-0.5">
-                      {row.lbl}
-                    </span>
-                    <span class="text-[13.5px] leading-[1.55] text-ink [&_strong]:font-bold [&_strong]:text-yale-dark" set:html={row.val} />
-                  </div>
-                ))}
-              </div>
-
-              <div class="mt-5 flex items-center gap-2 font-mono text-[11px] tracking-[0.06em] text-muted uppercase">
+          <div class="flex flex-1 flex-col px-5 py-5 sm:px-6 sm:py-6">
+            <div class="mb-4 flex flex-wrap items-center gap-2">
+              <span class="inline-flex items-center gap-1.5 rounded-full bg-cyan/10 px-3 py-1 font-mono text-[10.5px] font-semibold tracking-[0.08em] text-cyan-strong uppercase">
                 <span class="size-1.5 shrink-0 rounded-full bg-cyan" aria-hidden="true" />
-                Vehicle · {card.vehicle}
-              </div>
+                {card.state}
+              </span>
+              <span class="inline-flex items-center gap-1.5 rounded-full bg-amber/10 px-3 py-1 font-mono text-[10.5px] font-semibold tracking-[0.08em] text-amber uppercase">
+                <FileClock class="size-3" aria-hidden="true" />
+                {card.tag}
+              </span>
             </div>
-          </article>
-        );
-      })}
+
+            <h3 class="text-[clamp(1.125rem,2vw,1.3125rem)] leading-[1.2] font-extrabold tracking-[-0.015em] text-yale-dark">
+              {card.heading}
+            </h3>
+            <p class="mt-1.5 font-mono text-[11.5px] leading-[1.45] text-muted">{card.sub}</p>
+
+            <div class="mt-5 grid grid-cols-2 gap-2.5">
+              {card.stats.map((stat) => (
+                <div class="rounded-xl border border-line-soft/90 bg-seasalt/70 px-3.5 py-3 transition-colors duration-300 group-hover:border-line group-hover:bg-seasalt">
+                  <div class="text-[1.25rem] leading-none font-bold tracking-[-0.02em] text-yale-dark">{stat.n}</div>
+                  <div class="mt-1.5 text-[11px] leading-[1.35] text-muted">{stat.l}</div>
+                </div>
+              ))}
+            </div>
+
+            <div class="mt-5 flex flex-col gap-4 border-t border-line-soft pt-5 sm:flex-row sm:items-center sm:justify-between">
+              <div class="flex flex-wrap gap-1.5">
+                {card.chips.map((chip) => (
+                  <span class="rounded-full border border-line/80 bg-white px-2.5 py-1 font-mono text-[10px] tracking-[0.02em] text-muted">
+                    {chip}
+                  </span>
+                ))}
+              </div>
+              <span class="inline-flex shrink-0 items-center gap-2 rounded-full border border-cyan/25 bg-cyan/5 px-3.5 py-2 text-[12.5px] font-bold text-cyan-strong transition-[gap,background-color,border-color] duration-300 group-hover:gap-2.5 group-hover:border-cyan/40 group-hover:bg-cyan/10">
+                Read case study
+                <ArrowRight class="size-3.5 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true" />
+              </span>
+            </div>
+          </div>
+        </a>
+      ))}
     </div>
   </SledPageWrap>
 </section>

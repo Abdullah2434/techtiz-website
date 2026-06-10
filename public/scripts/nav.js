@@ -337,6 +337,9 @@
   });
 
   if ('IntersectionObserver' in window && spyMap.size) {
+    const isSledHub = /^\/us-sled\/?$/.test(path);
+    if (!isSledHub) return;
+
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {

@@ -1,0 +1,32 @@
+---
+import HowWeEngageCoverageSection from '../../components/sled/how-we-engage/HowWeEngageCoverageSection.astro';
+import HowWeEngageHeroSection from '../../components/sled/how-we-engage/HowWeEngageHeroSection.astro';
+import HowWeEngagePrinciplesSection from '../../components/sled/how-we-engage/HowWeEngagePrinciplesSection.astro';
+import HowWeEngageRegistrationStrip from '../../components/sled/how-we-engage/HowWeEngageRegistrationStrip.astro';
+import HowWeEngageSequenceSection from '../../components/sled/how-we-engage/HowWeEngageSequenceSection.astro';
+import HowWeEngageStartSection from '../../components/sled/how-we-engage/HowWeEngageStartSection.astro';
+import HowWeEngageVehiclesSection from '../../components/sled/how-we-engage/HowWeEngageVehiclesSection.astro';
+import SledFaqSection from '../../components/sled/shared/SledFaqSection.astro';
+import SledLayout from '../../layouts/SledLayout.astro';
+import { HOW_WE_ENGAGE_SEO } from '../../lib/constants/pages/how-we-engage';
+import { HOW_WE_ENGAGE_FAQ } from '../../lib/constants/pages/sled-faq';
+import { ROUTES } from '../../lib/constants/routes';
+import '../../styles/sled.css';
+
+const { title, description, canonicalPath, ogImage } = HOW_WE_ENGAGE_SEO;
+---
+
+<SledLayout {title} {description} {canonicalPath} {ogImage} currentPage={ROUTES.sledHowWePartner}>
+  <div class="sled-engage-page">
+    <HowWeEngageHeroSection />
+    <HowWeEngageSequenceSection />
+    <HowWeEngagePrinciplesSection />
+    <HowWeEngageCoverageSection />
+    <HowWeEngageVehiclesSection />
+    <HowWeEngageRegistrationStrip />
+    <HowWeEngageStartSection />
+    <SledFaqSection {...HOW_WE_ENGAGE_FAQ} canonicalPath={canonicalPath} />
+  </div>
+  <script src="/scripts/sled-hub.js" is:inline></script>
+  <script src="/scripts/sled-engage.js" is:inline></script>
+</SledLayout>

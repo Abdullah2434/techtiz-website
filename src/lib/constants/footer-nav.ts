@@ -37,14 +37,12 @@ export const FOOTER_NAV_SECTIONS: FooterNavSectionData[] = [
   {
     title: "SLED Partnerships",
     links: [
-      { name: "SLED Hub", href: ROUTES.sledHub },
+      { name: "Hub", href: ROUTES.sledHub },
       { name: "Capabilities", href: ROUTES.sledCapabilities },
-      { name: "How We Engage", href: ROUTES.sledHowWeEngage },
-      { name: "Operating Model", href: ROUTES.sledOperatingModel },
+      { name: "How We Partner", href: ROUTES.sledHowWePartner },
       { name: "Engagement Examples", href: ROUTES.sledCaseStudies },
-      { name: "Procurement Vehicles", href: ROUTES.sledVehicles },
-      { name: "Capability Statement", href: ROUTES.sledCapabilityStatement },
-      { name: "SLED Contact", href: ROUTES.sledContact },
+      // { name: "Capability Statement", href: ROUTES.sledCapabilityStatement },
+      { name: "Contact", href: ROUTES.sledContact },
     ],
   },
 ];

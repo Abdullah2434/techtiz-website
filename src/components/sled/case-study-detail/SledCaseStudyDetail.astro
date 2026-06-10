@@ -1,0 +1,22 @@
+---
+import type { SledCaseStudy } from '../../../lib/constants/pages/sled-case-studies';
+import CaseStudyDetailHero from './CaseStudyDetailHero.astro';
+import CaseStudyDetailSections from './CaseStudyDetailSections.astro';
+
+interface Props {
+  study: SledCaseStudy;
+}
+
+const { study } = Astro.props;
+const deadline = 'deadline' in study ? study.deadline : undefined;
+---
+
+<div
+  class="sled-case-study-detail"
+  data-sled-case-study
+  data-sled-case-deadline={deadline}
+  data-sled-case-status="live"
+>
+  <CaseStudyDetailHero study={study} />
+  <CaseStudyDetailSections study={study} />
+</div>

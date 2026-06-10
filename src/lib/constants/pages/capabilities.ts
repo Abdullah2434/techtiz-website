@@ -24,7 +24,7 @@ export const SLED_CAPABILITIES = {
         label: "Download capability statement",
         href: "/us-sled/capability-statement/",
         variant: "cta" as const,
-        showArrow: true,
+        showArrow: false,
       },
       {
         label: "Start an NDA conversation",
@@ -245,7 +245,8 @@ export const SLED_CAPABILITIES = {
         variant: "serve" as const,
         label: "Serve directly",
         title: "Standard subcontract",
-        description: "Non-PII, non-CJI scopes proceed under standard prime terms.",
+        description:
+          "Non-PII, non-CJI scopes proceed under standard prime terms.",
         items: [
           {
             code: "Most SLED procurements",
@@ -320,7 +321,8 @@ export const SLED_CAPABILITIES = {
   },
   cta: {
     eyebrow: "Engage us",
-    heading: "Need the full compliance pack before your next subcontract review?",
+    heading:
+      "Need the full compliance pack before your next subcontract review?",
     body: "The capability statement, architecture diagram, control mapping, per-state posture page, and personnel attestation template, sent under NDA within one business day.",
     ctas: [
       {

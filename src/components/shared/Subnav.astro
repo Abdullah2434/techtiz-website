@@ -14,7 +14,11 @@ function isActive(href: string) {
   const normalized = currentPath.replace(/\/$/, '') || '/';
   const hrefNorm = href.replace(/\/$/, '') || '/';
   if (hrefNorm.includes('#')) return false;
-  return normalized === hrefNorm || normalized === hrefNorm.replace(/\/$/, '');
+  if (hrefNorm === '/us-sled') {
+    return normalized === '/us-sled';
+  }
+  if (normalized === hrefNorm) return true;
+  return normalized.startsWith(`${hrefNorm}/`);
 }
 
 const crumbs = buildBreadcrumbs(currentPath);

@@ -1,0 +1,36 @@
+---
+import { CASE_STUDIES_HERO } from '../../../lib/constants/pages/case-studies';
+import Eyebrow from '../../shared/Eyebrow.astro';
+import SledPageWrap from '../shared/SledPageWrap.astro';
+---
+
+<section
+  class="sled-case-studies-hero relative overflow-hidden bg-yale-dark text-white"
+  data-screen-label="01 Hero"
+>
+  <div
+    class="pointer-events-none absolute inset-0 z-0 bg-[url('/assets/hero-desk.png')] bg-cover bg-[position:right_center] bg-no-repeat"
+    aria-hidden="true"
+  />
+  <div
+    class="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(100deg,var(--color-yale-dark)_24%,rgba(14,38,64,0.72)_46%,rgba(14,38,64,0.30)_68%,transparent_92%)]"
+    aria-hidden="true"
+  />
+  <div
+    class="pointer-events-none absolute top-[-50px] right-[-50px] z-[1] size-[300px] rotate-[15deg] bg-[linear-gradient(45deg,transparent_49%,rgba(24,176,230,0.16)_49%_51%,transparent_51%)] bg-[length:28px_28px] motion-reduce:hidden"
+    aria-hidden="true"
+  />
+
+  <SledPageWrap class="relative z-[5] py-[clamp(3.375rem,6vw,5.25rem)] pb-[clamp(2.5rem,4.5vw,3.75rem)]">
+    <div class="sled-reveal max-w-[var(--wrap,1200px)]" data-sled-reveal>
+      <Eyebrow text={CASE_STUDIES_HERO.eyebrow} onDark showGlyph class="mb-[18px]" />
+      <h1
+        class="sled-h1 mb-5 max-w-[18ch] text-white"
+        set:html={CASE_STUDIES_HERO.heading}
+      />
+      <p class="max-w-[560px] text-[clamp(1.02rem,1.4vw,1.125rem)] leading-[1.55] text-white/80">
+        {CASE_STUDIES_HERO.body}
+      </p>
+    </div>
+  </SledPageWrap>
+</section>

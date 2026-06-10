@@ -411,6 +411,232 @@
   background: var(--color-seasalt);
 }
 
+/* Capabilities — bifurcated architecture board */
+.sled-arch-board {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 80px 1fr;
+  gap: 0;
+  overflow: hidden;
+  border: 1px solid var(--color-line-soft);
+  border-radius: 16px;
+  background: var(--color-white);
+  padding: clamp(24px, 3vw, 40px);
+  box-shadow: 0 8px 24px -12px rgba(21, 58, 95, 0.14);
+}
+
+.sled-arch-board::before {
+  content: attr(data-air-gap-label);
+  position: absolute;
+  top: clamp(24px, 3vw, 40px);
+  left: 50%;
+  z-index: 3;
+  transform: translateX(-50%);
+  padding: 4px 10px;
+  border: 1px solid var(--color-cyan);
+  border-radius: 5px;
+  background: var(--color-white);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-cyan-strong);
+}
+
+.sled-arch-col {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  border: 1px solid var(--color-line);
+  border-radius: 12px;
+  background: var(--color-seasalt);
+  padding: 28px;
+}
+
+.sled-arch-col--onshore {
+  border-color: var(--color-yale-mid);
+}
+
+.sled-arch-col-head {
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--color-line-soft);
+}
+
+.sled-arch-flag {
+  display: inline-block;
+  padding: 5px 9px;
+  border-radius: 5px;
+  background: var(--color-yale-dark);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.sled-arch-flag--offshore {
+  background: var(--color-cyan-strong);
+}
+
+.sled-arch-title {
+  margin: 14px 0 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--color-yale-dark);
+}
+
+.sled-arch-sub {
+  margin: 6px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--color-muted);
+}
+
+.sled-arch-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sled-arch-item {
+  display: grid;
+  grid-template-columns: 16px 1fr;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--color-ink);
+}
+
+.sled-arch-item p {
+  margin: 0;
+}
+
+.sled-arch-item strong {
+  color: var(--color-yale-dark);
+  font-weight: 700;
+}
+
+.sled-arch-dot {
+  width: 7px;
+  height: 7px;
+  margin-top: 6px;
+  margin-left: 4px;
+  border-radius: 1.5px;
+  background: var(--color-cyan);
+  transform: rotate(15deg);
+}
+
+.sled-arch-col--onshore .sled-arch-dot {
+  background: var(--color-yale-mid);
+}
+
+.sled-arch-data {
+  margin-top: auto;
+  padding-top: 18px;
+  border-top: 1px solid var(--color-line-soft);
+}
+
+.sled-arch-data-label {
+  margin-bottom: 10px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.sled-arch-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.sled-arch-pill {
+  padding: 4px 9px;
+  border: 1px solid var(--color-cyan-soft);
+  border-radius: 5px;
+  background: var(--color-cyan-soft);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-yale-dark);
+}
+
+.sled-arch-pill--offshore {
+  border-color: var(--color-line);
+  background: var(--color-white);
+  color: var(--color-muted);
+}
+
+.sled-arch-gap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.sled-arch-vline {
+  width: 1px;
+  flex: 1;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--color-cyan) 0 6px,
+    transparent 6px 12px
+  );
+}
+
+.sled-arch-lock {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin: 6px 0;
+  border: 1px solid var(--color-cyan);
+  border-radius: 50%;
+  background: var(--color-white);
+  color: var(--color-cyan-strong);
+}
+
+.sled-arch-gap-label {
+  margin-top: 4px;
+}
+
+@media (max-width: 900px) {
+  .sled-arch-board {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .sled-arch-board::before {
+    display: none;
+  }
+
+  .sled-arch-gap {
+    flex-direction: row;
+    height: 40px;
+  }
+
+  .sled-arch-vline {
+    width: auto;
+    height: 1px;
+    flex: 1;
+    background: repeating-linear-gradient(
+      to right,
+      var(--color-cyan) 0 6px,
+      transparent 6px 12px
+    );
+  }
+
+  .sled-arch-gap-label {
+    margin-top: 0;
+    white-space: nowrap;
+  }
+}
+
 /* Backbone bento — detail overlay reveal */
 .sled-bento-detail {
   opacity: 0;

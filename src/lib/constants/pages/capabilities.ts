@@ -157,6 +157,77 @@ export const FRAMEWORKS_SECTION = {
 /** @deprecated Use SLED_CAPABILITIES_FRAMEWORKS */
 export const COMPLIANCE_FRAMEWORKS = SLED_CAPABILITIES_FRAMEWORKS.items;
 
+export const SLED_CAPABILITIES_ARCHITECTURE = {
+  eyebrow: "Data architecture",
+  heading: "Where the data goes. Who touches it.",
+  body: "The one question a prime compliance officer asks before paperwork moves. Live agency data, CJI, PHI, FCI, and CUI are handled only by U.S. personnel on U.S. soil. Lahore engineers work against sanitized, synthetic data behind a documented air-gap.",
+  airGapLabel: "Air-gap",
+  onshore: {
+    flag: "CONUS · US persons",
+    title: "Onshore plane",
+    subtitle:
+      "U.S.-citizen personnel on U.S. soil. The only environment cleared to handle live agency data, controlled information, and any work touching law-enforcement, judicial, or healthcare systems.",
+    items: [
+      {
+        title: "Engagement manager & technical liaison:",
+        body: "single accountable contact for the prime PM. Status, escalations, and change requests flow here first.",
+      },
+      {
+        title: "Live data handling:",
+        body: "any production pull touching CJI, PHI, FCI, CUI, or agency PII is performed onshore inside the prime's authorization boundary.",
+      },
+      {
+        title: "CJIS-cleared operations:",
+        body: "fingerprinted, background-checked U.S. personnel on a CJIS-aligned workstation for law-enforcement, court, or dispatch systems.",
+      },
+      {
+        title: "Acceptance, KT, and deployment:",
+        body: "final review, agency-facing artifact handoff to the prime, and production deployment gates.",
+      },
+    ],
+    dataClassesLabel: "Data classes handled here",
+    dataClasses: [
+      "CUI",
+      "FCI",
+      "CJI",
+      "PHI",
+      "Agency PII",
+      "Live production data",
+    ],
+  },
+  offshore: {
+    flag: "Lahore · Engineering",
+    title: "Offshore engineering plane",
+    subtitle:
+      "Senior engineers in Lahore working against sanitized environments, synthetic data sets, and API contracts that do not expose live agency endpoints. Where the bulk of the build happens, never against production data.",
+    items: [
+      {
+        title: "Codebase development:",
+        body: "feature work against mock data and contract tests. Pull requests gated by onshore review before any live-data deployment.",
+      },
+      {
+        title: "Synthetic-data engineering:",
+        body: "schema-faithful but content-scrubbed datasets for development and regression testing. Real records never leave the onshore plane.",
+      },
+      {
+        title: "Artifact production:",
+        body: "architecture docs, runbooks, statutory-format templates, and dashboards, reviewed onshore before release.",
+      },
+      {
+        title: "Workstation controls:",
+        body: "managed devices, disk encryption, DLP egress monitoring, no removable-media write, audit logs forwarded to the onshore SIEM.",
+      },
+    ],
+    dataClassesLabel: "Data classes handled here",
+    dataClasses: [
+      "Synthetic data",
+      "Mock fixtures",
+      "Public-domain artifacts",
+      "Codebase & configs",
+    ],
+  },
+} as const;
+
 export const SLED_CAPABILITIES_MATRIX = {
   eyebrow: "Core capabilities",
   heading: "Six capabilities, mapped to NAICS and NIGP.",

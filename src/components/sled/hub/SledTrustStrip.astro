@@ -1,9 +1,9 @@
 ---
-import { TRUST_ITEMS } from '../../../lib/constants/pages/case-studies';
+import { HUB_TRUST_ITEMS } from '../../../lib/constants/pages/sled-hub';
 import SledIcon from '../shared/SledIcon.astro';
 import SledPageWrap from '../shared/SledPageWrap.astro';
 
-function trustItemHref(item: (typeof TRUST_ITEMS)[number]): string | undefined {
+function trustItemHref(item: (typeof HUB_TRUST_ITEMS)[number]): string | undefined {
   if ('href' in item && typeof item.href === 'string') {
     return item.href;
   }
@@ -14,7 +14,7 @@ function trustItemHref(item: (typeof TRUST_ITEMS)[number]): string | undefined {
 <div class="sled-glass border-b border-line/80 py-6" data-sled-reveal>
   <SledPageWrap>
     <div class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4 max-[600px]:grid-cols-1 max-[600px]:gap-5">
-      {TRUST_ITEMS.map((item, idx) => {
+      {HUB_TRUST_ITEMS.map((item, idx) => {
         const inner = (
           <>
             <div class="grid size-12 shrink-0 place-items-center rounded-xl border border-line/80 bg-white shadow-[0_8px_20px_-14px_rgba(21,58,95,0.18)] text-cyan-strong transition-transform duration-300 group-hover:scale-105">

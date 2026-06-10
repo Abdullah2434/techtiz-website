@@ -15,19 +15,10 @@ export const CASE_STUDIES_HERO = {
   body: "Technical work completed for U.S. prime contractors under subcontract and NDA. Partner names withheld without written permission.",
 } as const;
 
-export const TRUST_ITEMS = [
-  {
-    icon: "calendar",
-    label: "Federal classification",
-    value: "NAICS 541511 · 541512",
-  },
-  {
-    icon: "building",
-    label: "State procurement",
-    value: "NIGP 918-46 · 918-00",
-  },
-  { icon: "check-circle", label: "Insurance", value: "Prime-routed" },
-  { icon: "clock", label: "Response SLA", value: "1 business day" },
+export const CASE_STUDIES_BOUNDARY_ITEMS = [
+  'Subcontract-only',
+  'NDA on first contact',
+  'Zero agency-facing engagements',
 ] as const;
 
 export const ENGAGEMENTS_SECTION = {

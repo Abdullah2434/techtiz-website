@@ -48,6 +48,21 @@ export const TRUST_BADGES = [
   },
 ] as const;
 
+export const HUB_TRUST_ITEMS = [
+  {
+    icon: "calendar",
+    label: "Federal classification",
+    value: "NAICS 541511 · 541512",
+  },
+  {
+    icon: "building",
+    label: "State procurement",
+    value: "NIGP 918-46 · 918-00",
+  },
+  { icon: "check-circle", label: "Insurance", value: "Prime-routed" },
+  { icon: "clock", label: "Response SLA", value: "1 business day" },
+] as const;
+
 export const PAST_PERFORMANCE_STRIPE = {
   label: "Active engagements",
   body: "Active subcontractor support for U.S. SLED prime contractors under NDA. Agency references and CPARS-style performance narratives available upon executed teaming agreement.",

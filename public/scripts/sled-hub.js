@@ -6,8 +6,10 @@
     el.dataset.done = '1';
     const to = parseFloat(el.getAttribute('data-to'));
     if (Number.isNaN(to)) return;
+    const prefix = el.getAttribute('data-prefix') || '';
+    const suffix = el.getAttribute('data-suffix') || '';
     if (prefersReduced || to === 0) {
-      el.textContent = String(to);
+      el.textContent = prefix + String(to) + suffix;
       return;
     }
     const dur = 1100;
@@ -16,9 +18,9 @@
       if (start === null) start = ts;
       const t = Math.min((ts - start) / dur, 1);
       const eased = 1 - Math.pow(1 - t, 3);
-      el.textContent = String(Math.round(to * eased));
+      el.textContent = prefix + String(Math.round(to * eased)) + suffix;
       if (t < 1) requestAnimationFrame(step);
-      else el.textContent = String(to);
+      else el.textContent = prefix + String(to) + suffix;
     }
     requestAnimationFrame(step);
   }
@@ -186,6 +188,45 @@
   document.querySelectorAll('[data-sled-need-card]').forEach((card) => {
     card.addEventListener('click', () => card.classList.toggle('is-selected'));
   });
+})();
+
+(function () {
+  const slider = document.querySelector('[data-sled-proof-slider]');
+  const track = document.querySelector('[data-sled-proof-track]');
+  const prev = document.querySelector('[data-sled-proof-prev]');
+  const next = document.querySelector('[data-sled-proof-next]');
+  const dotsWrap = document.querySelector('[data-sled-proof-dots]');
+  if (!(slider instanceof HTMLElement && track instanceof HTMLElement && prev && next && dotsWrap)) {
+    return;
+  }
+
+  const slides = track.children;
+  const count = slides.length;
+  if (!count) return;
+
+  let index = 0;
+  const dots = [];
+
+  for (let i = 0; i < count; i += 1) {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'sled-proof-dot' + (i === 0 ? ' is-active' : '');
+    dot.setAttribute('aria-label', `Engagement ${i + 1}`);
+    dot.addEventListener('click', () => go(i));
+    dotsWrap.appendChild(dot);
+    dots.push(dot);
+  }
+
+  function go(target) {
+    index = (target + count) % count;
+    track.style.transform = `translateX(${-index * 100}%)`;
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('is-active', i === index);
+    });
+  }
+
+  prev.addEventListener('click', () => go(index - 1));
+  next.addEventListener('click', () => go(index + 1));
 })();
 
 (function () {

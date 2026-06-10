@@ -585,6 +585,35 @@
   transform: scaleX(1.08);
 }
 
+/* Proof — engagement slider */
+.sled-proof-track {
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sled-proof-slide {
+  flex: 0 0 100%;
+  box-shadow: none;
+}
+
+.sled-proof-dot {
+  width: 8px;
+  height: 8px;
+  border: 0;
+  border-radius: 999px;
+  padding: 0;
+  background: var(--color-line);
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sled-proof-dot.is-active {
+  width: 24px;
+  border-radius: 5px;
+  background: var(--color-cyan);
+}
+
 @media (prefers-reduced-motion: reduce) {
 
   .sled-hero-capitol,
@@ -625,6 +654,10 @@
 
   .sled-hl-u::after {
     transform: scaleX(1);
+    transition: none;
+  }
+
+  .sled-proof-track {
     transition: none;
   }
 }

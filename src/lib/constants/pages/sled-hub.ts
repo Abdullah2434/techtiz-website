@@ -87,6 +87,113 @@ export const SLED_OUTCOMES = {
   stats: readonly SledOutcomeStat[];
 };
 
+export type SledProofMetric = {
+  label: string;
+  value?: string;
+  variant?: "green" | "cyan";
+  tickerTo?: number;
+  tickerPrefix?: string;
+  tickerSuffix?: string;
+};
+
+export type SledProofSlide = {
+  left:
+    | {
+        kind: "portal";
+        imageSrc: string;
+        imageAlt: string;
+        url: string;
+        caption: string;
+      }
+    | {
+        kind: "nda";
+        caption: string;
+      };
+  state: string;
+  status: { kind: "completed" | "nda"; label: string };
+  title: string;
+  subtitle: string;
+  metrics: readonly SledProofMetric[];
+  tags: readonly string[];
+  locked: readonly string[];
+};
+
+export const SLED_PROOF = {
+  eyebrow: "Engagement insights · under NDA",
+  heading: "Proof a prime can ",
+  headingAccent: "verify.",
+  linkHref: "/us-sled/case-studies/",
+  linkLabel: "All engagement examples",
+  slides: [
+    {
+      left: {
+        kind: "portal",
+        imageSrc: "/assets/portal-ui.png",
+        imageAlt: "Government portal interface screenshot",
+        url: "portal.co.gov",
+        caption:
+          "Subcontract delivery for a portal serving ~300k residents, under the prime's brand.",
+      },
+      state: "CO",
+      status: { kind: "completed", label: "Completed" },
+      title: "Government portal redesign",
+      subtitle: "WCAG 2.2 AA",
+      metrics: [
+        { label: "A/AA failures at launch", tickerTo: 0, variant: "green" },
+        { label: "Pages migrated", tickerTo: 100, tickerSuffix: "%" },
+        {
+          label: "Residents served",
+          tickerTo: 300,
+          tickerPrefix: "~",
+          tickerSuffix: "k",
+        },
+        { label: "Value (prime-held)", value: "$250–300k" },
+      ],
+      tags: ["WordPress", "WCAG 2.2 AA", "PDF/UA", "Leaflet", "Figma"],
+      locked: [
+        "Agency reference under teaming agreement",
+        "CPARS narrative on request",
+      ],
+    },
+    {
+      left: {
+        kind: "nda",
+        caption:
+          "Ongoing accounting, audit-prep, and statutory reporting for a California special district, under teaming agreement.",
+      },
+      state: "CA",
+      status: { kind: "nda", label: "RFP · responding" },
+      title: "Library district finance modernization",
+      subtitle: "Accounting & financial consulting",
+      metrics: [
+        { label: "Annual budget operated", value: "$3.9M" },
+        { label: "Residents served", tickerTo: 43, tickerSuffix: "k" },
+        { label: "Cash-flow projection model", tickerTo: 10, tickerSuffix: "-yr" },
+        { label: "Engagement value (under NDA)", value: "NDA", variant: "cyan" },
+      ],
+      tags: [
+        "GAAP close",
+        "CFD bond",
+        "OPEB",
+        "PERS",
+        "1099 / W-9",
+        "Budget-to-Actual",
+      ],
+      locked: [
+        "Scope, LOE & pricing under NDA",
+        "District name & references on request",
+      ],
+    },
+  ],
+} as const satisfies {
+  eyebrow: string;
+  heading: string;
+  headingAccent: string;
+  linkHref: string;
+  linkLabel: string;
+  slides: readonly SledProofSlide[];
+};
+
 export type SledBackboneCard = {
   meta: string;
   heading: string;

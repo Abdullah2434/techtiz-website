@@ -81,18 +81,18 @@ const icons = {
     </div>
 
     <a
-      class="group sled-reveal mt-[18px] grid grid-cols-[64px_1fr_auto] items-center gap-[22px] rounded-xl bg-cyan-soft px-6 py-[18px] text-inherit transition-[transform,box-shadow] duration-300 motion-safe:hover:-translate-y-0.5 motion-safe:hover:shadow-[0_12px_32px_-20px_rgba(21,58,95,0.2)]"
+      class="group sled-reveal mt-[18px] grid max-w-full grid-cols-[40px_minmax(0,1fr)] items-center gap-x-3.5 gap-y-3 rounded-xl bg-cyan-soft px-6 py-[18px] text-inherit transition-[transform,box-shadow] duration-300 motion-safe:hover:-translate-y-0.5 motion-safe:hover:shadow-[0_12px_32px_-20px_rgba(21,58,95,0.2)] sm:grid-cols-[64px_1fr_auto] sm:gap-[22px] sm:gap-y-0"
       data-sled-reveal
       href={SLED_SPECIALIZATIONS.cta.linkHref}
     >
-      <span class="flex items-center justify-center font-mono text-[1.6rem] text-cyan">
+      <span class="col-start-1 row-start-1 flex items-center justify-center font-mono text-[1.6rem] text-cyan">
         <Plus class="size-[22px]" stroke-width="2" aria-hidden="true" />
       </span>
       <span
-        class="text-[15px] text-ink [&_b]:font-bold [&_b]:text-yale"
+        class="col-start-2 row-start-1 min-w-0 text-[15px] text-ink [&_b]:font-bold [&_b]:text-yale"
         set:html={SLED_SPECIALIZATIONS.cta.textHtml}
       />
-      <span class="inline-flex items-center gap-2 text-sm font-bold whitespace-nowrap text-cyan-strong">
+      <span class="col-span-2 row-start-2 inline-flex items-center gap-2 text-sm font-bold text-cyan-strong sm:col-span-1 sm:col-start-3 sm:row-start-1 sm:whitespace-nowrap">
         {SLED_SPECIALIZATIONS.cta.linkLabel}
         <ArrowRight class="size-[18px] transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transform-none" aria-hidden="true" />
       </span>

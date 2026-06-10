@@ -2,8 +2,9 @@
 import type { SledCaseStudy } from '../../../lib/constants/pages/sled-case-studies';
 import CtaButton from '../../shared/CtaButton.astro';
 import Eyebrow from '../../shared/Eyebrow.astro';
-import CaseStudyIcon from './CaseStudyIcon.astro';
 import SledPageWrap from '../shared/SledPageWrap.astro';
+import CaseStudyIcon from './CaseStudyIcon.astro';
+import CaseStudyLiveEyebrow from './CaseStudyLiveEyebrow.astro';
 
 interface Props {
   study: SledCaseStudy;
@@ -76,12 +77,7 @@ const hasLivePast = 'livePill' in hero && hero.livePill;
 
   <SledPageWrap class="relative z-[5] py-[clamp(3.375rem,6vw,5.25rem)] pb-[clamp(2.5rem,4.5vw,3.75rem)]">
     <div class="sled-reveal max-w-[var(--wrap,1200px)]" data-sled-reveal>
-      <Eyebrow
-        text={eyebrowLive ?? ''}
-        onDark
-        showGlyph
-        class="sled-cs-eyebrow-live mb-[18px]"
-      />
+      <CaseStudyLiveEyebrow text={eyebrowLive ?? ''} class="sled-cs-eyebrow-live mb-[18px]" />
       {eyebrowPast && eyebrowPast !== eyebrowLive && (
         <Eyebrow
           text={eyebrowPast}
@@ -146,6 +142,7 @@ const hasLivePast = 'livePill' in hero && hero.livePill;
             label={cta.label}
             variant={cta.variant === 'cyan' ? 'cta' : 'ghost-dark'}
             showArrow={false}
+            beam={'beam' in cta ? cta.beam : false}
           />
         ))}
       </div>

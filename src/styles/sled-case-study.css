@@ -32,6 +32,10 @@
   display: none !important;
 }
 
+.sled-cs-eyebrow-live .sled-cs-live-dot {
+  vertical-align: middle;
+}
+
 .sled-cs-live-dot {
   animation: sledCsLivePulse 2.4s ease-out infinite;
 }

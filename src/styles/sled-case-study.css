@@ -1,0 +1,86 @@
+/* SLED case study detail — live/past dual mode, tabs, progress bars */
+
+@keyframes sledCsLivePulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(67, 229, 155, 0.55);
+  }
+
+  70% {
+    box-shadow: 0 0 0 8px rgba(67, 229, 155, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(67, 229, 155, 0);
+  }
+}
+
+.sled-case-study-detail[data-sled-case-status='past'] .sled-cs-live-only,
+.sled-case-study-detail[data-sled-case-status='past'] .sled-cs-eyebrow-live,
+.sled-case-study-detail[data-sled-case-status='past'] .sled-cs-livepill {
+  display: none !important;
+}
+
+.sled-case-study-detail[data-sled-case-status='past'] .sled-cs-past-only,
+.sled-case-study-detail[data-sled-case-status='past'] .sled-cs-eyebrow-past,
+.sled-case-study-detail[data-sled-case-status='past'] .sled-cs-closedpill {
+  display: inline-flex !important;
+}
+
+.sled-case-study-detail[data-sled-case-status='live'] .sled-cs-past-only,
+.sled-case-study-detail[data-sled-case-status='live'] .sled-cs-eyebrow-past,
+.sled-case-study-detail[data-sled-case-status='live'] .sled-cs-closedpill {
+  display: none !important;
+}
+
+.sled-cs-live-dot {
+  animation: sledCsLivePulse 2.4s ease-out infinite;
+}
+
+.sled-case-study-detail[data-sled-case-status='past'] .sled-cs-live-dot {
+  animation: none;
+  background: rgba(255, 255, 255, 0.5) !important;
+}
+
+.sled-case-studies-hero h1 .accent,
+.sled-cs-hero h1 .accent {
+  color: var(--color-cyan);
+}
+
+.sled-cs-iv-fill {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: 4px;
+  background: var(--color-cyan);
+  transition: width 0.85s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.sled-reveal.is-visible .sled-cs-iv-fill,
+.sled-reveal-stagger.is-visible .sled-cs-iv-fill {
+  width: var(--w, 0);
+}
+
+.sled-cs-tab[aria-selected='true'] {
+  border-color: transparent !important;
+  background: var(--color-yale) !important;
+  color: #fff;
+}
+
+.sled-cs-tab[aria-selected='true'] .font-mono {
+  color: var(--color-cyan) !important;
+}
+
+.sled-cs-tab[aria-selected='true'] .text-sm {
+  color: #fff !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sled-cs-live-dot {
+    animation: none;
+  }
+
+  .sled-cs-iv-fill {
+    transition: none;
+    width: var(--w, 0);
+  }
+}

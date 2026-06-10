@@ -8,7 +8,7 @@ export const CASE_STUDIES_SEO = {
 export const CASE_STUDIES_HERO = {
   eyebrow: 'U.S. SLED · Engagement examples',
   heading: 'Delivered subcontractor <span class="accent">engagements.</span>',
-  body: 'Technical work completed for U.S. prime contractors under subcontract and NDA. Engagements summarized at the engagement-type level; partner names withheld unless we have explicit written permission to publish them.',
+  body: 'Technical work completed for U.S. prime contractors under subcontract and NDA. Partner names withheld without written permission.',
 } as const;
 
 export const TRUST_ITEMS = [
@@ -17,86 +17,105 @@ export const TRUST_ITEMS = [
   'Zero agency-facing engagements',
 ] as const;
 
-export const ENGAGEMENT_CARDS = [
+export const ENGAGEMENTS_SECTION = {
+  eyebrow: 'Delivered engagements',
+  heading: 'What we shipped, under whose roof, on what vehicle.',
+  body: 'Each card: the technical surface area, the prime relationship, what shipped, and the vehicle it moved through. References available under NDA.',
+} as const;
+
+export const FEATURE_CARDS = [
   {
-    badge: 'Delivered',
-    anon: 'Anonymized · NDA',
-    heading: 'GIS facility inventory & forecast model for a state environmental plan',
-    meta: ['GIS & Data', 'Environmental', 'Statutory submission'],
-    rows: [
-      { lbl: 'Engagement', val: 'Subcontracted technical workstream for the GIS, data-pipeline, and statutory-document portions of a county-level Materials Management Plan adopted under a state environmental framework.' },
-      { lbl: 'Prime', val: 'National environmental consulting firm holding the master contract with the county.' },
-      { lbl: 'Shipped', val: 'Facility-level inventory pipeline (PostGIS + GeoPandas), 20-year capacity forecast model, statutory document production package, EGLE-format-validated submission.' },
-      { lbl: 'Outcome', val: '<strong>Submitted on the prime\'s schedule, zero format deficiencies on first submission, adopted at scheduled hearing.</strong>' },
+    href: '/us-sled/case-studies/adams/',
+    logo: '/assets/adams-logo.png',
+    logoAlt: 'Adams County, Colorado',
+    cap: 'Full RFI response package for a U.S. prime on a cloud-budgeting RFI, white-label.',
+    heading: 'Cloud-based budgeting system',
+    sub: 'Adams County, CO · RFI-RZA-2026.560',
+    state: 'CO',
+    tag: 'Live RFI',
+    stats: [
+      { n: '8', l: 'Capability areas' },
+      { n: 'RFI', l: 'No award stage' },
+      { n: '$400-510k', l: 'Impl. est.' },
+      { n: 'Jun 2026', l: 'Response due' },
     ],
-    vehicle: 'Direct subcontract under prime\'s master agreement',
+    chips: ['ERP integration', '10-year CIP', 'SSO & SAML'],
   },
   {
-    badge: 'Delivered',
-    anon: 'Anonymized · NDA',
-    heading: 'Accessibility remediation engineering for a statewide service portal',
-    meta: ['WCAG 2.2 AA', 'Engineering', 'Portal modernization'],
-    rows: [
-      { lbl: 'Engagement', val: 'Engineering workstream covering remediation of an existing constituent service portal against WCAG 2.2 AA, including component-library refactor, PDF/UA tooling, and automated regression suite.' },
-      { lbl: 'Prime', val: 'Mid-size systems integrator holding the modernization contract with the state agency.' },
-      { lbl: 'Shipped', val: 'Accessible component library, screen-reader test harness (NVDA / VoiceOver), PDF/UA conversion pipeline, plain-language editing of 1,200+ pages of statutory content.' },
-      { lbl: 'Outcome', val: '<strong>All P0/P1 axe-detected findings closed; passed third-party manual audit on first run.</strong>' },
+    href: '/us-sled/case-studies/holland/',
+    logo: '/assets/holland-logo.png',
+    logoAlt: 'City of Holland',
+    cap: 'Full technical-response package for a U.S. prime on a cloud-security RFP, white-label.',
+    heading: 'Cloud-delivered SASE',
+    sub: 'City of Holland, MI · Ref 0000426310',
+    state: 'MI',
+    tag: 'Live RFP',
+    stats: [
+      { n: '9', l: 'Capability areas' },
+      { n: '1', l: 'Single award' },
+      { n: '$280-550k', l: 'Contract est.' },
+      { n: 'Jun 2026', l: 'Bid due' },
     ],
-    vehicle: 'State Master Agreement, prime-held',
+    chips: ['Entra ID integration', 'Compliance matrix', 'SLAs & methodology'],
   },
   {
-    badge: 'Delivered',
-    anon: 'Anonymized · NDA',
-    heading: 'Permitting platform integration & data migration',
-    meta: ['Platform modernization', 'Integration', 'Data migration'],
-    rows: [
-      { lbl: 'Engagement', val: 'Integration and data-migration workstream for a state permitting platform modernization. Wrapped a legacy mainframe with a service layer; migrated 14 years of permit records into the new platform.' },
-      { lbl: 'Prime', val: 'Tier-1 systems integrator delivering the platform under a multi-year contract.' },
-      { lbl: 'Shipped', val: 'REST service layer over legacy mainframe, ETL pipeline (Airbyte + dbt) for record migration, audit trail and reconciliation reporting, IV&V response packages.' },
-      { lbl: 'Outcome', val: '<strong>Phase 2 cutover hit milestone date; reconciliation reports closed with zero unexplained variance.</strong>' },
+    href: '/us-sled/case-studies/mdc/',
+    logo: '/assets/miami-dade-college.png',
+    logoAlt: 'Miami Dade College',
+    cap: 'Full qualifications package for a U.S. prime, six disciplines, white-label.',
+    heading: 'Engineering services qualification',
+    sub: 'Miami Dade College · RFQ 2026-WP-15',
+    state: 'FL',
+    tag: 'Pre-award',
+    stats: [
+      { n: '6', l: 'Disciplines' },
+      { n: '2', l: 'On-call pools' },
+      { n: '$1-7.5M', l: 'Per-project cost' },
+      { n: 'Jun 2026', l: 'Bid due' },
     ],
-    vehicle: 'NASPO ValuePoint, via prime',
+    chips: ['SF330', 'Compliance matrix', 'Forms & affidavits'],
   },
   {
-    badge: 'Delivered',
-    anon: 'Anonymized · NDA',
-    heading: 'Multilingual public engagement platform for a regional plan',
-    meta: ['Public engagement', 'Multilingual', 'Regional plan'],
-    rows: [
-      { lbl: 'Engagement', val: 'Public-facing engagement platform supporting a 35-municipality regional plan: comment capture, multilingual surveys, hearing presentation packs, and disadvantaged-community outreach instrumentation.' },
-      { lbl: 'Prime', val: 'Regional planning consultancy under contract to the lead municipality.' },
-      { lbl: 'Shipped', val: 'Custom survey platform with full i18n stack (English, Spanish, Arabic), comment intake and triage workflow, hearing-pack generator, equity dashboard.' },
-      { lbl: 'Outcome', val: '<strong>All 35 municipalities covered in the per-meeting briefing pack; statutory comment-period requirements met across every jurisdiction.</strong>' },
+    href: '/us-sled/case-studies/altadena/',
+    logo: '/assets/altadena-libraries.png',
+    logoAlt: 'Altadena Libraries',
+    cap: 'Outsourced finance function for a California special district, white-label.',
+    heading: 'Accounting & financial consulting',
+    sub: 'Altadena Library District · RFP No. 31',
+    state: 'CA',
+    tag: 'Live RFP',
+    stats: [
+      { n: '$3.9M', l: 'District budget' },
+      { n: '3+2', l: 'Year term' },
+      { n: '~$126k', l: 'Mid case / yr' },
+      { n: 'Jun 2026', l: 'Bid due' },
     ],
-    vehicle: "Direct subcontract under prime's master agreement",
+    chips: ['GASB / CalPERS', 'CFD bond', 'Reconciliations'],
   },
   {
-    badge: 'Delivered',
-    anon: 'Anonymized · NDA',
-    heading: 'Grant-reporting automation for a federal-state pass-through',
-    meta: ['Grants', 'Automation', 'Federal-state'],
-    rows: [
-      { lbl: 'Engagement', val: 'Reporting automation workstream covering quarterly milestone reporting and federal-state reconciliation for a multi-year pass-through grant program serving tribal and rural districts.' },
-      { lbl: 'Prime', val: 'Regional consultancy holding the program-management contract for the grant administrator.' },
-      { lbl: 'Shipped', val: 'Reporting pipeline (n8n + custom Python), reconciliation engine against project delivery data, federal-format report generators, deadline alerting and audit trail.' },
-      { lbl: 'Outcome', val: '<strong>Zero late quarterly filings across the engagement period; audit-trail artifacts accepted by federal program officer without follow-up.</strong>' },
+    href: '/us-sled/case-studies/escondido/',
+    logo: '/assets/escondido-logo.png',
+    logoAlt: 'City of Escondido',
+    cap: 'Documentation backbone behind a U.S. prime, the prime owns the field.',
+    heading: 'Geotechnical & special inspection',
+    sub: 'City of Escondido · RFP No. 26-19',
+    state: 'CA',
+    tag: 'Live RFP',
+    stats: [
+      { n: '$100k', l: 'Instrument cap' },
+      { n: '4 yr', l: 'On-call term' },
+      { n: '7', l: 'Service categories' },
+      { n: 'Jun 2026', l: 'Bid due' },
     ],
-    vehicle: "Direct subcontract under prime's master agreement",
-  },
-  {
-    badge: 'Delivered',
-    anon: 'Anonymized · NDA',
-    heading: 'Compliance & adoption-sequence tracking for a multi-county program',
-    meta: ['Compliance', 'Dashboarding', 'Audit trail'],
-    rows: [
-      { lbl: 'Engagement', val: 'Operational dashboarding and audit-trail workstream tracking statutory comment periods, public hearings, board adoptions, and submission deadlines across a multi-county program.' },
-      { lbl: 'Prime', val: 'Environmental consulting prime delivering the multi-county program-management contract.' },
-      { lbl: 'Shipped', val: 'Adoption-sequence tracker (PostgreSQL + Metabase), deadline alerting service, statute-citation validation engine, immutable records export for FOIA requests.' },
-      { lbl: 'Outcome', val: '<strong>All counties adopted on schedule; FOIA-ready records export delivered to the prime within 24 hours of request.</strong>' },
-    ],
-    vehicle: "Direct subcontract under prime's master agreement",
+    chips: ['Special inspection', 'Daily reports', 'Rate schedule'],
   },
 ] as const;
+
+export const CONFIDENTIALITY_SECTION = {
+  eyebrow: 'What we cannot show publicly',
+  heading: 'Most of our SLED work stays under NDA.',
+  body: 'The engagements above are summarized at the technical-deliverable level. Specifics live on a separate call, behind a mutual NDA, with the prime in the room.',
+} as const;
 
 export const CONFIDENTIALITY_ROWS = [
   {
@@ -113,6 +132,14 @@ export const CONFIDENTIALITY_ROWS = [
   },
   {
     heading: 'Reference conversations',
-    body: 'with the named prime contractor on any of these engagements are available on request, with an NDA in place and the prime\'s consent.',
+    body: "with the named prime contractor on any of these engagements are available on request, with an NDA in place and the prime's consent.",
   },
 ] as const;
+
+export const CASE_STUDIES_CTA = {
+  eyebrow: 'Capture manager or BD lead at a U.S. prime?',
+  heading: 'Request a reference conversation.',
+  body: "NDA-first introduction. We'll route you to the right named reference for the engagement type closest to your pursuit.",
+  primaryCta: { label: 'Start an NDA conversation', href: '/us-sled/contact/' },
+  secondaryCta: { label: 'See capabilities', href: '/us-sled/capabilities/' },
+} as const;

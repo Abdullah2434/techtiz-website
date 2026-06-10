@@ -1,0 +1,154 @@
+---
+import type { SledCaseStudy } from '../../../lib/constants/pages/sled-case-studies';
+import CtaButton from '../../shared/CtaButton.astro';
+import Eyebrow from '../../shared/Eyebrow.astro';
+import CaseStudyIcon from './CaseStudyIcon.astro';
+import SledPageWrap from '../shared/SledPageWrap.astro';
+
+interface Props {
+  study: SledCaseStudy;
+}
+
+const { study } = Astro.props;
+const { hero } = study;
+
+const eyebrowLive =
+  'eyebrowLive' in hero
+    ? hero.eyebrowLive
+    : 'eyebrow' in hero
+      ? typeof hero.eyebrow === 'string'
+        ? hero.eyebrow
+        : hero.eyebrow.live
+      : '';
+const eyebrowPast =
+  'eyebrowPast' in hero
+    ? hero.eyebrowPast
+    : 'eyebrow' in hero &&
+        typeof hero.eyebrow === 'object' &&
+        hero.eyebrow &&
+        'past' in hero.eyebrow
+      ? hero.eyebrow.past
+      : eyebrowLive;
+
+const id = hero.identity;
+const awardingLabel =
+  typeof id.awardingBody === 'string' ? 'Awarding body' : id.awardingBody.label;
+const awardingValue =
+  typeof id.awardingBody === 'string' ? id.awardingBody : id.awardingBody.value;
+const jurisdictionLabel =
+  'jurisdiction' in id && typeof id.jurisdiction === 'object'
+    ? id.jurisdiction.label
+    : 'Jurisdiction';
+const jurisdictionValue =
+  'jurisdiction' in id && typeof id.jurisdiction === 'object'
+    ? id.jurisdiction.value
+    : 'jurisdiction' in id
+      ? id.jurisdiction
+      : '';
+const statusLive =
+  'statusLive' in id
+    ? id.statusLive
+    : 'status' in id && typeof id.status === 'object' && id.status && 'live' in id.status
+      ? id.status.live
+      : typeof id.status === 'string'
+        ? id.status
+        : '';
+const statusPast =
+  'statusPast' in id
+    ? id.statusPast
+    : 'status' in id && typeof id.status === 'object' && id.status && 'past' in id.status
+      ? id.status.past
+      : 'Engagement closed';
+const statusIcon = 'statusIcon' in id ? id.statusIcon : undefined;
+const hasLivePast = 'livePill' in hero && hero.livePill;
+---
+
+<section class="sled-cs-hero relative overflow-hidden bg-yale-dark text-white">
+  <div
+    class="pointer-events-none absolute inset-0 z-0 bg-cover bg-[position:76%_42%] bg-no-repeat opacity-95"
+    style={`background-image:url('${hero.heroBg}')`}
+    aria-hidden="true"
+  />
+  <div
+    class="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(90deg,var(--color-yale-dark)_0%,rgba(14,38,64,0.94)_26%,rgba(14,38,64,0.52)_58%,rgba(14,38,64,0.32)_100%)]"
+    aria-hidden="true"
+  />
+
+  <SledPageWrap class="relative z-[5] py-[clamp(3.375rem,6vw,5.25rem)] pb-[clamp(2.5rem,4.5vw,3.75rem)]">
+    <div class="sled-reveal max-w-[var(--wrap,1200px)]" data-sled-reveal>
+      <Eyebrow
+        text={eyebrowLive ?? ''}
+        onDark
+        showGlyph
+        class="sled-cs-eyebrow-live mb-[18px]"
+      />
+      {eyebrowPast && eyebrowPast !== eyebrowLive && (
+        <Eyebrow
+          text={eyebrowPast}
+          onDark
+          showGlyph
+          class="sled-cs-eyebrow-past mb-[18px] hidden"
+        />
+      )}
+      <h1 class="sled-h1 mb-5 max-w-[17ch] text-white" set:html={hero.h1} />
+      <p class="max-w-[560px] text-[clamp(1.02rem,1.4vw,1.125rem)] leading-[1.55] text-white/80">{hero.body}</p>
+
+      {hasLivePast && (
+        <div class="mt-5">
+          <span class="sled-cs-livepill sled-cs-live-only inline-flex items-center gap-2 rounded-lg border border-green/55 bg-green/18 px-3.5 py-1.5 font-mono text-[11px] font-bold tracking-[0.07em] text-white uppercase">
+            <span class="sled-cs-live-dot size-2 rounded-full bg-[#43E59B]" aria-hidden="true" />
+            {hero.livePill}
+          </span>
+          <span class="sled-cs-closedpill sled-cs-past-only hidden inline-flex items-center gap-2 rounded-lg border border-white/22 bg-white/8 px-3.5 py-1.5 font-mono text-[11px] font-bold tracking-[0.07em] text-white/72 uppercase">
+            <span class="size-2 rounded-full bg-white/50" aria-hidden="true" />
+            {hero.pastPill}
+          </span>
+        </div>
+      )}
+
+      <div class="mt-6 inline-flex max-w-full flex-wrap items-stretch overflow-hidden rounded-[14px] bg-white shadow-[0_12px_32px_-12px_rgba(21,58,95,0.28)]">
+        <div class="flex items-center gap-3 border-r border-line-soft px-5 py-3.5 max-sm:w-full max-sm:border-r-0 max-sm:border-b">
+          <img src={hero.logo} alt={hero.logoAlt} class="h-[34px] w-auto rounded-[5px]" loading="eager" />
+          <div class="flex flex-col gap-0.5 leading-none">
+            <span class="font-mono text-[9.5px] tracking-[0.13em] text-muted uppercase">{awardingLabel}</span>
+            <span class="text-[13px] font-bold text-yale-dark">{awardingValue}</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 border-r border-line-soft px-5 py-3.5 max-sm:w-full max-sm:border-r-0 max-sm:border-b">
+          <span class="size-[11px] shrink-0 rotate-[15deg] rounded-[2px] bg-cyan" aria-hidden="true" />
+          <div class="flex flex-col gap-0.5 leading-none">
+            <span class="font-mono text-[9.5px] tracking-[0.13em] text-muted uppercase">{jurisdictionLabel}</span>
+            <span class="text-[13px] font-bold text-yale-dark">{jurisdictionValue}</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 px-5 py-3.5 max-sm:w-full">
+          <span class="grid size-5 place-items-center text-green">
+            {statusIcon ? (
+              <CaseStudyIcon name={statusIcon} class="size-4" />
+            ) : (
+              <span class="sled-cs-live-dot size-[9px] rounded-full bg-green" aria-hidden="true" />
+            )}
+          </span>
+          <div class="flex flex-col gap-0.5 leading-none">
+            <span class="font-mono text-[9.5px] tracking-[0.13em] text-muted uppercase">Status</span>
+            <span class="text-[13px] font-bold text-yale-dark">
+              <span class="sled-cs-live-only">{statusLive}</span>
+              <span class="sled-cs-past-only hidden">{statusPast}</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-7 flex flex-wrap gap-3.5">
+        {hero.ctas.map((cta) => (
+          <CtaButton
+            href={cta.href}
+            label={cta.label}
+            variant={cta.variant === 'cyan' ? 'cta' : 'ghost-dark'}
+            showArrow={false}
+          />
+        ))}
+      </div>
+    </div>
+  </SledPageWrap>
+</section>

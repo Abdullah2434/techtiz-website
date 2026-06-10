@@ -17,7 +17,8 @@ function isActive(href: string) {
   if (hrefNorm === '/us-sled') {
     return normalized === '/us-sled';
   }
-  return normalized === hrefNorm;
+  if (normalized === hrefNorm) return true;
+  return normalized.startsWith(`${hrefNorm}/`);
 }
 
 const crumbs = buildBreadcrumbs(currentPath);

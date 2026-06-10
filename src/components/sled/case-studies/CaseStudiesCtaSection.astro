@@ -1,4 +1,5 @@
 ---
+import { CASE_STUDIES_CTA } from '../../../lib/constants/pages/case-studies';
 import Eyebrow from '../../shared/Eyebrow.astro';
 import CtaButton from '../../shared/CtaButton.astro';
 import SledPageWrap from '../shared/SledPageWrap.astro';
@@ -6,20 +7,26 @@ import SledPageWrap from '../shared/SledPageWrap.astro';
 
 <section class="sled-final-cta relative overflow-hidden bg-yale-dark">
   <div
-    class="sled-hero-glow-b pointer-events-none absolute right-[-10%] top-[-30%] size-[min(55vw,480px)] rounded-full bg-[radial-gradient(circle,rgba(24,176,230,0.14)_0%,transparent_70%)] blur-[90px] motion-reduce:hidden"
+    class="pointer-events-none absolute right-[-60px] top-[-60px] size-[340px] rotate-[15deg] bg-[linear-gradient(45deg,transparent_48%,rgba(24,176,230,0.16)_48%_52%,transparent_52%)] bg-[length:30px_30px] motion-reduce:hidden"
     aria-hidden="true"
   />
-  <SledPageWrap class="relative z-2 py-[clamp(4.5rem,8vw,5.5rem)]">
+  <SledPageWrap class="relative z-2 py-[clamp(3.75rem,7vw,5.625rem)]">
     <div class="sled-reveal mx-auto max-w-[700px] text-center" data-sled-reveal>
-      <Eyebrow text="Capture manager or BD lead at a U.S. prime?" onDark showGlyph class="mb-4 justify-center" />
-      <h2 class="sled-h2 text-white">
-        Request a reference conversation.
-      </h2>
-      <p class="mx-auto mt-4 max-w-[560px] text-[15.5px] leading-[1.65] text-white/72">
-        NDA-first introduction. We'll route you to the right named reference for the engagement type closest to your pursuit.
-      </p>
-      <div class="mt-8 flex justify-center max-[600px]:[&_a]:w-full max-[600px]:[&_a]:justify-center">
-        <CtaButton href="/us-sled/contact/" label="Start an NDA conversation" variant="cta" />
+      <Eyebrow text={CASE_STUDIES_CTA.eyebrow} onDark showGlyph class="mb-4 justify-center" />
+      <h2 class="sled-h2 mx-auto mb-4 max-w-[680px] text-white">{CASE_STUDIES_CTA.heading}</h2>
+      <p class="mx-auto mb-7 max-w-[580px] text-base leading-[1.6] text-white/78">{CASE_STUDIES_CTA.body}</p>
+      <div class="flex flex-wrap justify-center gap-3.5 max-[600px]:[&_a]:w-full max-[600px]:[&_a]:justify-center">
+        <CtaButton
+          href={CASE_STUDIES_CTA.primaryCta.href}
+          label={CASE_STUDIES_CTA.primaryCta.label}
+          variant="ghost-dark"
+          showArrow={false}
+        />
+        <CtaButton
+          href={CASE_STUDIES_CTA.secondaryCta.href}
+          label={CASE_STUDIES_CTA.secondaryCta.label}
+          variant="cta"
+        />
       </div>
     </div>
   </SledPageWrap>

@@ -2,6 +2,7 @@
 import ArrowRight from '@lucide/astro/icons/arrow-right';
 import FileClock from '@lucide/astro/icons/file-clock';
 import { ENGAGEMENTS_SECTION, FEATURE_CARDS } from '../../../lib/constants/pages/case-studies';
+import { isLiveStatusTag } from '../../../lib/sled-case-studies/live-eyebrow';
 import Eyebrow from '../../shared/Eyebrow.astro';
 import SledPageWrap from '../shared/SledPageWrap.astro';
 ---
@@ -53,7 +54,11 @@ import SledPageWrap from '../shared/SledPageWrap.astro';
                 {card.state}
               </span>
               <span class="inline-flex items-center gap-1.5 rounded-full bg-amber/10 px-3 py-1 font-mono text-[10.5px] font-semibold tracking-[0.08em] text-amber uppercase">
-                <FileClock class="size-3" aria-hidden="true" />
+                {isLiveStatusTag(card.tag) ? (
+                  <span class="sled-cs-live-dot size-1.5 shrink-0 rounded-full bg-[#43E59B]" aria-hidden="true" />
+                ) : (
+                  <FileClock class="size-3" aria-hidden="true" />
+                )}
                 {card.tag}
               </span>
             </div>

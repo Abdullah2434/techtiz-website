@@ -1,5 +1,8 @@
 ---
+import { CASE_STUDY_DETAIL_FAQ } from '../../../lib/constants/pages/case-studies';
 import type { SledCaseStudy } from '../../../lib/constants/pages/sled-case-studies';
+import { sledCaseStudyPath } from '../../../lib/constants/pages/sled-case-studies';
+import SledFaqSection from '../shared/SledFaqSection.astro';
 import CaseStudyDetailHero from './CaseStudyDetailHero.astro';
 import CaseStudyDetailSections from './CaseStudyDetailSections.astro';
 
@@ -9,6 +12,7 @@ interface Props {
 
 const { study } = Astro.props;
 const deadline = 'deadline' in study ? study.deadline : undefined;
+const canonicalPath = sledCaseStudyPath(study.slug);
 ---
 
 <div
@@ -19,4 +23,5 @@ const deadline = 'deadline' in study ? study.deadline : undefined;
 >
   <CaseStudyDetailHero study={study} />
   <CaseStudyDetailSections study={study} />
+  <SledFaqSection {...CASE_STUDY_DETAIL_FAQ} {canonicalPath} screenLabel="FAQ" />
 </div>

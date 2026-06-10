@@ -370,35 +370,25 @@ export const SLED_DELIVERY = {
   concerns: readonly SledDeliveryConcern[];
 };
 
-export const OPERATING_PRINCIPLES = {
-  eyebrow: "Operating Principles",
+export const SLED_OPERATING_PRINCIPLES = {
+  eyebrow: "Operating principles",
   heading: "How we work behind a prime.",
-  body: "Four non-negotiables that govern every engagement. Signed into our teaming letter so there's no ambiguity.",
-  badge: "Locked in teaming letter",
   items: [
     {
-      num: "01",
-      icon: "eye-off",
-      heading: "You stay the only voice to the agency.",
-      body: 'Never in agency-facing emails, calls, or deliverables. No co-logos, no "powered by" footers. If the agency asks who built it, the answer is your name.',
+      heading: "Only voice to the agency",
+      body: 'No co-logos, no "powered by."',
     },
     {
-      num: "02",
-      icon: "edit",
-      heading: "Your brand on every artifact.",
-      body: "Code, docs, decks, runbooks, and dashboards ship under your prime brand. Internal IP licensed to you for the period of performance.",
+      heading: "Your brand, every artifact",
+      body: "Code, docs, dashboards, all yours.",
     },
     {
-      num: "03",
-      icon: "shield",
-      heading: "Compliance posture, kept.",
-      body: "We operate inside your authorization boundary. CJIS, HIPAA, IRS Pub 1075, StateRAMP-aligned controls applied to our work. Audit-ready artifacts on demand.",
+      heading: "Compliance posture kept",
+      body: "Inside your authorization boundary.",
     },
     {
-      num: "04",
-      icon: "network",
-      heading: "Prime PM owns the relationship.",
-      body: "Status, escalations, and change requests flow through your PM. Weekly burndowns to you, never to the agency. You decide what to surface upstream.",
+      heading: "Your PM owns it",
+      body: "You decide what surfaces upstream.",
     },
   ],
 } as const;

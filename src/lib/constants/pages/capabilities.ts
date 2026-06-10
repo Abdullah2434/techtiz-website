@@ -54,64 +54,108 @@ export const PROCUREMENT_STRIP = {
   ],
 } as const;
 
-export const FRAMEWORKS_SECTION = {
+export type SledFrameworkStatusVariant =
+  | "in-progress"
+  | "posture"
+  | "aligned"
+  | "applied";
+
+export const SLED_CAPABILITIES_FRAMEWORKS = {
   eyebrow: "Compliance frameworks",
-  heading: "What a prime compliance officer is looking for.",
-  body: "Specific framework claims with status, scope, and target dates. We don't list controls we can't substantiate. Where a framework is in-progress, the target is on the page.",
+  heading: "The frameworks a prime compliance officer is looking for.",
+  body: "Specific claims with status, scope, and target dates. We don't list controls we can't substantiate; in-progress frameworks show a target date.",
+  items: [
+    {
+      num: "01",
+      name: "SOC 2 Type II",
+      icon: "shield-check" as const,
+      status: "In progress",
+      statusVariant: "in-progress" as const,
+      body: "Operational cybersecurity controls. Independent audit of access, change management, monitoring, and incident response over a 6 to 12 month window.",
+      facts: [
+        "Scope · platform, repos, IdP, deploy",
+        "<strong>Target · Q4 2026</strong>",
+        "Bridge letter on request",
+      ],
+    },
+    {
+      num: "02",
+      name: "CJIS Security Policy",
+      icon: "fingerprint-pattern" as const,
+      status: "Posture",
+      statusVariant: "posture" as const,
+      body: "Required for law-enforcement, court, and dispatch work. Fingerprinted, background-checked U.S.-citizen personnel on U.S. soil; FIPS 140-2/3 encryption.",
+      facts: [
+        "<strong>Onshore · CJIS-cleared staff</strong>",
+        "Offshore · never touches CJI",
+        "Attestations to CJIS coordinator",
+      ],
+    },
+    {
+      num: "03",
+      name: "StateRAMP / TX-RAMP",
+      icon: "cloud" as const,
+      status: "Aligned",
+      statusVariant: "aligned" as const,
+      body: "Cloud architectures we design are StateRAMP-aware. We build inside the prime's authorization boundary using controls that map to StateRAMP and TX-RAMP categorization.",
+      facts: [
+        "Architecture & control mapping",
+        "SSP narrative drafts",
+        "3PAO response support",
+      ],
+    },
+    {
+      num: "04",
+      name: "Section 508 / VPAT",
+      icon: "accessibility" as const,
+      status: "Applied",
+      statusVariant: "applied" as const,
+      body: "Required for all government digital interfaces. WCAG 2.2 AA validation, screen-reader regression, PDF/UA conversion, plain-language editing.",
+      facts: [
+        "<strong>Signed VPAT 2.5 per surface</strong>",
+        "NVDA & VoiceOver tested",
+        "Prior VPATs under NDA",
+      ],
+    },
+    {
+      num: "05",
+      name: "NIST 800-171 / CMMC",
+      icon: "lock-keyhole" as const,
+      status: "Aligned",
+      statusVariant: "aligned" as const,
+      body: "Standard hygiene for any prime serving federal customers. 110-control baseline across access, audit, configuration, incident response, and media protection.",
+      facts: [
+        "Self-assessment complete",
+        "SSP & POAM maintained",
+        "<strong>CMMC Level 2 alignment</strong>",
+      ],
+    },
+    {
+      num: "06",
+      name: "HIPAA · IRS Pub 1075",
+      icon: "heart-pulse" as const,
+      status: "Posture",
+      statusVariant: "posture" as const,
+      body: "Required for healthcare, eligibility, and tax-data engagements. BAA executed as subcontractor under the prime BAA; offshore plane never touches FTI or PHI.",
+      facts: [
+        "Mutual / flow-down BAA",
+        "<strong>FTI onshore-only · Pub 1075 §9.3</strong>",
+      ],
+    },
+  ],
+} as const;
+
+/** @deprecated Use SLED_CAPABILITIES_FRAMEWORKS */
+export const FRAMEWORKS_SECTION = {
+  eyebrow: SLED_CAPABILITIES_FRAMEWORKS.eyebrow,
+  heading: SLED_CAPABILITIES_FRAMEWORKS.heading,
+  body: SLED_CAPABILITIES_FRAMEWORKS.body,
   linkLabel: "See the full operating model and architecture",
   linkHref: "/us-sled/operating-model/",
 } as const;
 
-export const COMPLIANCE_FRAMEWORKS = [
-  {
-    name: "SOC 2 Type II",
-    status: "In progress",
-    statusClass: "ip",
-    what: "<strong>Operational cybersecurity controls.</strong> Independent audit of access, change management, monitoring, and incident response across a 6–12 month observation window.",
-    targetLabel: "Target",
-    target: "Q4 2026 · Bridge letter on request",
-  },
-  {
-    name: "CJIS Security Policy",
-    status: "Posture",
-    statusClass: "po",
-    what: "<strong>Required for LE, court, and dispatch work.</strong> Fingerprinted, background-checked U.S. personnel on U.S. soil for any CJI touch. Offshore plane never touches CJI.",
-    targetLabel: "Evidence",
-    target: "Personnel attestations to the prime's CJIS coordinator",
-  },
-  {
-    name: "StateRAMP / TX-RAMP",
-    status: "Aligned",
-    statusClass: "al",
-    what: "<strong>StateRAMP-aware cloud architecture.</strong> We design inside the prime's authorization boundary using controls that map cleanly to StateRAMP and TX-RAMP categorization.",
-    targetLabel: "Scope",
-    target: "Architecture, SSP narrative, 3PAO response support",
-  },
-  {
-    name: "Section 508 / VPAT",
-    status: "Applied",
-    statusClass: "ap",
-    what: "<strong>Required for all government digital interfaces.</strong> WCAG 2.2 AA validation, screen-reader regression, PDF/UA conversion, plain-language editing. VPAT 2.5 ITI authored per surface.",
-    targetLabel: "Deliverable",
-    target: "Signed VPAT ships with every scoped engagement",
-  },
-  {
-    name: "NIST 800-171 / CMMC",
-    status: "Aligned",
-    statusClass: "al",
-    what: "<strong>Baseline for primes serving federal customers.</strong> 110-control baseline implemented across access, audit, configuration, incident response, and media protection.",
-    targetLabel: "Posture",
-    target: "Self-assessment · SSP & POAM maintained · CMMC Level 2 alignment",
-  },
-  {
-    name: "HIPAA · IRS Pub 1075",
-    status: "Posture",
-    statusClass: "po",
-    what: "<strong>For healthcare, eligibility, and tax-data work.</strong> BAA executed as sub under prime BAA. FTI and PHI handled by U.S. personnel on U.S. soil per Pub 1075 §9.3.",
-    targetLabel: "Onshore-only",
-    target: "for any PHI / FTI / agency PII touch",
-  },
-] as const;
+/** @deprecated Use SLED_CAPABILITIES_FRAMEWORKS */
+export const COMPLIANCE_FRAMEWORKS = SLED_CAPABILITIES_FRAMEWORKS.items;
 
 export const SLED_CAPABILITIES_MATRIX = {
   eyebrow: "Core capabilities",

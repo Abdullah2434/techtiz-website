@@ -384,6 +384,33 @@
   overflow: hidden;
 }
 
+/* Capabilities frameworks — status badges in accordion head */
+.sled-fw-status {
+  padding: 5px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.sled-fw-status--in-progress {
+  color: var(--color-amber);
+  background: rgba(216, 144, 23, 0.1);
+}
+
+.sled-fw-status--applied {
+  color: #1f7855;
+  background: rgba(43, 165, 114, 0.12);
+}
+
+.sled-fw-status--aligned {
+  color: var(--color-cyan-strong);
+  background: var(--color-cyan-soft);
+}
+
+.sled-fw-status--posture {
+  color: var(--color-yale);
+  background: var(--color-seasalt);
+}
+
 /* Backbone bento — detail overlay reveal */
 .sled-bento-detail {
   opacity: 0;

@@ -288,26 +288,30 @@ export const SLED_BACKBONE = {
   cards: readonly SledBackboneCard[];
 };
 
-export const WHY_CARDS = [
-  {
-    num: "01 · Specialization depth",
-    heading: "We've engineered the deliverables your SOW will name.",
-    body: "Real production work across GIS, AI, workflow automation, statutory document production, and grant reporting, ready to plug into your bid stack under teaming letter.",
-    counter: 'Counter to "do you understand U.S. SLED technical scope?"',
-  },
-  {
-    num: "02 · Back-office only",
-    heading: "We never face the agency.",
-    body: "Our model depends on being the partner that makes your delivery stronger, not the firm that walks past you into procurement. We engage only through a prime. No exceptions.",
-    counter: 'Counter to "will you go around us?"',
-  },
-  {
-    num: "03 · Your terms",
-    heading: "We work on your contract.",
-    body: "Subcontract under your master agreement. Insurance routes through you. IP per your standard NDA. We adapt to your delivery model. You don't adapt to ours.",
-    counter: 'Counter to "how risky is this operationally?"',
-  },
-] as const;
+export const SLED_WHY_TECHTIZ = {
+  eyebrow: "Why Techtiz",
+  heading: "Three answers to three questions every prime asks.",
+  cards: [
+    {
+      num: "01 · Specialization depth",
+      heading: "We've engineered the deliverables your SOW will name.",
+      body: "Production work across GIS, AI, automation, statutory document production, and grant reporting, ready to plug into your bid stack.",
+      counter: '"Do you understand U.S. SLED technical scope?"',
+    },
+    {
+      num: "02 · Back-office only",
+      heading: "We never face the agency.",
+      body: "Our model depends on making your delivery stronger, not walking past you into procurement. We engage only through a prime. No exceptions.",
+      counter: '"Will you go around us?"',
+    },
+    {
+      num: "03 · Your terms",
+      heading: "We work on your contract.",
+      body: "Subcontract under your master agreement. Insurance routes through you. IP per your standard NDA. You don't adapt to us.",
+      counter: '"How risky is this operationally?"',
+    },
+  ],
+} as const;
 
 export const WHO_WE_ARE_NOT = {
   label: "Who we are not",
@@ -608,11 +612,6 @@ export const SLED_SPECIALIZATIONS = {
     linkHref: string;
   };
 };
-
-export const WHY_SECTION = {
-  eyebrow: "Why Techtiz",
-  heading: "Three answers to three questions every prime asks.",
-} as const;
 
 export const HUB_INQUIRY = {
   aside: {

@@ -113,53 +113,53 @@ export const COMPLIANCE_FRAMEWORKS = [
   },
 ] as const;
 
-export const CAPABILITY_MATRIX = [
-  {
-    name: "Regulatory & Statutory Compliance",
-    what: "Plan-content checklists, statute-citation validation, adoption-sequence tracking against state framework guidance.",
-    tools:
-      "Custom rule engines · Statutory framework libraries · EGLE guidance maps",
-  },
-  {
-    name: "GIS & Data Pipelines",
-    what: "Facility inventories, forecast models, supply chain analysis, parcel data, multi-source spatial joins.",
-    tools: "ArcGIS · PostGIS · GeoPandas · Mapbox · Leaflet",
-  },
-  {
-    name: "Public Engagement Technology",
-    what: "Multilingual surveys, comment capture, disadvantaged-community reach, hearing presentation packs.",
-    tools:
-      "Custom survey platforms · Accessibility tooling · i18n stacks · Plain-language pipelines",
-  },
-  {
-    name: "Grant Reporting Automation",
-    what: "Quarterly milestone reports auto-generated, reconciliation against delivery data, federal-state report alignment.",
-    tools: "Make.com · n8n · Custom reporting pipelines · Workday Adaptive",
-  },
-  {
-    name: "Document Production & Format Compliance",
-    what: "Statutory-format compliant deliverables in PDF, InDesign, ArcGIS, Word, Excel. PDF/UA accessibility built in.",
-    tools: "Adobe Creative Suite · Microsoft Office · PDF/UA tooling · LaTeX",
-  },
-  {
-    name: "Accessibility & Equity",
-    what: "WCAG 2.2 AA validation, multilingual content, disadvantaged-community engagement, plain-language editing.",
-    tools:
-      "axe DevTools · Screen-reader testing (NVDA, VoiceOver) · Plain-language style guides",
-  },
-  {
-    name: "Adoption Sequence Tracking",
-    what: "Statutory comment periods, public hearings, board adoption, EGLE submission, deadline alerting.",
-    tools:
-      "Project management instrumentation · Notion · Linear · Custom deadline alerting",
-  },
-  {
-    name: "Audit Trail & Records Management",
-    what: "Every delivery action timestamped, attributable, exportable for FOIA and state public-records requests.",
-    tools:
-      "Custom audit logging · Structured records export · S3 immutable storage",
-  },
-] as const;
+export const SLED_CAPABILITIES_MATRIX = {
+  eyebrow: "Core capabilities",
+  heading: "Six capabilities, mapped to NAICS and NIGP.",
+  body: "The back-end build behind your brand, under your contract. Each row is work we've shipped, mapped to the codes a prime files against.",
+  columns: ["Capability", "What we do", "NAICS / NIGP"] as const,
+  rows: [
+    {
+      name: "Enterprise Application Development",
+      icon: "app-window" as const,
+      what: "Citizen-service portals, case management, and back-office systems built to agency requirements and delivered under the prime contract.",
+      codes: "NAICS 541511 · NIGP 920-29",
+    },
+    {
+      name: "Systems Modernization & Integration",
+      icon: "git-merge" as const,
+      what: "Legacy modernization within procurement and budget constraints; inter-agency integration that breaks down data silos and meets interoperability requirements.",
+      codes: "NAICS 541512 · NIGP 918-46",
+    },
+    {
+      name: "AI & Process Automation",
+      icon: "bot" as const,
+      what: "Automated case routing, document intake, and decision support that reduce manual processing and backlog for understaffed program teams.",
+      codes: "NAICS 541511 · NIGP 920-29",
+    },
+    {
+      name: "GIS & Geospatial Data",
+      icon: "map-pin" as const,
+      what: "Facility and asset inventories, parcel and permitting data, and forecast models for planning, public works, and environmental programs.",
+      codes: "NAICS 541519 · NIGP 918-00",
+    },
+    {
+      name: "Data, Reporting & Grant Compliance",
+      icon: "chart-column" as const,
+      what: "Audit-ready data pipelines, grant and performance reporting, and FOIA-exportable records aligned to oversight and compliance requirements.",
+      codes: "NAICS 541512 · NIGP 920-04",
+    },
+    {
+      name: "Accessibility & Statutory Documents",
+      icon: "accessibility" as const,
+      what: "Section 508 and WCAG 2.2 AA conformance, VPAT preparation, and statutory document and format compliance for public-facing deliverables.",
+      codes: "NAICS 541519 · NIGP 918-46",
+    },
+  ],
+} as const;
+
+/** @deprecated Use SLED_CAPABILITIES_MATRIX */
+export const CAPABILITY_MATRIX = SLED_CAPABILITIES_MATRIX.rows;
 
 export const TECH_STACK = [
   {

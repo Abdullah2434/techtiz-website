@@ -71,8 +71,28 @@
 }
 
 .sled-hub-hero h1 .accent,
-.sled-inner-hero h1 .accent {
+.sled-inner-hero h1 .accent,
+.sled-capabilities-hero h1 .accent {
   color: var(--color-cyan);
+}
+
+.sled-capabilities-hero::before {
+  content: '';
+  position: absolute;
+  right: -50px;
+  top: -50px;
+  z-index: 2;
+  width: 300px;
+  height: 300px;
+  pointer-events: none;
+  background: linear-gradient(
+    45deg,
+    transparent 49%,
+    rgba(24, 176, 230, 0.16) 49% 51%,
+    transparent 51%
+  );
+  background-size: 28px 28px;
+  transform: rotate(15deg);
 }
 
 /* Beam border — Tailwind can't express conic-gradient mask animation */

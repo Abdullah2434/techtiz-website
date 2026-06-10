@@ -7,9 +7,9 @@ import CapabilitiesProcStrip from '../../components/sled/capabilities/Capabiliti
 import CapabilitiesTechStackSection from '../../components/sled/capabilities/CapabilitiesTechStackSection.astro';
 import SledFaqSection from '../../components/sled/shared/SledFaqSection.astro';
 import SledFinalCta from '../../components/sled/shared/SledFinalCta.astro';
-import SledInnerHero from '../../components/sled/shared/SledInnerHero.astro';
+import CapabilitiesHero from '../../components/sled/capabilities/CapabilitiesHero.astro';
 import SledLayout from '../../layouts/SledLayout.astro';
-import { CAPABILITIES_HERO, CAPABILITIES_SEO } from '../../lib/constants/pages/capabilities';
+import { CAPABILITIES_SEO } from '../../lib/constants/pages/capabilities';
 import { CAPABILITIES_FAQ } from '../../lib/constants/pages/sled-faq';
 import { absoluteUrl, serviceJsonLd } from '../../lib/seo/json-ld';
 import '../../styles/sled.css';
@@ -27,12 +27,7 @@ const jsonLd = [
 ---
 
 <SledLayout {title} {description} {canonicalPath} {ogImage} {jsonLd} currentPage="/us-sled/capabilities/">
-  <SledInnerHero
-    eyebrow={CAPABILITIES_HERO.eyebrow}
-    heading={CAPABILITIES_HERO.heading}
-    body={CAPABILITIES_HERO.body}
-    ctas={CAPABILITIES_HERO.ctas}
-  />
+  <CapabilitiesHero />
   <CapabilitiesProcStrip />
   <CapabilitiesFrameworksSection />
   <CapabilitiesMatrixSection />

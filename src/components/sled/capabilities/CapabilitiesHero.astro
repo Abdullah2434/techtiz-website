@@ -1,0 +1,49 @@
+---
+import { SLED_CAPABILITIES_HERO } from '../../../lib/constants/pages/capabilities';
+import CtaButton from '../../shared/CtaButton.astro';
+import Eyebrow from '../../shared/Eyebrow.astro';
+import SledPageWrap from '../shared/SledPageWrap.astro';
+---
+
+<section
+  class="sled-capabilities-hero relative isolate overflow-hidden bg-yale-dark text-white"
+  id="top"
+  data-screen-label="01 Hero"
+>
+  <div class="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
+    <div
+      class="absolute inset-0 bg-[url('/assets/hero-servers.png')] bg-cover bg-[right_center]"
+    ></div>
+  </div>
+  <div
+    class="absolute inset-0 z-[1] pointer-events-none bg-[linear-gradient(100deg,var(--color-yale-dark)_26%,rgba(14,38,64,0.78)_48%,rgba(14,38,64,0.34)_70%,transparent_96%)]"
+    aria-hidden="true"
+  ></div>
+
+  <SledPageWrap class="relative z-[5] py-[clamp(3.4rem,6vw,5.25rem)] pb-[clamp(2.5rem,4.5vw,3.75rem)]">
+    <div class="max-w-[62ch] sled-reveal is-visible">
+      <Eyebrow text={SLED_CAPABILITIES_HERO.eyebrow} onDark showGlyph class="mb-[18px]" />
+
+      <h1
+        class="sled-h1 mb-5 text-[clamp(2.4rem,4.4vw,3.6rem)] font-semibold leading-[1.05] tracking-[-0.022em] text-white [&_.accent]:text-cyan"
+        set:html={SLED_CAPABILITIES_HERO.heading}
+      />
+
+      <p class="mb-7 max-w-[600px] text-[clamp(1.02rem,1.4vw,1.18rem)] leading-[1.55] text-white/80">
+        {SLED_CAPABILITIES_HERO.body}
+      </p>
+
+      <div class="flex flex-wrap gap-3.5 max-[600px]:flex-col max-[600px]:items-stretch">
+        {SLED_CAPABILITIES_HERO.ctas.map((cta) => (
+          <CtaButton
+            href={cta.href}
+            label={cta.label}
+            variant={cta.variant}
+            showArrow={cta.showArrow}
+            beam={'beam' in cta ? cta.beam : false}
+          />
+        ))}
+      </div>
+    </div>
+  </SledPageWrap>
+</section>

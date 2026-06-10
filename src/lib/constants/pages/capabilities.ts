@@ -1,28 +1,34 @@
 export const CAPABILITIES_SEO = {
-  title: "SLED Capabilities | The Techtiz SLED Backbone | Techtiz",
+  title: "Capabilities & Compliance · The Techtiz SLED Backbone | Techtiz SLED",
   description:
-    "SLED technical capabilities for U.S. prime contractors: engineering backbone, GIS, statutory documents, AI automation, NIST 800-171 alignment, and clear subcontract delivery boundaries.",
+    "What Techtiz brings to a U.S. SLED prime: the capability matrix, the compliance posture a prime compliance officer is looking for, the CONUS / Lahore air-gapped data architecture, state-by-state offshore restrictions, and the boundaries of our lane.",
   canonicalPath: "/us-sled/capabilities/",
-  ogImage: "/assets/capitol.png",
+  ogImage: "/assets/hero-servers.png",
 } as const;
 
-export const CAPABILITIES_HERO = {
-  eyebrow: "Capabilities of the Techtiz SLED Backbone",
-  heading: 'What we <span class="accent">bring on day one.</span>',
-  body: "A reference page a prime can scan in two minutes to confirm Techtiz can plug into the bid stack.",
+export const SLED_CAPABILITIES_HERO = {
+  eyebrow: "U.S. SLED · Capabilities & compliance",
+  heading: 'What we bring, and <span class="accent">how we secure it.</span>',
+  body: "The engineering we plug in on day one, the compliance posture your security officer needs, and the architecture behind both.",
   ctas: [
     {
       label: "Download capability statement",
       href: "/us-sled/capability-statement/",
       variant: "cta" as const,
+      showArrow: true,
     },
     {
       label: "Start an NDA conversation",
       href: "/us-sled/contact/",
-      variant: "ghost-light" as const,
+      variant: "ghost-dark" as const,
+      showArrow: false,
+      beam: true,
     },
   ],
 } as const;
+
+/** @deprecated Use SLED_CAPABILITIES_HERO */
+export const CAPABILITIES_HERO = SLED_CAPABILITIES_HERO;
 
 export const PROCUREMENT_STRIP = {
   eyebrow: "Procurement & registration",

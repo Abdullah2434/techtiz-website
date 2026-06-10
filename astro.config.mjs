@@ -13,11 +13,7 @@ export default defineConfig({
     excludeFiles: ["./public/**"],
   }),
   trailingSlash: "always",
-  integrations: [
-    sitemap({
-      filter: (page) => !page.includes("case-study-2026-08"),
-    }),
-  ],
+  integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],
   },

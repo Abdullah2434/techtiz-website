@@ -46,18 +46,6 @@
   }
 }
 
-@keyframes sledStatShine {
-
-  0%,
-  100% {
-    opacity: 0.35;
-  }
-
-  50% {
-    opacity: 0.7;
-  }
-}
-
 .sled-hero-capitol {
   animation: capitolDrift 32s ease-in-out infinite alternate;
 }
@@ -148,13 +136,6 @@
   font-size: clamp(1.375rem, 3.5vw, 2.75rem);
   line-height: 1.08;
   letter-spacing: -0.022em;
-  font-weight: 800;
-}
-
-.sled-stat {
-  font-size: clamp(1.5rem, 4vw, 3rem);
-  line-height: 1;
-  letter-spacing: -0.03em;
   font-weight: 800;
 }
 
@@ -266,16 +247,6 @@
   opacity: 1;
 }
 
-.sled-card-dark {
-  border-color: rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.03);
-}
-
-.sled-card-dark:hover {
-  border-color: rgba(24, 176, 230, 0.35);
-  box-shadow: 0 24px 48px -24px rgba(0, 0, 0, 0.45);
-}
-
 .sled-engagement-card::before {
   content: "";
   position: absolute;
@@ -373,21 +344,6 @@
 
 .sled-model-panel.is-fade-in {
   animation: sledModelFadeThrough 0.5s cubic-bezier(0.05, 0.7, 0.1, 1) both;
-}
-
-/* Specializations accordion */
-.sled-spec-body {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.5s cubic-bezier(0.2, 0, 0, 1);
-}
-
-.sled-spec-item.is-open .sled-spec-body {
-  grid-template-rows: 1fr;
-}
-
-.sled-spec-body-inner {
-  overflow: hidden;
 }
 
 /* Capabilities frameworks — status badges in accordion head */
@@ -782,20 +738,6 @@
   background: var(--color-seasalt);
 }
 
-/* Operating principles decorative grid */
-.sled-principles::after {
-  content: "";
-  position: absolute;
-  left: 40%;
-  bottom: -60px;
-  width: 380px;
-  height: 380px;
-  pointer-events: none;
-  background:
-    repeating-linear-gradient(0deg, transparent 0 40px, rgba(24, 176, 230, 0.03) 40px 41px),
-    repeating-linear-gradient(90deg, transparent 0 40px, rgba(24, 176, 230, 0.03) 40px 41px);
-}
-
 /* Inner page hero decoration */
 .sled-inner-hero::before {
   content: "";
@@ -822,37 +764,6 @@
   background-size: 30px 30px;
   transform: rotate(15deg);
   pointer-events: none;
-}
-
-/* Link underline accent */
-.sled-link-accent {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: 700;
-  color: var(--color-yale);
-  transition: gap 0.22s ease;
-}
-
-.sled-link-accent::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 2px;
-  background: var(--color-cyan);
-  transform-origin: left;
-  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.sled-link-accent:hover {
-  gap: 0.75rem;
-}
-
-.sled-link-accent:hover::after {
-  transform: scaleX(1.08);
 }
 
 /* Proof — engagement slider */
@@ -979,6 +890,7 @@
   grid-template-rows: 1fr;
 }
 
+.sled-spec-body-inner,
 .sled-spec-body-in {
   overflow: hidden;
 }
@@ -1066,22 +978,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .sled-spec-body {
-    transition: none;
-  }
-
-  .sled-spec-item:not(.is-open) .sled-spec-body {
-    display: none;
-  }
-
-  .sled-spec-item.is-open .sled-spec-body {
-    display: block;
-    grid-template-rows: 1fr;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-
   .sled-hero-capitol,
   .sled-hero-glow-a,
   .sled-hero-glow-b,
@@ -1115,6 +1011,15 @@
   .sled-spec-body {
     grid-template-rows: 1fr;
     transition: none;
+  }
+
+  .sled-spec-item:not(.is-open) .sled-spec-body {
+    display: none;
+  }
+
+  .sled-spec-item.is-open .sled-spec-body {
+    display: block;
+    grid-template-rows: 1fr;
   }
 
   .sled-hl-u::after {

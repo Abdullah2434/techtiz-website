@@ -24,7 +24,8 @@ export const SLED_HERO = {
     {
       label: "How we partner →",
       href: "/us-sled/how-we-partner/",
-      variant: "ghost-dark",
+      variant: "filled",
+      showArrow: false,
     },
   ],
   stats: [
@@ -256,7 +257,7 @@ export const SLED_BACKBONE = {
       detail: "GIS layers, spatial joins, and statutory map production.",
       stackHtml: "<b>ArcGIS</b> · <b>PostGIS</b> · GeoPandas · Mapbox",
       icon: "map",
-      dark: true,
+      dark: false,
     },
     {
       meta: "02 · ENGAGE",

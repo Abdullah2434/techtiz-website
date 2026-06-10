@@ -47,22 +47,45 @@ export const PAST_PERFORMANCE_STRIPE = {
   body: "Active subcontractor support for U.S. SLED prime contractors under NDA. Agency references and CPARS-style performance narratives available upon executed teaming agreement.",
 } as const;
 
-export const OUTCOMES_STATS = [
-  {
-    n: "Live",
-    l: "Subcontract delivery on state vehicles via Tier 1 primes",
-  },
-  {
-    n: "NDA",
-    l: "References and CPARS-style narratives under teaming agreement",
-  },
-  { n: "0", l: "Agency-facing engagements—subcontract-only model" },
-  { n: "1 day", l: `Teaming inquiry response at ${SITE.email.sled}` },
-  {
-    n: "100%",
-    l: "White-label artifacts under your prime brand",
-  },
-] as const;
+export type SledOutcomeStat = {
+  label: string;
+  value?: string;
+  tickerTo?: number;
+  suffix?: string;
+};
+
+export const SLED_OUTCOMES = {
+  eyebrow: "Outcomes that matter to primes",
+  heading: "What changes when Techtiz is on your team.",
+  stats: [
+    {
+      label: "GIS-tagged facility inventory delivered on a state environmental plan",
+      tickerTo: 100,
+      suffix: "%",
+    },
+    {
+      label: "Statutory-format deficiencies on first submission",
+      value: "0",
+    },
+    {
+      label: "Municipalities covered per-meeting briefing pack",
+      tickerTo: 35,
+      suffix: "/35",
+    },
+    {
+      label: "Late quarterly grant reports filed",
+      value: "0",
+    },
+    {
+      label: "Agency-facing engagements ever",
+      value: "0",
+    },
+  ],
+} as const satisfies {
+  eyebrow: string;
+  heading: string;
+  stats: readonly SledOutcomeStat[];
+};
 
 export type SledBackboneCard = {
   meta: string;
@@ -391,12 +414,6 @@ export const SLED_OPERATING_PRINCIPLES = {
       body: "You decide what surfaces upstream.",
     },
   ],
-} as const;
-
-export const OUTCOMES = {
-  eyebrow: "Outcomes that matter to primes",
-  heading: "What changes when Techtiz is on your team.",
-  sub: "Metrics and agency references are shared under executed teaming agreement never published in violation of prime NDAs.",
 } as const;
 
 export type SledSpecializationItem = {

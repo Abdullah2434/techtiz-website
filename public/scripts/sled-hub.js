@@ -1,5 +1,32 @@
 (function () {
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function runTicker(el) {
+    if (el.dataset.done) return;
+    el.dataset.done = '1';
+    const to = parseFloat(el.getAttribute('data-to'));
+    if (Number.isNaN(to)) return;
+    if (prefersReduced || to === 0) {
+      el.textContent = String(to);
+      return;
+    }
+    const dur = 1100;
+    let start = null;
+    function step(ts) {
+      if (start === null) start = ts;
+      const t = Math.min((ts - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - t, 3);
+      el.textContent = String(Math.round(to * eased));
+      if (t < 1) requestAnimationFrame(step);
+      else el.textContent = String(to);
+    }
+    requestAnimationFrame(step);
+  }
+
+  function runTickersIn(root) {
+    root.querySelectorAll('[data-sled-ticker]').forEach(runTicker);
+  }
+
   const revealEls = document.querySelectorAll('[data-sled-reveal]');
   if (revealEls.length && !prefersReduced) {
     const io = new IntersectionObserver(
@@ -7,6 +34,7 @@
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('is-visible');
+            runTickersIn(entry.target);
             io.unobserve(entry.target);
           }
         });
@@ -15,7 +43,10 @@
     );
     revealEls.forEach((el) => io.observe(el));
   } else {
-    revealEls.forEach((el) => el.classList.add('is-visible'));
+    revealEls.forEach((el) => {
+      el.classList.add('is-visible');
+      runTickersIn(el);
+    });
   }
 })();
 

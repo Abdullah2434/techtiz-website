@@ -24,7 +24,7 @@ export const SLED_CAPABILITIES = {
         label: "Download capability statement",
         href: "/us-sled/capability-statement/",
         variant: "cta" as const,
-        showArrow: true,
+        showArrow: false,
       },
       {
         label: "Start an NDA conversation",

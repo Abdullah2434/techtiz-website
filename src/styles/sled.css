@@ -277,30 +277,88 @@
   background-size: 100% 100%;
 }
 
-/* Stage tabs */
-.sled-stage-panel {
+/* Model section — accent underline */
+.sled-hl-u {
+  position: relative;
+}
+
+.sled-hl-u::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.08em;
+  height: 3px;
+  background: var(--color-cyan);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
+}
+
+.sled-reveal.is-visible .sled-hl-u::after {
+  transform: scaleX(1);
+}
+
+/* Model section — segmented control indicator */
+.sled-model-seg-ind {
+  transform: translateX(0);
+  transition:
+    transform 0.5s cubic-bezier(0.2, 0, 0, 1),
+    width 0.5s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.sled-model-tab {
+  gap: 0;
+  padding: 11px 22px;
+  line-height: 1;
+  transition: color 0.25s ease;
+}
+
+.sled-model-tab-chk {
+  width: 0;
+  min-width: 0;
+  margin-right: 0;
+  opacity: 0;
+  transition:
+    width 0.35s cubic-bezier(0.2, 0, 0, 1),
+    margin-right 0.35s cubic-bezier(0.2, 0, 0, 1),
+    opacity 0.2s ease;
+}
+
+.sled-model-tab[aria-selected="true"] {
+  gap: 7px;
+}
+
+.sled-model-tab[aria-selected="true"] .sled-model-tab-chk {
+  width: 17px;
+  min-width: 17px;
+  margin-right: 0;
+  opacity: 1;
+}
+
+.sled-model-panel {
   display: none;
 }
 
-.sled-stage-panel.is-visible {
-  display: grid;
-  animation: sledFadeUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+.sled-model-panel.is-active {
+  display: block;
 }
 
-.sled-tab-pill {
-  transition:
-    background 0.25s ease,
-    color 0.25s ease,
-    box-shadow 0.25s ease,
-    transform 0.2s ease;
+.sled-model-panel.is-fade-in {
+  animation: sledModelFadeThrough 0.5s cubic-bezier(0.05, 0.7, 0.1, 1) both;
 }
 
-.sled-tab-pill[aria-selected="true"] {
-  box-shadow: 0 8px 24px -10px rgba(14, 38, 64, 0.35);
-}
+@keyframes sledModelFadeThrough {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translateY(10px);
+  }
 
-.sled-tab-pill:not([aria-selected="true"]):hover {
-  transform: translateY(-1px);
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* Inquiry form */
@@ -478,11 +536,12 @@
 
   .sled-card:hover,
   .sled-need-card:hover,
-  .sled-tab-pill:not([aria-selected="true"]):hover {
-    transform: none;
+  .sled-model-panel.is-fade-in {
+    animation: none;
   }
 
-  .sled-stage-panel.is-visible {
-    animation: none;
+  .sled-hl-u::after {
+    transform: scaleX(1);
+    transition: none;
   }
 }

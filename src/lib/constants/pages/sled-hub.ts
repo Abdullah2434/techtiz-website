@@ -129,105 +129,134 @@ export const WHO_WE_ARE_NOT = {
   body: "Techtiz is not a procurement intelligence firm. We are a technical implementation subcontractor for U.S. SLED primes. For RFP intelligence, our partners use Deltek GovWin and Bloomberg Government.",
 } as const;
 
-export const TWO_STAGES = {
-  eyebrow: "Two engagement modes. One contract structure.",
-  heading:
-    "Engage us pre-award, post-award, or both, the prime always stays the face to the agency.",
-  sub: "Under teaming letter and NDA. Pre-award, we draft proposal volumes and build demo systems for your evaluation panel. Post-award, we deliver the technical workstream. Either way, white-labeled.",
+export type SledModelDeliverable = {
+  num: string;
+  icon:
+    | "file-text"
+    | "list-checks"
+    | "monitor-play"
+    | "calculator"
+    | "award"
+    | "id-card"
+    | "users-round"
+    | "tag"
+    | "shield-check";
+  heading: string;
+  body: string;
+};
+
+export type SledModelMode = {
+  quoteLabel: string;
+  quote: string;
+  quoteFoot: string;
+  quoteFootIcon: "file-pen-line" | "rocket";
+  quoteTone: "pain" | "win";
+  deliverables: readonly SledModelDeliverable[];
+  moreDeliverables?: {
+    summary: string;
+    items: readonly SledModelDeliverable[];
+  };
+};
+
+export const SLED_MODEL = {
+  eyebrow: "The model",
+  heading: "Onshore PM. Offshore engineering.",
+  headingAccent: "One prime-controlled team.",
+  sub: "Engage us pre-award, post-award, or both. Under teaming letter and NDA, the prime always stays the face to the agency.",
+  tablistLabel: "Engagement mode",
   tabs: [
-    { id: "pre", label: "Pre-Award Proposal Support" },
-    { id: "post", label: "Post-Award Delivery" },
+    { id: "pre", label: "Pre-award" },
+    { id: "post", label: "Post-award" },
   ],
   pre: {
-    tag: "Phase 01 · Pre-Award (under teaming letter + NDA)",
-    heading:
-      "Load the technical volume. Build the demo. Package past performance.",
-    pain: '"17 days to submission. Your architect is on another pursuit. Technical volume, compliance matrix, and orals demo all need owners."',
-    role: "Proposal-support services under teaming letter",
-    services: [
+    quoteLabel: "The pain",
+    quote:
+      "17 days to submission, architect on another pursuit, volume and matrix need owners.",
+    quoteFoot: "Pre-award · under teaming letter + NDA",
+    quoteFootIcon: "file-pen-line",
+    quoteTone: "pain",
+    deliverables: [
       {
-        n: "01",
-        icon: "edit",
-        heading: "Technical volume writing",
-        body: "Solution architecture, approach, and methodology sections drafted to your outline and style guide.",
+        num: "01",
+        icon: "file-text",
+        heading: "Technical volume",
+        body: "Architecture and approach, your outline.",
       },
       {
-        n: "02",
-        icon: "check-square",
-        heading: "Compliance matrix preparation",
-        body: "Line-by-line traceability against the SOW, every statutory requirement mapped to a proposal section, owner, and evidence.",
+        num: "02",
+        icon: "list-checks",
+        heading: "Compliance matrix",
+        body: "Line-by-line SOW traceability.",
       },
       {
-        n: "03",
-        icon: "trending",
-        heading: "LOE & pricing input",
-        body: "Bottom-up labor estimates with optimistic/likely/pessimistic ranges. Direct-to-pricing model handoff.",
-      },
-      {
-        n: "04",
-        icon: "monitor",
-        heading: "Demo & POC builds for orals",
-        body: "Working prototypes the evaluation panel can click, not slideware. Built in 2-3 weeks, ready for orals.",
-      },
-      {
-        n: "05",
-        icon: "book",
-        heading: "Past-performance packaging",
-        body: "Citation writeups, CPARS-equivalent narratives, and reference letters, in your prime-branded templates.",
-      },
-      {
-        n: "06",
-        icon: "users",
-        heading: "Key personnel resume tailoring",
-        body: "Resume edits, role mapping, and LCAT alignment for proposed staff (yours or ours, named on your roster).",
+        num: "03",
+        icon: "monitor-play",
+        heading: "Orals demo",
+        body: "Clickable POC in 2 to 3 weeks.",
       },
     ],
+    moreDeliverables: {
+      summary: "Three more deliverables",
+      items: [
+        {
+          num: "04",
+          icon: "calculator",
+          heading: "LOE & pricing",
+          body: "Bottom-up labor estimates with rationale.",
+        },
+        {
+          num: "05",
+          icon: "award",
+          heading: "Past performance",
+          body: "Tailored write-ups to the SOW.",
+        },
+        {
+          num: "06",
+          icon: "id-card",
+          heading: "Key personnel",
+          body: "Named seniors, resumes, letters.",
+        },
+      ],
+    },
   },
   post: {
-    tag: "Phase 02 · Post-Award",
-    heading: "Deliver the technical workstream, under your name.",
-    pain: '"Kickoff Monday. You need senior engineers in seats, a sprint cadence the agency PM trusts, and zero compliance findings. Bench is thin, ramp-up is tight."',
-    role: "Back-office delivery · white-label",
-    services: [
+    quoteLabel: "The win",
+    quote:
+      "Kickoff Monday. Senior engineers in seats, a cadence the agency PM trusts, zero findings.",
+    quoteFoot: "Post-award · inside your authorization boundary",
+    quoteFootIcon: "rocket",
+    quoteTone: "win",
+    deliverables: [
       {
-        n: "01",
-        icon: "users",
-        heading: "Senior engineering surge",
-        body: "Named, vetted engineers, not generic resumes. Cleared resources available; team scaling 2-20 FTEs.",
+        num: "01",
+        icon: "users-round",
+        heading: "Engineering surge",
+        body: "Named seniors, 2 to 20 FTEs.",
       },
       {
-        n: "02",
-        icon: "eye-off",
+        num: "02",
+        icon: "tag",
         heading: "White-label delivery",
-        body: "All artifacts, code, comms, docs, demos, carry your prime brand. We never appear in agency-facing channels.",
+        body: "Everything under your brand.",
       },
       {
-        n: "03",
-        icon: "calendar",
-        heading: "Sprint delivery under your PM",
-        body: "We slot into your cadence, your tooling, your Definition of Done. Weekly burndown reports to your PM only.",
-      },
-      {
-        n: "04",
-        icon: "shield",
-        heading: "Compliance posture maintained",
-        body: "CJIS, HIPAA, IRS Pub 1075, StateRAMP-aligned controls applied to our work, inside your authorization boundary.",
-      },
-      {
-        n: "05",
-        icon: "file",
-        heading: "Documentation & KT",
-        body: "Living architecture docs, runbooks, and ATO artifacts. KT package delivered before each milestone close.",
-      },
-      {
-        n: "06",
-        icon: "alert",
-        heading: "IV&V response support",
-        body: "Findings remediation, audit responses, and CAP narratives, turned in your templates within SLA.",
+        num: "03",
+        icon: "shield-check",
+        heading: "Compliance kept",
+        body: "Inside your authorization boundary.",
       },
     ],
   },
-} as const;
+} as const satisfies {
+  eyebrow: string;
+  heading: string;
+  headingAccent: string;
+  sub: string;
+  tablistLabel: string;
+  tabs: readonly { id: string; label: string }[];
+  pre: SledModelMode;
+  post: SledModelMode;
+};
 
 export const ONSHORE = {
   eyebrow: "Delivery model",

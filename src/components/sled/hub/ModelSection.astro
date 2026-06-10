@@ -1,0 +1,156 @@
+---
+import Check from '@lucide/astro/icons/check';
+import FilePenLine from '@lucide/astro/icons/file-pen-line';
+import Plus from '@lucide/astro/icons/plus';
+import Rocket from '@lucide/astro/icons/rocket';
+import { SLED_MODEL } from '../../../lib/constants/pages/sled-hub';
+import Eyebrow from '../../shared/Eyebrow.astro';
+import ModelDeliverableRow from './ModelDeliverableRow.astro';
+import SledPageWrap from '../shared/SledPageWrap.astro';
+
+const footIcons = {
+  'file-pen-line': FilePenLine,
+  rocket: Rocket,
+} as const;
+
+const modes = [
+  { id: 'pre' as const, data: SLED_MODEL.pre },
+  { id: 'post' as const, data: SLED_MODEL.post },
+];
+---
+
+<section class="sled-section bg-seasalt" id="model" data-screen-label="The Model">
+  <SledPageWrap>
+    <div
+      class="mb-6 grid grid-cols-1 items-end gap-5 lg:mb-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12"
+    >
+      <div class="sled-reveal" data-sled-reveal>
+        <Eyebrow text={SLED_MODEL.eyebrow} showGlyph class="mb-4" />
+        <h2 class="text-[clamp(1.7rem,2.5vw,2.3rem)] font-semibold leading-[1.12] tracking-[-0.02em] text-yale-dark">
+          {SLED_MODEL.heading}
+          <br />
+          <span class="sled-hl-u text-yale-dark">{SLED_MODEL.headingAccent}</span>
+        </h2>
+      </div>
+      <p
+        class="sled-reveal max-w-[42ch] text-[15px] leading-[1.55] text-muted lg:justify-self-end"
+        data-sled-reveal
+      >
+        {SLED_MODEL.sub}
+      </p>
+    </div>
+
+    <div
+      class="sled-reveal relative mb-6 inline-flex gap-1 rounded-full border border-line bg-white p-[5px] shadow-[0_10px_30px_-20px_rgba(21,58,95,0.16)]"
+      data-sled-model-seg
+      data-sled-reveal
+      role="tablist"
+      aria-label={SLED_MODEL.tablistLabel}
+    >
+      <span
+        class="sled-model-seg-ind pointer-events-none absolute top-[5px] bottom-[5px] left-0 z-0 rounded-full bg-yale shadow-[0_8px_24px_-10px_rgba(14,38,64,0.35)]"
+        aria-hidden="true"
+      ></span>
+      {
+        SLED_MODEL.tabs.map((tab, idx) => (
+          <button
+            type="button"
+            id={tab.id === 'pre' ? 'sledModelTabPre' : 'sledModelTabPost'}
+            role="tab"
+            data-sled-model-tab={tab.id}
+            aria-selected={idx === 0 ? 'true' : 'false'}
+            aria-controls={tab.id === 'pre' ? 'sledModelPanelPre' : 'sledModelPanelPost'}
+            class="sled-model-tab relative z-[1] inline-flex items-center rounded-full bg-transparent text-[14.5px] font-bold text-muted [&[aria-selected=true]]:text-white"
+          >
+            <span class="sled-model-tab-chk inline-flex shrink-0 items-center justify-center overflow-hidden" aria-hidden="true">
+              <Check class="size-[17px] shrink-0" stroke-width="2.25" />
+            </span>
+            {tab.label}
+          </button>
+        ))
+      }
+    </div>
+
+    {
+      modes.map((mode, idx) => {
+        const panelId = mode.id === 'pre' ? 'sledModelPanelPre' : 'sledModelPanelPost';
+        const tabId = mode.id === 'pre' ? 'sledModelTabPre' : 'sledModelTabPost';
+        const FootIcon = footIcons[mode.data.quoteFootIcon];
+        const quoteLabelClass =
+          mode.data.quoteTone === 'win'
+            ? 'text-green before:bg-green'
+            : 'text-amber before:bg-amber';
+        const moreDeliverables =
+          'moreDeliverables' in mode.data ? mode.data.moreDeliverables : undefined;
+
+        return (
+          <div
+            id={panelId}
+            role="tabpanel"
+            aria-labelledby={tabId}
+            data-sled-model-panel={mode.id}
+            class:list={['sled-model-panel', idx === 0 && 'is-active']}
+            hidden={idx !== 0}
+          >
+            <div
+              class="sled-reveal grid grid-cols-1 items-stretch gap-4 lg:grid-cols-[0.82fr_1.18fr] lg:gap-5.5"
+              data-sled-reveal
+            >
+              <aside class="flex flex-col rounded-2xl bg-yale-dark p-7 text-white shadow-[0_10px_30px_-20px_rgba(21,58,95,0.16)]">
+                <span
+                  class:list={[
+                    'mb-4.5 inline-flex items-center gap-2.25 font-mono text-[11px] font-semibold tracking-[0.12em] uppercase before:size-2 before:shrink-0 before:rounded-full',
+                    quoteLabelClass,
+                  ]}
+                >
+                  {mode.data.quoteLabel}
+                </span>
+                <p class="m-0 text-[1.15rem] leading-[1.45] font-medium italic text-white/95">
+                  {mode.data.quote}
+                </p>
+                <div class="mt-auto flex items-center gap-2.25 pt-5.5 font-mono text-[11.5px] tracking-[0.02em] text-white/56">
+                  <FootIcon class="size-[15px] shrink-0 text-cyan" stroke-width="1.75" aria-hidden="true" />
+                  {mode.data.quoteFoot}
+                </div>
+              </aside>
+
+              <div class="flex flex-col rounded-2xl border border-line-soft bg-white px-6 py-1 shadow-[0_10px_30px_-20px_rgba(21,58,95,0.16)]">
+                {
+                  mode.data.deliverables.map((item, itemIdx) => (
+                    <ModelDeliverableRow
+                      item={item}
+                      isLast={!moreDeliverables && itemIdx === mode.data.deliverables.length - 1}
+                    />
+                  ))
+                }
+                {
+                  moreDeliverables && (
+                    <details class="group border-t border-line-soft">
+                      <summary class="flex cursor-pointer list-none items-center gap-2.25 border-b border-transparent py-3.75 font-mono text-[12.5px] font-semibold text-cyan-strong group-open:border-line-soft [&::-webkit-details-marker]:hidden">
+                        <span
+                          class="inline-flex transition-transform duration-300 ease-[cubic-bezier(0.2,0,0,1)] group-open:rotate-45"
+                          aria-hidden="true"
+                        >
+                          <Plus class="size-4" stroke-width="2" />
+                        </span>
+                        {moreDeliverables.summary}
+                      </summary>
+                      {
+                        moreDeliverables.items.map((item, itemIdx) => (
+                          <ModelDeliverableRow
+                            item={item}
+                            isLast={itemIdx === moreDeliverables.items.length - 1}
+                          />
+                        ))
+                      }
+                    </details>
+                  )
+                }
+              </div>
+            </div>
+          </div>
+        );
+      })
+    }
+  </SledPageWrap>
+</section>

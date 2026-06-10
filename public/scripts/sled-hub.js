@@ -20,23 +20,66 @@
 })();
 
 (function () {
-  const buttons = document.querySelectorAll('[data-sled-stage-tab]');
-  const panels = document.querySelectorAll('[data-sled-stage-panel]');
-  buttons.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const target = btn.dataset.sledStageTab;
-      buttons.forEach((b) => {
-        const active = b === btn;
-        b.classList.toggle('bg-yale-dark', active);
-        b.classList.toggle('text-white', active);
-        b.classList.toggle('text-muted', !active);
-        b.setAttribute('aria-selected', active ? 'true' : 'false');
-      });
-      panels.forEach((p) => {
-        p.classList.toggle('is-visible', p.dataset.sledStagePanel === target);
-      });
+  const seg = document.querySelector('[data-sled-model-seg]');
+  const tabPre = document.getElementById('sledModelTabPre');
+  const tabPost = document.getElementById('sledModelTabPost');
+  const ind = seg?.querySelector('.sled-model-seg-ind');
+  const pre = document.getElementById('sledModelPanelPre');
+  const post = document.getElementById('sledModelPanelPost');
+  if (!seg || !tabPre || !tabPost || !pre || !post) return;
+
+  function moveIndicator(btn) {
+    if (!ind || !btn) return;
+    ind.style.width = `${btn.offsetWidth}px`;
+    ind.style.transform = `translateX(${btn.offsetLeft}px)`;
+  }
+
+  function select(which, animate) {
+    const isPre = which === 'pre';
+    tabPre.setAttribute('aria-selected', isPre ? 'true' : 'false');
+    tabPost.setAttribute('aria-selected', isPre ? 'false' : 'true');
+    pre.classList.toggle('is-active', isPre);
+    post.classList.toggle('is-active', !isPre);
+    pre.hidden = !isPre;
+    post.hidden = isPre;
+    moveIndicator(isPre ? tabPre : tabPost);
+
+    const shown = isPre ? pre : post;
+    if (animate) {
+      shown.classList.remove('is-fade-in');
+      void shown.offsetWidth;
+      shown.classList.add('is-fade-in');
+    }
+  }
+
+  tabPre.addEventListener('click', () => select('pre', true));
+  tabPost.addEventListener('click', () => select('post', true));
+
+  seg.querySelectorAll('.sled-model-tab-chk').forEach((chk) => {
+    chk.addEventListener('transitionend', (event) => {
+      if (event.propertyName === 'width') place();
     });
   });
+
+  function place() {
+    moveIndicator(tabPre.getAttribute('aria-selected') === 'true' ? tabPre : tabPost);
+  }
+
+  if (ind instanceof HTMLElement) {
+    ind.style.transition = 'none';
+    place();
+    setTimeout(() => {
+      ind.style.transition = '';
+    }, 60);
+  }
+
+  if (document.fonts?.ready) {
+    document.fonts.ready.then(place);
+  }
+  window.addEventListener('load', place);
+  window.addEventListener('resize', place);
+  setTimeout(place, 140);
+  setTimeout(place, 420);
 })();
 
 (function () {

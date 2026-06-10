@@ -26,8 +26,8 @@ export const SLED_HERO = {
     //   variant: "ghost-dark",
     // },
     {
-      label: "How we engage →",
-      href: "/us-sled/how-we-engage/",
+      label: "How we partner →",
+      href: "/us-sled/how-we-partner/",
       variant: "ghost-dark",
     },
   ],

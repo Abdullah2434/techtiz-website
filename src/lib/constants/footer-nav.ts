@@ -39,7 +39,7 @@ export const FOOTER_NAV_SECTIONS: FooterNavSectionData[] = [
     links: [
       { name: "SLED Hub", href: ROUTES.sledHub },
       { name: "Capabilities", href: ROUTES.sledCapabilities },
-      { name: "How We Engage", href: ROUTES.sledHowWeEngage },
+      { name: "How We Partner", href: ROUTES.sledHowWePartner },
       { name: "Operating Model", href: ROUTES.sledOperatingModel },
       { name: "Engagement Examples", href: ROUTES.sledCaseStudies },
       { name: "Procurement Vehicles", href: ROUTES.sledVehicles },

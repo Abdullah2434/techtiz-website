@@ -86,7 +86,7 @@ export const PAGE_KEYWORDS: Record<string, readonly string[]> = {
     'GIS statutory documents',
     'NIST 800-171',
   ],
-  '/us-sled/how-we-engage/': [
+  '/us-sled/how-we-partner/': [
     'SLED teaming letter',
     'subcontract engagement',
     'mutual NDA',

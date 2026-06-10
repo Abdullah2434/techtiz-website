@@ -1,0 +1,96 @@
+---
+import Badge from '@lucide/astro/icons/badge';
+import ChevronDown from '@lucide/astro/icons/chevron-down';
+import EyeOff from '@lucide/astro/icons/eye-off';
+import Signature from '@lucide/astro/icons/signature';
+import GitMerge from '@lucide/astro/icons/git-merge';
+import Handshake from '@lucide/astro/icons/handshake';
+import MessagesSquare from '@lucide/astro/icons/messages-square';
+import PenLine from '@lucide/astro/icons/pen-line';
+import ShieldCheck from '@lucide/astro/icons/shield-check';
+
+interface AccordionItem {
+  n: string;
+  icon: string;
+  heading: string;
+  body: string;
+  when?: string;
+  tools?: readonly string[];
+}
+
+interface Props {
+  items: readonly AccordionItem[];
+  variant?: 'light' | 'dark';
+  defaultOpen?: number;
+  class?: string;
+}
+
+const { items, variant = 'light', defaultOpen = 0, class: extraClass = '' } = Astro.props;
+
+const iconMap = {
+  handshake: Handshake,
+  'messages-square': MessagesSquare,
+  signature: Signature,
+  'eye-off': EyeOff,
+  badge: Badge,
+  'pen-line': PenLine,
+  'shield-check': ShieldCheck,
+  'git-merge': GitMerge,
+} as const;
+
+const isDark = variant === 'dark';
+---
+
+<div
+  class:list={[
+    'sled-spec-acc border-t',
+    isDark ? 'sled-spec-acc-dark border-white/16' : 'border-line',
+    extraClass,
+  ]}
+  data-sled-spec-acc
+>
+  {
+    items.map((item, idx) => {
+      const ItemIcon = iconMap[item.icon as keyof typeof iconMap];
+      const isOpen = idx === defaultOpen;
+      return (
+        <article
+          class:list={['sled-spec-item', isOpen && 'is-open']}
+          data-sled-spec-item
+        >
+          <button
+            type="button"
+            class="sled-spec-head"
+            aria-expanded={isOpen ? 'true' : 'false'}
+          >
+            <span class="sled-spec-num">{item.n}</span>
+            <span class="sled-spec-title">
+              {ItemIcon && <ItemIcon class="size-[19px] shrink-0" aria-hidden="true" />}
+              {item.heading}
+            </span>
+            <span class="sled-spec-head-right">
+              {item.when && <span class="sled-when-tag">{item.when}</span>}
+              <span class="sled-spec-chev" aria-hidden="true">
+                <ChevronDown class="size-5" />
+              </span>
+            </span>
+          </button>
+          <div class="sled-spec-body">
+            <div class="sled-spec-body-in">
+              <div class="sled-spec-body-pad">
+                <p>{item.body}</p>
+                {item.tools && item.tools.length > 0 && (
+                  <div class="sled-spec-tools">
+                    {item.tools.map((tool) => (
+                      <span>{tool}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </article>
+      );
+    })
+  }
+</div>

@@ -19,8 +19,8 @@ export const PROCUREMENT_VEHICLES_HERO = {
       variant: "cta" as const,
     },
     {
-      label: "How we engage →",
-      href: "/us-sled/how-we-engage/",
+      label: "How we partner →",
+      href: "/us-sled/how-we-partner/",
       variant: "ghost-dark" as const,
     },
   ],
@@ -135,7 +135,7 @@ export const PRE_AWARD_NOTE = {
   heading: "Same vehicle. Two modes under one teaming letter.",
   body: "Pre-award: technical volumes, compliance matrices, LOE input, orals demos, and past-performance packaging under teaming letter and NDA. Post-award: named engineering surge, white-label delivery, and IV&V response support under your PM. Either mode, the prime stays the face to the agency.",
   linkLabel: "See the full engagement sequence",
-  linkHref: "/us-sled/how-we-engage/",
+  linkHref: "/us-sled/how-we-partner/",
 } as const;
 
 export const PROCUREMENT_BOUNDARY = {

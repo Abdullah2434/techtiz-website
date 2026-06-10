@@ -409,56 +409,70 @@ export const OUTCOMES = {
   sub: "Metrics and agency references are shared under executed teaming agreement never published in violation of prime NDAs.",
 } as const;
 
-export const SPECIALIZATIONS = {
-  eyebrow: "Specializations we go deep on",
+export type SledSpecializationItem = {
+  num: string;
+  icon: "map-pin" | "accessibility" | "server" | "users" | "chart-column";
+  title: string;
+  body: string;
+  tools: readonly string[];
+};
+
+export const SLED_SPECIALIZATIONS = {
+  eyebrow: "Specializations",
   heading: "The technical domains we engineer in.",
-  sub: "Five surface areas where we keep specialized engineers, tooling, and statutory-format expertise on hand. Plug-in ready under a prime's master subcontract.",
-  linkLabel: "Delivered engagement examples",
-  linkHref: "/us-sled/case-studies/",
-  cards: [
+  items: [
     {
       num: "01",
       icon: "map-pin",
-      heading: "Materials & environmental data platforms",
-      body: "Facility inventories, capacity forecast models, multi-source spatial joins, and statutory-format document production for environmental plans adopted under state framework guidance.",
-      tools: ["ArcGIS", "PostGIS", "GeoPandas", "State plan formats"],
+      title: "Materials & environmental data",
+      body: "Facility inventories, capacity forecast models, multi-source spatial joins, statutory-format document production.",
+      tools: ["ArcGIS", "PostGIS", "GeoPandas"],
     },
     {
       num: "02",
-      icon: "globe",
-      heading: "Accessibility remediation engineering",
-      body: "WCAG 2.2 AA component-library refactors, PDF/UA conversion pipelines, screen-reader regression suites, plain-language editing of statutory content at portal scale.",
-      tools: ["axe DevTools", "NVDA / VoiceOver", "PDF/UA", "Pandoc"],
+      icon: "accessibility",
+      title: "Accessibility remediation",
+      body: "WCAG 2.2 AA refactors, PDF/UA pipelines, screen-reader regression suites, plain-language editing at portal scale.",
+      tools: ["axe", "NVDA / VoiceOver", "PDF/UA"],
     },
     {
       num: "03",
-      icon: "calendar-grid",
-      heading: "Permitting & licensing system modernization",
-      body: "Service layer wrappers over legacy mainframes, ETL pipelines for record migration, reconciliation reporting, IV&V response packages, audit-trail and FOIA export tooling.",
-      tools: ["Airbyte", "dbt", "PostgreSQL", "Supabase"],
+      icon: "server",
+      title: "Permitting & licensing systems",
+      body: "Service layers over legacy mainframes, record-migration ETL, reconciliation reporting, FOIA export tooling.",
+      tools: ["Airbyte", "dbt", "PostgreSQL"],
     },
     {
       num: "04",
       icon: "users",
-      heading: "Public engagement platform engineering",
-      body: "Multilingual survey platforms, comment-capture and triage workflows, hearing-pack generators, disadvantaged-community outreach instrumentation, equity dashboards.",
-      tools: ["i18next", "Twilio", "SendGrid", "Custom survey"],
+      title: "Public engagement platforms",
+      body: "Multilingual surveys, comment triage workflows, hearing-pack generators, equity dashboards.",
+      tools: ["i18next", "Twilio", "SendGrid"],
     },
     {
       num: "05",
-      icon: "bar-chart",
-      heading: "Grant reporting automation",
-      body: "Quarterly milestone reporting pipelines, federal-state reconciliation engines, deadline alerting, audit-trail artifacts, format generators for pass-through programs.",
-      tools: ["n8n", "Make.com", "Workday Adaptive", "Metabase"],
+      icon: "chart-column",
+      title: "Grant reporting automation",
+      body: "Quarterly milestone pipelines, federal-state reconciliation engines, deadline alerting, audit-trail artifacts.",
+      tools: ["n8n", "Make", "Metabase"],
     },
   ],
   cta: {
-    heading: "A specialization not listed?",
-    body: "If your pursuit sits adjacent to one of these surface areas, the capability is likely covered. Start with a 30-minute NDA-first conversation; we'll map our team shape to your SOW.",
+    textHtml:
+      'A specialization not listed? <b>We\'ll map our team to your SOW.</b>',
     linkLabel: "Start an NDA conversation",
     linkHref: "/us-sled/contact/",
   },
-} as const;
+} as const satisfies {
+  eyebrow: string;
+  heading: string;
+  items: readonly SledSpecializationItem[];
+  cta: {
+    textHtml: string;
+    linkLabel: string;
+    linkHref: string;
+  };
+};
 
 export const WHY_SECTION = {
   eyebrow: "Why Techtiz",

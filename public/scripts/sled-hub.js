@@ -109,6 +109,30 @@
 })();
 
 (function () {
+  const accordion = document.querySelector('[data-sled-spec-accordion]');
+  if (!accordion) return;
+
+  const items = accordion.querySelectorAll('[data-sled-spec-item]');
+  items.forEach((item) => {
+    const head = item.querySelector('.sled-spec-head');
+    if (!head) return;
+
+    head.addEventListener('click', () => {
+      const isOpen = item.classList.contains('is-open');
+      items.forEach((entry) => {
+        entry.classList.remove('is-open');
+        const button = entry.querySelector('.sled-spec-head');
+        if (button) button.setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        item.classList.add('is-open');
+        head.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+})();
+
+(function () {
   const cards = document.querySelectorAll('[data-sled-bento-card]');
   if (!cards.length) return;
 

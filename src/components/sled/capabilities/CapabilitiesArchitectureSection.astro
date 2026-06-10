@@ -1,0 +1,95 @@
+---
+import Lock from '@lucide/astro/icons/lock';
+import { SLED_CAPABILITIES } from '../../../lib/constants/pages/capabilities';
+import Eyebrow from '../../shared/Eyebrow.astro';
+import SledPageWrap from '../shared/SledPageWrap.astro';
+
+const { architecture } = SLED_CAPABILITIES;
+const { onshore, offshore, airGapLabel } = architecture;
+---
+
+<section
+  class="sled-section border-t border-line-soft bg-white"
+  data-screen-label="04 Data architecture"
+>
+  <SledPageWrap>
+    <div class="sled-reveal mb-12 max-w-[820px]" data-sled-reveal>
+      <Eyebrow text={architecture.eyebrow} showGlyph class="mb-4" />
+      <h2 class="text-[clamp(1.7rem,2.5vw,2.3rem)] font-semibold leading-[1.12] tracking-[-0.02em] text-yale-dark">
+        {architecture.heading}
+      </h2>
+      <p class="mt-3.5 text-[15.5px] leading-[1.6] text-muted">
+        {architecture.body}
+      </p>
+    </div>
+
+    <div
+      class="sled-arch-board sled-reveal"
+      data-sled-reveal
+      data-air-gap-label={airGapLabel}
+    >
+      <article class="sled-arch-col sled-arch-col--onshore">
+        <header class="sled-arch-col-head">
+          <span class="sled-arch-flag">{onshore.flag}</span>
+          <h3 class="sled-arch-title">{onshore.title}</h3>
+          <p class="sled-arch-sub">{onshore.subtitle}</p>
+        </header>
+        <ul class="sled-arch-list">
+          {onshore.items.map((item) => (
+            <li class="sled-arch-item">
+              <span class="sled-arch-dot" aria-hidden="true"></span>
+              <p>
+                <strong>{item.title}</strong> {item.body}
+              </p>
+            </li>
+          ))}
+        </ul>
+        <div class="sled-arch-data">
+          <div class="sled-arch-data-label">{onshore.dataClassesLabel}</div>
+          <div class="sled-arch-pills">
+            {onshore.dataClasses.map((pill) => (
+              <span class="sled-arch-pill">{pill}</span>
+            ))}
+          </div>
+        </div>
+      </article>
+
+      <div class="sled-arch-gap" aria-hidden="true">
+        <div class="sled-arch-vline"></div>
+        <div class="sled-arch-lock">
+          <Lock class="size-5" stroke-width="1.75" />
+        </div>
+        <div class="sled-arch-vline"></div>
+        <span class="sled-arch-gap-label font-mono text-[10px] font-semibold tracking-[0.2em] uppercase text-cyan-strong lg:hidden">
+          {airGapLabel}
+        </span>
+      </div>
+
+      <article class="sled-arch-col sled-arch-col--offshore">
+        <header class="sled-arch-col-head">
+          <span class="sled-arch-flag sled-arch-flag--offshore">{offshore.flag}</span>
+          <h3 class="sled-arch-title">{offshore.title}</h3>
+          <p class="sled-arch-sub">{offshore.subtitle}</p>
+        </header>
+        <ul class="sled-arch-list">
+          {offshore.items.map((item) => (
+            <li class="sled-arch-item">
+              <span class="sled-arch-dot" aria-hidden="true"></span>
+              <p>
+                <strong>{item.title}</strong> {item.body}
+              </p>
+            </li>
+          ))}
+        </ul>
+        <div class="sled-arch-data">
+          <div class="sled-arch-data-label">{offshore.dataClassesLabel}</div>
+          <div class="sled-arch-pills">
+            {offshore.dataClasses.map((pill) => (
+              <span class="sled-arch-pill sled-arch-pill--offshore">{pill}</span>
+            ))}
+          </div>
+        </div>
+      </article>
+    </div>
+  </SledPageWrap>
+</section>

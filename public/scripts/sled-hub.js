@@ -109,6 +109,25 @@
 })();
 
 (function () {
+  const cards = document.querySelectorAll('[data-sled-bento-card]');
+  if (!cards.length) return;
+
+  cards.forEach((card) => {
+    card.addEventListener('click', () => {
+      const wasOpen = card.classList.contains('is-open');
+      cards.forEach((c) => c.classList.remove('is-open'));
+      if (!wasOpen) card.classList.add('is-open');
+    });
+    card.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        card.click();
+      }
+    });
+  });
+})();
+
+(function () {
   document.querySelectorAll('[data-sled-need-card]').forEach((card) => {
     card.addEventListener('click', () => card.classList.toggle('is-selected'));
   });

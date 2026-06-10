@@ -64,44 +64,78 @@ export const OUTCOMES_STATS = [
   },
 ] as const;
 
-export const BACKBONE_CARDS = [
-  {
-    badgeNo: "01 · Specify",
-    heading: "Technical Requirements Analysis",
-    body: "Translating SOW technical sections into architecture, integration, and delivery specifications. Under NDA, against a defined engagement scope.",
-    href: "/us-sled/capabilities/",
-  },
-  {
-    badgeNo: "02 · Map",
-    heading: "GIS & Data Layer",
-    body: "Facility inventories, forecast models, supply chain analysis. ArcGIS, PostGIS, GeoPandas.",
-    href: "/us-sled/capabilities/",
-  },
-  {
-    badgeNo: "03 · Engage",
-    heading: "Engagement Cloud",
-    body: "Public surveys, multilingual platforms, comment capture, disadvantaged-community reach.",
-    href: "/us-sled/capabilities/",
-  },
-  {
-    badgeNo: "04 · Produce",
-    heading: "Document Production Suite",
-    body: "Statutory-format compliant deliverables in PDF, InDesign, ArcGIS, Word, Excel. Validated against state plan frameworks under prime QA.",
-    href: "/us-sled/capabilities/",
-  },
-  {
-    badgeNo: "05 · Report",
-    heading: "Grant Reporting Automation",
-    body: "Quarterly milestone reports generated from project delivery data. Zero late filings.",
-    href: "/us-sled/capabilities/",
-  },
-  {
-    badgeNo: "06 · Comply",
-    heading: "Statutory Compliance Layer",
-    body: "Plan-content checklists, adoption-sequence tracking, audit trails per state framework.",
-    href: "/us-sled/capabilities/",
-  },
-] as const;
+export type SledBackboneCard = {
+  meta: string;
+  heading: string;
+  detail: string;
+  stackHtml: string;
+  icon:
+    | "map"
+    | "messages-square"
+    | "file-stack"
+    | "chart-column"
+    | "scale"
+    | "ruler";
+  dark?: boolean;
+};
+
+export const SLED_BACKBONE = {
+  eyebrow: "The backbone",
+  heading: "The platform you plug into.",
+  linkLabel: "See the full capability matrix",
+  linkHref: "/us-sled/capabilities/",
+  cards: [
+    {
+      meta: "01 · MAP",
+      heading: "Geospatial intelligence",
+      detail: "GIS layers, spatial joins, and statutory map production.",
+      stackHtml: "<b>ArcGIS</b> · <b>PostGIS</b> · GeoPandas · Mapbox",
+      icon: "map",
+      dark: true,
+    },
+    {
+      meta: "02 · ENGAGE",
+      heading: "Engagement cloud",
+      detail: "Multilingual surveys, comment capture, and outreach.",
+      stackHtml: "surveys · i18n · capture",
+      icon: "messages-square",
+    },
+    {
+      meta: "03 · PRODUCE",
+      heading: "Document suite",
+      detail: "Accessible, statutory-format document production at scale.",
+      stackHtml: "<b>PDF/UA</b> · InDesign",
+      icon: "file-stack",
+    },
+    {
+      meta: "04 · REPORT",
+      heading: "Grant reporting",
+      detail: "Automated milestone and reconciliation pipelines.",
+      stackHtml: "<b>n8n</b> · Make",
+      icon: "chart-column",
+    },
+    {
+      meta: "05 · COMPLY",
+      heading: "Statutory layer",
+      detail: "Audit trails and controls inside your authorization boundary.",
+      stackHtml: "audit trails · CJIS · Pub 1075",
+      icon: "scale",
+    },
+    {
+      meta: "06 · SPECIFY",
+      heading: "Requirements",
+      detail: "SOW technical sections translated into delivery specs.",
+      stackHtml: "SOW to specs",
+      icon: "ruler",
+    },
+  ],
+} as const satisfies {
+  eyebrow: string;
+  heading: string;
+  linkLabel: string;
+  linkHref: string;
+  cards: readonly SledBackboneCard[];
+};
 
 export const WHY_CARDS = [
   {
@@ -373,14 +407,6 @@ export const OUTCOMES = {
   eyebrow: "Outcomes that matter to primes",
   heading: "What changes when Techtiz is on your team.",
   sub: "Metrics and agency references are shared under executed teaming agreement never published in violation of prime NDAs.",
-} as const;
-
-export const BACKBONE = {
-  eyebrow: "The Techtiz SLED Backbone",
-  heading: "The platform you plug into.",
-  sub: "Six capabilities, one stack. Built for the RFP work no off-the-shelf product covers cleanly.",
-  linkLabel: "Full capability matrix",
-  linkHref: "/us-sled/capabilities/",
 } as const;
 
 export const SPECIALIZATIONS = {

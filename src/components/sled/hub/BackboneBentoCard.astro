@@ -1,0 +1,104 @@
+---
+import ChartColumn from '@lucide/astro/icons/chart-column';
+import FileStack from '@lucide/astro/icons/file-stack';
+import Map from '@lucide/astro/icons/map';
+import MessagesSquare from '@lucide/astro/icons/messages-square';
+import Plus from '@lucide/astro/icons/plus';
+import Ruler from '@lucide/astro/icons/ruler';
+import Scale from '@lucide/astro/icons/scale';
+import type { SledBackboneCard } from '../../../lib/constants/pages/sled-hub';
+
+interface Props {
+  card: SledBackboneCard;
+  delayMs?: number;
+}
+
+const { card, delayMs = 0 } = Astro.props;
+
+const icons = {
+  map: Map,
+  'messages-square': MessagesSquare,
+  'file-stack': FileStack,
+  'chart-column': ChartColumn,
+  scale: Scale,
+  ruler: Ruler,
+} as const;
+
+const Icon = icons[card.icon];
+---
+
+<article
+  tabindex="0"
+  data-sled-bento-card
+  class:list={[
+    'sled-bento-card group relative flex min-h-[158px] cursor-pointer flex-col overflow-hidden rounded-xl border p-6 transition-[transform,box-shadow,border-color] duration-300 motion-safe:hover:-translate-y-0.75 motion-safe:hover:shadow-[0_18px_40px_-22px_rgba(21,58,95,0.28)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan',
+    card.dark
+      ? 'border-transparent bg-yale-dark text-white hover:border-transparent'
+      : 'border-line-soft bg-white hover:border-line',
+  ]}
+  style={delayMs ? `--d:${delayMs}ms` : undefined}
+>
+  <span
+    class:list={[
+      'mb-4.5 grid size-[46px] place-items-center rounded-xl',
+      card.dark ? 'bg-cyan/16 text-cyan' : 'bg-cyan-soft text-cyan-strong',
+    ]}
+  >
+    <Icon class="size-[22px]" stroke-width="1.75" aria-hidden="true" />
+  </span>
+
+  <div
+    class:list={[
+      'mb-1.75 font-mono text-[11px] font-semibold tracking-[0.1em] uppercase',
+      card.dark ? 'text-cyan' : 'text-cyan-strong',
+    ]}
+  >
+    {card.meta}
+  </div>
+
+  <h3
+    class:list={[
+      'm-0 text-[1.2rem] font-semibold leading-[1.2]',
+      card.dark ? 'text-white' : 'text-yale-dark',
+    ]}
+  >
+    {card.heading}
+  </h3>
+
+  <span
+    class:list={[
+      'absolute top-[22px] right-[22px] grid size-[26px] place-items-center rounded-full border transition-[transform,border-color,color] duration-300 group-hover:rotate-45 group-hover:border-cyan group-hover:text-cyan-strong group-[.is-open]:rotate-45 group-[.is-open]:border-cyan group-[.is-open]:text-cyan-strong',
+      card.dark
+        ? 'border-white/28 text-white/70'
+        : 'border-line text-muted',
+    ]}
+    aria-hidden="true"
+  >
+    <Plus class="size-[15px]" stroke-width="2" />
+  </span>
+
+  <div
+    class:list={[
+      'sled-bento-detail absolute inset-0 flex flex-col justify-end gap-3 rounded-[inherit] p-6',
+      card.dark ? 'bg-yale-mid' : 'bg-white',
+    ]}
+  >
+    <p
+      class:list={[
+        'm-0 text-[13.5px] leading-normal',
+        card.dark ? 'text-white/80' : 'text-muted',
+      ]}
+    >
+      {card.detail}
+    </p>
+    <div
+      class:list={[
+        'border-t pt-3.5 font-mono text-[11.5px] leading-[1.7] tracking-wide [&_b]:font-semibold',
+        card.dark
+          ? 'border-white/16 text-white/62 [&_b]:text-white'
+          : 'border-line-soft text-muted [&_b]:text-yale-dark',
+      ]}
+      set:html={card.stackHtml}
+    />
+  </div>
+</article>

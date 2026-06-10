@@ -16,6 +16,8 @@ interface Props {
   type?: 'button' | 'submit';
   variant?: ButtonVariant;
   showArrow?: boolean;
+  /** Animated cyan border trace (redesign beam). */
+  beam?: boolean;
   id?: string;
   class?: string;
 }
@@ -26,6 +28,7 @@ const {
   type = 'button',
   variant = 'cta',
   showArrow = true,
+  beam = false,
   id,
   class: className = '',
 } = Astro.props;
@@ -37,7 +40,7 @@ function resolveVariant(v: ButtonVariant): string {
 }
 
 const styleVariant = resolveVariant(variant);
-const btnClass = ['btn', `btn--${styleVariant}`, className];
+const btnClass = ['btn', `btn--${styleVariant}`, beam && 'btn--beam', className];
 const Tag = href ? 'a' : 'button';
 ---
 

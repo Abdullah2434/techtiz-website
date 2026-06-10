@@ -1,59 +1,45 @@
 import { SITE } from "../site";
 
 export const SLED_HUB_SEO = {
-  title:
-    "U.S. SLED Subcontractor | Back-office engineering for primes | Techtiz",
+  title: "U.S. SLED · Back-office engineering for primes | Techtiz",
   description:
-    "Active back-office technical subcontractor for U.S. SLED prime contractors. NDA-first, subcontract-only—GIS, AI, automation, statutory documents, and grant reporting. Agency references under executed teaming agreement. We never face the agency.",
+    "AI engineering behind your SLED prime contract. Back-office, white-label, NDA-first. We never face the agency.",
   canonicalPath: "/us-sled/",
-  ogImage: "/assets/capitol.png",
+  ogImage: "/assets/hero-capitol.png",
 } as const;
 
 export const SLED_HERO = {
-  eyebrow: "U.S. SLED · Active subcontractor for primes",
+  eyebrow: "U.S. SLED · Subcontractor to primes",
   heading:
-    'AI engineering for <span class="accent">U.S. SLED prime contractors.</span>',
-  body: "Active technical subcontractor behind Tier 1 primes. Pre bid proposal support and post award delivery under teaming letter. NDA-Protected. Subcontract-Only. We never face the agency your PM stays the only voice upstream.",
+    'AI engineering behind your <span class="accent">SLED prime contract.</span>',
+  body: "Back-office, white-label, NDA-first. We never face the agency.",
   ctas: [
     {
       label: "Start an NDA conversation",
       href: "/us-sled/contact/",
-      variant: "cta",
-    },
-    // {
-    //   label: "Capability statement →",
-    //   href: "/us-sled/capability-statement/",
-    //   variant: "ghost-dark",
-    // },
-    {
-      label: "How we engage →",
-      href: "/us-sled/how-we-engage/",
       variant: "ghost-dark",
+      showArrow: false,
+      beam: true,
+    },
+    {
+      label: "How we engage",
+      href: "/us-sled/how-we-engage/",
+      variant: "cta",
+      showArrow: false,
     },
   ],
-  stats: [
-    { n: "~10h", l: "US/PK overlap, daily" },
-    { n: "1 day", l: "Response SLA, NDA-bound" },
-    { n: "NDA", l: "First on substantive contact" },
-    { n: "0", l: "Agency-facing engagements" },
-  ],
-  disclaimer:
-    "Subcontract-only · NDA-first intake · We never face the agency · We do not compete with our partners",
 } as const;
 
-export const TRUST_ITEMS = [
+export const TRUST_BADGES = [
+  { label: "SAM.gov registration in progress", beam: true },
+  { label: "WCAG 2.2 AA" },
+  { label: "Section 508 / VPAT" },
+  { label: "NIST 800-171 / CMMC" },
+  { label: "CJIS · HIPAA · Pub 1075" },
   {
-    icon: "calendar",
-    label: "Federal classification",
-    value: "NAICS 541511 · 541512",
+    label: "NAICS 541511 · 541512 · 541519 · 541611 · 541990",
+    naics: true,
   },
-  {
-    icon: "building",
-    label: "State procurement",
-    value: "NIGP 918-46 · 918-00",
-  },
-  { icon: "check-circle", label: "Insurance", value: "Prime-routed" },
-  { icon: "clock", label: "Response SLA", value: "1 business day" },
 ] as const;
 
 export const PAST_PERFORMANCE_STRIPE = {

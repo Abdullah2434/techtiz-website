@@ -75,6 +75,43 @@
   color: var(--color-cyan);
 }
 
+/* Beam border — Tailwind can't express conic-gradient mask animation */
+@property --sled-beam-a {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.sled-beam::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--sled-beam-a),
+    transparent 0 62%,
+    rgb(24 176 230 / 0.25) 74%,
+    var(--color-cyan) 84%,
+    rgb(24 176 230 / 0.25) 92%,
+    transparent 100%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: sled-beam-spin 5s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes sled-beam-spin {
+  to {
+    --sled-beam-a: 360deg;
+  }
+}
+
 /* SLED heading scale — tuned for mobile (min ~22–24px, scales up on desktop) */
 .sled-h1 {
   font-size: clamp(1.5rem, 5.2vw, 3.5rem);
@@ -426,7 +463,9 @@
 
   .sled-hero-capitol,
   .sled-hero-glow-a,
-  .sled-hero-glow-b {
+  .sled-hero-glow-b,
+  .sled-beam::before,
+  .btn--beam::after {
     animation: none;
   }
 

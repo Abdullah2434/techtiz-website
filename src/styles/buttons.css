@@ -1,5 +1,11 @@
 /* Unified CTA + form buttons — shine hover, no color/text flip on hover */
 
+@property --btn-beam-a {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
 .btn {
   position: relative;
   display: inline-flex;
@@ -150,6 +156,41 @@
   color: #fff;
 }
 
+/* Redesign beam — cyan arc traces the button edge */
+.btn--beam::before {
+  display: none;
+}
+
+.btn--beam::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--btn-beam-a),
+    transparent 0 62%,
+    rgb(24 176 230 / 0.3) 74%,
+    var(--cyan) 84%,
+    rgb(24 176 230 / 0.3) 92%,
+    transparent 100%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: btn-beam-spin 5s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes btn-beam-spin {
+  to {
+    --btn-beam-a: 360deg;
+  }
+}
+
 /* ghost on light backgrounds — same cyan shine as outlined */
 .btn--ghost-light {
   border-color: var(--line);
@@ -220,6 +261,10 @@
 @media (prefers-reduced-motion: reduce) {
   .btn::before {
     display: none;
+  }
+
+  .btn--beam::after {
+    animation: none;
   }
 
   .btn:hover .btn__arrow,

@@ -1,0 +1,65 @@
+---
+import ArrowRight from '@lucide/astro/icons/arrow-right';
+import ChevronLeft from '@lucide/astro/icons/chevron-left';
+import ChevronRight from '@lucide/astro/icons/chevron-right';
+import { SLED_PROOF } from '../../../lib/constants/pages/sled-hub';
+import Eyebrow from '../../shared/Eyebrow.astro';
+import ProofSlide from './ProofSlide.astro';
+import SledPageWrap from '../shared/SledPageWrap.astro';
+---
+
+<section
+  class="sled-section border-t border-line-soft bg-white"
+  id="proof"
+  data-screen-label="Proof"
+>
+  <SledPageWrap>
+    <div class="sled-reveal mb-[30px] max-w-[640px]" data-sled-reveal>
+      <Eyebrow text={SLED_PROOF.eyebrow} showGlyph class="mb-4" />
+      <h2 class="text-[clamp(1.7rem,2.5vw,2.3rem)] font-semibold leading-[1.12] tracking-[-0.02em] text-yale-dark">
+        {SLED_PROOF.heading}
+        <span class="sled-hl-u">{SLED_PROOF.headingAccent}</span>
+      </h2>
+      <a
+        class="mt-[18px] inline-flex items-center gap-2 text-sm font-bold text-yale-dark transition-colors duration-200 hover:text-cyan-strong"
+        href={SLED_PROOF.linkHref}
+      >
+        {SLED_PROOF.linkLabel}
+        <ArrowRight class="size-4" aria-hidden="true" />
+      </a>
+    </div>
+
+    <div class="sled-reveal" data-sled-proof-slider data-sled-reveal>
+      <div class="overflow-hidden rounded-2xl">
+        <div class="sled-proof-track flex" data-sled-proof-track>
+          {SLED_PROOF.slides.map((slide) => <ProofSlide slide={slide} />)}
+        </div>
+      </div>
+
+      <div class="mt-[22px] flex items-center justify-center gap-[18px]">
+        <button
+          type="button"
+          class="sled-proof-btn grid size-11 place-items-center rounded-full border border-line bg-white text-yale shadow-sm transition-[border-color,color,transform] duration-200 hover:-translate-y-px hover:border-cyan hover:text-cyan-strong"
+          data-sled-proof-prev
+          aria-label="Previous engagement"
+        >
+          <ChevronLeft class="size-5" aria-hidden="true" />
+        </button>
+        <div
+          class="flex items-center gap-[9px]"
+          data-sled-proof-dots
+          role="tablist"
+          aria-label="Engagements"
+        ></div>
+        <button
+          type="button"
+          class="sled-proof-btn grid size-11 place-items-center rounded-full border border-line bg-white text-yale shadow-sm transition-[border-color,color,transform] duration-200 hover:-translate-y-px hover:border-cyan hover:text-cyan-strong"
+          data-sled-proof-next
+          aria-label="Next engagement"
+        >
+          <ChevronRight class="size-5" aria-hidden="true" />
+        </button>
+      </div>
+    </div>
+  </SledPageWrap>
+</section>

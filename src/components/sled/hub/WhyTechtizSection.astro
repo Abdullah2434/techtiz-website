@@ -1,27 +1,50 @@
 ---
-import { WHY_CARDS, WHY_SECTION } from '../../../lib/constants/pages/sled-hub';
+import { SLED_WHY_TECHTIZ } from '../../../lib/constants/pages/sled-hub';
 import Eyebrow from '../../shared/Eyebrow.astro';
 import SledPageWrap from '../shared/SledPageWrap.astro';
+
+const staggerDelays = [0, 90, 180];
 ---
 
-<section class="sled-section border-t border-line bg-white" data-screen-label="09 Why Techtiz">
+<section
+  class="sled-section border-t border-line-soft bg-white"
+  id="why"
+  data-screen-label="Why Techtiz"
+>
   <SledPageWrap>
-    <div class="sled-reveal mb-12 lg:max-w-[620px]" data-sled-reveal>
-      <Eyebrow text={WHY_SECTION.eyebrow} showGlyph class="mb-4" />
-      <h2 class="sled-h2 leading-[1.08] text-yale-dark">{WHY_SECTION.heading}</h2>
+    <div class="sled-reveal mb-[30px] max-w-[680px]" data-sled-reveal>
+      <Eyebrow text={SLED_WHY_TECHTIZ.eyebrow} showGlyph class="mb-4" />
+      <h2 class="text-[clamp(1.7rem,2.5vw,2.3rem)] font-semibold leading-[1.12] tracking-[-0.02em] text-yale-dark">
+        {SLED_WHY_TECHTIZ.heading}
+      </h2>
     </div>
 
-    <div class="sled-reveal-stagger grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-6" data-sled-reveal>
-      {WHY_CARDS.map((c) => (
-        <div class="sled-card group flex flex-col p-7">
-          <div class="mb-4 font-mono text-[11px] tracking-[0.16em] uppercase text-cyan-strong">{c.num}</div>
-          <h3 class="mb-4 text-[clamp(1.125rem,2vw,1.375rem)] font-extrabold leading-[1.2] text-yale">{c.heading}</h3>
-          <p class="mb-5 flex-1 text-[14.5px] leading-[1.65] text-muted">{c.body}</p>
-          <div class="rounded-xl border border-line bg-seasalt px-4 py-3 font-mono text-[11px] leading-[1.45] tracking-[0.04em] text-ink transition-colors duration-300 group-hover:border-cyan/20 group-hover:bg-cyan-soft/30">
-            <em class="not-italic text-cyan-strong">Counter to</em> {c.counter.replace('Counter to ', '')}
-          </div>
-        </div>
-      ))}
+    <div
+      class="sled-reveal-stagger grid grid-cols-1 gap-[18px] md:grid-cols-2 lg:grid-cols-3"
+      data-sled-reveal
+    >
+      {
+        SLED_WHY_TECHTIZ.cards.map((card, idx) => (
+          <article
+            class="flex flex-col rounded-xl border border-line-soft bg-white p-7 transition-[transform,box-shadow] duration-300 motion-safe:hover:-translate-y-0.75 motion-safe:hover:shadow-md"
+            style={staggerDelays[idx] ? `--d:${staggerDelays[idx]}ms` : undefined}
+          >
+            <div class="mb-3.5 font-mono text-xs font-semibold tracking-[0.04em] text-cyan-strong">
+              {card.num}
+            </div>
+            <h3 class="mb-2.5 text-[1.18rem] leading-[1.28] font-semibold text-yale-dark">
+              {card.heading}
+            </h3>
+            <p class="mb-[18px] text-sm leading-[1.55] text-muted">{card.body}</p>
+            <div class="mt-auto border-t border-line-soft pt-3.5 text-[13px] text-ink">
+              <em class="mb-[5px] block font-mono text-[10.5px] font-semibold tracking-[0.06em] text-cyan-strong uppercase not-italic">
+                Counters
+              </em>
+              {card.counter}
+            </div>
+          </article>
+        ))
+      }
     </div>
   </SledPageWrap>
 </section>

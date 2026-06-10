@@ -1,65 +1,101 @@
 ---
-import { SPECIALIZATIONS } from '../../../lib/constants/pages/sled-hub';
+import Accessibility from '@lucide/astro/icons/accessibility';
+import ArrowRight from '@lucide/astro/icons/arrow-right';
+import ChartColumn from '@lucide/astro/icons/chart-column';
+import ChevronDown from '@lucide/astro/icons/chevron-down';
+import MapPin from '@lucide/astro/icons/map-pin';
+import Plus from '@lucide/astro/icons/plus';
+import Server from '@lucide/astro/icons/server';
+import Users from '@lucide/astro/icons/users';
+import { SLED_SPECIALIZATIONS } from '../../../lib/constants/pages/sled-hub';
 import Eyebrow from '../../shared/Eyebrow.astro';
-import SledIcon from '../shared/SledIcon.astro';
 import SledPageWrap from '../shared/SledPageWrap.astro';
 
-const specCard = 'sled-card group flex flex-col gap-4 p-7';
-
-const iconWrap =
-  'grid size-12 place-items-center rounded-xl bg-cyan-soft text-cyan-strong transition-transform duration-300 group-hover:scale-105';
+const icons = {
+  'map-pin': MapPin,
+  accessibility: Accessibility,
+  server: Server,
+  users: Users,
+  'chart-column': ChartColumn,
+} as const;
 ---
 
-<section class="sled-section border-y border-line bg-white" data-screen-label="07 Specializations">
+<section
+  class="sled-section border-b border-line-soft bg-white"
+  id="specializations"
+  data-screen-label="Specializations"
+>
   <SledPageWrap>
-    <div class="sled-reveal mb-14 flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end lg:gap-12" data-sled-reveal>
-      <div class="max-w-[700px]">
-        <Eyebrow text={SPECIALIZATIONS.eyebrow} showGlyph class="mb-4" />
-        <h2 class="sled-h2-lg text-yale-dark">{SPECIALIZATIONS.heading}</h2>
-        <p class="mt-4 max-w-[720px] text-[15.5px] leading-[1.65] text-muted">{SPECIALIZATIONS.sub}</p>
-      </div>
-      <a class="sled-link-accent shrink-0 pb-1 text-sm" href={SPECIALIZATIONS.linkHref}>
-        {SPECIALIZATIONS.linkLabel} <span aria-hidden="true">→</span>
-      </a>
+    <div class="sled-reveal mb-[30px] max-w-[680px]" data-sled-reveal>
+      <Eyebrow text={SLED_SPECIALIZATIONS.eyebrow} showGlyph class="mb-4" />
+      <h2 class="text-[clamp(1.7rem,2.5vw,2.3rem)] font-semibold leading-[1.12] tracking-[-0.02em] text-yale-dark">
+        {SLED_SPECIALIZATIONS.heading}
+      </h2>
     </div>
 
-    <div class="sled-reveal-stagger grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3" data-sled-reveal>
-      {SPECIALIZATIONS.cards.map((card) => (
-        <article class={specCard}>
-          <div class="flex items-center justify-between">
-            <div class={iconWrap}>
-              <SledIcon name={card.icon} class="size-[22px]" />
+    <div class="sled-reveal border-t border-line" data-sled-spec-accordion data-sled-reveal>
+      {
+        SLED_SPECIALIZATIONS.items.map((item, idx) => {
+          const Icon = icons[item.icon];
+          const isOpen = idx === 0;
+
+          return (
+            <div
+              class:list={['sled-spec-item border-b border-line-soft', isOpen && 'is-open']}
+              data-sled-spec-item
+            >
+              <button
+                type="button"
+                class="sled-spec-head group grid w-full grid-cols-[64px_1fr_auto] items-center gap-[22px] bg-transparent py-5 px-2 text-left"
+                aria-expanded={isOpen ? 'true' : 'false'}
+              >
+                <span class="font-mono text-[1.9rem] font-semibold leading-none tracking-[-0.02em] text-line transition-colors duration-200 group-hover:text-cyan-strong [.sled-spec-item.is-open_&]:text-cyan">
+                  {item.num}
+                </span>
+                <span class="flex items-center gap-3 text-[1.18rem] font-semibold text-yale transition-colors duration-200 group-hover:text-cyan-strong [.sled-spec-item.is-open_&]:text-yale">
+                  <Icon class="size-[19px] shrink-0 text-cyan-strong" stroke-width="1.75" aria-hidden="true" />
+                  {item.title}
+                </span>
+                <span class="text-muted transition-[transform,color] duration-300 [.sled-spec-item.is-open_&]:rotate-180 [.sled-spec-item.is-open_&]:text-cyan-strong">
+                  <ChevronDown class="size-5" aria-hidden="true" />
+                </span>
+              </button>
+              <div class="sled-spec-body">
+                <div class="sled-spec-body-inner">
+                  <div class="flex flex-col gap-3.5 pb-6 pl-[86px] pr-2">
+                    <p class="m-0 max-w-[64ch] text-sm leading-[1.55] text-muted">{item.body}</p>
+                    <div class="flex flex-wrap gap-1.5">
+                      {item.tools.map((tool) => (
+                        <span class="rounded-md border border-line-soft bg-seasalt px-2 py-1 font-mono text-[10.5px] whitespace-nowrap text-muted">
+                          {tool}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <span class="font-mono text-[11px] tracking-[0.14em] uppercase text-muted">{card.num}</span>
-          </div>
-          <h3 class="text-[18px] font-extrabold leading-[1.2] text-yale-dark">{card.heading}</h3>
-          <p class="text-[13.5px] leading-[1.58] text-muted">{card.body}</p>
-          <div class="mt-auto flex flex-wrap gap-2 border-t border-line-soft pt-4">
-            {card.tools.map((tool) => (
-              <span class="rounded-md border border-line bg-seasalt px-2.5 py-1 font-mono text-[10.5px] tracking-[0.02em] text-cyan-strong">
-                {tool}
-              </span>
-            ))}
-          </div>
-        </article>
-      ))}
-
-      <article class={specCard}>
-        <div class="flex items-center justify-between">
-          <div class={iconWrap}>
-            <SledIcon name="arrow" class="size-[22px]" />
-          </div>
-          <span class="font-mono text-[11px] tracking-[0.14em] uppercase text-muted">+</span>
-        </div>
-        <h3 class="text-[18px] font-extrabold leading-[1.2] text-yale-dark">{SPECIALIZATIONS.cta.heading}</h3>
-        <p class="text-[13.5px] leading-[1.58] text-muted">{SPECIALIZATIONS.cta.body}</p>
-        <a
-          class="mt-auto inline-flex items-center gap-2 border-t border-line-soft pt-4 font-mono text-[12px] tracking-[0.10em] uppercase text-cyan-strong transition-[gap] duration-300 ease-out hover:gap-3.5"
-          href={SPECIALIZATIONS.cta.linkHref}
-        >
-          {SPECIALIZATIONS.cta.linkLabel} <span aria-hidden="true">→</span>
-        </a>
-      </article>
+          );
+        })
+      }
     </div>
+
+    <a
+      class="group sled-reveal mt-[18px] grid max-w-full grid-cols-[40px_minmax(0,1fr)] items-center gap-x-3.5 gap-y-3 rounded-xl bg-cyan-soft px-6 py-[18px] text-inherit transition-[transform,box-shadow] duration-300 motion-safe:hover:-translate-y-0.5 motion-safe:hover:shadow-[0_12px_32px_-20px_rgba(21,58,95,0.2)] sm:grid-cols-[64px_1fr_auto] sm:gap-[22px] sm:gap-y-0"
+      data-sled-reveal
+      href={SLED_SPECIALIZATIONS.cta.linkHref}
+    >
+      <span class="col-start-1 row-start-1 flex items-center justify-center font-mono text-[1.6rem] text-cyan">
+        <Plus class="size-[22px]" stroke-width="2" aria-hidden="true" />
+      </span>
+      <span
+        class="col-start-2 row-start-1 min-w-0 text-[15px] text-ink [&_b]:font-bold [&_b]:text-yale"
+        set:html={SLED_SPECIALIZATIONS.cta.textHtml}
+      />
+      <span class="col-span-2 row-start-2 inline-flex items-center gap-2 text-sm font-bold text-cyan-strong sm:col-span-1 sm:col-start-3 sm:row-start-1 sm:whitespace-nowrap">
+        {SLED_SPECIALIZATIONS.cta.linkLabel}
+        <ArrowRight class="size-[18px] transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transform-none" aria-hidden="true" />
+      </span>
+    </a>
   </SledPageWrap>
 </section>

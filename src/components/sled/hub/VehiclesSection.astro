@@ -1,5 +1,70 @@
 ---
-import ProcurementVehiclesGridSection from '../procurement-vehicles/ProcurementVehiclesGridSection.astro';
+import ArrowRight from '@lucide/astro/icons/arrow-right';
+import { SLED_VEHICLES } from '../../../lib/constants/pages/sled-hub';
+import Eyebrow from '../../shared/Eyebrow.astro';
+import SledPageWrap from '../shared/SledPageWrap.astro';
 ---
 
-<ProcurementVehiclesGridSection showHubLink screenLabel="08 Vehicles" />
+<section
+  class="sled-section bg-seasalt"
+  id="vehicles"
+  data-screen-label="Procurement vehicles"
+>
+  <SledPageWrap>
+    <div class="sled-reveal mb-[30px] max-w-[640px]" data-sled-reveal>
+      <Eyebrow text={SLED_VEHICLES.eyebrow} showGlyph class="mb-4" />
+      <h2 class="text-[clamp(1.7rem,2.5vw,2.3rem)] font-semibold leading-[1.12] tracking-[-0.02em] text-yale-dark">
+        {SLED_VEHICLES.heading}
+      </h2>
+      <a
+        class="mt-[18px] inline-flex items-center gap-2 text-sm font-bold text-yale-dark transition-colors duration-200 hover:text-cyan-strong"
+        href={SLED_VEHICLES.linkHref}
+      >
+        {SLED_VEHICLES.linkLabel}
+        <ArrowRight class="size-4" aria-hidden="true" />
+      </a>
+    </div>
+
+    <div
+      class="sled-reveal grid grid-cols-1 items-center gap-9 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12"
+      data-sled-reveal
+    >
+      <div class="rounded-2xl border border-line-soft bg-white p-[30px] shadow-sm">
+        <svg
+          data-sled-dotmap
+          class="block h-auto w-full"
+          viewBox="0 0 460 280"
+          role="img"
+          aria-label={SLED_VEHICLES.mapAriaLabel}
+        ></svg>
+        <div class="mt-[18px] flex flex-wrap items-center gap-[18px] font-mono text-xs tracking-[0.04em] text-muted">
+          {
+            SLED_VEHICLES.mapLegend.map((item) => (
+              <span class="inline-flex items-center gap-[7px]">
+                <i
+                  class:list={[
+                    'block size-[9px] rounded-full',
+                    item.variant === 'served' ? 'bg-cyan' : 'bg-line',
+                  ]}
+                  aria-hidden="true"
+                ></i>
+                {item.label}
+              </span>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        {
+          SLED_VEHICLES.chips.map((chip) => (
+            <div class="flex items-center justify-between gap-4 rounded-[14px] border border-line bg-white px-5 py-4 transition-[transform,border-color,box-shadow] duration-300 motion-safe:hover:translate-x-0.75 motion-safe:hover:border-cyan motion-safe:hover:shadow-sm">
+              <span class="text-[15px] font-bold text-yale">{chip.name}</span>
+              <span class="font-mono text-[11.5px] tracking-[0.02em] text-muted">{chip.meta}</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </SledPageWrap>
+</section>

@@ -75,6 +75,43 @@
   color: var(--color-cyan);
 }
 
+/* Beam border — Tailwind can't express conic-gradient mask animation */
+@property --sled-beam-a {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.sled-beam::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--sled-beam-a),
+    transparent 0 62%,
+    rgb(24 176 230 / 0.25) 74%,
+    var(--color-cyan) 84%,
+    rgb(24 176 230 / 0.25) 92%,
+    transparent 100%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: sled-beam-spin 5s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes sled-beam-spin {
+  to {
+    --sled-beam-a: 360deg;
+  }
+}
+
 /* SLED heading scale — tuned for mobile (min ~22–24px, scales up on desktop) */
 .sled-h1 {
   font-size: clamp(1.5rem, 5.2vw, 3.5rem);
@@ -240,30 +277,156 @@
   background-size: 100% 100%;
 }
 
-/* Stage tabs */
-.sled-stage-panel {
+/* Model section — accent underline */
+.sled-hl-u {
+  position: relative;
+}
+
+.sled-hl-u::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.08em;
+  height: 3px;
+  background: var(--color-cyan);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
+}
+
+.sled-reveal.is-visible .sled-hl-u::after {
+  transform: scaleX(1);
+}
+
+/* Model section — segmented control indicator */
+.sled-model-seg-ind {
+  transform: translateX(0);
+  transition:
+    transform 0.5s cubic-bezier(0.2, 0, 0, 1),
+    width 0.5s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.sled-model-tab {
+  gap: 0;
+  padding: 11px 22px;
+  line-height: 1;
+  transition: color 0.25s ease;
+}
+
+.sled-model-tab-chk {
+  width: 0;
+  min-width: 0;
+  margin-right: 0;
+  opacity: 0;
+  transition:
+    width 0.35s cubic-bezier(0.2, 0, 0, 1),
+    margin-right 0.35s cubic-bezier(0.2, 0, 0, 1),
+    opacity 0.2s ease;
+}
+
+.sled-model-tab[aria-selected="true"] {
+  gap: 7px;
+}
+
+.sled-model-tab[aria-selected="true"] .sled-model-tab-chk {
+  width: 17px;
+  min-width: 17px;
+  margin-right: 0;
+  opacity: 1;
+}
+
+.sled-model-panel {
   display: none;
 }
 
-.sled-stage-panel.is-visible {
+.sled-model-panel.is-active {
+  display: block;
+}
+
+.sled-model-panel.is-fade-in {
+  animation: sledModelFadeThrough 0.5s cubic-bezier(0.05, 0.7, 0.1, 1) both;
+}
+
+/* Specializations accordion */
+.sled-spec-body {
   display: grid;
-  animation: sledFadeUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.5s cubic-bezier(0.2, 0, 0, 1);
 }
 
-.sled-tab-pill {
+.sled-spec-item.is-open .sled-spec-body {
+  grid-template-rows: 1fr;
+}
+
+.sled-spec-body-inner {
+  overflow: hidden;
+}
+
+/* Backbone bento — detail overlay reveal */
+.sled-bento-detail {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
   transition:
-    background 0.25s ease,
-    color 0.25s ease,
-    box-shadow 0.25s ease,
-    transform 0.2s ease;
+    opacity 0.35s ease,
+    transform 0.35s cubic-bezier(0.2, 0, 0, 1),
+    visibility 0.35s;
 }
 
-.sled-tab-pill[aria-selected="true"] {
-  box-shadow: 0 8px 24px -10px rgba(14, 38, 64, 0.35);
+.sled-bento-card:hover .sled-bento-detail,
+.sled-bento-card:focus-within .sled-bento-detail,
+.sled-bento-card.is-open .sled-bento-detail {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
 }
 
-.sled-tab-pill:not([aria-selected="true"]):hover {
-  transform: translateY(-1px);
+/* Delivery model — clock grid + concern tabs */
+.sled-delivery-bars {
+  background: repeating-linear-gradient(
+    90deg,
+    var(--color-line-soft) 0 1px,
+    transparent 1px 12.5%
+  );
+}
+
+.sled-delivery-panel {
+  display: none;
+}
+
+.sled-delivery-panel.is-active {
+  display: flex;
+}
+
+.sled-delivery-panel.is-fade-in {
+  animation: sledModelFadeThrough 0.5s cubic-bezier(0.05, 0.7, 0.1, 1) both;
+}
+
+.sled-delivery-tab[aria-selected="true"] {
+  border-color: transparent;
+  background-color: var(--color-yale);
+}
+
+.sled-delivery-tab[aria-selected="true"] .sled-delivery-tab-num {
+  color: var(--color-cyan);
+}
+
+.sled-delivery-tab[aria-selected="true"] .sled-delivery-tab-label {
+  color: #fff;
+}
+
+@keyframes sledModelFadeThrough {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* Inquiry form */
@@ -276,39 +439,10 @@
   animation: sledFadeUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.sled-need-card.is-selected {
+[data-sled-inquiry-need].is-on {
   border-color: var(--color-cyan);
   background: var(--color-cyan-soft);
-  box-shadow: 0 0 0 3px rgba(24, 176, 230, 0.12);
-}
-
-.sled-need-card.is-selected .sled-need-check {
-  background: var(--color-cyan);
-  border-color: var(--color-cyan);
-}
-
-.sled-need-card.is-selected .sled-need-check::after {
-  content: "";
-  position: absolute;
-  left: 4px;
-  top: 1px;
-  width: 5px;
-  height: 9px;
-  border-right: 2px solid var(--color-yale-dark);
-  border-bottom: 2px solid var(--color-yale-dark);
-  transform: rotate(45deg);
-}
-
-.sled-need-card {
-  transition:
-    border-color 0.22s ease,
-    background 0.22s ease,
-    box-shadow 0.22s ease,
-    transform 0.22s ease;
-}
-
-.sled-need-card:hover {
-  transform: translateY(-1px);
+  color: var(--color-yale);
 }
 
 /* Matrix row hover */
@@ -422,11 +556,47 @@
   transform: scaleX(1.08);
 }
 
+/* Proof — engagement slider */
+.sled-proof-track {
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sled-proof-slide {
+  flex: 0 0 100%;
+  box-shadow: none;
+}
+
+.sled-proof-dot {
+  width: 8px;
+  height: 8px;
+  border: 0;
+  border-radius: 999px;
+  padding: 0;
+  background: var(--color-line);
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sled-proof-dot.is-active {
+  width: 24px;
+  border-radius: 5px;
+  background: var(--color-cyan);
+}
+
+/* Vehicles — dotted US map */
+[data-sled-dotmap] circle {
+  transition: fill 0.5s ease, opacity 0.5s ease;
+}
+
 @media (prefers-reduced-motion: reduce) {
 
   .sled-hero-capitol,
   .sled-hero-glow-a,
-  .sled-hero-glow-b {
+  .sled-hero-glow-b,
+  .sled-beam::before,
+  .btn--beam::after {
     animation: none;
   }
 
@@ -437,13 +607,32 @@
     transition: none;
   }
 
+  .sled-bento-card:hover,
   .sled-card:hover,
-  .sled-need-card:hover,
-  .sled-tab-pill:not([aria-selected="true"]):hover {
+  .sled-model-panel.is-fade-in,
+  .sled-delivery-panel.is-fade-in {
     transform: none;
+    animation: none;
   }
 
-  .sled-stage-panel.is-visible {
-    animation: none;
+  .sled-bento-detail {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition: none;
+  }
+
+  .sled-spec-body {
+    grid-template-rows: 1fr;
+    transition: none;
+  }
+
+  .sled-hl-u::after {
+    transform: scaleX(1);
+    transition: none;
+  }
+
+  .sled-proof-track {
+    transition: none;
   }
 }

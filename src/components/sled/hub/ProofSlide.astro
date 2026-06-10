@@ -1,0 +1,161 @@
+---
+import Check from '@lucide/astro/icons/check';
+import FileLock from '@lucide/astro/icons/file-lock';
+import Lock from '@lucide/astro/icons/lock';
+import type { SledProofSlide } from '../../../lib/constants/pages/sled-hub';
+
+type Props = {
+  slide: SledProofSlide;
+};
+
+const { slide } = Astro.props;
+
+const metricColor = (variant?: 'green' | 'cyan') => {
+  if (variant === 'green') return 'text-green';
+  if (variant === 'cyan') return 'text-cyan-strong';
+  return 'text-yale';
+};
+---
+
+<article class="sled-proof-slide sled-beam relative shrink-0 overflow-hidden rounded-2xl border border-line bg-white shadow-sm">
+  <div class="grid grid-cols-1 lg:grid-cols-[1.05fr_1fr]">
+    <div class="flex flex-col gap-[18px] bg-yale-dark p-[34px]">
+      {
+        slide.left.kind === 'portal' ? (
+          <>
+            <div class="overflow-hidden rounded-xl border border-black/10 bg-white shadow-[0_24px_60px_rgba(0,0,0,0.4)]">
+              <div class="flex items-center gap-2 border-b border-[#e2e6eb] bg-[#f1f3f6] px-3.5 py-[11px]">
+                <span class="flex gap-[7px]" aria-hidden="true">
+                  <i class="block size-[11px] rounded-full bg-[#ff5f57]"></i>
+                  <i class="block size-[11px] rounded-full bg-[#febc2e]"></i>
+                  <i class="block size-[11px] rounded-full bg-[#28c840]"></i>
+                </span>
+                <span class="flex-1 rounded-md border border-[#e2e6eb] bg-white px-3 py-[5px] text-center font-mono text-[11px] text-muted">
+                  {slide.left.url}
+                </span>
+              </div>
+              <img
+                src={slide.left.imageSrc}
+                alt={slide.left.imageAlt}
+                class="block aspect-[16/10] w-full bg-seasalt object-cover"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <p class="m-0 font-mono text-[12.5px] leading-normal text-white/60">
+              {slide.left.caption}
+            </p>
+          </>
+        ) : (
+          <>
+            <div class="flex flex-1 flex-col items-start justify-center gap-[11px] rounded-[14px] border border-dashed border-white/20 bg-white/[0.03] p-8">
+              <span
+                class="grid size-12 place-items-center rounded-xl bg-cyan/16 text-cyan"
+                aria-hidden="true"
+              >
+                <Lock class="size-6" />
+              </span>
+              <div class="font-mono text-[10.5px] font-semibold tracking-[0.12em] text-cyan uppercase">
+                Active pursuit · under NDA
+              </div>
+              <h4 class="m-0 text-[1.18rem] leading-[1.25] text-white">
+                Full engagement brief on request
+              </h4>
+              <p class="m-0 max-w-[34ch] text-[13px] leading-normal text-white/62">
+                Scope, pricing, and the district name are shared after a mutual NDA.
+              </p>
+              <div class="mt-2 flex w-full flex-col gap-2" aria-hidden="true">
+                <span class="h-[9px] w-[82%] rounded bg-white/10"></span>
+                <span class="h-[9px] w-[66%] rounded bg-white/10"></span>
+                <span class="h-[9px] w-[74%] rounded bg-white/10"></span>
+              </div>
+            </div>
+            <p class="m-0 font-mono text-[12.5px] leading-normal text-white/60">
+              {slide.left.caption}
+            </p>
+          </>
+        )
+      }
+    </div>
+
+    <div class="p-9">
+      <div class="mb-3.5 flex flex-wrap gap-2">
+        <span class="inline-flex items-center gap-[7px] rounded-md bg-cyan-soft px-[11px] py-[5px] text-[12.5px] font-bold text-yale">
+          <span class="inline-block size-[9px] rotate-[15deg] rounded-sm bg-cyan" aria-hidden="true"></span>
+          {slide.state}
+        </span>
+        {
+          slide.status.kind === 'completed' ? (
+            <span class="inline-flex items-center gap-[7px] rounded-md bg-green/10 px-[11px] py-[5px] text-[12.5px] font-bold text-green">
+              <Check class="size-3.5" aria-hidden="true" />
+              {slide.status.label}
+            </span>
+          ) : (
+            <span class="inline-flex items-center gap-[7px] rounded-md bg-amber/12 px-[11px] py-[5px] text-[12.5px] font-bold whitespace-nowrap text-amber">
+              <FileLock class="size-3.5" aria-hidden="true" />
+              {slide.status.label}
+            </span>
+          )
+        }
+      </div>
+
+      <h3 class="text-[1.5rem] leading-[1.2] font-semibold text-yale-dark">
+        {slide.title}
+        <br />
+        <span class="text-base font-medium text-muted">{slide.subtitle}</span>
+      </h3>
+
+      <div class="my-[26px] grid grid-cols-1 gap-6 sm:grid-cols-2">
+        {
+          slide.metrics.map((metric) => (
+            <div>
+              <div
+                class:list={[
+                  'font-mono text-[2rem] leading-none font-semibold tracking-[-0.02em] tabular-nums',
+                  metricColor(metric.variant),
+                ]}
+              >
+                {
+                  metric.tickerTo !== undefined ? (
+                    <span
+                      data-sled-ticker
+                      data-to={metric.tickerTo}
+                      data-prefix={metric.tickerPrefix ?? ''}
+                      data-suffix={metric.tickerSuffix ?? ''}
+                    >
+                      0
+                    </span>
+                  ) : (
+                    metric.value
+                  )
+                }
+              </div>
+              <p class="mt-2 text-[13px] leading-[1.4] text-muted">{metric.label}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="mt-2 flex flex-wrap gap-2">
+        {
+          slide.tags.map((tag) => (
+            <span class="rounded-md border border-line-soft bg-seasalt px-[9px] py-[5px] font-mono text-[11px] whitespace-nowrap text-muted">
+              {tag}
+            </span>
+          ))
+        }
+      </div>
+
+      <div class="mt-[22px]">
+        {
+          slide.locked.map((line) => (
+            <div class="flex items-center gap-2.5 border-t border-line-soft py-[11px] text-[13px] text-muted">
+              <Lock class="size-[15px] shrink-0" aria-hidden="true" />
+              {line}
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</article>

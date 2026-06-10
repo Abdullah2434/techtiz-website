@@ -1,202 +1,225 @@
 ---
-import { HUB_INQUIRY } from '../../../lib/constants/pages/sled-hub';
-import { SITE, highlightSledEmailHtml } from '../../../lib/constants/site';
-import Send from '@lucide/astro/icons/send';
+import Check from '@lucide/astro/icons/check';
+import { SLED_HUB_INQUIRY } from '../../../lib/constants/pages/sled-hub';
+import { highlightSledEmailHtml, SITE } from '../../../lib/constants/site';
 import CtaButton from '../../shared/CtaButton.astro';
-import FormButton from '../../shared/FormButton.astro';
 import Eyebrow from '../../shared/Eyebrow.astro';
 import SledPageWrap from '../shared/SledPageWrap.astro';
 
-const inputClass =
-  'w-full rounded-xl border border-line bg-white px-4 py-3.5 text-[14.5px] text-ink outline-none transition-[border-color,box-shadow,transform] duration-200 ease-out placeholder:text-[#9AA4B2] focus:border-cyan focus:shadow-[0_0_0_3px_rgba(24,176,230,0.18)] focus:-translate-y-px';
+const fieldClass =
+  'w-full rounded-[10px] border border-line bg-seasalt px-3.5 py-3 text-sm text-ink outline-none transition-[border-color,box-shadow] placeholder:text-muted focus:border-cyan focus:shadow-[0_0_0_3px_rgba(24,176,230,0.16)]';
+const labelClass = 'mb-[7px] block text-[12.5px] font-semibold text-yale';
 ---
 
-<section class="sled-section bg-seasalt" id="inquiry" data-screen-label="10 Inquiry form">
+<section
+  class="sled-section bg-yale-dark text-white"
+  id="inquiry"
+  data-screen-label="Inquiry form"
+>
   <SledPageWrap>
     <div
-      class="sled-reveal grid grid-cols-1 overflow-hidden rounded-2xl border border-line bg-white shadow-[0_32px_64px_-28px_rgba(14,38,64,0.22)] lg:grid-cols-[0.85fr_1.4fr]"
+      class="sled-reveal grid grid-cols-1 items-start gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:gap-12"
       data-sled-reveal
     >
-      <aside class="relative overflow-hidden bg-yale-dark px-10 py-12 text-white max-[900px]:px-8 lg:px-12 lg:py-14">
-        <div
-          class="pointer-events-none absolute -bottom-10 -right-10 size-[240px] [background:repeating-linear-gradient(0deg,transparent_0_26px,rgba(24,176,230,0.06)_26px_27px),repeating-linear-gradient(90deg,transparent_0_26px,rgba(24,176,230,0.06)_26px_27px)]"
-          aria-hidden="true"
-        ></div>
-        <div
-          class="sled-hero-glow-a pointer-events-none absolute top-[-20%] left-[-15%] size-[200px] rounded-full bg-[radial-gradient(circle,rgba(24,176,230,0.2)_0%,transparent_70%)] blur-[60px] motion-reduce:hidden"
-          aria-hidden="true"
-        ></div>
-        <div class="relative z-[2]">
-          <Eyebrow text={HUB_INQUIRY.aside.eyebrow} onDark showGlyph class="mb-5" />
-          <h2 class="sled-h2 mb-6 leading-[1.08] text-white">{HUB_INQUIRY.aside.heading}</h2>
-          <p class="mb-8 text-[14.5px] leading-[1.68] text-white/82">{HUB_INQUIRY.aside.body}</p>
-          <ul class="flex flex-col gap-4">
-            {HUB_INQUIRY.aside.bullets.map((bullet) => (
-              <li class="flex items-start gap-3 text-[14px] leading-[1.5] text-white/95">
-                <svg class="mt-0.5 size-[18px] shrink-0 text-cyan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8 12 l2.5 2.5 L16 9"></path></svg>
+      <aside>
+        <Eyebrow text={SLED_HUB_INQUIRY.aside.eyebrow} onDark showGlyph class="mb-4" />
+        <h2 class="mb-4 text-[clamp(1.8rem,2.8vw,2.5rem)] leading-[1.1] font-semibold text-white">
+          {SLED_HUB_INQUIRY.aside.heading}
+          <span class="sled-hl-u">{SLED_HUB_INQUIRY.aside.headingAccent}</span>
+        </h2>
+        <p class="mb-6 max-w-[42ch] text-[14.5px] leading-normal text-white/72">
+          {SLED_HUB_INQUIRY.aside.body}
+        </p>
+        <ul class="m-0 flex list-none flex-col gap-3 p-0">
+          {
+            SLED_HUB_INQUIRY.aside.bullets.map((bullet) => (
+              <li class="flex items-start gap-3 text-sm text-white/85">
+                <Check class="mt-0.5 size-[18px] shrink-0 text-cyan" aria-hidden="true" />
                 {bullet}
               </li>
-            ))}
-          </ul>
-        </div>
+            ))
+          }
+        </ul>
+        <img
+          src={SLED_HUB_INQUIRY.aside.imageSrc}
+          alt={SLED_HUB_INQUIRY.aside.imageAlt}
+          class="mt-[26px] block aspect-[16/10] w-full rounded-[14px] border border-white/14 bg-white/[0.04] object-cover shadow-md"
+          loading="lazy"
+          decoding="async"
+        />
       </aside>
 
-      <form
-        class="flex flex-col gap-6 px-10 py-10 max-[900px]:px-8 lg:px-12 lg:py-12"
-        id="sledInquiryForm"
-        novalidate
-      >
-        <div>
-          <label class="mb-2.5 block font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted">
-            What do you need help with? <span class="text-cyan-strong">*</span>
-          </label>
-          <div class="grid grid-cols-1 gap-3.5 lg:grid-cols-2">
-            {HUB_INQUIRY.needOptions.map((opt) => (
-              <div
-                data-sled-need-card
-                class:list={[
-                  'sled-need-card relative grid cursor-pointer grid-cols-[40px_1fr_20px] items-center gap-3 rounded-xl border border-line p-4 px-5',
-                  opt.defaultOn && 'is-selected border-cyan bg-cyan-soft',
-                ]}
-                data-need={opt.id}
-              >
-                <div class="grid size-10 place-items-center rounded-lg bg-seasalt text-yale-dark">
-                  {opt.id === 'pre' ? (
-                    <svg class="size-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-                  ) : (
-                    <svg class="size-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 16.5 L3 21 l4.5 -1.5 M14 6 l4 4 -8 8 -4 0 0 -4 z"></path></svg>
-                  )}
-                </div>
-                <div>
-                  <h5 class="mb-0.5 text-[14.5px] font-bold text-yale-dark" data-sled-need-label>{opt.label}</h5>
-                  <p class="m-0 font-mono text-[10.5px] tracking-[0.10em] uppercase text-muted">{opt.desc}</p>
-                </div>
-                <div class="sled-need-check relative size-[18px] rounded border-[1.5px] border-line transition-[border-color,background] duration-200 ease-out"></div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          <div>
-            <label class="mb-2 block font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted" for="sled-iq-company">
-              Company <span class="text-cyan-strong">*</span>
+      <div class="relative">
+        <form
+          class="flex flex-col rounded-2xl bg-white p-[30px] text-ink shadow-lg"
+          id="sledInquiryForm"
+          novalidate
+        >
+          <div class="mb-4">
+            <label class={labelClass}>
+              What do you need help with? <span class="text-cyan-strong">*</span>
             </label>
-            <input class={inputClass} type="text" id="sled-iq-company" name="company" placeholder="Prime contractor name" required />
+            <div class="flex flex-wrap gap-2" data-sled-inquiry-needs>
+              {
+                SLED_HUB_INQUIRY.needOptions.map((opt) => (
+                  <label
+                    class:list={[
+                      'inline-flex cursor-pointer items-center gap-2 rounded-full border border-line bg-seasalt px-3.5 py-2.25 text-[13px] font-semibold text-muted transition-[background,border-color,color] duration-200',
+                      opt.defaultOn && 'is-on border-cyan bg-cyan-soft text-yale',
+                    ]}
+                    data-sled-inquiry-need
+                  >
+                    <input
+                      type="checkbox"
+                      name="need"
+                      value={opt.value}
+                      class="sr-only"
+                      checked={opt.defaultOn}
+                    />
+                    {opt.label}
+                  </label>
+                ))
+              }
+            </div>
           </div>
-          <div>
-            <label class="mb-2 block font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted" for="sled-iq-role">Your role</label>
-            <input class={inputClass} type="text" id="sled-iq-role" name="role" placeholder="e.g. Capture Manager, Delivery Lead" />
-          </div>
-        </div>
 
-        <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          <div>
-            <label class="mb-2 block font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted" for="sled-iq-rfp">
-              {HUB_INQUIRY.form.rfpLabel}
-            </label>
-            <input
-              class={inputClass}
-              type="text"
-              id="sled-iq-rfp"
-              name="rfp"
-              placeholder={HUB_INQUIRY.form.rfpPlaceholder}
-            />
+          <div class="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div>
+              <label class={labelClass} for="sled-iq-company">
+                Company <span class="text-cyan-strong">*</span>
+              </label>
+              <input
+                class={fieldClass}
+                type="text"
+                id="sled-iq-company"
+                name="company"
+                placeholder="Prime contractor name"
+                required
+              />
+            </div>
+            <div>
+              <label class={labelClass} for="sled-iq-role">Your role</label>
+              <input
+                class={fieldClass}
+                type="text"
+                id="sled-iq-role"
+                name="role"
+                placeholder="e.g. Capture Manager"
+              />
+            </div>
           </div>
-          <div>
-            <label class="mb-2 block font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted" for="sled-iq-nda">
-              {HUB_INQUIRY.form.ndaLabel}
-            </label>
-            <select class={inputClass} id="sled-iq-nda" name="nda">
-              <option value="">{HUB_INQUIRY.form.ndaPlaceholder}</option>
-              {HUB_INQUIRY.form.ndaOptions.map((opt) => <option>{opt}</option>)}
-            </select>
-          </div>
-        </div>
 
-        <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          <div>
-            <label class="mb-2 block font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted" for="sled-iq-vehicle">Contract vehicle</label>
-            <select class={inputClass} id="sled-iq-vehicle" name="vehicle">
-              <option value="">Select…</option>
-              {HUB_INQUIRY.vehicleOptions.map((v) => <option>{v}</option>)}
-            </select>
+          <div class="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div>
+              <label class={labelClass} for="sled-iq-vehicle">Contract vehicle</label>
+              <select class={fieldClass} id="sled-iq-vehicle" name="vehicle">
+                <option value="">Select…</option>
+                {SLED_HUB_INQUIRY.vehicleOptions.map((v) => <option>{v}</option>)}
+              </select>
+            </div>
+            <div>
+              <label class={labelClass} for="sled-iq-agency">Agency / end customer</label>
+              <input
+                class={fieldClass}
+                type="text"
+                id="sled-iq-agency"
+                name="agency"
+                placeholder="We never contact directly"
+              />
+            </div>
           </div>
-          <div>
-            <label class="mb-2 block font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted" for="sled-iq-agency">Agency / end customer</label>
-            <input class={inputClass} type="text" id="sled-iq-agency" name="agency" placeholder="For teaming context only—we never contact the agency" />
-          </div>
-        </div>
 
-        <div>
-          <label class="mb-2 block font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted" for="sled-iq-desc">
-            Engagement description, contract #, scope, start date
-          </label>
-          <textarea
-            class={`${inputClass} min-h-[120px] resize-y font-extrabold`}
-            id="sled-iq-desc"
-            name="desc"
-            placeholder="Tell us about the pursuit and/or the active contract. What phase, what scope, what timing…"
-          ></textarea>
-        </div>
-
-        <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          <div>
-            <label class="mb-2 block font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted" for="sled-iq-email">
-              Email <span class="text-cyan-strong">*</span>
-            </label>
-            <input class={inputClass} type="email" id="sled-iq-email" name="email" placeholder="you@prime.com" required />
+          <div class="mb-4">
+            <label class={labelClass} for="sled-iq-desc">{SLED_HUB_INQUIRY.descLabel}</label>
+            <textarea
+              class={`${fieldClass} min-h-[92px] resize-y`}
+              id="sled-iq-desc"
+              name="desc"
+              placeholder={SLED_HUB_INQUIRY.descPlaceholder}
+            ></textarea>
           </div>
-          <div>
-            <label class="mb-2 block font-mono text-[10.5px] tracking-[0.14em] uppercase text-muted" for="sled-iq-phone">Phone</label>
-            <input class={inputClass} type="tel" id="sled-iq-phone" name="phone" placeholder={SITE.phone.display} />
-          </div>
-        </div>
 
-        <input
-          type="text"
-          name="website"
-          tabindex="-1"
-          autocomplete="off"
-          class="hidden"
-          aria-hidden="true"
-        />
-
-        <div class="flex flex-col gap-5 border-t border-line-soft pt-6 lg:flex-row lg:items-center lg:justify-between">
-          <div class="max-w-[380px] font-mono text-[10.5px] font-extrabold leading-[1.5] tracking-[0.06em] uppercase text-muted">
-            {HUB_INQUIRY.ndaNote}
+          <div class="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div>
+              <label class={labelClass} for="sled-iq-email">
+                Email <span class="text-cyan-strong">*</span>
+              </label>
+              <input
+                class={fieldClass}
+                type="email"
+                id="sled-iq-email"
+                name="email"
+                placeholder="you@prime.com"
+                required
+              />
+            </div>
+            <div>
+              <label class={labelClass} for="sled-iq-phone">Phone</label>
+              <input
+                class={fieldClass}
+                type="tel"
+                id="sled-iq-phone"
+                name="phone"
+                placeholder={SITE.phone.display}
+              />
+            </div>
           </div>
-          <FormButton
+
+          <input
+            type="text"
+            name="website"
+            tabindex="-1"
+            autocomplete="off"
+            class="hidden"
+            aria-hidden="true"
+          />
+
+          <CtaButton
             type="submit"
-            label={HUB_INQUIRY.submitLabel}
-            variant="yale"
-            showArrow={false}
-          >
-            <Send class="size-4 shrink-0" aria-hidden="true" />
-          </FormButton>
-        </div>
-      </form>
+            label={SLED_HUB_INQUIRY.submitLabel}
+            variant="cta"
+            class="mt-1.5 w-full justify-center"
+          />
+          <p class="mt-3.5 text-center text-xs leading-normal text-muted">
+            {SLED_HUB_INQUIRY.reassure}
+          </p>
+        </form>
 
-      <div
-        class="sled-inquiry-success min-h-[420px] flex-col items-center justify-center px-10 py-12 text-center lg:col-start-2 lg:row-start-1 max-[900px]:px-8 lg:px-12"
-        id="sledInquirySuccess"
-        role="status"
-      >
-        <div class="mx-auto mb-6 grid size-16 place-items-center rounded-full bg-cyan-soft shadow-[0_12px_28px_-12px_rgba(24,176,230,0.45)]">
-          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--color-cyan-strong)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"></path></svg>
+        <div
+          class="sled-inquiry-success absolute inset-0 min-h-full flex-col items-center justify-center rounded-2xl bg-white px-8 py-12 text-center shadow-lg"
+          id="sledInquirySuccess"
+          role="status"
+        >
+          <div class="mx-auto mb-6 grid size-16 place-items-center rounded-full bg-cyan-soft shadow-[0_12px_28px_-12px_rgba(24,176,230,0.45)]">
+            <svg
+              viewBox="0 0 24 24"
+              width="28"
+              height="28"
+              fill="none"
+              stroke="var(--color-cyan-strong)"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M5 13l4 4L19 7"></path>
+            </svg>
+          </div>
+          <h3 class="mb-3 text-2xl font-semibold text-yale-dark">
+            {SLED_HUB_INQUIRY.success.heading}
+          </h3>
+          <p
+            class="mx-auto mb-7 max-w-[420px] text-[15px] leading-[1.58] text-muted"
+            set:html={highlightSledEmailHtml(SLED_HUB_INQUIRY.success.body)}
+          />
+          <CtaButton
+            id="sledInquiryReset"
+            href="#top"
+            label={SLED_HUB_INQUIRY.success.resetLabel}
+            variant="ghost-light"
+            showArrow={false}
+          />
         </div>
-        <h3 class="mb-3 text-2xl font-extrabold text-yale-dark">{HUB_INQUIRY.success.heading}</h3>
-        <p
-          class="mx-auto mb-7 max-w-[420px] text-[15px] leading-[1.58] text-muted"
-          set:html={highlightSledEmailHtml(HUB_INQUIRY.success.body)}
-        />
-        <CtaButton
-          id="sledInquiryReset"
-          href="#top"
-          label={HUB_INQUIRY.success.resetLabel}
-          variant="ghost-light"
-          showArrow={false}
-        />
       </div>
     </div>
   </SledPageWrap>

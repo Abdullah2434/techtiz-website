@@ -1,54 +1,41 @@
 ---
-import { OPERATING_PRINCIPLES } from '../../../lib/constants/pages/sled-hub';
+import { SLED_OPERATING_PRINCIPLES } from '../../../lib/constants/pages/sled-hub';
 import Eyebrow from '../../shared/Eyebrow.astro';
-import SledIcon from '../shared/SledIcon.astro';
 import SledPageWrap from '../shared/SledPageWrap.astro';
+
+const staggerDelays = [0, 90, 180, 270];
 ---
 
-<section class="sled-principles sled-section relative overflow-hidden bg-yale-dark text-white" data-screen-label="04 Operating principles">
-  <div
-    class="pointer-events-none absolute -right-10 top-[60px] size-[480px] opacity-100 [background:repeating-linear-gradient(0deg,transparent_0_40px,rgba(24,176,230,0.04)_40px_41px),repeating-linear-gradient(90deg,transparent_0_40px,rgba(24,176,230,0.04)_40px_41px)]"
-    aria-hidden="true"
-  ></div>
-  <div
-    class="sled-hero-glow-a pointer-events-none absolute bottom-[-20%] left-[-8%] size-[min(50vw,420px)] rounded-full bg-[radial-gradient(circle,rgba(24,176,230,0.12)_0%,transparent_70%)] blur-[80px] motion-reduce:hidden"
-    aria-hidden="true"
-  ></div>
+<section class="sled-section bg-seasalt" data-screen-label="Operating principles">
+  <SledPageWrap>
+    <div class="sled-reveal mb-[30px] max-w-[640px]" data-sled-reveal>
+      <Eyebrow text={SLED_OPERATING_PRINCIPLES.eyebrow} showGlyph class="mb-4" />
+      <h2 class="text-[clamp(1.7rem,2.5vw,2.3rem)] font-semibold leading-[1.12] tracking-[-0.02em] text-yale-dark">
+        {SLED_OPERATING_PRINCIPLES.heading}
+      </h2>
+    </div>
 
-  <SledPageWrap class="relative z-[2]">
-    <div class="grid grid-cols-1 gap-14 lg:grid-cols-[0.85fr_1.4fr] lg:gap-16">
-      <div class="sled-reveal lg:sticky lg:top-[140px] lg:self-start" data-sled-reveal>
-        <Eyebrow text={OPERATING_PRINCIPLES.eyebrow} onDark showGlyph class="mb-5" />
-        <h2 class="sled-h2 mb-5 leading-[1.08] text-white">
-          {OPERATING_PRINCIPLES.heading}
-        </h2>
-        <p class="mb-7 max-w-[380px] text-[15.5px] leading-[1.65] text-white/72">{OPERATING_PRINCIPLES.body}</p>
-        <div class="inline-flex items-center gap-2.5 rounded-full border border-cyan/40 bg-cyan/12 px-4 py-2.5 font-mono text-[11px] tracking-[0.14em] uppercase text-cyan backdrop-blur-sm">
-          <svg class="size-[14px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11 V7 a5 5 0 0 1 10 0 v4"></path></svg>
-          {OPERATING_PRINCIPLES.badge}
-        </div>
-      </div>
-
-      <div class="sled-reveal overflow-hidden rounded-2xl border border-white/12 bg-white/[0.03] shadow-[0_32px_64px_-32px_rgba(0,0,0,0.45)] backdrop-blur-sm" data-sled-reveal>
-        <div class="grid grid-cols-1 lg:grid-cols-2">
-          {OPERATING_PRINCIPLES.items.map((item, idx) => (
-            <div
-              class:list={[
-                'sled-card-dark group relative p-8 pb-9 transition-colors duration-300 hover:bg-white/[0.05]',
-                idx < 2 && 'border-b border-white/10',
-                idx % 2 === 0 && 'lg:border-r lg:border-white/10',
-              ]}
-            >
-              <span class="absolute right-7 top-7 font-mono text-[10.5px] tracking-[0.14em] text-white/40">{item.num}</span>
-              <div class="mb-5 grid size-11 place-items-center rounded-xl bg-cyan/15 text-cyan transition-transform duration-300 group-hover:scale-105">
-                <SledIcon name={item.icon} class="size-5" />
-              </div>
-              <h3 class="mb-3 text-[19px] font-extrabold leading-[1.2] text-white">{item.heading}</h3>
-              <p class="text-[13.5px] leading-[1.65] text-white/72">{item.body}</p>
-            </div>
-          ))}
-        </div>
-      </div>
+    <div
+      class="sled-reveal-stagger grid grid-cols-1 gap-[18px] sm:grid-cols-2 lg:grid-cols-4"
+      data-sled-reveal
+    >
+      {
+        SLED_OPERATING_PRINCIPLES.items.map((item, idx) => (
+          <article
+            class="rounded-xl border border-line-soft border-t-[3px] border-t-cyan bg-white p-[30px] transition-[transform,box-shadow] duration-300 motion-safe:hover:-translate-y-0.75 motion-safe:hover:shadow-[0_18px_40px_-22px_rgba(21,58,95,0.22)]"
+            style={staggerDelays[idx] ? `--d:${staggerDelays[idx]}ms` : undefined}
+          >
+            <span
+              class="mb-5 inline-block size-3.5 rotate-[15deg] rounded-sm bg-cyan"
+              aria-hidden="true"
+            ></span>
+            <h4 class="mb-2.25 text-[1.12rem] font-semibold leading-[1.25] text-yale-dark">
+              {item.heading}
+            </h4>
+            <p class="m-0 text-[14.5px] leading-normal text-muted">{item.body}</p>
+          </article>
+        ))
+      }
     </div>
   </SledPageWrap>
 </section>

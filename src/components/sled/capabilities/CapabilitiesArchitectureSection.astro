@@ -1,10 +1,11 @@
 ---
 import Lock from '@lucide/astro/icons/lock';
-import { SLED_CAPABILITIES_ARCHITECTURE } from '../../../lib/constants/pages/capabilities';
+import { SLED_CAPABILITIES } from '../../../lib/constants/pages/capabilities';
 import Eyebrow from '../../shared/Eyebrow.astro';
 import SledPageWrap from '../shared/SledPageWrap.astro';
 
-const { onshore, offshore, airGapLabel } = SLED_CAPABILITIES_ARCHITECTURE;
+const { architecture } = SLED_CAPABILITIES;
+const { onshore, offshore, airGapLabel } = architecture;
 ---
 
 <section
@@ -13,12 +14,12 @@ const { onshore, offshore, airGapLabel } = SLED_CAPABILITIES_ARCHITECTURE;
 >
   <SledPageWrap>
     <div class="sled-reveal mb-12 max-w-[820px]" data-sled-reveal>
-      <Eyebrow text={SLED_CAPABILITIES_ARCHITECTURE.eyebrow} showGlyph class="mb-4" />
+      <Eyebrow text={architecture.eyebrow} showGlyph class="mb-4" />
       <h2 class="text-[clamp(1.7rem,2.5vw,2.3rem)] font-semibold leading-[1.12] tracking-[-0.02em] text-yale-dark">
-        {SLED_CAPABILITIES_ARCHITECTURE.heading}
+        {architecture.heading}
       </h2>
       <p class="mt-3.5 text-[15.5px] leading-[1.6] text-muted">
-        {SLED_CAPABILITIES_ARCHITECTURE.body}
+        {architecture.body}
       </p>
     </div>
 

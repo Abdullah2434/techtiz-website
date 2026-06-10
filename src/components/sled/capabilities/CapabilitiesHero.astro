@@ -1,8 +1,10 @@
 ---
-import { SLED_CAPABILITIES_HERO } from '../../../lib/constants/pages/capabilities';
+import { SLED_CAPABILITIES } from '../../../lib/constants/pages/capabilities';
 import CtaButton from '../../shared/CtaButton.astro';
 import Eyebrow from '../../shared/Eyebrow.astro';
 import SledPageWrap from '../shared/SledPageWrap.astro';
+
+const { hero } = SLED_CAPABILITIES;
 ---
 
 <section
@@ -22,19 +24,19 @@ import SledPageWrap from '../shared/SledPageWrap.astro';
 
   <SledPageWrap class="relative z-[5] py-[clamp(3.4rem,6vw,5.25rem)] pb-[clamp(2.5rem,4.5vw,3.75rem)]">
     <div class="max-w-[62ch] sled-reveal is-visible">
-      <Eyebrow text={SLED_CAPABILITIES_HERO.eyebrow} onDark showGlyph class="mb-[18px]" />
+      <Eyebrow text={hero.eyebrow} onDark showGlyph class="mb-[18px]" />
 
       <h1
         class="sled-h1 mb-5 text-[clamp(2.4rem,4.4vw,3.6rem)] font-semibold leading-[1.05] tracking-[-0.022em] text-white [&_.accent]:text-cyan"
-        set:html={SLED_CAPABILITIES_HERO.heading}
+        set:html={hero.heading}
       />
 
       <p class="mb-7 max-w-[600px] text-[clamp(1.02rem,1.4vw,1.18rem)] leading-[1.55] text-white/80">
-        {SLED_CAPABILITIES_HERO.body}
+        {hero.body}
       </p>
 
       <div class="flex flex-wrap gap-3.5 max-[600px]:flex-col max-[600px]:items-stretch">
-        {SLED_CAPABILITIES_HERO.ctas.map((cta) => (
+        {hero.ctas.map((cta) => (
           <CtaButton
             href={cta.href}
             label={cta.label}

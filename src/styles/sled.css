@@ -605,6 +605,65 @@
   margin-top: 4px;
 }
 
+/* Capabilities — state offshore posture board */
+.sled-posture-head {
+  border-top: 3px solid var(--color-line);
+}
+
+.sled-posture-col--serve .sled-posture-head {
+  border-top-color: var(--color-green);
+}
+
+.sled-posture-col--disclose .sled-posture-head {
+  border-top-color: var(--color-amber);
+}
+
+.sled-posture-col--waiver .sled-posture-head {
+  border-top-color: #c44;
+}
+
+.sled-posture-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.sled-posture-swatch {
+  width: 10px;
+  height: 10px;
+  flex: none;
+  border-radius: 3px;
+}
+
+.sled-posture-col--serve .sled-posture-label {
+  color: #1f7855;
+}
+
+.sled-posture-col--serve .sled-posture-swatch {
+  background: var(--color-green);
+}
+
+.sled-posture-col--disclose .sled-posture-label {
+  color: var(--color-amber);
+}
+
+.sled-posture-col--disclose .sled-posture-swatch {
+  background: var(--color-amber);
+}
+
+.sled-posture-col--waiver .sled-posture-label {
+  color: #b33;
+}
+
+.sled-posture-col--waiver .sled-posture-swatch {
+  background: #c44;
+}
+
 @media (max-width: 900px) {
   .sled-arch-board {
     grid-template-columns: 1fr;

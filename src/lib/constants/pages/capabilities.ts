@@ -228,6 +228,71 @@ export const SLED_CAPABILITIES_ARCHITECTURE = {
   },
 } as const;
 
+export type SledPostureVariant = "serve" | "disclose" | "waiver";
+
+export const SLED_CAPABILITIES_STATE_RESTRICTIONS = {
+  eyebrow: "State-by-state offshore restrictions",
+  heading:
+    "Where we serve directly. Where the prime discloses. Where a waiver is required.",
+  body: "The U.S. landscape on offshore subcontracting is fragmented. Here's our posture, kept current. Always confirm against the live solicitation before bid.",
+  footer:
+    "// Disclosure pack on request · Updated quarterly · Confirm against live solicitation language",
+  columns: [
+    {
+      variant: "serve" as const,
+      label: "Serve directly",
+      title: "Standard subcontract",
+      description: "Non-PII, non-CJI scopes proceed under standard prime terms.",
+      items: [
+        {
+          code: "Most SLED procurements",
+          what: "Permitting, environmental, GIS, public engagement, grant reporting, document production.",
+        },
+      ],
+    },
+    {
+      variant: "disclose" as const,
+      label: "Disclose",
+      title: "Subcontract + offshore-handling disclosure",
+      description: "Permitted with explicit disclosure of offshore handling.",
+      items: [
+        {
+          code: "CJIS · national",
+          what: "Onshore-only CJI; U.S.-citizen staff vetted by state CJIS coordinators.",
+        },
+        {
+          code: "15+ states · Medicaid",
+          what: "Offshore rules range from disclosure-only to prohibition; HIPAA BAA layered on top.",
+        },
+      ],
+    },
+    {
+      variant: "waiver" as const,
+      label: "Waiver / restructure",
+      title: "Written waiver or restructuring required",
+      description: "Onshore by default; bid-by-bid analysis.",
+      items: [
+        {
+          code: "MD",
+          what: "State CISO written waiver for any offshore activity.",
+        },
+        {
+          code: "CA · Gov't Code §19130",
+          what: "Onshore-only handling of state data.",
+        },
+        {
+          code: "NJ",
+          what: "Statutory offshore-labor limits; scope varies by agency.",
+        },
+        {
+          code: "AZ · FL · MO · TX",
+          what: "Medicaid data: disclosures and, in some scopes, restructuring.",
+        },
+      ],
+    },
+  ],
+} as const;
+
 export const SLED_CAPABILITIES_MATRIX = {
   eyebrow: "Core capabilities",
   heading: "Six capabilities, mapped to NAICS and NIGP.",

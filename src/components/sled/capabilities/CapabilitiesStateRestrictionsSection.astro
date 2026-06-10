@@ -1,0 +1,62 @@
+---
+import { SLED_CAPABILITIES_STATE_RESTRICTIONS } from '../../../lib/constants/pages/capabilities';
+import Eyebrow from '../../shared/Eyebrow.astro';
+import SledPageWrap from '../shared/SledPageWrap.astro';
+---
+
+<section
+  class="sled-section border-t border-line-soft bg-seasalt"
+  data-screen-label="05 State restrictions"
+>
+  <SledPageWrap>
+    <div class="sled-reveal mb-12 max-w-[760px]" data-sled-reveal>
+      <Eyebrow text={SLED_CAPABILITIES_STATE_RESTRICTIONS.eyebrow} showGlyph class="mb-4" />
+      <h2 class="text-[clamp(1.7rem,2.5vw,2.3rem)] font-semibold leading-[1.12] tracking-[-0.02em] text-yale-dark">
+        {SLED_CAPABILITIES_STATE_RESTRICTIONS.heading}
+      </h2>
+      <p class="mt-3.5 text-[15.5px] leading-[1.6] text-muted">
+        {SLED_CAPABILITIES_STATE_RESTRICTIONS.body}
+      </p>
+    </div>
+
+    <div
+      class="sled-posture-board sled-reveal grid grid-cols-1 items-start gap-4 lg:grid-cols-3"
+      data-sled-reveal
+    >
+      {
+        SLED_CAPABILITIES_STATE_RESTRICTIONS.columns.map((column) => (
+          <article
+            class:list={[
+              'sled-posture-col overflow-hidden rounded-xl border border-line-soft bg-white shadow-[0_8px_24px_-12px_rgba(21,58,95,0.14)]',
+              `sled-posture-col--${column.variant}`,
+            ]}
+          >
+            <header class="sled-posture-head px-5 pt-5 pb-[18px]">
+              <span class="sled-posture-label">
+                <span class="sled-posture-swatch" aria-hidden="true"></span>
+                {column.label}
+              </span>
+              <h3 class="mt-2.5 text-[1.05rem] font-semibold leading-[1.25] text-yale">
+                {column.title}
+              </h3>
+              <p class="mt-1.5 text-[12.5px] leading-normal text-muted">{column.description}</p>
+            </header>
+            {column.items.map((item) => (
+              <div class="border-t border-line-soft px-5 py-3.5">
+                <div class="mb-0.5 font-mono text-[13px] font-bold text-yale-dark">{item.code}</div>
+                <div class="text-[12.5px] leading-normal text-muted">{item.what}</div>
+              </div>
+            ))}
+          </article>
+        ))
+      }
+    </div>
+
+    <p
+      class="sled-reveal mt-5 font-mono text-[11px] tracking-[0.08em] text-muted uppercase"
+      data-sled-reveal
+    >
+      {SLED_CAPABILITIES_STATE_RESTRICTIONS.footer}
+    </p>
+  </SledPageWrap>
+</section>

@@ -15,10 +15,10 @@ export const CASE_STUDIES_HERO = {
   body: "Technical work completed for U.S. prime contractors under subcontract and NDA. Partner names withheld without written permission.",
 } as const;
 
-export const TRUST_ITEMS = [
-  "Subcontract-only",
-  "NDA on first contact",
-  "Zero agency-facing engagements",
+export const CASE_STUDIES_BOUNDARY_ITEMS = [
+  'Subcontract-only',
+  'NDA on first contact',
+  'Zero agency-facing engagements',
 ] as const;
 
 export const ENGAGEMENTS_SECTION = {

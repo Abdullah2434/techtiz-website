@@ -2,7 +2,7 @@
 import EyeOff from '@lucide/astro/icons/eye-off';
 import FileLock from '@lucide/astro/icons/file-lock';
 import Handshake from '@lucide/astro/icons/handshake';
-import { TRUST_ITEMS } from '../../../lib/constants/pages/case-studies';
+import { CASE_STUDIES_BOUNDARY_ITEMS } from '../../../lib/constants/pages/case-studies';
 import SledPageWrap from '../shared/SledPageWrap.astro';
 const trustIcons = [Handshake, FileLock, EyeOff] as const;
 ---
@@ -15,8 +15,10 @@ const trustIcons = [Handshake, FileLock, EyeOff] as const;
           Operating boundaries
         </span>
         <div class="grid min-w-0 grid-cols-1 gap-3 sm:grid-cols-3 lg:col-span-3 lg:grid-cols-3 lg:gap-4">
-          {TRUST_ITEMS.map((item, idx) => {
+          {CASE_STUDIES_BOUNDARY_ITEMS.map((item, idx) => {
             const Icon = trustIcons[idx];
+            if (!Icon) return null;
+
             return (
               <span class="group flex min-w-0 items-center gap-3 rounded-xl px-2 py-1.5 text-[13.5px] font-semibold leading-snug text-yale transition-colors hover:bg-white/70 sm:border-l sm:border-line sm:pl-5 first:sm:border-l-0 first:sm:pl-0 max-sm:border-t max-sm:border-line max-sm:pt-3 first:max-sm:border-t-0 first:max-sm:pt-0">
                 <span class="grid size-9 shrink-0 place-items-center rounded-lg bg-cyan-soft text-cyan-strong transition-transform duration-300 group-hover:scale-105">

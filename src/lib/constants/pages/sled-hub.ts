@@ -258,51 +258,83 @@ export const SLED_MODEL = {
   post: SledModelMode;
 };
 
-export const ONSHORE = {
+export type SledDeliveryConcern = {
+  icon: "sun" | "lock" | "file-lock" | "user-round-check";
+  tabNum: string;
+  tabLabel: string;
+  heading: string;
+  trap: string;
+  fix: string;
+};
+
+export const SLED_DELIVERY = {
   eyebrow: "Delivery model",
-  heading: "Onshore PM-led. Offshore-engineered. Prime-controlled, end to end.",
-  sub: "US-based partner manager runs the engagement. Senior engineers in Lahore build the work. Agency sees the prime; the prime sees one accountable contact.",
+  heading: "Onshore PM-led.",
+  headingLine2: "Offshore-engineered.",
+  sub: "US partner manager runs the engagement. Senior engineers in Lahore build the work. The agency sees the prime; the prime sees one accountable contact.",
+  tablistLabel: "Common concerns",
   clock: {
     label: "24-hour delivery clock",
-    heading:
-      "~10 hours of timezone overlap, same-day responses, overnight progress.",
-    pkBar: "PK ENG · 11A-8P PKT",
-    usBar: "US PM · 9A-6P ET",
+    heading: "~10 hours of overlap, same-day responses, overnight progress.",
+    ruler: ["12a", "3a", "6a", "9a", "12p", "3p", "6p", "9p", "12a"] as const,
+    overlapTag: "~10h overlap",
+    pkBar: "PK ENG · 11A–8P PKT",
+    usBar: "US PM · 9A–6P ET",
     leftNote: "← Lahore picks up overnight",
-    overlap: "~10h overlap",
     rightNote: "US wraps the day →",
   },
   concerns: [
     {
-      num: "SLED pain 01",
-      icon: "shield",
-      heading: "Compliance and audit readiness without slowing delivery.",
-      pain: "IV&V findings, CJIS/HIPAA/StateRAMP flow-downs, and statutory checklists land on thin bench while the contract clock runs.",
-      fix: "We operate inside your authorization boundary audit ready artifacts, CAP narratives in your templates, controls applied to our workstream only.",
+      icon: "sun",
+      tabNum: "01",
+      tabLabel: "Follow-the-sun",
+      heading: "Follow-the-sun, no 3 a.m. pings",
+      trap: "Offshore vendors bury PMs in async pings and stall on US-hours blockers.",
+      fix: "US manager owns the daily standup; Lahore picks up overnight for same-day responses.",
     },
     {
-      num: "SLED pain 02",
+      icon: "lock",
+      tabNum: "02",
+      tabLabel: "NDA-bound",
+      heading: "NDA-bound from the first call",
+      trap: "Capture leads can't share the RFP or past-performance set until paperwork clears.",
+      fix: "Mutual NDA ready to sign before discovery; sensitive details stay in audited channels.",
+    },
+    {
       icon: "file-lock",
-      heading: "Legacy modernization inside procurement and budget limits.",
-      pain: "mainframe wrappers, record migration, and portal refactors stall when the sub doesn't understand state procurement pacing.",
-      fix: "Service layer integration, ETL, and phased cutovers scoped to your vehicle and period of performance white-labeled under your PM.",
+      tabNum: "03",
+      tabLabel: "IP on day one",
+      heading: "IP assigned to you on day one",
+      trap: 'Vendors keep "reusable components" and license them back, complicating government IP rights.',
+      fix: "Period-of-performance IP assignment baked into the teaming letter. Code is the prime's.",
     },
     {
-      num: "SLED pain 03",
-      icon: "network",
-      heading: "Interoperability and data silos across agencies and systems.",
-      pain: "GIS inventories, grant pass-through data, and engagement platforms that don't join cleanly for statutory deliverables.",
-      fix: "Spatial joins, reconciliation reporting, and engagement cloud instrumentation built for the RFP work no COTS product covers cleanly.",
-    },
-    {
-      num: "SLED pain 04",
-      icon: "users",
-      heading: "Recompete risk and staffing gaps on active vehicles.",
-      pain: "17 days to submission or kickoff Monday with architects on another pursuit and no named seniors locked for CPARS.",
-      fix: "Pre-award surge under teaming letter + NDA; post-award named engineers (background-check-ready, CUI-aware) who match the resumes you proposed.",
+      icon: "user-round-check",
+      tabNum: "04",
+      tabLabel: "Named seniors",
+      heading: "Named seniors, no bait-and-switch",
+      trap: "Principals on the proposal, juniors on delivery, CPARS pain at year-end review.",
+      fix: "The resumes you propose are the engineers who execute. Substitutions need prime approval.",
     },
   ],
-} as const;
+} as const satisfies {
+  eyebrow: string;
+  heading: string;
+  headingLine2: string;
+  sub: string;
+  tablistLabel: string;
+  clock: {
+    label: string;
+    heading: string;
+    ruler: readonly string[];
+    overlapTag: string;
+    pkBar: string;
+    usBar: string;
+    leftNote: string;
+    rightNote: string;
+  };
+  concerns: readonly SledDeliveryConcern[];
+};
 
 export const OPERATING_PRINCIPLES = {
   eyebrow: "Operating Principles",

@@ -29,6 +29,7 @@ const { eyebrow, heading, body, ctas } = HOW_WE_ENGAGE_HERO;
             label={cta.label}
             variant={cta.variant}
             showArrow={false}
+            beam={'beam' in cta ? cta.beam : false}
           />
         ))}
       </div>

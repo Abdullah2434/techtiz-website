@@ -16,6 +16,7 @@ export const HOW_WE_ENGAGE_HERO = {
       label: "Start an NDA conversation",
       href: "/us-sled/contact/",
       variant: "ghost-light" as const,
+      beam: true,
     },
     {
       label: "See capabilities & compliance",

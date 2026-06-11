@@ -336,7 +336,7 @@ export const ERIE_CASE_STUDY = {
     scenarios: [
       {
         tier: "Low",
-        value: "&minus;8 to 12%",
+        value: "-8 to 12%",
         valueSmall: "vs local median",
         desc: "Helps later task-order competitions inside the pool, but carries margin risk across a three-year rate lock.",
       },
@@ -454,7 +454,7 @@ export const ERIE_CASE_STUDY = {
     modHead: {
       eyebrow: "Agency context",
       h2: "Who is buying, and why this pool matters for a decade.",
-      p: "Erie is a home rule town in Boulder and Weld Counties on the Front Range north of Denver. The buyer is the <strong>Engineering Division within the Public Works Department.</strong> The named contact and signer is <strong>Emma Atwell, P.E., Project Manager and Civil Engineer II,</strong> reached online through the portal only; no phone calls are accepted for questions. Mailing address: 645 Holbrook St, P.O. Box 750, Erie, CO 80516. A town expecting to roughly double is buying a standing engineering bench, which makes this a relationship purchase, not a one-time deliverable.",
+      p: "",
     },
     photo:
       "https://www.dailycamera.com/wp-content/uploads/2025/01/DCC-L-ErieTownHall152.jpg?w=1024&h=696",

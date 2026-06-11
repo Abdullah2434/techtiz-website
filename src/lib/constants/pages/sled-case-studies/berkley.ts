@@ -455,11 +455,13 @@ export const BERKLEY_CASE_STUDY = {
         num: "Question 01",
         title: "Which CAD system is in use?",
         desc: "The CAD platform sets the integration scope for the July 6 demo and defines the CJIS-adjacent boundary.",
+        locked: true,
       },
       {
         num: "Question 02",
         title: "What is the current NERIS submission status?",
         desc: "The District's NERIS position shapes how the RMS and ePCR area is scoped and demonstrated.",
+        locked: true,
       },
       {
         num: "Question 03",

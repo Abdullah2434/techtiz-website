@@ -455,11 +455,13 @@ export const ESCONDIDO_CASE_STUDY = {
         num: "Question 03",
         title: "Does DIR registration apply to inspection services here?",
         body: "Clarify the prevailing-wage and DIR scope for this specific work.",
+        locked: true,
       },
       {
         num: "Question 04",
         title: "Is a debrief available to unsuccessful proposers?",
         body: "Useful for the next pursuit, and a legitimate pre-bid ask.",
+        locked: true,
       },
     ],
   },

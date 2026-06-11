@@ -1,13 +1,25 @@
 ---
+import ArrowRight from '@lucide/astro/icons/arrow-right';
 import ChevronDown from '@lucide/astro/icons/chevron-down';
 import Lock from '@lucide/astro/icons/lock';
 import type { SledCaseStudy } from '../../../lib/constants/pages/sled-case-studies';
+import {
+  gatePricingDesc,
+  isGatedPricingScenario,
+  isLockedCapabilityItem,
+  isLockedQuestion,
+  isNdaStat,
+  ndaStatDisplay,
+} from '../../../lib/sled-case-studies/gated-content';
 import { sectionHead } from '../../../lib/sled-case-studies/section-head';
 import CtaButton from '../../shared/CtaButton.astro';
 import Eyebrow from '../../shared/Eyebrow.astro';
 import SledPageWrap from '../shared/SledPageWrap.astro';
 import CaseStudyFailureTabs from './CaseStudyFailureTabs.astro';
+import CaseStudyGatedHtml from './CaseStudyGatedHtml.astro';
+import CaseStudyGateVeil from './CaseStudyGateVeil.astro';
 import CaseStudyIcon from './CaseStudyIcon.astro';
+import CaseStudyLockChip from './CaseStudyLockChip.astro';
 import CaseStudyModHead from './CaseStudyModHead.astro';
 
 interface Props {
@@ -845,50 +857,61 @@ const techtizSlot =
     <SledPageWrap>
       <CaseStudyModHead {...capHead} />
       <div class="sled-reveal-stagger grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4" data-sled-reveal>
-        {capabilityGrid.items.map((item) => (
-          <article
-            class:list={[
-              'rounded-[14px] border border-line-soft bg-white p-5',
-              'star' in item && item.star && 'border-cyan shadow-[inset_0_0_0_1px_var(--color-cyan)]',
-              'dark' in item && item.dark && 'bg-yale-dark text-white',
-            ]}
-          >
-            <span
+        {capabilityGrid.items.map((item) => {
+          const locked = isLockedCapabilityItem(item);
+          return (
+            <article
               class:list={[
-                'mb-3 grid size-[34px] place-items-center rounded-lg bg-cyan-soft text-cyan-strong',
-                'dark' in item && item.dark && 'bg-white/10 text-cyan',
+                'fed-item rounded-[14px] border border-line-soft bg-white p-5',
+                locked && 'fed-locked',
+                'star' in item && item.star && 'border-cyan shadow-[inset_0_0_0_1px_var(--color-cyan)]',
+                'dark' in item && item.dark && 'bg-yale-dark text-white',
               ]}
             >
-              <CaseStudyIcon name={item.icon} class="size-[17px]" />
-            </span>
-            {'num' in item && item.num && (
-              <div class="mb-1.5 font-mono text-[9.5px] tracking-[0.12em] text-muted uppercase">
-                {item.num}
+              <span
+                class:list={[
+                  'fic mb-3 grid size-[34px] place-items-center rounded-lg bg-cyan-soft text-cyan-strong',
+                  'dark' in item && item.dark && 'bg-white/10 text-cyan',
+                ]}
+              >
+                <CaseStudyIcon name={item.icon} class="size-[17px]" />
+              </span>
+              {'num' in item && item.num && (
+                <div class="fnum mb-1.5 font-mono text-[9.5px] tracking-[0.12em] text-muted uppercase">
+                  {item.num}
+                </div>
+              )}
+              {'meta' in item && item.meta && (
+                <div class="mb-1.5 font-mono text-[9.5px] tracking-[0.12em] text-muted uppercase">
+                  {item.meta}
+                </div>
+              )}
+              <div
+                class:list={[
+                  'ft text-[13.5px] leading-[1.25] font-bold text-yale-dark',
+                  'dark' in item && item.dark && 'text-white',
+                ]}
+              >
+                {locked ? (
+                  <a class="flock" href="/us-sled/contact/">
+                    <Lock class="size-[11px]" aria-hidden="true" />
+                    Under NDA
+                  </a>
+                ) : (
+                  item.title
+                )}
               </div>
-            )}
-            {'meta' in item && item.meta && (
-              <div class="mb-1.5 font-mono text-[9.5px] tracking-[0.12em] text-muted uppercase">
-                {item.meta}
-              </div>
-            )}
-            <div
-              class:list={[
-                'text-[13.5px] leading-[1.25] font-bold text-yale-dark',
-                'dark' in item && item.dark && 'text-white',
-              ]}
-            >
-              {item.title}
-            </div>
-            <p
-              class:list={[
-                'mt-1.5 text-xs leading-[1.45] text-muted',
-                'dark' in item && item.dark && 'text-white/72',
-              ]}
-            >
-              {item.desc}
-            </p>
-          </article>
-        ))}
+              <p
+                class:list={[
+                  'fx mt-1.5 text-xs leading-[1.45] text-muted',
+                  'dark' in item && item.dark && 'text-white/72',
+                ]}
+              >
+                {locked ? <span class="redact">{item.desc}</span> : item.desc}
+              </p>
+            </article>
+          );
+        })}
       </div>
     </SledPageWrap>
   </section>
@@ -914,6 +937,9 @@ const techtizSlot =
             ('highlight' in scenario && scenario.highlight) ||
             ('mid' in scenario && scenario.mid) ||
             ('recommended' in scenario && scenario.recommended);
+          const gated = isGatedPricingScenario(scenario);
+          const descText =
+            'desc' in scenario ? scenario.desc : 'detail' in scenario ? scenario.detail : '';
           return (
             <article
               class:list={[
@@ -938,16 +964,35 @@ const techtizSlot =
                 )}
               </div>
               <div class="font-mono text-2xl leading-[1.05] font-bold tracking-[-0.02em] text-yale-dark">
-                {scenario.value}
+                {gated ? (
+                  <span class="redact">{scenario.value}</span>
+                ) : (
+                  scenario.value
+                )}
                 {'valueSmall' in scenario && scenario.valueSmall && (
-                  <small class="text-[0.85rem] font-medium text-muted">{scenario.valueSmall}</small>
+                  <small class="text-[0.85rem] font-medium text-muted">
+                    {gated ? <span class="redact">{scenario.valueSmall}</span> : scenario.valueSmall}
+                  </small>
                 )}
                 {'unit' in scenario && scenario.unit && (
-                  <small class="text-[0.85rem] font-medium text-muted">{scenario.unit}</small>
+                  <small class="text-[0.85rem] font-medium text-muted">
+                    {gated ? <span class="redact">{scenario.unit}</span> : scenario.unit}
+                  </small>
                 )}
               </div>
               <p class="mt-2 text-[13px] leading-[1.5] text-muted">
-                {'desc' in scenario ? scenario.desc : 'detail' in scenario ? scenario.detail : ''}
+                {gated ? (
+                  <>
+                    <span set:html={gatePricingDesc(descText)} />
+                    {' '}
+                    <a class="gatelink" href="/us-sled/contact/">
+                      Model under NDA
+                      <ArrowRight class="size-[13px]" aria-hidden="true" />
+                    </a>
+                  </>
+                ) : (
+                  descText
+                )}
               </p>
             </article>
           );
@@ -1082,7 +1127,11 @@ const techtizSlot =
               ]}
             >
               <div class="font-mono text-[1.95rem] leading-none font-bold tracking-[-0.02em] text-yale-dark">
-                {statNumber(stat)}
+                {isNdaStat(stat) ? (
+                  <span class="redact">{ndaStatDisplay(stat)}</span>
+                ) : (
+                  statNumber(stat)
+                )}
                 {statSuffix(stat) && (
                   <small class="text-[0.95rem] text-cyan-strong">{statSuffix(stat)}</small>
                 )}
@@ -1124,7 +1173,9 @@ const techtizSlot =
         competingField.notes?.map((note) => (
           <div class="sled-reveal mt-4 flex items-start gap-2.5 text-[12.5px] leading-[1.55] text-muted" data-sled-reveal>
             <CaseStudyIcon name={note.icon} class="mt-0.5 size-[15px] shrink-0 text-amber" />
-            <span class="[&_strong]:text-yale-dark" set:html={note.html} />
+            <span class="[&_strong]:text-yale-dark">
+              <CaseStudyGatedHtml html={note.html} gateLinkLabel="Named under NDA" />
+            </span>
           </div>
         ))}
       {'liveFootnote' in competingField && competingField.liveFootnote && (
@@ -1142,13 +1193,21 @@ const techtizSlot =
     <SledPageWrap>
       <CaseStudyModHead {...responseHead} />
       {'scopeChips' in response && response.scopeChips && (
-        <div class="sled-reveal flex flex-wrap gap-2" data-sled-reveal>
-          {response.scopeChips.map((chip) => (
-            <span class="inline-flex items-center gap-2 rounded-lg border border-line-soft bg-white px-[15px] py-2.5 text-[12.5px] leading-[1.2] text-ink shadow-[0_8px_24px_-16px_rgba(21,58,95,0.12)]">
-              <span class="font-mono text-[10px] font-bold text-cyan-strong">{chip.num}</span>
-              {chip.label}
-            </span>
-          ))}
+        <div class="scope-chips sled-reveal flex flex-wrap gap-2" data-sled-reveal>
+          {response.scopeChips.map((chip) =>
+            'locked' in chip && chip.locked ? (
+              <a class="chip-lock" href="/us-sled/contact/">
+                <span class="cn">{chip.num}</span>
+                <span class="redact">{chip.label}</span>
+                <Lock class="size-[13px]" aria-hidden="true" />
+              </a>
+            ) : (
+              <span class="inline-flex items-center gap-2 rounded-lg border border-line-soft bg-white px-[15px] py-2.5 text-[12.5px] leading-[1.2] text-ink shadow-[0_8px_24px_-16px_rgba(21,58,95,0.12)]">
+                <span class="font-mono text-[10px] font-bold text-cyan-strong">{chip.num}</span>
+                {chip.label}
+              </span>
+            ),
+          )}
         </div>
       )}
       {'chips' in response && response.chips && (
@@ -1210,7 +1269,7 @@ const techtizSlot =
       )}
       {'lockedNote' in response && response.lockedNote && (
         <div class="sled-reveal mt-[22px] flex items-center gap-2.5 py-2.5 text-[13px] text-muted" data-sled-reveal>
-          <Lock class="size-[15px] shrink-0" aria-hidden="true" />
+          <CaseStudyLockChip label="NDA" class="!py-1" />
           {response.lockedNote}
         </div>
       )}
@@ -1234,17 +1293,26 @@ const techtizSlot =
     <SledPageWrap>
       <CaseStudyModHead {...stratHead} />
       <div class="sled-reveal-stagger grid grid-cols-1 gap-3.5 md:grid-cols-2" data-sled-reveal>
-        {strategicQuestions.questions.map((q, qIdx) => (
-          <article class="rounded-[14px] border border-line-soft border-l-[3px] border-l-cyan bg-white px-[26px] py-6">
-            <div class="mb-2.5 font-mono text-[11px] font-bold tracking-[0.08em] text-cyan-strong">
-              {questionNum(q, qIdx)}
-            </div>
-            <h4 class="mb-2 text-[1.02rem] font-bold text-yale-dark">{q.title}</h4>
-            <p class="text-[13px] leading-[1.55] text-muted">
-              {'body' in q ? q.body : 'desc' in q ? q.desc : ''}
-            </p>
-          </article>
-        ))}
+        {strategicQuestions.questions.map((q, qIdx) => {
+          const locked = isLockedQuestion(q);
+          return (
+            <article
+              class:list={[
+                'relative rounded-[14px] border border-line-soft border-l-[3px] border-l-cyan bg-white px-[26px] py-6',
+                locked && 'gate-tile',
+              ]}
+            >
+              <div class="mb-2.5 font-mono text-[11px] font-bold tracking-[0.08em] text-cyan-strong">
+                {questionNum(q, qIdx)}
+              </div>
+              <h4 class="mb-2 text-[1.02rem] font-bold text-yale-dark">{q.title}</h4>
+              <p class="text-[13px] leading-[1.55] text-muted">
+                {'body' in q ? q.body : 'desc' in q ? q.desc : ''}
+              </p>
+              {locked && <CaseStudyGateVeil label="Under NDA" />}
+            </article>
+          );
+        })}
       </div>
     </SledPageWrap>
   </section>
@@ -1266,7 +1334,7 @@ const techtizSlot =
       </div>
       {'lockedNote' in techtizApproach && techtizApproach.lockedNote && (
         <div class="sled-reveal mt-[22px] flex items-center gap-2.5 py-2.5 text-[13px] text-muted" data-sled-reveal>
-          <Lock class="size-[15px] shrink-0" aria-hidden="true" />
+          <CaseStudyLockChip label="NDA" class="!py-1" />
           {techtizApproach.lockedNote}
         </div>
       )}

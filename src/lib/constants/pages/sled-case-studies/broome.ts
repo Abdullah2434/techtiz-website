@@ -572,6 +572,7 @@ export const BROOME_CASE_STUDY = {
       {
         title: "Locked",
         desc: "Locked",
+        locked: true,
       },
     ],
     liveOnly: true,

@@ -496,6 +496,7 @@ export const PARKER_CASE_STUDY = {
         num: "Question 02",
         title: "Does a data dictionary or export exist from Beehive or FASTER?",
         body: "The migration methodology in Tab 5 depends on what conversion source data is available from the two core systems.",
+        locked: true,
       },
       {
         num: "Question 03",
@@ -506,6 +507,7 @@ export const PARKER_CASE_STUDY = {
         num: "Question 04",
         title: "Is general SaaS pricing acceptable in Tab 4?",
         body: "Confirming the expected granularity keeps the indicative cost estimate responsive without crossing into a binding quote.",
+        locked: true,
       },
     ],
     liveOnly: true,

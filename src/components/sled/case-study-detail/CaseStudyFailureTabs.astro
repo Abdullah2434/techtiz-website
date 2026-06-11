@@ -1,4 +1,7 @@
 ---
+import Lock from '@lucide/astro/icons/lock';
+import { isLockedFailureTab } from '../../../lib/sled-case-studies/gated-content';
+import CaseStudyGateVeil from './CaseStudyGateVeil.astro';
 import CaseStudyIcon from './CaseStudyIcon.astro';
 import CaseStudyModHead from './CaseStudyModHead.astro';
 
@@ -43,57 +46,81 @@ function fixText(tab: Tab) {
 <div data-sled-failure-tabs>
   <CaseStudyModHead {...modHead} accentEyebrow={modHead.eyebrowAccent} />
   <div class="sled-reveal mb-[18px] flex flex-wrap gap-2.5" data-sled-reveal role="tablist" aria-label={modHead.heading}>
-    {tabs.map((tab, idx) => (
-      <button
-        type="button"
-        class:list={[
-          'sled-cs-tab inline-flex items-center gap-2.5 rounded-full border px-4 py-2.5 transition-colors',
-          idx === 0
-            ? 'border-transparent bg-yale text-white'
-            : 'border-line bg-white text-muted hover:border-cyan',
-        ]}
-        data-sled-failure-tab={idx}
-        aria-selected={idx === 0 ? 'true' : 'false'}
-      >
-        <span class="font-mono text-xs font-semibold text-cyan-strong [.sled-cs-tab.border-transparent_&]:text-cyan">{tab.num}</span>
-        <span class="text-sm font-bold [.sled-cs-tab.border-transparent_&]:text-white">{tab.tab ?? tab.label}</span>
-        <span class="rounded bg-[rgba(196,68,68,0.1)] px-1.5 py-0.5 font-mono text-[9px] font-semibold tracking-[0.08em] text-[#B33] uppercase [.sled-cs-tab.border-transparent_&]:bg-white/18 [.sled-cs-tab.border-transparent_&]:text-white">
-          {tab.pill}
-        </span>
-      </button>
-    ))}
+    {tabs.map((tab, idx) => {
+      const locked = isLockedFailureTab(tab);
+      return (
+        <button
+          type="button"
+          class:list={[
+            'sled-cs-tab inline-flex items-center gap-2.5 rounded-full border px-4 py-2.5 transition-colors',
+            locked && 'sled-cs-tab-locked',
+            idx === 0
+              ? 'border-transparent bg-yale text-white'
+              : 'border-line bg-white text-muted hover:border-cyan',
+          ]}
+          data-sled-failure-tab={idx}
+          aria-selected={idx === 0 ? 'true' : 'false'}
+        >
+          <span class="font-mono text-xs font-semibold text-cyan-strong [.sled-cs-tab.border-transparent_&]:text-cyan">{tab.num}</span>
+          <span class="text-sm font-bold [.sled-cs-tab.border-transparent_&]:text-white">{tab.tab ?? tab.label}</span>
+          <span
+            class:list={[
+              'sled-cs-tab-pill rounded px-1.5 py-0.5 font-mono text-[9px] font-semibold tracking-[0.08em] uppercase',
+              locked
+                ? 'text-cyan-strong'
+                : 'bg-[rgba(196,68,68,0.1)] text-[#B33] [.sled-cs-tab.border-transparent_&]:bg-white/18 [.sled-cs-tab.border-transparent_&]:text-white',
+            ]}
+          >
+            {locked && <Lock class="size-2.5" aria-hidden="true" />}
+            {tab.pill}
+          </span>
+        </button>
+      );
+    })}
   </div>
   <div class="sled-reveal" data-sled-reveal>
-    {tabs.map((tab, idx) => (
-      <div
-        class:list={[
-          'sled-cs-panel flex gap-5 rounded-2xl border border-line-soft bg-white p-7 shadow-[0_8px_24px_-16px_rgba(21,58,95,0.14)]',
-          idx === 0 ? 'flex' : 'hidden',
-        ]}
-        data-sled-failure-panel={idx}
-        role="tabpanel"
-        hidden={idx !== 0}
-      >
-        <span class="grid size-12 shrink-0 place-items-center rounded-[13px] bg-[rgba(196,68,68,0.1)] text-[#B33]">
-          <CaseStudyIcon name={tab.icon} class="size-5" />
-        </span>
-        <div class="min-w-0 flex-1">
-          <h4 class="mb-4 flex flex-wrap items-baseline gap-3 text-[1.2rem] leading-[1.25] font-bold text-yale-dark">
-            {tab.title}
-            <span class="font-mono text-[11px] font-semibold tracking-[0.03em] text-cyan-strong">{tab.secref}</span>
-          </h4>
-          <div class="grid gap-4 sm:grid-cols-2">
-            <div>
-              <span class="mb-1.5 block font-mono text-[10px] font-bold tracking-[0.12em] text-[#B33] uppercase">{trapLabel(tab)}</span>
-              <p class="text-[13.5px] leading-[1.55] text-ink">{trapText(tab)}</p>
-            </div>
-            <div>
-              <span class="mb-1.5 block font-mono text-[10px] font-bold tracking-[0.12em] text-[#B33] uppercase">{fixLabel(tab)}</span>
-              <p class="text-[13.5px] leading-[1.55] text-ink">{fixText(tab)}</p>
+    {tabs.map((tab, idx) => {
+      const locked = isLockedFailureTab(tab);
+      return (
+        <div
+          class:list={[
+            'sled-cs-panel flex gap-5 rounded-2xl border border-line-soft bg-white p-7 shadow-[0_8px_24px_-16px_rgba(21,58,95,0.14)]',
+            locked && 'sled-cs-panel-gated',
+            idx === 0 ? 'flex' : 'hidden',
+          ]}
+          data-sled-failure-panel={idx}
+          role="tabpanel"
+          hidden={idx !== 0}
+        >
+          <span
+            class:list={[
+              'sled-cs-panel-icon grid size-12 shrink-0 place-items-center rounded-[13px]',
+              locked
+                ? 'bg-[rgba(24,176,230,0.1)] text-cyan-strong'
+                : 'bg-[rgba(196,68,68,0.1)] text-[#B33]',
+            ]}
+          >
+            <CaseStudyIcon name={tab.icon} class="size-5" />
+          </span>
+          <div class="min-w-0 flex-1">
+            <h4 class="mb-4 flex flex-wrap items-baseline gap-3 text-[1.2rem] leading-[1.25] font-bold text-yale-dark">
+              {tab.title}
+              <span class="font-mono text-[11px] font-semibold tracking-[0.03em] text-cyan-strong">{tab.secref}</span>
+            </h4>
+            <div class="sled-cs-panel-trap-wrap grid gap-4 sm:grid-cols-2">
+              <div class="sled-cs-panel-trap">
+                <span class="mb-1.5 block font-mono text-[10px] font-bold tracking-[0.12em] text-[#B33] uppercase">{trapLabel(tab)}</span>
+                <p class="text-[13.5px] leading-[1.55] text-ink">{trapText(tab)}</p>
+              </div>
+              <div class="sled-cs-panel-fix">
+                <span class="mb-1.5 block font-mono text-[10px] font-bold tracking-[0.12em] text-[#B33] uppercase">{fixLabel(tab)}</span>
+                <p class="text-[13.5px] leading-[1.55] text-ink">{fixText(tab)}</p>
+              </div>
+              {locked && <CaseStudyGateVeil />}
             </div>
           </div>
         </div>
-      </div>
-    ))}
+      );
+    })}
   </div>
 </div>

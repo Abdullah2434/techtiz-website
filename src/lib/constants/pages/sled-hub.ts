@@ -68,6 +68,69 @@ export const PAST_PERFORMANCE_STRIPE = {
   body: "Active subcontractor support for U.S. SLED prime contractors under NDA. Agency references and CPARS-style performance narratives available upon executed teaming agreement.",
 } as const;
 
+export const SLED_FEATURED_CLIENTS_SECTION = {
+  heading: "Active engagement jurisdictions",
+} as const;
+
+export const SLED_FEATURED_CLIENTS = [
+  {
+    name: "University of Wyoming",
+    image: "/assets/sled-case-studies/uwyo/logo.png",
+  },
+  {
+    name: "Town of Erie, Colorado",
+    image: "/assets/sled-case-studies/erie/logo.png",
+  },
+  {
+    name: "Broome County, New York",
+    image: "/assets/sled-case-studies/broome/logo.png",
+  },
+  {
+    name: "West Metro Fire Rescue",
+    image: "/assets/sled-case-studies/west-metro/logo.png",
+  },
+  {
+    name: "Town of Parker",
+    image: "/assets/sled-case-studies/parker/logo.png",
+  },
+  {
+    name: "City of Berkley",
+    image: "/assets/sled-case-studies/berkley/logo.png",
+  },
+  {
+    name: "OCM BOCES",
+    image: "/assets/sled-case-studies/ocmboces/logo.png",
+  },
+  {
+    name: "County of Westchester",
+    image: "/assets/sled-case-studies/westchester/logo.png",
+  },
+  {
+    name: "Wayne RESA",
+    image: "/assets/sled-case-studies/wayne/logo.png",
+  },
+  {
+    name: "Adams County, Colorado",
+    image: "/assets/sled-case-studies/adams/logo.png",
+  },
+  {
+    name: "City of Holland",
+    image: "/assets/sled-case-studies/holland/logo.png",
+  },
+  {
+    name: "Miami Dade College",
+    image: "/assets/sled-case-studies/mdc/logo.png",
+  },
+  {
+    name: "Altadena Libraries",
+    image: "/assets/sled-case-studies/altadena/logo.png",
+  },
+  {
+    name: "City of Escondido",
+    image: "/assets/sled-case-studies/escondido/logo.png",
+  },
+] as const;
+
 export type SledOutcomeStat = {
   label: string;
   value?: string;

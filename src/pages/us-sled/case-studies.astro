@@ -4,12 +4,13 @@ import CaseStudiesCtaSection from '../../components/sled/case-studies/CaseStudie
 import CaseStudiesEngagementsSection from '../../components/sled/case-studies/CaseStudiesEngagementsSection.astro';
 import CaseStudiesHeroSection from '../../components/sled/case-studies/CaseStudiesHeroSection.astro';
 import CaseStudiesTrustStrip from '../../components/sled/case-studies/CaseStudiesTrustStrip.astro';
+import SledFeaturedClientsSection from '../../components/sled/hub/SledFeaturedClientsSection.astro';
 import SledFaqSection from '../../components/sled/shared/SledFaqSection.astro';
 import SledLayout from '../../layouts/SledLayout.astro';
 import { CASE_STUDIES_SEO } from '../../lib/constants/pages/case-studies';
 import { CASE_STUDIES_FAQ } from '../../lib/constants/pages/sled-faq';
-import '../../styles/sled.css';
 import '../../styles/sled-case-study.css';
+import '../../styles/sled.css';
 
 const { title, description, canonicalPath, ogImage } = CASE_STUDIES_SEO;
 ---
@@ -17,6 +18,7 @@ const { title, description, canonicalPath, ogImage } = CASE_STUDIES_SEO;
 <SledLayout {title} {description} {canonicalPath} {ogImage} currentPage="/us-sled/case-studies/">
   <div class="sled-case-studies-page">
     <CaseStudiesHeroSection />
+    <SledFeaturedClientsSection />
     <CaseStudiesTrustStrip />
     <CaseStudiesEngagementsSection />
     <CaseStudiesConfidentialitySection />

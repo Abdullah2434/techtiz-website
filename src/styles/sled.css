@@ -149,7 +149,7 @@
 
 /* Section rhythm */
 .sled-section {
-  padding-block: clamp(4.5rem, 8vw, 6.875rem);
+  padding-block: clamp(1.5rem, 8vw, 3.875rem);
 }
 
 .sled-section-tight {
@@ -977,13 +977,47 @@
   }
 }
 
+@keyframes sled-logo-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.sled-logo-marquee {
+  animation: sled-logo-marquee 48s linear infinite;
+  will-change: transform;
+}
+
+.sled-logo-cloud:hover .sled-logo-marquee {
+  animation-play-state: paused;
+}
+
 @media (prefers-reduced-motion: reduce) {
+
   .sled-hero-capitol,
   .sled-hero-glow-a,
   .sled-hero-glow-b,
   .sled-beam::before,
-  .btn--beam::after {
+  .btn--beam::after,
+  .sled-logo-marquee {
     animation: none;
+  }
+
+  .sled-logo-cloud {
+    overflow-x: auto;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
+  .sled-logo-marquee {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    gap: 1.5rem;
+  }
+
+  .sled-logo-marquee>*:nth-child(n + 15) {
+    display: none;
   }
 
   .sled-reveal,

@@ -1,93 +1,348 @@
 ---
 import ArrowRight from '@lucide/astro/icons/arrow-right';
 import FileClock from '@lucide/astro/icons/file-clock';
-import { ENGAGEMENTS_SECTION, FEATURE_CARDS } from '../../../lib/constants/pages/case-studies';
-import { isLiveStatusTag } from '../../../lib/sled-case-studies/live-eyebrow';
 import Eyebrow from '../../shared/Eyebrow.astro';
 import SledPageWrap from '../shared/SledPageWrap.astro';
+
+const ENGAGEMENTS_SECTION = {
+  eyebrow: 'Delivered engagements',
+  heading: 'What we shipped, under whose roof, on what vehicle.',
+  body: 'Each card: the technical surface area, the prime relationship, what shipped, and the vehicle it moved through. References available under NDA.',
+} as const;
+
+const FEATURE_CARDS = [
+  {
+    href: '/us-sled/case-studies/uwyo/',
+    logo: '/assets/uwyo-logo.png',
+    logoAlt: 'University of Wyoming',
+    cap: 'Capability-map drafting, Navigate 360 integration documentation, and omnichannel scaffolding for a U.S. prime on an enrollment-platform sole source notification, white-label.',
+    heading: 'EAB recruitment platform sole source',
+    sub: 'University of Wyoming · KLW-2026-30',
+    state: 'WY',
+    tag: 'Sole source',
+    stats: [
+      { n: 'EAB', l: 'Named incumbent' },
+      { n: '5 systems', l: 'Named integrations' },
+      { n: '~$1.07M', l: '3-yr est.' },
+      { n: 'Jun 2026', l: 'Capabilities due' },
+    ],
+    chips: ['Navigate 360 hook', 'FERPA data gates', 'Competition trigger'],
+  },
+  {
+    href: '/us-sled/case-studies/erie/',
+    logo: '/assets/erie-logo.png',
+    logoAlt: 'Town of Erie, Colorado',
+    cap: 'Compliance packaging, Town-standard CAD and GIS production, and qualifications drafting for a U.S. prime on a municipal on-call engineering RFQ, white-label.',
+    heading: 'On-call general engineering consulting',
+    sub: 'Town of Erie, CO · RFQ N26-409',
+    state: 'CO',
+    tag: 'Live RFQ',
+    stats: [
+      { n: '5 teams', l: 'On-call pool' },
+      { n: '$500k', l: 'Per-contract ceiling' },
+      { n: '86', l: 'Primes mapped' },
+      { n: 'Jun 2026', l: 'Qualifications due' },
+    ],
+    chips: ['Offshore allocation model', 'C.R.S. accessibility bar', 'Rate-table pricing'],
+  },
+  {
+    href: '/us-sled/case-studies/broome/',
+    logo: '/assets/broome-logo.png',
+    logoAlt: 'Seal of Broome County, New York',
+    cap: 'Analytical modeling, GIS, and procurement-document drafting for a U.S. prime on a homeless housing alternatives RFP, white-label.',
+    heading: 'Homeless housing alternatives advisory',
+    sub: 'County of Broome, NY · RFP-2026-022',
+    state: 'NY',
+    tag: 'Live RFP',
+    stats: [
+      { n: '8', l: 'Mandatory tasks' },
+      { n: '$200k', l: 'Not-to-exceed' },
+      { n: '40/100', l: 'Understanding + method' },
+      { n: 'Jul 2026', l: 'Proposals due' },
+    ],
+    chips: ['THA regulatory frame', 'Offshore data gates', 'Task-level fee model'],
+  },
+  {
+    href: '/us-sled/case-studies/west-metro/',
+    logo: '/assets/west-metro-logo.png',
+    logoAlt: 'West Metro Fire Rescue',
+    cap: 'Non-CJIS technical and back-office drafting for a U.S. prime on a fire-district enterprise technology RFP, white-label.',
+    heading: 'Enterprise technology platforms',
+    sub: 'West Metro Fire, CO · WMRFP2026-1',
+    state: 'CO',
+    tag: 'Live RFP',
+    stats: [
+      { n: '7', l: 'Functional areas' },
+      { n: 'CJIS', l: 'Offshore boundary' },
+      { n: '$0.5-2.8M', l: '5-yr TCO est.' },
+      { n: 'Jun 2026', l: 'Proposals due' },
+    ],
+    chips: ['CJIS work-package split', 'NIST control map', 'Five-year TCO'],
+  },
+  {
+    href: '/us-sled/case-studies/parker-eam/',
+    logo: '/assets/parker-logo.png',
+    logoAlt: 'Town of Parker',
+    cap: 'Full six-tab RFI response workbook for a U.S. prime on an enterprise asset management RFI, white-label.',
+    heading: 'Enterprise asset management technology',
+    sub: 'Town of Parker, CO · RFI 26-012',
+    state: 'CO',
+    tag: 'Live RFI',
+    stats: [
+      { n: '6 tabs', l: 'GT.1-GT.36' },
+      { n: '6 systems', l: 'To consolidate' },
+      { n: '$150-900k', l: 'Project est.' },
+      { n: 'Jun 2026', l: 'Response due' },
+    ],
+    chips: ['GT security block', 'Six-system disposition', 'Migration methodology'],
+  },
+  {
+    href: '/us-sled/case-studies/berkley/',
+    logo: '/assets/berkley-logo.png',
+    logoAlt: 'City of Berkley',
+    cap: 'Document, CAD, and grant-research support for a licensed U.S. prime on a corridor-study engineering RFP, white-label.',
+    heading: 'Coolidge Corridor Study',
+    sub: 'City of Berkley, MI · RFP 2026',
+    state: 'MI',
+    tag: 'Live RFP',
+    stats: [
+      { n: '6 tasks', l: 'QBS, Council' },
+      { n: 'MDOT LAP', l: 'Federal-aid' },
+      { n: '$380-680k', l: 'Project est.' },
+      { n: 'Jun 2026', l: 'Proposal due' },
+    ],
+    chips: ['Grant-narrative research', 'CAD & graphics', 'Six-form compliance'],
+  },
+  {
+    href: '/us-sled/case-studies/ocmboces/',
+    logo: '/assets/ocmboces-logo.png',
+    logoAlt: 'OCM BOCES',
+    cap: 'Pre-award bid-prep for a U.S. prime reseller on a 146-line OEM-supplies renewal, white-label.',
+    heading: 'Computer related supplies',
+    sub: 'OCM BOCES, NY · RFB-227-05',
+    state: 'NY',
+    tag: 'Live RFB',
+    stats: [
+      { n: '146', l: 'Line items' },
+      { n: 'Per-line', l: 'Lowest price' },
+      { n: '$150-320k', l: 'Contract est.' },
+      { n: 'Jun 2026', l: 'Bid due' },
+    ],
+    chips: ['146-line pricing build', 'HP Outlet gate', 'Compliance matrix'],
+  },
+  {
+    href: '/us-sled/case-studies/westchester/',
+    logo: '/assets/westchester-logo.png',
+    logoAlt: 'County of Westchester',
+    cap: 'Pre-award bid-prep for a U.S. prime reseller on a lowest-price county software renewal, white-label.',
+    heading: 'Computer management software renewal',
+    sub: 'County of Westchester, NY · RFB-WC-26182',
+    state: 'NY',
+    tag: 'Live RFB',
+    stats: [
+      { n: '5,000', l: 'Seats / product' },
+      { n: '1 LOT', l: 'Lowest price' },
+      { n: '$120-260k', l: 'LOT est.' },
+      { n: 'Jun 2026', l: 'Bid due' },
+    ],
+    chips: ['Price-to-win model', 'Responsiveness QA', 'Recast spec match'],
+  },
+  {
+    href: '/us-sled/case-studies/parker/',
+    logo: '/assets/parker-logo.png',
+    logoAlt: 'Town of Parker',
+    cap: 'Full RFI response workbook for a U.S. prime on a community-development technology RFI, white-label.',
+    heading: 'Community development technology',
+    sub: 'Town of Parker, CO · RFI 26-011',
+    state: 'CO',
+    tag: 'Live RFI',
+    stats: [
+      { n: '6', l: 'Functional areas' },
+      { n: '190+', l: 'Tab 2 requirements' },
+      { n: '$180-520k', l: 'Project est.' },
+      { n: 'Jun 2026', l: 'Response due' },
+    ],
+    chips: ['Six-tab workbook', 'TRAKiT migration', 'GIS integration'],
+  },
+  {
+    href: '/us-sled/case-studies/wayne/',
+    logo: '/assets/wayne-resa-logo.png',
+    logoAlt: 'Wayne RESA',
+    cap: 'Full technical-response and integration package for a U.S. prime on a K-12 assessment-data RFP, white-label.',
+    heading: 'Assessment data management system',
+    sub: 'Wayne RESA, MI · WRESA-47-2026-2027-04',
+    state: 'MI',
+    tag: 'Live RFP',
+    stats: [
+      { n: '33', l: 'Districts served' },
+      { n: '100-pt', l: 'Best value' },
+      { n: '$1.17-2.73M', l: 'Contract est.' },
+      { n: 'Jul 2026', l: 'Bid due' },
+    ],
+    chips: ['MISTAR integration', 'MTSS & IRIP', 'FERPA & US-hosting'],
+  },
+  {
+    href: '/us-sled/case-studies/adams/',
+    logo: '/assets/adams-logo.png',
+    logoAlt: 'Adams County, Colorado',
+    cap: 'Full RFI response package for a U.S. prime on a cloud-budgeting RFI, white-label.',
+    heading: 'Cloud-based budgeting system',
+    sub: 'Adams County, CO · RFI-RZA-2026.560',
+    state: 'CO',
+    tag: 'Live RFI',
+    stats: [
+      { n: '8', l: 'Capability areas' },
+      { n: 'RFI', l: 'No award stage' },
+      { n: '$400-510k', l: 'Impl. est.' },
+      { n: 'Jun 2026', l: 'Response due' },
+    ],
+    chips: ['ERP integration', '10-year CIP', 'SSO & SAML'],
+  },
+  {
+    href: '/us-sled/case-studies/holland/',
+    logo: '/assets/holland-logo.png',
+    logoAlt: 'City of Holland',
+    cap: 'Full technical-response package for a U.S. prime on a cloud-security RFP, white-label.',
+    heading: 'Cloud-delivered SASE',
+    sub: 'City of Holland, MI · Ref 0000426310',
+    state: 'MI',
+    tag: 'Live RFP',
+    stats: [
+      { n: '9', l: 'Capability areas' },
+      { n: '1', l: 'Single award' },
+      { n: '$280-550k', l: 'Contract est.' },
+      { n: 'Jun 2026', l: 'Bid due' },
+    ],
+    chips: ['Entra ID integration', 'Compliance matrix', 'SLAs & methodology'],
+  },
+  {
+    href: '/us-sled/case-studies/mdc/',
+    logo: '/assets/miami-dade-college.png',
+    logoAlt: 'Miami Dade College',
+    cap: 'Full qualifications package for a U.S. prime, six disciplines, white-label.',
+    heading: 'Engineering services qualification',
+    sub: 'Miami Dade College · RFQ 2026-WP-15',
+    state: 'FL',
+    tag: 'Pre-award',
+    stats: [
+      { n: '6', l: 'Disciplines' },
+      { n: '2', l: 'On-call pools' },
+      { n: '$1-7.5M', l: 'Per-project cost' },
+      { n: 'Jun 2026', l: 'Bid due' },
+    ],
+    chips: ['SF330', 'Compliance matrix', 'Forms & affidavits'],
+  },
+  {
+    href: '/us-sled/case-studies/altadena/',
+    logo: '/assets/altadena-libraries.png',
+    logoAlt: 'Altadena Libraries',
+    cap: 'Outsourced finance function for a California special district, white-label.',
+    heading: 'Accounting & financial consulting',
+    sub: 'Altadena Library District · RFP No. 31',
+    state: 'CA',
+    tag: 'Live RFP',
+    stats: [
+      { n: '$3.9M', l: 'District budget' },
+      { n: '3+2', l: 'Year term' },
+      { n: '~$126k', l: 'Mid case / yr' },
+      { n: 'Jun 2026', l: 'Bid due' },
+    ],
+    chips: ['GASB / CalPERS', 'CFD bond', 'Reconciliations'],
+  },
+  {
+    href: '/us-sled/case-studies/escondido/',
+    logo: '/assets/escondido-logo.png',
+    logoAlt: 'City of Escondido',
+    cap: 'Documentation backbone behind a U.S. prime, the prime owns the field.',
+    heading: 'Geotechnical & special inspection',
+    sub: 'City of Escondido · RFP No. 26-19',
+    state: 'CA',
+    tag: 'Live RFP',
+    stats: [
+      { n: '$100k', l: 'Instrument cap' },
+      { n: '4 yr', l: 'On-call term' },
+      { n: '7', l: 'Service categories' },
+      { n: 'Jun 2026', l: 'Bid due' },
+    ],
+    chips: ['Special inspection', 'Daily reports', 'Rate schedule'],
+  },
+] as const;
 ---
 
 <section class="sled-section bg-seasalt" id="engagements" aria-labelledby="engagements-heading">
   <SledPageWrap>
-    <div class="sled-reveal mb-[clamp(2.25rem,4.5vw,3.5rem)] flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between" data-sled-reveal>
-      <div class="max-w-[720px]">
-        <Eyebrow text={ENGAGEMENTS_SECTION.eyebrow} showGlyph class="mb-3.5" />
-        <h2 id="engagements-heading" class="sled-h2 leading-[1.12] text-yale-dark max-w-[20ch]">
-          {ENGAGEMENTS_SECTION.heading}
-        </h2>
-        <p class="mt-3.5 max-w-[640px] text-[15.5px] leading-[1.6] text-muted">{ENGAGEMENTS_SECTION.body}</p>
-      </div>
-      <p class="shrink-0 rounded-full border border-line bg-white px-4 py-2 font-mono text-[11px] font-semibold tracking-[0.12em] text-muted uppercase">
-        {FEATURE_CARDS.length} engagement examples
-      </p>
+    <div class="sled-reveal mb-[clamp(2rem,4vw,3.25rem)] max-w-[720px]" data-sled-reveal>
+      <Eyebrow text={ENGAGEMENTS_SECTION.eyebrow} showGlyph class="mb-3.5" />
+      <h2 id="engagements-heading" class="sled-h2 leading-[1.12] text-yale-dark">
+        {ENGAGEMENTS_SECTION.heading}
+      </h2>
+      <p class="mt-3.5 max-w-[640px] text-[15.5px] leading-[1.6] text-muted">{ENGAGEMENTS_SECTION.body}</p>
     </div>
 
-    <div class="sled-reveal-stagger grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-6" data-sled-reveal>
+    <div class="sled-reveal-stagger grid grid-cols-1 gap-[18px] lg:grid-cols-2" data-sled-reveal>
       {FEATURE_CARDS.map((card) => (
         <a
           href={card.href}
-          class="sled-engagement-card group relative flex flex-col overflow-hidden rounded-[20px] border border-line/80 bg-white text-inherit no-underline shadow-[0_10px_30px_-18px_rgba(21,58,95,0.16)] transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:border-cyan/35 hover:shadow-[0_24px_48px_-22px_rgba(21,58,95,0.22)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
+          class="sled-engagement-card group relative flex flex-col overflow-hidden rounded-2xl border border-line-soft bg-white text-inherit no-underline shadow-[0_1px_2px_rgba(14,38,64,0.1),0_1px_3px_1px_rgba(14,38,64,0.05)] transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-[3px] hover:border-cyan hover:shadow-[0_4px_8px_3px_rgba(14,38,64,0.08),0_1px_3px_rgba(14,38,64,0.12)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
         >
-          <div class="relative overflow-hidden bg-yale-dark px-5 py-5 sm:px-6">
-            <div
-              class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(24,176,230,0.22)_0%,transparent_55%),linear-gradient(135deg,rgba(14,38,64,0.2)_0%,transparent_50%)]"
-              aria-hidden="true"
-            />
-            <div class="relative flex flex-col gap-4 sm:flex-row sm:items-center">
-              <div class="flex h-[108px] w-full shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/95 p-4 shadow-[0_16px_36px_-14px_rgba(0,0,0,0.45)] backdrop-blur-sm sm:h-[112px] sm:w-[148px]">
-                <img
-                  src={card.logo}
-                  alt={card.logoAlt}
-                  class="h-auto max-h-[72px] w-full max-w-[120px] object-contain"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <p class="font-mono text-[11px] leading-[1.55] text-white/72 sm:flex-1">{card.cap}</p>
+          <div class="flex flex-col bg-yale-dark p-4 sm:p-[18px]">
+            <div class="flex h-[138px] items-center justify-center rounded-[9px] border border-white/[0.08] bg-white p-[18px] shadow-[0_14px_30px_rgba(0,0,0,0.3)]">
+              <img
+                src={card.logo}
+                alt={card.logoAlt}
+                class="h-auto max-h-full w-auto max-w-[172px] object-contain"
+                loading="lazy"
+                decoding="async"
+              />
             </div>
+            <p class="mt-2.5 font-mono text-[11px] leading-[1.5] text-white/70">{card.cap}</p>
           </div>
 
-          <div class="flex flex-1 flex-col px-5 py-5 sm:px-6 sm:py-6">
-            <div class="mb-4 flex flex-wrap items-center gap-2">
-              <span class="inline-flex items-center gap-1.5 rounded-full bg-cyan/10 px-3 py-1 font-mono text-[10.5px] font-semibold tracking-[0.08em] text-cyan-strong uppercase">
-                <span class="size-1.5 shrink-0 rounded-full bg-cyan" aria-hidden="true" />
-                {card.state}
-              </span>
-              <span class="inline-flex items-center gap-1.5 rounded-full bg-amber/10 px-3 py-1 font-mono text-[10.5px] font-semibold tracking-[0.08em] text-amber uppercase">
-                {isLiveStatusTag(card.tag) ? (
-                  <span class="sled-cs-live-dot size-1.5 shrink-0 rounded-full bg-[#43E59B]" aria-hidden="true" />
-                ) : (
-                  <FileClock class="size-3" aria-hidden="true" />
-                )}
-                {card.tag}
-              </span>
+          <div class="flex flex-1 flex-col px-[22px] py-5">
+            <div class="mb-3 flex items-start gap-3.5">
+              <div class="min-w-0 flex-1">
+                <h3 class="mb-1 text-[1.3rem] leading-[1.16] font-extrabold tracking-[-0.01em] text-yale-dark">
+                  {card.heading}
+                </h3>
+                <p class="font-mono text-xs text-muted">{card.sub}</p>
+              </div>
+              <div class="flex shrink-0 gap-2">
+                <span class="inline-flex items-center gap-[7px] rounded-[7px] bg-cyan/12 px-3 py-1.5 font-mono text-[11px] font-semibold tracking-[0.06em] text-cyan-strong">
+                  <span
+                    class="relative inline-block size-[9px] -translate-y-px rotate-[15deg] bg-cyan"
+                    aria-hidden="true"
+                  >
+                    <span class="absolute left-[1px] top-[1px] size-[3px] bg-white" />
+                  </span>
+                  {card.state}
+                </span>
+                <span class="inline-flex items-center gap-1.5 rounded-[7px] bg-amber/12 px-3 py-1.5 font-mono text-[11px] font-semibold tracking-[0.06em] text-amber">
+                  <FileClock class="size-3.5" aria-hidden="true" />
+                  {card.tag}
+                </span>
+              </div>
             </div>
 
-            <h3 class="text-[clamp(1.125rem,2vw,1.3125rem)] leading-[1.2] font-extrabold tracking-[-0.015em] text-yale-dark">
-              {card.heading}
-            </h3>
-            <p class="mt-1.5 font-mono text-[11.5px] leading-[1.45] text-muted">{card.sub}</p>
-
-            <div class="mt-5 grid grid-cols-2 gap-2.5">
+            <div class="grid grid-cols-2 gap-x-5 gap-y-[11px] border-y border-line-soft py-[13px]">
               {card.stats.map((stat) => (
-                <div class="rounded-xl border border-line-soft/90 bg-seasalt/70 px-3.5 py-3 transition-colors duration-300 group-hover:border-line group-hover:bg-seasalt">
-                  <div class="text-[1.25rem] leading-none font-bold tracking-[-0.02em] text-yale-dark">{stat.n}</div>
-                  <div class="mt-1.5 text-[11px] leading-[1.35] text-muted">{stat.l}</div>
+                <div>
+                  <div class="text-[1.4rem] leading-none font-bold tracking-[-0.02em] text-yale-dark">{stat.n}</div>
+                  <div class="mt-[5px] text-[11.5px] text-muted">{stat.l}</div>
                 </div>
               ))}
             </div>
 
-            <div class="mt-5 flex flex-col gap-4 border-t border-line-soft pt-5 sm:flex-row sm:items-center sm:justify-between">
+            <div class="mt-[11px] flex flex-wrap items-center gap-3.5">
               <div class="flex flex-wrap gap-1.5">
                 {card.chips.map((chip) => (
-                  <span class="rounded-full border border-line/80 bg-white px-2.5 py-1 font-mono text-[10px] tracking-[0.02em] text-muted">
+                  <span class="rounded-[6px] border border-line bg-seasalt px-[9px] py-1 font-mono text-[10.5px] text-muted">
                     {chip}
                   </span>
                 ))}
               </div>
-              <span class="inline-flex shrink-0 items-center gap-2 rounded-full border border-cyan/25 bg-cyan/5 px-3.5 py-2 text-[12.5px] font-bold text-cyan-strong transition-[gap,background-color,border-color] duration-300 group-hover:gap-2.5 group-hover:border-cyan/40 group-hover:bg-cyan/10">
-                Read case study
-                <ArrowRight class="size-3.5 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true" />
+              <span class="ml-auto inline-flex shrink-0 items-center gap-2 whitespace-nowrap text-[13px] font-bold text-cyan-strong">
+                Read the full case study
+                <ArrowRight class="size-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
               </span>
             </div>
           </div>

@@ -11,14 +11,13 @@ interface Props {
 }
 
 const { study } = Astro.props;
-const deadline = 'deadline' in study ? study.deadline : undefined;
 const canonicalPath = sledCaseStudyPath(study.slug);
 ---
 
 <div
   class="sled-case-study-detail"
   data-sled-case-study
-  data-sled-case-deadline={deadline}
+  data-sled-case-deadline={'deadline' in study ? study.deadline : undefined}
   data-sled-case-status="live"
 >
   <CaseStudyDetailHero study={study} />

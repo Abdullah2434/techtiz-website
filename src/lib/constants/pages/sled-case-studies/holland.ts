@@ -7,7 +7,7 @@ export const HOLLAND_CASE_STUDY = {
       "City of Holland · Cloud-Delivered SASE (Ref 0000426310) | Techtiz SLED",
     description:
       "Pre-bid brief: City of Holland, Michigan, Cloud-Delivered Secure Internet Access and Security Service Edge (Ref 0000426310). Techtiz is the prime's NDA-first technology and back-office subcontractor. Never agency-facing.",
-    ogImage: "/assets/holland-hero.jpg",
+    ogImage: "/assets/sled-case-studies/holland/hero.jpg",
   },
   hero: {
     eyebrowLive: "Pre-bid brief · Live RFP · Under NDA",
@@ -16,8 +16,8 @@ export const HOLLAND_CASE_STUDY = {
     body: "City of Holland, Michigan, a cloud-delivered Security Service Edge platform for every user, device, and location. One award, one prime, Techtiz builds the technical-response engine behind it.",
     livePill: "Live · closes Jun 22, 11 AM EDT",
     pastPill: "Closed · selection complete",
-    heroBg: "/assets/holland-hero.jpg",
-    logo: "/assets/holland-logo.png",
+    heroBg: "/assets/sled-case-studies/holland/hero.jpg",
+    logo: "/assets/sled-case-studies/holland/logo.png",
     logoAlt: "City of Holland",
     identity: {
       awardingBody: { label: "Awarding body", value: "City of Holland" },

@@ -7,7 +7,7 @@ export const ALTADENA_CASE_STUDY = {
       "Altadena Library District · Accounting Services (RFP No. 31) | Techtiz SLED",
     description:
       "Pre-bid brief: Altadena Library District RFP No. 31, Accounting and Financial Consulting Services. Techtiz is the prime CPA firm's NDA-first technology and back-office production subcontractor. Never agency-facing.",
-    ogImage: "/assets/altadena-library-interior.png",
+    ogImage: "/assets/sled-case-studies/altadena/hero.png",
     canonicalPath: "/us-sled/case-studies/altadena/",
   },
   hero: {
@@ -19,8 +19,8 @@ export const ALTADENA_CASE_STUDY = {
     body: "Altadena Library District, Accounting and Financial Consulting Services. One vendor, three years, the District's outsourced finance function.",
     livePill: "Live · closes Jun 26, 5 PM PT",
     pastPill: "Closed · selection complete",
-    heroBg: "/assets/altadena-library-interior.png",
-    logo: "/assets/altadena-libraries.png",
+    heroBg: "/assets/sled-case-studies/altadena/hero.png",
+    logo: "/assets/sled-case-studies/altadena/logo.png",
     logoAlt: "Altadena Libraries",
     identity: {
       awardingBody: "Altadena Library District",

@@ -7,14 +7,14 @@ export const MDC_CASE_STUDY = {
       "Miami Dade College · Professional Engineering Services (RFQ 2026-WP-15) | Techtiz SLED",
     description:
       "Engagement example: Techtiz built the full back-office qualifications package behind a U.S. prime responding to Miami Dade College RFQ 2026-WP-15, Professional Engineering Services. White-label, NDA-first, never agency-facing.",
-    ogImage: "/assets/mdc-building.png",
+    ogImage: "/assets/sled-case-studies/mdc/hero.png",
   },
   hero: {
     eyebrow: "Engagement example · Pre-award · Under NDA",
     h1: 'A prime\'s pre-bid brief for <span class="accent">RFQ 2026-WP-15.</span>',
     body: "Miami Dade College, Professional Engineering Services. Two pools, six disciplines, one hard deadline.",
-    heroBg: "/assets/mdc-building.png",
-    logo: "/assets/miami-dade-college.png",
+    heroBg: "/assets/sled-case-studies/mdc/hero.png",
+    logo: "/assets/sled-case-studies/mdc/logo.png",
     logoAlt: "Miami Dade College",
     identity: {
       awardingBody: { label: "Awarding body", value: "Miami Dade College" },

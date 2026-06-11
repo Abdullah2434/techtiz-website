@@ -7,7 +7,7 @@ export const PARKER_EAM_CASE_STUDY = {
       "Town of Parker · Enterprise Asset Management Technology (RFI 26-012) | Techtiz SLED",
     description:
       "Pre-bid brief: Town of Parker, Colorado RFI 26-012, Enterprise Asset Management Technology. An RFI, no award. Techtiz is the prime's NDA-first technology and back-office subcontractor for the six-tab response workbook. Never agency-facing.",
-    ogImage: "/assets/parker-sign.png",
+    ogImage: "/assets/sled-case-studies/parker/hero.png",
   },
   hero: {
     eyebrowLive: "Pre-bid brief · Live RFI · Under NDA",
@@ -16,8 +16,8 @@ export const PARKER_EAM_CASE_STUDY = {
     body: "Town of Parker, Colorado, a Request for Information on Enterprise Asset Management technology. No award comes from this RFI. It is the requirements-setting instrument for a future RFP, and a precise six-tab workbook now is how a prime gets into the Town's evaluation while the RFP is being written. Techtiz drafts the workbook engine behind the prime.",
     livePill: "Live · closes Jun 19, 10 AM MST",
     pastPill: "Responses in review",
-    heroBg: "/assets/parker-sign.png",
-    logo: "/assets/parker-logo.png",
+    heroBg: "/assets/sled-case-studies/parker/hero.png",
+    logo: "/assets/sled-case-studies/parker/logo.png",
     logoAlt: "Town of Parker",
     identity: {
       awardingBody: {
@@ -475,7 +475,7 @@ export const PARKER_EAM_CASE_STUDY = {
       h2: "Who is buying, and who reads it first.",
       p: "",
     },
-    photo: "/assets/parker-sign.png",
+    photo: "/assets/sled-case-studies/parker/hero.png",
     photoAlt: "Mainstreet in downtown Parker, Colorado",
     body: "The Town of Parker is a home-rule municipality in Douglas County, Colorado, serving 72,147 residents on a 2025 budget of $328.5M. Procurement runs through the Finance Department under <strong>Charles Ellis, Chief Procurement Officer,</strong> the named contact and signer, at 20120 East Mainstreet. The Town engaged <strong>BerryDunn as its technology advisor,</strong> and BerryDunn reads the responses and may help draft the future RFP scope, which makes it the first and gating reader. The prime, not Techtiz, handles every interaction.",
     attribution: "Mainstreet in downtown Parker, Colorado. Photo by Jeffrey Beall, CC BY 3.0, via Wikimedia Commons.",

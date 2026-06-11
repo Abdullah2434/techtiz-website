@@ -7,7 +7,7 @@ export const UWYO_CASE_STUDY = {
       "University of Wyoming · EAB Recruitment Platform Sole Source (KLW-2026-30) | Techtiz SLED",
     description:
       "Pre-bid brief: University of Wyoming Sole Source Notification KLW-2026-30, EAB Global Recruitment Services Platform. A sole source notification, not an RFP. Techtiz is the US prime's NDA-first technology and back-office subcontractor for the offshore-capable portion of a Statement of Capabilities. No student data offshore, never University-facing.",
-    ogImage: "/assets/uwyo-building.png",
+    ogImage: "/assets/sled-case-studies/uwyo/hero.png",
   },
   hero: {
     eyebrowLive: "Pre-bid brief · Live notice · Under NDA",
@@ -16,8 +16,8 @@ export const UWYO_CASE_STUDY = {
     body: "A sole source notification, not an RFP. The University named EAB Global and described the product by EAB's own features. Techtiz drafts the offshore-capable portion of a Statement of Capabilities behind a US prime, never touching student data, never University-facing.",
     livePill: "Live · capabilities close Jun 1, 2 PM MT",
     pastPill: "Closed · capabilities window ended",
-    heroBg: "/assets/uwyo-building.png",
-    logo: "/assets/uwyo-logo.png",
+    heroBg: "/assets/sled-case-studies/uwyo/hero.png",
+    logo: "/assets/sled-case-studies/uwyo/logo.png",
     logoAlt: "University of Wyoming",
     identity: {
       awardingBody: {

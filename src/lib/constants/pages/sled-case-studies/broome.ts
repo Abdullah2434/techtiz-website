@@ -7,7 +7,7 @@ export const BROOME_CASE_STUDY = {
       "County of Broome · Homeless Housing Alternatives (RFP-2026-022) | Techtiz SLED",
     description:
       "Pre-bid brief: County of Broome RFP-2026-022, strategic advisory, alternatives analysis, and predevelopment services to reduce reliance on hotel and motel placements for homeless households. Techtiz is the prime's NDA-first remote analytics and back-office subcontractor. Never county-facing, never touching household-level data.",
-    ogImage: "/assets/broome-courthouse.png",
+    ogImage: "/assets/sled-case-studies/broome/hero.png",
   },
   hero: {
     eyebrowLive: "Pre-bid brief · Live RFP · Under NDA",
@@ -16,8 +16,8 @@ export const BROOME_CASE_STUDY = {
     body: "Strategic advisory and predevelopment services to reduce hotel and motel placements for homeless households. Techtiz drafts the analytical and document work behind a US prime, NDA-first, and never county-facing.",
     livePill: "Live · closes Jul 8, 2 PM EDT",
     pastPill: "Proposals in review",
-    heroBg: "/assets/broome-courthouse.png",
-    logo: "/assets/broome-logo.png",
+    heroBg: "/assets/sled-case-studies/broome/hero.png",
+    logo: "/assets/sled-case-studies/broome/logo.png",
     logoAlt: "Seal of Broome County, New York",
     identity: {
       awardingBody: {
@@ -582,7 +582,7 @@ export const BROOME_CASE_STUDY = {
       h2: "Who is buying, and the 2 named contacts.",
       p: "The County of Broome is a New York State county government of 198,683 residents (2020 census; 195,736 estimated 2025), seated in Binghamton and led by County Executive Jason T. Garnar. The scope was developed by the Department of Social Services in coordination with Mental Health, Planning and Economic Development, Health, the Office of Management and Budget, and the Department of Law, 6 departments in total, with the Division of Purchasing as contracting authority. Communication runs through 2 named contacts only: <strong>Carolyn Secor, Division of Purchasing,</strong> carolyn.secor@broomecountyny.gov, with the County Executive's office copied on all written inquiries. No phone is published in the solicitation; verify at broomecountyny.gov. The prime, not Techtiz, uses that channel.",
     },
-    photo: "/assets/broome-courthouse.png",
+    photo: "/assets/sled-case-studies/broome/hero.png",
     photoAlt: "Broome County Courthouse in Binghamton, New York",
     body: "The County of Broome is a New York State county government of 198,683 residents (2020 census; 195,736 estimated 2025), seated in Binghamton and led by County Executive Jason T. Garnar. The scope was developed by the Department of Social Services in coordination with Mental Health, Planning and Economic Development, Health, the Office of Management and Budget, and the Department of Law, 6 departments in total, with the Division of Purchasing as contracting authority. Communication runs through 2 named contacts only: <strong>Carolyn Secor, Division of Purchasing,</strong> carolyn.secor@broomecountyny.gov, with the County Executive's office copied on all written inquiries. No phone is published in the solicitation; verify at broomecountyny.gov. The prime, not Techtiz, uses that channel.",
     stats: [

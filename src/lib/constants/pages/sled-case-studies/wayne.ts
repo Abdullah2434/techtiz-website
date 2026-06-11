@@ -7,7 +7,7 @@ export const WAYNE_CASE_STUDY = {
       "Wayne RESA · Assessment Data Management System (WRESA-47-2026-2027-04) | Techtiz SLED",
     description:
       "Pre-bid brief: Wayne RESA Assessment Data Management System, RFP WRESA-47-2026-2027-04. Techtiz is the prime's NDA-first remote integration and proposal back-office subcontractor. Never agency-facing.",
-    ogImage: "/assets/wayne-resa-building.jpg",
+    ogImage: "/assets/sled-case-studies/wayne/hero.jpg",
   },
   hero: {
     eyebrowLive: "Pre-bid brief · Live RFP · Under NDA",
@@ -16,8 +16,8 @@ export const WAYNE_CASE_STUDY = {
     body: "Wayne RESA, Michigan, a cloud-hosted Assessment Data Management System for 33 districts and about 97 academies, more than 260,000 students. One best-value award, one US prime, Techtiz builds the integration and back-office engine behind it.",
     livePill: "Live · closes Jul 1, 12 PM EDT",
     pastPill: "Closed · selection complete",
-    heroBg: "/assets/wayne-resa-building.jpg",
-    logo: "/assets/wayne-resa-logo.png",
+    heroBg: "/assets/sled-case-studies/wayne/hero.jpg",
+    logo: "/assets/sled-case-studies/wayne/logo.png",
     logoAlt: "Wayne RESA",
     identity: {
       awardingBody: {
@@ -643,7 +643,7 @@ export const WAYNE_CASE_STUDY = {
       h2: "Who is buying, and who scores it.",
       p: "",
     },
-    photo: "/assets/wayne-resa-logo.png",
+    photo: "/assets/sled-case-studies/wayne/logo.png",
     photoAlt: "Wayne RESA",
     body: "Wayne RESA is the Wayne County Regional Educational Service Agency, the largest of 56 RESAs in Michigan, governed by a board elected by the 33 county district boards it serves under Superintendent <strong>Dr. Daveda J. Colbert.</strong> Procurement runs through one office. <strong>Stacey Shaw, purchasing@resa.net,</strong> is the sole point of contact and signer. Contact with any other Wayne RESA personnel may result in disqualification.",
     stats: [

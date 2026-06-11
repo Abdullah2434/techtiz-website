@@ -7,7 +7,7 @@ export const WESTCHESTER_CASE_STUDY = {
       "County of Westchester · Computer Mgmt Software Renewal (RFB-WC-26182) | Techtiz SLED",
     description:
       "Pre-bid brief: County of Westchester, NY RFB-WC-26182, Computer Management Software Renewal (Recast Software). A lowest-price RFB. Techtiz is the prime reseller's NDA-first bid-preparation back-office subcontractor. Never agency-facing.",
-    ogImage: "/assets/westchester-building.png",
+    ogImage: "/assets/sled-case-studies/westchester/hero.png",
   },
   hero: {
     eyebrowLive: "Pre-bid brief · Live RFB · Under NDA",
@@ -16,8 +16,8 @@ export const WESTCHESTER_CASE_STUDY = {
     body: "County of Westchester, New York, a lowest-price renewal of the Recast Software management suite across 5,000 county machines. One LOT, price decides it. Techtiz runs the bid-prep engine behind the prime reseller, under NDA, before the June 11 deadline.",
     livePill: "Live · closes Jun 11, 2 PM EDT",
     pastPill: "Closed · bids opened",
-    heroBg: "/assets/westchester-building.png",
-    logo: "/assets/westchester-logo.png",
+    heroBg: "/assets/sled-case-studies/westchester/hero.png",
+    logo: "/assets/sled-case-studies/westchester/logo.png",
     logoAlt: "Westchester County",
     identity: {
       awardingBody: {
@@ -390,7 +390,7 @@ export const WESTCHESTER_CASE_STUDY = {
       h2: "Who is buying, and who signs it.",
       p: "",
     },
-    photo: "/assets/westchester-building.png",
+    photo: "/assets/sled-case-studies/westchester/hero.png",
     photoAlt: "Westchester County, White Plains, New York",
     body: "The County of Westchester is a New York State county government. The renewal is owned by the <strong>Westchester County IT Department</strong> and issued through the <strong>Bureau of Purchase and Supplies.</strong> <strong>Martin A. O'Sullivan</strong> is the single named contact and signer, at 148 Martine Avenue, Room 713, White Plains. The prime, not Techtiz, handles every interaction with that office.",
     stats: [

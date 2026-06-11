@@ -7,7 +7,7 @@ export const PARKER_CASE_STUDY = {
       "Town of Parker · Community Development Technology (RFI 26-011) | Techtiz SLED",
     description:
       "Pre-bid brief: Town of Parker, Colorado RFI 26-011, Community Development Technology. An RFI, no award. Techtiz is the prime's NDA-first technology and technical-writing subcontractor for the response workbook. Never agency-facing.",
-    ogImage: "/assets/parker-sign.png",
+    ogImage: "/assets/sled-case-studies/parker/hero.png",
   },
   hero: {
     eyebrowLive: "Pre-bid brief · Live RFI · Under NDA",
@@ -16,8 +16,8 @@ export const PARKER_CASE_STUDY = {
     body: "Town of Parker, Colorado, a Request for Information on Community Development Technology. No award comes from this RFI. It shapes the future RFP, and a complete response workbook now is how a prime earns the invitation. Techtiz builds the workbook engine behind the prime.",
     livePill: "Live · closes Jun 19, 10 AM MT",
     pastPill: "Closed · responses in review",
-    heroBg: "/assets/parker-sign.png",
-    logo: "/assets/parker-logo.png",
+    heroBg: "/assets/sled-case-studies/parker/hero.png",
+    logo: "/assets/sled-case-studies/parker/logo.png",
     logoAlt: "Town of Parker",
     identity: {
       awardingBody: {
@@ -516,7 +516,7 @@ export const PARKER_CASE_STUDY = {
       h2: "Who is buying, and who reads it first.",
       p: "",
     },
-    photo: "/assets/parker-sign.png",
+    photo: "/assets/sled-case-studies/parker/hero.png",
     photoAlt: "Welcome to the Town of Parker, Colorado",
     body: "The Town of Parker is a home-rule municipality in Douglas County, Colorado, founded 1864. Procurement runs through the Finance Department under <strong>Charles Ellis, Chief Procurement Officer,</strong> the named contact and signer. The Town retained <strong>BerryDunn as its consulting advisor,</strong> and BerryDunn reviews and synthesizes vendor responses before they reach Town leadership, which makes it the first and gating reader.",
     attribution: "Welcome sign, Town of Parker, Colorado.",

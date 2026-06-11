@@ -7,7 +7,7 @@ export const WEST_METRO_CASE_STUDY = {
       "West Metro Fire · Enterprise Technology Platforms (WMRFP2026-1) | Techtiz SLED",
     description:
       "Pre-bid brief: West Metro Fire Protection District RFP WMRFP2026-1, Enterprise Technology Platforms. Techtiz is the prime's NDA-first remote technology and back-office subcontractor for the non-CJIS scope. Never agency-facing, never touching CJIS-controlled data.",
-    ogImage: "/assets/west-metro-truck.png",
+    ogImage: "/assets/sled-case-studies/west-metro/hero.png",
   },
   hero: {
     eyebrowLive: "Pre-bid brief · Live RFP · Under NDA",
@@ -16,8 +16,8 @@ export const WEST_METRO_CASE_STUDY = {
     body: "West Metro Fire Protection District, Colorado, an RFP for Enterprise Technology Platforms across seven functional areas. One CJIS boundary decides what offshore support can legally touch. Techtiz drafts the non-CJIS technical and back-office work behind a US prime, NDA-first, and never agency-facing.",
     livePill: "Live · closes Jun 29, 4 PM EDT",
     pastPill: "Proposals in review",
-    heroBg: "/assets/west-metro-truck.png",
-    logo: "/assets/west-metro-logo.png",
+    heroBg: "/assets/sled-case-studies/west-metro/hero.png",
+    logo: "/assets/sled-case-studies/west-metro/logo.png",
     logoAlt: "West Metro Fire Rescue",
     identity: {
       awardingBody: {
@@ -493,7 +493,7 @@ export const WEST_METRO_CASE_STUDY = {
       h2: "Who is buying, and the single channel.",
       p: "",
     },
-    photo: "/assets/west-metro-truck.png",
+    photo: "/assets/sled-case-studies/west-metro/hero.png",
     photoAlt: "A West Metro Fire Rescue engine",
     body: "West Metro Fire Protection District is an independent special district in Jefferson County, Colorado, organized under the Colorado Special District Act, C.R.S. Title 32, governed by an elected board and funded largely through property taxes in Jefferson and Douglas Counties. It serves about 300,000 residents across 108 square miles and 17 stations, running more than 42,000 incidents a year in a mixed urban, wildland, and interface area. Procurement runs through one channel only: <strong>Todd Heinl, RFP Contact and Contracting Officer,</strong> at RFP2026@westmetrofire.org. The prime, not Techtiz, uses that channel.",
     stats: [

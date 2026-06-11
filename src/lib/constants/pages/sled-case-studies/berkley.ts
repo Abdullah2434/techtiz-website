@@ -7,7 +7,7 @@ export const BERKLEY_CASE_STUDY = {
       "City of Berkley · Coolidge Corridor Study (RFP 2026) | Techtiz SLED",
     description:
       "Pre-bid brief: City of Berkley, MI Coolidge Corridor Study (RFP 2026), preliminary engineering design and funding assistance. A qualifications-based RFP. Techtiz is the licensed prime's NDA-first document, CAD, and grant-research back-office subcontractor. No engineering judgment, no seals, never agency-facing.",
-    ogImage: "/assets/berkley-downtown.png",
+    ogImage: "/assets/sled-case-studies/berkley/hero.png",
   },
   hero: {
     eyebrowLive: "Pre-bid brief · Live RFP · Under NDA",
@@ -16,8 +16,8 @@ export const BERKLEY_CASE_STUDY = {
     body: "City of Berkley, Michigan, a qualifications-based RFP for preliminary engineering design and funding assistance on a 3R rehabilitation of Coolidge Highway. One Professional Services Agreement, awarded by City Council. Techtiz runs the document, CAD, and grant-research engine behind the licensed prime, under NDA, before the June 26 deadline.",
     livePill: "Live · closes Jun 26, 3 PM EDT",
     pastPill: "Closed · under evaluation",
-    heroBg: "/assets/berkley-downtown.png",
-    logo: "/assets/berkley-logo.png",
+    heroBg: "/assets/sled-case-studies/berkley/hero.png",
+    logo: "/assets/sled-case-studies/berkley/logo.png",
     logoAlt: "City of Berkley",
     identity: {
       awardingBody: {
@@ -480,7 +480,7 @@ export const BERKLEY_CASE_STUDY = {
       h2: "Who is buying, and who signs it.",
       p: "The City of Berkley is a small Oakland County municipality, population 14,934, about 2.62 square miles and 51 miles of roads, with a lean procurement structure and no separate purchasing department. <strong>Shawn Young, Deputy City Manager for Public Services,</strong> is the named contact and signer, both contracting officer and primary evaluator contact, at 3338 Coolidge Hwy. The final award is a City Council function. The prime, not Techtiz, handles every interaction.",
     },
-    photo: "/assets/berkley-downtown.png",
+    photo: "/assets/sled-case-studies/berkley/hero.png",
     photoAlt: "Downtown Berkley, Michigan, Coolidge Highway",
     body: "The City of Berkley is a small Oakland County municipality, population 14,934, about 2.62 square miles and 51 miles of roads, with a lean procurement structure and no separate purchasing department. <strong>Shawn Young, Deputy City Manager for Public Services,</strong> is the named contact and signer, both contracting officer and primary evaluator contact, at 3338 Coolidge Hwy. The final award is a City Council function. The prime, not Techtiz, handles every interaction.",
     stats: [

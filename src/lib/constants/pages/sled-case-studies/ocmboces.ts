@@ -6,7 +6,7 @@ export const OCMBOCES_CASE_STUDY = {
     title: "OCM BOCES · Computer Related Supplies (RFB-227-05) | Techtiz SLED",
     description:
       "Pre-bid brief: OCM BOCES RFB-227-05, Computer Related Supplies. A line-item lowest-price RFB for genuine OEM supplies. Techtiz is the prime reseller's NDA-first bid-preparation back-office subcontractor. Never agency-facing.",
-    ogImage: "/assets/ocmboces-sign.png",
+    ogImage: "/assets/sled-case-studies/ocmboces/hero.png",
   },
   hero: {
     eyebrowLive: "Pre-bid brief · Live RFB · Under NDA",
@@ -15,8 +15,8 @@ export const OCMBOCES_CASE_STUDY = {
     body: "OCM BOCES, New York, a line-item renewal of genuine OEM computer supplies across 146 items for 23 component districts. Lowest price wins each line. Techtiz runs the bid-prep engine behind the prime reseller, under NDA, before the June 11 deadline.",
     livePill: "Live · closes Jun 11, 1:30 PM EDT",
     pastPill: "Closed · bids opened",
-    heroBg: "/assets/ocmboces-sign.png",
-    logo: "/assets/ocmboces-logo.png",
+    heroBg: "/assets/sled-case-studies/ocmboces/hero.png",
+    logo: "/assets/sled-case-studies/ocmboces/logo.png",
     logoAlt: "OCM BOCES",
     identity: {
       awardingBody: {
@@ -432,7 +432,7 @@ export const OCMBOCES_CASE_STUDY = {
       h2: "Who is buying, and who signs it.",
       p: "",
     },
-    photo: "/assets/ocmboces-sign.png",
+    photo: "/assets/sled-case-studies/ocmboces/hero.png",
     photoAlt: "OCM BOCES, Onondaga County, New York",
     body: "OCM BOCES is a New York State Board of Cooperative Educational Services serving Onondaga, Cortland, and Madison counties, under District Superintendent Dr. Matthew Cook. It serves 23 component school districts including Syracuse City, and the Central New York Regional Information Center co-owns the requirement. <strong>Terri Hewitt, Assistant School Purchasing Officer,</strong> is the named contact and signer; the final award is a Board of Education function. The prime, not Techtiz, handles every interaction.",
     stats: [

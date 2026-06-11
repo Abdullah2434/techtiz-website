@@ -19,7 +19,7 @@ export const ERIE_CASE_STUDY = {
     pastPill: "Closed · submission window ended",
     heroBg:
       "https://www.dailycamera.com/wp-content/uploads/2025/01/DCC-L-ErieTownHall152.jpg?w=1024&h=696",
-    logo: "/assets/erie-logo.png",
+    logo: "/assets/sled-case-studies/erie/logo.png",
     logoAlt: "Town of Erie, Colorado",
     identity: {
       awardingBody: {

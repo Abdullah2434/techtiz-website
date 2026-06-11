@@ -133,6 +133,62 @@
   font-size: 16px;
 }
 
+/* Capabilities grid — hover-reveal detail (legacy .cap / .cap-detail) */
+.home-cap-detail {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 26px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition:
+    opacity 300ms ease,
+    transform 300ms cubic-bezier(0.2, 0, 0, 1),
+    visibility 300ms;
+}
+
+.home-cap-card:hover .home-cap-detail,
+.home-cap-card:focus-visible .home-cap-detail,
+.home-cap-card:focus-within .home-cap-detail {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+@media (hover: none) {
+  .home-cap-detail {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    padding: 0;
+    background: transparent !important;
+  }
+
+  .home-cap-card {
+    min-height: 0;
+  }
+
+  .home-cap-tags {
+    margin-top: 2px;
+  }
+}
+
+@keyframes home-cap-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .home-cap-grid.is-in .home-cap-card {
+    animation: home-cap-in 550ms cubic-bezier(0.05, 0.7, 0.1, 1) backwards;
+    animation-delay: calc(var(--ci, 0) * 80ms);
+  }
+}
+
 .home-cap-scroll {
   -ms-overflow-style: none;
   scrollbar-width: none;

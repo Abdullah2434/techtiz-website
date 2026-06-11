@@ -6,20 +6,24 @@ type Capability = (typeof HOME_CAPABILITIES_GRID)[number];
 
 interface Props {
   capability: Capability;
+  index: number;
 }
 
-const { capability } = Astro.props;
+const { capability, index } = Astro.props;
 const isFeatured = capability.featured;
+const capNum = String(index + 1).padStart(2, '0');
 ---
 
 <a
   href={capability.href}
+  role="listitem"
   class:list={[
-    'group relative flex h-full min-h-[280px] flex-col gap-3.5 overflow-hidden rounded-[10px] border px-7 py-[30px] transition-[transform,border-color,box-shadow] duration-240 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan',
+    'home-cap-card group relative flex min-h-[218px] flex-col gap-3.5 overflow-hidden rounded-[10px] border p-[26px] transition-[transform,border-color,box-shadow] duration-240 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan',
     isFeatured
       ? 'border-yale-dark bg-yale-dark text-white hover:-translate-y-0.5 hover:shadow-[0_18px_36px_-18px_rgba(21,58,95,0.18)]'
       : 'border-line bg-white hover:-translate-y-0.5 hover:border-[#C2CCD9] hover:shadow-[0_18px_36px_-18px_rgba(21,58,95,0.18)]',
   ]}
+  style={`--ci: ${index}`}
 >
   {
     isFeatured && (
@@ -34,15 +38,27 @@ const isFeatured = capability.featured;
     )
   }
 
-  <div
-    class:list={[
-      'grid size-11 place-items-center rounded-lg',
-      isFeatured
-        ? 'bg-cyan/16 text-cyan'
-        : 'bg-cyan-soft text-cyan-strong',
-    ]}
-  >
-    <HomeCapabilityGridIcon name={capability.icon} />
+  <div class="flex items-start justify-between gap-3.5">
+    <div
+      class:list={[
+        'grid size-11 shrink-0 place-items-center rounded-lg transition-[background,color] duration-240',
+        isFeatured
+          ? 'bg-cyan/16 text-cyan group-hover:bg-cyan group-hover:text-yale-dark'
+          : 'bg-cyan-soft text-cyan-strong group-hover:bg-cyan group-hover:text-yale-dark',
+      ]}
+    >
+      <HomeCapabilityGridIcon name={capability.icon} />
+    </div>
+    <span
+      class:list={[
+        'font-mono text-[26px] font-semibold leading-none tracking-[-0.02em] transition-colors duration-240',
+        isFeatured
+          ? 'text-white/22 group-hover:text-cyan'
+          : 'text-line group-hover:text-cyan',
+      ]}
+    >
+      {capNum}
+    </span>
   </div>
 
   <h3
@@ -54,57 +70,55 @@ const isFeatured = capability.featured;
     {capability.title}
   </h3>
 
-  <p
-    class:list={[
-      'text-[14px] leading-[1.55]',
-      isFeatured ? 'text-white/74' : 'text-muted',
-    ]}
-  >
-    {capability.description}
-  </p>
-
-  <div class="mt-1.5 flex min-h-0 flex-1 flex-col">
-    <div class="flex flex-wrap gap-1.5">
-      {
-        capability.tags.map((tag) => (
-          <span
-            class:list={[
-              'rounded border px-2 py-1 font-mono text-[10.5px] leading-[1.4] tracking-[0.04em] whitespace-nowrap',
-              isFeatured
-                ? 'border-white/14 bg-white/5 text-cyan'
-                : 'border-line bg-seasalt text-yale',
-            ]}
-          >
-            {tag}
-          </span>
-        ))
-      }
-    </div>
-
+  <div class="home-cap-tags mt-auto flex flex-wrap gap-1.5">
     {
-      'stack' in capability && capability.stack ? (
-        <div class="mt-4 border-t border-white/10 pt-4 font-mono text-[10.5px] leading-[1.6] tracking-widest text-cyan uppercase">
-          {capability.stack}
-        </div>
-      ) : (
-        <div
-          class="pointer-events-none mt-4 border-t border-transparent pt-4 font-mono text-[10.5px] leading-[1.6] tracking-widest uppercase opacity-0 select-none"
-          aria-hidden="true"
+      capability.tags.map((tag) => (
+        <span
+          class:list={[
+            'rounded border px-2 py-1 font-mono text-[10.5px] leading-[1.4] tracking-[0.04em] whitespace-nowrap',
+            isFeatured
+              ? 'border-white/14 bg-white/5 text-cyan'
+              : 'border-line bg-seasalt text-yale',
+          ]}
         >
-          Anthropic · OpenAI · LangGraph · Pinecone · pgvector · Modal · Inngest
-        </div>
-      )
+          {tag}
+        </span>
+      ))
     }
   </div>
 
-  <span
+  <div
     class:list={[
-      'home-cap-grid-more mt-auto inline-flex items-center gap-2 text-[13.5px] font-bold transition-[gap,color] duration-200 group-hover:gap-3.5',
-      isFeatured
-        ? 'text-cyan group-hover:text-cyan'
-        : 'text-yale group-hover:text-cyan-strong',
+      'home-cap-detail flex flex-col justify-end gap-3.5',
+      isFeatured ? 'bg-yale-mid' : 'bg-white',
     ]}
   >
-    {capability.moreLabel}
-  </span>
+    <p
+      class:list={[
+        'text-[14px] leading-[1.55]',
+        isFeatured ? 'text-white/74' : 'text-muted',
+      ]}
+    >
+      {capability.description}
+    </p>
+
+    {
+      'stack' in capability && capability.stack ? (
+        <div class="border-t border-white/10 pt-4 font-mono text-[10.5px] leading-[1.6] tracking-widest text-cyan uppercase">
+          {capability.stack}
+        </div>
+      ) : null
+    }
+
+    <span
+      class:list={[
+        'home-cap-grid-more mt-auto flex items-center gap-2 border-t pt-4 text-[13.5px] font-bold transition-[gap,color] duration-200 group-hover:gap-3.5',
+        isFeatured
+          ? 'border-white/14 text-cyan'
+          : 'border-line-soft text-yale group-hover:text-cyan-strong',
+      ]}
+    >
+      {capability.moreLabel}
+    </span>
+  </div>
 </a>

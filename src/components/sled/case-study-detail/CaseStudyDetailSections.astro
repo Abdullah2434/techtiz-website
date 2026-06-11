@@ -431,6 +431,15 @@ const techtizSlot =
           );
         })}
       </ol>
+      {'notes' in study.keyDates &&
+        study.keyDates.notes?.map((note) => (
+          <div class="sled-reveal mt-4 flex items-start gap-2.5 text-[12.5px] leading-[1.55] text-muted" data-sled-reveal>
+            <CaseStudyIcon name={note.icon} class="mt-0.5 size-[15px] shrink-0 text-amber" />
+            <span class="[&_strong]:text-yale-dark">
+              <CaseStudyGatedHtml html={note.html} gateLinkLabel="Named under NDA" />
+            </span>
+          </div>
+        ))}
       {'foot' in study.keyDates && study.keyDates.foot && (() => {
         const footRender = renderKeyDatesFoot(study.keyDates.foot);
         if (!footRender) return null;

@@ -112,12 +112,12 @@ export const UWYO_CASE_STUDY = {
       {
         date: "May 26, 2026",
         label: "Published, 10:17 AM ET",
-        detail: "",
+        detail: "Notification KLW-2026-30 released, reference 0000425554",
       },
       {
         date: "Not specified",
         label: "Questions",
-        detail: "",
+        detail: "Direct to Kelly Lynne Wooden, Procurement Officer",
       },
       {
         date: "Jun 1, 2026",
@@ -128,7 +128,7 @@ export const UWYO_CASE_STUDY = {
       {
         date: "3 years",
         label: "Term",
-        detail: "",
+        detail: "From purchase order execution, if an award proceeds",
       },
     ],
     notes: [

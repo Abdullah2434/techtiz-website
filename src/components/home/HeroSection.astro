@@ -3,7 +3,6 @@ import ChevronRight from "@lucide/astro/icons/chevron-right";
 import { HOME_HERO } from "../../lib/constants/pages/home";
 import CtaButton from "../shared/CtaButton.astro";
 import Eyebrow from "../shared/Eyebrow.astro";
-import HeroResolutionChart from "./HeroResolutionChart.astro";
 import PageWrap from "./PageWrap.astro";
 
 const {
@@ -86,160 +85,94 @@ const {
         <CtaButton href={cta.href} label={cta.label} variant="primary" />
       </div>
 
-      <div
-        class="relative min-w-0"
-        aria-hidden="true"
-        data-aos="zoom-in"
-        data-aos-delay="100"
-        data-aos-duration="1000"
-      >
+      <div class="home-mockup-shell relative min-w-0" aria-hidden="true">
         <span
-          class="home-float-a absolute -left-[18px] -top-3.5 size-[22px] rotate-[15deg] bg-cyan opacity-[0.22] max-[640px]:hidden"
+          class="home-float-a absolute top-[-14px] left-[-18px] size-[22px] rotate-[15deg] bg-cyan opacity-[0.22] max-[640px]:hidden"
         ></span>
         <span
           class="home-float-b absolute bottom-[-18px] right-[30%] size-3.5 rotate-[15deg] bg-cyan opacity-40 max-[640px]:hidden"
         ></span>
         <span
-          class="home-float-c absolute top-[30%] -right-7 size-[30px] rotate-[15deg] bg-cyan opacity-[0.15] max-[640px]:hidden"
+          class="home-float-c absolute top-[30%] right-[-28px] size-[30px] rotate-[15deg] bg-cyan opacity-[0.15] max-[640px]:hidden"
         ></span>
 
         <div
-          class="home-mockup overflow-hidden rounded-[14px] border border-line bg-white shadow-[0_30px_60px_-30px_rgba(14,38,64,0.20),0_8px_24px_-16px_rgba(14,38,64,0.10)] max-[640px]:rounded-xl"
+          class="home-build-flow"
           role="img"
-          aria-label="Production AI agent dashboard mockup"
+          aria-label="A client brief becoming an AI-native build, shipped to production under your brand"
         >
-          <div
-            class="flex items-center gap-2.5 border-b border-line-soft bg-seasalt px-4 py-3 max-[640px]:gap-2 max-[640px]:px-3 max-[640px]:py-2"
-          >
-            <div class="flex shrink-0 gap-1.5 max-[640px]:gap-1">
-              <span class="size-2.5 rounded-full bg-line max-[640px]:size-2"></span>
-              <span class="size-2.5 rounded-full bg-line max-[640px]:size-2"></span>
-              <span class="size-2.5 rounded-full bg-line max-[640px]:size-2"></span>
+          <div class="home-bf-brief">
+            <span class="home-bf-chip-l">01 · Your brief</span>
+            <span class="home-bf-chip-t">Customer onboarding flow · 6-wk scope</span>
+          </div>
+
+          <div class="home-bf-link" aria-hidden="true">
+            <span class="home-bf-comet"></span>
+          </div>
+
+          <div class="home-bf-terminal">
+            <div class="home-bf-bar">
+              <span class="home-bf-dots" aria-hidden="true">
+                <i></i><i></i><i></i>
+              </span>
+              <span class="home-bf-title">techtiz · build-os</span>
+              <span class="home-bf-health">
+                <span class="home-bf-blink"></span>
+                Building
+              </span>
             </div>
-            <div
-              class="mx-3 min-w-0 flex-1 truncate rounded border border-line bg-white px-3 py-1 font-mono text-[11px] text-muted max-[640px]:mx-2 max-[640px]:px-2 max-[640px]:py-0.5 max-[640px]:text-[9px]"
-            >
-              agents.techtiz.io / <span class="text-cyan">triage-v3</span>
-            </div>
-            <div
-              class="inline-flex shrink-0 items-center gap-1.5 font-mono text-[10.5px] font-semibold uppercase tracking-[0.08em] text-green max-[640px]:gap-1 max-[640px]:text-[8px]"
-            >
-              <span class="home-health-blink size-[7px] rounded-full bg-green max-[640px]:size-[5px]"
-              ></span>
-              <span class="max-[480px]:sr-only">Healthy</span>
+            <div class="home-bf-log">
+              <div class="home-bf-ln" style="--i: 0">
+                <span class="home-bf-p">›</span>
+                brief.parse()
+                <em>scope mapped · day 1</em>
+              </div>
+              <div class="home-bf-ln" style="--i: 1">
+                <span class="home-bf-ok">✓</span>
+                team assembled
+                <em>3 senior eng · 2 AI agents</em>
+              </div>
+              <div class="home-bf-ln" style="--i: 2">
+                <span class="home-bf-ok">✓</span>
+                RAG pipeline live
+                <em>evals 98.2% · $0.018 / run</em>
+              </div>
+              <div class="home-bf-ln" style="--i: 3">
+                <span class="home-bf-ok">✓</span>
+                accessibility audit
+                <em>WCAG 2.2 AA · 0 failures</em>
+              </div>
+              <div class="home-bf-ln home-bf-ln-ship" style="--i: 4">
+                <span class="home-bf-p">▶</span>
+                ship v1.0 → production
+                <span class="home-bf-caret" aria-hidden="true"></span>
+              </div>
             </div>
           </div>
 
-          <div
-            class="flex flex-col gap-3 px-[22px] pt-[22px] pb-4 max-[640px]:gap-2 max-[640px]:px-3.5 max-[640px]:pt-3.5 max-[640px]:pb-3"
-          >
-            <div class="flex min-w-0 items-center gap-3 max-[640px]:gap-2">
-              <div
-                class="relative grid size-[38px] shrink-0 place-items-center rounded-lg bg-yale-dark before:size-4 before:rotate-[15deg] before:bg-cyan before:content-[''] after:absolute after:left-[11px] after:top-[11px] after:size-1 after:bg-white after:content-[''] max-[640px]:size-[30px] max-[640px]:rounded-md max-[640px]:before:size-3 max-[640px]:after:left-[9px] max-[640px]:after:top-[9px]"
-              >
-              </div>
-              <div class="min-w-0">
-                <div
-                  class="truncate text-[14.5px] font-bold leading-[1.2] text-yale-dark max-[640px]:text-[12px]"
-                >
-                  Customer triage agent
-                </div>
-                <div
-                  class="mt-1 truncate font-mono text-[10.5px] tracking-[0.05em] text-muted max-[640px]:mt-0.5 max-[640px]:text-[9px]"
-                >
-                  v3.2 · prod · region us-east
-                </div>
-              </div>
-            </div>
-            <div class="flex gap-3.5 overflow-x-auto font-mono text-[10.5px] text-muted max-[640px]:gap-2.5 max-[640px]:text-[9px] [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-              <span
-                class="home-menu-on relative shrink-0 text-yale after:absolute after:-bottom-2 after:left-0 after:right-0 after:h-0.5 after:bg-cyan after:content-[''] max-[640px]:after:-bottom-1.5"
-                >Overview</span
-              >
-              <span class="shrink-0">Eval</span>
-              <span class="shrink-0">Cost</span>
-              <span class="shrink-0">Logs</span>
-            </div>
+          <div class="home-bf-link home-bf-link-b" aria-hidden="true">
+            <span class="home-bf-comet"></span>
           </div>
 
-          <div
-            class="grid grid-cols-3 border-y border-line-soft"
-          >
-            <div class="border-r border-line-soft px-5 py-4 last:border-r-0 max-[640px]:px-2.5 max-[640px]:py-3">
-              <div
-                class="mb-1.5 font-mono text-[9.5px] uppercase tracking-[0.10em] text-muted max-[640px]:mb-1 max-[640px]:text-[8px]"
-              >
-                Resolved
-              </div>
-              <div
-                class="home-kpi-v text-[22px] font-extrabold leading-none tracking-[-0.02em] text-yale-dark max-[640px]:text-[16px]"
-              >
-                94<span class="ml-1 text-xs font-semibold text-muted max-[640px]:text-[10px]">%</span>
-              </div>
-              <div class="mt-1 font-mono text-[10.5px] text-green max-[640px]:mt-0.5 max-[640px]:text-[8px]">
-                ▲ 2.1 this week
+          <div class="home-bf-ship">
+            <div class="home-bf-chrome">
+              <span class="home-bf-dots home-bf-dots-light" aria-hidden="true">
+                <i></i><i></i><i></i>
+              </span>
+              <span class="home-bf-url">app.yourbrand.com</span>
+              <span class="home-bf-live">
+                <span class="home-bf-blink"></span>
+                Live
+              </span>
+            </div>
+            <div class="home-bf-ui">
+              <span class="home-bf-u home-bf-u-a"></span>
+              <span class="home-bf-u home-bf-u-b"></span>
+              <div class="home-bf-u-grid">
+                <span></span><span></span><span></span>
               </div>
             </div>
-            <div class="border-r border-line-soft px-5 py-4 last:border-r-0 max-[640px]:px-2.5 max-[640px]:py-3">
-              <div
-                class="mb-1.5 font-mono text-[9.5px] uppercase tracking-[0.10em] text-muted max-[640px]:mb-1 max-[640px]:text-[8px]"
-              >
-                p95 latency
-              </div>
-              <div
-                class="home-kpi-v home-kpi-v-2 text-[22px] font-extrabold leading-none tracking-[-0.02em] text-yale-dark max-[640px]:text-[16px]"
-              >
-                312<span class="ml-1 text-xs font-semibold text-muted max-[640px]:text-[10px]">ms</span>
-              </div>
-              <div class="mt-1 font-mono text-[10.5px] text-green max-[640px]:mt-0.5 max-[640px]:text-[8px]">
-                ▼ 48 vs v3.1
-              </div>
-            </div>
-            <div class="px-5 py-4 max-[640px]:px-2.5 max-[640px]:py-3">
-              <div
-                class="mb-1.5 font-mono text-[9.5px] uppercase tracking-[0.10em] text-muted max-[640px]:mb-1 max-[640px]:text-[8px]"
-              >
-                Cost / run
-              </div>
-              <div
-                class="home-kpi-v home-kpi-v-3 text-[22px] font-extrabold leading-none tracking-[-0.02em] text-yale-dark max-[640px]:text-[16px]"
-              >
-                $0.018
-              </div>
-              <div class="mt-1 font-mono text-[10.5px] text-muted max-[640px]:mt-0.5 max-[640px]:text-[8px]">stable</div>
-            </div>
-          </div>
-
-          <div class="px-[22px] pt-5 pb-[18px] max-[640px]:px-3.5 max-[640px]:pt-3.5 max-[640px]:pb-3">
-            <div class="mb-3 flex flex-col gap-2 max-[640px]:mb-2 max-[640px]:gap-1.5 sm:flex-row sm:items-center sm:justify-between">
-              <div class="text-xs font-bold text-yale-dark max-[640px]:text-[11px]">
-                Resolution rate · last 14 days
-              </div>
-              <div class="flex flex-wrap gap-2.5 font-mono text-[10px] text-muted max-[640px]:gap-2 max-[640px]:text-[8px]">
-                <span
-                  class="inline-flex items-center gap-1.5 before:inline-block before:size-2 before:rotate-[15deg] before:bg-cyan before:content-[''] max-[640px]:gap-1 max-[640px]:before:size-1.5"
-                  >Auto-resolved</span
-                >
-                <span
-                  class="inline-flex items-center gap-1.5 before:inline-block before:size-2 before:rotate-[15deg] before:bg-yale before:content-[''] max-[640px]:gap-1 max-[640px]:before:size-1.5"
-                  >Escalated</span
-                >
-              </div>
-            </div>
-            <div class="h-[90px] max-[640px]:h-[72px]">
-              <HeroResolutionChart class="size-full" />
-            </div>
-          </div>
-
-          <div
-            class="flex flex-col gap-1.5 border-t border-line-soft bg-seasalt px-[22px] py-3.5 font-mono text-[10.5px] text-muted max-[640px]:gap-1 max-[640px]:px-3.5 max-[640px]:py-2.5 max-[640px]:text-[8px] sm:flex-row sm:items-center sm:justify-between"
-          >
-            <div
-              class="home-badge-twist inline-flex items-center gap-2 font-semibold uppercase tracking-[0.06em] text-cyan-strong before:inline-block before:size-2 before:rotate-[15deg] before:bg-cyan before:content-[''] max-[640px]:gap-1.5 max-[640px]:before:size-1.5"
-            >
-              Self-improving
-            </div>
-            <div class="truncate">3 evals running · 87 traces / hr</div>
+            <div class="home-bf-cap">wk 6 · in production · your brand, your IP</div>
           </div>
         </div>
       </div>

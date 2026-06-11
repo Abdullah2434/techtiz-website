@@ -15,18 +15,21 @@
 }
 
 .sled-case-study-detail[data-sled-case-status='past'] .sled-cs-live-only,
+.sled-case-study-detail[data-sled-case-status='past'] .live-only,
 .sled-case-study-detail[data-sled-case-status='past'] .sled-cs-eyebrow-live,
 .sled-case-study-detail[data-sled-case-status='past'] .sled-cs-livepill {
   display: none !important;
 }
 
 .sled-case-study-detail[data-sled-case-status='past'] .sled-cs-past-only,
+.sled-case-study-detail[data-sled-case-status='past'] .past-only,
 .sled-case-study-detail[data-sled-case-status='past'] .sled-cs-eyebrow-past,
 .sled-case-study-detail[data-sled-case-status='past'] .sled-cs-closedpill {
   display: inline-flex !important;
 }
 
 .sled-case-study-detail[data-sled-case-status='live'] .sled-cs-past-only,
+.sled-case-study-detail[data-sled-case-status='live'] .past-only,
 .sled-case-study-detail[data-sled-case-status='live'] .sled-cs-eyebrow-past,
 .sled-case-study-detail[data-sled-case-status='live'] .sled-cs-closedpill {
   display: none !important;

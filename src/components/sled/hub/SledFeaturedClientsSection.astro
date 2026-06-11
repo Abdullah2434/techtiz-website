@@ -1,0 +1,53 @@
+---
+import {
+SLED_FEATURED_CLIENTS,
+SLED_FEATURED_CLIENTS_SECTION,
+} from '../../../lib/constants/pages/sled-hub';
+import SledPageWrap from '../shared/SledPageWrap.astro';
+
+const marqueeClients = [...SLED_FEATURED_CLIENTS, ...SLED_FEATURED_CLIENTS];
+---
+
+<section
+  class="sled-section bg-white py-3 max-[640px]:py-2 md:py-4"
+  aria-labelledby="sled-featured-clients-heading"
+>
+  <SledPageWrap>
+    <h2
+      id="sled-featured-clients-heading"
+      class="sled-reveal mb-6 text-left text-[18px] font-medium uppercase tracking-[0.18em] text-ink max-[640px]:mb-4 max-[640px]:text-[15px]"
+      data-sled-reveal
+    >
+      {SLED_FEATURED_CLIENTS_SECTION.heading}
+    </h2>
+
+    <div
+      class="sled-logo-cloud sled-reveal overflow-hidden py-2 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]"
+      data-sled-reveal
+    >
+      <div class="sled-logo-marquee flex w-max items-center gap-10 md:gap-16 lg:gap-20">
+        {
+          marqueeClients.map((client, index) => (
+            <div
+              class="flex shrink-0 items-center justify-center px-3 md:px-4"
+              aria-hidden={index >= SLED_FEATURED_CLIENTS.length ? 'true' : undefined}
+            >
+              <img
+                src={client.image}
+                alt={client.name}
+                width={150}
+                height={80}
+                loading="lazy"
+                decoding="async"
+                class:list={[
+                  'h-auto max-h-[56px] w-auto max-w-[120px] object-contain transition-transform duration-500 ease-out hover:scale-110 md:max-h-[70px] md:max-w-[150px]',
+                  'imageClass' in client ? client.imageClass : undefined,
+                ]}
+              />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </SledPageWrap>
+</section>

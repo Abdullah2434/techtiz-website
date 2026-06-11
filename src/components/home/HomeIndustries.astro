@@ -1,11 +1,9 @@
 ---
 import { INDUSTRIES_DATA, INDUSTRY_TABS } from "../../lib/constants/pages/home";
-import CtaButton from "../shared/CtaButton.astro";
 import IndustryIcon from "./IndustryIcon.astro";
 import PageWrap from "./PageWrap.astro";
 
 const initial = INDUSTRIES_DATA.healthcare;
-const IND_TRANSITION_MS = 400;
 const IND_ICON_KEYS = [
   "heart",
   "growth",
@@ -14,30 +12,37 @@ const IND_ICON_KEYS = [
   "truck",
   "grad",
 ] as const;
+
+const challengeItems = initial.challenges
+  .map(
+    (c) =>
+      `<div class="home-ind-challenge"><div class="home-ind-ch-title">${c.title}</div><div class="home-ind-ch-pain">${c.pain}</div></div>`,
+  )
+  .join("");
 ---
 
 <section
-  class="relative overflow-hidden bg-yale-dark py-[110px] text-white max-[900px]:py-14"
+  id="industries"
+  class="home-industries relative overflow-hidden bg-yale-dark py-[70px] text-white max-[900px]:py-14"
 >
   <div
-    class="pointer-events-none absolute -top-[60px] -right-[60px] size-[320px] rotate-[15deg] opacity-70 bg-[linear-gradient(45deg,transparent_48%,rgba(24,176,230,0.12)_48%_52%,transparent_52%)] bg-size-[28px_28px]"
+    class="pointer-events-none absolute -right-[60px] -bottom-[60px] size-[320px] rotate-[15deg] opacity-70 bg-[linear-gradient(45deg,transparent_48%,rgba(24,176,230,0.12)_48%_52%,transparent_52%)] bg-size-[28px_28px]"
     aria-hidden="true"
   >
   </div>
 
   <PageWrap class="relative z-[2]">
     <div
-      class="mb-14 flex items-end justify-between gap-12 max-[900px]:mb-9 max-[900px]:flex-col max-[900px]:items-start max-[900px]:gap-4"
-      data-aos="fade-up"
-      data-aos-delay="100"
+      class="relative z-[2] mb-14 flex items-end justify-between gap-12 max-[900px]:mb-9 max-[900px]:flex-col max-[900px]:items-start max-[900px]:gap-4"
     >
       <div class="max-w-[700px]">
         <span
-          class="mb-3.5 inline-flex font-mono text-[11px] font-bold tracking-[0.18em] uppercase text-white"
-          >Industries</span
+          class="mb-3 inline-flex font-mono text-[11px] font-bold tracking-[0.18em] text-cyan-strong uppercase"
         >
+          Industries
+        </span>
         <h2
-          class="text-[44px] font-extrabold leading-[1.05] tracking-[-0.022em] text-white max-[900px]:text-[30px]"
+          class="text-[34px] leading-[1.1] font-semibold tracking-[-0.022em] text-white max-[900px]:text-[30px] max-[640px]:text-[24px]"
         >
           Empowering diverse <span class="text-cyan">business ecosystems.</span>
         </h2>
@@ -47,27 +52,22 @@ const IND_ICON_KEYS = [
       </div>
       <a
         href="/industries/"
-        class="inline-flex items-center gap-2 border-b-2 border-cyan pb-1 text-sm font-bold text-cyan transition-[gap] duration-200 hover:gap-3.5"
+        class="inline-flex shrink-0 items-center gap-2 border-b-2 border-cyan pb-1 text-sm font-bold text-cyan transition-[gap] duration-200 hover:gap-3.5"
       >
         Explore all →
       </a>
     </div>
 
     <div
-      class="home-ind-tabs mb-[22px] flex flex-nowrap gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      class="home-ind-tabs relative z-[2] mb-[22px] flex flex-wrap gap-2"
       role="tablist"
       data-ind-tabs
-      data-aos="fade-up"
-      data-aos-delay="100"
     >
       {
         INDUSTRY_TABS.map((tab, i) => (
           <button
             type="button"
-            class:list={[
-              "home-ind-tab cursor-pointer rounded-[10px] px-6 py-3 text-sm font-semibold leading-none whitespace-nowrap text-white hover:border-cyan/30 hover:bg-white/8",
-              i === 0 && "is-active",
-            ]}
+            class:list={["home-ind-tab", i === 0 && "is-active"]}
             role="tab"
             data-ind={tab.id}
             aria-selected={i === 0 ? "true" : "false"}
@@ -79,140 +79,123 @@ const IND_ICON_KEYS = [
     </div>
 
     <div
-      class="home-ind-panel grid grid-cols-[1.1fr_1fr_0.9fr] gap-4 max-[900px]:grid-cols-1"
+      class="home-ind-panel relative z-[2] grid grid-cols-[1.1fr_1fr_0.9fr] items-stretch gap-4 max-[900px]:grid-cols-1 max-[900px]:gap-7"
       data-ind-panel
-      data-aos="fade-up"
-      data-aos-delay="200"
     >
       <div
-        class="home-ind-pane flex flex-col rounded-[14px] border border-white/10 bg-white/4 p-8 max-[600px]:p-6"
+        class="home-ind-card home-ind-insights flex flex-col rounded-[14px] border border-white/10 bg-white/4 px-[30px] py-8 max-[600px]:px-6 max-[600px]:py-6"
       >
-        <div class="home-ind-stagger">
-          <div class="mb-[18px] flex items-center gap-3" data-ind-icon-wrap>
-            <div
-              class="grid size-11 shrink-0 place-items-center rounded-[10px] bg-cyan/12 text-cyan"
-            >
-              <IndustryIcon name={initial.icon} />
-            </div>
-          </div>
-          <h3
-            class="mb-3 text-2xl font-extrabold leading-[1.2] text-white"
-            data-ind-title
-          >
-            {initial.title}
-          </h3>
-          <p
-            class="mb-[22px] text-[14.5px] leading-[1.6] text-white/72"
-            data-ind-desc
-          >
-            {initial.desc}
-          </p>
-          <div class="mt-auto flex flex-col gap-2.5" data-ind-badges>
-            {
-              initial.badges.map((b) => (
-                <span class="inline-flex w-fit max-w-full items-center gap-2.5 rounded-full border border-cyan/30 bg-cyan/8 px-4 py-2 font-mono text-xs tracking-[0.04em] text-cyan before:inline-block before:size-[7px] before:shrink-0 before:rotate-[15deg] before:bg-cyan before:content-['']">
-                  <strong class="font-bold text-white">{b.strong}</strong>
-                  {b.rest}
-                </span>
-              ))
-            }
-          </div>
-        </div>
-      </div>
-
-      <div
-        class="home-ind-pane flex flex-col rounded-[14px] border border-white/10 bg-white/4 p-8 max-[600px]:p-6"
-      >
-        <div class="home-ind-stagger">
+        <div class="mb-[18px] flex items-center gap-3">
           <div
-            class="mb-4 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-cyan"
+            class="home-ind-icon grid size-11 shrink-0 place-items-center rounded-[10px] bg-cyan/12 text-cyan [&_svg]:size-[22px]"
+            data-ind-icon
           >
-            Pain points we solve
+            <IndustryIcon name={initial.icon} />
           </div>
-          <h4
-            class="mb-[18px] text-base font-bold leading-[1.3] text-white"
-            data-ind-ch-head
-          >
-            {initial.chHead}
-          </h4>
-          <div data-ind-challenges>
-            {
-              initial.challenges.map((c) => (
-                <div class="border-t border-white/8 py-4 first:border-t-0 first:pt-0 last:pb-0">
-                  <div class="mb-1.5 flex items-start gap-2.5 text-[14.5px] font-bold leading-[1.3] text-white before:mt-1.5 before:inline-block before:size-2 before:shrink-0 before:rotate-[15deg] before:bg-cyan before:content-['']">
-                    {c.title}
-                  </div>
-                  <p class="pl-[18px] text-[13px] leading-[1.5] text-white/62">
-                    {c.pain}
-                  </p>
-                </div>
-              ))
-            }
-          </div>
+        </div>
+        <h3
+          class="mb-3 text-2xl leading-[1.2] font-semibold text-white"
+          data-ind-title
+        >
+          {initial.title}
+        </h3>
+        <p
+          class="mb-[22px] text-[14.5px] leading-[1.6] text-white/72"
+          data-ind-desc
+        >
+          {initial.desc}
+        </p>
+        <div class="mt-auto flex flex-col gap-2.5" data-ind-badges>
+          {
+            initial.badges.map((b) => (
+              <span class="home-ind-badge">
+                <strong>{b.strong}</strong>
+                {b.rest}
+              </span>
+            ))
+          }
         </div>
       </div>
 
       <div
-        class="home-ind-pane relative overflow-hidden rounded-[14px] border border-yale-mid bg-yale p-8 max-[600px]:p-6"
+        class="home-ind-card home-ind-challenges flex flex-col rounded-[14px] border border-white/10 bg-white/4 px-[30px] py-8 max-[600px]:px-6 max-[600px]:py-6"
       >
         <div
-          class="pointer-events-none absolute -bottom-[30px] -right-[30px] size-[200px] rotate-[15deg] bg-[linear-gradient(45deg,transparent_48%,rgba(24,176,230,0.20)_48%_52%,transparent_52%)] bg-size-[22px_22px]"
-          aria-hidden="true"
+          class="mb-1 font-mono text-[11px] font-semibold tracking-[0.14em] text-cyan uppercase"
         >
+          Pain points we solve
         </div>
-        <div class="relative z-[2] flex h-full flex-col home-ind-stagger">
-          <div
-            class="mb-7 grid size-11 place-items-center rounded-[10px] bg-white/10 text-cyan"
-          >
-            <IndustryIcon name="sparkle" />
+        <h4
+          class="mb-[18px] text-base leading-[1.3] font-bold text-white"
+          data-ind-ch-head
+        >
+          {initial.chHead}
+        </h4>
+        <div class="home-ind-ch-reel" data-ind-challenges>
+          <div class="home-ind-ch-track">
+            <div class="home-ind-ch-set" set:html={challengeItems} />
+            <div class="home-ind-ch-set" aria-hidden="true" set:html={challengeItems} />
           </div>
-          <h3
-            class="mb-3.5 max-w-[260px] text-[26px] font-extrabold leading-[1.15] text-white"
-            data-ind-cta-title
-          >
-            {initial.cta}
-          </h3>
-          <p
-            class="mb-7 text-[13.5px] leading-[1.55] text-white/72"
-            data-ind-cta-sub
-          >
-            {initial.ctaSub}
-          </p>
-          <CtaButton
-            href="/contact/"
-            label="Book intro call"
-            variant="ghost-dark"
-            class="mt-auto w-full !min-w-0 [&_.btn__inner]:w-full [&_.btn__inner]:justify-between"
-          />
         </div>
+      </div>
+
+      <div
+        class="home-ind-card home-ind-cta relative flex flex-col overflow-hidden rounded-[14px] border border-yale-mid bg-yale px-[30px] py-8 max-[600px]:px-6 max-[600px]:py-6"
+      >
+        <div
+          class="home-ind-icon relative z-[2] mb-7 grid size-11 place-items-center rounded-[10px] bg-white/10 text-cyan [&_svg]:size-[22px]"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            class="size-[22px]"
+          >
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+          </svg>
+        </div>
+        <h3
+          class="relative z-[2] mb-3.5 max-w-[260px] text-[26px] leading-[1.15] font-semibold text-white"
+          data-ind-cta-title
+        >
+          {initial.cta}
+        </h3>
+        <p
+          class="relative z-[2] mb-7 text-[13.5px] leading-[1.55] text-white/72"
+          data-ind-cta-sub
+        >
+          {initial.ctaSub}
+        </p>
+        <a href="/contact/" class="home-ind-cta-btn relative z-[2]">
+          Book intro call
+          <span class="home-ind-cta-arr" aria-hidden="true"></span>
+        </a>
       </div>
     </div>
 
     <div class="hidden" aria-hidden="true" id="home-ind-icon-templates">
       {
         IND_ICON_KEYS.map((key) => (
-          <div data-ind-icon={key}>
-            <div class="grid size-11 shrink-0 place-items-center rounded-[10px] bg-cyan/12 text-cyan">
-              <IndustryIcon name={key} />
-            </div>
-          </div>
+          <template data-ind-icon={key}>
+            <IndustryIcon name={key} />
+          </template>
         ))
       }
     </div>
   </PageWrap>
 </section>
 
-<script
-  define:vars={{
-    industriesData: INDUSTRIES_DATA,
-    indTransitionMs: IND_TRANSITION_MS,
-  }}
->
+<script define:vars={{ industriesData: INDUSTRIES_DATA }}>
   const panel = document.querySelector("[data-ind-panel]");
   const tabs = document.querySelectorAll("[data-ind-tabs] [data-ind]");
   if (!panel || !tabs.length) return;
 
-  const iconEl = panel.querySelector("[data-ind-icon-wrap]");
+  const iconEl = panel.querySelector("[data-ind-icon]");
   const titleEl = panel.querySelector("[data-ind-title]");
   const descEl = panel.querySelector("[data-ind-desc]");
   const badgesEl = panel.querySelector("[data-ind-badges]");
@@ -220,96 +203,81 @@ const IND_ICON_KEYS = [
   const chEl = panel.querySelector("[data-ind-challenges]");
   const ctaTitleEl = panel.querySelector("[data-ind-cta-title]");
   const ctaSubEl = panel.querySelector("[data-ind-cta-sub]");
-  const panes = panel.querySelectorAll(".home-ind-pane");
-  let activeKey = "healthcare";
-  let animating = false;
+  const cards = panel.querySelectorAll(".home-ind-card");
 
   const iconTemplates = document.getElementById("home-ind-icon-templates");
 
   const getIconMarkup = (key) => {
-    const template = iconTemplates?.querySelector(`[data-ind-icon="${key}"]`);
+    const template = iconTemplates?.querySelector(`template[data-ind-icon="${key}"]`);
     return template?.innerHTML ?? "";
   };
 
-  const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const buildChallengeItems = (challenges) =>
+    challenges
+      .map(
+        (c) =>
+          `<div class="home-ind-challenge"><div class="home-ind-ch-title">${c.title}</div><div class="home-ind-ch-pain">${c.pain}</div></div>`,
+      )
+      .join("");
+
+  const buildChallengesHtml = (challenges) => {
+    const items = buildChallengeItems(challenges);
+    return `<div class="home-ind-ch-track"><div class="home-ind-ch-set">${items}</div><div class="home-ind-ch-set" aria-hidden="true">${items}</div></div>`;
+  };
 
   const setTabState = (tab, on) => {
     tab.setAttribute("aria-selected", on ? "true" : "false");
     tab.classList.toggle("is-active", on);
   };
 
-  const updateContent = (key) => {
+  const render = (key) => {
     const d = industriesData[key];
     if (!d) return;
 
-    if (iconEl) {
-      const markup = getIconMarkup(d.icon);
-      if (markup) iconEl.innerHTML = markup;
-    }
-    if (titleEl) titleEl.textContent = d.title;
-    if (descEl) descEl.textContent = d.desc;
-    if (badgesEl) {
-      badgesEl.innerHTML = d.badges
-        .map(
-          (b) =>
-            `<span class="inline-flex w-fit max-w-full items-center gap-2.5 rounded-full border border-cyan/30 bg-cyan/8 px-4 py-2 font-mono text-xs tracking-[0.04em] text-cyan before:inline-block before:size-[7px] before:shrink-0 before:rotate-[15deg] before:bg-cyan before:content-['']"><strong class="font-bold text-white">${b.strong}</strong>${b.rest}</span>`,
-        )
-        .join("");
-    }
-    if (chHeadEl) chHeadEl.textContent = d.chHead;
-    if (chEl) {
-      chEl.innerHTML = d.challenges
-        .map(
-          (c) =>
-            `<div class="border-t border-white/8 py-4 first:border-t-0 first:pt-0 last:pb-0"><div class="mb-1.5 flex items-start gap-2.5 text-[14.5px] font-bold leading-[1.3] text-white before:mt-1.5 before:inline-block before:size-2 before:shrink-0 before:rotate-[15deg] before:bg-cyan before:content-['']">${c.title}</div><p class="pl-[18px] text-[13px] leading-[1.5] text-white/62">${c.pain}</p></div>`,
-        )
-        .join("");
-    }
-    if (ctaTitleEl) ctaTitleEl.textContent = d.cta;
-    if (ctaSubEl) ctaSubEl.textContent = d.ctaSub;
+    cards.forEach((card) => card.classList.add("is-fade"));
+
+    setTimeout(() => {
+      if (iconEl) {
+        const markup = getIconMarkup(d.icon);
+        if (markup) iconEl.innerHTML = markup;
+      }
+      if (titleEl) titleEl.textContent = d.title;
+      if (descEl) descEl.textContent = d.desc;
+      if (badgesEl) {
+        badgesEl.innerHTML = d.badges
+          .map(
+            (b) =>
+              `<span class="home-ind-badge"><strong>${b.strong}</strong>${b.rest}</span>`,
+          )
+          .join("");
+      }
+      if (chHeadEl) chHeadEl.textContent = d.chHead;
+      if (chEl) chEl.innerHTML = buildChallengesHtml(d.challenges);
+      if (ctaTitleEl) ctaTitleEl.textContent = d.cta;
+      if (ctaSubEl) ctaSubEl.textContent = d.ctaSub;
+      cards.forEach((card) => card.classList.remove("is-fade"));
+    }, 180);
+
+    setTimeout(() => {
+      cards.forEach((card) => {
+        card.style.transition = "none";
+        card.style.opacity = "1";
+        card.style.transform = "none";
+        requestAnimationFrame(() => {
+          card.style.transition = "";
+          card.style.opacity = "";
+          card.style.transform = "";
+          card.classList.remove("is-fade");
+        });
+      });
+    }, 700);
   };
-
-  const runPanelTransition = async (key) => {
-    if (animating || key === activeKey) return;
-    animating = true;
-
-    panes.forEach((pane) => {
-      pane.classList.remove("home-ind-enter");
-      pane.classList.add("home-ind-exit");
-    });
-
-    await wait(indTransitionMs);
-
-    panel.classList.remove("home-ind-panel-ready");
-    panel.classList.add("home-ind-revealing");
-    updateContent(key);
-    activeKey = key;
-
-    panes.forEach((pane) => {
-      pane.classList.remove("home-ind-exit");
-      pane.classList.add("home-ind-enter");
-    });
-
-    await wait(20);
-
-    panes.forEach((pane) => pane.classList.remove("home-ind-enter"));
-    panel.classList.add("home-ind-panel-ready");
-
-    await wait(indTransitionMs);
-
-    panel.classList.remove("home-ind-revealing");
-    animating = false;
-  };
-
-  panel.classList.add("home-ind-panel-ready");
 
   tabs.forEach((tab) => {
     tab.addEventListener("click", () => {
-      const key = tab.getAttribute("data-ind");
-      if (!key || key === activeKey) return;
-
+      if (tab.classList.contains("is-active")) return;
       tabs.forEach((t) => setTabState(t, t === tab));
-      runPanelTransition(key);
+      render(tab.getAttribute("data-ind"));
     });
   });
 </script>

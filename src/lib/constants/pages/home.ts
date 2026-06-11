@@ -105,7 +105,7 @@ export const HOME_CAPABILITIES_GRID = [
     id: "ai",
     title: "AI & Intelligence",
     description:
-      "Agents, ML models, and retrieval systems that act inside the tools you already run. Instrumented, evaluated, cost-controlled.",
+      "Agents, ML models, and retrieval systems that act inside the tools you run. Instrumented, evaluated, cost-controlled.",
     href: serviceSlug("ai-agent"),
     tags: ["AI Agents", "ML & Predictive", "AI Consultation", "GenAI / RAG"],
     stack:

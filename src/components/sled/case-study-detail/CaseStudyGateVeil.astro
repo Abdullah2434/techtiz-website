@@ -1,0 +1,14 @@
+---
+import CaseStudyLockChip from './CaseStudyLockChip.astro';
+
+interface Props {
+  href?: string;
+  label?: string;
+}
+
+const { href = '/us-sled/contact/', label = 'Available under NDA' } = Astro.props;
+---
+
+<a class="gate-veil" href={href}>
+  <CaseStudyLockChip {label} />
+</a>

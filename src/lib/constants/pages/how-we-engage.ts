@@ -101,7 +101,7 @@ export const NON_NEGOTIABLES = [
 
 export const COVERAGE_SECTION = {
   eyebrow: "Procurement vehicles",
-  heading: "Easy to put on contract, in all 50 states.",
+  heading: "Easy to put on contract.",
   body: "We never hold the prime contract, you do. Techtiz lands on your paper as a subcontractor through whichever vehicle your pursuit already runs on. Cooperative purchasing extends that reach without a fresh competition.",
   mapLegend: [
     { label: "Served via primes", tone: "served" as const },

@@ -7,7 +7,7 @@ export const ESCONDIDO_CASE_STUDY = {
       "City of Escondido · Geotechnical & Special Inspection (RFP No. 26-19) | Techtiz SLED",
     description:
       "Pre-bid brief: City of Escondido RFP No. 26-19, As-needed Geotechnical and Special Inspection Services. Techtiz is the prime's NDA-first technology and back-office subcontractor. Never agency-facing.",
-    ogImage: "/assets/escondido-arch.png",
+    ogImage: "/assets/sled-case-studies/escondido/hero.png",
     canonicalPath: "/us-sled/case-studies/escondido/",
   },
   hero: {
@@ -19,8 +19,8 @@ export const ESCONDIDO_CASE_STUDY = {
     body: "City of Escondido, as-needed geotechnical and special inspection services for the Utilities CIP. The prime owns the field, Techtiz builds the paperwork engine.",
     livePill: "Live · closes Jun 18, 2 PM PDT",
     pastPill: "Closed · selection complete",
-    heroBg: "/assets/escondido-arch.png",
-    logo: "/assets/escondido-logo.png",
+    heroBg: "/assets/sled-case-studies/escondido/hero.png",
+    logo: "/assets/sled-case-studies/escondido/logo.png",
     logoAlt: "City of Escondido",
     identity: {
       awardingBody: "City of Escondido",
@@ -455,11 +455,13 @@ export const ESCONDIDO_CASE_STUDY = {
         num: "Question 03",
         title: "Does DIR registration apply to inspection services here?",
         body: "Clarify the prevailing-wage and DIR scope for this specific work.",
+        locked: true,
       },
       {
         num: "Question 04",
         title: "Is a debrief available to unsuccessful proposers?",
         body: "Useful for the next pursuit, and a legitimate pre-bid ask.",
+        locked: true,
       },
     ],
   },

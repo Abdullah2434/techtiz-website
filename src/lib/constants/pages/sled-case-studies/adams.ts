@@ -7,7 +7,7 @@ export const ADAMS_CASE_STUDY = {
       "Adams County · Cloud-Based Budgeting System (RFI-RZA-2026.560) | Techtiz SLED",
     description:
       "Pre-bid brief: Adams County, Colorado RFI-RZA-2026.560, Cloud-Based Budgeting System. A Request for Information, no award or contract. Techtiz is the prime's NDA-first remote engineering and proposal back-office subcontractor. Never agency-facing.",
-    ogImage: "/assets/adams-hero.jpg",
+    ogImage: "/assets/sled-case-studies/adams/hero.jpg",
   },
   hero: {
     eyebrow: {
@@ -18,8 +18,8 @@ export const ADAMS_CASE_STUDY = {
     body: "Adams County, Colorado, a cloud-based budgeting platform across the full budget lifecycle. This is a Request for Information, no award and no contract. Techtiz writes the response and builds the platform behind a US prime who owns the agency relationship.",
     livePill: "Live · responses close Jun 22, 3 PM MT",
     pastPill: "Closed · response window ended",
-    heroBg: "/assets/adams-hero.jpg",
-    logo: "/assets/adams-logo.png",
+    heroBg: "/assets/sled-case-studies/adams/hero.jpg",
+    logo: "/assets/sled-case-studies/adams/logo.png",
     logoAlt: "Adams County, Colorado",
     identity: {
       awardingBody: { label: "Awarding body", value: "Adams County" },
@@ -467,7 +467,7 @@ export const ADAMS_CASE_STUDY = {
       eyebrow: "Agency context",
       heading: "Who is buying, and who scores it.",
     },
-    photo: "/assets/adams-hero.jpg",
+    photo: "/assets/sled-case-studies/adams/hero.jpg",
     photoAlt: "Adams County Government Center, Brighton, Colorado",
     bodyHtml:
       "Adams County is a county government in the Denver metropolitan area, county seat Brighton, founded 1901. It buys through the Board of County Commissioners, with the Finance Department's Purchasing Division as the issuing office. <strong>Rebekah Zamora-Arroyo, Contract Specialist II,</strong> is the named contact and signer. The RFI gathers market input on a cloud budgeting platform; no award is made from it.",
@@ -566,16 +566,19 @@ export const ADAMS_CASE_STUDY = {
         num: "Question 04",
         title: "Phased implementation or full cutover?",
         body: "The rollout model changes the timeline, the risk profile, and the change-management cost.",
+        locked: true,
       },
       {
         num: "Question 05",
         title: "Is legacy data cleanup or migration in scope?",
         body: "Multi-year historical migration is a major cost driver worth scoping early.",
+        locked: true,
       },
       {
         num: "Question 06",
         title: "Enterprise platform or specialist tool?",
         body: "The County is undecided. A constructive question here helps shape the RFP without overstepping.",
+        locked: true,
       },
     ],
   },

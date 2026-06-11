@@ -30,7 +30,7 @@ export const ENGAGEMENTS_SECTION = {
 export const FEATURE_CARDS = [
   {
     href: "/us-sled/case-studies/adams/",
-    logo: "/assets/adams-logo.png",
+    logo: "/assets/sled-case-studies/adams/logo.png",
     logoAlt: "Adams County, Colorado",
     cap: "Full RFI response package for a U.S. prime on a cloud-budgeting RFI, white-label.",
     heading: "Cloud-based budgeting system",
@@ -47,7 +47,7 @@ export const FEATURE_CARDS = [
   },
   {
     href: "/us-sled/case-studies/holland/",
-    logo: "/assets/holland-logo.png",
+    logo: "/assets/sled-case-studies/holland/logo.png",
     logoAlt: "City of Holland",
     cap: "Full technical-response package for a U.S. prime on a cloud-security RFP, white-label.",
     heading: "Cloud-delivered SASE",
@@ -64,7 +64,7 @@ export const FEATURE_CARDS = [
   },
   {
     href: "/us-sled/case-studies/mdc/",
-    logo: "/assets/miami-dade-college.png",
+    logo: "/assets/sled-case-studies/mdc/logo.png",
     logoAlt: "Miami Dade College",
     cap: "Full qualifications package for a U.S. prime, six disciplines, white-label.",
     heading: "Engineering services qualification",
@@ -81,7 +81,7 @@ export const FEATURE_CARDS = [
   },
   {
     href: "/us-sled/case-studies/altadena/",
-    logo: "/assets/altadena-libraries.png",
+    logo: "/assets/sled-case-studies/altadena/logo.png",
     logoAlt: "Altadena Libraries",
     cap: "Outsourced finance function for a California special district, white-label.",
     heading: "Accounting & financial consulting",
@@ -98,7 +98,7 @@ export const FEATURE_CARDS = [
   },
   {
     href: "/us-sled/case-studies/escondido/",
-    logo: "/assets/escondido-logo.png",
+    logo: "/assets/sled-case-studies/escondido/logo.png",
     logoAlt: "City of Escondido",
     cap: "Documentation backbone behind a U.S. prime, the prime owns the field.",
     heading: "Geotechnical & special inspection",

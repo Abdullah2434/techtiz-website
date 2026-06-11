@@ -1,0 +1,16 @@
+---
+import Lock from '@lucide/astro/icons/lock';
+
+interface Props {
+  label?: string;
+  dark?: boolean;
+  class?: string;
+}
+
+const { label = 'Under NDA', dark = false, class: className } = Astro.props;
+---
+
+<span class:list={['lockchip', dark && 'dk', className]}>
+  <Lock aria-hidden="true" />
+  {label}
+</span>

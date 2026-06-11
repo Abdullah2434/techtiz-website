@@ -1,0 +1,31 @@
+---
+import ArrowRight from '@lucide/astro/icons/arrow-right';
+import { htmlHasGateLink, htmlHasRedact } from '../../../lib/sled-case-studies/gated-content';
+
+interface Props {
+  html: string;
+  appendGateLink?: boolean;
+  gateLinkLabel?: string;
+  gateLinkHref?: string;
+}
+
+const {
+  html,
+  appendGateLink = true,
+  gateLinkLabel = 'Revealed under NDA',
+  gateLinkHref = '/us-sled/contact/',
+} = Astro.props;
+
+const showGateLink =
+  appendGateLink && htmlHasRedact(html) && !htmlHasGateLink(html);
+---
+
+<span set:html={html} />
+{showGateLink && (
+  <span class="gateline">
+    <a class="gatelink" href={gateLinkHref}>
+      {gateLinkLabel}
+      <ArrowRight class="size-[13px]" aria-hidden="true" />
+    </a>
+  </span>
+)}

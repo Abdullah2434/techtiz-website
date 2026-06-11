@@ -105,6 +105,32 @@ function statSuffix(stat: object) {
   return '';
 }
 
+function questionNum(q: object, index: number) {
+  if ('num' in q && typeof q.num === 'string') return q.num;
+  return `Question ${String(index + 1).padStart(2, '0')}`;
+}
+
+type KeyDatesFootRender =
+  | { kind: 'prefix-only'; prefix: string }
+  | { kind: 'live-past'; live: string; past: string }
+  | { kind: 'prefix-live-past'; prefix: string; live: string; past: string; suffix?: string };
+
+function renderKeyDatesFoot(foot: unknown): KeyDatesFootRender | null {
+  if (!foot || typeof foot !== 'object') return null;
+  const f = foot as Record<string, unknown>;
+  const prefix = typeof f.prefix === 'string' ? f.prefix : undefined;
+  const live = typeof f.live === 'string' ? f.live : undefined;
+  const past = typeof f.past === 'string' ? f.past : undefined;
+  const suffix = typeof f.suffix === 'string' ? f.suffix : undefined;
+
+  if (live && past) {
+    if (prefix) return { kind: 'prefix-live-past', prefix, live, past, suffix };
+    return { kind: 'live-past', live, past };
+  }
+  if (prefix) return { kind: 'prefix-only', prefix };
+  return null;
+}
+
 const tierBarClass: Record<string, string> = {
   nat: 'bg-yale',
   large: 'bg-cyan-strong',
@@ -393,23 +419,36 @@ const techtizSlot =
           );
         })}
       </ol>
-      {'foot' in study.keyDates && study.keyDates.foot && (
-        <p class="sled-reveal mt-4 font-mono text-[11.5px] tracking-[0.04em] text-muted" data-sled-reveal>
-          {'prefix' in study.keyDates.foot && study.keyDates.foot.prefix}
-          {'live' in study.keyDates.foot && typeof study.keyDates.foot.live === 'string' && !('prefix' in study.keyDates.foot) ? (
-            <>
-              <span class="sled-cs-live-only">{study.keyDates.foot.live}</span>
-              <span class="sled-cs-past-only hidden">{study.keyDates.foot.past}</span>
-            </>
-          ) : (
-            <>
-              <span class="sled-cs-live-only text-green">{study.keyDates.foot.live}</span>
-              <span class="sled-cs-past-only hidden">{study.keyDates.foot.past}</span>
-              {'suffix' in study.keyDates.foot && study.keyDates.foot.suffix}
-            </>
-          )}
-        </p>
-      )}
+      {'foot' in study.keyDates && study.keyDates.foot && (() => {
+        const footRender = renderKeyDatesFoot(study.keyDates.foot);
+        if (!footRender) return null;
+
+        if (footRender.kind === 'prefix-only') {
+          return (
+            <p class="sled-reveal mt-4 font-mono text-[11.5px] tracking-[0.04em] text-muted" data-sled-reveal>
+              {footRender.prefix}
+            </p>
+          );
+        }
+
+        if (footRender.kind === 'prefix-live-past') {
+          return (
+            <p class="sled-reveal mt-4 font-mono text-[11.5px] tracking-[0.04em] text-muted" data-sled-reveal>
+              {footRender.prefix}
+              <span class="sled-cs-live-only text-green">{footRender.live}</span>
+              <span class="sled-cs-past-only hidden">{footRender.past}</span>
+              {footRender.suffix ?? null}
+            </p>
+          );
+        }
+
+        return (
+          <p class="sled-reveal mt-4 font-mono text-[11.5px] tracking-[0.04em] text-muted" data-sled-reveal>
+            <span class="sled-cs-live-only">{footRender.live}</span>
+            <span class="sled-cs-past-only hidden">{footRender.past}</span>
+          </p>
+        );
+      })()}
     </SledPageWrap>
   </section>
 )}
@@ -859,6 +898,16 @@ const techtizSlot =
   <section class={sectionClass()}>
     <SledPageWrap>
       <CaseStudyModHead {...priceHead} />
+      {'scopeChips' in pricing && pricing.scopeChips && (
+        <div class="sled-reveal mb-6 flex flex-wrap gap-2" data-sled-reveal>
+          {pricing.scopeChips.map((chip) => (
+            <span class="inline-flex items-center gap-2 rounded-lg border border-line-soft bg-white px-[15px] py-2.5 text-[12.5px] leading-[1.2] text-ink shadow-[0_8px_24px_-16px_rgba(21,58,95,0.12)]">
+              <span class="font-mono text-[10px] font-bold text-cyan-strong">{chip.num}</span>
+              {chip.label}
+            </span>
+          ))}
+        </div>
+      )}
       <div class="sled-reveal grid grid-cols-1 gap-4 md:grid-cols-3" data-sled-reveal>
         {pricing.scenarios.map((scenario) => {
           const isMid =
@@ -1185,10 +1234,10 @@ const techtizSlot =
     <SledPageWrap>
       <CaseStudyModHead {...stratHead} />
       <div class="sled-reveal-stagger grid grid-cols-1 gap-3.5 md:grid-cols-2" data-sled-reveal>
-        {strategicQuestions.questions.map((q) => (
+        {strategicQuestions.questions.map((q, qIdx) => (
           <article class="rounded-[14px] border border-line-soft border-l-[3px] border-l-cyan bg-white px-[26px] py-6">
             <div class="mb-2.5 font-mono text-[11px] font-bold tracking-[0.08em] text-cyan-strong">
-              {q.num}
+              {questionNum(q, qIdx)}
             </div>
             <h4 class="mb-2 text-[1.02rem] font-bold text-yale-dark">{q.title}</h4>
             <p class="text-[13px] leading-[1.55] text-muted">

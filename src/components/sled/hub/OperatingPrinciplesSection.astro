@@ -24,11 +24,7 @@ const staggerDelays = [0, 90, 180, 270];
           <article
             class="rounded-xl border border-line-soft border-t-[3px] border-t-cyan bg-white p-[30px] transition-[transform,box-shadow] duration-300 motion-safe:hover:-translate-y-0.75 motion-safe:hover:shadow-[0_18px_40px_-22px_rgba(21,58,95,0.22)]"
             style={staggerDelays[idx] ? `--d:${staggerDelays[idx]}ms` : undefined}
-          >
-            <span
-              class="mb-5 inline-block size-3.5 rotate-[15deg] rounded-sm bg-cyan"
-              aria-hidden="true"
-            ></span>
+          >           
             <h4 class="mb-2.25 text-[1.12rem] font-semibold leading-[1.25] text-yale-dark">
               {item.heading}
             </h4>

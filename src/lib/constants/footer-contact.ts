@@ -1,6 +1,6 @@
 import { SITE, mailtoGeneral } from "./site";
 
-export type FooterContactIcon = "location" | "phone" | "email";
+export type FooterContactIcon = "location" | "phone" | "email" | "whatsapp";
 
 export type FooterContactItem = {
   icon: FooterContactIcon;
@@ -27,6 +27,11 @@ export const FOOTER_CONTACT_INFO: FooterContactItem[] = [
     icon: "phone",
     text: SITE.phone.display,
     href: `tel:${SITE.phone.tel}`,
+  },
+  {
+    icon: "whatsapp",
+    text: SITE.phone.business.display,
+    href: SITE.phone.business.whatsapp,
   },
   {
     icon: "email",

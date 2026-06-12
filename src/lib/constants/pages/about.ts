@@ -25,7 +25,7 @@ export const ABOUT_VALUES: AboutValue[] = [
     number: "01.",
     title: "Experienced Builder",
     description:
-      "At TECHTIZ, we understand that a house is more than just four walls and a roof – it's the cornerstone of your life's journey. With our unwavering commitment to excellence and personalized service, we're dedicated to guiding you every step of the way on your real estate adventure.",
+      "From first prototype to production rollout, we bring years of hands-on product engineering. We architect for scale, ship with discipline, and stay accountable after launch — so your software keeps working as complexity grows.",
     video: "/images/Industries/education.mp4",
   },
   {

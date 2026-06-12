@@ -64,6 +64,9 @@ export const SITE = {
   og: {
     image: "/assets/capitol.png",
   },
+  analytics: {
+    googleMeasurementId: "G-FN18PJHS01",
+  },
   responseSla: {
     sled: "1 business day",
     sledShort: "1 day",

@@ -17,6 +17,11 @@ export const SITE = {
   phone: {
     display: "+92 326 1199244",
     tel: "+923261199244",
+    business: {
+      display: "+1 (469) 351-1525",
+      tel: "+14693511525",
+      whatsapp: "https://wa.me/14693511525",
+    },
     sled: {
       display: "+1 (XXX) XXX-XXXX",
       tel: "",
@@ -60,6 +65,7 @@ export const SITE = {
     facebook: "https://www.facebook.com/techtiz",
     x: "https://x.com/techtiz",
     linkedin: "https://www.linkedin.com/company/techtiz/",
+    whatsapp: "https://wa.me/14693511525",
   },
   og: {
     image: "/assets/capitol.png",

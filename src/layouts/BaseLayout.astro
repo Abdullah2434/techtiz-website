@@ -1,6 +1,7 @@
 ---
 import 'aos/dist/aos.css';
 import '../styles/globals.css';
+import GoogleAnalytics from '../components/seo/GoogleAnalytics.astro';
 import JsonLd from '../components/seo/JsonLd.astro';
 import Seo from '../components/seo/Seo.astro';
 import { siteGraphJsonLd } from '../lib/seo/json-ld';
@@ -51,6 +52,7 @@ const graphs = includeSiteGraph ? siteGraphJsonLd(jsonLd) : jsonLd;
     {noindex}
   />
   <JsonLd data={graphs} />
+  <GoogleAnalytics />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />

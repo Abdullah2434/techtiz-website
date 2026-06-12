@@ -31,19 +31,27 @@
 
   const revealEls = document.querySelectorAll('[data-sled-reveal]');
   if (revealEls.length && !prefersReduced) {
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            runTickersIn(entry.target);
-            io.unobserve(entry.target);
-          }
-        });
-      },
-      { rootMargin: '0px 0px -8% 0px', threshold: 0.12 }
-    );
-    revealEls.forEach((el) => io.observe(el));
+    const rootMargin = '0px 0px -8% 0px';
+
+    revealEls.forEach((el) => {
+      // Stagger grids (e.g. case-study cards) can exceed several viewport heights on
+      // mobile, so a 12% visibility threshold may never be reached — cards stay hidden.
+      const threshold = el.classList.contains('sled-reveal-stagger') ? 0 : 0.12;
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              runTickersIn(entry.target);
+              io.unobserve(entry.target);
+            }
+          });
+        },
+        { rootMargin, threshold }
+      );
+      io.observe(el);
+    });
   } else {
     revealEls.forEach((el) => {
       el.classList.add('is-visible');
